@@ -1,0 +1,10 @@
+# Graphify: arquivo de custo e cache são locais de cada máquina
+graphify-out/cost.json
+graphify-out/cache/
+# Caminhos locais da máquina de quem gerou o grafo
+graphify-out/.graphify_python
+graphify-out/.graphify_root
+
+# Sistema operacional e Office
+.DS_Store
+~$*.docx
