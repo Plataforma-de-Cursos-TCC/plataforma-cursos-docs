@@ -232,7 +232,7 @@ sequenceDiagram
 | Provedor do modelo de linguagem (Tutor de IA) | Pergunta do Aluno e trechos do curso recuperados por similaridade; resposta em streaming | Sem fonte na v11 para o comportamento em indisponibilidade | Sem fonte na v11. |
 | Armazenamento e entrega de vídeo (R2) | Arquivo de vídeo, por URL assinada de envio com validade de 15 min (RNF002); `videoKey` guardada no banco; reprodução por URL assinada | Upload com URL expirada ou indisponível: o sistema informa o erro e gera nova URL assinada (UC015, E-2); falha na entrega do vídeo na reprodução (UC009) | Nova URL assinada para nova tentativa (v11, UC015) |
 | Envio de e-mail (recuperar senha) | Link de redefinição, com validade de 30 minutos (UC011) | Sem fonte na v11 | Sem fonte na v11. |
-| Pagamento | Não há integração externa: o pagamento é simulado (RF014; entidade Payment com status pendente, confirmado ou estornado) | Pagamento recusado: nenhuma matrícula criada, nova tentativa permitida (UC003, E-2) | Nova tentativa pelo Aluno |
+| Pagamento | Não há integração externa: o pagamento é simulado (RF014; entidade Payment com status aprovado ou recusado) | Pagamento recusado: nenhuma matrícula criada, nova tentativa permitida (UC003, E-2) | Nova tentativa pelo Aluno |
 
 <!-- proposta: provedor de e-mail transacional (por exemplo, serviço SMTP ou API de e-mail) com envio assíncrono e nova solicitação pelo usuário em caso de falha. A v11 diz que o e-mail é enviado, mas não escolhe serviço nem trata falha. Motivo: o fluxo de recuperar senha depende do envio -->
 
@@ -246,7 +246,7 @@ O detalhamento completo dos campos, tipos, tamanhos e regras de normalização d
 
 | Dado | Onde fica | Observação |
 |---|---|---|
-| Usuário, endereços, perfil do instrutor | Banco de dados | Entidades User, Address, InstructorProfile. `passwordHash` guarda só o hash da senha (RNF007). `documentNumber` (CPF) e `birthDate` são dados pessoais. `socialLinks` e `payoutInfo` são campos JSON, exceção conhecida à 1FN por decisão do Plano Técnico |
+| Usuário, endereços, perfil do instrutor | Banco de dados | Entidades User, Address, InstructorProfile. `passwordHash` guarda só o hash da senha (RNF007). `documentNumber` (CPF) e `birthDate` são dados pessoais. `socialLinks` é campo JSON, exceção conhecida à 1FN por decisão do Plano Técnico |
 | Curso, módulo, aula, categoria | Banco de dados | Entidades Category, Course, Module, Lesson. Preço em centavos e moeda ISO 4217 |
 | Vídeo da aula e imagem de capa | Armazenamento de vídeo (R2) | Banco guarda só `videoKey` e `thumbnailKey` |
 | Matrícula, pagamento simulado, progresso | Banco de dados | Entidades Enrollment, Payment, LessonProgress (`watchedSeconds` para retomar de onde parou) |
@@ -293,7 +293,6 @@ classDiagram
         +bio
         +headline
         +socialLinks
-        +payoutInfo
     }
     class Category {
         +id
