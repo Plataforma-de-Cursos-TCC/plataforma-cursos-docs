@@ -85,7 +85,6 @@ erDiagram
         TEXT bio
         VARCHAR headline
         JSON socialLinks
-        JSON payoutInfo
     }
     Category {
         UUID id PK
@@ -182,7 +181,7 @@ erDiagram
 
 ### Dicionário de dados
 
-Atributos normalizados até a 3FN, exceto os campos JSON InstructorProfile.socialLinks e InstructorProfile.payoutInfo, mantidos como estrutura semiestruturada por decisão do Plano Técnico (exceção conhecida à 1FN, não normalização pendente).
+Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialLinks, mantido como estrutura semiestruturada por decisão do Plano Técnico (exceção conhecida à 1FN, não normalização pendente).
 
 | Entidade / Atributo | Classe | Domínio | Tamanho | Descrição |
 |---|---|---|---|---|
@@ -215,7 +214,6 @@ Atributos normalizados até a 3FN, exceto os campos JSON InstructorProfile.socia
 | bio | Simples | Texto | - | Biografia curta do instrutor. |
 | headline | Simples | Texto | 150 | Chamada/título de apresentação. |
 | socialLinks | Composto | Texto | - | Conjunto de links de redes sociais (JSON). |
-| payoutInfo | Composto | Texto | - | Dados de repasse financeiro (JSON). |
 | **Entidade: Category** | | | | |
 | id | Determinante | Texto | - | Identificador único da categoria (UUID). |
 | name | Simples | Texto | 80 | Nome da categoria de curso. |
@@ -281,12 +279,12 @@ Atributos normalizados até a 3FN, exceto os campos JSON InstructorProfile.socia
 | attemptId | Simples | Texto | - | Referência à tentativa. |
 | questionId | Simples | Texto | - | Referência à pergunta respondida. |
 | optionId | Simples | Texto | - | Referência à alternativa escolhida. |
-| **Entidade: Payment** | | | | |
+| **Entidade: Payment** | | | | Registro de pagamento simulado; não guarda dado de cartão ou de conta. |
 | id | Determinante | Texto | - | Identificador único do pagamento (UUID). |
 | enrollmentId | Simples | Texto | - | Referência à matrícula paga. |
 | amountCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| status | Simples | Texto | - | Pendente, confirmado ou estornado (simulado). |
+| status | Simples | Texto | - | Aprovado ou recusado (simulado). |
 | paidAt | Simples | Data | - | Data/hora do pagamento. |
 | **Entidade: Review** | | | | |
 | id | Determinante | Texto | - | Identificador único da avaliação (UUID). |
