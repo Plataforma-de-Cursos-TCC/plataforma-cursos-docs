@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Criar conta</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav></nav></header>
+<main class="center">
+  <form class="card form stack">
+    <h1>Criar conta</h1>
+    <div class="field"><label>E-mail</label>
+      <div class="input" data-estado="padrao instrutor senha-fraca">aluno@email.com</div>
+      <div class="input erro" data-estado="email-em-uso">aluno@email.com</div>
+      <p class="msg-erro" data-estado="email-em-uso">Este e-mail já está em uso.</p>
+      <p class="small" style="margin-top:6px" data-estado="email-em-uso"><a href="#">Fazer login</a> ou <a href="#">recuperar senha</a></p>
+    </div>
+    <div class="field"><label>Senha</label>
+      <div class="input" data-estado="padrao instrutor email-em-uso">••••••••</div>
+      <div class="input erro" data-estado="senha-fraca">••••</div>
+      <p class="msg-erro" data-estado="senha-fraca">A senha não atende aos critérios:</p>
+      <ul class="small muted" data-estado="senha-fraca" style="margin:6px 0 0 20px">
+        <li>ao menos 8 caracteres</li>
+        <li>ao menos uma letra e um número</li>
+      </ul>
+    </div>
+    <div class="field"><label>Confirmar senha</label>
+      <div class="input" data-estado="padrao instrutor email-em-uso">••••••••</div>
+      <div class="input" data-estado="senha-fraca">••••</div>
+    </div>
+    <div class="field"><label>Perfil</label>
+      <div class="row" style="margin-top:8px" data-estado="padrao email-em-uso senha-fraca"><span class="radio on"></span>Aluno</div>
+      <div class="row" style="margin-top:8px" data-estado="padrao email-em-uso senha-fraca"><span class="radio"></span>Instrutor</div>
+      <div class="row" style="margin-top:8px" data-estado="instrutor"><span class="radio"></span>Aluno</div>
+      <div class="row" style="margin-top:8px" data-estado="instrutor"><span class="radio on"></span>Instrutor</div>
+    </div>
+    <div class="check"><span class="box on"></span><span>Aceito os <a href="#">termos de uso</a> e a <a href="#">política de privacidade</a></span></div>
+    <button class="btn primary block" type="button">Criar conta</button>
+  </form>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>

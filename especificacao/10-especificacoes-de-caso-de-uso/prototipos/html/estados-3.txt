@@ -1,0 +1,42 @@
+# Haiku #3: Área C + UC001 (UC003, UC009, UC002, UC010, UC001)
+# UC003
+pagina-curso.html padrao UC003-FB-1 | Página do curso com botão Matricular-se
+pagina-curso.html processando-pagamento UC003-FB-2 | Processando pagamento simulado
+meus-cursos-aluno.html pos-matricula UC003-FB-3 | Meus cursos do aluno após matrícula
+pagina-curso.html gratuito UC003-A2-1 | Curso gratuito: matrícula sem preço
+pagina-curso.html indisponivel UC003-E1-1 | Curso indisponível: aviso e sem matrícula
+pagina-curso.html pagamento-recusado UC003-E2-1 | Pagamento recusado: aviso e nova tentativa
+pagina-curso.html matriculado UC003-A1-1 | Aluno matriculado: Continuar assistindo
+# UC009 (tela do UC001: aula-chat.html)
+aula-chat.html padrao UC009-FB-1 | Aula com vídeo e Tutor de IA fechado
+aula-chat.html aula-concluida UC009-FB-2 | Aula concluída
+aula-chat.html retomando UC009-A2-1 | Aula retomada do ponto salvo
+aula-chat.html bloqueada UC009-E1-1 | Aula bloqueada: matricule-se para assistir
+aula-chat.html erro-video UC009-E2-1 | Erro ao carregar o vídeo
+# UC009-A3 abre o chat: mesma tela do UC001-FB-1
+@ UC001-FB-1 UC009-A3-1 | Abrir chat: mesma tela do UC001 chat
+# UC002
+quiz.html padrao UC002-FB-1 | Quiz sem respostas
+quiz.html respondidas UC002-FB-2 | Quiz com respostas preenchidas
+quiz.html resultado UC002-FB-3 | Resultado do quiz com nota e gabarito
+quiz.html rascunho UC002-A2-1 | Rascunho salvo do quiz
+quiz.html resultado-salvo UC002-A1-1 | Resultado salvo
+quiz.html resultado-salvo-refazer UC002-A1-2 | Resultado salvo com opção de refazer
+quiz.html pendentes UC002-E1-1 | Questões pendentes impedem o envio
+quiz.html gabarito-incompleto UC002-E2-1 | Gabarito incompleto: nota não calculada
+# UC010 (UC010-FB-1 reusa UC003-A1-1; UC010-A2 cancela sem tela própria)
+@ UC003-A1-1 UC010-FB-1 | Avaliar curso: abrir a partir de Avaliar curso
+pagina-curso.html avaliar-vazio UC010-FB-2 | Modal Avaliar curso vazio
+pagina-curso.html avaliar-preenchido UC010-FB-3 | Modal Avaliar curso preenchido
+pagina-curso.html avaliacao-salva UC010-FB-4 | Avaliação salva na página do curso
+pagina-curso.html avaliar-existente UC010-A1-1 | Avaliação existente para editar
+pagina-curso.html avaliar-bloqueado UC010-E1-1 | Avaliação bloqueada: concluir uma aula antes
+pagina-curso.html avaliar-sem-nota UC010-E2-1 | Avaliação sem nota: aviso obrigatório
+# UC001
+aula-chat.html chat UC001-FB-1 | Tutor de IA aberto e vazio
+aula-chat.html pergunta UC001-FB-2 | Pergunta enviada ao Tutor de IA
+aula-chat.html resposta UC001-FB-3 | Resposta do Tutor de IA
+aula-chat.html sem-informacao UC001-A1-1 | Tutor sem informação no material
+aula-chat.html historico UC001-A2-1 | Histórico de perguntas no chat
+aula-chat.html conteudo-em-preparo UC001-E1-1 | Conteúdo em preparo
+aula-chat.html limite-mensagens UC001-E2-1 | Limite de mensagens atingido

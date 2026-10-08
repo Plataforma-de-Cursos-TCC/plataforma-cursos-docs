@@ -1,0 +1,37 @@
+# Haiku #2: Área B (UC006, UC014, UC015, UC004)
+meus-cursos-instrutor.html padrao UC006-FB-1 | lista "Meus cursos" do instrutor
+meus-cursos-instrutor.html rascunho-salvo UC006-FB-4 | lista "Meus cursos" após salvar rascunho
+meus-cursos-instrutor.html publicado UC006-FB-6 | lista "Meus cursos" com curso publicado
+meus-cursos-instrutor.html excluir-curso UC006-A2-1 | confirmação de exclusão do curso na lista
+meus-cursos-instrutor.html exclusao-bloqueada UC006-E2-1 | exclusão bloqueada na lista "Meus cursos"
+curso-form.html padrao UC006-FB-2 | formulário "Novo curso" vazio
+curso-form.html preenchido UC006-FB-3 | formulário "Novo curso" preenchido
+curso-form.html edicao UC006-A1-1 | formulário "Editar curso" com dados atuais
+curso-form.html erro-campos UC006-E1-1 | erro "Campo obrigatório" no título
+curso-modulos.html padrao UC014-FB-1 | tela "Módulos do curso" com botão "Novo módulo"
+curso-modulos.html modulo-criado UC014-FB-5 | tela "Módulos do curso" após criar módulo
+curso-modulos.html exclusao-modulo UC014-A2-1 | confirmação de exclusão do módulo
+modulo-form.html padrao UC014-FB-3 | formulário "Novo módulo" vazio
+modulo-form.html edicao UC014-A1-1 | formulário "Editar módulo" com dados atuais
+modulo-form.html erro-titulo UC014-E1-1 | erro "Campo obrigatório" no título do módulo
+modulo-form.html erro-posicao UC014-E2-1 | erro "Posição já em uso" no módulo
+modulo-aulas.html padrao UC015-FB-1 | tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"
+modulo-aulas.html aula-salva UC015-FB-7 | tela "Aulas do módulo" após salvar aula
+modulo-aulas.html exclusao-aula UC015-A2-1 | confirmação de exclusão da aula
+aula-form.html padrao UC015-FB-3 | formulário "Nova aula" vazio
+aula-form.html enviando UC015-FB-6 | formulário "Nova aula" com envio em andamento
+aula-form.html edicao UC015-A1-1 | formulário "Editar aula" com dados atuais
+aula-form.html erro-formato UC015-E1-1 | erro "Formato não aceito" no vídeo
+aula-form.html erro-envio UC015-E2-1 | erro "Falha no envio" com botão "Tentar novamente"
+quiz-form.html padrao UC004-FB-3 | formulário "Novo quiz" vazio
+quiz-form.html gabarito UC004-FB-4 | formulário "Novo quiz" com alternativa correta marcada
+quiz-form.html rascunho-salvo UC004-A2-1 | formulário "Novo quiz" após salvar rascunho
+quiz-form.html publicado UC004-FB-7 | formulário "Novo quiz" após publicar com "Voltar ao módulo"
+quiz-form.html edicao UC004-A1-1 | formulário "Editar quiz" com aviso de notas
+quiz-form.html erro-alternativas UC004-E1-1 | erro "Informe pelo menos duas alternativas"
+quiz-form.html erro-gabarito UC004-E2-1 | erro "Marque a alternativa correta"
+@ UC014-FB-1 UC014-FB-2 | botão "Novo módulo" na tela "Módulos do curso"
+@ UC015-FB-1 UC015-FB-2 | botão "Nova aula" na tela "Aulas do módulo"
+@ UC015-FB-1 UC004-FB-1 | botão "Novo quiz" na tela "Aulas do módulo"
+@ UC015-FB-1 UC004-FB-2 | botão "Novo quiz" acionado na tela "Aulas do módulo"
+@ UC004-FB-4 UC004-FB-5 | "Salvar quiz" dispara validação sobre o estado preenchido
