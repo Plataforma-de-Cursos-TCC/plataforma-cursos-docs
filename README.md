@@ -34,6 +34,7 @@ O repositório começa cru. Cada parte da estrutura abaixo entra por um pull req
 │
 ├── especificacao/             a entrega: itens 1 a 11 do template da disciplina
 ├── entregas/                  plano de tarefas e critérios de aceite de cada entrega
+├── scripts/build_doc.py       gera o DOCX e o PDF da especificação a partir do Template.docx
 │
 ├── pesquisa/                  pesquisa de mercado: produtos similares e concorrentes
 ├── docs/
@@ -50,6 +51,14 @@ O repositório começa cru. Cada parte da estrutura abaixo entra por um pull req
 ├── graphify-out/              grafo de conhecimento gerado a partir dos arquivos acima
 └── .graphifyignore            o que fica fora do grafo
 ```
+
+## Gerar o documento
+
+```sh
+python3 scripts/build_doc.py [de] [até] --template "caminho/ESSW - Especificacao de Projeto - Template.docx"
+```
+
+Gera `build/Especificação - itens <de>-<até>.docx` e `.pdf` com capa, sumário, cabeçalho, rodapé e a declaração de uso de IA no fim. O padrão é `1 11` (escopo do RA1); `1 15` inclui os itens do RA2, que entram como "em elaboração" enquanto não tiverem fonte pronta. O template também pode vir da variável `ESSW_TEMPLATE`. Precisa de pandoc, LibreOffice (`soffice`) e python-docx. A pasta `build/` não é versionada.
 
 ## Como trabalhamos
 
