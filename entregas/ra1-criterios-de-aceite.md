@@ -117,7 +117,7 @@ Resumo dos pesos por item (rubrica do Canvas, a conferir; seção 6, A4). O tota
 
 - [x] **C01.1** Exatamente **3** objetivos. — evidência: especificacao/01-3-objetivos.md:9-11
 - [x] **C01.2** Cada objetivo é claro, específico e **verificável**. — evidência: especificacao/01-3-objetivos.md:9-11 (metricas explicitas)
-- [ ] **C01.3** Cada objetivo articula **problema, valor e métrica de sucesso**: a métrica é explícita e mensurável. — pendente: problema e valor nao separados por objetivo (especificacao/01-3-objetivos.md:13, marcador revisar)
+- [x] **C01.3** Cada objetivo articula **problema, valor e métrica de sucesso**: a métrica é explícita e mensurável. — evidência: decisao do Lucas (08/10/2026): item 1 mantem v11 sem Problema/Valor separados; template nao pede
 - [ ] **C01.4** Os objetivos são coerentes com a Visão do Produto (item 3) e com os demais artefatos. — pendente: coerencia com item 3 nao conferida
 
 ### 3.2 Item 2 — Quadro "É – Não é – Faz – Não faz" (0,2)
@@ -187,11 +187,11 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 - [x] **C07.1** Pelo menos uma estória por RF. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 US cobrem RF001-RF018)
 - [x] **C07.2** Todas no formato **COMO / POSSO / PARA**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 COMO/POSSO/PARA)
-- [ ] **C07.3** Cada estória está vinculada a um RF correspondente, com o número do RF no título. A estória usa o mesmo número do RF (US001 ↔ RF001; ADR-0001). — pendente: aguarda decisao do Lucas: numeracao US x RF (ex.: US001 -> RF017)
+- [ ] **C07.3** Cada estória cita no cabeçalho o RF que atende, no formato `USnnn – REQUISITO n: <nome>` do template. A numeração das estórias é contínua e independente da dos RFs (adendo do ADR-0001). — pendente: cabecalhos conferidos (area-a.md:1, area-a.md:17, area-b.md:1 etc.), formato USnnn – REQUISITO RFnnn; falta o adendo do ADR-0001 citado no criterio (docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md nao tem adendo)
 - [x] **C07.4** Cada estória tem **≥2 critérios de aceite**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (3 criterios por US)
 - [x] **C07.5** Todos os critérios estão no formato **DADO QUE / QUANDO / ENTÃO**, claros e **verificáveis**, com resultado observável. — evidência: especificacao/07-estorias-de-usuario/area-*.md (60 DADO QUE / QUANDO / ENTAO)
 - [ ] **C07.6** Os critérios cobrem cenários diferentes (caminho principal e ao menos uma variação ou erro), e não repetições do mesmo cenário. — pendente: variacao e erro por estoria nao conferidos
-- [ ] **C07.7** As estórias são consistentes com as outras especificações: atores, RFs e casos de uso. — pendente: consistencia US x UC/RF pendente (UC013 x RF016)
+- [ ] **C07.7** As estórias são consistentes com as outras especificações: atores, RFs e casos de uso. — pendente: so US020 conferida: ator Instrutor coberto por UC013 (area-a.md:167, A1 em area-a.md:189-196); demais estorias x UC/RF nao conferidas
 
 ### 3.8 Item 8 — Relação de Requisitos Não-Funcionais (0,1) · por integrante
 
@@ -228,7 +228,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 - [x] **C10.5** Cada especificação tem ao menos um **fluxo alternativo** (variação intencional do ator). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo alternativo em todos os UCs)
 - [x] **C10.6** Cada especificação tem ao menos um **fluxo de exceção** (variação não intencional ou erro). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo de excecao em todos os UCs)
 - [ ] **C10.7** A linguagem é testável: cada passo é observável. — pendente: testabilidade de cada passo nao conferida
-- [ ] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores. — pendente: nomes e atores UC x diagrama nao conferidos (ver K.4)
+- [ ] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores. — pendente: UC013 conferido (nome e ator iguais no diagrama: especificacao/diagramas/09-casos-de-uso.puml:31,52); demais 19 UCs nao conferidos item a item
 - [ ] **C10.9** As regras de negócio são coerentes com as estórias e os RFs. — pendente: regras de negocio x estorias x RFs nao conferidas
 
 ### 3.11 Item 11 — Diagrama de Atividades (0,2)
@@ -274,11 +274,11 @@ Itens 1, 2, 3  (base do produto)
 
 Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 
-- [ ] **K.1** Os mesmos atores (nomes idênticos) aparecem nos itens 4, 5, 6, 7, 9, 10 e 11. — pendente: UC013 x RF016 com ator divergente (especificacao/09 e area-a.md:189-196)
+- [ ] **K.1** Os mesmos atores (nomes idênticos) aparecem nos itens 4, 5, 6, 7, 9, 10 e 11. — pendente: UC013 usa 'Usuario' (puml:52 USU) e US020 usa 'Instrutor'; decisao do Lucas cobre o mapeamento RF x UC, nao a grafia dos atores; demais itens nao conferidos
 - [x] **K.2** Todo RF (item 6) tem **pelo menos uma** estória (item 7) e toda estória aponta para um RF existente. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 e especificacao/07-estorias-de-usuario/area-*.md
 - [x] **K.3** Todo RF está coberto por **pelo menos um** caso de uso no diagrama (item 9). — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md (todo RF mapeado a UC)
-- [ ] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — pendente: mesmo nome UC x diagrama nao conferido item a item
-- [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito. — pendente: UC013 x RF016 (especificacao/10-especificacoes-de-caso-de-uso/area-a.md:189-196)
+- [ ] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — pendente: UC013 conferido (puml:31); demais 19 UCs nao conferidos item a item
+- [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito. — pendente: US020 x UC013 A1 sem contradicao (area-a.md:189-196); demais estorias x fluxos nao conferidas
 - [ ] **K.6** Os objetivos (item 1) são atendidos por algum RF e aparecem refletidos na Visão (item 3). — pendente: objetivos x RFs x visao nao conferidos
 - [ ] **K.7** Nada listado em "Não faz" (item 2) aparece como RF, estória ou caso de uso. — pendente: 'Nao faz' x RFs/US/UCs nao conferido item a item
 - [ ] **K.8** As lanes do BPMN (item 4) e as raias do diagrama de atividades (item 11) usam os atores do item 5. — pendente: lanes BPMN e raias UML nao conferidas
