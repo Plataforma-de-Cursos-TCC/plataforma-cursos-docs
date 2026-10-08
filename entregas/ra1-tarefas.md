@@ -17,7 +17,8 @@ relacionados: [ra1-criterios-de-aceite, contexto, adr-0001, adr-0002, adr-0003, 
 ## 1. Decisões de divisão
 
 ### 1.1 Responsáveis
-- **Todas as tarefas ficam sem responsável** até o grupo confirmar. Quem puxar a tarefa se coloca como responsável (assignee) ao começar.
+- **Sub-issues por área** (itens 6, 7, 8 e 10): responsável é o dono da área (tabela 1.2): A Lucas Stopinski, B Adrian, C Lucas Bruno, D Vinicius.
+- **Demais tarefas** ficam sem responsável; quem puxar se coloca como responsável (assignee) ao começar.
 - **Itens 1 a 5, 9 e 11 e tarefas gerais** (preparação, revisão final, consolidação e envio): do grupo; quem puxar escreve, e outro integrante revisa ([CONTEXT.md](../CONTEXT.md), seção 5).
 - **Integrantes:** Adrian Antônio de Souza Gomes (`adrian69-droid`), Lucas Bruno e Silva (`Luc-Bruno`), Lucas Stopinski da Silva (`LucasStop`) e Vinicius Lima Teider (`Teider011`).
 
@@ -27,10 +28,10 @@ Cada integrante fica com **uma área** ([ADR-0006](../docs/adr/0006-divisao-por-
 
 | Área | Escopo | Casos de uso de partida | IDs provisórios | RNF (ISO/IEC 25010) | Responsável |
 |---|---|---|---|---|---|
-| **A** | Acesso e conta | Cadastrar-se, Realizar login, Recuperar senha, Editar dados do perfil | RF-A1… · US-A1… · RNF-A1… · UC-A1… | Segurança (incl. LGPD) · Compatibilidade | |
-| **B** | Autoria do instrutor | Cadastrar curso, Gerenciar módulos, Gerenciar aulas, Cadastrar quiz com gabarito | RF-B1… · US-B1… · RNF-B1… · UC-B1… | Manutenibilidade · Portabilidade | |
-| **C** | Aprendizagem do aluno | Matricular-se em curso, Assistir aula, Responder quiz, Avaliar curso | RF-C1… · US-C1… · RNF-C1… · UC-C1… | Capacidade de interação · Acessibilidade | |
-| **D** | Tutor de IA, analytics e administração | Conversar com Tutor de IA, Ver dashboard com filtro, Gerenciar usuários, Acessar área protegida por perfil | RF-D1… · US-D1… · RNF-D1… · UC-D1… | Eficiência de desempenho · Confiabilidade | |
+| **A** | Acesso e conta | Cadastrar-se, Realizar login, Recuperar senha, Editar dados do perfil | RF-A1… · US-A1… · RNF-A1… · UC-A1… | Segurança (incl. LGPD) · Compatibilidade | Lucas Stopinski da Silva (`LucasStop`) |
+| **B** | Autoria do instrutor | Cadastrar curso, Gerenciar módulos, Gerenciar aulas, Cadastrar quiz com gabarito | RF-B1… · US-B1… · RNF-B1… · UC-B1… | Manutenibilidade · Portabilidade | Adrian Antônio de Souza Gomes (`adrian69-droid`) |
+| **C** | Aprendizagem do aluno | Matricular-se em curso, Assistir aula, Responder quiz, Avaliar curso | RF-C1… · US-C1… · RNF-C1… · UC-C1… | Capacidade de interação · Acessibilidade | Lucas Bruno e Silva (`Luc-Bruno`) |
+| **D** | Tutor de IA, analytics e administração | Conversar com Tutor de IA, Ver dashboard com filtro, Gerenciar usuários, Acessar área protegida por perfil | RF-D1… · US-D1… · RNF-D1… · UC-D1… | Eficiência de desempenho · Confiabilidade | Vinicius Lima Teider (`Teider011`) |
 
 Os escopos são orientação para evitar sobreposição. Os requisitos em si são definidos por cada integrante nas sub-issues. A renumeração única (RF001, US001, RNF001, UC001) acontece no início de T12 e fica registrada em `entregas/ra1-renumeracao.md`.
 
@@ -39,7 +40,7 @@ Os escopos são orientação para evitar sobreposição. Os requisitos em si sã
 - **Formato:** todo o conteúdo é produzido em arquivos **Markdown** no repositório, e não direto no .docx do template.
 - **Diagramas como código** ([ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)): Mermaid (`.mmd` ou bloco no Markdown); BPMN 2.0 em `.bpmn` no item 4 (critério C04.1). Fonte versionada junto da imagem exportada.
 - **Branches:** uma por tarefa (`feat/nome-descritivo` ou `fix/nome-descritivo`), entrando na `main` por **pull request** (`gh pr create`). PR aberto = **In review**; **Done** só após o merge.
-- **Consolidação:** com todos os itens na `main`, os MDs viram um único documento na ordem e com os títulos do template, exportado em **PDF** (formato de envio a confirmar, ponto A3).
+- **Consolidação:** com todos os itens na `main`, os MDs viram um único documento na ordem e com os títulos do template, exportado em **PDF e DOCX**.
 - **Nomes exatos:** produto "Plataforma de Cursos"; atores Visitante, Aluno, Instrutor, Administrador e Tutor de IA.
 
 ### 1.4 Pendências cruzadas entre áreas
@@ -89,7 +90,7 @@ Título: `[RA1][Item NN] <descrição>`; gerais: `[RA1][Geral] <descrição>`. *
 | T10 | [RA1][Item 10] Especificações de Caso de Uso (≥16 especificações) | `ra1`, `item-10`, `tarefa-mae` | C10.1 a C10.9 | T07, T09 | |
 | T11 | [RA1][Item 11] Diagrama de Atividades | `ra1`, `item-11` | C11.1 a C11.7 | T10 | |
 | T12 | [RA1][Geral] Revisão cruzada e verificação independente | `ra1`, `geral` | K.1 a K.13, X.8 e a verificação de todos os `Cxx.y` | T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11 | |
-| T13 | [RA1][Geral] Consolidar em PDF e enviar no Canvas | `ra1`, `geral` | X.1, X.2, X.3, X.4, X.5, X.6, X.7, X.9, X.10 | T12 | |
+| T13 | [RA1][Geral] Consolidar em PDF e DOCX e enviar no Canvas | `ra1`, `geral` | X.1, X.2, X.3, X.4, X.5, X.6, X.7, X.9, X.10 | T12 | |
 | T06a |   ↳ [RA1][Item 06] RFs da área A (Acesso e conta) | `ra1`, `item-06`, `por-integrante`, `area-a` | C06.2, C06.3, C06.4, C06.5, C06.9 | T03, T05 | |
 | T06b |   ↳ [RA1][Item 06] RFs da área B (Autoria do instrutor) | `ra1`, `item-06`, `por-integrante`, `area-b` | C06.2, C06.3, C06.4, C06.5, C06.9 | T03, T05 | |
 | T06c |   ↳ [RA1][Item 06] RFs da área C (Aprendizagem do aluno) | `ra1`, `item-06`, `por-integrante`, `area-c` | C06.2, C06.3, C06.4, C06.5, C06.9 | T03, T05 | |
@@ -156,25 +157,25 @@ Título: `[RA1][Item NN] <descrição>`; gerais: `[RA1][Geral] <descrição>`. *
 - Bloqueada por: T03, T05
 
   **T06a · [RA1][Item 06] RFs da área A (Acesso e conta)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-a`
+  - Responsável: `LucasStop` · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-a`
   - Descrição: Escrever os RFs da área (mínimo 4, sem máximo), tabela `# | REQUISITO FUNCIONAL | ATOR / USUÁRIO | OBJETIVO | SPRINT`, com SPRINT vazia (decidida em T06). IDs provisórios: RF-A1….
   - Critérios que fecha: C06.2, C06.3, C06.4, C06.5, C06.9
   - Bloqueada por: T03, T05
 
   **T06b · [RA1][Item 06] RFs da área B (Autoria do instrutor)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-b`
+  - Responsável: `adrian69-droid` · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-b`
   - Descrição: Escrever os RFs da área (mínimo 4, sem máximo), tabela `# | REQUISITO FUNCIONAL | ATOR / USUÁRIO | OBJETIVO | SPRINT`, com SPRINT vazia (decidida em T06). IDs provisórios: RF-B1….
   - Critérios que fecha: C06.2, C06.3, C06.4, C06.5, C06.9
   - Bloqueada por: T03, T05
 
   **T06c · [RA1][Item 06] RFs da área C (Aprendizagem do aluno)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-c`
+  - Responsável: `Luc-Bruno` · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-c`
   - Descrição: Escrever os RFs da área (mínimo 4, sem máximo), tabela `# | REQUISITO FUNCIONAL | ATOR / USUÁRIO | OBJETIVO | SPRINT`, com SPRINT vazia (decidida em T06). IDs provisórios: RF-C1….
   - Critérios que fecha: C06.2, C06.3, C06.4, C06.5, C06.9
   - Bloqueada por: T03, T05
 
   **T06d · [RA1][Item 06] RFs da área D (Tutor de IA, analytics e administração)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-d`
+  - Responsável: `Teider011` · Rótulos: `ra1`, `item-06`, `por-integrante`, `area-d`
   - Descrição: Escrever os RFs da área (mínimo 4, sem máximo), tabela `# | REQUISITO FUNCIONAL | ATOR / USUÁRIO | OBJETIVO | SPRINT`, com SPRINT vazia (decidida em T06). IDs provisórios: RF-D1….
   - Critérios que fecha: C06.2, C06.3, C06.4, C06.5, C06.9
   - Bloqueada por: T03, T05
@@ -186,25 +187,25 @@ Título: `[RA1][Item NN] <descrição>`; gerais: `[RA1][Geral] <descrição>`. *
 - Bloqueada por: T06
 
   **T07a · [RA1][Item 07] Estórias da área A (Acesso e conta)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-a`
+  - Responsável: `LucasStop` · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-a`
   - Descrição: Escrever uma estória por RF da área, no formato COMO / POSSO / PARA, com ≥2 critérios DADO QUE / QUANDO / ENTÃO cada (ADR-0002). IDs provisórios: US-A1….
   - Critérios que fecha: C07.2, C07.3, C07.4, C07.5, C07.6, C07.7
   - Bloqueada por: T06a
 
   **T07b · [RA1][Item 07] Estórias da área B (Autoria do instrutor)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-b`
+  - Responsável: `adrian69-droid` · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-b`
   - Descrição: Escrever uma estória por RF da área, no formato COMO / POSSO / PARA, com ≥2 critérios DADO QUE / QUANDO / ENTÃO cada (ADR-0002). IDs provisórios: US-B1….
   - Critérios que fecha: C07.2, C07.3, C07.4, C07.5, C07.6, C07.7
   - Bloqueada por: T06b
 
   **T07c · [RA1][Item 07] Estórias da área C (Aprendizagem do aluno)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-c`
+  - Responsável: `Luc-Bruno` · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-c`
   - Descrição: Escrever uma estória por RF da área, no formato COMO / POSSO / PARA, com ≥2 critérios DADO QUE / QUANDO / ENTÃO cada (ADR-0002). IDs provisórios: US-C1….
   - Critérios que fecha: C07.2, C07.3, C07.4, C07.5, C07.6, C07.7
   - Bloqueada por: T06c
 
   **T07d · [RA1][Item 07] Estórias da área D (Tutor de IA, analytics e administração)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-d`
+  - Responsável: `Teider011` · Rótulos: `ra1`, `item-07`, `por-integrante`, `area-d`
   - Descrição: Escrever uma estória por RF da área, no formato COMO / POSSO / PARA, com ≥2 critérios DADO QUE / QUANDO / ENTÃO cada (ADR-0002). IDs provisórios: US-D1….
   - Critérios que fecha: C07.2, C07.3, C07.4, C07.5, C07.6, C07.7
   - Bloqueada por: T06d
@@ -216,25 +217,25 @@ Título: `[RA1][Item NN] <descrição>`; gerais: `[RA1][Geral] <descrição>`. *
 - Bloqueada por: T03
 
   **T08a · [RA1][Item 08] RNFs da área A (Acesso e conta)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-a`
+  - Responsável: `LucasStop` · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-a`
   - Descrição: Escrever os RNFs da área (mínimo 4, sem máximo), classificados na ISO/IEC 25010 (segurança (LGPD) e compatibilidade) e com métrica mensurável. IDs provisórios: RNF-A1….
   - Critérios que fecha: C08.2, C08.3, C08.4, C08.6
   - Bloqueada por: T03
 
   **T08b · [RA1][Item 08] RNFs da área B (Autoria do instrutor)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-b`
+  - Responsável: `adrian69-droid` · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-b`
   - Descrição: Escrever os RNFs da área (mínimo 4, sem máximo), classificados na ISO/IEC 25010 (manutenibilidade e portabilidade) e com métrica mensurável. IDs provisórios: RNF-B1….
   - Critérios que fecha: C08.2, C08.3, C08.4, C08.6
   - Bloqueada por: T03
 
   **T08c · [RA1][Item 08] RNFs da área C (Aprendizagem do aluno)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-c`
+  - Responsável: `Luc-Bruno` · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-c`
   - Descrição: Escrever os RNFs da área (mínimo 4, sem máximo), classificados na ISO/IEC 25010 (capacidade de interação e acessibilidade) e com métrica mensurável. IDs provisórios: RNF-C1….
   - Critérios que fecha: C08.2, C08.3, C08.4, C08.6
   - Bloqueada por: T03
 
   **T08d · [RA1][Item 08] RNFs da área D (Tutor de IA, analytics e administração)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-d`
+  - Responsável: `Teider011` · Rótulos: `ra1`, `item-08`, `por-integrante`, `area-d`
   - Descrição: Escrever os RNFs da área (mínimo 4, sem máximo), classificados na ISO/IEC 25010 (eficiência de desempenho e confiabilidade) e com métrica mensurável. IDs provisórios: RNF-D1….
   - Critérios que fecha: C08.2, C08.3, C08.4, C08.6
   - Bloqueada por: T03
@@ -254,25 +255,25 @@ Título: `[RA1][Item NN] <descrição>`; gerais: `[RA1][Geral] <descrição>`. *
 - Bloqueada por: T07, T09
 
   **T10a · [RA1][Item 10] Especificações de caso de uso da área A (Acesso e conta)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-a`
+  - Responsável: `LucasStop` · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-a`
   - Descrição: Escrever as especificações da área (mínimo 4, sem máximo; uma por caso de uso do item 9), com os 10 campos, protótipos de alta fidelidade e fluxos básico, alternativo e de exceção. IDs provisórios: UC-A1….
   - Critérios que fecha: C10.2, C10.3, C10.4, C10.5, C10.6, C10.7, C10.8, C10.9
   - Bloqueada por: T07a, T09
 
   **T10b · [RA1][Item 10] Especificações de caso de uso da área B (Autoria do instrutor)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-b`
+  - Responsável: `adrian69-droid` · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-b`
   - Descrição: Escrever as especificações da área (mínimo 4, sem máximo; uma por caso de uso do item 9), com os 10 campos, protótipos de alta fidelidade e fluxos básico, alternativo e de exceção. IDs provisórios: UC-B1….
   - Critérios que fecha: C10.2, C10.3, C10.4, C10.5, C10.6, C10.7, C10.8, C10.9
   - Bloqueada por: T07b, T09
 
   **T10c · [RA1][Item 10] Especificações de caso de uso da área C (Aprendizagem do aluno)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-c`
+  - Responsável: `Luc-Bruno` · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-c`
   - Descrição: Escrever as especificações da área (mínimo 4, sem máximo; uma por caso de uso do item 9), com os 10 campos, protótipos de alta fidelidade e fluxos básico, alternativo e de exceção. IDs provisórios: UC-C1….
   - Critérios que fecha: C10.2, C10.3, C10.4, C10.5, C10.6, C10.7, C10.8, C10.9
   - Bloqueada por: T07c, T09
 
   **T10d · [RA1][Item 10] Especificações de caso de uso da área D (Tutor de IA, analytics e administração)**
-  - Responsável: em branco · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-d`
+  - Responsável: `Teider011` · Rótulos: `ra1`, `item-10`, `por-integrante`, `area-d`
   - Descrição: Escrever as especificações da área (mínimo 4, sem máximo; uma por caso de uso do item 9), com os 10 campos, protótipos de alta fidelidade e fluxos básico, alternativo e de exceção. IDs provisórios: UC-D1….
   - Critérios que fecha: C10.2, C10.3, C10.4, C10.5, C10.6, C10.7, C10.8, C10.9
   - Bloqueada por: T07d, T09
@@ -291,9 +292,9 @@ Título: `[RA1][Item NN] <descrição>`; gerais: `[RA1][Geral] <descrição>`. *
 - Critérios que fecha: K.1, K.2, K.3, K.4, K.5, K.6, K.7, K.8, K.9, K.10, K.11, K.12, K.13, X.8
 - Bloqueada por: T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11
 
-**T13 · [RA1][Geral] Consolidar em PDF e enviar no Canvas**
+**T13 · [RA1][Geral] Consolidar em PDF e DOCX e enviar no Canvas**
 - Responsável: em branco · Rótulos: `ra1`, `geral`
-- Descrição: Consolidar os MDs em um único documento no formato do template (capa com Plataforma de Cursos, os 4 autores e 2026; sumário; seções 1 a 11 na ordem; diagramas legíveis), incluir a declaração de uso de IA preenchida, exportar em PDF e enviar na tarefa "Avaliação do RA 1 - Projeto" até 10/10/2026, 23:59.
+- Descrição: Consolidar os MDs em um único documento no formato do template (capa com Plataforma de Cursos, os 4 autores e 2026; sumário; seções 1 a 11 na ordem; diagramas legíveis), incluir a declaração de uso de IA preenchida, exportar em PDF e DOCX e enviar na tarefa "Avaliação do RA 1 - Projeto" até 10/10/2026, 23:59.
 - Critérios que fecha: X.1, X.2, X.3, X.4, X.5, X.6, X.7, X.9, X.10
 - Bloqueada por: T12
 
@@ -336,16 +337,16 @@ Referência: `entregas/ra1-criterios-de-aceite.md`
 4. Criar as 16 sub-issues e vinculá-las como sub-issues das mães (campo `parent`).
 5. Trocar cada placeholder `{{Txx}}` dos corpos pelo `#n` real; registrar também o bloqueio nativo, se disponível (campo `blocked_by`).
 6. Adicionar as 30 issues ao Project com Status **Todo**, sem datas.
-7. Verificar por comando: 30 issues com `ra1`; 30 itens no Project; 4 mães com 4 sub-issues; nenhum `{{` pendente nos corpos; nenhuma issue com responsável.
+7. Verificar por comando: 30 issues com `ra1`; 30 itens no Project; 4 mães com 4 sub-issues; nenhum `{{` pendente nos corpos; responsável só nas 16 sub-issues por área.
 8. Relatório final: `Tarefa | nº da issue | status no Project | verificado`.
 
 ---
 
 ## 6. Pontos em aberto
 
-- **A1.** Responsáveis por área: o grupo define; a tabela 1.2 e as sub-issues ficam em branco até lá.
+- **A1.** Resolvido: A `LucasStop`, B `adrian69-droid`, C `Luc-Bruno`, D `Teider011`.
 - **A2.** Resolvido: Project nº 1 (https://github.com/orgs/Plataforma-de-Cursos-TCC/projects/1).
-- **A3.** Formato de entrega no Canvas (PDF consolidado) a confirmar com a professora.
+- **A3.** Resolvido: entrega em PDF e DOCX.
 - **A4.** A rubrica do Canvas não estava disponível; os critérios foram revisados contra o plano de ensino e os ADRs (ver `ra1-criterios-de-aceite.md`).
 - **A5.** Resolvido: `Teider011`.
 
@@ -372,7 +373,7 @@ Referência: `entregas/ra1-criterios-de-aceite.md`
   ],
   "parent": null,
   "blocked_by": [],
-  "body": "## Objetivo\nCriar em `especificacao/` um arquivo MD por item do template (1 a 11), com os títulos originais; nos itens 6, 7, 8 e 10, um arquivo por área (`area-a.md` a `area-d.md`, ADR-0006). Definir a pasta dos diagramas (fonte `.mmd` ou `.bpmn` + imagem exportada), o nome do produto (Plataforma de Cursos) e o padrão de branch (`feat/` ou `fix/`). Registrar no `README.md`.\n\n## Insumos obrigatórios\n- Ler `CONTEXT.md` antes de começar.\n- `especificacao/` e `README.md` (mapa do repositório)\n- ADR-0001, ADR-0004, ADR-0006\n\n## Critérios de aceite\nReferência: `entregas/ra1-criterios-de-aceite.md`\n- [ ] X.1 Template. O documento final (PDF consolidado a partir dos MDs do repositório) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e…\n- [ ] X.9 Nome do produto. O nome Plataforma de Cursos (exatamente assim) aparece em todos os campos \"NOME DO PRODUTO\" / \"PRODUTO\" dos quadros.\n\n## Dependências\n- Bloqueada por: nenhuma\n- Bloqueia: {{T01}}, {{T02}}\n\n## Definição de pronto\n- Trabalho em branch própria (`feat/` ou `fix/`), em arquivo(s) MD do repositório; diagramas como código com fonte versionada.\n- Todos os critérios acima marcados, cada um com evidência (arquivo e seção, quantidade contada).\n- Dúvida sobre outra área: registrar na issue `pendencia-cruzada` da área, sem inventar o requisito dela.\n- Pull request para a `main`, card em **In review**; outro integrante revisa. **Done** só após o merge."
+  "body": "## Objetivo\nCriar em `especificacao/` um arquivo MD por item do template (1 a 11), com os títulos originais; nos itens 6, 7, 8 e 10, um arquivo por área (`area-a.md` a `area-d.md`, ADR-0006). Definir a pasta dos diagramas (fonte `.mmd` ou `.bpmn` + imagem exportada), o nome do produto (Plataforma de Cursos) e o padrão de branch (`feat/` ou `fix/`). Registrar no `README.md`.\n\n## Insumos obrigatórios\n- Ler `CONTEXT.md` antes de começar.\n- `especificacao/` e `README.md` (mapa do repositório)\n- ADR-0001, ADR-0004, ADR-0006\n\n## Critérios de aceite\nReferência: `entregas/ra1-criterios-de-aceite.md`\n- [ ] X.1 Template. O documento final (consolidado a partir dos MDs do repositório e entregue em PDF e DOCX) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e…\n- [ ] X.9 Nome do produto. O nome Plataforma de Cursos (exatamente assim) aparece em todos os campos \"NOME DO PRODUTO\" / \"PRODUTO\" dos quadros.\n\n## Dependências\n- Bloqueada por: nenhuma\n- Bloqueia: {{T01}}, {{T02}}\n\n## Definição de pronto\n- Trabalho em branch própria (`feat/` ou `fix/`), em arquivo(s) MD do repositório; diagramas como código com fonte versionada.\n- Todos os critérios acima marcados, cada um com evidência (arquivo e seção, quantidade contada).\n- Dúvida sobre outra área: registrar na issue `pendencia-cruzada` da área, sem inventar o requisito dela.\n- Pull request para a `main`, card em **In review**; outro integrante revisa. **Done** só após o merge."
  },
  {
   "id": "T01",
@@ -550,7 +551,7 @@ Referência: `entregas/ra1-criterios-de-aceite.md`
  },
  {
   "id": "T13",
-  "title": "[RA1][Geral] Consolidar em PDF e enviar no Canvas",
+  "title": "[RA1][Geral] Consolidar em PDF e DOCX e enviar no Canvas",
   "labels": [
    "ra1",
    "geral"
@@ -559,7 +560,7 @@ Referência: `entregas/ra1-criterios-de-aceite.md`
   "blocked_by": [
    "T12"
   ],
-  "body": "## Objetivo\nConsolidar os MDs em um único documento no formato do template (capa com Plataforma de Cursos, os 4 autores e 2026; sumário; seções 1 a 11 na ordem; diagramas legíveis), incluir a declaração de uso de IA preenchida, exportar em PDF e enviar na tarefa \"Avaliação do RA 1 - Projeto\" até 10/10/2026, 23:59.\n\n## Insumos obrigatórios\n- Ler `CONTEXT.md` antes de começar.\n- `entregas/ra1-criterios-de-aceite.md` seções 2 e 6\n\n## Critérios de aceite\nReferência: `entregas/ra1-criterios-de-aceite.md`\n- [ ] X.1 Template. O documento final (PDF consolidado a partir dos MDs do repositório) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e…\n- [ ] X.2 Capa. Nome do produto (Plataforma de Cursos) no lugar de \"NOME DO PRODUTO DE SOFTWARE\", os 4 autores no lugar de \"NOME AUTOR 1..4\" e ano 2026 (o template traz 2025).\n- [ ] X.3 Textos em azul. Todos os textos personalizáveis (em azul) foram substituídos e estão na cor preta.\n- [ ] X.4 Textos em laranja. Todos os quadros de aviso e textos de orientação em laranja foram removidos.\n- [ ] X.5 Exemplos do template. Os exemplos do template foram removidos ou substituídos, por exemplo RF1 \"Realizar login de usuário\" com o ator genérico e as estórias…\n- [ ] X.6 Sumário. O sumário está atualizado, com números de página corretos.\n- [ ] X.7 Declaração de uso de IA. O documento contém a declaração obrigatória (plano de ensino, seção 7.1): *\"Durante a preparação deste [TIPO DE CONTEÚDO], o(s) autor(es)…\n- [ ] X.9 Nome do produto. O nome Plataforma de Cursos (exatamente assim) aparece em todos os campos \"NOME DO PRODUTO\" / \"PRODUTO\" dos quadros.\n- [ ] X.10 Legibilidade dos diagramas. Os diagramas (itens 4, 9 e 11) estão legíveis no documento final, sem texto cortado ou ilegível. As imagens são geradas a partir do…\n\n## Dependências\n- Bloqueada por: {{T12}}\n- Bloqueia: nenhuma\n\n## Definição de pronto\n- Trabalho em branch própria (`feat/` ou `fix/`), em arquivo(s) MD do repositório; diagramas como código com fonte versionada.\n- Todos os critérios acima marcados, cada um com evidência (arquivo e seção, quantidade contada).\n- Dúvida sobre outra área: registrar na issue `pendencia-cruzada` da área, sem inventar o requisito dela.\n- Pull request para a `main`, card em **In review**; outro integrante revisa. **Done** só após o merge."
+  "body": "## Objetivo\nConsolidar os MDs em um único documento no formato do template (capa com Plataforma de Cursos, os 4 autores e 2026; sumário; seções 1 a 11 na ordem; diagramas legíveis), incluir a declaração de uso de IA preenchida, exportar em PDF e DOCX e enviar na tarefa \"Avaliação do RA 1 - Projeto\" até 10/10/2026, 23:59.\n\n## Insumos obrigatórios\n- Ler `CONTEXT.md` antes de começar.\n- `entregas/ra1-criterios-de-aceite.md` seções 2 e 6\n\n## Critérios de aceite\nReferência: `entregas/ra1-criterios-de-aceite.md`\n- [ ] X.1 Template. O documento final (PDF consolidado a partir dos MDs do repositório) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e…\n- [ ] X.2 Capa. Nome do produto (Plataforma de Cursos) no lugar de \"NOME DO PRODUTO DE SOFTWARE\", os 4 autores no lugar de \"NOME AUTOR 1..4\" e ano 2026 (o template traz 2025).\n- [ ] X.3 Textos em azul. Todos os textos personalizáveis (em azul) foram substituídos e estão na cor preta.\n- [ ] X.4 Textos em laranja. Todos os quadros de aviso e textos de orientação em laranja foram removidos.\n- [ ] X.5 Exemplos do template. Os exemplos do template foram removidos ou substituídos, por exemplo RF1 \"Realizar login de usuário\" com o ator genérico e as estórias…\n- [ ] X.6 Sumário. O sumário está atualizado, com números de página corretos.\n- [ ] X.7 Declaração de uso de IA. O documento contém a declaração obrigatória (plano de ensino, seção 7.1): *\"Durante a preparação deste [TIPO DE CONTEÚDO], o(s) autor(es)…\n- [ ] X.9 Nome do produto. O nome Plataforma de Cursos (exatamente assim) aparece em todos os campos \"NOME DO PRODUTO\" / \"PRODUTO\" dos quadros.\n- [ ] X.10 Legibilidade dos diagramas. Os diagramas (itens 4, 9 e 11) estão legíveis no documento final, sem texto cortado ou ilegível. As imagens são geradas a partir do…\n\n## Dependências\n- Bloqueada por: {{T12}}\n- Bloqueia: nenhuma\n\n## Definição de pronto\n- Trabalho em branch própria (`feat/` ou `fix/`), em arquivo(s) MD do repositório; diagramas como código com fonte versionada.\n- Todos os critérios acima marcados, cada um com evidência (arquivo e seção, quantidade contada).\n- Dúvida sobre outra área: registrar na issue `pendencia-cruzada` da área, sem inventar o requisito dela.\n- Pull request para a `main`, card em **In review**; outro integrante revisa. **Done** só após o merge."
  },
  {
   "id": "T06a",

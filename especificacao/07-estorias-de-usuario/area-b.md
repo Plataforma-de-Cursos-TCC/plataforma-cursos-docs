@@ -2,7 +2,7 @@
 
 O template exige uma estória de usuário por requisito funcional, com critérios de aceite. Formato Como / Posso / Para, com pelo menos 2 critérios (ADR-0002).
 
-Área B: Autoria do instrutor. Responsável: <nome do integrante>. IDs: US-Bn, uma por RF da área, com o mesmo número (US-B1 ↔ RF-B1).
+Área B: Autoria do instrutor. Responsável: Adrian Antônio de Souza Gomes (`adrian69-droid`). IDs: US-Bn, uma por RF da área, com o mesmo número (US-B1 ↔ RF-B1).
 
 <!--
 MODELO A PREENCHER
