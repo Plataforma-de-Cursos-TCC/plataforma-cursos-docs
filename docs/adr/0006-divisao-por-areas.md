@@ -41,7 +41,7 @@ relacionados: [adr-0001, adr-0005]
 
 ## Consequências
 
-- Cada área tem um arquivo próprio nos itens 6, 7, 8 e 10 (`area-a.md` … `area-d.md`), o que reduz conflito de merge.
+- Cada área tem um arquivo próprio nos itens 7 e 10 (`area-a.md` … `area-d.md`), o que reduz conflito de merge. Os itens 6 e 8 ficam num `00-item.md` único, porque o template pede uma tabela só, ordenada por ID.
 - A numeração final dos IDs segue a [ADR-0001](0001-minimo-por-integrante-e-numeracao-provisoria.md).
 - Na ISO/IEC 25010:2023, acessibilidade é a subcaracterística "inclusividade" de **Capacidade de interação**, e não uma característica própria. RNF de acessibilidade (ex.: WCAG) é classificado assim.
 
