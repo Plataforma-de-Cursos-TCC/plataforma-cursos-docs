@@ -1,10 +1,3 @@
-# 9 DIAGRAMA GERAL DE CASOS DE USO
-
-O template exige o diagrama geral de casos de uso do sistema, com atores, casos de uso e relações include/extend (o extend segue a ADR-0003). Diagrama como código (ADR-0004).
-
-Fonte: `especificacao/diagramas/09-casos-de-uso.mmd`
-
-```mermaid
 %% Convenção do TE3_3: seta do UC que pode derivar (base) para o UC estendido/incluído.
 %% Casos de uso em Mermaid: flowchart (Mermaid não tem notação nativa de UC). Fronteira do sistema = subgraph.
 %%{init: {"flowchart": {"defaultRenderer": "elk"}}}%%
@@ -62,7 +55,3 @@ flowchart LR
   UC005 -. "«include»" .-> UC016
   UC005 -. "«extend»" .-> UC011
   UC009 -. "«extend»" .-> UC001
-
-```
-
-*Figura 2 – Diagrama Geral de Casos de Uso*
