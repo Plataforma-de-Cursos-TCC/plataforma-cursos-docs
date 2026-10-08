@@ -14,181 +14,154 @@ atualizado: 2026-10-07
 
 ## 2. Modelo de dados
 
-<!-- revisar: classDiagram reconstruído do dicionário; conferir com a imagem da v11 -->
-
 ```mermaid
-classDiagram
-    direction TB
+erDiagram
+    Category ||--o{ Course : ""
+    Course ||--|{ Module : ""
+    Module ||--|{ Lesson : ""
+    Module ||--o{ Quiz : ""
+    Quiz ||--|{ Question : ""
+    Question ||--|{ QuestionOption : ""
+    Question ||--o{ QuizAnswer : ""
+    QuestionOption ||--o{ QuizAnswer : ""
+    Quiz ||--o{ QuizAttempt : ""
+    QuizAttempt ||--|{ QuizAnswer : ""
+    Enrollment ||--o{ QuizAttempt : ""
+    Enrollment ||--o{ LessonProgress : ""
+    Lesson ||--o{ LessonProgress : ""
+    Course ||--o{ Enrollment : ""
+    Enrollment ||--|| Payment : ""
+    Course ||--o{ Review : ""
+    User ||--o{ Course : ""
+    User ||--o{ Enrollment : ""
+    User ||--o{ Review : ""
+    User ||--o{ Address : ""
+    User ||--|| InstructorProfile : ""
 
-    class User {
-        +String id
-        +String name
-        +String email
-        +String passwordHash
-        +String role
-        +String locale
-        +String phone
-        +String documentNumber
-        +Date birthDate
-        +String status
+    User {
+        UUID id PK
+        VARCHAR name
+        VARCHAR email
+        VARCHAR passwordHash
+        ENUM role
+        VARCHAR locale
+        VARCHAR phone
+        VARCHAR documentNumber
+        DATE birthDate
+        ENUM status
     }
-
-    class Address {
-        +String id
-        +String userId
-        +String type
-        +String street
-        +String number
-        +String complement
-        +String district
-        +String city
-        +String state
-        +String zipCode
-        +String country
-        +Boolean isDefault
+    Address {
+        UUID id PK
+        UUID userId FK
+        ENUM type
+        VARCHAR street
+        VARCHAR number
+        VARCHAR complement
+        VARCHAR district
+        VARCHAR city
+        CHAR state
+        VARCHAR zipCode
+        CHAR country
+        BOOLEAN isDefault
     }
-
-    class InstructorProfile {
-        +String userId
-        +String bio
-        +String headline
-        +String socialLinks
-        +String payoutInfo
+    InstructorProfile {
+        UUID userId PK,FK
+        TEXT bio
+        VARCHAR headline
+        JSON socialLinks
+        JSON payoutInfo
     }
-
-    class Category {
-        +String id
-        +String name
+    Category {
+        UUID id PK
+        VARCHAR name
     }
-
-    class Course {
-        +String id
-        +String instructorId
-        +String categoryId
-        +String title
-        +String description
-        +Integer priceCents
-        +String currency
-        +String level
-        +String status
-        +String thumbnailKey
+    Course {
+        UUID id PK
+        UUID instructorId FK
+        UUID categoryId FK
+        VARCHAR title
+        TEXT description
+        INT priceCents
+        CHAR currency
+        ENUM level
+        ENUM status
+        VARCHAR thumbnailKey
     }
-
-    class Module {
-        +String id
-        +String courseId
-        +String title
-        +Integer order
+    Module {
+        UUID id PK
+        UUID courseId FK
+        VARCHAR title
+        INT order
     }
-
-    class Lesson {
-        +String id
-        +String moduleId
-        +String title
-        +String videoKey
-        +Integer durationSeconds
-        +Integer order
-        +Boolean isPreview
+    Lesson {
+        UUID id PK
+        UUID moduleId FK
+        VARCHAR title
+        VARCHAR videoKey
+        INT durationSeconds
+        INT order
+        BOOLEAN isPreview
     }
-
-    class Enrollment {
-        +String id
-        +String userId
-        +String courseId
-        +Integer pricePaidCents
-        +String currency
-        +String status
+    Enrollment {
+        UUID id PK
+        UUID userId FK
+        UUID courseId FK
+        INT pricePaidCents
+        CHAR currency
+        ENUM status
     }
-
-    class LessonProgress {
-        +String id
-        +String enrollmentId
-        +String lessonId
-        +Boolean completed
-        +Integer watchedSeconds
-        +Date completedAt
+    LessonProgress {
+        UUID id PK
+        UUID enrollmentId FK
+        UUID lessonId FK
+        BOOLEAN completed
+        INT watchedSeconds
+        DATETIME completedAt
     }
-
-    class Quiz {
-        +String id
-        +String moduleId
-        +String title
+    Quiz {
+        UUID id PK
+        UUID moduleId FK
+        VARCHAR title
     }
-
-    class Question {
-        +String id
-        +String quizId
-        +String text
+    Question {
+        UUID id PK
+        UUID quizId FK
+        TEXT text
     }
-
-    class QuestionOption {
-        +String id
-        +String questionId
-        +String text
-        +Boolean isCorrect
+    QuestionOption {
+        UUID id PK
+        UUID questionId FK
+        TEXT text
+        BOOLEAN isCorrect
     }
-
-    class QuizAttempt {
-        +String id
-        +String enrollmentId
-        +String quizId
-        +Float score
-        +Date submittedAt
+    QuizAttempt {
+        UUID id PK
+        UUID enrollmentId FK
+        UUID quizId FK
+        DECIMAL score
+        DATETIME submittedAt
     }
-
-    class QuizAnswer {
-        +String id
-        +String attemptId
-        +String questionId
-        +String optionId
+    QuizAnswer {
+        UUID id PK
+        UUID attemptId FK
+        UUID questionId FK
+        UUID optionId FK
     }
-
-    class Payment {
-        +String id
-        +String enrollmentId
-        +Integer amountCents
-        +String currency
-        +String status
-        +Date paidAt
+    Payment {
+        UUID id PK
+        UUID enrollmentId FK
+        INT amountCents
+        CHAR currency
+        ENUM status
+        DATETIME paidAt
     }
-
-    class Review {
-        +String id
-        +String userId
-        +String courseId
-        +Integer rating
-        +String comment
+    Review {
+        UUID id PK
+        UUID userId FK
+        UUID courseId FK
+        TINYINT rating
+        TEXT comment
     }
-
-    User "1" --> "0..*" Address : possui
-    User "1" --> "0..1" InstructorProfile : possui
-    User "1" --> "0..*" Enrollment : realiza
-    User "1" --> "0..*" Review : escreve
-    User "1" --> "0..*" Course : leciona
-
-    Category "1" --> "0..*" Course : categoriza
-
-    Course "1" *-- "1..*" Module : contem
-    Course "1" --> "0..*" Enrollment : recebe
-    Course "1" --> "0..*" Review : avaliado_por
-
-    Module "1" *-- "1..*" Lesson : contem
-    Module "1" *-- "0..*" Quiz : contem
-
-    Enrollment "1" --> "0..*" LessonProgress : registra
-    Enrollment "1" --> "0..*" QuizAttempt : realiza
-    Enrollment "1" --> "0..1" Payment : possui
-
-    Lesson "1" --> "0..*" LessonProgress : monitorada_em
-
-    Quiz "1" *-- "1..*" Question : contem
-    Quiz "1" --> "0..*" QuizAttempt : avalia
-
-    Question "1" *-- "2..*" QuestionOption : contem
-    Question "1" --> "0..*" QuizAnswer : respondida_em
-
-    QuestionOption "1" --> "0..*" QuizAnswer : selecionada_em
-    QuizAttempt "1" *-- "1..*" QuizAnswer : contem
 ```
 
 ### Dicionário de dados
@@ -305,6 +278,135 @@ Atributos normalizados até a 3FN, exceto os campos JSON InstructorProfile.socia
 | courseId | Simples | Texto | - | Referência ao curso avaliado. |
 | rating | Simples | Numérico | - | Nota de 1 a 5. |
 | comment | Simples | Texto | - | Comentário do aluno. |
+
+### Diagrama de Classes
+
+```mermaid
+classDiagram
+    direction TB
+
+    class Usuario {
+        #id: número
+        #nome: texto
+        #email: texto
+        #telefone: texto
+        #status: StatusUsuario
+        +editarPerfil(dados: PerfilDTO)
+    }
+
+    class Instrutor {
+        -bio: texto
+        -headline: texto
+        +cadastrarCurso(dados: CourseDTO): Course
+        +cadastrarQuiz(modulo: Module, dados: QuizDTO): Quiz
+    }
+
+    class Aluno {
+        +matricular(curso: Course)
+        +responderQuiz(quiz: Quiz): QuizAttempt
+        +avaliar(curso: Course, nota: número)
+    }
+
+    class Administrador {
+        +bloquearUsuario(usuario: Usuario)
+    }
+
+    class Course {
+        -id: número
+        -titulo: texto
+        -descricao: texto
+        -precoCentavos: número
+        -status: StatusCurso
+        +publicar()
+        +adicionarModulo(dados: ModuleDTO): Module
+    }
+
+    class Module {
+        -id: número
+        -titulo: texto
+        -ordem: número
+        +adicionarAula(dados: LessonDTO): Lesson
+        +adicionarQuiz(dados: QuizDTO): Quiz
+    }
+
+    class Lesson {
+        -id: número
+        -titulo: texto
+        -videoKey: texto
+        -duracaoSegundos: número
+        -isPreview: booleano
+    }
+
+    class Quiz {
+        -id: número
+        -titulo: texto
+        +adicionarPergunta(dados: QuestionDTO): Question
+    }
+
+    class Question {
+        -texto: texto
+    }
+
+    class QuestionOption {
+        -texto: texto
+        -correta: booleano
+    }
+
+    class Enrollment {
+        -id: número
+        -precoPagoCentavos: número
+        -status: StatusMatricula
+    }
+
+    class Payment {
+        -valorCentavos: número
+        -status: StatusPagamento
+    }
+
+    class LessonProgress {
+        -concluida: booleano
+        -segundosAssistidos: número
+    }
+
+    class QuizAttempt {
+        -nota: número
+        -enviadoEm: dataHora
+    }
+
+    class Review {
+        -nota: número
+        -comentario: texto
+    }
+
+    class Category {
+        -id: número
+        -nome: texto
+    }
+
+    Usuario <|-- Instrutor
+    Usuario <|-- Aluno
+    Usuario <|-- Administrador
+
+    Instrutor "1" --> "0..*" Course : ministrado por
+    Course "1" *-- "1..*" Module : compõe
+    Module "1" *-- "1..*" Lesson
+    Module "1" *-- "0..1" Quiz
+
+    Quiz "1" *-- "1..*" Question
+    Question "1" *-- "2..*" QuestionOption
+
+    Aluno "1" --> "0..*" Enrollment
+    Aluno "1" --> "0..*" Review
+    Course "1" --> "0..*" Enrollment
+    Course "1" --> "0..*" Review
+
+    Enrollment "1" --> "1" Payment
+    Enrollment "1" --> "0..*" LessonProgress
+    Enrollment "1" --> "0..*" QuizAttempt
+
+    Category "1" --o "0..*" Course : agrega
+    Aluno ..> LessonProgress : «depende»
+```
 
 ## 3. APIs
 <!-- Endpoints por área, em OpenAPI (arquivo separado quando existir). Padrão de erro e paginação. -->

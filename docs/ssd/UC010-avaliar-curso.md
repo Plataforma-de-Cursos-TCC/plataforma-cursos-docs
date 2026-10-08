@@ -2,7 +2,6 @@
 
 Diagrama de sequência do sistema para o caso de uso UC010 (Avaliar Curso). Representa a avaliação com nota e comentário realizada pelo Aluno matriculado, com validação de matrícula e recálculo da nota média.
 
-<!-- revisar: diagrama reconstruído a partir da descrição da v11 (na v11 é só imagem); conferir contra a figura original. -->
 ```mermaid
 sequenceDiagram
     actor Aluno
@@ -21,6 +20,7 @@ sequenceDiagram
     FE->>API: POST /avaliacoes (nota, comentário)
     alt aluno matriculado no curso
         API->>DB: Salva/atualiza avaliação
+        DB-->>API: OK
         API->>DB: Recalcula nota média do curso
         DB-->>API: OK
         API-->>FE: 200 OK
