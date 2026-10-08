@@ -6,7 +6,7 @@
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; a aula já ter sido transcrita e indexada.
 - **Pós-condições:** pergunta e resposta salvas no histórico de conversa do Aluno com aquele curso.
 - **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno tem um limite de mensagens por período.
-- **Protótipo(s) de tela:** chat na lateral da reprodução do vídeo, com a resposta indicando a aula e o minuto do vídeo de origem. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Protótipo(s) de tela:** chat na lateral da reprodução do vídeo, com a resposta indicando a aula e o minuto do vídeo de origem. As telas de cada fluxo aparecem junto ao fluxo, abaixo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno abre o chat na página da aula. (A-2)
   2. O Aluno digita a pergunta e aciona “Enviar”. (E-2)
@@ -14,6 +14,18 @@
   4. O Tutor de IA gera a resposta citando a aula e o minuto do vídeo de origem.
   5. O sistema exibe a resposta no chat e a salva no histórico de conversa.
   6. Este caso de uso é finalizado.
+
+  ![tutor de IA aberto e vazio](prototipos/png/UC001-FB-1.png)
+
+  *Figura 0 – UC001, fluxo básico: tutor de IA aberto e vazio*
+
+  ![pergunta enviada ao Tutor de IA](prototipos/png/UC001-FB-2.png)
+
+  *Figura 0 – UC001, fluxo básico: pergunta enviada ao Tutor de IA*
+
+  ![resposta do Tutor de IA](prototipos/png/UC001-FB-3.png)
+
+  *Figura 0 – UC001, fluxo básico: resposta do Tutor de IA*
 
   ![tutor de IA aberto e vazio](prototipos/png/UC001-FB-1.png)
 
@@ -35,10 +47,18 @@
     ![tutor sem informação no material](prototipos/png/UC001-A1-1.png)
 
     *Figura 0 – UC001, fluxo alternativo A1: tutor sem informação no material*
+
+    ![tutor sem informação no material](prototipos/png/UC001-A1-1.png)
+
+    *Figura 0 – UC001, fluxo alternativo A1: tutor sem informação no material*
   - **A2 – O Aluno reabre uma conversa anterior**
     - A-2.1 O Aluno acessa o histórico de conversa da aula.
     - A-2.2 O sistema carrega as mensagens anteriores no chat.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
+
+    ![histórico de perguntas no chat](prototipos/png/UC001-A2-1.png)
+
+    *Figura 0 – UC001, fluxo alternativo A2: histórico de perguntas no chat*
 
     ![histórico de perguntas no chat](prototipos/png/UC001-A2-1.png)
 
@@ -52,10 +72,18 @@
     ![conteúdo em preparo](prototipos/png/UC001-E1-1.png)
 
     *Figura 0 – UC001, fluxo de exceção E1: conteúdo em preparo*
+
+    ![conteúdo em preparo](prototipos/png/UC001-E1-1.png)
+
+    *Figura 0 – UC001, fluxo de exceção E1: conteúdo em preparo*
   - **E2 – Limite de mensagens atingido**
     - E-2.1 O sistema identifica que o Aluno excedeu o limite de mensagens do período.
     - E-2.2 O sistema bloqueia o novo envio e informa o tempo de espera restante.
     - E-2.3 Este caso de uso é finalizado.
+
+    ![limite de mensagens atingido](prototipos/png/UC001-E2-1.png)
+
+    *Figura 0 – UC001, fluxo de exceção E2: limite de mensagens atingido*
 
     ![limite de mensagens atingido](prototipos/png/UC001-E2-1.png)
 
@@ -69,7 +97,7 @@
 - **Pré-condições:** o Instrutor ou o Administrador ter realizado login; existir ao menos um curso com alunos matriculados.
 - **Pós-condições:** dashboard exibe as métricas agregadas conforme o filtro aplicado.
 - **Regras de negócio:** R-1 as métricas consideram apenas o período selecionado; R-2 o Instrutor só vê dados dos próprios cursos, e o Administrador vê os de todos os cursos; R-3 as métricas são calculadas a partir dos registros de progresso de aula (RF006) e de matrícula (RF005), agregados por dia, semana ou mês, o que permite ver tendências de engajamento e comparar intervalos.
-- **Protótipo(s) de tela:** dashboard com gráficos de progresso e engajamento, seletor de intervalo de datas e filtro por curso. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Protótipo(s) de tela:** dashboard com gráficos de progresso e engajamento, seletor de intervalo de datas e filtro por curso. As telas de cada fluxo aparecem junto ao fluxo, abaixo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Instrutor ou o Administrador acessa o dashboard. (A-2)
   2. O usuário seleciona um intervalo de datas. (E-1)
@@ -77,6 +105,10 @@
   4. O sistema agrega o progresso e o engajamento do período selecionado. (E-2)
   5. O sistema exibe os gráficos atualizados no dashboard.
   6. Este caso de uso é finalizado.
+
+  ![dashboard do Aluno com todos os cursos](prototipos/png/UC007-FB-1.png)
+
+  *Figura 0 – UC007, fluxo básico: dashboard do Aluno com todos os cursos*
 
   ![dashboard do Aluno com todos os cursos](prototipos/png/UC007-FB-1.png)
 
@@ -90,10 +122,18 @@
     ![dashboard filtrado pelo curso "Fundamentos de Pesquisa"](prototipos/png/UC007-A1-1.png)
 
     *Figura 0 – UC007, fluxo alternativo A1: dashboard filtrado pelo curso "Fundamentos de Pesquisa"*
+
+    ![dashboard filtrado pelo curso "Fundamentos de Pesquisa"](prototipos/png/UC007-A1-1.png)
+
+    *Figura 0 – UC007, fluxo alternativo A1: dashboard filtrado pelo curso "Fundamentos de Pesquisa"*
   - **A2 – O Administrador visualiza todos os cursos**
     - A-2.1 O Administrador acessa o dashboard sem restrição de Instrutor.
     - A-2.2 O sistema considera os dados de todos os cursos da plataforma.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
+
+    ![dashboard do Administrador com todos os cursos](prototipos/png/UC007-A2-1.png)
+
+    *Figura 0 – UC007, fluxo alternativo A2: dashboard do Administrador com todos os cursos*
 
     ![dashboard do Administrador com todos os cursos](prototipos/png/UC007-A2-1.png)
 
@@ -107,10 +147,18 @@
     ![erro "Data final anterior à data inicial"](prototipos/png/UC007-E1-1.png)
 
     *Figura 0 – UC007, fluxo de exceção E1: erro "Data final anterior à data inicial"*
+
+    ![erro "Data final anterior à data inicial"](prototipos/png/UC007-E1-1.png)
+
+    *Figura 0 – UC007, fluxo de exceção E1: erro "Data final anterior à data inicial"*
   - **E2 – Nenhum aluno com atividade no período selecionado**
     - E-2.1 O sistema identifica ausência de dados de progresso ou engajamento no período.
     - E-2.2 O sistema exibe um aviso claro de que não há dados, sem erro.
     - E-2.3 Este caso de uso é finalizado.
+
+    ![aviso "Nenhum aluno com atividade no período selecionado"](prototipos/png/UC007-E2-1.png)
+
+    *Figura 0 – UC007, fluxo de exceção E2: aviso "Nenhum aluno com atividade no período selecionado"*
 
     ![aviso "Nenhum aluno com atividade no período selecionado"](prototipos/png/UC007-E2-1.png)
 
@@ -124,7 +172,7 @@
 - **Pré-condições:** o Administrador ter realizado login na plataforma.
 - **Pós-condições:** status do usuário atualizado e aplicado imediatamente, revogando ou restaurando o acesso.
 - **Regras de negócio:** R-1 o Administrador não pode bloquear a própria conta.
-- **Protótipo(s) de tela:** lista de usuários com busca, filtro por perfil e ações de bloquear, desbloquear e excluir. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Protótipo(s) de tela:** lista de usuários com busca, filtro por perfil e ações de bloquear, desbloquear e excluir. As telas de cada fluxo aparecem junto ao fluxo, abaixo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Administrador busca um usuário por nome, e-mail ou perfil. (A-1)
   2. O Administrador seleciona a ação: bloquear ou desbloquear. (A-3)
@@ -132,6 +180,18 @@
   4. O sistema aplica a mudança de status. (E-1) (E-2)
   5. O sistema revoga ou restaura imediatamente o acesso do usuário.
   6. Este caso de uso é finalizado.
+
+  ![lista de usuários com avatar e perfis](prototipos/png/UC008-FB-1.png)
+
+  *Figura 0 – UC008, fluxo básico: lista de usuários com avatar e perfis*
+
+  ![modal de confirmação "Bloquear João Silva?"](prototipos/png/UC008-FB-2.png)
+
+  *Figura 0 – UC008, fluxo básico: modal de confirmação "Bloquear João Silva?"*
+
+  ![lista com João Silva bloqueado](prototipos/png/UC008-FB-3.png)
+
+  *Figura 0 – UC008, fluxo básico: lista com João Silva bloqueado*
 
   ![lista de usuários com avatar e perfis](prototipos/png/UC008-FB-1.png)
 
@@ -153,10 +213,18 @@
     ![lista filtrada pelo perfil Aluno](prototipos/png/UC008-A1-1.png)
 
     *Figura 0 – UC008, fluxo alternativo A1: lista filtrada pelo perfil Aluno*
+
+    ![lista filtrada pelo perfil Aluno](prototipos/png/UC008-A1-1.png)
+
+    *Figura 0 – UC008, fluxo alternativo A1: lista filtrada pelo perfil Aluno*
   - **A2 – O Administrador cancela a ação na confirmação**
     - A-2.1 O Administrador aciona “Cancelar” na tela de confirmação.
     - A-2.2 O sistema descarta a ação selecionada, sem alterar o status do usuário.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 1).
+
+    ![lista de usuários sem alteração após cancelar](prototipos/png/UC008-FB-1.png)
+
+    *Figura 0 – UC008, fluxo alternativo A2: lista de usuários sem alteração após cancelar*
 
     ![lista de usuários sem alteração após cancelar](prototipos/png/UC008-FB-1.png)
 
@@ -174,10 +242,18 @@
     ![erro "Não é possível bloquear a própria conta"](prototipos/png/UC008-E1-1.png)
 
     *Figura 0 – UC008, fluxo de exceção E1: erro "Não é possível bloquear a própria conta"*
+
+    ![erro "Não é possível bloquear a própria conta"](prototipos/png/UC008-E1-1.png)
+
+    *Figura 0 – UC008, fluxo de exceção E1: erro "Não é possível bloquear a própria conta"*
   - **E2 – Usuário-alvo já removido por outro Administrador**
     - E-2.1 O sistema identifica que o usuário-alvo não existe mais.
     - E-2.2 O sistema informa que o usuário não foi encontrado e atualiza a lista.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 1).
+
+    ![erro "Usuário não encontrado"](prototipos/png/UC008-E2-1.png)
+
+    *Figura 0 – UC008, fluxo de exceção E2: erro "Usuário não encontrado"*
 
     ![erro "Usuário não encontrado"](prototipos/png/UC008-E2-1.png)
 
@@ -191,7 +267,7 @@
 - **Pré-condições:** o Administrador ter realizado login e estar na lista de usuários (UC008).
 - **Pós-condições:** dados pessoais do usuário removidos, histórico de matrícula e pagamento mantido anonimizado, acesso revogado e usuário fora da lista.
 - **Regras de negócio:** R-1 a exclusão remove os dados pessoais, mas mantém o histórico de matrícula e pagamento anonimizado; R-2 o Administrador não pode excluir a própria conta; R-3 a exclusão é irreversível e exige confirmação explícita.
-- **Protótipo(s) de tela:** modal de confirmação “Excluir usuário?” com aviso de anonimização irreversível sobre a lista de usuários. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Protótipo(s) de tela:** modal de confirmação “Excluir usuário?” com aviso de anonimização irreversível sobre a lista de usuários. As telas de cada fluxo aparecem junto ao fluxo, abaixo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O sistema exibe a confirmação de exclusão com o nome do usuário e o aviso de que a ação é irreversível. (A-1)
   2. O Administrador aciona “Excluir”.
@@ -199,6 +275,14 @@
   4. O sistema anonimiza os dados pessoais, mantém o histórico anonimizado e revoga o acesso.
   5. O sistema retira o usuário da lista e confirma a exclusão.
   6. Este caso de uso é finalizado.
+
+  ![modal de confirmação com aviso de anonimização irreversível](prototipos/png/UC018-FB-1.png)
+
+  *Figura 0 – UC018, fluxo básico: modal de confirmação com aviso de anonimização irreversível*
+
+  ![lista sem o usuário excluído e aviso "Usuário excluído"](prototipos/png/UC018-FB-2.png)
+
+  *Figura 0 – UC018, fluxo básico: lista sem o usuário excluído e aviso "Usuário excluído"*
 
   ![modal de confirmação com aviso de anonimização irreversível](prototipos/png/UC018-FB-1.png)
 
@@ -216,11 +300,19 @@
     ![lista de usuários sem alteração após cancelar](prototipos/png/UC008-FB-1.png)
 
     *Figura 0 – UC018, fluxo alternativo A1: lista de usuários sem alteração após cancelar*
+
+    ![lista de usuários sem alteração após cancelar](prototipos/png/UC008-FB-1.png)
+
+    *Figura 0 – UC018, fluxo alternativo A1: lista de usuários sem alteração após cancelar*
 - **Fluxos de exceção:**
   - **E1 – Tentativa de excluir a própria conta**
     - E-1.1 O sistema identifica que o usuário-alvo é a própria conta do Administrador que está logado.
     - E-1.2 O sistema impede a exclusão e exibe um aviso.
     - E-1.3 Este caso de uso é finalizado.
+
+    ![erro "Não é possível excluir a própria conta"](prototipos/png/UC018-E1-1.png)
+
+    *Figura 0 – UC018, fluxo de exceção E1: erro "Não é possível excluir a própria conta"*
 
     ![erro "Não é possível excluir a própria conta"](prototipos/png/UC018-E1-1.png)
 
@@ -234,6 +326,10 @@
 
     *Figura 0 – UC018, fluxo de exceção E2: erro "Usuário não encontrado"*
 
+    ![erro "Usuário não encontrado"](prototipos/png/UC008-E2-1.png)
+
+    *Figura 0 – UC018, fluxo de exceção E2: erro "Usuário não encontrado"*
+
 ## UC016 – Acessar Área Protegida por Perfil
 
 - **Nome do caso de uso:** Acessar Área Protegida por Perfil
@@ -242,7 +338,7 @@
 - **Pré-condições:** o Usuário ter conta na plataforma.
 - **Pós-condições:** área exibida se o perfil for compatível; caso contrário, acesso negado e registrado na trilha de auditoria.
 - **Regras de negócio:** R-1 os perfis são Aluno, Instrutor e Administrador; R-2 todas as áreas protegidas verificam o perfil do Usuário (RNF001); R-3 toda negação de acesso é registrada na trilha de auditoria (RNF016).
-- **Protótipo(s) de tela:** sem tela própria; usa a tela de login (UC005), a página inicial de cada perfil e uma mensagem de acesso negado. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Protótipo(s) de tela:** sem tela própria; usa a tela de login (UC005), a página inicial de cada perfil e uma mensagem de acesso negado. As telas de cada fluxo aparecem junto ao fluxo, abaixo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Usuário acessa uma área da plataforma. (A-1)
   2. O sistema verifica se a sessão do Usuário está ativa. (E-1)
@@ -268,6 +364,18 @@
 
     *Figura 0 – UC016, fluxo alternativo A1: página inicial do Administrador*
 
+    ![página inicial do Aluno](prototipos/png/UC003-FB-2.png)
+
+    *Figura 0 – UC016, fluxo alternativo A1: página inicial do Aluno*
+
+    ![página inicial do Instrutor](prototipos/png/UC006-FB-1.png)
+
+    *Figura 0 – UC016, fluxo alternativo A1: página inicial do Instrutor*
+
+    ![página inicial do Administrador](prototipos/png/UC007-A2-1.png)
+
+    *Figura 0 – UC016, fluxo alternativo A1: página inicial do Administrador*
+
 - **Fluxos de exceção:**
   - **E1 – Sessão ausente ou expirada**
     - E-1.1 O sistema identifica que não há sessão ativa ou que a sessão expirou.
@@ -277,10 +385,18 @@
     ![login com aviso de sessão expirada](prototipos/png/UC005-E2-1.png)
 
     *Figura 0 – UC016, fluxo de exceção E1: login com aviso de sessão expirada*
+
+    ![login com aviso de sessão expirada](prototipos/png/UC005-E2-1.png)
+
+    *Figura 0 – UC016, fluxo de exceção E1: login com aviso de sessão expirada*
   - **E2 – Perfil sem permissão**
     - E-2.1 O sistema identifica que o perfil do Usuário não é o exigido pela área.
     - E-2.2 O sistema nega o acesso, informa a restrição, registra a tentativa na trilha de auditoria e direciona o Usuário à sua área.
     - E-2.3 Este caso de uso é finalizado.
+
+    ![tela "Acesso negado" com aviso de perfil sem acesso](prototipos/png/UC016-E2-1.png)
+
+    *Figura 0 – UC016, fluxo de exceção E2: tela "Acesso negado" com aviso de perfil sem acesso*
 
     ![tela "Acesso negado" com aviso de perfil sem acesso](prototipos/png/UC016-E2-1.png)
 

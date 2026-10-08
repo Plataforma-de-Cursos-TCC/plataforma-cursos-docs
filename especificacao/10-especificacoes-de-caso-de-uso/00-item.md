@@ -13,6 +13,7 @@
 | UC014 | Gerenciar módulos do curso | Instrutor | B (Autoria do instrutor) | [area-b.md](area-b.md) |
 | UC015 | Gerenciar aulas do curso | Instrutor | B (Autoria do instrutor) | [area-b.md](area-b.md) |
 | UC004 | Cadastrar quiz com gabarito | Instrutor | B (Autoria do instrutor) | [area-b.md](area-b.md) |
+| UC020 | Consultar catálogo de cursos | Visitante, Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC003 | Matricular-se em curso | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC019 | Processar pagamento simulado | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC009 | Assistir aula | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
