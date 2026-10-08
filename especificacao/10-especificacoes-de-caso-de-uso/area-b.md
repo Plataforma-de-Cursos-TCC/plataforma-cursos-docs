@@ -14,7 +14,7 @@
 
   *Figura 8 – Protótipo de tela do UC006 — Cadastrar Curso*
 - **Fluxo básico:**
-  1. O Instrutor acessa “Meus cursos”.
+  1. O Instrutor acessa “Meus cursos”. (A-2) (E-2)
   2. O Instrutor aciona “Novo curso”.
   3. O Instrutor preenche título, descrição, preço e categoria.
   4. O sistema salva o curso com status rascunho. (E-1)
