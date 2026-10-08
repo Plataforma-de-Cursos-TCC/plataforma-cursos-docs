@@ -58,13 +58,13 @@ Escopo alinhado ao item "É – Não é – Faz – Não faz" do v11.
 *Organizado por áreas A‑D conforme ADR‑0006.*
 
 - **Área A – Acesso e conta**: Registro, login, recuperação de senha, perfis. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
-  - IDs: RF-A1, RF-A2
+  - IDs: RF001, RF013, RF017
 - **Área B – Autoria do instrutor**: Criação de cursos, módulos, aulas, quizzes e gabaritos. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
-  - IDs: RF-B1, RF-B2, RF-B3, RF-B4, RF-B5
+  - IDs: RF002, RF003, RF004, RF007, RF016
 - **Área C – Aprendizagem do aluno**: Matrícula, visualização de aulas, quizzes, avaliação, interação com Tutor de IA. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
-  - IDs: RF-C1, RF-C2, RF-C3, RF-C4, RF-C5, RF-C6
+  - IDs: RF005, RF006, RF008, RF011, RF014, RF015
 - **Área D – Tutor de IA & Analytics**: Consulta de embeddings, respostas contextualizadas, dashboard de analytics. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
-  - IDs: RF-D1, RF-D2, RF-D3
+  - IDs: RF009, RF010, RF012, RF018
 
 ## 6. Concorrentes e diferencial
 A matriz comparativa mostra que nenhum concorrente oferece simultaneamente:

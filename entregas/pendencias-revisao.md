@@ -27,17 +27,12 @@ relacionados: [ra1-criterios-de-aceite, ra1-tarefas, propostas-lacunas, contexto
 
 ## 2. Marcações `<!-- revisar -->` que ainda existem
 
-| # | Onde | Pendência | Tipo | Encaminhamento |
-|---|---|---|:---:|---|
-| 1 | `especificacao/01-3-objetivos.md:13` | A v11 não separa "Problema" e "Valor" por objetivo | **G** | Decidir se divide o texto em Problema e Valor ou mantém o parágrafo da v11. |
-| 2 | `especificacao/08-requisitos-nao-funcionais/00-item.md:26` | RNF017 e RNF018 são rascunhos tirados das regras do UC011 e do UC015 | **G** | O grupo valida os valores (30 min; mp4/webm até 500 MB). |
+Nenhuma marcação pendente.
 
 ## 3. Pendências que não estão em marcação
 
 | Pendência | Tipo | Encaminhamento |
 |---|:---:|---|
-| RF015 (catálogo) sem caso de uso especificado; hoje coberto só pela estória US019 e pela rastreabilidade do item 9 | **G** | Manter assim ou especificar "Consultar catálogo" como UC017. |
-| Protótipos de alta fidelidade para os 7 casos de uso sem tela e para os fluxos alternativos e de exceção | **G** | Definir com o grupo a ferramenta, quem desenha e como os fluxos aparecem no item 10. |
 | Declaração de uso de IA | **G** | Cada integrante confere se a lista de ferramentas cobre o que usou. |
 | Documento final (capa, cabeçalho, rodapé, sumário) | **M** | Gerado por script a partir do Template.docx (issue #25). |
 
