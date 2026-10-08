@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """Renderiza os protótipos HTML em PNG (Chrome headless, 1440x900).
 
-Lê prototipos/html/estados-*.txt (um por autor) e grava prototipos/png/<png>.png.
+Lê prototipos/html/estados-*.txt (um por autor). Cada captura sai em dois temas:
+claro em prototipos/png/<png>.png (é a que entra no DOCX) e escuro em
+prototipos/png/escuro/<png>.png, com &tema=escuro na URL.
 Linhas: "<tela>.html <estado> <png> | <legenda>" ou, para reusar uma captura em
 outro fluxo, "@ <png-existente> <UC>-<fluxo> | <legenda>". --check só valida a lista; filtro opcional por
 prefixos de PNG (ex.: UC005 UC006) renderizam só as linhas que casam.
@@ -48,16 +50,20 @@ def check():
     return not erros
 
 
+TEMAS = (("", PNG), ("&tema=escuro", PNG / "escuro"))
+
+
 def render(filtros=("",)):
-    PNG.mkdir(exist_ok=True)
     for _, tela, estado, png, _ in linhas():
         if not png.startswith(filtros):
             continue
-        url = f"{(HTML / tela).as_uri()}?estado={estado}"
-        subprocess.run([CHROME, "--headless", "--disable-gpu", "--hide-scrollbars",
-                        "--window-size=1440,900", "--virtual-time-budget=3000",
-                        f"--screenshot={PNG / (png + '.png')}", url],
-                       check=True, capture_output=True)
+        for extra, pasta in TEMAS:
+            pasta.mkdir(parents=True, exist_ok=True)
+            url = f"{(HTML / tela).as_uri()}?estado={estado}{extra}"
+            subprocess.run([CHROME, "--headless", "--disable-gpu", "--hide-scrollbars",
+                            "--window-size=1440,900", "--virtual-time-budget=3000",
+                            f"--screenshot={pasta / (png + '.png')}", url],
+                           check=True, capture_output=True)
         print(png)
 
 
