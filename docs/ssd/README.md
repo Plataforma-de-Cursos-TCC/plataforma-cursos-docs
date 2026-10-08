@@ -13,7 +13,7 @@ Um diagrama de sequência do sistema por caso de uso, em Mermaid (ADR-0004), no 
 
 | Caso de uso | Área | Arquivo |
 |---|---|---|
-<!-- Uma linha por UC do item 10, ex.: | UC-A1 Cadastrar-se | A | [UC-A1.mmd](UC-A1.mmd) | -->
+<!-- Uma linha por UC do item 10, ex.: | UC012 Cadastrar-se na Plataforma | A | [UC012-cadastrar-se-na-plataforma.md](UC012-cadastrar-se-na-plataforma.md) | -->
 | UC001 Conversar com Tutor de IA | D | [UC001-conversar-com-tutor-de-ia.md](UC001-conversar-com-tutor-de-ia.md) |
 | UC002 Responder Quiz | C | [UC002-responder-quiz.md](UC002-responder-quiz.md) |
 | UC003 Matricular-se em Curso | C | [UC003-matricular-se-em-curso.md](UC003-matricular-se-em-curso.md) |

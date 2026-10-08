@@ -25,6 +25,6 @@ Fonte: `especificacao/diagramas/09-casos-de-uso.puml` (PlantUML, [ADR-0004](../d
 | RF013 | UC011 | A | Should Have | Evita a perda de acesso à conta. |
 | RF014 | UC019 | C | Must Have | Viabiliza o curso pago sem gateway externo. |
 | RF015 | UC020 | C | Should Have | Descoberta de cursos pelo catálogo; coberto pela estória US019. |
-| RF016 | UC013 | B | Could Have | Apresenta o Instrutor aos alunos. |
+| RF016 | UC013 (fluxo A1) | B | Could Have | Apresenta o Instrutor aos alunos. |
 | RF017 | UC005 | A | Must Have | Acesso às áreas da plataforma. |
 | RF018 | UC016 | D | Must Have | Cada perfil vê só a sua área. |

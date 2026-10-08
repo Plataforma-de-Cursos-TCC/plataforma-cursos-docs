@@ -24,5 +24,3 @@
 | RNF018 | Vídeo de aula aceito somente em mp4 ou webm, com até 500 MB por arquivo. | Eficiência de desempenho (capacidade) |
 | RNF019 | Layout funcional de 360 a 1920 px de largura. | Flexibilidade (adaptabilidade) |
 | RNF020 | Aceite de termos e da política de dados pessoais (LGPD) registrado em 100% dos cadastros. | Segurança (responsabilização) |
-
-<!-- revisar: RNF017 e RNF018 são rascunhos tirados das regras do UC011 e do UC015; o grupo valida os valores -->
