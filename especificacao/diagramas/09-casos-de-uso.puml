@@ -31,6 +31,7 @@ rectangle "Plataforma de Cursos" {
   usecase "UC013\nEditar dados do perfil" as UC013
   usecase "UC017\nAlterar senha" as UC017
   usecase "UC003\nMatricular-se em curso" as UC003
+  usecase "UC020\nConsultar catálogo de cursos" as UC020
   usecase "UC019\nProcessar pagamento\nsimulado" as UC019
   usecase "UC009\nAssistir aula" as UC009
   usecase "UC001\nConversar com Tutor de IA" as UC001
@@ -46,9 +47,11 @@ rectangle "Plataforma de Cursos" {
 }
 
 VIS -- UC012
+VIS -- UC020
 USU -- UC005
 USU -- UC013
 ALU -- UC003
+ALU -- UC020
 ALU -- UC009
 ALU -- UC002
 ALU -- UC010

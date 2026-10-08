@@ -1,4 +1,11 @@
 # Haiku #3: Área C + UC001 (UC003, UC009, UC002, UC010, UC001)
+# UC020 (catálogo; FB-3 reusa a página do curso)
+catalogo.html padrao UC020-FB-1 | Catálogo de cursos com todas as categorias
+catalogo.html filtrado UC020-FB-2 | Catálogo filtrado por categoria
+@ UC003-FB-1 UC020-FB-3 | Página do curso aberta a partir do catálogo
+@ UC020-FB-1 UC020-A1-1 | Filtro limpo: catálogo com todas as categorias
+catalogo.html vazio UC020-E1-1 | Nenhum curso disponível no momento.
+catalogo.html categoria-vazia UC020-E2-1 | Nenhum curso encontrado nesta categoria.
 # UC003
 pagina-curso.html padrao UC003-FB-1 | Página do curso com botão Matricular-se
 meus-cursos-aluno.html pos-matricula UC003-FB-2 | Meus cursos do aluno após matrícula

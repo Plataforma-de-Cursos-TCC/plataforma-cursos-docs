@@ -1,3 +1,58 @@
+## UC020 – Consultar Catálogo de Cursos
+
+- **Nome do caso de uso:** Consultar Catálogo de Cursos
+- **Ator(es):** Visitante, Aluno.
+- **Descrição:** o Visitante ou o Aluno consulta o catálogo de cursos publicados e filtra a lista por categoria (US019, RF015).
+- **Pré-condições:** nenhuma, porque o catálogo é público.
+- **Pós-condições:** lista de cursos exibida conforme o filtro selecionado.
+- **Regras de negócio:** R-1 só cursos publicados aparecem no catálogo; R-2 o card mostra título, nome do instrutor e preço em R$, ou “Gratuito”; R-3 uma categoria por vez, e “Todas” mostra todos os cursos.
+- **Protótipo(s) de tela:** página do catálogo com chips de categoria e grade de cards, com estados de lista filtrada, catálogo vazio e categoria vazia. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Fluxo básico:**
+  1. O ator acessa o catálogo.
+  2. O sistema lista os cursos publicados. (E-1)
+  3. O ator seleciona uma categoria. (A-1)
+  4. O sistema filtra a lista pela categoria. (E-2)
+  5. O ator seleciona um curso e o sistema abre a página do curso. Se o ator for Aluno, ele pode executar o UC003 – Matricular-se em Curso.
+  6. Este caso de uso é finalizado.
+
+  ![catálogo de cursos com todas as categorias](prototipos/png/UC020-FB-1.png)
+
+  *Figura 0 – UC020, fluxo básico: catálogo de cursos com todas as categorias*
+
+  ![catálogo filtrado por categoria](prototipos/png/UC020-FB-2.png)
+
+  *Figura 0 – UC020, fluxo básico: catálogo filtrado por categoria*
+
+  ![página do curso aberta a partir do catálogo](prototipos/png/UC003-FB-1.png)
+
+  *Figura 0 – UC020, fluxo básico: página do curso aberta a partir do catálogo*
+- **Fluxos alternativos:**
+  - **A1 – O ator limpa o filtro**
+    - A-1.1 O ator seleciona “Todas” ou limpa o filtro.
+    - A-1.2 O sistema exibe a lista completa de cursos publicados.
+    - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
+
+    ![filtro limpo: catálogo com todas as categorias](prototipos/png/UC020-FB-1.png)
+
+    *Figura 0 – UC020, fluxo alternativo A1: filtro limpo: catálogo com todas as categorias*
+- **Fluxos de exceção:**
+  - **E1 – Nenhum curso publicado**
+    - E-1.1 O sistema identifica que não há cursos publicados.
+    - E-1.2 O sistema exibe “Nenhum curso disponível no momento.”
+    - E-1.3 Este caso de uso é finalizado.
+
+    ![nenhum curso publicado no catálogo](prototipos/png/UC020-E1-1.png)
+
+    *Figura 0 – UC020, fluxo de exceção E1: nenhum curso publicado no catálogo*
+  - **E2 – Categoria sem cursos**
+    - E-2.1 O sistema identifica que a categoria selecionada não tem cursos publicados.
+    - E-2.2 O sistema exibe “Nenhum curso encontrado nesta categoria.” e o botão “Ver todos os cursos”.
+    - E-2.3 Este caso de uso retorna ao fluxo básico (passo 3).
+
+    ![categoria sem cursos publicados](prototipos/png/UC020-E2-1.png)
+
+    *Figura 0 – UC020, fluxo de exceção E2: categoria sem cursos publicados*
+
 ## UC003 – Matricular-se em Curso
 
 - **Nome do caso de uso:** Matricular-se em Curso
