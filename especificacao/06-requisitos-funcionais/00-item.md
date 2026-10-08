@@ -18,7 +18,7 @@
 | RF012 | Gerenciar usuários e perfis de acesso | Administrador | Sprint 1 |
 | RF013 | Recuperar senha por e-mail | Usuário | Sprint 1 |
 | RF014 | Registrar pagamento simulado da matrícula | Aluno | Sprint 1 |
-| RF015 | Consultar catálogo e buscar cursos por categoria | Visitante, Aluno | Sprint 2 |
+| RF015 | Consultar catálogo de cursos por categoria | Visitante, Aluno | Sprint 2 |
 | RF016 | Gerenciar perfil do instrutor | Instrutor | Sprint 2 |
 | RF017 | Realizar login de usuário | Usuário | Sprint 1 |
 | RF018 | Controlar o acesso às áreas protegidas por perfil | Usuário | Sprint 1 |
