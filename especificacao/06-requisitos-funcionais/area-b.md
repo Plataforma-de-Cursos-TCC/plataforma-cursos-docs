@@ -2,7 +2,7 @@
 
 O template exige a lista de requisitos funcionais do sistema, com ator, objetivo atendido e sprint.
 
-Área B: Autoria do instrutor. Responsável: <nome do integrante>. IDs: RF-B1, RF-B2… (mínimo 4 por integrante, sem máximo; ADR-0001).
+Área B: Autoria do instrutor. Responsável: Adrian Antônio de Souza Gomes (`adrian69-droid`). IDs: RF-B1, RF-B2… (mínimo 4 por integrante, sem máximo; ADR-0001).
 
 <!--
 MODELO A PREENCHER

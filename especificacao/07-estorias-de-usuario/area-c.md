@@ -2,7 +2,7 @@
 
 O template exige uma estória de usuário por requisito funcional, com critérios de aceite. Formato Como / Posso / Para, com pelo menos 2 critérios (ADR-0002).
 
-Área C: Aprendizagem do aluno. Responsável: <nome do integrante>. IDs: US-Cn, uma por RF da área, com o mesmo número (US-C1 ↔ RF-C1).
+Área C: Aprendizagem do aluno. Responsável: Lucas Bruno e Silva (`Luc-Bruno`). IDs: US-Cn, uma por RF da área, com o mesmo número (US-C1 ↔ RF-C1).
 
 <!--
 MODELO A PREENCHER

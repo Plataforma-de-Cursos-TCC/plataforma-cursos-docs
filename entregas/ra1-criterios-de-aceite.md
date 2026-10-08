@@ -57,10 +57,10 @@ Este protocolo reúne boas práticas para agentes de IA: manter uma lista de tar
 
 | Integrante | GitHub | Área |
 |---|---|---|
-| Adrian Antônio de Souza Gomes | `adrian69-droid` | A definir |
-| Lucas Bruno e Silva | `Luc-Bruno` | A definir |
-| Lucas Stopinski da Silva | `LucasStop` | A definir |
-| Vinicius Lima Teider | a informar | A definir |
+| Adrian Antônio de Souza Gomes | `adrian69-droid` | Área B: autoria do instrutor |
+| Lucas Bruno e Silva | `Luc-Bruno` | Área C: aprendizagem do aluno |
+| Lucas Stopinski da Silva | `LucasStop` | Área A: acesso e conta |
+| Vinicius Lima Teider | `Teider011` | Área D: Tutor de IA, analytics e administração |
 
 O responsável por cada área (A a D) fica no [README](../README.md) e é preenchido quando o grupo distribuir as áreas. Este arquivo não nomeia responsável por área.
 
@@ -77,7 +77,7 @@ Quando o plano de ensino e uma decisão do grupo divergirem, vale o que for mais
 
 ## 2. Regras gerais (valem para o documento inteiro)
 
-- [ ] **X.1 — Template.** O documento final (PDF consolidado a partir dos MDs do repositório) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e quadros no formato do template.
+- [ ] **X.1 — Template.** O documento final (consolidado a partir dos MDs do repositório e entregue em PDF e DOCX) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e quadros no formato do template.
 - [ ] **X.2 — Capa.** Nome do produto (**Plataforma de Cursos**) no lugar de "NOME DO PRODUTO DE SOFTWARE", os 4 autores no lugar de "NOME AUTOR 1..4" e ano **2026** (o template traz 2025).
 - [ ] **X.3 — Textos em azul.** Todos os textos personalizáveis (em azul) foram substituídos e estão na cor **preta**.
 - [ ] **X.4 — Textos em laranja.** Todos os quadros de aviso e textos de orientação em **laranja** foram removidos.
@@ -294,6 +294,6 @@ Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 
 - ~~**A1.** Quantidade de especificações de caso de uso.~~ **Resolvido:** no mínimo 16 (4 por integrante × 4 integrantes); sem máximo (ADR-0001).
 - ~~**A2.** Quais itens são "dependentes da quantidade de integrantes".~~ **Resolvido:** itens 6, 7, 8 e 10 (ADR-0001 e ADR-0006).
-- **A3.** Formato de envio. Proposta: **PDF**, gerado a partir da consolidação dos arquivos MD do repositório, seguindo a estrutura do template. Confirmar com o grupo.
+- ~~**A3.** Formato de envio.~~ **Resolvido:** PDF e DOCX, gerados a partir da consolidação dos arquivos MD do repositório, seguindo a estrutura do template.
 - **A4.** Revisão contra a rubrica: o texto da rubrica "Atividades do RA 1" do Canvas não está no repositório, então esta revisão conferiu o arquivo só contra o plano de ensino (seções 3, 4 e 5: ID1.1 a ID1.4 e as atividades das aulas 3 a 9) e contra os ADRs. Pesos, critérios "Excede" e formatos aceitos de envio foram trazidos do modelo de outro grupo e do plano de ensino; conferir com a página da tarefa no Canvas e ajustar este arquivo.
-- **A5.** Responsável de cada área (A a D): "A definir" no [README](../README.md).
+- ~~**A5.** Responsável de cada área (A a D).~~ **Resolvido:** A Lucas Stopinski, B Adrian, C Lucas Bruno, D Vinicius ([README](../README.md)).
