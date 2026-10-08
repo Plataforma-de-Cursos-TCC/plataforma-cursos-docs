@@ -57,13 +57,13 @@ Escopo alinhado ao item "É – Não é – Faz – Não faz" do v11.
 ## 5. Requisitos em alto nível
 *Organizado por áreas A‑D conforme ADR‑0006.*
 
-- **Área A – Acesso e conta**: Registro, login, recuperação de senha, perfis. ([especificacao/06-requisitos-funcionais/area-a.md](../especificacao/06-requisitos-funcionais/area-a.md))
+- **Área A – Acesso e conta**: Registro, login, recuperação de senha, perfis. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
   - IDs: RF-A1, RF-A2
-- **Área B – Autoria do instrutor**: Criação de cursos, módulos, aulas, quizzes e gabaritos. ([especificacao/06-requisitos-funcionais/area-b.md](../especificacao/06-requisitos-funcionais/area-b.md))
+- **Área B – Autoria do instrutor**: Criação de cursos, módulos, aulas, quizzes e gabaritos. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
   - IDs: RF-B1, RF-B2, RF-B3, RF-B4, RF-B5
-- **Área C – Aprendizagem do aluno**: Matrícula, visualização de aulas, quizzes, avaliação, interação com Tutor de IA. ([especificacao/06-requisitos-funcionais/area-c.md](../especificacao/06-requisitos-funcionais/area-c.md))
+- **Área C – Aprendizagem do aluno**: Matrícula, visualização de aulas, quizzes, avaliação, interação com Tutor de IA. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
   - IDs: RF-C1, RF-C2, RF-C3, RF-C4, RF-C5, RF-C6
-- **Área D – Tutor de IA & Analytics**: Consulta de embeddings, respostas contextualizadas, dashboard de analytics. ([especificacao/06-requisitos-funcionais/area-d.md](../especificacao/06-requisitos-funcionais/area-d.md))
+- **Área D – Tutor de IA & Analytics**: Consulta de embeddings, respostas contextualizadas, dashboard de analytics. ([especificacao/06-requisitos-funcionais/00-item.md](../especificacao/06-requisitos-funcionais/00-item.md))
   - IDs: RF-D1, RF-D2, RF-D3
 
 ## 6. Concorrentes e diferencial
