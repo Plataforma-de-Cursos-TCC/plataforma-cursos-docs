@@ -66,7 +66,7 @@ O responsável por cada área (A a D) fica no [README](../README.md) e é preenc
 
 ### 1.2 Fontes (em ordem de prioridade quando houver conflito)
 
-1. Página da tarefa no Canvas, "Avaliação do RA 1 - Projeto", com a rubrica "Atividades do RA 1". Os pesos por item e os critérios "Excede" da seção 3 vêm desta página e **precisam ser conferidos com ela** (seção 6, A4); a cópia local não está no repositório.
+1. [`ra1-rubrica-canvas.md`](ra1-rubrica-canvas.md): cópia da página da tarefa no Canvas, "Avaliação do RA 1 - Projeto", com a rubrica "Atividades do RA 1". Os pesos por item e os critérios "Excede" da seção 3 vêm desta página e **precisam ser conferidos com a página original** (seção 6, A4).
 2. Template oficial do documento de especificação (a versão preenchida mais recente é a v11, `Documento de Especificação - Versões/v11 - Correção de extend, BPMN e atividades.docx`, fora do git). Os títulos dos itens 1 a 11 desta entrega são os do template.
 3. Plano de ensino vigente: `BSI_PE_Especificacao de Software_2026_2.pdf` (seções 4, 5 e 7.1). A versão `- v3.pdf` é anterior e não vale.
 4. Decisões do grupo: [`docs/adr/`](../docs/adr/README.md) e [`CONTEXT.md`](../CONTEXT.md). Sobre conteúdo do produto, valem acima do template preenchido (CONTEXT, seção 6, regra 1); a v11 é rascunho anterior ao repositório.
@@ -175,7 +175,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 - [x] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: mantém a numeração da v11 e os requisitos novos entram no fim (RF017, RF018…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (sem lacunas, sem ID provisorio)
 - [ ] **C06.3** Cada RF está redigido de forma clara e **testável**: uma ação verificável, sem "etc." e sem termos vagos. — pendente: testabilidade de cada RF nao conferida
 - [x] **C06.4** Cada RF é rastreado a um **ator** (coluna preenchida, com ator do item 5). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (coluna ator preenchida)
-- ~~**C06.5**~~ Removido: o template não tem coluna OBJETIVO, e o plano de ensino e as rubricas não pedem rastreio RF→objetivo (coluna retirada no c5d2116).
+- [x] **C06.5** Cada RF está ligado a um objetivo do item 1 (coluna Objetivo da rastreabilidade do item 9), como pede a rubrica do item 6. — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md:11-28 (coluna OBJETIVO) e PR #68
 - [x] **C06.6** A **priorização** está presente: coluna SPRINT preenchida e/ou prioridade. A coluna fica vazia enquanto as áreas escrevem; o grupo divide em sprints na consolidação (T06), depois que todos os RFs e RNFs estiverem definidos. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (coluna SPRINT preenchida)
 - [ ] **C06.7** Há uma **breve justificativa** da priorização. — pendente: justificativa da priorizacao nao encontrada na rodada
 - [ ] **C06.8** Os RFs cobrem o núcleo do produto: cadastro de curso, módulos, aulas e quiz com gabarito; matrícula, progresso e avaliação do curso; correção automática do quiz; conversa com o Tutor de IA no contexto da aula; dashboard com filtro; gestão de usuários e perfis; acesso a área protegida por perfil. Não se limitam a CRUD. — pendente: cobertura do nucleo do produto nao conferida
@@ -187,7 +187,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 - [x] **C07.1** Pelo menos uma estória por RF. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 US cobrem RF001-RF018)
 - [x] **C07.2** Todas no formato **COMO / POSSO / PARA**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 COMO/POSSO/PARA)
-- [ ] **C07.3** Cada estória cita no cabeçalho o RF que atende, no formato `USnnn – REQUISITO n: <nome>` do template. A numeração das estórias é contínua e independente da dos RFs (adendo do ADR-0001). — pendente: cabecalhos conferidos (area-a.md:1, area-a.md:17, area-b.md:1 etc.), formato USnnn – REQUISITO RFnnn; falta o adendo do ADR-0001 citado no criterio (docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md nao tem adendo)
+- [x] **C07.3** Cada estória cita no cabeçalho o RF que atende, no formato `USnnn – REQUISITO n: <nome>` do template. A numeração das estórias é contínua e independente da dos RFs (adendo do ADR-0001). — evidência: docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md:42 (adendo 08/10/2026) e cabeçalhos em especificacao/07-estorias-de-usuario/area-*.md:1, 17, 33, 49 etc.
 - [x] **C07.4** Cada estória tem **≥2 critérios de aceite**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (3 criterios por US)
 - [x] **C07.5** Todos os critérios estão no formato **DADO QUE / QUANDO / ENTÃO**, claros e **verificáveis**, com resultado observável. — evidência: especificacao/07-estorias-de-usuario/area-*.md (60 DADO QUE / QUANDO / ENTAO)
 - [ ] **C07.6** Os critérios cobrem cenários diferentes (caminho principal e ao menos uma variação ou erro), e não repetições do mesmo cenário. — pendente: variacao e erro por estoria nao conferidos
