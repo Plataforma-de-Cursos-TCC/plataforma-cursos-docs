@@ -13,11 +13,15 @@ login.html senha-redefinida UC011-FB-4 | login com aviso "Senha redefinida. Entr
 recuperar-senha.html link-expirado UC011-E2-1 | aviso "Este link expirou" com botão "Solicitar novo link"
 meu-perfil.html padrao UC013-FB-1 | perfil do Aluno
 meu-perfil.html salvo UC013-FB-2 | perfil com aviso "Alterações salvas"
-meu-perfil.html senha UC013-A1-1 | perfil com bloco de alteração de senha
+meu-perfil.html instrutor UC013-A1-1 | perfil do Instrutor com minibiografia e links
 meu-perfil.html campo-invalido UC013-E1-1 | erro "Informe o nome" no campo Nome
-meu-perfil.html senha-atual-incorreta UC013-E2-1 | erro "Senha atual incorreta"
-# UC013 variante Instrutor (minibiografia e links, US020): mesma tela, nao ha fluxo A2 no UC013
-meu-perfil.html instrutor UC013-FB-3 | perfil do Instrutor com minibiografia e links
+# UC013-A2 executa o UC017 (sem tela propria)
+# UC017
+meu-perfil.html senha UC017-FB-1 | perfil com bloco de alteração de senha
+meu-perfil.html senha-alterada UC017-FB-2 | perfil com aviso "Senha alterada"
+@ UC013-FB-1 UC017-A1-1 | perfil sem alteração de senha após cancelar
+meu-perfil.html senha-atual-incorreta UC017-E1-1 | erro "Senha atual incorreta"
+meu-perfil.html senha-fora-da-politica UC017-E2-1 | erro de nova senha fora da política
 dashboard.html padrao UC007-FB-1 | dashboard do Aluno com todos os cursos
 dashboard.html curso-selecionado UC007-A1-1 | dashboard filtrado pelo curso "Fundamentos de Pesquisa"
 dashboard.html admin UC007-A2-1 | dashboard do Administrador com todos os cursos
@@ -27,12 +31,20 @@ usuarios.html padrao UC008-FB-1 | lista de usuários com avatar e perfis
 usuarios.html confirmar-bloqueio UC008-FB-2 | modal de confirmação "Bloquear João Silva?"
 usuarios.html atualizado UC008-FB-3 | lista com João Silva bloqueado
 usuarios.html filtro-aluno UC008-A1-1 | lista filtrada pelo perfil Aluno
+@ UC008-FB-1 UC008-A2-1 | lista de usuários sem alteração após cancelar
 usuarios.html proprio-bloqueio UC008-E1-1 | erro "Não é possível bloquear a própria conta"
 usuarios.html nao-encontrado UC008-E2-1 | erro "Usuário não encontrado"
+# UC008-A3 executa o UC018 (sem tela propria)
+# UC018
+usuarios.html confirmar-exclusao UC018-FB-1 | modal de confirmação com aviso de anonimização irreversível
+usuarios.html excluido UC018-FB-2 | lista sem o usuário excluído e aviso "Usuário excluído"
+@ UC008-FB-1 UC018-A1-1 | lista de usuários sem alteração após cancelar
+usuarios.html propria-exclusao UC018-E1-1 | erro "Não é possível excluir a própria conta"
+@ UC008-E2-1 UC018-E2-1 | erro "Usuário não encontrado"
 acesso-negado.html padrao UC016-E2-1 | tela "Acesso negado" com aviso de perfil sem acesso
 # UC016-FB4 reusa a tela da area (sem captura propria)
 # UC012-A1 mantido como captura propria (estado Instrutor marcado no mesmo formulario)
-@ UC003-FB-3 UC016-A1-1 | página inicial do Aluno
+@ UC003-FB-2 UC016-A1-1 | página inicial do Aluno
 @ UC006-FB-1 UC016-A1-2 | página inicial do Instrutor
 @ UC007-A2-1 UC016-A1-3 | página inicial do Administrador
 @ UC005-E2-1 UC016-E1-1 | login com aviso de sessão expirada

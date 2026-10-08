@@ -10,7 +10,7 @@ Fonte: `especificacao/diagramas/09-casos-de-uso.puml` (PlantUML, [ADR-0004](../d
 
 | RF | UC | ÁREA | PRIORIDADE | JUSTIFICATIVA |
 |---|---|---|---|---|
-| RF001 | UC012, UC013 | A | Must Have | Base de acesso à plataforma. |
+| RF001 | UC012, UC013, UC017 | A | Must Have | Base de acesso à plataforma. |
 | RF002 | UC006 | B | Must Have | Sem curso cadastrado não há conteúdo. |
 | RF003 | UC014 | B | Must Have | Organiza o curso em módulos. |
 | RF004 | UC015 | B | Must Have | Conteúdo central do curso e insumo do Tutor de IA. |
@@ -21,9 +21,9 @@ Fonte: `especificacao/diagramas/09-casos-de-uso.puml` (PlantUML, [ADR-0004](../d
 | RF009 | UC001 | D | Should Have | Diferencial do produto. |
 | RF010 | UC007 | D | Should Have | Decisão do Instrutor orientada a dados. |
 | RF011 | UC010 | C | Could Have | Coleta a opinião do Aluno sobre o curso. |
-| RF012 | UC008 | D | Must Have | Segurança e organização dos usuários. |
+| RF012 | UC008, UC018 | D | Must Have | Segurança e organização dos usuários. |
 | RF013 | UC011 | A | Should Have | Evita a perda de acesso à conta. |
-| RF014 | UC003 | C | Must Have | Viabiliza o curso pago sem gateway externo. |
+| RF014 | UC019 | C | Must Have | Viabiliza o curso pago sem gateway externo. |
 | RF015 | sem caso de uso especificado | C | Should Have | Descoberta de cursos; coberto pela estória US019. |
 | RF016 | UC013 | B | Could Have | Apresenta o Instrutor aos alunos. |
 | RF017 | UC005 | A | Must Have | Acesso às áreas da plataforma. |

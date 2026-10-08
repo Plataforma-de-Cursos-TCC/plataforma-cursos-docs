@@ -8,12 +8,12 @@
 <body>
 <header class="topbar"><span class="logo">Plataforma de Cursos</span>
   <nav>
-    <a href="#" data-estado="padrao salvo senha senha-atual-incorreta campo-invalido">Meus cursos</a>
-    <a href="#" data-estado="padrao salvo senha senha-atual-incorreta campo-invalido">Catálogo</a>
+    <a href="#" data-estado="padrao salvo senha senha-atual-incorreta senha-fora-da-politica senha-alterada campo-invalido">Meus cursos</a>
+    <a href="#" data-estado="padrao salvo senha senha-atual-incorreta senha-fora-da-politica senha-alterada campo-invalido">Catálogo</a>
     <a href="#" data-estado="instrutor">Meus cursos</a>
     <a href="#" data-estado="instrutor">Novo curso</a>
   </nav>
-  <span class="avatar" data-estado="padrao salvo senha senha-atual-incorreta campo-invalido">AS</span>
+  <span class="avatar" data-estado="padrao salvo senha senha-atual-incorreta senha-fora-da-politica senha-alterada campo-invalido">AS</span>
   <span class="avatar" data-estado="instrutor">MA</span>
 </header>
 <main class="page">
@@ -22,7 +22,7 @@
     <div class="grid c2" style="align-items:start">
       <div class="stack">
         <div class="field"><label>Nome</label>
-          <div class="input" data-estado="padrao salvo senha senha-atual-incorreta">Ana Souza</div>
+          <div class="input" data-estado="padrao salvo senha senha-atual-incorreta senha-fora-da-politica senha-alterada">Ana Souza</div>
           <div class="input" data-estado="instrutor">Marina Alves</div>
           <div class="input erro" data-estado="campo-invalido">&nbsp;</div>
           <p class="msg-erro" data-estado="campo-invalido">Informe o nome.</p>
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="field"><label>Perfil de acesso</label>
-          <div><span class="chip neutral" data-estado="padrao salvo senha senha-atual-incorreta campo-invalido">Aluno</span><span class="chip accent" data-estado="instrutor">Instrutor</span></div>
+          <div><span class="chip neutral" data-estado="padrao salvo senha senha-atual-incorreta senha-fora-da-politica senha-alterada campo-invalido">Aluno</span><span class="chip accent" data-estado="instrutor">Instrutor</span></div>
         </div>
         <div class="field" data-estado="instrutor"><label>Minibiografia</label>
           <div class="input" style="min-height:96px">Pesquisadora em educação. Leciona métodos de pesquisa há doze anos.</div>
@@ -42,17 +42,19 @@
         <div class="field" data-estado="instrutor"><label>Links do perfil</label>
           <div class="input">https://exemplo.com/marina-alves</div>
         </div>
-        <p class="small" data-estado="padrao salvo campo-invalido instrutor"><a href="#">Alterar senha</a></p>
+        <p class="small" data-estado="padrao salvo campo-invalido instrutor senha-alterada"><a href="#">Alterar senha</a></p>
       </div>
-      <div class="stack" data-estado="senha senha-atual-incorreta">
+      <div class="stack" data-estado="senha senha-atual-incorreta senha-fora-da-politica">
         <h3>Alterar senha</h3>
         <div class="field"><label>Senha atual</label>
-          <div class="input" data-estado="senha">••••••••</div>
+          <div class="input" data-estado="senha senha-fora-da-politica">••••••••</div>
           <div class="input erro" data-estado="senha-atual-incorreta">••••••••</div>
           <p class="msg-erro" data-estado="senha-atual-incorreta">Senha atual incorreta.</p>
         </div>
         <div class="field"><label>Nova senha</label>
-          <div class="input">••••••••</div>
+          <div class="input" data-estado="senha senha-atual-incorreta">••••••••</div>
+          <div class="input erro" data-estado="senha-fora-da-politica">••••••••</div>
+          <p class="msg-erro" data-estado="senha-fora-da-politica">A senha deve ter ao menos 8 caracteres, com letras e números.</p>
         </div>
         <div class="field"><label>Confirmar nova senha</label>
           <div class="input">••••••••</div>
@@ -63,6 +65,7 @@
   </section>
 </main>
 <div class="banner sucesso toast" data-estado="salvo">Alterações salvas.</div>
+<div class="banner sucesso toast" data-estado="senha-alterada">Senha alterada.</div>
 <script src="_estado.js"></script>
 </body>
 </html>

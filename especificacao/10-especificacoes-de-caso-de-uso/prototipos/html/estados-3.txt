@@ -1,12 +1,16 @@
 # Haiku #3: Área C + UC001 (UC003, UC009, UC002, UC010, UC001)
 # UC003
 pagina-curso.html padrao UC003-FB-1 | Página do curso com botão Matricular-se
-pagina-curso.html processando-pagamento UC003-FB-2 | Processando pagamento simulado
-meus-cursos-aluno.html pos-matricula UC003-FB-3 | Meus cursos do aluno após matrícula
+meus-cursos-aluno.html pos-matricula UC003-FB-2 | Meus cursos do aluno após matrícula
 pagina-curso.html gratuito UC003-A2-1 | Curso gratuito: matrícula sem preço
 pagina-curso.html indisponivel UC003-E1-1 | Curso indisponível: aviso e sem matrícula
-pagina-curso.html pagamento-recusado UC003-E2-1 | Pagamento recusado: aviso e nova tentativa
 pagina-curso.html matriculado UC003-A1-1 | Aluno matriculado: Continuar assistindo
+# UC019 (pagamento simulado, estende o UC003)
+pagina-curso.html resumo-pagamento UC019-FB-1 | Resumo do pagamento com Confirmar pagamento
+pagina-curso.html processando-pagamento UC019-FB-2 | Processando pagamento simulado
+@ UC003-FB-1 UC019-A1-1 | Página do curso sem matrícula após cancelar
+pagina-curso.html pagamento-recusado UC019-E1-1 | Pagamento recusado: aviso e nova tentativa
+@ UC019-E1-1 UC003-E2-1 | Pagamento não concluído: matrícula não registrada
 # UC009 (tela do UC001: aula-chat.html)
 aula-chat.html padrao UC009-FB-1 | Aula com vídeo e Tutor de IA fechado
 aula-chat.html aula-concluida UC009-FB-2 | Aula concluída
