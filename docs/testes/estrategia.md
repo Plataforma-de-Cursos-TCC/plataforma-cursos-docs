@@ -77,7 +77,7 @@ A equipe adota o ciclo clássico de **TDD (Red → Green → Refactor)** como me
 | **Testes de Frontend (Unit e Componentes)** | **Vitest** + **React Testing Library** | Node.js LTS / Next.js | Execução ultrarrápida com suporte nativo a ESM e TypeScript, compatível com o ecossistema de componentes shadcn/ui e Tailwind. |
 | **Mock de APIs no Frontend** | **Mock Service Worker (MSW)** | Frontend / Testes | Intercepta requisições HTTP na camada de rede nos testes Vitest, permitindo simular contratos REST reais sem subir a API completa. |
 | **Testes Ponta a Ponta (E2E)** | **Playwright** | Chromium, Firefox, WebKit | Testes multiplataforma com gravação de traces, screenshots de falhas, suporte a fluxos assíncronos e simulação de responsividade móvel (RNF019). |
-| **Banco Efêmero de Testes** | **MySQL 8** (Service Container) | GitHub Actions CI | Garante fidelidade de tipos, restrições de integridade e stored procedures idênticas ao ambiente de produção. |
+| **Banco Efêmero de Testes** | **MySQL 8** (Service Container) | GitHub Actions CI | Garante fidelidade de tipos e restrições de integridade idênticas ao ambiente de produção. |
 | **Banco Vetorial Efêmero** | **PostgreSQL 16 + pgvector** (Service Container) | GitHub Actions CI | Valida as consultas com `whereVectorSimilarTo()` do `ai-service` sem depender de banco SQLite incompatível com vetores. |
 
 ## 5. Testes do Tutor de IA (`ai-service`)
@@ -86,8 +86,8 @@ O Tutor de IA introduz desafios específicos de teste devido à natureza probabi
 
 ### 5.1. Provedor Mockado / Fake (Sem chamadas reais no CI)
 - **Zero chamadas externas no pipeline:** Em nenhuma hipótese o pipeline de CI executa chamadas pagas ou externas à API de LLM (OpenAI, Anthropic ou provedores compatíveis).
-- **Driver Fake do Laravel AI SDK:** Utiliza-se o mecanismo de fake nativo (`Ai::fake()`) ou stubs de cliente HTTP para simular a resposta do modelo:
-  - Para geração de embeddings: retorna vetores estáticos pré-calculados (dimensão 1536) baseados em hash determinístico do texto de entrada.
+- **Driver Fake / Stubs:** Utiliza-se o mecanismo de fake do Laravel AI SDK (ou stubs do cliente HTTP) para simular a resposta do modelo:
+  - Para geração de embeddings: retorna vetores estáticos pré-calculados na dimensão do modelo de embeddings configurado, baseados em hash determinístico do texto de entrada.
   - Para chat em streaming: simula chunks de Server-Sent Events (SSE) emitindo tokens incrementais e payload estruturado contendo a citação formal de aula e timestamp.
 
 ### 5.2. Isolamento Obrigatório por Curso (`course_id`)
@@ -98,11 +98,13 @@ O Tutor de IA introduz desafios específicos de teste devido à natureza probabi
   - O teste assere que a query de similaridade vetorial contém estritamente o filtro `WHERE course_id = ?` e que nenhum trecho do Curso B é retornado ou utilizado no prompt final.
 
 ### 5.3. Fluxo de Indisponibilidade e Tratamento de Falhas (Fallback)
-- **Simulação de Falha de Rede ou Timeout do Provedor:**
+- **Simulação de Falha de Rede ou Timeout do Provedor:** <!-- proposta: fluxo não especificado no UC001 -->
   - O provedor mockado é configurado para lançar exceção de timeout ou erro HTTP 503.
-  - O teste valida que o `ai-service` captura o erro graciosa e rapidamente, não trava o streaming do aluno, e emite a mensagem de erro padronizada conforme especificado no fluxo de exceção `E-2` do `UC001`: *"O Tutor de IA está temporariamente indisponível. Tente novamente em instantes."*
-- **Aulas sem Embeddings Prontos:**
-  - Teste automatizado para o fluxo `E-1` do `UC001`: quando o aluno pergunta sobre uma aula recém-adicionada cujo processamento em background ainda não concluiu, o sistema deve responder com a mensagem clara: *"O conteúdo desta aula ainda está sendo preparado pelo Tutor de IA."*, sem disparar chamadas ao LLM.
+  - O teste valida que o `ai-service` captura o erro graciosa e rapidamente, não trava o streaming do aluno e retorna resposta de erro amigável sem expor detalhes internos da infraestrutura.
+- **Aulas sem Embeddings Prontos (Fluxo E-1 do UC001):**
+  - Teste automatizado para o fluxo de exceção `E-1`: quando o aluno pergunta sobre uma aula cuja transcrição e indexação ainda não foram concluídas, o sistema avisa que o conteúdo ainda está sendo preparado e sugere tentar novamente mais tarde, sem disparar chamadas ao LLM.
+- **Limite de Mensagens Atingido (Fluxo E-2 do UC001):**
+  - Teste automatizado para o fluxo de exceção `E-2`: ao identificar que o aluno excedeu o limite de mensagens do período, o sistema bloqueia o novo envio e a resposta informa o tempo de espera restante.
 
 ### 5.4. Conjunto de Perguntas de Referência (Golden Dataset)
 - Para testes de avaliação de qualidade semântica (executados manualmente em ambiente de homologação, fora do gatilho de PR):
