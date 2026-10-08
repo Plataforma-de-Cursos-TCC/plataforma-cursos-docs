@@ -43,6 +43,8 @@ relacionados: [adr-0006]
 
 Os requisitos RF017 (login), RF018 (controle de acesso), RNF017 (link de recuperação de senha), RNF018 (limite e formato de vídeo de aula) e os casos de uso UC017–UC020 foram adicionados posteriormente, no final da numeração sequencial, sem renumerar os itens anteriores da v11. A inclusão de UC017–UC019 foi registrada pelo PR #58 e UC020 pelo PR #60.
 
+A numeração das estórias de usuário é contínua e independente da numeração dos RFs (slide 21 do ESSW_TE3_1). O vínculo entre estória e requisito é feito pelo cabeçalho no formato do template, `USnnn – REQUISITO n: <nome>`, em que n é o número do RF atendido. Um RF pode ter mais de uma estória.
+
 ---
 
 ## Ligações

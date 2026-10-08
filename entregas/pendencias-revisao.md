@@ -27,9 +27,7 @@ relacionados: [ra1-criterios-de-aceite, ra1-tarefas, propostas-lacunas, contexto
 
 ## 2. Marcações `<!-- revisar -->` que ainda existem
 
-| # | Onde | Pendência | Tipo | Encaminhamento |
-|---|---|---|:---:|---|
-| 1 | `especificacao/01-3-objetivos.md:13` | A v11 não separa "Problema" e "Valor" por objetivo | **G** | Decidir se divide o texto em Problema e Valor ou mantém o parágrafo da v11. |
+Nenhuma marcação pendente.
 
 ## 3. Pendências que não estão em marcação
 
