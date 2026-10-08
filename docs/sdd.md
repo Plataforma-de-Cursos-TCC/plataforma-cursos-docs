@@ -13,7 +13,7 @@ atualizado: 2026-10-07
 
 A Plataforma de Cursos é um sistema web com front-end separado de uma API central. A API concentra as regras de negócio das quatro áreas (A a D) e é a única a falar com o banco, com o armazenamento de vídeo e com os serviços externos. A v11 sustenta três pontos de arquitetura: autenticação por token JWT com rotas protegidas por perfil (RNF001), upload e entrega de vídeo por URL assinada (RNF002) e um Tutor de IA que consulta só o material do próprio curso (RAG restrito por `course_id`).
 
-<!-- proposta: estilo monólito modular (API única dividida por área A a D) com front-end SPA; a v11 não nomeia o estilo. Motivo: equipe de 4 integrantes, uma área por integrante (ADR-0006) e prazo curto, o que não justifica microsserviços -->
+A arquitetura adota o estilo monólito modular (API única dividida por áreas A a D com Laravel 13) integrado a um front-end SPA em Next.js e microsserviços físicos dedicados para IA e mídia, conforme definido no [ADR-0007](adr/0007-stack-e-bancos.md). Motivo: equipe de 4 integrantes (uma área por integrante, conforme [ADR-0006](adr/0006-divisao-por-areas.md)) e alta coesão de domínio no core, isolando fisicamente apenas serviços com cargas computacionais e dependências especializadas (`ai-service` e `media-service`).
 
 O Tutor de IA é ator sistêmico (ADR-0005): recebe a pergunta do Aluno com o contexto da aula e devolve a resposta.
 

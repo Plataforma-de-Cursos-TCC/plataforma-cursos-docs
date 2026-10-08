@@ -53,7 +53,6 @@ O grupo decidiu pela seguinte arquitetura de stack e bancos:
 
 ## Ligações
 
-- **Pesquisa de banco para o Tutor:** `scratchpad/out/pesquisa-banco-ai.md`
 - **Documento de Design de Software:** [docs/sdd.md](../sdd.md)
 - **Tutor como ator sistêmico:** [ADR-0005](0005-tutor-de-ia-como-ator-sistemico.md)
 - **Divisão por áreas:** [ADR-0006](0006-divisao-por-areas.md)
