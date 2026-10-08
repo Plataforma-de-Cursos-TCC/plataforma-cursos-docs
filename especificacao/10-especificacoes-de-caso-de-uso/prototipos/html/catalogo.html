@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Catálogo de cursos</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Catálogo</a></nav><span class="row"><a href="#">Entrar</a><a href="#" class="btn primary" style="min-height:36px;padding:6px 14px">Criar conta</a></span></header>
+<main class="page stack">
+  <h1>Catálogo de cursos</h1>
+
+  <div class="row" data-estado="padrao"><span class="chip accent">Todas</span><span class="chip neutral">Programação</span><span class="chip neutral">Design</span><span class="chip neutral">Negócios</span><span class="chip neutral">Dados</span></div>
+  <div class="row" data-estado="filtrado"><span class="chip neutral">Todas</span><span class="chip accent">Programação</span><span class="chip neutral">Design</span><span class="chip neutral">Negócios</span><span class="chip neutral">Dados</span></div>
+  <div class="row" data-estado="categoria-vazia"><span class="chip neutral">Todas</span><span class="chip neutral">Programação</span><span class="chip neutral">Design</span><span class="chip neutral">Negócios</span><span class="chip accent">Dados</span></div>
+
+  <p class="small muted" data-estado="filtrado">3 cursos em Programação</p>
+
+  <div class="grid c3" data-estado="padrao">
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>Lógica de Programação</h3>
+      <p class="small muted">Rafael Costa</p>
+      <span class="chip success">Gratuito</span>
+    </div>
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>JavaScript Essencial</h3>
+      <p class="small muted">Rafael Costa</p>
+      <p><strong>R$ 189,90</strong></p>
+    </div>
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>Fundamentos de Pesquisa com Usuários</h3>
+      <p class="small muted">Marina Alves</p>
+      <p><strong>R$ 249,90</strong></p>
+    </div>
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>Gestão de Produtos na Prática</h3>
+      <p class="small muted">Paulo Reis</p>
+      <p><strong>R$ 219,90</strong></p>
+    </div>
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>Python para Análise de Dados</h3>
+      <p class="small muted">Camila Duarte</p>
+      <p><strong>R$ 299,90</strong></p>
+    </div>
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>Design de Interfaces</h3>
+      <p class="small muted">Marina Alves</p>
+      <p><strong>R$ 199,90</strong></p>
+    </div>
+  </div>
+
+  <div class="grid c3" data-estado="filtrado">
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>Lógica de Programação</h3>
+      <p class="small muted">Rafael Costa</p>
+      <span class="chip success">Gratuito</span>
+    </div>
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>JavaScript Essencial</h3>
+      <p class="small muted">Rafael Costa</p>
+      <p><strong>R$ 189,90</strong></p>
+    </div>
+    <div class="card stack">
+      <div style="height:120px;border-radius:8px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <h3>Git na Prática</h3>
+      <p class="small muted">Rafael Costa</p>
+      <p><strong>R$ 129,90</strong></p>
+    </div>
+  </div>
+
+  <div class="card stack" style="text-align:center" data-estado="vazio">
+    <p class="muted">Nenhum curso disponível no momento.</p>
+  </div>
+
+  <div class="card stack" style="text-align:center" data-estado="categoria-vazia">
+    <p class="muted">Nenhum curso encontrado nesta categoria.</p>
+    <div><button class="btn secondary" type="button">Ver todos os cursos</button></div>
+  </div>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>
