@@ -22,7 +22,7 @@ relacionados: [mapa-pesquisa, adr-indice, adr-0001, adr-0002, adr-0003, adr-0004
 | Ator | Papel |
 |---|---|
 | **Usuário** | Ator geral (generalização) de Aluno, Instrutor e Administrador: quem tem conta e faz login e edita o próprio perfil. |
-| **Visitante** | Pessoa sem conta ou sem sessão; navega pelo que é público, cadastra-se e faz login. |
+| **Visitante** | Pessoa sem conta ou sem sessão; navega pelo que é público e cadastra-se. Depois do login, atua como Usuário. |
 | **Aluno** | Matricula-se em cursos, assiste às aulas, responde aos quizzes, avalia cursos e conversa com o Tutor de IA. |
 | **Instrutor** | Cadastra cursos, módulos, aulas e quizzes com gabarito; acompanha o desempenho dos alunos no dashboard. |
 | **Administrador** | Gerencia usuários e perfis de acesso; vê o dashboard da plataforma; não produz conteúdo de curso. |

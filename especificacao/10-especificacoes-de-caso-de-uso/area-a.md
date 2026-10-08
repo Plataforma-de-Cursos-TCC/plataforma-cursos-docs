@@ -82,7 +82,7 @@ O template exige a especificação de, no mínimo, 8 casos de uso, com protótip
 
 - **Nome do caso de uso:** Recuperar Senha
 - **Ator(es):** Aluno, Instrutor, Administrador (ainda não autenticado).
-- **Descrição:** o usuário que esqueceu a senha solicita um link de redefinição por e-mail. Iniciado a partir do UC005 (Realizar Login), fluxo alternativo A1: UC005 «extend» UC011.
+- **Descrição:** o usuário que esqueceu a senha solicita um link de redefinição por e-mail. Iniciado a partir do UC005 (Realizar Login), fluxo alternativo A1: UC011 «extend» UC005 (a seta sai do UC011 e aponta para o UC005).
 - **Pré-condições:** usuário possui conta cadastrada na plataforma.
 - **Pós-condições:** senha do usuário é redefinida e ele consegue fazer login com a nova senha.
 - **Regras de negócio:** link de redefinição expira em tempo limitado (30 minutos); mensagem de confirmação não revela se o e-mail existe ou não na base (mesma regra anti-enumeração do UC005).

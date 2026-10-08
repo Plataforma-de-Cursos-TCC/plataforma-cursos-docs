@@ -1,0 +1,65 @@
+' Item 11 - Diagrama de atividades do UC009 (Assistir aula), com o UC001
+' (Conversar com Tutor de IA) iniciado pelo fluxo alternativo A3.
+' Rótulos: número = passo do fluxo básico; A-x/E-x = fluxo alternativo/de exceção.
+' Gerar o PNG: plantuml -tpng 11-atividades.puml
+@startuml 11-atividades
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor black
+skinparam ActivityDiamondBackgroundColor white
+skinparam ActivityDiamondBorderColor black
+skinparam SwimlaneBorderColor black
+
+|Aluno|
+start
+:1. Acessa a aula no curso;
+|Plataforma de Cursos|
+:Verifica a matrícula e se a aula é prévia;
+if (Pode assistir?) then ([sem matrícula e aula não prévia])
+  :E-1. Bloqueia o acesso e sugere a matrícula;
+  stop
+else ([matriculado ou aula prévia])
+endif
+if (Aula iniciada antes?) then ([há ponto salvo])
+  :A-2. Posiciona o vídeo no ponto salvo;
+else ([sem ponto salvo])
+endif
+:2. Carrega e reproduz o vídeo;
+if (Vídeo carregou?) then ([falha na entrega do vídeo])
+  :E-2. Exibe erro e oferece recarregar;
+  stop
+else ([vídeo carregado])
+endif
+repeat
+  |Aluno|
+  :3. Assiste ao vídeo;
+  if (Tem dúvida?) then ([tem dúvida])
+    :A-3. Envia a pergunta no chat;
+    |Plataforma de Cursos|
+    if (Limite de mensagens?) then ([limite atingido])
+      :UC001 E-2. Informa o tempo de espera;
+    else ([dentro do limite])
+      |Tutor de IA|
+      :Busca trechos restritos ao curso;
+      if (Trecho relevante?) then ([encontrado])
+        :Gera a resposta citando aula e timestamp;
+      else ([não encontrado])
+        :UC001 A-1. Informa que o material
+        não cobre a pergunta e sugere reformular;
+      endif
+      |Plataforma de Cursos|
+      :Exibe a resposta e salva no histórico;
+    endif
+  else ([sem dúvida])
+  endif
+  |Plataforma de Cursos|
+  if (Aluno saiu da tela?) then ([saiu antes do fim])
+    :A-1. Salva os segundos assistidos;
+    stop
+  else ([continua na aula])
+  endif
+repeat while (Vídeo terminou?) is ([não terminou]) not ([terminou])
+:4. Marca a aula como concluída e atualiza o progresso;
+stop
+@enduml

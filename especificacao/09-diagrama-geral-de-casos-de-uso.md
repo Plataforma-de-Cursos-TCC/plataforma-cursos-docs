@@ -1,68 +1,7 @@
 # 9 DIAGRAMA GERAL DE CASOS DE USO
 
-O template exige o diagrama geral de casos de uso do sistema, com atores, casos de uso e relações include/extend (o extend segue a ADR-0003). Diagrama como código (ADR-0004).
+Fonte: `especificacao/diagramas/09-casos-de-uso.puml` (PlantUML, [ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)). O «extend» segue a [ADR-0003](../docs/adr/0003-extend-no-sentido-do-te3-3.md): a seta sai do caso de uso opcional e aponta para o caso de uso base.
 
-Fonte: `especificacao/diagramas/09-casos-de-uso.mmd`
-
-```mermaid
-%% Convenção do TE3_3: seta do UC que pode derivar (base) para o UC estendido/incluído.
-%% Casos de uso em Mermaid: flowchart (Mermaid não tem notação nativa de UC). Fronteira do sistema = subgraph.
-%%{init: {"flowchart": {"defaultRenderer": "elk"}}}%%
-flowchart LR
-  classDef ator fill:#e8f0ff,stroke:#335,stroke-width:1.5px
-  classDef uc fill:#fff,stroke:#333
-
-  VIS(["Visitante"]):::ator
-  ALU(["Aluno"]):::ator
-  INS(["Instrutor"]):::ator
-  ADM(["Administrador"]):::ator
-  TUT(["Tutor de IA<br/>(ator sistêmico)"]):::ator
-
-  subgraph SYS["Plataforma de Cursos (fronteira do sistema)"]
-    UC012([UC012 Cadastrar-se na plataforma]):::uc
-    UC005([UC005 Realizar login]):::uc
-    UC011([UC011 Recuperar senha]):::uc
-    UC016([UC016 Acessar área protegida por perfil]):::uc
-    UC013([UC013 Editar dados do perfil]):::uc
-    UC003([UC003 Matricular-se em curso]):::uc
-    UC009([UC009 Assistir aula]):::uc
-    UC001([UC001 Conversar com Tutor de IA]):::uc
-    UC002([UC002 Responder quiz]):::uc
-    UC010([UC010 Avaliar curso]):::uc
-    UC006([UC006 Cadastrar curso]):::uc
-    UC014([UC014 Gerenciar módulos do curso]):::uc
-    UC015([UC015 Gerenciar aulas do curso]):::uc
-    UC004([UC004 Cadastrar quiz com gabarito]):::uc
-    UC007([UC007 Ver dashboard com filtro]):::uc
-    UC008([UC008 Gerenciar usuários]):::uc
-  end
-
-  VIS --- UC012
-  VIS --- UC005
-  ALU --- UC005
-  INS --- UC005
-  ADM --- UC005
-  ALU --- UC013
-  INS --- UC013
-  ADM --- UC013
-  ALU --- UC003
-  ALU --- UC009
-  ALU --- UC001
-  ALU --- UC002
-  ALU --- UC010
-  INS --- UC006
-  INS --- UC014
-  INS --- UC015
-  INS --- UC004
-  INS --- UC007
-  ADM --- UC007
-  ADM --- UC008
-  TUT --- UC001
-
-  UC005 -. "«include»" .-> UC016
-  UC005 -. "«extend»" .-> UC011
-  UC009 -. "«extend»" .-> UC001
-
-```
+![Diagrama Geral de Casos de Uso](diagramas/09-casos-de-uso.png)
 
 *Figura 2 – Diagrama Geral de Casos de Uso*

@@ -1,0 +1,64 @@
+' Item 9 - Diagrama geral de casos de uso (ADR-0003 e ADR-0004).
+' «extend»: a seta sai do caso de uso opcional e aponta para o base.
+' «include»: a seta sai do base e aponta para o incluído.
+' Gerar o PNG: plantuml -tpng 09-casos-de-uso.puml
+@startuml 09-casos-de-uso
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam usecase {
+  BackgroundColor white
+  BorderColor black
+}
+skinparam actorStyle stickman
+
+actor Visitante as VIS
+actor "Usuário" as USU
+actor Aluno as ALU
+actor Instrutor as INS
+actor Administrador as ADM
+actor "Tutor de IA" as TUT
+
+USU <|-- ALU
+USU <|-- INS
+USU <|-- ADM
+
+rectangle "Plataforma de Cursos" {
+  usecase "UC012\nCadastrar-se na plataforma" as UC012
+  usecase "UC005\nRealizar login" as UC005
+  usecase "UC011\nRecuperar senha" as UC011
+  usecase "UC016\nAcessar área protegida\npor perfil" as UC016
+  usecase "UC013\nEditar dados do perfil" as UC013
+  usecase "UC003\nMatricular-se em curso" as UC003
+  usecase "UC009\nAssistir aula" as UC009
+  usecase "UC001\nConversar com Tutor de IA" as UC001
+  usecase "UC002\nResponder quiz" as UC002
+  usecase "UC010\nAvaliar curso" as UC010
+  usecase "UC006\nCadastrar curso" as UC006
+  usecase "UC014\nGerenciar módulos do curso" as UC014
+  usecase "UC015\nGerenciar aulas do curso" as UC015
+  usecase "UC004\nCadastrar quiz com gabarito" as UC004
+  usecase "UC007\nVer dashboard com filtro" as UC007
+  usecase "UC008\nGerenciar usuários" as UC008
+}
+
+VIS -- UC012
+USU -- UC005
+USU -- UC013
+ALU -- UC003
+ALU -- UC009
+ALU -- UC002
+ALU -- UC010
+INS -- UC006
+INS -- UC014
+INS -- UC015
+INS -- UC004
+INS -- UC007
+ADM -- UC007
+ADM -- UC008
+UC001 -- TUT
+
+UC005 ..> UC016 : <<include>>
+UC005 <.. UC011 : <<extend>>
+UC009 <.. UC001 : <<extend>>
+@enduml
