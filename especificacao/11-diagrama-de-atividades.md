@@ -1,63 +1,7 @@
 # 11 DIAGRAMA DE ATIVIDADES
 
-O template exige o diagrama de atividades do sistema.
+Fonte: `especificacao/diagramas/11-atividades.puml` (PlantUML, [ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)). O diagrama cobre o UC009 (Assistir aula), com o fluxo básico, os fluxos alternativos A-1, A-2 e A-3 e as exceções E-1 e E-2. O A-3 inicia o UC001 (Conversar com Tutor de IA), que aparece com o fluxo alternativo A-1 e a exceção E-2. Os números nas atividades indicam o passo do fluxo básico, e A-x e E-x indicam o fluxo alternativo ou de exceção.
 
-Fonte: `especificacao/diagramas/11-atividades.mmd`
-
-```mermaid
-%% Passos numerados = fluxo básico do UC009; A-3.x = alternativo A3 (inicia UC001). Atividades com raias (UC009 Assistir aula + UC001 Conversar com Tutor de IA)
-flowchart TB
-  classDef ini fill:#000,stroke:#000,color:#000
-  classDef fim fill:#fff,stroke:#000,stroke-width:5px
-  classDef gw fill:#fff7d6,stroke:#8a6d00
-  classDef bar fill:#000,stroke:#000,color:#000
-
-  s0(( )):::ini --> a1
-
-  subgraph ALU["Aluno"]
-    a1[1. Acessa a aula no curso]
-    a3[3. Assiste ao vídeo]
-    d1{Tem dúvida?}:::gw
-    a4[A-3.1 Aciona o chat e envia a pergunta]
-  end
-
-  subgraph PLA["Plataforma"]
-    p1[Verifica matrícula e se a aula é prévia]
-    d0{Matriculado ou aula prévia?}:::gw
-    p2[Bloqueia o acesso e sugere a matrícula]
-    p3[2. Reproduz o vídeo]
-    f1[" "]:::bar
-    p5[Salva os segundos assistidos]
-    p6[Exibe a resposta e salva no histórico]
-    m2{" "}:::gw
-    d3{Vídeo terminou?}:::gw
-    j1[" "]:::bar
-    p7[4. Marca a aula como concluída e atualiza o progresso]
-  end
-
-  subgraph TUT["Tutor de IA"]
-    t1[Busca trechos relevantes restritos ao curso]
-    d2{Trecho relevante?}:::gw
-    t2[Gera resposta citando aula e timestamp]
-    t3[Informa que não há conteúdo e sugere reformular]
-    m1{" "}:::gw
-  end
-
-  a1 --> p1 --> d0
-  d0 -- não --> p2 --> e1((Fim: acesso negado)):::fim
-  d0 -- sim --> p3 --> f1
-  f1 --> a3 --> d1
-  f1 --> p5 --> j1
-  d1 -- sim --> a4 --> t1 --> d2
-  d2 -- sim --> t2 --> m1
-  d2 -- não --> t3 --> m1
-  m1 --> p6 --> m2
-  d1 -- não --> m2
-  m2 --> d3
-  d3 -- não --> a3
-  d3 -- sim --> j1
-  j1 --> p7 --> e2((Fim: aula concluída)):::fim
-
-```
+![Diagrama de Atividades](diagramas/11-atividades.png)
 
 *Figura 12 – Diagrama de Atividades*
