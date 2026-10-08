@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Página do curso</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#">Meus cursos</a><a href="#">Catálogo</a></nav><span class="avatar">LS</span></header>
+<main class="page stack">
+  <div class="banner erro" data-estado="indisponivel">Este curso não está mais disponível.</div>
+  <div class="banner erro" data-estado="pagamento-recusado">Pagamento recusado.</div>
+
+  <div class="grid" style="grid-template-columns:1fr 320px;align-items:start">
+    <section class="stack">
+      <div style="height:220px;border-radius:12px;background:linear-gradient(135deg,var(--accent-bg),var(--primary))"></div>
+      <div>
+        <h1>Fundamentos de Pesquisa com Usuários</h1>
+        <p class="muted">Design de Produto · Instrutor: Marina Alves</p>
+        <p class="small muted">8 módulos · 3h40 de conteúdo</p>
+      </div>
+      <div class="card stack">
+        <h3>Conteúdo</h3>
+        <div class="row between"><span>Módulo 1 · Por que pesquisar antes de desenhar</span><span class="small muted">18 min</span></div>
+        <div class="row between"><span>Módulo 2 · Entrevistas de descoberta</span><span class="small muted">24 min</span></div>
+        <div class="row between"><span>Módulo 3 · Sintetizando achados</span><span class="small muted">21 min</span></div>
+      </div>
+      <div class="card stack" data-estado="avaliacao-salva">
+        <div class="row between"><h3>Avaliações</h3><span class="chip accent">Nota média 4,6 · 12 avaliações</span></div>
+        <div class="row between"><span>Você</span><span class="chip neutral">Nota 4</span></div>
+        <p class="small">Trilha clara, exemplos bons.</p>
+      </div>
+    </section>
+
+    <aside class="card stack">
+      <p data-estado="padrao pagamento-recusado processando-pagamento"><strong style="font-size:24px">R$ 249,90</strong></p>
+      <p data-estado="gratuito"><strong style="font-size:24px">Gratuito</strong></p>
+      <button class="btn primary block" type="button" data-estado="padrao gratuito pagamento-recusado processando-pagamento">Matricular-se</button>
+      <button class="btn primary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado avaliacao-salva">Continuar assistindo</button>
+      <button class="btn secondary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado">Avaliar curso</button>
+      <button class="btn secondary block" type="button" data-estado="avaliacao-salva">Editar avaliação</button>
+      <div class="stack" data-estado="indisponivel">
+        <p>Este curso não está mais disponível.</p>
+        <button class="btn secondary block" type="button">Voltar ao catálogo</button>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div class="overlay" data-estado="avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota">
+  <div class="modal stack">
+    <h2>Avaliar curso</h2>
+    <div class="field">
+      <label>Nota (1 a 5)</label>
+      <div class="row" data-estado="avaliar-vazio avaliar-sem-nota">
+        <span class="btn secondary" style="width:52px;padding:0">1</span><span class="btn secondary" style="width:52px;padding:0">2</span><span class="btn secondary" style="width:52px;padding:0">3</span><span class="btn secondary" style="width:52px;padding:0">4</span><span class="btn secondary" style="width:52px;padding:0">5</span>
+      </div>
+      <div class="row" data-estado="avaliar-preenchido">
+        <span class="btn secondary" style="width:52px;padding:0">1</span><span class="btn secondary" style="width:52px;padding:0">2</span><span class="btn secondary" style="width:52px;padding:0">3</span><span class="btn primary" style="width:52px;padding:0">4</span><span class="btn secondary" style="width:52px;padding:0">5</span>
+      </div>
+      <div class="row" data-estado="avaliar-existente">
+        <span class="btn secondary" style="width:52px;padding:0">1</span><span class="btn secondary" style="width:52px;padding:0">2</span><span class="btn secondary" style="width:52px;padding:0">3</span><span class="btn secondary" style="width:52px;padding:0">4</span><span class="btn primary" style="width:52px;padding:0">5</span>
+      </div>
+    </div>
+    <div class="field">
+      <label>Comentário (opcional)</label>
+      <div class="input placeholder" data-estado="avaliar-vazio avaliar-sem-nota">Comentário</div>
+      <div class="input" data-estado="avaliar-preenchido">Trilha clara, exemplos bons.</div>
+      <div class="input" data-estado="avaliar-existente">Conteúdo ótimo, faltou prática.</div>
+    </div>
+    <div class="banner erro" data-estado="avaliar-sem-nota">A nota é obrigatória.</div>
+    <div class="acoes">
+      <button class="btn secondary" type="button">Cancelar</button>
+      <button class="btn primary" type="button">Confirmar envio</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" data-estado="avaliar-bloqueado">
+  <div class="modal stack">
+    <h2>Avaliar curso</h2>
+    <p>É preciso concluir ao menos uma aula para avaliar este curso.</p>
+    <div class="acoes"><button class="btn secondary" type="button">Fechar</button></div>
+  </div>
+</div>
+
+<div class="overlay" data-estado="processando-pagamento">
+  <div class="modal stack">
+    <h2>Pagamento</h2>
+    <p class="small muted">Fundamentos de Pesquisa com Usuários · R$ 249,90</p>
+    <p>Processando pagamento simulado…</p>
+  </div>
+</div>
+
+<script src="_estado.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Aula</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Meus cursos</a><a href="#">Novo curso</a></nav><span class="avatar">ML</span></header>
+<main class="center">
+  <form class="card form stack">
+    <h2 data-estado="padrao enviando erro-formato erro-envio">Nova aula</h2>
+    <h2 data-estado="edicao">Editar aula</h2>
+    <div class="banner erro" data-estado="erro-envio">Falha no envio ou link expirado.</div>
+
+    <div class="field"><label>Título</label>
+      <div class="input placeholder" data-estado="padrao">Título da aula</div>
+      <div class="input" data-estado="enviando erro-formato erro-envio edicao">Recrutamento de participantes</div>
+    </div>
+
+    <div class="field"><label>Descrição</label>
+      <div class="input placeholder" data-estado="padrao">Descrição da aula</div>
+      <div class="input" data-estado="enviando erro-formato erro-envio edicao">Como definir critérios e convidar participantes.</div>
+    </div>
+
+    <div class="field"><label>Ordem</label>
+      <div class="input placeholder" data-estado="padrao">Ex.: 3</div>
+      <div class="input" data-estado="enviando erro-formato erro-envio edicao">3</div>
+    </div>
+
+    <div class="field"><label>Prévia</label>
+      <div class="row" data-estado="padrao"><span class="radio"></span><span>Sim</span><span class="radio"></span><span>Não</span></div>
+      <div class="row" data-estado="enviando erro-formato erro-envio edicao"><span class="radio"></span><span>Sim</span><span class="radio on"></span><span>Não</span></div>
+    </div>
+
+    <div class="field"><label>Vídeo</label>
+      <div class="input placeholder" data-estado="padrao">Selecione o arquivo</div>
+      <p class="small muted" data-estado="padrao" style="margin-top:6px">mp4 ou webm, até 500 MB</p>
+      <div class="input" data-estado="enviando erro-envio edicao">aula-03.mp4</div>
+      <div class="input erro" data-estado="erro-formato">aula-03.avi</div>
+      <div class="msg-erro" data-estado="erro-formato">Formato não aceito. Use mp4 ou webm, até 500 MB.</div>
+    </div>
+
+    <div data-estado="enviando" style="height:8px;background:var(--surface-raised);border-radius:4px;overflow:hidden"><div style="width:45%;height:100%;background:var(--primary)"></div></div>
+    <p class="small muted" data-estado="enviando">Enviando: 45%</p>
+
+    <button class="btn primary block" type="button" data-estado="padrao edicao erro-formato">Salvar</button>
+    <button class="btn primary block" type="button" disabled data-estado="enviando">Salvar</button>
+    <button class="btn secondary block" type="button" data-estado="erro-envio">Tentar novamente</button>
+  </form>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>

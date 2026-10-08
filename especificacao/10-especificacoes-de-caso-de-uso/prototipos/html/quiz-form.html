@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Quiz</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Meus cursos</a><a href="#">Novo curso</a></nav><span class="avatar">ML</span></header>
+<main class="center">
+  <form class="card form stack">
+    <h2 data-estado="padrao gabarito erro-alternativas erro-gabarito rascunho-salvo publicado">Novo quiz</h2>
+    <h2 data-estado="edicao">Editar quiz</h2>
+    <div class="banner sucesso" data-estado="rascunho-salvo">Rascunho salvo.</div>
+    <div class="banner sucesso" data-estado="publicado">Quiz publicado.</div>
+    <button class="btn secondary block" type="button" data-estado="publicado">Voltar ao módulo</button>
+    <div class="banner aviso" data-estado="edicao">Edição não altera as notas dos alunos.</div>
+
+    <div class="field"><label>Título do quiz</label>
+      <div class="input placeholder" data-estado="padrao">Título do quiz</div>
+      <div class="input" data-estado="gabarito rascunho-salvo publicado edicao erro-alternativas erro-gabarito">Quiz — Módulo 1</div>
+    </div>
+
+    <div class="field"><label>Enunciado da pergunta 1</label>
+      <div class="input placeholder" data-estado="padrao">Enunciado</div>
+      <div class="input" data-estado="gabarito rascunho-salvo publicado edicao erro-alternativas erro-gabarito">Qual método usa roteiro aberto e perguntas de aprofundamento?</div>
+    </div>
+
+    <div class="field"><label>Alternativas</label>
+      <div class="row" data-estado="padrao"><span class="radio"></span><div class="input placeholder" style="flex:1">Alternativa 1</div></div>
+      <div class="row" data-estado="gabarito rascunho-salvo publicado edicao"><span class="radio on"></span><div class="input" style="flex:1">Entrevista semiestruturada</div></div>
+      <div class="row" data-estado="erro-alternativas erro-gabarito"><span class="radio"></span><div class="input" style="flex:1">Entrevista semiestruturada</div></div>
+
+      <div class="row" data-estado="padrao"><span class="radio"></span><div class="input placeholder" style="flex:1">Alternativa 2</div></div>
+      <div class="row" data-estado="gabarito rascunho-salvo publicado edicao erro-gabarito"><span class="radio"></span><div class="input" style="flex:1">Survey fechado</div></div>
+      <div class="row" data-estado="erro-alternativas"><span class="radio"></span><div class="input erro placeholder" style="flex:1">Alternativa 2</div></div>
+
+      <div class="row" data-estado="padrao"><span class="radio"></span><div class="input placeholder" style="flex:1">Alternativa 3</div></div>
+      <div class="row" data-estado="gabarito rascunho-salvo publicado edicao erro-gabarito"><span class="radio"></span><div class="input" style="flex:1">Teste A/B</div></div>
+
+      <p class="small" style="color:var(--success)" data-estado="gabarito rascunho-salvo publicado edicao">Gabarito marcado — alternativa 1</p>
+      <div class="msg-erro" data-estado="erro-alternativas">Informe pelo menos duas alternativas.</div>
+      <div class="msg-erro" data-estado="erro-gabarito">Marque a alternativa correta.</div>
+    </div>
+
+    <button class="btn secondary block" type="button">+ Adicionar pergunta</button>
+
+    <div class="grid c2" data-estado="padrao gabarito erro-alternativas erro-gabarito edicao rascunho-salvo">
+      <button class="btn secondary" type="button">Salvar como rascunho</button>
+      <button class="btn primary" type="button" data-estado="padrao gabarito erro-alternativas erro-gabarito rascunho-salvo">Salvar quiz</button>
+      <button class="btn primary" type="button" data-estado="edicao">Salvar alterações</button>
+    </div>
+  </form>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>

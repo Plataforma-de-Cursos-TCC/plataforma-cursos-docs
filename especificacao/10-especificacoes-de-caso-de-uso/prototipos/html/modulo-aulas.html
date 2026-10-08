@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Aulas do módulo</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Meus cursos</a><a href="#">Novo curso</a></nav><span class="avatar">ML</span></header>
+<main class="page">
+  <div class="row between" style="margin-bottom:24px">
+    <div>
+      <p class="small muted">Módulo 1</p>
+      <h2>Planejamento de pesquisa</h2>
+    </div>
+    <div class="row">
+      <button class="btn secondary" type="button">Novo quiz</button>
+      <button class="btn primary" type="button">Nova aula</button>
+    </div>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table>
+      <tr><th>Ordem</th><th>Aula</th><th></th></tr>
+      <tr>
+        <td>1</td>
+        <td>Objetivos da pesquisa</td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Roteiro de entrevista</td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+      <tr data-estado="aula-salva">
+        <td>3</td>
+        <td><span class="row">Recrutamento de participantes <span class="chip warning">transcrição em processamento</span></span></td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+    </table>
+  </div>
+</main>
+<div class="overlay" data-estado="exclusao-aula">
+  <div class="modal">
+    <h3>Excluir aula</h3>
+    <p class="muted" style="margin-top:8px">A aula e o vídeo serão removidos.</p>
+    <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn danger" type="button">Confirmar</button></div>
+  </div>
+</div>
+<script src="_estado.js"></script>
+</body>
+</html>
