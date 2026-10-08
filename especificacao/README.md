@@ -16,4 +16,4 @@ Esqueleto dos 11 itens do template da disciplina. Cada arquivo traz o título do
 | 10 | Especificações de caso de uso | `10-especificacoes-de-caso-de-uso/` (idem, mais `prototipos/`) |
 | 11 | Diagrama de atividades | `11-diagrama-de-atividades.md` |
 
-Diagramas como código (fontes `.mmd` e `.bpmn`, e imagens geradas) ficam em `diagramas/` (ADR-0004).
+Diagramas como código (fontes `.bpmn` e `.puml`, e imagens PNG geradas) ficam em `diagramas/` (ADR-0004).

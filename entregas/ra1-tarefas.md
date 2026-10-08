@@ -41,7 +41,7 @@ Os escopos são orientação para evitar sobreposição. Os requisitos em si sã
 ### 1.3 Fluxo de trabalho
 
 - **Formato:** todo o conteúdo é produzido em arquivos **Markdown** no repositório, e não direto no .docx do template.
-- **Diagramas como código** ([ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)): Mermaid (`.mmd` ou bloco no Markdown); BPMN 2.0 em `.bpmn` no item 4 (critério C04.1). Fonte versionada junto da imagem exportada.
+- **Diagramas como código** ([ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)): BPMN 2.0 em `.bpmn` no item 4 (critério C04.1) e PlantUML (`.puml`) nos itens 9 e 11; Mermaid fica só em `docs/`. Fonte versionada junto da imagem exportada.
 - **Branches:** uma por tarefa (`feat/nome-descritivo` ou `fix/nome-descritivo`), entrando na `main` por **pull request** (`gh pr create`). PR aberto = **In review**; **Done** só após o merge.
 - **Consolidação:** com todos os itens na `main`, os MDs viram um único documento na ordem e com os títulos do template, exportado em **PDF e DOCX**.
 - **Nomes exatos:** produto "Plataforma de Cursos"; atores Visitante, Aluno, Instrutor, Administrador e Tutor de IA.
