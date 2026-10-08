@@ -39,6 +39,10 @@ relacionados: [adr-0006]
 - Cada RF tem pelo menos uma estória com pelo menos 2 critérios de aceite ([ADR-0002](0002-formato-de-estoria-e-criterios.md)).
 - A área de cada ID fica registrada na rastreabilidade (item 9), e não no próprio ID.
 
+## Adendo (08/10/2026)
+
+Os requisitos RF017 (login), RF018 (controle de acesso), RNF017 (link de recuperação de senha), RNF018 (limite e formato de vídeo de aula) e os casos de uso UC017–UC020 foram adicionados posteriormente, no final da numeração sequencial, sem renumerar os itens anteriores da v11. A inclusão de UC017–UC019 foi registrada pelo PR #58 e UC020 pelo PR #60.
+
 ---
 
 ## Ligações
