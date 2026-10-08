@@ -14,7 +14,6 @@ Esse fluxo é a base para a Relação de Requisitos Funcionais (item 6) e para a
 
 Fonte: `diagramas/04-mapeamento-de-negocios.mmd`
 
-<!-- revisar: a v11 traz o diagrama em Mermaid (flowchart com raias), não em .bpmn; o esqueleto cita .bpmn (ADR 0004 aceita as duas formas) -->
 
 ```mermaid
 %% BPMN (TO BE) em Mermaid: raias como subgraph; eventos (círculo), tarefas (retângulo), gateways (losango)

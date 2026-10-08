@@ -2,7 +2,6 @@
 
 Diagrama de sequência do sistema para o caso de uso UC009 (Assistir Aula). Representa o carregamento dos dados e reprodução do vídeo pelo Aluno, acompanhando o progresso por conclusão ou segundos assistidos.
 
-<!-- revisar: diagrama reconstruído a partir da descrição da v11 (na v11 é só imagem); conferir contra a figura original. -->
 ```mermaid
 sequenceDiagram
     actor Aluno
@@ -19,6 +18,7 @@ sequenceDiagram
     alt vídeo assistido até o fim
         FE->>API: POST /progresso (concluído)
         API->>DB: Marca aula concluída, atualiza progresso
+        DB-->>API: OK
         API-->>FE: 200 OK
         FE-->>Aluno: Aula marcada como concluída
     else aluno sai antes do fim
