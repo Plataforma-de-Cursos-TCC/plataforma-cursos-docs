@@ -30,22 +30,13 @@ relacionados: [ra1-criterios-de-aceite, ra1-tarefas, propostas-lacunas, contexto
 | # | Onde | Pendência | Tipo | Encaminhamento |
 |---|---|---|:---:|---|
 | 1 | `especificacao/01-3-objetivos.md:13` | A v11 não separa "Problema" e "Valor" por objetivo | **G** | Decidir se divide o texto em Problema e Valor ou mantém o parágrafo da v11. |
-| 2–5 | `especificacao/06-requisitos-funcionais/area-a..d.md` | Coluna OBJETIVO ausente | **M** | O template do item 6 pede só `# \| RF \| ATOR \| SPRINT`. As colunas extras saem e a ligação RF–UC vai para a rastreabilidade do item 9. |
-| 6 | `06-*/area-a.md:14` | Área A com 2 RFs | **M** | Meta interna. O RF001 é dividido e o novo ID entra como RF017. |
-| 7 | `06-*/area-d.md:15` | Área D com 3 RFs | **M** | Meta interna. O RF012 é dividido e o novo ID entra como RF018. |
-| 8 | `06-*/area-b.md:17` | RF016 (perfil do instrutor) sem caso de uso | **G** | Ligar ao caso de uso de editar perfil (UC013) ou especificar um caso de uso próprio. |
-| 9 | `06-*/area-c.md:18` | RF015 (catálogo) sem caso de uso | **G** | Ligar a um caso de uso existente ou especificar "Consultar catálogo". |
-| 10–13 | `especificacao/07-estorias-de-usuario/area-a..d.md:5` | Formato Como/Quero/Para que | **M** | Reescrever em COMO / POSSO / PARA ([ADR-0002](../docs/adr/0002-formato-de-estoria-e-criterios.md)). |
-| 14–16 | `07-*/area-a.md:73`, `area-c.md:121`, `area-d.md:73` | Número da estória diferente do RF | **M** | Com a numeração da v11 a regra "mesmo número" não se aplica. Basta pelo menos 1 estória por RF. |
-| 17–20 | `especificacao/08-requisitos-nao-funcionais/area-a..d.md` | Coluna de subcaracterística vazia | **M** | O template do item 8 pede só `# \| RNF \| NORMA ISO/IEC 25010`. A coluna sai. |
-| 21 | `08-*/area-a.md:15` | Área A com 3 RNFs | **G** | Meta interna. O grupo valida o rascunho do RNF017. |
-| 22 | `08-*/area-b.md:16` | Área B com 3 RNFs | **G** | Meta interna. O grupo valida o rascunho do RNF018. |
+| 2 | `especificacao/08-requisitos-nao-funcionais/00-item.md:26` | RNF017 e RNF018 são rascunhos tirados das regras do UC011 e do UC015 | **G** | O grupo valida os valores (30 min; mp4/webm até 500 MB). |
 
 ## 3. Pendências que não estão em marcação
 
 | Pendência | Tipo | Encaminhamento |
 |---|:---:|---|
-| RNF012 (WCAG 2.1 AA) classificado como "Acessibilidade" | **M** | Na ISO/IEC 25010:2023 é "Capacidade de interação", subcaracterística inclusividade. |
+| RF015 (catálogo) sem caso de uso especificado; hoje coberto só pela estória US019 e pela rastreabilidade do item 9 | **G** | Manter assim ou especificar "Consultar catálogo" como UC017. |
 | Protótipos de alta fidelidade para os 7 casos de uso sem tela e para os fluxos alternativos e de exceção | **G** | Definir com o grupo a ferramenta, quem desenha e como os fluxos aparecem no item 10. |
 | Declaração de uso de IA | **G** | Cada integrante confere se a lista de ferramentas cobre o que usou. |
 | Documento final (capa, cabeçalho, rodapé, sumário) | **M** | Gerado por script a partir do Template.docx (issue #25). |

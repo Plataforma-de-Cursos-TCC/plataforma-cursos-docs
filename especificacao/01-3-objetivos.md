@@ -1,7 +1,5 @@
 # 1 QUADRO “3 OBJETIVOS”
 
-O template exige o quadro com os 3 objetivos do produto, cada um com problema, valor e métrica de sucesso.
-
 **NOME DO PRODUTO:** Plataforma de Cursos
 
 | OBJETIVOS | DESCRIÇÃO |

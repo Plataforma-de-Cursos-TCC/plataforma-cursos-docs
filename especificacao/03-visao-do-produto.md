@@ -1,7 +1,5 @@
 # 3 VISÃO DO PRODUTO
 
-O template exige a visão do produto, relacionando os problemas identificados às expectativas que o produto atende.
-
 **NOME DO PRODUTO:** Plataforma de Cursos
 
 | PROBLEMAS | EXPECTATIVAS |
