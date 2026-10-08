@@ -3,15 +3,15 @@ id: testes-casos
 titulo: "Casos de teste"
 tipo: documento-projeto
 status: rascunho
-atualizado: 2026-10-07
+atualizado: 2026-10-08
 ---
 # Casos de teste
 
-48 casos de teste (TC001–TC048), 3 por estória, derivados dos critérios de aceite do item 7 (Dado/Quando/Então), um caso por critério, no padrão Cenário, CT, Entradas e Resultado Esperado. Lacuna conhecida: UC011 e US017–US020 ainda sem casos de teste.
+63 casos de teste (TC001–TC063), derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US020) possuem cobertura de testes associada.
 
-Padrão TE6. Os casos nascem dos critérios de aceite das estórias (ADR-0002).
+Padrão TE6. Os casos nascem dos critérios de aceite das estórias (ADR-0002) e das especificações de casos de uso.
 
-Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem do caso na v11 (fluxo ou critério da estória). Onde a planilha de casos de teste e a v11 divergem, vale a v11.
+Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem do caso (fluxo do UC ou critério da estória). Onde a planilha de casos de teste e a v11 divergem, vale a v11.
 
 
 | ID | UC | Tipo | Pré-condição | Passos | Resultado esperado | Cenário |
@@ -64,3 +64,19 @@ Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem 
 | TC046 | UC008 | Positivo | Dado que estou logado como admin | 1. Quando busco um usuário e altero seu status pra bloqueado. | Então o acesso dele é revogado imediatamente. | Fluxo básico (passos 1-6) |
 | TC047 | UC008 | Negativo | Dado que tento bloquear minha própria conta admin | 1. Quando confirmo a ação. | Então o sistema impede e mostra aviso. | Fluxo de exceção E1 |
 | TC048 | UC008 | Positivo | Dado que um usuário é excluído | 1. Quando a exclusão é confirmada. | Então seus dados pessoais são removidos mas o histórico de matrícula/pagamento permanece anonimizado. | Fluxo básico (passos 1-6) |
+| TC049 | UC011 | Positivo | Dado que informo um e-mail cadastrado | 1. Quando solicito a recuperação. | Então recebo um link de redefinição com validade limitada de 30 minutos. | Critério 1 (US017) / Fluxo básico (passos 1-6) |
+| TC050 | UC011 | Positivo | Dado que informo um e-mail não cadastrado | 1. Quando solicito a recuperação. | Então vejo a mesma mensagem de confirmação genérica sem revelar se o e-mail existe. | Critério 2 (US017) / Fluxo de exceção E1 |
+| TC051 | UC011 | Negativo | Dado que abro um link de redefinição expirado | 1. Quando tento definir a nova senha. | Então o sistema recusa e permite solicitar um novo link. | Critério 3 (US017) / Fluxo de exceção E2 |
+| TC052 | UC019 | Positivo | Dado que escolhi um curso pago | 1. Quando confirmo o pagamento simulado. | Então o pagamento é registrado como aprovado e a matrícula é criada. | Critério 1 (US018) / Fluxo básico (passos 1-5) |
+| TC053 | UC019 | Negativo | Dado que informo dados de pagamento simulado inválidos | 1. Quando confirmo o pagamento simulado. | Então o pagamento é recusado, nenhuma matrícula é criada e posso tentar novamente. | Critério 2 (US018) / Fluxo de exceção E1 |
+| TC054 | UC019 | Positivo | Dado que o curso é gratuito | 1. Quando solicito a matrícula. | Então nenhum pagamento é exigido e o acesso é liberado diretamente. | Critério 3 (US018) / Regra R-1 |
+| TC055 | UC020 | Positivo | Dado que existem cursos publicados e em rascunho | 1. Quando acesso o catálogo. | Então vejo apenas cursos publicados, com título, instrutor e preço. | Critério 1 (US019) / Fluxo básico (passos 1-2) |
+| TC056 | UC020 | Positivo | Dado que seleciono uma categoria | 1. Quando aplico o filtro. | Então a lista mostra somente cursos dessa categoria. | Critério 2 (US019) / Fluxo básico (passos 3-4) |
+| TC057 | UC020 | Positivo | Dado que uma categoria não tem cursos publicados | 1. Quando filtro por essa categoria. | Então vejo a mensagem "Nenhum curso encontrado nesta categoria." com botão para ver todos. | Critério 3 (US019) / Fluxo de exceção E2 |
+| TC058 | UC013 | Positivo | Dado que estou logado como Instrutor | 1. Quando preencho minibiografia e links e salvo. | Então o perfil é atualizado e exibido na página do curso. | Critério 1 (US020) / Fluxo alternativo A1 |
+| TC059 | UC013 | Negativo | Dado que informo um link em formato inválido | 1. Quando salvo. | Então o sistema recusa e indica o campo com mensagem de erro. | Critério 2 (US020) / Fluxo de exceção E1 |
+| TC060 | UC013 | Negativo | Dado que sou Aluno ou Administrador | 1. Quando tento editar campos exclusivos de perfil de Instrutor. | Então o acesso aos campos é bloqueado e a alteração é negada. | Critério 3 (US020) / Regra R-1 |
+| TC061 | UC017 | Positivo | Dado que estou logado e informo a senha atual correta e nova senha válida | 1. Quando aciono "Salvar senha". | Então a senha é substituída pela nova e recebo confirmação de alteração. | Fluxo básico (passos 1-6) |
+| TC062 | UC017 | Negativo | Dado que informo uma senha atual incorreta | 1. Quando aciono "Salvar senha". | Então o sistema recusa a troca e exibe aviso de senha atual incorreta. | Fluxo de exceção E1 |
+| TC063 | UC018 | Negativo | Dado que estou logado como Administrador e tento excluir minha própria conta | 1. Quando tento confirmar a exclusão. | Então o sistema impede a exclusão e exibe o aviso "Não é possível excluir a própria conta". | Fluxo de exceção E1 |
+
