@@ -12,12 +12,12 @@ Este repositório não tem código do sistema. Ele guarda três coisas:
 
 | Integrante | GitHub | Área funcional |
 |---|---|---|
-| Adrian Antônio de Souza Gomes | [@adrian69-droid](https://github.com/adrian69-droid) | A definir |
-| Lucas Bruno e Silva | [@Luc-Bruno](https://github.com/Luc-Bruno) | A definir |
-| Lucas Stopinski da Silva | [@LucasStop](https://github.com/LucasStop) | A definir |
-| Vinicius Lima Teider | a informar | A definir |
+| Adrian Antônio de Souza Gomes | [@adrian69-droid](https://github.com/adrian69-droid) | Área B: autoria do instrutor |
+| Lucas Bruno e Silva | [@Luc-Bruno](https://github.com/Luc-Bruno) | Área C: aprendizagem do aluno |
+| Lucas Stopinski da Silva | [@LucasStop](https://github.com/LucasStop) | Área A: acesso e conta |
+| Vinicius Lima Teider | [@Teider011](https://github.com/Teider011) | Área D: Tutor de IA, analytics e administração |
 
-Áreas a distribuir, uma por integrante: **A** acesso e conta; **B** autoria do instrutor; **C** aprendizagem do aluno; **D** Tutor de IA, analytics e administração. Escopo de cada uma no [CONTEXT.md](CONTEXT.md).
+Áreas, uma por integrante: **A** acesso e conta; **B** autoria do instrutor; **C** aprendizagem do aluno; **D** Tutor de IA, analytics e administração. Escopo de cada uma no [CONTEXT.md](CONTEXT.md).
 
 ## Estado atual
 
