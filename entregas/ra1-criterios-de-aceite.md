@@ -175,7 +175,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 - [ ] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: mantém a numeração da v11 e os requisitos novos entram no fim (RF017, RF018…). Não há ID provisório por área (ADR-0001).
 - [ ] **C06.3** Cada RF está redigido de forma clara e **testável**: uma ação verificável, sem "etc." e sem termos vagos.
 - [ ] **C06.4** Cada RF é rastreado a um **ator** (coluna preenchida, com ator do item 5).
-- [ ] **C06.5** Cada RF é rastreado a um **objetivo** do item 1, na coluna **OBJETIVO** acrescentada à tabela do template.
+- ~~**C06.5**~~ Removido: o template não tem coluna OBJETIVO, e o plano de ensino e as rubricas não pedem rastreio RF→objetivo (coluna retirada no c5d2116).
 - [ ] **C06.6** A **priorização** está presente: coluna SPRINT preenchida e/ou prioridade. A coluna fica vazia enquanto as áreas escrevem; o grupo divide em sprints na consolidação (T06), depois que todos os RFs e RNFs estiverem definidos.
 - [ ] **C06.7** Há uma **breve justificativa** da priorização.
 - [ ] **C06.8** Os RFs cobrem o núcleo do produto: cadastro de curso, módulos, aulas e quiz com gabarito; matrícula, progresso e avaliação do curso; correção automática do quiz; conversa com o Tutor de IA no contexto da aula; dashboard com filtro; gestão de usuários e perfis; acesso a área protegida por perfil. Não se limitam a CRUD.
