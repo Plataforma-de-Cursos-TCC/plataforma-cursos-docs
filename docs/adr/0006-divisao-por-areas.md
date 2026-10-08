@@ -32,7 +32,7 @@ relacionados: [adr-0001, adr-0005]
 |---|---|---|---|
 | A | Acesso e conta | Cadastrar-se, Realizar login, Recuperar senha, Editar dados do perfil | Segurança (LGPD), Compatibilidade |
 | B | Autoria do instrutor | Cadastrar curso, Gerenciar módulos, Gerenciar aulas, Cadastrar quiz com gabarito | Manutenibilidade, Portabilidade |
-| C | Aprendizagem do aluno | Matricular-se em curso, Assistir aula, Responder quiz, Avaliar curso | Capacidade de interação, Acessibilidade |
+| C | Aprendizagem do aluno | Matricular-se em curso, Assistir aula, Responder quiz, Avaliar curso | Capacidade de interação (inclui inclusividade, antiga acessibilidade, na ISO/IEC 25010:2023) |
 | D | Tutor de IA, analytics e administração | Conversar com Tutor de IA, Ver dashboard com filtro, Gerenciar usuários, Acessar área protegida por perfil | Eficiência de desempenho, Confiabilidade |
 
 - O responsável de cada área fica na tabela do [README](../../README.md).
@@ -42,7 +42,8 @@ relacionados: [adr-0001, adr-0005]
 ## Consequências
 
 - Cada área tem um arquivo próprio nos itens 6, 7, 8 e 10 (`area-a.md` … `area-d.md`), o que reduz conflito de merge.
-- Os IDs provisórios seguem a área ([ADR-0001](0001-minimo-por-integrante-e-numeracao-provisoria.md)).
+- A numeração final dos IDs segue a [ADR-0001](0001-minimo-por-integrante-e-numeracao-provisoria.md).
+- Na ISO/IEC 25010:2023, acessibilidade é a subcaracterística "inclusividade" de **Capacidade de interação**, e não uma característica própria. RNF de acessibilidade (ex.: WCAG) é classificado assim.
 
 ---
 
