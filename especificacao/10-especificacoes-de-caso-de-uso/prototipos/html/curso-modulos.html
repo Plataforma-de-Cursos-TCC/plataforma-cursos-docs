@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Módulos do curso</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Meus cursos</a><a href="#">Novo curso</a></nav><span class="avatar">ML</span></header>
+<main class="page">
+  <div class="row between" style="margin-bottom:24px">
+    <h2>Fundamentos de Pesquisa com Usuários</h2>
+    <button class="btn primary" type="button">Novo módulo</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table>
+      <tr><th>Posição</th><th>Módulo</th><th></th></tr>
+      <tr>
+        <td>1</td>
+        <td>Planejamento de pesquisa</td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Entrevistas</td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+      <tr data-estado="modulo-criado">
+        <td>3</td>
+        <td>Síntese de achados</td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+    </table>
+  </div>
+</main>
+<div class="overlay" data-estado="exclusao-modulo">
+  <div class="modal">
+    <h3>Excluir módulo</h3>
+    <p class="muted" style="margin-top:8px">As aulas e o quiz deste módulo também serão removidos.</p>
+    <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn danger" type="button">Confirmar</button></div>
+  </div>
+</div>
+<script src="_estado.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Módulo</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Meus cursos</a><a href="#">Novo curso</a></nav><span class="avatar">ML</span></header>
+<main class="center">
+  <form class="card form stack">
+    <h2 data-estado="padrao erro-titulo erro-posicao">Novo módulo</h2>
+    <h2 data-estado="edicao">Editar módulo</h2>
+
+    <div class="field"><label>Título</label>
+      <div class="input placeholder" data-estado="padrao">Título do módulo</div>
+      <div class="input erro placeholder" data-estado="erro-titulo">Título do módulo</div>
+      <div class="input" data-estado="edicao">Entrevistas</div>
+      <div class="input" data-estado="erro-posicao">Síntese de achados</div>
+      <div class="msg-erro" data-estado="erro-titulo">Campo obrigatório.</div>
+    </div>
+
+    <div class="field"><label>Posição</label>
+      <div class="input placeholder" data-estado="padrao erro-titulo">Ex.: 1</div>
+      <div class="input" data-estado="edicao">2</div>
+      <div class="input erro" data-estado="erro-posicao">2</div>
+      <div class="msg-erro" data-estado="erro-posicao">Posição já em uso. Informe outra.</div>
+    </div>
+
+    <button class="btn primary block" type="button">Salvar</button>
+  </form>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Dashboard</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span>
+  <nav>
+    <a href="#" data-estado="padrao curso-selecionado intervalo-invalido sem-dados">Meus cursos</a>
+    <a href="#" data-estado="padrao curso-selecionado intervalo-invalido sem-dados">Novo curso</a>
+    <a href="#" data-estado="admin">Usuários</a>
+    <a href="#" class="ativo" data-estado="admin padrao curso-selecionado intervalo-invalido sem-dados">Dashboard</a>
+  </nav>
+  <span class="avatar" data-estado="padrao curso-selecionado intervalo-invalido sem-dados">MA</span>
+  <span class="avatar" data-estado="admin">CM</span>
+</header>
+<main class="page stack">
+  <h1>Dashboard</h1>
+  <div class="banner erro" data-estado="intervalo-invalido">Data final anterior à data inicial.</div>
+  <div class="banner info" data-estado="sem-dados">Nenhum aluno com atividade no período selecionado.</div>
+  <div class="grid c3">
+    <div class="field"><label>Data inicial</label>
+      <div class="input" data-estado="padrao curso-selecionado admin sem-dados">01/09/2026</div>
+      <div class="input" data-estado="intervalo-invalido">30/09/2026</div>
+    </div>
+    <div class="field"><label>Data final</label>
+      <div class="input" data-estado="padrao curso-selecionado admin sem-dados">30/09/2026</div>
+      <div class="input erro" data-estado="intervalo-invalido">01/09/2026</div>
+    </div>
+    <div class="field"><label>Curso</label>
+      <div class="input" data-estado="padrao intervalo-invalido sem-dados">Todos os meus cursos</div>
+      <div class="input" data-estado="admin">Todos os cursos</div>
+      <div class="input" data-estado="curso-selecionado">Fundamentos de Pesquisa</div>
+    </div>
+  </div>
+  <div class="grid c3">
+    <div class="card">
+      <p class="small muted">Alunos matriculados</p>
+      <h2><span data-estado="padrao intervalo-invalido">42</span><span data-estado="curso-selecionado">12</span><span data-estado="admin">128</span><span data-estado="sem-dados">0</span></h2>
+    </div>
+    <div class="card">
+      <p class="small muted">Aulas concluídas</p>
+      <h2><span data-estado="padrao intervalo-invalido">318</span><span data-estado="curso-selecionado">96</span><span data-estado="admin">1.024</span><span data-estado="sem-dados">0</span></h2>
+    </div>
+    <div class="card">
+      <p class="small muted">Alunos com atividade</p>
+      <h2><span data-estado="padrao intervalo-invalido">27</span><span data-estado="curso-selecionado">9</span><span data-estado="admin">64</span><span data-estado="sem-dados">0</span></h2>
+    </div>
+  </div>
+  <div class="card" data-estado="padrao curso-selecionado admin intervalo-invalido">
+    <div class="row between">
+      <h3>Progresso e engajamento no período</h3>
+      <span class="small muted">01/09/2026 – 30/09/2026</span>
+    </div>
+    <div style="display:flex;align-items:flex-end;gap:12px;height:200px;margin-top:24px">
+      <div style="flex:1;height:35%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:42%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:40%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:55%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:60%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:58%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:72%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:78%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:85%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+      <div style="flex:1;height:92%;background:linear-gradient(180deg,#52A19B,#1E3022);border-radius:4px 4px 0 0"></div>
+    </div>
+  </div>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+/* Tokens e componentes do docs/design-system.md (tema escuro). */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@600;700&display=swap");
+:root {
+  --bg: #101417; --surface: #181D20; --surface-raised: #222A2C; --border: #2B3033; --field-border: #6B7274;
+  --text: #FBFFFF; --text-muted: #A1A6A9; --text-placeholder: #8F9496;
+  --primary: #52A19B; --on-primary: #001E15;
+  --accent: #A59CDD; --accent-bg: #252142;
+  --success: #8DBA9D; --success-bg: #1E3022;
+  --danger: #CE857F; --danger-bg: #332323;
+  --warning: #E3B341; --warning-bg: #332B17;
+  --neutral-chip: #A3AFAF;
+  --serif: "Source Serif 4", Georgia, serif; --sans: Inter, system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; }
+body { background: var(--bg); color: var(--text); font: 400 16px/1.5 var(--sans); min-height: 100vh; }
+h1, h2, h3 { font-family: var(--serif); font-weight: 700; }
+h1 { font-size: 28px; } h2 { font-size: 22px; } h3 { font-size: 18px; }
+a { color: var(--primary); text-decoration: none; }
+.muted { color: var(--text-muted); } .small { font-size: 14px; }
+
+/* Barra superior da plataforma */
+.topbar { display: flex; align-items: center; gap: 24px; padding: 14px 32px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.topbar .logo { font: 700 20px var(--serif); }
+.topbar nav { display: flex; gap: 20px; flex: 1; } .topbar nav a { color: var(--text-muted); } .topbar nav a.ativo { color: var(--text); }
+.avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--accent-bg); color: var(--accent); display: inline-grid; place-items: center; font-weight: 600; font-size: 14px; }
+.page { max-width: 1120px; margin: 0 auto; padding: 32px; }
+.center { min-height: calc(100vh - 66px); display: grid; place-items: center; padding: 32px; }
+
+/* Cartão */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+.card.form { width: 420px; }
+.stack > * + * { margin-top: 16px; }
+.row { display: flex; gap: 12px; align-items: center; } .row.between { justify-content: space-between; }
+.grid { display: grid; gap: 16px; } .grid.c2 { grid-template-columns: 1fr 1fr; } .grid.c3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Campo */
+.field label { display: block; font-size: 14px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
+.input { width: 100%; background: var(--bg); border: 1px solid var(--field-border); border-radius: 8px; padding: 10px 12px; color: var(--text); font: inherit; min-height: 44px; }
+.input.placeholder { color: var(--text-placeholder); }
+.input.erro { border-color: var(--danger); }
+.field .msg-erro { color: var(--danger); font-size: 14px; margin-top: 6px; }
+textarea.input { min-height: 96px; resize: vertical; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; }
+.check .box { width: 18px; height: 18px; border: 1px solid var(--field-border); border-radius: 4px; flex: none; margin-top: 2px; }
+.check .box.on { background: var(--primary); border-color: var(--primary); }
+.radio { width: 18px; height: 18px; border: 1px solid var(--field-border); border-radius: 50%; flex: none; }
+.radio.on { border: 5px solid var(--primary); }
+
+/* Botões */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 8px; padding: 10px 18px; font: 600 15px var(--sans); border: 1px solid transparent; min-height: 44px; cursor: pointer; }
+.btn.primary { background: var(--primary); color: var(--on-primary); }
+.btn.secondary { background: var(--surface); color: var(--text); border-color: var(--border); }
+.btn.danger { background: transparent; color: var(--danger); border-color: var(--danger); }
+.btn.block { width: 100%; } .btn[disabled] { opacity: .5; cursor: not-allowed; }
+
+/* Etiquetas */
+.chip { display: inline-block; border-radius: 999px; padding: 2px 10px; font-size: 13px; font-weight: 600; }
+.chip.accent { color: var(--accent); background: var(--accent-bg); }
+.chip.success { color: var(--success); background: var(--success-bg); }
+.chip.danger { color: var(--danger); background: var(--danger-bg); }
+.chip.warning { color: var(--warning); background: var(--warning-bg); }
+.chip.neutral { color: var(--neutral-chip); background: var(--surface-raised); }
+
+/* Mensagens */
+.banner { border-radius: 8px; padding: 12px 16px; font-size: 15px; border: 1px solid; }
+.banner.erro { color: var(--danger); background: var(--danger-bg); border-color: var(--danger); }
+.banner.sucesso { color: var(--success); background: var(--success-bg); border-color: var(--success); }
+.banner.aviso { color: var(--warning); background: var(--warning-bg); border-color: var(--warning); }
+.banner.info { color: var(--text); background: var(--surface-raised); border-color: var(--border); }
+.toast { position: fixed; right: 32px; bottom: 32px; min-width: 320px; box-shadow: 0 8px 24px #0008; }
+
+/* Modal */
+.overlay { position: fixed; inset: 0; background: #000a; display: grid; place-items: center; }
+.modal { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; width: 480px; }
+.modal .acoes { display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; }
+
+/* Tabela */
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); padding: 10px 12px; }
+td { padding: 12px; background: var(--surface); border-top: 1px solid var(--border); }
+
+/* Estados: só o bloco cujo data-estado inclui o estado atual aparece. */
+[data-estado] { display: none !important; }

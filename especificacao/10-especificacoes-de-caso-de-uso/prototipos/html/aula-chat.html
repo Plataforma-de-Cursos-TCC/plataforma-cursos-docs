@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Aula com Tutor de IA</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#">Meus cursos</a><a href="#">Catálogo</a></nav><span class="avatar">LS</span></header>
+<main class="page stack">
+  <div class="row between">
+    <div>
+      <p class="small muted">Fundamentos de Pesquisa com Usuários · Módulo 1</p>
+      <h1>Aula 2 · Entrevistas de descoberta</h1>
+    </div>
+  </div>
+
+  <div class="grid" style="grid-template-columns:1fr 340px;align-items:start">
+    <section class="stack">
+      <div class="row" data-estado="retomando"><span class="chip accent">Retomando de 04:12</span></div>
+      <div class="stack" data-estado="aula-concluida">
+        <div class="row between"><span class="chip success">Aula concluída</span><span class="small">Progresso do curso: 40%</span></div>
+        <div style="height:4px;border-radius:2px;background:var(--surface-raised)"><div style="width:40%;height:100%;border-radius:2px;background:var(--primary)"></div></div>
+      </div>
+      <div style="height:360px;border-radius:12px;background:linear-gradient(135deg,var(--accent-bg),var(--primary));position:relative;display:flex;align-items:center;justify-content:center" data-estado="padrao retomando chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens aula-concluida bloqueada erro-video">
+        <span class="chip neutral" style="position:absolute;left:16px;top:16px">Aula 2</span>
+        <div class="stack" style="align-items:center;text-align:center;width:70%" data-estado="bloqueada erro-video">
+          <div class="banner erro" data-estado="bloqueada">Matricule-se no curso para assistir esta aula.</div>
+          <button class="btn primary" type="button" data-estado="bloqueada">Matricular-se</button>
+          <div class="banner erro" data-estado="erro-video">Não foi possível carregar o vídeo.</div>
+          <button class="btn secondary" type="button" data-estado="erro-video">Tentar novamente</button>
+        </div>
+        <div class="row" style="position:absolute;left:0;right:0;bottom:0;padding:12px 16px;gap:12px;background:rgba(0,0,0,.45);color:#fff" data-estado="padrao retomando chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens aula-concluida">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <div style="flex:1;height:4px;border-radius:2px;background:rgba(255,255,255,.35)">
+            <div style="width:34%;height:100%;border-radius:2px;background:var(--primary)" data-estado="padrao retomando chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens"></div>
+            <div style="width:100%;height:100%;border-radius:2px;background:var(--primary)" data-estado="aula-concluida"></div>
+          </div>
+          <span class="small" data-estado="padrao retomando chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens">04:12 / 12:30</span>
+          <span class="small" data-estado="aula-concluida">12:30 / 12:30</span>
+          <span class="small">1x</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h6v2H6v4H4V4zm10 0h6v6h-2V6h-4V4zM4 14h2v4h4v2H4v-6zm14 4v-4h2v6h-6v-2h4z"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <aside class="card stack" data-estado="padrao retomando aula-concluida">
+      <h3>Tutor de IA</h3>
+      <button class="btn secondary block" type="button">Abrir chat</button>
+    </aside>
+
+    <aside class="card stack" data-estado="chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens">
+      <h3>Tutor de IA</h3>
+
+      <div class="stack" data-estado="pergunta resposta historico sem-informacao">
+        <div class="card" style="padding:12px;background:var(--surface-raised)" data-estado="pergunta resposta">Qual a diferença entre entrevista e survey?</div>
+        <div class="card" style="padding:12px;background:var(--surface-raised)" data-estado="historico">O que é uma entrevista de descoberta?</div>
+        <div class="card" style="padding:12px" data-estado="historico"><p>Uma conversa aberta, guiada por um roteiro curto, para entender a rotina do usuário.</p><p class="small"><span class="chip accent">Aula 2 · 04:12</span></p></div>
+        <div class="card" style="padding:12px" data-estado="resposta">
+          <p>Entrevista é 1:1 e aberta; survey escala mas perde profundidade.</p>
+          <p class="small"><span class="chip accent">Aula 2 · 04:12</span></p>
+        </div>
+        <div class="card" style="padding:12px;background:var(--surface-raised)" data-estado="sem-informacao">Qual a previsão do tempo para amanhã?</div>
+        <div class="card" style="padding:12px" data-estado="sem-informacao">Não tenho essa informação no material do curso. Tente reformular a pergunta.</div>
+      </div>
+
+      <div class="banner aviso" data-estado="conteudo-em-preparo">Este conteúdo ainda está sendo preparado. Tente novamente mais tarde.</div>
+      <div class="banner aviso" data-estado="limite-mensagens">Limite de mensagens atingido. Aguarde 42 min para enviar.</div>
+
+      <div class="field" data-estado="chat">
+        <div class="input placeholder">Sua pergunta</div>
+      </div>
+      <div class="field" data-estado="pergunta resposta historico sem-informacao">
+        <div class="input placeholder">Sua pergunta</div>
+      </div>
+      <div class="field" data-estado="conteudo-em-preparo limite-mensagens" style="opacity:.5">
+        <div class="input placeholder">Sua pergunta</div>
+      </div>
+      <div class="row between" data-estado="chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens">
+        <span class="small muted"></span>
+        <button class="btn primary" type="button" data-estado="chat pergunta resposta historico sem-informacao">Enviar</button>
+        <button class="btn primary" type="button" disabled data-estado="conteudo-em-preparo limite-mensagens">Enviar</button>
+      </div>
+    </aside>
+  </div>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>

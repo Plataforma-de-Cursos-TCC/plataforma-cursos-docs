@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Meus cursos</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Meus cursos</a><a href="#">Novo curso</a></nav><span class="avatar">ML</span></header>
+<main class="page">
+  <div class="row between" style="margin-bottom:24px">
+    <h2>Meus cursos</h2>
+    <button class="btn primary" type="button">Novo curso</button>
+  </div>
+  <div class="card" style="padding:0;overflow:hidden">
+    <table>
+      <tr><th>Curso</th><th>Status</th><th></th></tr>
+      <tr>
+        <td>Fundamentos de Pesquisa com Usuários</td>
+        <td><span class="chip success">Publicado</span></td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+      <tr>
+        <td>Prototipação de Interfaces</td>
+        <td><span class="chip neutral">Rascunho</span></td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+      <tr data-estado="rascunho-salvo">
+        <td>Design de Produto</td>
+        <td><span class="chip neutral">Rascunho</span></td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+      <tr data-estado="publicado">
+        <td>Design de Produto</td>
+        <td><span class="chip success">Publicado</span></td>
+        <td><span class="row"><a href="#" class="small">Editar</a><a href="#" class="small" style="color:var(--danger)">Excluir</a></span></td>
+      </tr>
+    </table>
+  </div>
+</main>
+<div class="overlay" data-estado="excluir-curso">
+  <div class="modal">
+    <h3>Excluir curso</h3>
+    <p class="muted" style="margin-top:8px">O curso será removido.</p>
+    <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn danger" type="button">Confirmar</button></div>
+  </div>
+</div>
+<div class="overlay" data-estado="exclusao-bloqueada">
+  <div class="modal">
+    <h3>Não é possível excluir</h3>
+    <p class="muted" style="margin-top:8px">O curso tem matrículas ativas.</p>
+    <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn primary" type="button">Despublicar</button></div>
+  </div>
+</div>
+<script src="_estado.js"></script>
+</body>
+</html>

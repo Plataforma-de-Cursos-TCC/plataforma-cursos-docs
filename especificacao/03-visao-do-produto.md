@@ -2,9 +2,10 @@
 
 **NOME DO PRODUTO:** Plataforma de Cursos
 
-| PROBLEMAS | EXPECTATIVAS |
+| | |
 |---|---|
-| Instrutor autônomo ou pequena escola não tem plataforma própria para vender curso em vídeo com suporte inteligente ao aluno, sem pagar comissão alta de marketplace nem abrir mão de dado do aluno. | Instrutor publica e vende curso em plataforma própria; aluno aprende com apoio de um tutor de IA que conhece só o conteúdo daquele curso, tira dúvida na hora com citação de aula+timestamp. |
+| **PROBLEMAS** | Instrutor autônomo ou pequena escola não tem plataforma própria para vender curso em vídeo com suporte inteligente ao aluno, sem pagar comissão alta de marketplace nem abrir mão de dado do aluno. |
+| **EXPECTATIVAS** | Instrutor publica e vende curso em plataforma própria; aluno aprende com apoio de um tutor de IA que conhece só o conteúdo daquele curso, tira dúvida na hora com citação de aula+timestamp. |
 
 **VISÃO DE PRODUTO**
 
