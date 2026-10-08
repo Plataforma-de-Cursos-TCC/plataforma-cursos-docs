@@ -8,3 +8,6 @@ graphify-out/.graphify_root
 # Sistema operacional e Office
 .DS_Store
 ~$*.docx
+graphify-out/cache/
+graphify-out/cost.json
+graphify-out/.graphify_python
