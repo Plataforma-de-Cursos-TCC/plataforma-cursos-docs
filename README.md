@@ -39,6 +39,7 @@ O repositório começa cru. Cada parte da estrutura abaixo entra por um pull req
 ├── docs/
 │   ├── adr/                   decisões do projeto, uma por arquivo
 │   ├── agents/                configuração das skills de IA (issues, rótulos, domínio)
+│   │                          RA2 / rascunho, fora do PDF do RA1:
 │   ├── prd.md                 Product Requirements Document
 │   ├── sdd.md                 Software Design Document (arquitetura, componentes, integrações)
 │   ├── tdd.md                 Technical Design Document (stack, dados, APIs)
