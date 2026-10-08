@@ -242,6 +242,8 @@ sequenceDiagram
 
 ## 5. Dados e armazenamento
 
+O detalhamento completo dos campos, tipos, tamanhos e regras de normalização de cada entidade está documentado no [Dicionário de dados do TDD](tdd.md#dicionário-de-dados).
+
 | Dado | Onde fica | Observação |
 |---|---|---|
 | Usuário, endereços, perfil do instrutor | Banco de dados | Entidades User, Address, InstructorProfile. `passwordHash` guarda só o hash da senha (RNF007). `documentNumber` (CPF) e `birthDate` são dados pessoais. `socialLinks` e `payoutInfo` são campos JSON, exceção conhecida à 1FN por decisão do Plano Técnico |
