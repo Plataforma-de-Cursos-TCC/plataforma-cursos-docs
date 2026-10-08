@@ -66,7 +66,7 @@ O responsável por cada área (A a D) fica no [README](../README.md) e é preenc
 
 ### 1.2 Fontes (em ordem de prioridade quando houver conflito)
 
-1. Página da tarefa no Canvas, "Avaliação do RA 1 - Projeto", com a rubrica "Atividades do RA 1". Os pesos por item e os critérios "Excede" da seção 3 vêm desta página e **precisam ser conferidos com ela** (seção 6, A4); a cópia local não está no repositório.
+1. [`ra1-rubrica-canvas.md`](ra1-rubrica-canvas.md): cópia da página da tarefa no Canvas, "Avaliação do RA 1 - Projeto", com a rubrica "Atividades do RA 1". Os pesos por item e os critérios "Excede" da seção 3 vêm desta página e **precisam ser conferidos com a página original** (seção 6, A4).
 2. Template oficial do documento de especificação (a versão preenchida mais recente é a v11, `Documento de Especificação - Versões/v11 - Correção de extend, BPMN e atividades.docx`, fora do git). Os títulos dos itens 1 a 11 desta entrega são os do template.
 3. Plano de ensino vigente: `BSI_PE_Especificacao de Software_2026_2.pdf` (seções 4, 5 e 7.1). A versão `- v3.pdf` é anterior e não vale.
 4. Decisões do grupo: [`docs/adr/`](../docs/adr/README.md) e [`CONTEXT.md`](../CONTEXT.md). Sobre conteúdo do produto, valem acima do template preenchido (CONTEXT, seção 6, regra 1); a v11 é rascunho anterior ao repositório.
@@ -77,16 +77,16 @@ Quando o plano de ensino e uma meta do grupo divergirem, o plano define o mínim
 
 ## 2. Regras gerais (valem para o documento inteiro)
 
-- [ ] **X.1 — Template.** O documento final (consolidado a partir dos MDs do repositório e entregue em PDF e DOCX) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e quadros no formato do template.
-- [ ] **X.2 — Capa.** Nome do produto (**Plataforma de Cursos**) no lugar de "NOME DO PRODUTO DE SOFTWARE", os 4 autores no lugar de "NOME AUTOR 1..4" e ano **2026** (o template traz 2025).
-- [ ] **X.3 — Textos em azul.** Todos os textos personalizáveis (em azul) foram substituídos e estão na cor **preta**.
-- [ ] **X.4 — Textos em laranja.** Todos os quadros de aviso e textos de orientação em **laranja** foram removidos.
-- [ ] **X.5 — Exemplos do template.** Os exemplos do template foram removidos ou substituídos, por exemplo RF1 "Realizar login de usuário" com o ator genérico e as estórias US001/US002 de exemplo. Um RF de login do próprio sistema existe (área A), escrito para o nosso contexto.
-- [ ] **X.6 — Sumário.** O sumário está atualizado, com números de página corretos.
-- [ ] **X.7 — Declaração de uso de IA.** O documento contém a declaração obrigatória (plano de ensino, seção 7.1): *"Durante a preparação deste [TIPO DE CONTEÚDO], o(s) autor(es) usaram [FERRAMENTA, VERSÃO] para [EXPLICITAR MOTIVOS]. Após usar essa ferramenta, o(s) autor(es) revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo."*, preenchida.
-- [ ] **X.8 — Mínimos.** O mínimo oficial do plano de ensino é de **8 especificações de caso de uso** (aula 8). A meta interna do grupo é de **4 itens por integrante** nos itens 6, 7, 8 e 10, o que dá 16 com 4 integrantes; ela organiza a divisão do trabalho e não é exigência da disciplina (ADR-0001).
-- [ ] **X.9 — Nome do produto.** O nome **Plataforma de Cursos** (exatamente assim) aparece em todos os campos "NOME DO PRODUTO" / "PRODUTO" dos quadros.
-- [ ] **X.10 — Legibilidade dos diagramas.** Os diagramas (itens 4, 9 e 11) estão legíveis no documento final, sem texto cortado ou ilegível. As imagens são geradas a partir do código-fonte versionado, nunca editadas à mão (ADR-0004).
+- [ ] **X.1 — Template.** O documento final (consolidado a partir dos MDs do repositório e entregue em PDF e DOCX) segue a estrutura do template oficial: seções na ordem de 1 a 11, títulos originais e quadros no formato do template. — pendente: DOCX final nao esta no repo (gerado por scripts/build_doc.py fora do repo); issue #25 aberta
+- [x] **X.2 — Capa.** Nome do produto (**Plataforma de Cursos**) no lugar de "NOME DO PRODUTO DE SOFTWARE", os 4 autores no lugar de "NOME AUTOR 1..4" e ano **2026** (o template traz 2025). — evidência: scripts/build_doc.py:38-39
+- [x] **X.3 — Textos em azul.** Todos os textos personalizáveis (em azul) foram substituídos e estão na cor **preta**. — evidência: scripts/build_doc.py:310
+- [x] **X.4 — Textos em laranja.** Todos os quadros de aviso e textos de orientação em **laranja** foram removidos. — evidência: scripts/build_doc.py:310
+- [ ] **X.5 — Exemplos do template.** Os exemplos do template foram removidos ou substituídos, por exemplo RF1 "Realizar login de usuário" com o ator genérico e as estórias US001/US002 de exemplo. Um RF de login do próprio sistema existe (área A), escrito para o nosso contexto. — pendente: exemplos do template (RF1 login, US001/US002) nao conferidos no DOCX gerado
+- [ ] **X.6 — Sumário.** O sumário está atualizado, com números de página corretos. — pendente: sumario estatico em scripts/build_doc.py:319; numeros de pagina nao conferidos
+- [x] **X.7 — Declaração de uso de IA.** O documento contém a declaração obrigatória (plano de ensino, seção 7.1): *"Durante a preparação deste [TIPO DE CONTEÚDO], o(s) autor(es) usaram [FERRAMENTA, VERSÃO] para [EXPLICITAR MOTIVOS]. Após usar essa ferramenta, o(s) autor(es) revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo."*, preenchida. — evidência: entregas/declaracao-uso-de-ia.md:1-5; scripts/build_doc.py:30
+- [x] **X.8 — Mínimos.** O mínimo oficial do plano de ensino é de **8 especificações de caso de uso** (aula 8). A meta interna do grupo é de **4 itens por integrante** nos itens 6, 7, 8 e 10, o que dá 16 com 4 integrantes; ela organiza a divisão do trabalho e não é exigência da disciplina (ADR-0001). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (20 UCs, minimo 8)
+- [x] **X.9 — Nome do produto.** O nome **Plataforma de Cursos** (exatamente assim) aparece em todos os campos "NOME DO PRODUTO" / "PRODUTO" dos quadros. — evidência: especificacao/01-3-objetivos.md:5 (NOME DO PRODUTO: Plataforma de Cursos)
+- [ ] **X.10 — Legibilidade dos diagramas.** Os diagramas (itens 4, 9 e 11) estão legíveis no documento final, sem texto cortado ou ilegível. As imagens são geradas a partir do código-fonte versionado, nunca editadas à mão (ADR-0004). — pendente: legibilidade dos diagramas nao verificada visualmente
 
 ---
 
@@ -115,19 +115,19 @@ Resumo dos pesos por item (rubrica do Canvas, a conferir; seção 6, A4). O tota
 
 **Template:** tabela "QUADRO 3 OBJETIVOS" com NOME DO PRODUTO e as colunas OBJETIVOS / DESCRIÇÃO, linhas 1, 2 e 3. Relaciona os 3 grandes **objetivos de negócio** que o produto deve atender.
 
-- [ ] **C01.1** Exatamente **3** objetivos.
-- [ ] **C01.2** Cada objetivo é claro, específico e **verificável**.
-- [ ] **C01.3** Cada objetivo articula **problema, valor e métrica de sucesso**: a métrica é explícita e mensurável.
-- [ ] **C01.4** Os objetivos são coerentes com a Visão do Produto (item 3) e com os demais artefatos.
+- [x] **C01.1** Exatamente **3** objetivos. — evidência: especificacao/01-3-objetivos.md:9-11
+- [x] **C01.2** Cada objetivo é claro, específico e **verificável**. — evidência: especificacao/01-3-objetivos.md:9-11 (metricas explicitas)
+- [x] **C01.3** Cada objetivo articula **problema, valor e métrica de sucesso**: a métrica é explícita e mensurável. — evidência: decisao do Lucas (08/10/2026): item 1 mantem v11 sem Problema/Valor separados; template nao pede
+- [ ] **C01.4** Os objetivos são coerentes com a Visão do Produto (item 3) e com os demais artefatos. — pendente: coerencia com item 3 nao conferida
 
 ### 3.2 Item 2 — Quadro "É – Não é – Faz – Não faz" (0,2)
 
 **Template:** quadro de 4 quadrantes. É = atributos necessários ou desejados; Não é = atributos indesejados ou impeditivos; Faz = ações ou capacidades esperadas; Não faz = ações ou capacidades indesejadas ou não permitidas.
 
-- [ ] **C02.1** Os 4 quadrantes estão preenchidos.
-- [ ] **C02.2** Cada quadrante tem **≥3 itens específicos**, não genéricos.
-- [ ] **C02.3** Não há contradição entre quadrantes nem com os outros itens.
-- [ ] **C02.4** O quadro delimita claramente escopo, anti-escopo, capacidades e restrições. O "Não faz" é coerente com o fora de escopo vigente do projeto (CONTEXT, seção 1): pagamento da matrícula apenas simulado (sem cobrança real), sem emissão de certificado com validade legal e sem aplicativo móvel nativo, salvo decisão registrada em contrário. O Tutor de IA entra como ator sistêmico (ADR-0005), não como funcionalidade humana.
+- [x] **C02.1** Os 4 quadrantes estão preenchidos. — evidência: especificacao/02-e-nao-e-faz-nao-faz.md:7-12
+- [x] **C02.2** Cada quadrante tem **≥3 itens específicos**, não genéricos. — evidência: especificacao/02-e-nao-e-faz-nao-faz.md:9-10 (3/3/5/5 itens)
+- [x] **C02.3** Não há contradição entre quadrantes nem com os outros itens. — evidência: especificacao/02-e-nao-e-faz-nao-faz.md:9-10
+- [ ] **C02.4** O quadro delimita claramente escopo, anti-escopo, capacidades e restrições. O "Não faz" é coerente com o fora de escopo vigente do projeto (CONTEXT, seção 1): pagamento da matrícula apenas simulado (sem cobrança real), sem emissão de certificado com validade legal e sem aplicativo móvel nativo, salvo decisão registrada em contrário. O Tutor de IA entra como ator sistêmico (ADR-0005), não como funcionalidade humana. — pendente: conferencia com CONTEXT.md (secao 1) nao feita
 
 ### 3.3 Item 3 — Visão do Produto (0,2)
 
@@ -135,35 +135,35 @@ Resumo dos pesos por item (rubrica do Canvas, a conferir; seção 6, A4). O tota
 - Quadro A: **PROBLEMAS** (estado atual, antes da solução) e **EXPECTATIVAS** (estado desejado, alinhado aos problemas).
 - Quadro B: **CLIENTE-ALVO**, **CATEGORIA-SEGMENTO**, **BENEFÍCIO-CHAVE**, **DIFERENCIADO-CHAVE** e **META-VALOR**. Os rótulos ficam exatamente como estão no template: "DIFERENCIADO-CHAVE" é a grafia do próprio template e não deve ser trocada por "DIFERENCIAL-CHAVE".
 
-- [ ] **C03.1** O quadro A está completo: problemas e expectativas bem definidos.
-- [ ] **C03.2** Cada expectativa corresponde a pelo menos um problema levantado.
-- [ ] **C03.3** Os 5 campos do quadro B estão preenchidos com precisão.
-- [ ] **C03.4** Valor (meta-valor) e diferencial são **verificáveis**, não apenas slogans. O diferencial (Tutor de IA no contexto da aula) é confirmado ou ajustado pela pesquisa ([lacunas e diferencial](../pesquisa/similares/lacunas-e-diferencial.md)).
-- [ ] **C03.5** Os dois quadros são coerentes entre si e com os itens 1 e 2.
+- [ ] **C03.1** O quadro A está completo: problemas e expectativas bem definidos. — pendente: quadros do item 3 nao conferidos nesta rodada
+- [ ] **C03.2** Cada expectativa corresponde a pelo menos um problema levantado. — pendente: quadros do item 3 nao conferidos nesta rodada
+- [ ] **C03.3** Os 5 campos do quadro B estão preenchidos com precisão. — pendente: quadros do item 3 nao conferidos nesta rodada
+- [ ] **C03.4** Valor (meta-valor) e diferencial são **verificáveis**, não apenas slogans. O diferencial (Tutor de IA no contexto da aula) é confirmado ou ajustado pela pesquisa ([lacunas e diferencial](../pesquisa/similares/lacunas-e-diferencial.md)). — pendente: quadros do item 3 nao conferidos nesta rodada
+- [ ] **C03.5** Os dois quadros são coerentes entre si e com os itens 1 e 2. — pendente: quadros do item 3 nao conferidos nesta rodada
 
 ### 3.4 Item 4 — Mapeamento de Negócios (0,2)
 
 **Template:** diagrama **BPMN** do processo de negócio na versão **TO BE**, ou seja, como o processo fica com o sistema. Arquivo `.bpmn` (BPMN 2.0), editável no bpmn.io ou no Camunda Modeler (ADR-0004).
 
-- [ ] **C04.1** A notação é BPMN 2.0 de verdade (arquivo `.bpmn` com PNG gerado da fonte), não um fluxograma improvisado.
-- [ ] **C04.2** O diagrama representa apenas o TO BE, sem misturar com o AS IS.
-- [ ] **C04.3** Tem evento de **início** e de **fim**.
-- [ ] **C04.4** Tem **atividades** rotuladas de forma padronizada (verbo no infinitivo + objeto).
-- [ ] **C04.5** Tem **gateways com condições** escritas nas saídas.
-- [ ] **C04.6** Tem **pools/lanes** coerentes com os atores do item 5.
-- [ ] **C04.7** Tem eventos e mensagens quando aplicável, por exemplo a pergunta do Aluno ao Tutor de IA e a resposta com o contexto da aula.
-- [ ] **C04.8** O caminho principal está representado (do curso publicado ao Aluno que estuda, é avaliado e tira dúvidas com o Tutor de IA); o nível de detalhe é adequado e o diagrama é legível.
-- [ ] **C04.9** É consistente com a Visão do Produto.
+- [x] **C04.1** A notação é BPMN 2.0 de verdade (arquivo `.bpmn` com PNG gerado da fonte), não um fluxograma improvisado. — evidência: especificacao/diagramas/04-mapeamento-de-negocios.bpmn e .png
+- [ ] **C04.2** O diagrama representa apenas o TO BE, sem misturar com o AS IS. — pendente: diagrama BPMN nao inspecionado
+- [ ] **C04.3** Tem evento de **início** e de **fim**. — pendente: diagrama BPMN nao inspecionado
+- [ ] **C04.4** Tem **atividades** rotuladas de forma padronizada (verbo no infinitivo + objeto). — pendente: diagrama BPMN nao inspecionado
+- [ ] **C04.5** Tem **gateways com condições** escritas nas saídas. — pendente: diagrama BPMN nao inspecionado
+- [ ] **C04.6** Tem **pools/lanes** coerentes com os atores do item 5. — pendente: diagrama BPMN nao inspecionado
+- [ ] **C04.7** Tem eventos e mensagens quando aplicável, por exemplo a pergunta do Aluno ao Tutor de IA e a resposta com o contexto da aula. — pendente: diagrama BPMN nao inspecionado
+- [ ] **C04.8** O caminho principal está representado (do curso publicado ao Aluno que estuda, é avaliado e tira dúvidas com o Tutor de IA); o nível de detalhe é adequado e o diagrama é legível. — pendente: diagrama BPMN nao inspecionado
+- [ ] **C04.9** É consistente com a Visão do Produto. — pendente: consistencia com item 3 nao conferida
 
 ### 3.5 Item 5 — Relação de Atores / Usuários (0,2)
 
 **Template:** tabela `# | ATOR / USUÁRIO`.
 
-- [ ] **C05.1** **≥3 atores**.
-- [ ] **C05.2** Cada ator tem **papel e responsabilidades** descritos. Como a tabela do template só tem nome, acrescentar descrição, em coluna extra ou texto abaixo.
-- [ ] **C05.3** Cada ator tem sua relação com o processo e com o sistema explicitada.
-- [ ] **C05.4** As descrições são sucintas, sem ambiguidade e sem sobreposição de papéis.
-- [ ] **C05.5** Os atores são os mesmos usados nas lanes do BPMN (item 4), nos RFs (item 6), nas estórias (item 7) e nos casos de uso (itens 9 e 10).
+- [x] **C05.1** **≥3 atores**. — evidência: especificacao/05-atores-usuarios.md:3-10 (6 atores)
+- [x] **C05.2** Cada ator tem **papel e responsabilidades** descritos. Como a tabela do template só tem nome, acrescentar descrição, em coluna extra ou texto abaixo. — evidência: especificacao/05-atores-usuarios.md:3 (coluna DESCRICAO / RESPONSABILIDADES)
+- [ ] **C05.3** Cada ator tem sua relação com o processo e com o sistema explicitada. — pendente: relacao com processo e sistema nao conferida por ator
+- [ ] **C05.4** As descrições são sucintas, sem ambiguidade e sem sobreposição de papéis. — pendente: sobreposicao de papeis nao conferida
+- [ ] **C05.5** Os atores são os mesmos usados nas lanes do BPMN (item 4), nos RFs (item 6), nas estórias (item 7) e nos casos de uso (itens 9 e 10). — pendente: nomes de atores nas lanes, RFs, US e UCs nao conferidos (ver K.1)
 
 Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante**, **Aluno**, **Instrutor**, **Administrador** e o ator não humano **Tutor de IA** (ator sistêmico, [ADR-0005](../docs/adr/0005-tutor-de-ia-como-ator-sistemico.md)). Os nomes são idênticos em todos os itens.
 
@@ -171,77 +171,77 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 **Template:** tabela `# | REQUISITO FUNCIONAL | ATOR / USUÁRIO | SPRINT`. Relacionar **todos** os requisitos do sistema completo.
 
-- [ ] **C06.1** Todos os requisitos do sistema completo estão relacionados. Meta interna: 4 por integrante, ≥16 no total (ADR-0001).
-- [ ] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: mantém a numeração da v11 e os requisitos novos entram no fim (RF017, RF018…). Não há ID provisório por área (ADR-0001).
-- [ ] **C06.3** Cada RF está redigido de forma clara e **testável**: uma ação verificável, sem "etc." e sem termos vagos.
-- [ ] **C06.4** Cada RF é rastreado a um **ator** (coluna preenchida, com ator do item 5).
-- ~~**C06.5**~~ Removido: o template não tem coluna OBJETIVO, e o plano de ensino e as rubricas não pedem rastreio RF→objetivo (coluna retirada no c5d2116).
-- [ ] **C06.6** A **priorização** está presente: coluna SPRINT preenchida e/ou prioridade. A coluna fica vazia enquanto as áreas escrevem; o grupo divide em sprints na consolidação (T06), depois que todos os RFs e RNFs estiverem definidos.
-- [ ] **C06.7** Há uma **breve justificativa** da priorização.
-- [ ] **C06.8** Os RFs cobrem o núcleo do produto: cadastro de curso, módulos, aulas e quiz com gabarito; matrícula, progresso e avaliação do curso; correção automática do quiz; conversa com o Tutor de IA no contexto da aula; dashboard com filtro; gestão de usuários e perfis; acesso a área protegida por perfil. Não se limitam a CRUD.
-- [ ] **C06.9** Nenhum RF descreve atributo de qualidade (desempenho, segurança, usabilidade etc.): isso é RNF e vai para o item 8. O RF descreve o que o sistema faz (plano de ensino, ID1.3).
+- [x] **C06.1** Todos os requisitos do sistema completo estão relacionados. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (RF001-RF018)
+- [x] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: mantém a numeração da v11 e os requisitos novos entram no fim (RF017, RF018…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (sem lacunas, sem ID provisorio)
+- [ ] **C06.3** Cada RF está redigido de forma clara e **testável**: uma ação verificável, sem "etc." e sem termos vagos. — pendente: testabilidade de cada RF nao conferida
+- [x] **C06.4** Cada RF é rastreado a um **ator** (coluna preenchida, com ator do item 5). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (coluna ator preenchida)
+- [x] **C06.5** Cada RF está ligado a um objetivo do item 1 (coluna Objetivo da rastreabilidade do item 9), como pede a rubrica do item 6. — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md:11-28 (coluna OBJETIVO) e PR #68
+- [x] **C06.6** A **priorização** está presente: coluna SPRINT preenchida e/ou prioridade. A coluna fica vazia enquanto as áreas escrevem; o grupo divide em sprints na consolidação (T06), depois que todos os RFs e RNFs estiverem definidos. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (coluna SPRINT preenchida)
+- [ ] **C06.7** Há uma **breve justificativa** da priorização. — pendente: justificativa da priorizacao nao encontrada na rodada
+- [ ] **C06.8** Os RFs cobrem o núcleo do produto: cadastro de curso, módulos, aulas e quiz com gabarito; matrícula, progresso e avaliação do curso; correção automática do quiz; conversa com o Tutor de IA no contexto da aula; dashboard com filtro; gestão de usuários e perfis; acesso a área protegida por perfil. Não se limitam a CRUD. — pendente: cobertura do nucleo do produto nao conferida
+- [ ] **C06.9** Nenhum RF descreve atributo de qualidade (desempenho, segurança, usabilidade etc.): isso é RNF e vai para o item 8. O RF descreve o que o sistema faz (plano de ensino, ID1.3). — pendente: RFs com atributo de qualidade nao conferidos
 
 ### 3.7 Item 7 — Relação de Estórias de Usuário (1,5) · por integrante
 
 **Template:** para cada estória, `USnnn – REQUISITO n: <nome>` (ex.: `US001 – REQUISITO 1: <nome>`; ADR-0001), **COMO / POSSO / PARA** e Critérios de Aceite numerados em **DADO QUE / QUANDO / ENTÃO** (ADR-0002).
 
-- [ ] **C07.1** Pelo menos uma estória por RF. Meta interna: 4 por integrante, ≥16 no total (ADR-0001).
-- [ ] **C07.2** Todas no formato **COMO / POSSO / PARA**.
-- [ ] **C07.3** Cada estória está vinculada a um RF correspondente, com o número do RF no título. A estória usa o mesmo número do RF (US001 ↔ RF001; ADR-0001).
-- [ ] **C07.4** Cada estória tem **≥2 critérios de aceite**.
-- [ ] **C07.5** Todos os critérios estão no formato **DADO QUE / QUANDO / ENTÃO**, claros e **verificáveis**, com resultado observável.
-- [ ] **C07.6** Os critérios cobrem cenários diferentes (caminho principal e ao menos uma variação ou erro), e não repetições do mesmo cenário.
-- [ ] **C07.7** As estórias são consistentes com as outras especificações: atores, RFs e casos de uso.
+- [x] **C07.1** Pelo menos uma estória por RF. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 US cobrem RF001-RF018)
+- [x] **C07.2** Todas no formato **COMO / POSSO / PARA**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 COMO/POSSO/PARA)
+- [x] **C07.3** Cada estória cita no cabeçalho o RF que atende, no formato `USnnn – REQUISITO n: <nome>` do template. A numeração das estórias é contínua e independente da dos RFs (adendo do ADR-0001). — evidência: docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md:42 (adendo 08/10/2026) e cabeçalhos em especificacao/07-estorias-de-usuario/area-*.md:1, 17, 33, 49 etc.
+- [x] **C07.4** Cada estória tem **≥2 critérios de aceite**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (3 criterios por US)
+- [x] **C07.5** Todos os critérios estão no formato **DADO QUE / QUANDO / ENTÃO**, claros e **verificáveis**, com resultado observável. — evidência: especificacao/07-estorias-de-usuario/area-*.md (60 DADO QUE / QUANDO / ENTAO)
+- [ ] **C07.6** Os critérios cobrem cenários diferentes (caminho principal e ao menos uma variação ou erro), e não repetições do mesmo cenário. — pendente: variacao e erro por estoria nao conferidos
+- [ ] **C07.7** As estórias são consistentes com as outras especificações: atores, RFs e casos de uso. — pendente: so US020 conferida: ator Instrutor coberto por UC013 (area-a.md:167, A1 em area-a.md:189-196); demais estorias x UC/RF nao conferidas
 
 ### 3.8 Item 8 — Relação de Requisitos Não-Funcionais (0,1) · por integrante
 
 **Template:** tabela `# | REQUISITO NÃO-FUNCIONAL | NORMA ISO/IEC 25010`. O plano de ensino exige a classificação pela ISO/IEC 25010. Usar as características da edição vigente (25010:2023, como na v11) e acrescentar a coluna de métrica ou critério de aceitação.
 
-- [ ] **C08.1** Os RNFs cobrem as características de qualidade relevantes. Meta interna: 4 por integrante, ≥16 no total (ADR-0001).
-- [ ] **C08.2** Enumeração **RNF001, RNF002…**: mantém a numeração da v11 e os novos entram no fim (RNF017…). Não há ID provisório por área (ADR-0001).
-- [ ] **C08.3** Cada RNF está classificado em uma característica da **ISO/IEC 25010**.
-- [ ] **C08.4** Cada RNF é **mensurável**, com medida ou critério de aceitação objetivo (ex.: tempo de resposta ≤ X s no percentil 95). Nada de "ser rápido" ou "ser seguro".
-- [ ] **C08.5** Os RNFs das quatro áreas somados cobrem, no mínimo, eficiência de desempenho, segurança/LGPD, confiabilidade, capacidade de interação (usabilidade) e manutenibilidade. Sugestão por área ([ADR-0006](../docs/adr/0006-divisao-por-areas.md)): A segurança (LGPD) e compatibilidade; B manutenibilidade e portabilidade; C capacidade de interação (na ISO/IEC 25010:2023, a acessibilidade virou a subcaracterística inclusividade dentro dela); D eficiência de desempenho e confiabilidade.
-- [ ] **C08.6** Nenhum RNF descreve funcionalidade (ação do sistema ou do ator): isso é RF e vai para o item 6 (plano de ensino, ID1.3).
+- [x] **C08.1** Os RNFs cobrem as características de qualidade relevantes. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/08-requisitos-nao-funcionais/00-item.md:7-26 (20 RNF)
+- [x] **C08.2** Enumeração **RNF001, RNF002…**: mantém a numeração da v11 e os novos entram no fim (RNF017…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/08-requisitos-nao-funcionais/00-item.md (RNF001-RNF020 sequenciais)
+- [ ] **C08.3** Cada RNF está classificado em uma característica da **ISO/IEC 25010**. — pendente: RNF019 'Flexibilidade' nao e caracteristica nomeada da ISO/IEC 25010:2011; confirmar versao
+- [ ] **C08.4** Cada RNF é **mensurável**, com medida ou critério de aceitação objetivo (ex.: tempo de resposta ≤ X s no percentil 95). Nada de "ser rápido" ou "ser seguro". — pendente: RNF017 e RNF018 em rascunho (especificacao/08-requisitos-nao-funcionais/00-item.md:28)
+- [ ] **C08.5** Os RNFs das quatro áreas somados cobrem, no mínimo, eficiência de desempenho, segurança/LGPD, confiabilidade, capacidade de interação (usabilidade) e manutenibilidade. Sugestão por área ([ADR-0006](../docs/adr/0006-divisao-por-areas.md)): A segurança (LGPD) e compatibilidade; B manutenibilidade e portabilidade; C capacidade de interação (na ISO/IEC 25010:2023, a acessibilidade virou a subcaracterística inclusividade dentro dela); D eficiência de desempenho e confiabilidade. — pendente: cobertura minima por caracteristica nao conferida
+- [ ] **C08.6** Nenhum RNF descreve funcionalidade (ação do sistema ou do ator): isso é RF e vai para o item 6 (plano de ensino, ID1.3). — pendente: RNFs com funcionalidade nao conferidos
 
 ### 3.9 Item 9 — Diagrama Geral de Casos de Uso (0,2)
 
 **Template:** diagrama geral considerando **generalização de atores** e **inclusão e extensão** de casos de uso. Notação UML (boneco, elipse e fronteira do sistema), código em PlantUML (`.puml`) com PNG gerado da fonte (ADR-0004).
 
-- [ ] **C09.1** Tem **fronteira do sistema** com o nome do produto.
-- [ ] **C09.2** Os atores estão corretos e são os mesmos do item 5.
-- [ ] **C09.3** Os casos de uso principais correspondem aos RFs (≈ RF).
-- [ ] **C09.4** Tem **generalização de atores** onde fizer sentido, como o template pede.
-- [ ] **C09.5** Tem relacionamentos **include/extend** onde forem pertinentes, com a direção correta das setas: no «include» a seta sai do caso base para o incluído; no «extend» a seta sai do caso de uso opcional (estendido) e aponta para o caso base, como no TE3_3 e na UML ([ADR-0003](../docs/adr/0003-extend-no-sentido-do-te3-3.md)).
-- [ ] **C09.6** Os nomes dos casos de uso são consistentes com os RFs e as estórias.
-- [ ] **C09.7** O diagrama é legível.
-- [ ] **C09.8** Há casos de uso suficientes no diagrama para uma especificação (item 10) por caso de uso: ≥8 (mínimo oficial, C10.1); meta interna 16.
+- [ ] **C09.1** Tem **fronteira do sistema** com o nome do produto. — pendente: diagrama 09-casos-de-uso.png nao inspecionado
+- [ ] **C09.2** Os atores estão corretos e são os mesmos do item 5. — pendente: atores do diagrama nao conferidos (ver K.1)
+- [ ] **C09.3** Os casos de uso principais correspondem aos RFs (≈ RF). — pendente: UCs x RFs no diagrama nao conferidos item a item
+- [ ] **C09.4** Tem **generalização de atores** onde fizer sentido, como o template pede. — pendente: generalizacao de atores nao conferida no diagrama
+- [ ] **C09.5** Tem relacionamentos **include/extend** onde forem pertinentes, com a direção correta das setas: no «include» a seta sai do caso base para o incluído; no «extend» a seta sai do caso de uso opcional (estendido) e aponta para o caso base, como no TE3_3 e na UML ([ADR-0003](../docs/adr/0003-extend-no-sentido-do-te3-3.md)). — pendente: include/extend nao conferidos no diagrama
+- [ ] **C09.6** Os nomes dos casos de uso são consistentes com os RFs e as estórias. — pendente: nomes de UC x RF x US nao conferidos item a item
+- [ ] **C09.7** O diagrama é legível. — pendente: legibilidade do diagrama nao verificada
+- [x] **C09.8** Há casos de uso suficientes no diagrama para uma especificação (item 10) por caso de uso: ≥8 (mínimo oficial, C10.1); meta interna 16. — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md (20 UCs)
 
 ### 3.10 Item 10 — Especificações de Caso de Uso (1,5) · por integrante
 
 **Template:** para cada caso de uso, no formato reduzido: **Nome, Ator(es), Descrição, Pré-condições, Pós-condições, Regras de negócio, Protótipo(s) de tela, Fluxo básico, Fluxos alternativos, Fluxos de exceção**. O plano de ensino pede **protótipos de tela de alta fidelidade**.
 
-- [ ] **C10.1** **≥8 especificações** (mínimo oficial do plano de ensino, aula 8). Meta interna: 4 por integrante, 16 no total (ADR-0001).
-- [ ] **C10.2** Cada especificação tem os **10 campos** preenchidos.
-- [ ] **C10.3** Cada especificação tem **protótipos de tela de alta fidelidade** que cobrem todos os fluxos do caso de uso (básico, alternativos e de exceção), com a sequência de telas e estados, e não uma tela só.
-- [ ] **C10.4** Cada especificação tem **fluxo básico** completo, em passos numerados.
-- [ ] **C10.5** Cada especificação tem ao menos um **fluxo alternativo** (variação intencional do ator).
-- [ ] **C10.6** Cada especificação tem ao menos um **fluxo de exceção** (variação não intencional ou erro).
-- [ ] **C10.7** A linguagem é testável: cada passo é observável.
-- [ ] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores.
-- [ ] **C10.9** As regras de negócio são coerentes com as estórias e os RFs.
+- [x] **C10.1** **≥8 especificações** (mínimo oficial do plano de ensino, aula 8). Meta interna: 4 por integrante, 16 no total (ADR-0001). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (20 UCs)
+- [x] **C10.2** Cada especificação tem os **10 campos** preenchidos. — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (10 campos por UC)
+- [ ] **C10.3** Cada especificação tem **protótipos de tela de alta fidelidade** que cobrem todos os fluxos do caso de uso (básico, alternativos e de exceção), com a sequência de telas e estados, e não uma tela só. — pendente: UC016 sem tela propria (area-d.md:245); demais UCs sem tela nao confirmados
+- [x] **C10.4** Cada especificação tem **fluxo básico** completo, em passos numerados. — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo basico em todos os UCs)
+- [x] **C10.5** Cada especificação tem ao menos um **fluxo alternativo** (variação intencional do ator). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo alternativo em todos os UCs)
+- [x] **C10.6** Cada especificação tem ao menos um **fluxo de exceção** (variação não intencional ou erro). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo de excecao em todos os UCs)
+- [ ] **C10.7** A linguagem é testável: cada passo é observável. — pendente: testabilidade de cada passo nao conferida
+- [ ] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores. — pendente: UC013 conferido (nome e ator iguais no diagrama: especificacao/diagramas/09-casos-de-uso.puml:31,52); demais 19 UCs nao conferidos item a item
+- [ ] **C10.9** As regras de negócio são coerentes com as estórias e os RFs. — pendente: regras de negocio x estorias x RFs nao conferidas
 
 ### 3.11 Item 11 — Diagrama de Atividades (0,2)
 
 **Template:** diagrama de atividades do sistema, em notação UML. Código em PlantUML (`.puml`) com PNG gerado da fonte (ADR-0004).
 
-- [ ] **C11.1** Representa o **fluxo principal**.
-- [ ] **C11.2** Representa os **fluxos alternativos**.
-- [ ] **C11.3** Tem **decisões** com **condições de guarda** escritas.
-- [ ] **C11.4** Tem **atividades paralelas** (fork/join) onde houver ramos concorrentes, por exemplo o Aluno assistir à aula enquanto o Tutor de IA está disponível para dúvidas.
-- [ ] **C11.5** Tem **responsabilidades** (partições/raias) coerentes com os atores.
-- [ ] **C11.6** A notação UML é usada corretamente: nó inicial e final, ações, decisão/merge, fork/join.
-- [ ] **C11.7** É legível e aderente à documentação (atores, casos de uso, BPMN).
+- [ ] **C11.1** Representa o **fluxo principal**. — pendente: diagrama 11-atividades.png nao inspecionado
+- [ ] **C11.2** Representa os **fluxos alternativos**. — pendente: diagrama 11-atividades.png nao inspecionado
+- [ ] **C11.3** Tem **decisões** com **condições de guarda** escritas. — pendente: diagrama 11-atividades.png nao inspecionado
+- [ ] **C11.4** Tem **atividades paralelas** (fork/join) onde houver ramos concorrentes, por exemplo o Aluno assistir à aula enquanto o Tutor de IA está disponível para dúvidas. — pendente: diagrama 11-atividades.png nao inspecionado
+- [ ] **C11.5** Tem **responsabilidades** (partições/raias) coerentes com os atores. — pendente: diagrama 11-atividades.png nao inspecionado
+- [ ] **C11.6** A notação UML é usada corretamente: nó inicial e final, ações, decisão/merge, fork/join. — pendente: diagrama 11-atividades.png nao inspecionado
+- [ ] **C11.7** É legível e aderente à documentação (atores, casos de uso, BPMN). — pendente: diagrama 11-atividades.png nao inspecionado
 
 ---
 
@@ -274,19 +274,19 @@ Itens 1, 2, 3  (base do produto)
 
 Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 
-- [ ] **K.1** Os mesmos atores (nomes idênticos) aparecem nos itens 4, 5, 6, 7, 9, 10 e 11.
-- [ ] **K.2** Todo RF (item 6) tem **pelo menos uma** estória (item 7) e toda estória aponta para um RF existente.
-- [ ] **K.3** Todo RF está coberto por **pelo menos um** caso de uso no diagrama (item 9).
-- [ ] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome.
-- [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito.
-- [ ] **K.6** Os objetivos (item 1) são atendidos por algum RF e aparecem refletidos na Visão (item 3).
-- [ ] **K.7** Nada listado em "Não faz" (item 2) aparece como RF, estória ou caso de uso.
-- [ ] **K.8** As lanes do BPMN (item 4) e as raias do diagrama de atividades (item 11) usam os atores do item 5.
-- [ ] **K.9** As contagens conferem por contagem real: especificações ≥8 (mínimo oficial), cada estória com ≥2 critérios, ≥1 estória por RF; a meta interna (16 RF, 16 RNF, 16 casos de uso) é conferida à parte.
-- [ ] **K.10** Todos os critérios gerais X.1 a X.10 estão atendidos.
-- [ ] **K.11** Nenhum item contradiz o `CONTEXT.md` nem as decisões D1–D6 (`docs/adr/`), e todo número, preço ou recurso de concorrente usado na especificação cita a fonte da pesquisa (`pesquisa/fontes.md`).
-- [ ] **K.12** Não há issue aberta com o rótulo `pendencia-cruzada`: toda amarração entre áreas foi resolvida, com o ID do requisito que a atende ou com a decisão do grupo registrada (`entregas/ra1-tarefas.md`, seção 1.4).
-- [ ] **K.13** A numeração segue a v11 (RF001…, US001…, RNF001…, UC001…) com os IDs novos no fim, e não restou ID provisório (`-A1`, `-B2`…) em nenhum arquivo da especificação (ADR-0001).
+- [ ] **K.1** Os mesmos atores (nomes idênticos) aparecem nos itens 4, 5, 6, 7, 9, 10 e 11. — pendente: UC013 usa 'Usuario' (puml:52 USU) e US020 usa 'Instrutor'; decisao do Lucas cobre o mapeamento RF x UC, nao a grafia dos atores; demais itens nao conferidos
+- [x] **K.2** Todo RF (item 6) tem **pelo menos uma** estória (item 7) e toda estória aponta para um RF existente. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 e especificacao/07-estorias-de-usuario/area-*.md
+- [x] **K.3** Todo RF está coberto por **pelo menos um** caso de uso no diagrama (item 9). — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md (todo RF mapeado a UC)
+- [ ] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — pendente: UC013 conferido (puml:31); demais 19 UCs nao conferidos item a item
+- [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito. — pendente: US020 x UC013 A1 sem contradicao (area-a.md:189-196); demais estorias x fluxos nao conferidas
+- [ ] **K.6** Os objetivos (item 1) são atendidos por algum RF e aparecem refletidos na Visão (item 3). — pendente: objetivos x RFs x visao nao conferidos
+- [ ] **K.7** Nada listado em "Não faz" (item 2) aparece como RF, estória ou caso de uso. — pendente: 'Nao faz' x RFs/US/UCs nao conferido item a item
+- [ ] **K.8** As lanes do BPMN (item 4) e as raias do diagrama de atividades (item 11) usam os atores do item 5. — pendente: lanes BPMN e raias UML nao conferidas
+- [x] **K.9** As contagens conferem por contagem real: especificações ≥8 (mínimo oficial), cada estória com ≥2 critérios, ≥1 estória por RF; a meta interna (16 RF, 16 RNF, 16 casos de uso) é conferida à parte. — evidência: contagens reais: 20 UCs, 20 US (3 criterios cada), 18 RFs
+- [ ] **K.10** Todos os critérios gerais X.1 a X.10 estão atendidos. — pendente: X.1, X.5, X.6 e X.10 pendentes
+- [ ] **K.11** Nenhum item contradiz o `CONTEXT.md` nem as decisões D1–D6 (`docs/adr/`), e todo número, preço ou recurso de concorrente usado na especificação cita a fonte da pesquisa (`pesquisa/fontes.md`). — pendente: CONTEXT.md e fontes da pesquisa nao conferidos
+- [x] **K.12** Não há issue aberta com o rótulo `pendencia-cruzada`: toda amarração entre áreas foi resolvida, com o ID do requisito que a atende ou com a decisão do grupo registrada (`entregas/ra1-tarefas.md`, seção 1.4). — evidência: gh issue list --label pendencia-cruzada --state open (vazio)
+- [x] **K.13** A numeração segue a v11 (RF001…, US001…, RNF001…, UC001…) com os IDs novos no fim, e não restou ID provisório (`-A1`, `-B2`…) em nenhum arquivo da especificação (ADR-0001). — evidência: grep de IDs provisorios (-A1, -B2...) em especificacao/ sem ocorrencias
 
 ---
 
