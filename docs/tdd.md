@@ -2,15 +2,31 @@
 id: tdd
 titulo: "TDD — Technical Design Document"
 tipo: documento-projeto
-status: esqueleto
-atualizado: 2026-10-07
+status: rascunho
+atualizado: 2026-10-08
 ---
 # TDD — Technical Design Document
 
-> Esqueleto. Cada seção traz um comentário-guia; apague o comentário quando escrever a seção. Regras de escrita no [CONTEXT.md](../CONTEXT.md).
+> Regras de escrita no [CONTEXT.md](../CONTEXT.md). O que não tiver fonte formal é anotado como proposta (`<!-- proposta: motivo -->`).
 
 ## 1. Stack
-<!-- Linguagens, frameworks, banco, hospedagem. Cada escolha relevante vira ADR em docs/adr/. -->
+
+A infraestrutura e as escolhas tecnológicas da plataforma estão consolidadas no [ADR-0007](adr/0007-stack-e-bancos.md) e detalhadas na tabela abaixo:
+
+| Camada / Função | Tecnologia | Versão | Justificativa | Decisão / ADR |
+|---|---|---|---|---|
+| **Front-end Web** | Next.js com TypeScript | 14+ (ou compatível) | Arquitetado estritamente como SPA (Single Page Application, sem Server Components ou Server Actions) consumindo a API via JSON/REST e SSE. TypeScript unifica a tipagem com os DTOs do sistema e viabiliza tema claro/escuro (RNF014), suporte i18n (RNF013) e responsividade 360–1920 px (RNF005). | [ADR-0007](adr/0007-stack-e-bancos.md) |
+| **API (Core)** | Laravel / PHP | Laravel 13 / PHP 8.3 | Monólito modular dividido nas áreas A a D (`auth`, `catalog`, `learning`, `analytics`). Proporciona produtividade, migrações integradas, Eloquent ORM e separação coesa de domínios para a equipe de 4 desenvolvedores ([ADR-0006](adr/0006-divisao-por-areas.md)). | [ADR-0007](adr/0007-stack-e-bancos.md) |
+| **Banco de dados do Core** | MySQL | 8.0+ | SGBD relacional transacional primário que atende com maturidade todas as entidades relacionais da plataforma (usuários, cursos, matrículas, progresso, avaliações e quizzes). | [ADR-0007](adr/0007-stack-e-bancos.md) |
+| **Serviço do Tutor de IA (`ai-service`)** | Laravel com Laravel AI SDK / PHP | Laravel 13 / PHP 8.3 | Microsserviço físico separado responsável por transcrever aulas, gerar embeddings uma única vez (RNF004), executar o pipeline RAG do `CourseTutorAgent` e responder em streaming SSE (RNF003) sem onerar o core transacional. | [ADR-0007](adr/0007-stack-e-bancos.md) |
+| **Banco vetorial (`ai-service`)** | PostgreSQL com extensão `pgvector` | PostgreSQL 16 (`pgvector:pg16`) | Suporte nativo de primeira classe no Laravel 13 e Laravel AI SDK (`whereVectorSimilarTo`, `$table->vector()`), indexação HNSW de alta performance com filtragem híbrida e particionada por `course_id`. | [ADR-0007](adr/0007-stack-e-bancos.md) |
+| **Serviço de Mídia (`media-service`)** | Laravel / PHP | Laravel 13 / PHP 8.3 | Serviço físico desacoplado para coordenar upload e streaming de vídeos via URLs assinadas de 15 minutos (RNF002). | [ADR-0007](adr/0007-stack-e-bancos.md), [sdd.md](sdd.md) |
+| **Armazenamento de Objetos (Storage)** | Cloudflare R2 | API S3-compatible | Armazenamento seguro de vídeos das aulas e thumbnails com geração de URLs pré-assinadas temporárias (RNF002), sem tráfego de mídia passando pelo servidor web da API. | [sdd.md](sdd.md) |
+| **Mensageria e Filas** | RabbitMQ | 3.13+ | Broker de mensageria assíncrona para orquestração de pipelines pesados em background (transcrição de vídeos e ingestão de embeddings para o `ai-service`). | <!-- proposta: alinhado ao Obsidian Vault e SDD para jobs assíncronos desacoplados --> |
+| **Cache e Gerenciamento de Sessão** | Redis | 7.2+ | Cache de listagens em memória (RNF009), rate limiting de requisições e suporte à blocklist de tokens JWT revogados na Sprint 2. | <!-- proposta: alinhado ao Obsidian Vault para rate limit e blocklist --> |
+| **Testes Automatizados (Backend)** | Pest PHP | 2.x / 3.x | Framework de testes fluente para PHP que assegura cobertura mínima de testes de 75% no backend com validação em pipeline de CI (RNF006). | <!-- proposta: alinhado ao Obsidian Vault e RNF006 --> |
+| **Testes Automatizados (Frontend)** | Vitest e Playwright | Mais recentes | Vitest para testes unitários/componentes do Next.js e Playwright para validação de testes ponta a ponta (E2E) dos fluxos principais. | <!-- proposta: alinhado ao Obsidian Vault --> |
+| **Hospedagem e Deploy** | Docker Compose em VPS única | Docker 26+, Debian/Ubuntu LTS | Deploy orquestrado em container único na VPS, com portas de bancos de dados, cache e mensageria fechadas para a rede externa, expondo apenas reverse proxy HTTPS (Nginx/Traefik). | [ADR-0007](adr/0007-stack-e-bancos.md) |
 
 ## 2. Modelo de dados
 
@@ -409,13 +425,185 @@ classDiagram
 ```
 
 ## 3. APIs
-<!-- Endpoints por área, em OpenAPI (arquivo separado quando existir). Padrão de erro e paginação. -->
+
+A API central expõe interfaces REST sobre HTTPS, com payloads estritamente em JSON, seguindo versionamento por URI (`/api/v1`). O contrato formal completo é mantido em especificação OpenAPI 3.0 (arquivo a publicar no repositório de código da aplicação, garantindo cumprimento do RNF015).
+
+### 3.1 Padrão de Resposta de Erro
+
+Para garantir consistência no consumo pelo front-end SPA e facilitar o tratamento de exceções, todas as respostas de erro HTTP (famílias 4xx e 5xx) seguem uma estrutura padronizada com código de erro interno, mensagem amigável e detalhamento opcional de campos (essencial para validação de formulários, RNF005):
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_FAILED",
+    "message": "Os dados fornecidos são inválidos.",
+    "fields": {
+      "email": [
+        "O campo e-mail é obrigatório.",
+        "O e-mail deve ter um formato válido."
+      ],
+      "password": [
+        "A senha deve conter no mínimo 8 caracteres, incluindo letras e números."
+      ]
+    }
+  }
+}
+```
+
+Códigos de erro padrão da API:
+- `UNAUTHENTICATED` (401): Token JWT ausente, inválido ou expirado.
+- `FORBIDDEN` (403): Perfil sem permissão para acessar o recurso ou violação de propriedade (`assertOwnership`).
+- `NOT_FOUND` (404): Entidade solicitada inexistente.
+- `VALIDATION_FAILED` (422): Falha de validação estrutural ou semântica dos dados da requisição.
+- `TOO_MANY_REQUESTS` (429): Limite de taxa de requisições excedido (rate limit).
+- `INTERNAL_SERVER_ERROR` (500): Falha inesperada no processamento interno do servidor.
+
+### 3.2 Paginação
+
+Todas as listagens potencialmente extensas (catálogo de cursos, aulas, avaliações, matrículas e auditoria de usuários) adotam paginação estruturada via query parameters (`?page=1&per_page=15`), retornando metadados consolidados no envelope da resposta (RNF009):
+
+```json
+{
+  "data": [ ... ],
+  "meta": {
+    "currentPage": 1,
+    "perPage": 15,
+    "totalItems": 42,
+    "totalPages": 3
+  },
+  "links": {
+    "first": "/api/v1/courses?page=1&per_page=15",
+    "last": "/api/v1/courses?page=3&per_page=15",
+    "prev": null,
+    "next": "/api/v1/courses?page=2&per_page=15"
+  }
+}
+```
+
+### 3.3 Endpoints por Área e Casos de Uso
+
+A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D ([ADR-0006](adr/0006-divisao-por-areas.md)) e correlacionados aos casos de uso correspondentes ([especificacao/10-especificacoes-de-caso-de-uso/](especificacao/10-especificacoes-de-caso-de-uso/00-item.md)):
+
+| Área | Método e Endpoint | Descrição e Acesso | UC Relacionado |
+|---|---|---|---|
+| **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma (público) | UC012 |
+| | `POST /api/v1/auth/login` | Autenticação com e-mail/senha e emissão de JWT em cookie HttpOnly (público) | UC005 |
+| | `POST /api/v1/auth/logout` | Encerramento de sessão e invalidação do token (autenticado) | UC005 |
+| | `POST /api/v1/auth/forgot-password` | Solicitação de link de redefinição de senha com validade de 30 min (público) | UC011 |
+| | `POST /api/v1/auth/reset-password` | Redefinição de senha com token recebido por e-mail (público) | UC011 |
+| | `GET /api/v1/profile` | Obtenção dos dados cadastrais do usuário logado (autenticado) | UC013 |
+| | `PUT /api/v1/profile` | Atualização de nome, telefone, idioma preferido e endereço (autenticado) | UC013 |
+| | `PUT /api/v1/profile/password` | Alteração de senha do usuário logado com confirmação de senha atual (autenticado) | UC017 |
+| **Área B: Autoria do instrutor** | `POST /api/v1/instructor/courses` | Criação de novo curso em status de rascunho (Instrutor) | UC006 |
+| | `PUT /api/v1/instructor/courses/{id}` | Atualização de metadados, título, preço e publicação do curso (Instrutor dono) | UC006 |
+| | `POST /api/v1/instructor/courses/{id}/modules` | Criação e ordenação de módulos do curso (Instrutor dono) | UC014 |
+| | `PUT /api/v1/instructor/modules/{id}` | Edição e reordenação de módulos (Instrutor dono) | UC014 |
+| | `POST /api/v1/instructor/modules/{id}/lessons` | Criação de aula e solicitação de URL assinada para upload de vídeo (Instrutor dono) | UC015 |
+| | `PUT /api/v1/instructor/lessons/{id}` | Edição de dados da aula e marcação de `isPreview` (Instrutor dono) | UC015 |
+| | `POST /api/v1/instructor/modules/{id}/quiz` | Cadastro de quiz com perguntas e alternativas com gabarito (Instrutor dono) | UC004 |
+| | `PUT /api/v1/instructor/quizzes/{id}` | Edição de perguntas e gabarito do quiz (Instrutor dono) | UC004 |
+| **Área C: Aprendizagem do aluno** | `GET /api/v1/catalog/courses` | Listagem paginada de cursos publicados com filtros por categoria e nível (público) | UC020 |
+| | `GET /api/v1/catalog/courses/{id}` | Detalhes públicos do curso com lista de módulos e aulas prévia (público) | UC020 |
+| | `POST /api/v1/courses/{id}/enroll` | Criação de matrícula e início do fluxo de pagamento (Aluno) | UC003 |
+| | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado e liberação de acesso (Aluno dono) | UC019 |
+| | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview) | UC009 |
+| | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado) | UC009 |
+| | `POST /api/v1/quizzes/{id}/attempt` | Submissão de respostas do quiz e correção automática imediata (Aluno matriculado) | UC002 |
+| | `POST /api/v1/courses/{id}/reviews` | Envio de avaliação e comentário sobre o curso concluído (Aluno matriculado) | UC010 |
+| **Área D: Tutor de IA e Administração** | `POST /api/v1/ai/tutor/chat` | Envio de dúvida ao Tutor de IA com streaming SSE da resposta contextualizada (Aluno matriculado) | UC001 |
+| | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos com filtros de período (Instrutor / Administrador) | UC007 |
+| | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma (Administrador) | UC008 |
+| | `PUT /api/v1/admin/users/{id}/status` | Bloqueio ou desbloqueio de conta de usuário (Administrador) | UC008 |
+| | `DELETE /api/v1/admin/users/{id}` | Exclusão de conta com anonimização de dados conforme LGPD (Administrador) | UC018 |
+| | `GET /api/v1/me/permissions` | Verificação de permissões e direcionamento de rota protegida por perfil (autenticado) | UC016 |
+
+---
 
 ## 4. Autenticação e autorização
-<!-- Fluxo de login, sessão ou token, perfis (Aluno, Instrutor, Administrador), recuperação de senha. -->
+
+### 4.1 Mecanismo de Autenticação e Emissão de Token
+
+A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) com criptografia assimétrica (chaves pública e privada RSA/EdDSA), dispensando sessões com estado no servidor web da API e assegurando alta escalabilidade (RNF001, RNF009).
+- **Emissão e Assinatura:** No login bem-sucedido (UC005), a API assina o JWT utilizando sua chave privada. O token carrega claims padrão (`sub` com UUID do usuário, `role`, `locale`, `iat`, `exp`).
+- **Validação:** Requisições subsequentes são validadas pelo middleware da API utilizando a chave pública, eliminando queries ao banco de dados apenas para checagem criptográfica do token.
+- **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Lax/Strict`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
+- **Tempo de Vida (TTL):** O JWT possui tempo de expiração curto (TTL definido entre 15 e 30 minutos, com limite máximo de 1 hora conforme RNF001 e UC005). Tokens expirados exigem reautenticação.
+- **Revogação e Blocklist:** Na Sprint 2, a invalidação antecipada (logout imediato ou bloqueio administrativo de usuário, UC008/UC018) será realizada por meio de uma blocklist mantida em Redis pelo tempo residual de expiração do token.
+
+### 4.2 Autorização, Perfis e Verificação de Propriedade (*Ownership*)
+
+O sistema adota o modelo RBAC (*Role-Based Access Control*) com três perfis formais de acesso:
+1. **Aluno (`student`):** Permissão para matricular-se, assistir aulas liberadas, responder quizzes, interagir com o Tutor de IA e avaliar cursos.
+2. **Instrutor (`instructor`):** Permissão de autoria para criar cursos, módulos, aulas e quizzes, além de consultar relatórios de seus próprios cursos no dashboard.
+3. **Administrador (`admin`):** Permissão irrestrita de gestão, incluindo governança de usuários, bloqueios de contas, exclusão e auditoria de ações administrativas retida por 12 meses (RNF016).
+
+**Regras de proteção e controle de acesso:**
+- **Guarda por Perfil (UC016):** 100% das rotas privadas passam por middlewares dedicados de autorização (`EnsureUserHasRole`). Usuários que tentarem acessar rotas fora de seu perfil recebem HTTP 403 (*Forbidden*) e são redirecionados à sua respectiva interface no front-end.
+- **Verificação Estrita de Propriedade (`assertOwnership`):** Em todas as operações mutáveis de recursos pertencentes a instrutores ou alunos (ex.: edição de curso, alteração de módulo, resposta de quiz ou progresso de aula), a API executa obrigatoriamente a verificação de pertencimento: o `userId` autenticado no token deve corresponder ao proprietário da entidade ou o solicitante deve possuir o perfil de Administrador. Tentativas de acesso a recursos alheios são imediatamente rejeitadas.
+
+### 4.3 Fluxos de Login e Recuperação de Senha
+
+- **Proteção contra Força Bruta (RNF008, UC005):** A API monitora tentativas inválidas consecutivas de login por e-mail/IP. Após 5 falhas consecutivas, a conta ou endereço de origem é temporariamente bloqueado por 15 minutos.
+- **Mitigação de Enumeração de Usuários (UC005, UC011):** Respostas de falha de login exibem uma mensagem genérica (*"Credenciais inválidas"*). No fluxo de recuperação de senha (UC011), o envio do link por e-mail retorna status afirmativo padronizado independentemente de o e-mail constar ou não na base de dados.
+- **Ciclo de Recuperação de Senha (UC011):** O link de redefinição de senha encaminhado por e-mail contém um token de uso único (*one-time token*) com validade estrita de 30 minutos. Uma vez utilizado para gravar a nova senha (com hash seguro conforme RNF007), o token é imediatamente invalidado.
+
+---
 
 ## 5. Tutor de IA
-<!-- Como a aula vira contexto (transcrição, material), limites de uso, custo, tratamento de indisponibilidade (ADR-0005). -->
+
+O Tutor de IA é projetado como um ator sistêmico especializado ([ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md)) que atua como assistente pedagógico contextual dentro do reprodutor de aulas (UC001). A inteligência do assistente é materializada pelo `CourseTutorAgent`, implementado no microsserviço dedicado `ai-service` utilizando as ferramentas nativas do Laravel AI SDK.
+
+### 5.1 Pipeline de Contextualização e RAG
+
+O ciclo de vida do conhecimento do curso e atendimento ao aluno é composto pelas seguintes etapas:
+
+```mermaid
+flowchart TD
+    subgraph Ingestao["1. Pipeline de Ingestão Assíncrona (RNF004)"]
+        Upload["Instrutor conclui upload do vídeo da aula"]
+        JobTrans["Job de Transcrição (Whisper / STT) via RabbitMQ"]
+        Chunks["Geração de chunks com texto e timestamp (início e fim)"]
+        Embed["Geração de embeddings (uma única vez por aula)"]
+        Persist[("Gravação no PostgreSQL 16 + pgvector com course_id")]
+        Upload --> JobTrans --> Chunks --> Embed --> Persist
+    end
+
+    subgraph Consulta["2. Atendimento ao Aluno em Tempo Real (UC001, RNF003)"]
+        Pergunta["Aluno envia dúvida no chat da aula"]
+        AuthCheck["ai-service valida autenticação e course_id da aula"]
+        VetSearch["Busca vetorial filtrada: course_id + HNSW cosine similarity"]
+        ContextBuild["Montagem de prompt pedagógico com chunks mais relevantes"]
+        StreamLLM["Chamada ao LLM com streaming Server-Sent Events (SSE)"]
+        Resposta["Exibição gradual da resposta com citação de aula e timestamp"]
+        Pergunta --> AuthCheck --> VetSearch --> ContextBuild --> StreamLLM --> Resposta
+    end
+```
+
+1. **Transcrição de Vídeo e Segmentação:** Ao receber o evento de upload de aula, um worker assíncrono consome a fila no RabbitMQ, extrai a trilha de áudio do Cloudflare R2 e executa o reconhecimento de voz (transcrição). O texto resultante é segmentado em trechos (*chunks*) lógicos conservando seus intervalos temporais (`start_time` e `end_time` em segundos).
+2. **Indexação Vetorial Única (RNF004):** Para cada chunk, o vetor de embedding é gerado uma única vez e persistido na tabela de chunks do PostgreSQL 16 com a coluna `embedding` do tipo `vector`. O índice HNSW (`vector_cosine_ops`) garante busca rápida mesmo com crescimento da base.
+3. **Busca Vetorial Restrita por Curso:** A busca semântica é estritamente vinculada ao curso da aula em reprodução. A query executa um filtro relacional composto: `Chunk::where('course_id', $courseId)->whereVectorSimilarTo('embedding', $queryEmbedding)->limit(5)->get()`. Isso isola categoricamente o conteúdo de diferentes cursos e impede vazamento de dados de outros instrutores.
+4. **Geração de Resposta e Citação Obrigatória:** O modelo de linguagem recebe os chunks recuperados com instruções de sistema (*system prompt*) instruindo postura de tutor socrático. A resposta final deve obrigatoriamente citar o nome da aula e o timestamp correspondente (ex.: *"[Aula 3 — Introdução, aos 04:15]"*), permitindo ao aluno navegar diretamente ao ponto exato do vídeo.
+5. **Streaming de Resposta (RNF003):** A resposta gerada é enviada de volta ao front-end por conexão *Server-Sent Events* (SSE), garantindo que o primeiro token da resposta chegue ao aluno em menos de 3 segundos (meta p95 do RNF003).
+
+### 5.2 Limites de Uso, Controle de Custo e Privacidade
+
+- **Rate Limiting:** Para conter custos de chamadas de inferência de LLM e evitar abusos, cada aluno matriculado possui uma cota de perguntas por janela de tempo (ex.: máximo de 20 perguntas por hora, monitoradas em Redis). Requisições excedentes recebem HTTP 429 com aviso de tempo de espera.
+- **Privacidade e LGPD:** Em estrito cumprimento à privacidade do aluno (RNF007), nenhuma informação de identificação pessoal (PII) — como nome, e-mail, telefone ou CPF — é enviada aos provedores de modelos de linguagem externos. A mensagem enviada contém apenas a dúvida formulada pelo aluno e os fragmentos de contexto extraídos das aulas do curso.
+- **Tratamento de Indisponibilidade do Modelo:** Conforme determinado no [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md), o Tutor de IA é tratado como ator sistêmico externo. Caso a API de inferência externa falhe ou atinja timeout, o sistema ativa um fluxo alternativo/de degradação graciosa: o chat exibe uma mensagem informativa amigável (*"O Tutor de IA está temporariamente indisponível no momento. Por favor, tente novamente em alguns instantes."*), sem interromper a reprodução do vídeo ou o progresso da aula pelo aluno.
+
+---
 
 ## 6. Decisões técnicas
-<!-- Lista com link para cada ADR técnica. -->
+
+As decisões arquiteturais do projeto são formalizadas e mantidas como Architecture Decision Records (ADRs) no diretório [`docs/adr/`](adr/README.md). A tabela abaixo consolida as decisões vigentes:
+
+| ADR | Identificador | Título e Síntese da Decisão | Itens Afetados |
+|---|---|---|---|
+| [ADR-0001](adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) | D1 | **Meta interna de 4 por integrante e numeração final da v11:** Estabelece divisão de trabalho com meta de 4 artefatos por aluno e consolida identificadores definitivos sequenciais. | 6, 7, 8, 9, 10 |
+| [ADR-0002](adr/0002-formato-de-estoria-e-criterios.md) | D2 | **Formato de estória e critérios de aceite:** Padroniza estórias de usuário no padrão *Como / Posso / Para* com ao menos 2 critérios em formato *DADO QUE / QUANDO / ENTÃO*. | 7 |
+| [ADR-0003](adr/0003-extend-no-sentido-do-te3-3.md) | D3 | **«extend» no sentido do TE3_3 e UML:** Fixa a direção correta do relacionamento de extensão nos casos de uso (do caso opcional/estendido para o caso base). | 9, 10 |
+| [ADR-0004](adr/0004-diagramas-como-codigo.md) | D4 | **Diagramas como código:** Adoção de BPMN 2.0 (item 4) e PlantUML (itens 9 e 11) mantidos em código versionável no repositório. | 4, 9, 11 |
+| [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md) | D5 | **Tutor de IA como ator sistêmico:** Modela o Tutor como ator secundário participante de casos de uso sem iniciar fluxos autônomos. | 2, 5, 6, 9, 10 |
+| [ADR-0006](adr/0006-divisao-por-areas.md) | D6 | **Divisão por áreas de A a D:** Estrutura o sistema e o trabalho da equipe em 4 áreas funcionais especializadas. | 6, 7, 8, 10 |
+| [ADR-0007](adr/0007-stack-e-bancos.md) | D7 | **Definição da stack tecnológica e bancos de dados:** Formaliza Next.js SPA, API Laravel 13 modular, MySQL 8 relacional e `ai-service` físico com PostgreSQL 16 + pgvector. | 5, 11 |
+

@@ -13,7 +13,7 @@ atualizado: 2026-10-07
 
 A Plataforma de Cursos é um sistema web com front-end separado de uma API central. A API concentra as regras de negócio das quatro áreas (A a D) e é a única a falar com o banco, com o armazenamento de vídeo e com os serviços externos. A v11 sustenta três pontos de arquitetura: autenticação por token JWT com rotas protegidas por perfil (RNF001), upload e entrega de vídeo por URL assinada (RNF002) e um Tutor de IA que consulta só o material do próprio curso (RAG restrito por `course_id`).
 
-<!-- proposta: estilo monólito modular (API única dividida por área A a D) com front-end SPA; a v11 não nomeia o estilo. Motivo: equipe de 4 integrantes, uma área por integrante (ADR-0006) e prazo curto, o que não justifica microsserviços -->
+A arquitetura adota o estilo monólito modular (API única dividida por áreas A a D com Laravel 13) integrado a um front-end SPA em Next.js e microsserviços físicos dedicados para IA e mídia, conforme definido no [ADR-0007](adr/0007-stack-e-bancos.md). Motivo: equipe de 4 integrantes (uma área por integrante, conforme [ADR-0006](adr/0006-divisao-por-areas.md)) e alta coesão de domínio no core, isolando fisicamente apenas serviços com cargas computacionais e dependências especializadas (`ai-service` e `media-service`).
 
 O Tutor de IA é ator sistêmico (ADR-0005): recebe a pergunta do Aluno com o contexto da aula e devolve a resposta.
 
@@ -83,11 +83,12 @@ flowchart TB
 | Banco de dados | Entidades do dicionário de dados da v11 (seção 5); histórico de conversa do Tutor de IA | v11 |
 | Armazenamento de vídeo | Arquivos de vídeo, referenciados por `videoKey` (storage R2) | v11 (dicionário de dados) |
 
-<!-- proposta: front-end como SPA em TypeScript com React, API em Node.js com TypeScript, PostgreSQL como banco. A v11 não cita linguagem nem banco; o Tutor de IA e a API poderiam ser o mesmo processo no início. Motivo: TypeScript em todas as camadas reduz o custo de aprendizado do grupo e o JSON dos campos socialLinks e payoutInfo tem suporte nativo no PostgreSQL -->
-
-<!-- proposta: índice de embeddings na mesma instância do banco (extensão pgvector do PostgreSQL), filtrado por `course_id`. A v11 exige busca por similaridade restrita ao curso, mas não define onde ficam os vetores. Motivo: um único banco para operar e fazer backup (RNF011) -->
-
-<!-- proposta: separar o Serviço do Tutor de IA como contêiner lógico, mesmo que rode no processo da API. Motivo: isolar a dependência do provedor de LLM e a tarefa assíncrona de transcrição -->
+A stack tecnológica e os bancos de dados seguem a decisão do grupo registrada no [ADR-0007](adr/0007-stack-e-bancos.md):
+- **Front-end:** Next.js com TypeScript arquitetado como SPA (sem Server Components ou Server Actions).
+- **API (Core):** Laravel 13 / PHP 8.3 estruturado como monólito modular (módulos auth, catalog, learning e analytics).
+- **Banco de dados do Core:** MySQL 8 como SGBD relacional primário para todas as entidades do sistema.
+- **Serviço do Tutor de IA (`ai-service`):** Serviço físico separado rodando em seu próprio container (Laravel 13 / PHP 8.3) com banco de dados dedicado **PostgreSQL 16 com extensão pgvector** para índice vetorial HNSW e busca restrita a `course_id`. A separação física isola a dependência de LLM, pipelines assíncronos de transcrição/embeddings e a carga pesada de cálculo vetorial.
+- **Armazenamento de mídia (`media-service`):** Serviço separado com storage Cloudflare R2 para vídeos (`videoKey`).
 
 ## 3. Componentes
 
