@@ -83,11 +83,12 @@ flowchart TB
 | Banco de dados | Entidades do dicionário de dados da v11 (seção 5); histórico de conversa do Tutor de IA | v11 |
 | Armazenamento de vídeo | Arquivos de vídeo, referenciados por `videoKey` (storage R2) | v11 (dicionário de dados) |
 
-<!-- proposta: front-end como SPA em TypeScript com React, API em Node.js com TypeScript, PostgreSQL como banco. A v11 não cita linguagem nem banco; o Tutor de IA e a API poderiam ser o mesmo processo no início. Motivo: TypeScript em todas as camadas reduz o custo de aprendizado do grupo e o JSON dos campos socialLinks e payoutInfo tem suporte nativo no PostgreSQL -->
-
-<!-- proposta: índice de embeddings na mesma instância do banco (extensão pgvector do PostgreSQL), filtrado por `course_id`. A v11 exige busca por similaridade restrita ao curso, mas não define onde ficam os vetores. Motivo: um único banco para operar e fazer backup (RNF011) -->
-
-<!-- proposta: separar o Serviço do Tutor de IA como contêiner lógico, mesmo que rode no processo da API. Motivo: isolar a dependência do provedor de LLM e a tarefa assíncrona de transcrição -->
+A stack tecnológica e os bancos de dados seguem a decisão do grupo registrada no [ADR-0007](adr/0007-stack-e-bancos.md):
+- **Front-end:** Next.js com TypeScript arquitetado como SPA (sem Server Components ou Server Actions).
+- **API (Core):** Laravel 13 / PHP 8.3 estruturado como monólito modular (módulos auth, catalog, learning e analytics).
+- **Banco de dados do Core:** MySQL 8 como SGBD relacional primário para todas as entidades do sistema.
+- **Serviço do Tutor de IA (`ai-service`):** Serviço físico separado rodando em seu próprio container (Laravel 13 / PHP 8.3) com banco de dados dedicado **PostgreSQL 16 com extensão pgvector** para índice vetorial HNSW e busca restrita a `course_id`. A separação física isola a dependência de LLM, pipelines assíncronos de transcrição/embeddings e a carga pesada de cálculo vetorial.
+- **Armazenamento de mídia (`media-service`):** Serviço separado com storage Cloudflare R2 para vídeos (`videoKey`).
 
 ## 3. Componentes
 

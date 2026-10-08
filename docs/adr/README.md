@@ -4,7 +4,7 @@ titulo: "Decisões do projeto (ADRs)"
 tipo: decisao-indice
 status: vigente
 atualizado: 2026-10-08
-relacionados: [adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006]
+relacionados: [adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006, adr-0007]
 ---
 # Decisões do projeto (ADRs)
 
@@ -18,6 +18,7 @@ relacionados: [adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006]
 | [0004](0004-diagramas-como-codigo.md) | D4 | Diagramas como código: BPMN 2.0 no item 4, PlantUML nos itens 9 e 11 | 4, 9, 11 |
 | [0005](0005-tutor-de-ia-como-ator-sistemico.md) | D5 | Tutor de IA como ator sistêmico | 2, 5, 6, 9, 10 |
 | [0006](0006-divisao-por-areas.md) | D6 | Divisão do trabalho em áreas A a D, uma por integrante | 6, 7, 8, 10 |
+| [0007](0007-stack-e-bancos.md) | D7 | Stack (Next.js SPA, API Laravel 13, MySQL 8) e ai-service físico com PostgreSQL 16 + pgvector | 5, 11 |
 
 ---
 
