@@ -8,7 +8,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** preencho título, descrição e preço do curso <br> **QUANDO:** salvo <br> **ENTÃO:** o curso é criado com status rascunho. |
 | 2 | **DADO QUE:** edito um curso já publicado <br> **QUANDO:** salvo a alteração <br> **ENTÃO:** as mudanças aparecem no catálogo sem remover as matrículas existentes. |
@@ -24,7 +24,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** tenho um curso em rascunho <br> **QUANDO:** adiciono um módulo com título <br> **ENTÃO:** ele é salvo na ordem informada. |
 | 2 | **DADO QUE:** reordeno os módulos existentes <br> **QUANDO:** salvo a nova ordem <br> **ENTÃO:** a nova sequência aparece para os alunos matriculados. |
@@ -40,9 +40,9 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
-| 1 | **DADO QUE:** envio um arquivo de vídeo válido com o título da aula <br> **QUANDO:** o envio termina <br> **ENTÃO:** a aula fica disponível para reprodução pelos alunos matriculados. |
+| 1 | **DADO QUE:** informo o título da aula e um arquivo de vídeo válido <br> **QUANDO:** salvo a aula <br> **ENTÃO:** a aula fica disponível para reprodução pelos alunos matriculados. |
 | 2 | **DADO QUE:** envio um arquivo em formato não suportado <br> **QUANDO:** tento salvar <br> **ENTÃO:** recebo erro informando os formatos aceitos. |
 | 3 | **DADO QUE:** marco a aula como prévia <br> **QUANDO:** um Visitante sem matrícula acessa o curso <br> **ENTÃO:** ele consegue assistir a essa aula sem se matricular. |
 
@@ -56,7 +56,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** tenho um módulo criado <br> **QUANDO:** cadastro uma pergunta com uma alternativa marcada como correta <br> **ENTÃO:** o sistema usa esse gabarito para corrigir as respostas dos alunos. |
 | 2 | **DADO QUE:** tento salvar uma pergunta sem nenhuma alternativa marcada como correta <br> **QUANDO:** envio <br> **ENTÃO:** recebo erro pedindo para marcar o gabarito. |
@@ -72,7 +72,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** estou logado como Instrutor <br> **QUANDO:** preencho minibiografia e links e salvo <br> **ENTÃO:** o perfil é atualizado e exibido na página do curso. |
 | 2 | **DADO QUE:** informo um link em formato inválido <br> **QUANDO:** salvo <br> **ENTÃO:** o sistema recusa e indica o campo. |

@@ -22,5 +22,5 @@
 | US016 | Gerenciar usuários | RF012 | [area-d.md](area-d.md) |
 | US017 | Recuperar senha por e-mail | RF013 | [area-a.md](area-a.md) |
 | US018 | Registrar pagamento simulado da matrícula | RF014 | [area-c.md](area-c.md) |
-| US019 | Consultar catálogo e buscar cursos por categoria | RF015 | [area-c.md](area-c.md) |
+| US019 | Consultar catálogo de cursos por categoria | RF015 | [area-c.md](area-c.md) |
 | US020 | Gerenciar perfil do instrutor | RF016 | [area-b.md](area-b.md) |
