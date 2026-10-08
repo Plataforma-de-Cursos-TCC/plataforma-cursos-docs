@@ -5,7 +5,7 @@
 - **Descrição:** o Visitante cria uma conta na plataforma informando e-mail e senha e aceitando os termos de uso e a política de privacidade (US002, RF001).
 - **Pré-condições:** o Visitante ter acessado a plataforma sem estar autenticado.
 - **Pós-condições:** conta criada com perfil Aluno (ou Instrutor, se escolhido) e senha armazenada com hash; Visitante direcionado ao login.
-- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório (LGPD, RNF007).
+- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório (LGPD, RNF020).
 - **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política, opção de perfil e botão “Criar conta”. Imagem do protótipo pendente.
 - **Fluxo básico:**
   1. O Visitante acessa a tela de cadastro.
@@ -46,7 +46,7 @@
 
   *Figura 7 – Protótipo de tela do UC005 — Realizar Login*
 - **Fluxo básico:**
-  1. O Usuário acessa a tela de login. (A-1)
+  1. O Usuário acessa a tela de login. (A-1) (A-2)
   2. O Usuário informa e-mail e senha.
   3. O Usuário aciona “Entrar”.
   4. O sistema valida as credenciais. (E-1)

@@ -11,6 +11,7 @@ defina ESSW_TEMPLATE. Precisa de pandoc, soffice (LibreOffice) e pdftotext.
 """
 import argparse
 import copy
+import itertools
 import os
 import re
 import subprocess
@@ -74,6 +75,13 @@ function Header(el)
 end
 """
 
+# Parágrafos que, logo antes de uma tabela, são o título do quadro no template
+# (linhas mescladas no topo da tabela). O título da estória é um Heading 2.
+TITULO = re.compile(
+    r"^(QUADRO “|VISÃO DE PRODUTO$|NOME DO PRODUTO:|PRODUTO:|COMO:|Critérios de Aceite:$|US\d{3} –)"
+)
+US = re.compile(r"^US\d{3} –")
+
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
 
@@ -128,7 +136,61 @@ def build_markdown(items):
         else:
             parts += [preprocess(ESP / f) for f in src]
     parts.append(preprocess(DECLARACAO))
-    return "\n\n".join(parts)
+    return renumber_figures("\n\n".join(parts))
+
+
+def renumber_figures(md):
+    """Legendas `Figura N –` numeradas na ordem em que aparecem no documento."""
+    n = itertools.count(1)
+    return re.sub(r"Figura \d+ –", lambda m: f"Figura {next(n)} –", md)
+
+
+def child(parent, tag, index=None):
+    """Filho `tag` de `parent`, criado (no fim ou em `index`) se não existir."""
+    el = parent.find(qn(tag))
+    if el is None:
+        el = OxmlElement(tag)
+        parent.append(el) if index is None else parent.insert(index, el)
+    return el
+
+
+def titles_into_tables(body):
+    """Move os títulos dos quadros para linhas mescladas no topo da tabela, como no template."""
+    for tbl in list(body.iter(qn("w:tbl"))):
+        # O pandoc gera cabeçalho vazio para `| | |`; o template não tem essa linha.
+        for tr in tbl.findall(qn("w:tr")):
+            if not text_of(tr).strip() and tr.find(".//" + qn("w:drawing")) is None:
+                tbl.remove(tr)
+        rows = tbl.findall(qn("w:tr"))
+        header = rows[0].find(qn("w:trPr") + "/" + qn("w:tblHeader")) is not None
+        ncols = len(tbl.find(qn("w:tblGrid")).findall(qn("w:gridCol")))
+        titles, prev = [], tbl.getprevious()
+        while prev is not None and prev.tag == qn("w:p") and TITULO.match(text_of(prev).strip()):
+            titles.insert(0, prev)
+            prev = prev.getprevious()
+        for p in titles:
+            child(child(p, "w:pPr", 0), "w:pStyle", 0).set(qn("w:val"), "Compact")
+            if US.match(text_of(p).strip()):  # deixa de ser Heading 2: negrito à mão
+                for r in p.findall(qn("w:r")):
+                    child(child(r, "w:rPr", 0), "w:b")
+            tr, tc = OxmlElement("w:tr"), OxmlElement("w:tc")
+            if header:
+                child(tr, "w:trPr").append(OxmlElement("w:tblHeader"))
+            child(tc, "w:tcPr").append(OxmlElement("w:gridSpan"))
+            tc.find(qn("w:tcPr"))[0].set(qn("w:val"), str(ncols))
+            tc.append(p)
+            tr.append(tc)
+            rows[0].addprevious(tr)
+        # Sem parágrafo entre elas, tabelas vizinhas se fundem numa só ao renderizar.
+        prev = tbl.getprevious()
+        while prev is not None and prev.tag in (qn("w:bookmarkStart"), qn("w:bookmarkEnd")):
+            prev = prev.getprevious()
+        if titles and prev is not None and prev.tag == qn("w:tbl"):
+            tbl.addprevious(OxmlElement("w:p"))
+        # Linha não se parte entre páginas.
+        for tr in tbl.findall(qn("w:tr")):
+            idx = 1 if tr.find(qn("w:tblPrEx")) is not None else 0
+            child(child(tr, "w:trPr", idx), "w:cantSplit", 0)
 
 
 def set_text(par, text):
@@ -182,6 +244,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
     doc = docx.Document(pandoc_docx)
     body = doc.element.body
     tbody = list(tdoc.element.body)
+    titles_into_tables(body)
 
     # Elementos 0-28 do template: capa, folha de rosto, sumário e quebra de seção.
     cover = [copy.deepcopy(e) for e in tbody[:29]]
@@ -240,6 +303,8 @@ def assemble(pandoc_docx, template, out_docx, pages):
         cols = tbl.find(qn("w:tblGrid")).findall(qn("w:gridCol"))
         lens = [1] * len(cols)
         for tr in tbl.findall(qn("w:tr")):
+            if tr.find(".//" + qn("w:gridSpan")) is not None:  # título mesclado
+                continue
             for c, tc in enumerate(tr.findall(qn("w:tc"))[:len(cols)]):
                 lens[c] = max(lens[c], len(text_of(tc)))
         total = sum(int(g.get(qn("w:w"))) for g in cols)
@@ -341,6 +406,10 @@ def check():
         raise AssertionError(bad)
     md = drop_column("| A | ARQUIVO |\n|---|---|\n| x | [a.md](a.md) |\n\ntexto", "ARQUIVO")
     assert md == "| A |\n|---|\n| x |\n\ntexto", md
+    md = renumber_figures("*Figura 7 – a*\n*Figura 2 – b*\nver Figura 7")
+    assert md == "*Figura 1 – a*\n*Figura 2 – b*\nver Figura 7", md
+    assert TITULO.match("QUADRO “3 OBJETIVOS”") and TITULO.match("US001 – REQUISITO RF017: x")
+    assert not TITULO.match("1 QUADRO “3 OBJETIVOS”") and not TITULO.match("Rastreabilidade")
     print("check ok")
 
 

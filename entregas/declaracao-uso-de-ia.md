@@ -8,4 +8,10 @@ Durante a preparação deste documento de especificação, os autores usaram Cla
 
 Durante a preparação deste documento de especificação, os autores usaram Gemini 3.8 Flash (Google) para apoiar a pesquisa de produtos similares e a auditoria do documento contra o template. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
 
-Durante a preparação deste documento de especificação, os autores usaram GPT-OSS 120B, Nemotron 3 Ultra, MiMo-V2.6-Flash e LongCat 2.5 Preview para apoiar a transcrição da versão anterior do documento. Após usar essas ferramentas, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
+Durante a preparação deste documento de especificação, os autores usaram GPT-OSS 120B para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
+
+Durante a preparação deste documento de especificação, os autores usaram Nemotron 3 Ultra para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
+
+Durante a preparação deste documento de especificação, os autores usaram MiMo-V2.6-Flash para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
+
+Durante a preparação deste documento de especificação, os autores usaram LongCat 2.5 Preview para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.

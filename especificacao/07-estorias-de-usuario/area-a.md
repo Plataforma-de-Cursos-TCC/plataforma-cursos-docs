@@ -8,7 +8,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** informo e-mail e senha corretos <br> **QUANDO:** envio o formulário <br> **ENTÃO:** sou autenticado e direcionado para a minha área conforme o meu perfil. |
 | 2 | **DADO QUE:** informo senha incorreta <br> **QUANDO:** envio o formulário <br> **ENTÃO:** recebo mensagem de erro sem indicar se o e-mail existe ou não. |
@@ -24,7 +24,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** informo e-mail ainda não usado e senha válida <br> **QUANDO:** envio o cadastro <br> **ENTÃO:** a minha conta é criada com perfil Aluno por padrão e recebo confirmação. |
 | 2 | **DADO QUE:** informo um e-mail já cadastrado <br> **QUANDO:** envio o cadastro <br> **ENTÃO:** recebo erro informando que o e-mail já está em uso. |
@@ -40,7 +40,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** altero nome e telefone válidos <br> **QUANDO:** salvo <br> **ENTÃO:** os dados são atualizados e aparecem no meu perfil. |
 | 2 | **DADO QUE:** tento alterar o meu e-mail para um já usado por outro usuário <br> **QUANDO:** salvo <br> **ENTÃO:** recebo erro de e-mail em uso. |
@@ -56,7 +56,7 @@
 
 **Critérios de Aceite:**
 
-| # | |
+| | |
 |---|---|
 | 1 | **DADO QUE:** informo um e-mail cadastrado <br> **QUANDO:** solicito a recuperação <br> **ENTÃO:** recebo um link de redefinição com validade limitada. |
 | 2 | **DADO QUE:** informo um e-mail não cadastrado <br> **QUANDO:** solicito a recuperação <br> **ENTÃO:** vejo a mesma mensagem de sucesso, sem revelar se o e-mail existe. |
