@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Gera o documento de especificação (DOCX e PDF) a partir do Template.docx.
+"""Gera o documento de especificação (DOCX; PDF com --pdf) a partir do Template.docx.
 
 Uso:
-    python3 scripts/build_doc.py [de] [até] [--template T.docx] [--saida DIR]
+    python3 scripts/build_doc.py [de] [até] [--template T.docx] [--saida DIR] [--pdf]
     python3 scripts/build_doc.py --check
 
 Exemplos: `1 11` gera o RA1 (padrão), `6 8` só os itens 6 a 8, `1 15` tudo.
 O template da disciplina não fica no repositório: passe --template ou
-defina ESSW_TEMPLATE. Precisa de pandoc, soffice (LibreOffice) e pdftotext.
+defina ESSW_TEMPLATE. Precisa de pandoc, soffice (LibreOffice) e pdftotext
+(o soffice gera um PDF interno só para numerar as páginas do sumário).
 """
 import argparse
 import copy
@@ -172,7 +173,7 @@ def titles_into_tables(body):
             child(child(p, "w:pPr", 0), "w:pStyle", 0).set(qn("w:val"), "Compact")
             if US.match(text_of(p).strip()):  # deixa de ser Heading 2: negrito à mão
                 for r in p.findall(qn("w:r")):
-                    child(child(r, "w:rPr", 0), "w:b")
+                    bold_run(r)
             tr, tc = OxmlElement("w:tr"), OxmlElement("w:tc")
             if header:
                 child(tr, "w:trPr").append(OxmlElement("w:tblHeader"))
@@ -238,6 +239,56 @@ def toc_entry(level, text, page):
     return p
 
 
+def fld_run(kind, instr=None):
+    """Run com w:fldChar do tipo `kind` ou, sem tipo, com a instrução do campo."""
+    r = OxmlElement("w:r")
+    if kind:
+        el = OxmlElement("w:fldChar")
+        el.set(qn("w:fldCharType"), kind)
+    else:
+        el = OxmlElement("w:instrText")
+        el.set(qn("xml:space"), "preserve")
+        el.text = instr
+    r.append(el)
+    return r
+
+
+def bold_run(r):
+    """w:b logo após rStyle/rFonts, na ordem que o schema exige."""
+    rpr = child(r, "w:rPr", 0)
+    head = [e for e in rpr if e.tag in (qn("w:rStyle"), qn("w:rFonts"))]
+    child(rpr, "w:b", len(head))
+
+
+def format_tables_and_captions(doc):
+    """Negrito e centro no cabeçalho, no título do quadro e na coluna de número; legenda em Caption."""
+    def para_fmt(cell, bold):
+        for p in cell.iter(qn("w:p")):
+            ppr = child(p, "w:pPr", 0)
+            rpr = ppr.find(qn("w:rPr"))  # jc vem antes de rPr no schema
+            child(ppr, "w:jc", None if rpr is None else list(ppr).index(rpr)).set(qn("w:val"), "center")
+            if bold:
+                for r in p.findall(qn("w:r")):
+                    bold_run(r)
+
+    for tbl in doc.element.body.iter(qn("w:tbl")):
+        for tr in tbl.findall(qn("w:tr")):
+            tcs = tr.findall(qn("w:tc"))
+            if len(tcs) == 1 and tr.find(".//" + qn("w:gridSpan")) is not None:
+                para_fmt(tcs[0], False)  # título do quadro (já em negrito no texto)
+            elif tr.find(qn("w:trPr") + "/" + qn("w:tblHeader")) is not None:
+                for tc in tcs:
+                    para_fmt(tc, True)
+            elif tcs and re.fullmatch(r"\d+", text_of(tcs[0]).strip()):
+                para_fmt(tcs[0], True)
+    caption = doc.styles["Caption"].style_id
+    for p in doc.element.body.iter(qn("w:p")):
+        if re.match(r"Figura \d+ –", text_of(p).strip()):
+            child(child(p, "w:pPr", 0), "w:pStyle", 0).set(qn("w:val"), caption)
+            for i in list(p.iter(qn("w:i"), qn("w:iCs"))):
+                i.getparent().remove(i)
+
+
 def assemble(pandoc_docx, template, out_docx, pages):
     """Capa, sumário, cabeçalho e rodapé do template sobre a saída do pandoc."""
     tdoc = docx.Document(template)
@@ -245,6 +296,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
     body = doc.element.body
     tbody = list(tdoc.element.body)
     titles_into_tables(body)
+    format_tables_and_captions(doc)
 
     # Elementos 0-28 do template: capa, folha de rosto, sumário e quebra de seção.
     cover = [copy.deepcopy(e) for e in tbody[:29]]
@@ -277,6 +329,12 @@ def assemble(pandoc_docx, template, out_docx, pages):
         content.remove(p)
     for (level, text), page in zip(headings, pages or [0] * len(headings)):
         content.append(toc_entry(level, text, page))
+    # Campo TOC em volta das entradas: o Word mostra as estáticas e atualiza com F9.
+    entries = list(content)[2:]
+    first_ppr = entries[0].find(qn("w:pPr"))
+    for kind, instr in (("separate", None), (None, ' TOC \\o "1-2" \\h \\z \\u '), ("begin", None)):
+        first_ppr.addnext(fld_run(kind, instr))
+    entries[-1].append(fld_run("end"))
 
     # Toda referência r:id copiada precisa apontar para o mesmo alvo da saída.
     trels, orels = rel_targets(tdoc), rel_targets(doc)
@@ -420,6 +478,7 @@ def main():
     ap.add_argument("--template", default=os.environ.get("ESSW_TEMPLATE"))
     ap.add_argument("--saida", default=str(REPO / "build"))
     ap.add_argument("--check", action="store_true")
+    ap.add_argument("--pdf", action="store_true", help="também gera o PDF")
     a = ap.parse_args()
     if a.check:
         return check()
@@ -449,9 +508,9 @@ def main():
         pages = heading_pages(to_pdf(draft, tmp, tmp / "lo"), headings)
         final = saida / f"{nome}.docx"
         assemble(tmp / "pandoc.docx", a.template, final, pages)
-        pdf = to_pdf(final, saida, tmp / "lo")
+        if a.pdf:
+            print(to_pdf(final, saida, tmp / "lo"))
     print(final)
-    print(pdf)
 
 
 if __name__ == "__main__":
