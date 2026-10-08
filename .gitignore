@@ -11,3 +11,7 @@ graphify-out/.graphify_root
 graphify-out/cache/
 graphify-out/cost.json
 graphify-out/.graphify_python
+
+# Documento gerado por scripts/build_doc.py
+build/
+__pycache__/
