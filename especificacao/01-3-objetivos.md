@@ -6,6 +6,7 @@
 
 | OBJETIVOS | DESCRIÇÃO |
 |---|---|
-| 1 | Dar a instrutores e pequenas escolas infraestrutura própria para publicar, vender e gerenciar cursos em vídeo, sem depender de marketplace genérico com alto comissionamento (Hotmart, Udemy).<br><br>**Métrica de sucesso:** ao menos 10 instrutores com curso publicado em 6 meses após o lançamento. |
-| 2 | Reduzir o abandono de curso oferecendo suporte de aprendizado imediato: tutor de IA especializado no conteúdo exato daquele curso, disponível a qualquer momento.<br><br>**Métrica de sucesso:** taxa de conclusão de curso de pelo menos 60% em 6 meses. |
-| 3 | Dar ao gestor da plataforma visibilidade de engajamento e progresso dos alunos por meio de dashboard com filtro de período, para decisão orientada a dado sobre conteúdo e precificação.<br><br>**Métrica de sucesso:** dashboard com filtro de período disponível para 100% dos instrutores com curso publicado. |
+| 1 | **Problema:** instrutores e pequenas escolas dependem de marketplaces genéricos (Hotmart, Udemy), com comissão alta e pouco controle sobre a marca e o aluno.<br><br>**Valor:** infraestrutura própria para publicar, vender e gerenciar cursos em vídeo.<br><br>**Métrica de sucesso:** ao menos 10 instrutores com curso publicado em 6 meses após o lançamento. |
+| 2 | **Problema:** o aluno abandona o curso quando trava numa dúvida e não tem a quem perguntar.<br><br>**Valor:** tutor de IA especializado no conteúdo exato daquele curso, disponível a qualquer momento.<br><br>**Métrica de sucesso:** taxa de conclusão de curso de pelo menos 60% em 6 meses. |
+| 3 | **Problema:** instrutor e administrador não sabem quem está engajado nem em que ponto os alunos abandonam, e decidem sobre conteúdo e preço sem dados.<br><br>**Valor:** dashboard de engajamento e progresso com filtro de período.<br><br>**Métrica de sucesso:** ao menos 70% dos instrutores com curso publicado consultam o dashboard ao menos uma vez por mês, medido 6 meses após o lançamento. |
+
