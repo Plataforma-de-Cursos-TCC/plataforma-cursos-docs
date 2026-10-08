@@ -2,15 +2,15 @@
 
 - **Nome do caso de uso:** Matricular-se em Curso
 - **Ator(es):** Aluno.
-- **Descrição:** o Aluno se matricula em um curso publicado para ter acesso ao conteúdo das aulas, com pagamento simulado quando o curso é pago (US007, RF005; US018, RF014).
+- **Descrição:** o Aluno se matricula em um curso publicado para ter acesso ao conteúdo das aulas (US007, RF005). Em curso pago, a matrícula depende do pagamento simulado do UC019.
 - **Pré-condições:** o Aluno ter realizado login na plataforma; o curso estar com status publicado.
 - **Pós-condições:** matrícula registrada vinculando Aluno e curso; o curso passa a aparecer em “Meus cursos” do Aluno.
-- **Regras de negócio:** R-1 a matrícula só é permitida em curso publicado; R-2 um Aluno só pode ter uma matrícula por curso; R-3 em curso pago, o pagamento simulado é processado antes da confirmação da matrícula, sem gateway externo (RF014); R-4 em curso gratuito, nenhum pagamento é exigido.
-- **Protótipo(s) de tela:** página do curso com botão “Matricular-se” e confirmação. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Regras de negócio:** R-1 a matrícula só é permitida em curso publicado; R-2 um Aluno só pode ter uma matrícula por curso; R-3 em curso pago, a matrícula só é registrada depois do pagamento simulado aprovado no UC019 – Processar Pagamento Simulado (RF014); R-4 em curso gratuito, nenhum pagamento é exigido.
+- **Protótipo(s) de tela:** página do curso com botão “Matricular-se” e tela “Meus cursos” após a matrícula. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno acessa a página de um curso publicado. (A-1)
   2. O Aluno aciona “Matricular-se”.
-  3. O sistema processa o pagamento simulado. (A-2) (E-1) (E-2)
+  3. O sistema verifica que o curso é pago e executa o UC019 – Processar Pagamento Simulado. (A-2) (E-1) (E-2)
   4. O sistema registra a matrícula do Aluno no curso.
   5. O curso passa a aparecer em “Meus cursos” e o Aluno pode iniciar as aulas.
   6. Este caso de uso é finalizado.
@@ -19,11 +19,7 @@
 
   *Figura 0 – UC003, fluxo básico: página do curso com botão Matricular-se*
 
-  ![processando pagamento simulado](prototipos/png/UC003-FB-2.png)
-
-  *Figura 0 – UC003, fluxo básico: processando pagamento simulado*
-
-  ![meus cursos do aluno após matrícula](prototipos/png/UC003-FB-3.png)
+  ![meus cursos do aluno após matrícula](prototipos/png/UC003-FB-2.png)
 
   *Figura 0 – UC003, fluxo básico: meus cursos do aluno após matrícula*
 - **Fluxos alternativos:**
@@ -37,7 +33,7 @@
     *Figura 0 – UC003, fluxo alternativo A1: aluno matriculado: Continuar assistindo*
   - **A2 – O curso é gratuito**
     - A-2.1 O sistema identifica que o curso não tem preço definido.
-    - A-2.2 O sistema não executa o pagamento simulado.
+    - A-2.2 O sistema não executa o UC019.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 4).
 
     ![curso gratuito: matrícula sem preço](prototipos/png/UC003-A2-1.png)
@@ -52,14 +48,56 @@
     ![curso indisponível: aviso e sem matrícula](prototipos/png/UC003-E1-1.png)
 
     *Figura 0 – UC003, fluxo de exceção E1: curso indisponível: aviso e sem matrícula*
-  - **E2 – Pagamento simulado recusado**
-    - E-2.1 O sistema identifica falha no processamento do pagamento simulado.
-    - E-2.2 O sistema informa o erro ao Aluno e não registra a matrícula.
+  - **E2 – Pagamento não concluído**
+    - E-2.1 O UC019 termina sem pagamento aprovado (recusa ou cancelamento pelo Aluno).
+    - E-2.2 O sistema não registra a matrícula e mantém o botão “Matricular-se”.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![pagamento recusado: aviso e nova tentativa](prototipos/png/UC003-E2-1.png)
+    ![pagamento não concluído: matrícula não registrada](prototipos/png/UC019-E1-1.png)
 
-    *Figura 0 – UC003, fluxo de exceção E2: pagamento recusado: aviso e nova tentativa*
+    *Figura 0 – UC003, fluxo de exceção E2: pagamento não concluído: matrícula não registrada*
+
+## UC019 – Processar Pagamento Simulado
+
+- **Nome do caso de uso:** Processar Pagamento Simulado
+- **Ator(es):** Aluno.
+- **Descrição:** o sistema apresenta o resumo da compra de um curso pago e processa o pagamento simulado, sem gateway externo, antes da matrícula (US018, RF014). Estende o UC003 – Matricular-se em Curso quando o curso é pago.
+- **Pré-condições:** o Aluno ter acionado “Matricular-se” em um curso pago e publicado (UC003).
+- **Pós-condições:** pagamento simulado registrado como aprovado, vinculado ao Aluno e ao curso, e controle devolvido ao UC003.
+- **Regras de negócio:** R-1 o pagamento é simulado e não aciona gateway nem cobrança real; R-2 o valor cobrado é o preço do curso exibido no resumo; R-3 a matrícula só é registrada com pagamento aprovado.
+- **Protótipo(s) de tela:** modal “Resumo do pagamento” sobre a página do curso, com título, valor e botões “Confirmar pagamento” e “Cancelar”, e indicação de processamento. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Fluxo básico:**
+  1. O sistema exibe o resumo do pagamento com o título do curso e o valor. (A-1)
+  2. O Aluno aciona “Confirmar pagamento”.
+  3. O sistema processa o pagamento simulado. (E-1)
+  4. O sistema registra o pagamento aprovado.
+  5. Este caso de uso retorna ao UC003 (passo 4).
+
+  ![resumo do pagamento com Confirmar pagamento](prototipos/png/UC019-FB-1.png)
+
+  *Figura 0 – UC019, fluxo básico: resumo do pagamento com Confirmar pagamento*
+
+  ![processando pagamento simulado](prototipos/png/UC019-FB-2.png)
+
+  *Figura 0 – UC019, fluxo básico: processando pagamento simulado*
+- **Fluxos alternativos:**
+  - **A1 – O Aluno cancela no resumo**
+    - A-1.1 O Aluno aciona “Cancelar”.
+    - A-1.2 O sistema fecha o resumo sem registrar pagamento.
+    - A-1.3 Este caso de uso é finalizado.
+
+    ![página do curso sem matrícula após cancelar](prototipos/png/UC003-FB-1.png)
+
+    *Figura 0 – UC019, fluxo alternativo A1: página do curso sem matrícula após cancelar*
+- **Fluxos de exceção:**
+  - **E1 – Pagamento simulado recusado**
+    - E-1.1 O sistema identifica falha no processamento do pagamento simulado.
+    - E-1.2 O sistema informa o erro ao Aluno e não registra o pagamento.
+    - E-1.3 Este caso de uso retorna ao fluxo básico (passo 1).
+
+    ![pagamento recusado: aviso e nova tentativa](prototipos/png/UC019-E1-1.png)
+
+    *Figura 0 – UC019, fluxo de exceção E1: pagamento recusado: aviso e nova tentativa*
 
 ## UC009 – Assistir Aula
 

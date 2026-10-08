@@ -33,9 +33,9 @@
     </section>
 
     <aside class="card stack">
-      <p data-estado="padrao pagamento-recusado processando-pagamento"><strong style="font-size:24px">R$ 249,90</strong></p>
+      <p data-estado="padrao pagamento-recusado processando-pagamento resumo-pagamento"><strong style="font-size:24px">R$ 249,90</strong></p>
       <p data-estado="gratuito"><strong style="font-size:24px">Gratuito</strong></p>
-      <button class="btn primary block" type="button" data-estado="padrao gratuito pagamento-recusado processando-pagamento">Matricular-se</button>
+      <button class="btn primary block" type="button" data-estado="padrao gratuito pagamento-recusado processando-pagamento resumo-pagamento">Matricular-se</button>
       <button class="btn primary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado avaliacao-salva">Continuar assistindo</button>
       <button class="btn secondary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado">Avaliar curso</button>
       <button class="btn secondary block" type="button" data-estado="avaliacao-salva">Editar avaliação</button>
@@ -81,6 +81,19 @@
     <h2>Avaliar curso</h2>
     <p>É preciso concluir ao menos uma aula para avaliar este curso.</p>
     <div class="acoes"><button class="btn secondary" type="button">Fechar</button></div>
+  </div>
+</div>
+
+<div class="overlay" data-estado="resumo-pagamento">
+  <div class="modal stack">
+    <h2>Resumo do pagamento</h2>
+    <p class="small muted">Fundamentos de Pesquisa com Usuários</p>
+    <p><strong style="font-size:24px">R$ 249,90</strong></p>
+    <p class="small muted">Pagamento simulado, nenhuma cobrança real.</p>
+    <div class="acoes">
+      <button class="btn secondary" type="button">Cancelar</button>
+      <button class="btn primary" type="button">Confirmar pagamento</button>
+    </div>
   </div>
 </div>
 
