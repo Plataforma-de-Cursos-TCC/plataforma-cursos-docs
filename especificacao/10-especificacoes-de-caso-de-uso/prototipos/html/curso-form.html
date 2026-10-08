@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Novo curso</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#">Meus cursos</a><a href="#" class="ativo">Novo curso</a></nav><span class="avatar">ML</span></header>
+<main class="center">
+  <form class="card form stack">
+    <h2 data-estado="padrao preenchido erro-campos">Novo curso</h2>
+    <h2 data-estado="edicao">Editar curso</h2>
+
+    <div class="field"><label>Título</label>
+      <div class="input placeholder" data-estado="padrao">Título do curso</div>
+      <div class="input erro placeholder" data-estado="erro-campos">Título do curso</div>
+      <div class="input" data-estado="preenchido edicao">Fundamentos de Pesquisa com Usuários</div>
+      <div class="msg-erro" data-estado="erro-campos">Campo obrigatório.</div>
+    </div>
+
+    <div class="field"><label>Descrição</label>
+      <div class="input placeholder" data-estado="padrao" style="min-height:96px">Descrição do curso</div>
+      <div class="input erro placeholder" data-estado="erro-campos" style="min-height:96px">Descrição do curso</div>
+      <div class="input" data-estado="preenchido edicao" style="min-height:96px">Pesquisa com usuários do início ao fim: planejamento, entrevistas e síntese de achados.</div>
+      <div class="msg-erro" data-estado="erro-campos">Campo obrigatório.</div>
+    </div>
+
+    <div class="field"><label>Preço (R$)</label>
+      <div class="input placeholder" data-estado="padrao">0,00</div>
+      <div class="input erro placeholder" data-estado="erro-campos">0,00</div>
+      <div class="input" data-estado="preenchido edicao">249,90</div>
+      <div class="msg-erro" data-estado="erro-campos">Campo obrigatório.</div>
+    </div>
+
+    <div class="field"><label>Categoria</label>
+      <div class="input placeholder" data-estado="padrao erro-campos">Selecione</div>
+      <div class="input" data-estado="preenchido edicao">Design de Produto</div>
+    </div>
+
+    <div class="grid c2" data-estado="padrao preenchido erro-campos">
+      <button class="btn primary" type="button">Publicar</button>
+      <button class="btn secondary" type="button">Salvar rascunho</button>
+    </div>
+    <button class="btn primary block" type="button" data-estado="edicao">Salvar</button>
+  </form>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>

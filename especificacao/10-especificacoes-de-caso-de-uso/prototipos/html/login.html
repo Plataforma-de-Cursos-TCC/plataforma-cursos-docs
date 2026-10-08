@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Login</title>
+<link rel="stylesheet" href="_base.css">
+</head>
+<body>
+<header class="topbar"><span class="logo">Plataforma de Cursos</span><nav></nav></header>
+<main class="center">
+  <form class="card form stack">
+    <h1>Entrar</h1>
+    <div class="banner aviso" data-estado="sessao-expirada">Sua sessão expirou. Entre novamente para continuar.</div>
+    <div class="banner sucesso" data-estado="senha-redefinida">Senha redefinida. Entre com a nova senha.</div>
+    <div class="banner sucesso" data-estado="conta-criada">Conta criada. Entre para continuar.</div>
+    <div class="banner erro" data-estado="erro-credencial">E-mail ou senha inválidos.</div>
+    <div class="field"><label>E-mail</label>
+      <div class="input" data-estado="padrao erro-credencial">aluno@email.com</div>
+      <div class="input placeholder" data-estado="sessao-expirada senha-redefinida conta-criada">voce@email.com</div>
+    </div>
+    <div class="field"><label>Senha</label>
+      <div class="input" data-estado="padrao erro-credencial">••••••••</div>
+      <div class="input placeholder" data-estado="sessao-expirada senha-redefinida conta-criada">Sua senha</div>
+    </div>
+    <a href="#" class="small">Esqueci minha senha</a>
+    <button class="btn primary block" type="button">Entrar</button>
+    <p class="small muted" style="text-align:center">Não tem conta? <a href="#">Criar conta</a></p>
+  </form>
+</main>
+<script src="_estado.js"></script>
+</body>
+</html>
