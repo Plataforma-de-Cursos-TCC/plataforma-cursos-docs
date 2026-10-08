@@ -1,28 +1,11 @@
 # Declaração de uso de inteligência artificial
 
-<!-- revisar: a v11 traz só o modelo com campos em branco. O texto abaixo registra o uso de IA na montagem deste repositório. Cada integrante deve completar com o uso individual (ferramenta, versão, trechos) antes da entrega. -->
+Conforme a Resolução nº 274/2024 CONSUN e o item 7.1 do plano de ensino:
 
-**Ferramenta(s) de IA utilizada(s) e versão:**
+Durante a preparação deste documento de especificação, os autores usaram Claude Code (Claude Opus 5.5, Anthropic) para transcrever a versão anterior do documento, revisar a conformidade dos itens com o template e o material da disciplina, gerar os diagramas a partir de código e montar o documento final. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
 
-- Claude Code (Claude Opus 5.5, Anthropic): orquestração, revisão e organização do repositório.
-- Modelos auxiliares acionados pelo orquestrador para tarefas de transcrição e pesquisa: Claude Sonnet 5.5, Gemini 3.8 Flash, GPT-OSS 120B, Nemotron 3 Ultra, MiMo-V2.6-Flash e LongCat 2.5 Preview.
-- [FERRAMENTA, VERSÃO usadas individualmente pelos integrantes]
+Durante a preparação deste documento de especificação, os autores usaram Claude Sonnet 5.5 (Anthropic) para apoiar a transcrição dos itens e a pesquisa de produtos similares. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
 
-**Motivos e finalidades do uso:**
+Durante a preparação deste documento de especificação, os autores usaram Gemini 3.8 Flash (Google) para apoiar a pesquisa de produtos similares e a auditoria do documento contra o template. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
 
-- Transcrever o conteúdo da versão v11 do documento (`.docx`) para Markdown, mantendo o texto e ajustando só o formato.
-- Converter diagramas para código (Mermaid), conforme a [ADR 0004](../docs/adr/0004-diagramas-como-codigo.md).
-- Levantar e organizar a pesquisa de produtos similares em [pesquisa/](../pesquisa/README.md), com fontes verificáveis e marcação [Fato]/[Inferência].
-- Redigir rascunhos de PRD, SDD e design system para revisão do grupo.
-- [MOTIVOS adicionais dos integrantes]
-
-**Partes do documento com apoio de IA:**
-
-- Estrutura do repositório, decisões registradas (ADRs) e CONTEXT.
-- Pesquisa de mercado (`pesquisa/`).
-- Transcrição dos itens 1 a 11, do modelo de dados, dos diagramas de sequência e dos casos de teste a partir da v11. O conteúdo de origem é do grupo.
-- Rascunhos em `docs/prd.md`, `docs/sdd.md` e `docs/design-system.md`.
-- [TRECHOS adicionais]
-
-Todo conteúdo gerado ou transcrito com apoio de IA foi revisado por integrantes do grupo antes da entrega.
-<!-- revisar: confirmar que essa revisão aconteceu antes de manter a frase acima. -->
+Durante a preparação deste documento de especificação, os autores usaram GPT-OSS 120B, Nemotron 3 Ultra, MiMo-V2.6-Flash e LongCat 2.5 Preview para apoiar a transcrição da versão anterior do documento. Após usar essas ferramentas, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.

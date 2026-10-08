@@ -9,6 +9,8 @@ origem: v11.md + _lacunas.md
 # Propostas de Preenchimento de Lacunas e UCs Faltantes
 
 > **Regra:** tudo aqui é **proposta** (marcado com `<!-- proposta: ... -->`). O grupo decide o que incorporar.
+>
+> **Atualização de 08/10/2026:** os IDs provisórios e a ideia de realocar RFs entre áreas foram superados pela [ADR-0001](../docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md): fica a numeração da v11, com IDs novos no fim. A proposta RF-A4 (pagamento simulado) foi descartada por repetir o RF014. Ver [pendencias-revisao](pendencias-revisao.md).
 
 ---
 

@@ -3,10 +3,13 @@ id: ra1-tarefas
 titulo: "Quebra de tarefas: RA1 (Especificação do Projeto, itens 1 a 11)"
 tipo: processo
 status: rascunho, aguardando aprovação do grupo
-atualizado: 2026-10-07
+atualizado: 2026-10-08
 relacionados: [ra1-criterios-de-aceite, contexto, adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006]
 ---
+
 # Quebra de Tarefas: RA1 (Especificação do Projeto, itens 1 a 11)
+
+> **Atualização de 08/10/2026:** este plano é o registro histórico de como as tarefas foram abertas. Quatro pontos dele foram revistos e valem as decisões novas: (1) "mínimo 4 por integrante" e os totais "≥16" são meta interna, e o mínimo oficial é de 8 especificações de caso de uso ([ADR-0001](../docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md)); (2) não há IDs provisórios nem renumeração em T12, fica a numeração da v11 com IDs novos no fim; (3) o «extend» sai do caso de uso opcional e aponta para o base ([ADR-0003](../docs/adr/0003-extend-no-sentido-do-te3-3.md)); (4) o item 4 é BPMN 2.0 e os itens 9 e 11 são PlantUML ([ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)), e as tabelas dos itens 6 e 8 seguem só as colunas do template. Os critérios vigentes estão em [ra1-criterios-de-aceite](ra1-criterios-de-aceite.md).
 
 > Plano de tarefas para o GitHub Project do repositório `Plataforma-de-Cursos-TCC/plataforma-cursos-docs`, derivado de [`ra1-criterios-de-aceite.md`](ra1-criterios-de-aceite.md).
 > Os critérios (IDs `Cxx.y`, `X.y`, `K.y`) estão definidos naquele arquivo. Aqui só se referenciam os IDs.

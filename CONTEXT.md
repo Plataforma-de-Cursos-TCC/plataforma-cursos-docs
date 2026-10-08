@@ -3,7 +3,7 @@ id: contexto
 titulo: "Contexto do projeto: leia antes de qualquer tarefa"
 tipo: contexto
 status: vigente
-atualizado: 2026-10-07
+atualizado: 2026-10-08
 relacionados: [mapa-pesquisa, adr-indice, adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006]
 ---
 # Contexto do projeto
@@ -15,12 +15,13 @@ relacionados: [mapa-pesquisa, adr-indice, adr-0001, adr-0002, adr-0003, adr-0004
 - **Nome (sempre exatamente assim):** Plataforma de Cursos.
 - **O que é:** sistema web de cursos online. O Instrutor publica cursos organizados em módulos e aulas, com quiz e gabarito; o Aluno se matricula, assiste às aulas, responde aos quizzes, avalia o curso e tira dúvidas com o Tutor de IA no contexto da aula.
 - **Diferencial pretendido:** o Tutor de IA responde com base no conteúdo da aula que o Aluno está assistindo, e não como um chat genérico. A pesquisa de mercado ([lacunas e diferencial](pesquisa/similares/lacunas-e-diferencial.md)) confirma ou ajusta este ponto.
-- **Fora de escopo:** a lista vigente fica no item 2 da especificação (É / Não é / Faz / Não faz). Até lá, não assuma pagamento, emissão de certificado com validade legal nem aplicativo móvel nativo.
+- **Fora de escopo:** a lista vigente fica no item 2 da especificação (É / Não é / Faz / Não faz). O pagamento da matrícula é apenas simulado (sem cobrança real), e não há emissão de certificado com validade legal nem aplicativo móvel nativo.
 
 ## 2. Atores (nomes idênticos em todos os itens)
 
 | Ator | Papel |
 |---|---|
+| **Usuário** | Ator geral (generalização) de Aluno, Instrutor e Administrador: quem tem conta e faz login e edita o próprio perfil. |
 | **Visitante** | Pessoa sem conta ou sem sessão; navega pelo que é público, cadastra-se e faz login. |
 | **Aluno** | Matricula-se em cursos, assiste às aulas, responde aos quizzes, avalia cursos e conversa com o Tutor de IA. |
 | **Instrutor** | Cadastra cursos, módulos, aulas e quizzes com gabarito; acompanha o desempenho dos alunos no dashboard. |
@@ -48,10 +49,10 @@ Decisão: [ADR-0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md).
 
 | | Decisão | ADR |
 |---|---|---|
-| D1 | **Mínimo de 4 por integrante, sem máximo**; IDs provisórios por área (RF-A1, US-A1, RNF-A1, UC-A1) e renumeração sequencial única (RF001, US001, RNF001, UC001) antes da entrega | [0001](docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) |
+| D1 | **Meta interna de 4 por integrante** (mínimo oficial: 8 especificações de caso de uso); numeração final da v11 (RF001, US001, RNF001, UC001), com IDs novos no fim (RF017…) | [0001](docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) |
 | D2 | Estória no formato **Como / Posso / Para**, com **pelo menos 2 critérios** DADO QUE / QUANDO / ENTÃO | [0002](docs/adr/0002-formato-de-estoria-e-criterios.md) |
-| D3 | **«extend»** no sentido do material da disciplina (TE3_3): a seta sai do caso de uso base para o estendido | [0003](docs/adr/0003-extend-no-sentido-do-te3-3.md) |
-| D4 | **Diagramas como código**: Mermaid em `.mmd` ou bloco no Markdown; BPMN 2.0 em `.bpmn` no item 4 | [0004](docs/adr/0004-diagramas-como-codigo.md) |
+| D3 | **«extend»** no sentido do TE3_3 e da UML: a seta sai do caso de uso opcional e aponta para o base | [0003](docs/adr/0003-extend-no-sentido-do-te3-3.md) |
+| D4 | **Diagramas como código**: BPMN 2.0 (`.bpmn`) no item 4, PlantUML (`.puml`) nos itens 9 e 11, PNG gerado da fonte | [0004](docs/adr/0004-diagramas-como-codigo.md) |
 | D5 | **Tutor de IA como ator sistêmico** | [0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md) |
 | D6 | **Divisão por áreas A a D**, uma por integrante | [0006](docs/adr/0006-divisao-por-areas.md) |
 
