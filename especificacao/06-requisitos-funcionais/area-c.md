@@ -2,7 +2,7 @@
 
 O template exige a lista de requisitos funcionais do sistema, com ator, objetivo atendido e sprint.
 
-Área C: Aprendizagem do aluno. Responsável: <nome do integrante>. IDs: RF-C1, RF-C2… (mínimo 4 por integrante, sem máximo; ADR-0001).
+Área C: Aprendizagem do aluno. Responsável: Lucas Bruno e Silva (`Luc-Bruno`). IDs: RF-C1, RF-C2… (mínimo 4 por integrante, sem máximo; ADR-0001).
 
 <!--
 MODELO A PREENCHER
