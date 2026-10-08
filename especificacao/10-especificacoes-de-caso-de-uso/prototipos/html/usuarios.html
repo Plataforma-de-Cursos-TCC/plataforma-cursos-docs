@@ -13,26 +13,28 @@
 <main class="page stack">
   <h1>Usuários</h1>
   <div class="banner erro" data-estado="proprio-bloqueio">Não é possível bloquear a própria conta.</div>
+  <div class="banner erro" data-estado="propria-exclusao">Não é possível excluir a própria conta.</div>
   <div class="banner erro" data-estado="nao-encontrado">Usuário não encontrado.</div>
+  <div class="banner sucesso" data-estado="excluido">Usuário excluído.</div>
   <div class="row">
     <div class="input placeholder" style="flex:1">Buscar por nome ou e-mail</div>
-    <div class="input" style="width:220px" data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado">Todos os perfis</div>
+    <div class="input" style="width:220px" data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">Todos os perfis</div>
     <div class="input" style="width:220px" data-estado="filtro-aluno">Aluno</div>
   </div>
   <table>
     <thead><tr><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Status</th><th></th></tr></thead>
     <tbody>
-      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado">
+      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">
         <td><div class="row"><span class="avatar">CM</span>Carla Mendes</div></td><td>carla.mendes@email.com</td>
         <td><span class="chip accent">Administrador</span></td><td><span class="chip success">Ativo</span></td>
         <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
-      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado">
+      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">
         <td><div class="row"><span class="avatar">MA</span>Marina Alves</div></td><td>marina.alves@email.com</td>
         <td><span class="chip accent">Instrutor</span></td><td><span class="chip success">Ativo</span></td>
         <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
-      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno">
+      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno confirmar-exclusao propria-exclusao">
         <td><div class="row"><span class="avatar">JS</span>João Silva</div></td><td>joao.silva@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip success">Ativo</span></td>
         <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
@@ -42,7 +44,7 @@
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip danger">Bloqueado</span></td>
         <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
-      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno atualizado nao-encontrado">
+      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno atualizado nao-encontrado confirmar-exclusao excluido propria-exclusao">
         <td><div class="row"><span class="avatar">RC</span>Rafael Costa</div></td><td>rafael.costa@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip danger">Bloqueado</span></td>
         <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
@@ -55,6 +57,13 @@
     <h3>Bloquear João Silva?</h3>
     <p class="small muted" style="margin-top:8px">O acesso de João Silva será revogado imediatamente.</p>
     <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn primary" type="button">Confirmar</button></div>
+  </div>
+</div>
+<div class="overlay" data-estado="confirmar-exclusao">
+  <div class="modal">
+    <h3>Excluir usuário?</h3>
+    <p class="small muted" style="margin-top:8px">A conta de João Silva será excluída. Os dados pessoais serão anonimizados. Esta ação não pode ser desfeita.</p>
+    <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn danger" type="button">Excluir</button></div>
   </div>
 </div>
 <script src="_estado.js"></script>

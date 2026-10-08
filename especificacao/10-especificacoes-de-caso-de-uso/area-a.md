@@ -165,16 +165,16 @@
 
 - **Nome do caso de uso:** Editar Dados do Perfil
 - **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
-- **Descrição:** o Usuário autenticado altera os seus dados de perfil: nome, foto e senha (US003, RF001). O Instrutor também mantém por aqui a minibiografia e os links do perfil de Instrutor (US020, RF016).
+- **Descrição:** o Usuário autenticado altera os seus dados de perfil: nome e foto (US003, RF001). O Instrutor também mantém por aqui a minibiografia e os links do perfil de Instrutor (US020, RF016). A troca de senha fica no UC017, acionado a partir desta tela.
 - **Pré-condições:** o Usuário ter realizado login na plataforma.
 - **Pós-condições:** dados do perfil atualizados e confirmados ao Usuário.
-- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário; R-2 a nova senha segue a mesma política do cadastro (UC012); R-3 a troca de senha exige a senha atual.
-- **Protótipo(s) de tela:** tela “Meu perfil” com campos de nome, foto e senha e botão “Salvar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário.
+- **Protótipo(s) de tela:** tela “Meu perfil” com campos de nome e foto, opção “Alterar senha” e botão “Salvar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Usuário acessa a tela “Meu perfil”.
-  2. O Usuário altera nome, foto ou senha. (A-1)
+  2. O Usuário altera nome ou foto. (A-1) (A-2)
   3. O Usuário aciona “Salvar”.
-  4. O sistema valida os dados informados. (E-1) (E-2)
+  4. O sistema valida os dados informados. (E-1)
   5. O sistema atualiza o perfil e confirma a alteração.
   6. Este caso de uso é finalizado.
 
@@ -185,19 +185,19 @@
   ![perfil com aviso "Alterações salvas"](prototipos/png/UC013-FB-2.png)
 
   *Figura 0 – UC013, fluxo básico: perfil com aviso "Alterações salvas"*
-
-  ![perfil do Instrutor com minibiografia e links](prototipos/png/UC013-FB-3.png)
-
-  *Figura 0 – UC013, fluxo básico: perfil do Instrutor com minibiografia e links*
 - **Fluxos alternativos:**
-  - **A1 – O Usuário altera a senha**
-    - A-1.1 O Usuário informa a senha atual e a nova senha.
-    - A-1.2 O sistema valida a senha atual e a política da nova senha.
-    - A-1.3 Este caso de uso retorna ao fluxo básico (passo 5).
+  - **A1 – O Instrutor edita minibiografia e links**
+    - A-1.1 O sistema identifica que o Usuário é Instrutor e exibe os campos de minibiografia e links do perfil de Instrutor (US020, RF016).
+    - A-1.2 O Instrutor altera a minibiografia ou os links.
+    - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![perfil com bloco de alteração de senha](prototipos/png/UC013-A1-1.png)
+    ![perfil do Instrutor com minibiografia e links](prototipos/png/UC013-A1-1.png)
 
-    *Figura 0 – UC013, fluxo alternativo A1: perfil com bloco de alteração de senha*
+    *Figura 0 – UC013, fluxo alternativo A1: perfil do Instrutor com minibiografia e links*
+  - **A2 – O Usuário aciona “Alterar senha”**
+    - A-2.1 O Usuário aciona “Alterar senha”.
+    - A-2.2 O sistema executa o UC017 – Alterar Senha.
+    - A-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 - **Fluxos de exceção:**
   - **E1 – Campo inválido**
     - E-1.1 O sistema identifica um campo com valor inválido (nome vazio ou imagem fora do formato aceito).
@@ -207,11 +207,54 @@
     ![erro "Informe o nome" no campo Nome](prototipos/png/UC013-E1-1.png)
 
     *Figura 0 – UC013, fluxo de exceção E1: erro "Informe o nome" no campo Nome*
-  - **E2 – Senha atual incorreta**
-    - E-2.1 O sistema identifica que a senha atual informada não confere.
-    - E-2.2 O sistema recusa a troca de senha e informa o erro.
+
+## UC017 – Alterar Senha
+
+- **Nome do caso de uso:** Alterar Senha
+- **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
+- **Descrição:** o Usuário autenticado troca a própria senha informando a senha atual e a nova senha (US003, RF001). Estende o UC013 – Editar Dados do Perfil, a partir da opção “Alterar senha”.
+- **Pré-condições:** o Usuário ter realizado login na plataforma e estar na tela “Meu perfil” (UC013).
+- **Pós-condições:** senha do Usuário substituída pela nova e alteração confirmada ao Usuário.
+- **Regras de negócio:** R-1 a troca de senha exige a senha atual; R-2 a nova senha segue a mesma política do cadastro (UC012).
+- **Protótipo(s) de tela:** bloco “Alterar senha” na tela “Meu perfil”, com campos de senha atual, nova senha e confirmação e botões “Salvar senha” e “Cancelar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Fluxo básico:**
+  1. O sistema exibe o bloco “Alterar senha” na tela “Meu perfil”.
+  2. O Usuário informa a senha atual, a nova senha e a confirmação. (A-1)
+  3. O Usuário aciona “Salvar senha”.
+  4. O sistema valida a senha atual e a política da nova senha. (E-1) (E-2)
+  5. O sistema substitui a senha e confirma a alteração.
+  6. Este caso de uso é finalizado.
+
+  ![perfil com bloco de alteração de senha](prototipos/png/UC017-FB-1.png)
+
+  *Figura 0 – UC017, fluxo básico: perfil com bloco de alteração de senha*
+
+  ![perfil com aviso "Senha alterada"](prototipos/png/UC017-FB-2.png)
+
+  *Figura 0 – UC017, fluxo básico: perfil com aviso "Senha alterada"*
+- **Fluxos alternativos:**
+  - **A1 – O Usuário cancela a alteração**
+    - A-1.1 O Usuário aciona “Cancelar”.
+    - A-1.2 O sistema fecha o bloco “Alterar senha” sem alterar a senha.
+    - A-1.3 Este caso de uso é finalizado.
+
+    ![perfil sem alteração de senha após cancelar](prototipos/png/UC013-FB-1.png)
+
+    *Figura 0 – UC017, fluxo alternativo A1: perfil sem alteração de senha após cancelar*
+- **Fluxos de exceção:**
+  - **E1 – Senha atual incorreta**
+    - E-1.1 O sistema identifica que a senha atual informada não confere.
+    - E-1.2 O sistema recusa a troca de senha e informa o erro.
+    - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
+
+    ![erro "Senha atual incorreta"](prototipos/png/UC017-E1-1.png)
+
+    *Figura 0 – UC017, fluxo de exceção E1: erro "Senha atual incorreta"*
+  - **E2 – Nova senha fora da política**
+    - E-2.1 O sistema identifica que a nova senha não segue a política de senha (R-2) ou não confere com a confirmação.
+    - E-2.2 O sistema indica o campo e informa a regra.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![erro "Senha atual incorreta"](prototipos/png/UC013-E2-1.png)
+    ![erro de nova senha fora da política](prototipos/png/UC017-E2-1.png)
 
-    *Figura 0 – UC013, fluxo de exceção E2: erro "Senha atual incorreta"*
+    *Figura 0 – UC017, fluxo de exceção E2: erro de nova senha fora da política*
