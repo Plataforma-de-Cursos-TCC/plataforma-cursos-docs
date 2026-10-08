@@ -3,7 +3,7 @@ id: design-system
 titulo: "Design system"
 tipo: documento-projeto
 status: rascunho
-atualizado: 2026-10-07
+atualizado: 2026-10-08
 ---
 # Design system
 
@@ -11,7 +11,7 @@ Este documento descreve o visual da Plataforma de Cursos a partir dos 16 protót
 
 Fato extraído do cabeçalho do protótipo de alta fidelidade: o design system se chama "Institucional Confiável", usa Source Serif 4 e Inter e é baseado em shadcn/ui. [Fato]
 
-Os protótipos de alta fidelidade existem **só em tema escuro**. Todo valor "estimado do protótipo" é, portanto, do tema escuro; o tema claro é proposta (seção 6).
+Os protótipos de alta fidelidade foram medidos **em tema escuro**. Todo valor "estimado do protótipo" da seção 1.1 é, portanto, do tema escuro. O tema claro (seção 1.2) é o padrão dos protótipos e do DOCX; o escuro fica em `png/escuro/` (seção 6).
 
 ## 1. Tokens de cor
 
@@ -39,25 +39,29 @@ Observações:
 - A paleta é um neutro frio quase verde-azulado com uma primária verde-água e um roxo de apoio. Não há cor de **aviso** no protótipo. <!-- proposta: aviso necessário para estados como "prazo do quiz" ou "senha fraca"; sugerido `warning` `#E3B341` no escuro, contraste 8,73:1 sobre `surface` -->
 - Os valores acima têm precisão de amostragem de imagem JPEG: esperar diferença de 1 a 3 níveis por canal em relação ao design de origem.
 
-### 1.2 Tema claro (proposta)
+### 1.2 Tema claro
 
-<!-- proposta: o protótipo não tem tema claro; tokens derivados dos escuros, ajustados para passar em WCAG 2.1 AA -->
+Tema padrão: os protótipos e o DOCX usam este tema. Os tokens derivam dos escuros e passam em WCAG 2.1 AA.
 
 | Token | Hex | Contraste (par) |
 |---|---|---|
 | `bg` | `#FFFFFF` | |
 | `surface` | `#F4F6F6` | |
-| `border` | `#8A9193` | 3,21:1 sobre `bg` (componente, mínimo 3:1) |
-| `text` | `#14191B` | 17,73:1 sobre `bg` |
-| `text-muted` | `#4B5557` | 7,67:1 sobre `bg` |
-| `primary` | `#2D7A74` | 5,06:1 sobre `bg` |
-| `on-primary` | `#FFFFFF` | 5,06:1 sobre `primary` |
+| `surface-raised` | `#E6EBEB` | |
+| `border` | `#7A8285` | 3,92:1 sobre `bg`; 3,61:1 sobre `surface` (componente, mínimo 3:1) |
+| `field-border` | `#6B7274` | 4,90:1 sobre `bg`; 4,52:1 sobre `surface` |
+| `text` | `#14191B` | 17,73:1 sobre `bg`; 14,73:1 sobre `surface-raised` |
+| `text-muted` | `#4B5557` | 7,67:1 sobre `bg`; 7,08:1 sobre `surface` |
+| `text-placeholder` | `#6B7274` | 4,90:1 sobre `bg`; 4,52:1 sobre `surface` |
+| `primary` | `#0F6E6A` | 6,07:1 sobre `bg`; 5,60:1 sobre `surface`; 5,04:1 sobre `surface-raised` |
+| `on-primary` | `#FFFFFF` | 6,07:1 sobre `primary` |
 | `accent` / `accent-bg` | `#5B4FB5` / `#EEEBFA` | 5,54:1 |
-| `success` / bg | `#1F6B3A` / `#E3F2E8` | 5,63:1 |
-| `danger` / bg | `#A32B22` / `#FBE9E7` | 6,12:1 |
-| `warning` / bg | `#8A5A00` / `#FFF4D6` | 5,41:1 |
+| `success` / `success-bg` | `#1F6B3A` / `#E3F2E8` | 5,63:1 |
+| `danger` / `danger-bg` | `#A32B22` / `#FBE9E7` | 6,12:1 |
+| `warning` / `warning-bg` | `#8A5A00` / `#FFF4D6` | 5,41:1 |
+| `neutral-chip` | `#4B5557` sobre `surface-raised` | 6,38:1 |
 
-A `primary` do escuro (`#52A19B`) não serve no claro: dá menos de 3:1 sobre branco. Por isso o claro usa um tom mais escuro.
+A `primary` do escuro (`#52A19B`) é a variação clara de `#0F6E6A`. Sobre o fundo escuro `#101417`, `#0F6E6A` dá só 3,05:1 e reprova AA; `#52A19B` dá 6,11:1. Por isso cada tema tem a sua.
 
 ### 1.3 Contraste dos pares do protótipo (escuro)
 
@@ -169,7 +173,7 @@ Meta: WCAG 2.1 nível AA. O protótipo cobre pouco desta seção; o que é medid
 
 ## 6. Modo escuro
 
-O protótipo de alta fidelidade é **todo escuro**: o escuro é o tema de referência estimado, e o claro é proposta (tokens na seção 1.2). Os protótipos de baixa fidelidade também são escuros, em tons de cinza. [Fato]
+Os protótipos de alta fidelidade foram medidos em tema escuro (valores da seção 1.1). O tema claro (seção 1.2) é o padrão dos protótipos e do DOCX. O escuro fica em `png/escuro/` e é ativado com `?tema=escuro` na URL do protótipo. Os protótipos de baixa fidelidade são escuros, em tons de cinza. [Fato]
 
 <!-- proposta: regras de troca de tema -->
 - Tokens semânticos (`bg`, `surface`, `text`, `primary`…) como variáveis CSS; o tema muda trocando o conjunto de valores, nunca o nome do token.
@@ -198,5 +202,5 @@ Sem protótipo na v11: UC010 em diante. Os componentes deste documento cobrem es
 ## Pendências para o grupo
 
 - A tela 2 e a tela 5 mostram **preço** do curso ("R$ 249,90", "Preço (R$)"), e o CONTEXT.md manda não assumir pagamento. Decidir se preço é só informativo.
-- O tema claro e as correções de contraste da seção 1.3 precisam de aprovação antes de virar token de código.
+- As correções de contraste da seção 1.3 (escuro) precisam de aprovação antes de virar token de código. O tema claro da seção 1.2 já está nos protótipos.
 - O arquivo de origem do protótipo (Figma ou equivalente) não está no repositório; os hex deste documento são amostras de imagem JPEG.

@@ -1,6 +1,18 @@
-/* Tokens e componentes do docs/design-system.md (tema escuro). */
+/* Tokens e componentes do docs/design-system.md. Tema claro em :root (padrão dos protótipos e do DOCX);
+   tema escuro em [data-theme="escuro"], ativado por ?tema=escuro (ver _estado.js). */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:wght@600;700&display=swap");
 :root {
+  --bg: #FFFFFF; --surface: #F4F6F6; --surface-raised: #E6EBEB; --border: #7A8285; --field-border: #6B7274;
+  --text: #14191B; --text-muted: #4B5557; --text-placeholder: #6B7274;
+  --primary: #0F6E6A; --on-primary: #FFFFFF;
+  --accent: #5B4FB5; --accent-bg: #EEEBFA;
+  --success: #1F6B3A; --success-bg: #E3F2E8;
+  --danger: #A32B22; --danger-bg: #FBE9E7;
+  --warning: #8A5A00; --warning-bg: #FFF4D6;
+  --neutral-chip: #4B5557;
+  --serif: "Source Serif 4", Georgia, serif; --sans: Inter, system-ui, sans-serif;
+}
+[data-theme="escuro"] {
   --bg: #101417; --surface: #181D20; --surface-raised: #222A2C; --border: #2B3033; --field-border: #6B7274;
   --text: #FBFFFF; --text-muted: #A1A6A9; --text-placeholder: #8F9496;
   --primary: #52A19B; --on-primary: #001E15;
@@ -9,7 +21,6 @@
   --danger: #CE857F; --danger-bg: #332323;
   --warning: #E3B341; --warning-bg: #332B17;
   --neutral-chip: #A3AFAF;
-  --serif: "Source Serif 4", Georgia, serif; --sans: Inter, system-ui, sans-serif;
 }
 * { box-sizing: border-box; margin: 0; }
 body { background: var(--bg); color: var(--text); font: 400 16px/1.5 var(--sans); min-height: 100vh; }
