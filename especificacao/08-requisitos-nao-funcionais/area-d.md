@@ -13,6 +13,5 @@ O template exige a lista de requisitos não-funcionais, classificados segundo a 
 | RNF-D5 (RNF011) | Backup do banco de dados com restauração testada | Confiabilidade | - | Backup diário; restauração testada mensalmente. |
 | RNF-D6 (RNF016) | Trilha de auditoria das ações administrativas | Segurança | - | Registro de 100% das ações administrativas, retido por 12 meses. |
 
-<!-- revisar: RNF-D6 (RNF016) é requisito de segurança ligado a ações administrativas (UC016 / gerenciar usuários); alocado na área do UC relacionado conforme regra de ingestão (ADR 0006) -->
 
 <!-- revisar: a v11 classifica diretamente por característica da ISO/IEC 25010 sem coluna de subcaracterística; preenchido com '-' sem inventar dado -->
