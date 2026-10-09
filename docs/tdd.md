@@ -550,22 +550,22 @@ Códigos de erro padrão da API:
 
 ### 3.2 Paginação
 
-Todas as listagens potencialmente extensas (catálogo de cursos, aulas, avaliações, matrículas e auditoria de usuários) adotam paginação estruturada via query parameters (`?page=1&per_page=15`), retornando metadados consolidados no envelope da resposta (RNF009):
+Toda listagem é paginada ([ADR-0009](adr/0009-listagens-na-url-e-paginacao.md)). Os parâmetros são `page` (padrão 1), `per_page` (padrão 20, máximo 100), `sort` (lista branca de campos; prefixo `-` para decrescente, com desempate por `id`) e os filtros próprios de cada rota. Os mesmos parâmetros ficam na URL da tela, que é a fonte do estado de filtros e página. Cada tela usa um API Resource que devolve somente os campos que ela exibe. Metadados consolidados seguem no envelope da resposta (RNF009):
 
 ```json
 {
   "data": [ ... ],
   "meta": {
     "currentPage": 1,
-    "perPage": 15,
+    "perPage": 20,
     "totalItems": 42,
     "totalPages": 3
   },
   "links": {
-    "first": "/api/v1/courses?page=1&per_page=15",
-    "last": "/api/v1/courses?page=3&per_page=15",
+    "first": "/api/v1/courses?page=1&per_page=20",
+    "last": "/api/v1/courses?page=3&per_page=20",
     "prev": null,
-    "next": "/api/v1/courses?page=2&per_page=15"
+    "next": "/api/v1/courses?page=2&per_page=20"
   }
 }
 ```
@@ -578,6 +578,8 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 |---|---|---|---|
 | **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma (público) | UC012 |
 | | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público) | UC005 |
+| | `POST /api/v1/auth/refresh` | Troca o refresh token do cookie por novo par de cookies, com rotação (cookie de refresh presente apenas com `rememberMe`) | UC005 |
+| | `GET /api/v1/auth/me` | Dados do usuário autenticado, para restaurar a sessão ao carregar a SPA (autenticado) | UC005 |
 | | `POST /api/v1/auth/logout` | Encerramento de sessão e invalidação do token (autenticado) | UC005 |
 | | `POST /api/v1/auth/forgot-password` | Solicitação de link de redefinição de senha com validade de 30 min (público) | UC011 |
 | | `POST /api/v1/auth/reset-password` | Redefinição de senha com token recebido por e-mail (público) | UC011 |
@@ -617,9 +619,9 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) com criptografia assimétrica (chaves pública e privada RSA/EdDSA), dispensando sessões com estado no servidor web da API e assegurando alta escalabilidade (RNF001).
 - **Emissão e Assinatura:** No login bem-sucedido (UC005), a API assina o JWT utilizando sua chave privada. O token carrega claims padrão (`sub` com UUID do usuário, `role`, `iat`, `exp`).
 - **Validação:** Requisições subsequentes são validadas pelo middleware da API utilizando a chave pública, eliminando queries ao banco de dados apenas para checagem criptográfica do token.
-- **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Lax`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
+- **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Strict`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
 - **Tempo de Vida (TTL):** O JWT possui TTL de 1 hora (RNF001 e UC005). Ao expirar, o front-end renova a sessão com o refresh token da opção "manter conectado", quando existir; sem ele, o usuário reautentica.
-- **Manter conectado:** No login, o campo booleano `rememberMe` decide se a API também emite um refresh token rotativo, em cookie `HttpOnly` de vida longa. Cada renovação invalida o anterior. A duração será definida em ADR próprio.
+- **Manter conectado:** No login, o campo booleano `rememberMe` decide se a API também emite um refresh token rotativo, em cookie `HttpOnly` de vida longa. Cada renovação invalida o anterior. A duração (30 dias) e a rotação estão definidas no [ADR-0008](adr/0008-sessao-jwt-em-cookie.md).
 - **Revogação e Blocklist:** Na Sprint 2, a invalidação antecipada (logout imediato ou bloqueio administrativo de usuário, UC008/UC018) será realizada por meio de uma blocklist mantida em Redis pelo tempo residual de expiração do token.
 
 ### 4.2 Autorização, Perfis e Verificação de Propriedade (*Ownership*)
@@ -698,4 +700,6 @@ As decisões arquiteturais do projeto são formalizadas e mantidas como Architec
 | [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md) | D5 | **Tutor de IA como ator sistêmico:** Modela o Tutor como ator secundário participante de casos de uso sem iniciar fluxos autônomos. | 2, 5, 6, 9, 10 |
 | [ADR-0006](adr/0006-divisao-por-areas.md) | D6 | **Divisão por áreas de A a D:** Estrutura o sistema e o trabalho da equipe em 4 áreas funcionais especializadas. | 6, 7, 8, 10 |
 | [ADR-0007](adr/0007-stack-e-bancos.md) | D7 | **Definição da stack tecnológica e bancos de dados:** Formaliza Next.js SPA, API Laravel 13 modular, MySQL 8 relacional e `ai-service` físico com PostgreSQL 16 + pgvector. | 5, 11 |
+| [ADR-0008](adr/0008-sessao-jwt-em-cookie.md) | D8 | **Sessão com JWT em cookie HttpOnly:** Token de acesso de 1 hora, refresh token rotacionado para «manter conectado» e blocklist no Redis. | 5, 11 |
+| [ADR-0009](adr/0009-listagens-na-url-e-paginacao.md) | D9 | **Listagens com estado na URL e paginação obrigatória:** Filtros, ordenação e página na query string, `per_page` limitado e resposta mínima por tela. | 5, 11 |
 
