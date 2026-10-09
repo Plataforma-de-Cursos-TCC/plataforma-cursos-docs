@@ -31,12 +31,12 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 | UC014 – Gerenciar Módulos do Curso | US005 | RF003 | TC013, TC014, TC015 | Coberto |
 | UC015 – Gerenciar Aulas do Curso | US006 | RF004 | TC016, TC017, TC018 | Coberto |
 | UC016 – Acessar Área Protegida por Perfil | US015 | RF018 | TC043, TC044, TC045 | Coberto |
-| UC017 – Alterar Senha | US003 | RF001 | TC061, TC062 | Coberto |
+| UC017 – Alterar Senha | US021 | RF019 | TC061, TC062, TC064 | Coberto |
 | UC018 – Excluir e Anonimizar Usuário | US016 | RF012 | TC063 | Coberto |
 | UC019 – Processar Pagamento Simulado | US018 | RF014 | TC052, TC053, TC054 | Coberto |
 | UC020 – Consultar Catálogo de Cursos | US019 | RF015 | TC055, TC056, TC057 | Coberto |
 
-*Todos os 20 casos de uso e as 20 estórias de usuário possuem casos de teste especificados.*
+*Todos os 20 casos de uso e as 21 estórias de usuário possuem casos de teste especificados.*
 
 ## 2. Histórico de Medições do CI
 

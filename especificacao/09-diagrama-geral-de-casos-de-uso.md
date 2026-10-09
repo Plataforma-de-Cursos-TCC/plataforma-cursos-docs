@@ -30,3 +30,4 @@ A coluna Objetivo indica qual dos 3 objetivos do item 1 o RF atende.
 | RF016 | UC013 (fluxo A1) | 1 | B | Could Have | Apresenta o Instrutor aos alunos. |
 | RF017 | UC005 | 1 | A | Must Have | Acesso às áreas da plataforma. |
 | RF018 | UC016 | 1 | D | Must Have | Cada perfil vê só a sua área. |
+| RF019 | UC017 | 1 | A | Should Have | Permite trocar a senha sem perder o acesso à conta. |

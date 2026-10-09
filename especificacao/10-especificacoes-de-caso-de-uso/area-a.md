@@ -26,7 +26,7 @@
 - **Fluxos alternativos:**
   - **A1 – O Visitante escolhe o perfil de Instrutor**
     - A-1.1 O Visitante seleciona a opção de cadastro como Instrutor.
-    - A-1.2 O sistema marca a conta para criação com perfil Instrutor e orienta o preenchimento do perfil de Instrutor depois do login (RF016).
+    - A-1.2 O sistema marca a conta para criação com perfil Instrutor e orienta o preenchimento do perfil de Instrutor depois do login.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
     ![formulário de cadastro com perfil Instrutor marcado](prototipos/png/UC012-A1-1.png)
@@ -216,16 +216,16 @@
 
 - **Nome do caso de uso:** Alterar Senha
 - **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
-- **Descrição:** o Usuário autenticado troca a própria senha informando a senha atual e a nova senha (US003, RF001). Estende o UC013 – Editar Dados do Perfil, a partir da opção “Alterar senha”.
+- **Descrição:** o Usuário autenticado troca a própria senha informando a senha atual e a nova senha (US021, RF019). Estende o UC013 – Editar Dados do Perfil, a partir da opção “Alterar senha”.
 - **Pré-condições:** o Usuário ter realizado login na plataforma e estar na tela “Meu perfil” (UC013).
 - **Pós-condições:** senha do Usuário substituída pela nova e alteração confirmada ao Usuário.
-- **Regras de negócio:** R-1 a troca de senha exige a senha atual; R-2 a nova senha segue a mesma política do cadastro (UC012).
+- **Regras de negócio:** R-1 a troca de senha exige a senha atual; R-2 a nova senha segue a mesma política do cadastro (UC012); R-3 a confirmação deve coincidir com a nova senha.
 - **Protótipo(s) de tela:** bloco “Alterar senha” na tela “Meu perfil”, com campos de senha atual, nova senha e confirmação e botões “Salvar senha” e “Cancelar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O sistema exibe o bloco “Alterar senha” na tela “Meu perfil”.
   2. O Usuário informa a senha atual, a nova senha e a confirmação. (A-1)
   3. O Usuário aciona “Salvar senha”.
-  4. O sistema valida a senha atual e a política da nova senha. (E-1) (E-2)
+  4. O sistema valida a senha atual, a política da nova senha e a confirmação. (E-1) (E-2) (E-3)
   5. O sistema substitui a senha e confirma a alteração.
   6. Este caso de uso é finalizado.
 
@@ -255,10 +255,14 @@
 
     *Figura 0 – UC017, fluxo de exceção E1: erro "Senha atual incorreta"*
   - **E2 – Nova senha fora da política**
-    - E-2.1 O sistema identifica que a nova senha não segue a política de senha (R-2) ou não confere com a confirmação.
+    - E-2.1 O sistema identifica que a nova senha não segue a política de senha (R-2).
     - E-2.2 O sistema indica o campo e informa a regra.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
     ![erro de nova senha fora da política](prototipos/png/UC017-E2-1.png)
 
     *Figura 0 – UC017, fluxo de exceção E2: erro de nova senha fora da política*
+  - **E3 – Confirmação não confere**
+    - E-3.1 O sistema identifica que a confirmação informada é diferente da nova senha (R-3).
+    - E-3.2 O sistema indica o campo de confirmação e solicita que a informação seja repetida.
+    - E-3.3 Este caso de uso retorna ao fluxo básico (passo 2).

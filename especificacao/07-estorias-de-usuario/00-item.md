@@ -24,3 +24,4 @@
 | US018 | Registrar pagamento simulado da matrícula | RF014 | [area-c.md](area-c.md) |
 | US019 | Consultar catálogo de cursos por categoria | RF015 | [area-c.md](area-c.md) |
 | US020 | Gerenciar perfil do instrutor | RF016 | [area-b.md](area-b.md) |
+| US021 | Alterar senha | RF019 | [area-a.md](area-a.md) |

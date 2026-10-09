@@ -58,7 +58,7 @@ Escopo alinhado ao item 2, [É – Não é – Faz – Não faz](../especificaca
 *Organizado por áreas A‑D conforme ADR‑0006.*
 
 - **Área A – Acesso e conta**: Registro, login, recuperação de senha, perfis. ([item 6](../especificacao/06-requisitos-funcionais/00-item.md); detalhamento nos arquivos `area-a.md` do item 7, [estórias](../especificacao/07-estorias-de-usuario/area-a.md), e do item 10, [casos de uso](../especificacao/10-especificacoes-de-caso-de-uso/area-a.md))
-  - IDs: RF001, RF013, RF017
+  - IDs: RF001, RF013, RF017, RF019
 - **Área B – Autoria do instrutor**: Criação de cursos, módulos, aulas, quizzes e gabaritos. ([item 6](../especificacao/06-requisitos-funcionais/00-item.md); detalhamento nos arquivos `area-b.md` do item 7, [estórias](../especificacao/07-estorias-de-usuario/area-b.md), e do item 10, [casos de uso](../especificacao/10-especificacoes-de-caso-de-uso/area-b.md))
   - IDs: RF002, RF003, RF004, RF007, RF016
 - **Área C – Aprendizagem do aluno**: Matrícula, visualização de aulas, quizzes, avaliação, interação com Tutor de IA. ([item 6](../especificacao/06-requisitos-funcionais/00-item.md); detalhamento nos arquivos `area-c.md` do item 7, [estórias](../especificacao/07-estorias-de-usuario/area-c.md), e do item 10, [casos de uso](../especificacao/10-especificacoes-de-caso-de-uso/area-c.md))

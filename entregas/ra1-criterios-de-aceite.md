@@ -32,7 +32,7 @@ Este protocolo reúne boas práticas para agentes de IA: manter uma lista de tar
 
 1. **Condição de conclusão.** O trabalho só está concluído quando **todos** os critérios aplicáveis deste arquivo (IDs `Cxx.y` e `X.y`) estiverem marcados como atendidos, cada um com evidência. Qualquer outro estado é "em andamento".
 2. **Lista de tarefas antes de começar.** Antes de produzir qualquer coisa, crie uma lista de tarefas com **um item por ID de critério** no escopo pedido. Não agrupe critérios em um único item.
-3. **Evidência por critério.** Um critério só pode ser marcado como atendido com evidência concreta: seção do documento, quantidade contada (ex.: "18 RFs, RF001 a RF018"), nome do arquivo do diagrama. "Feito" sem evidência não conta.
+3. **Evidência por critério.** Um critério só pode ser marcado como atendido com evidência concreta: seção do documento, quantidade contada (ex.: "19 RFs, RF001 a RF019"), nome do arquivo do diagrama. "Feito" sem evidência não conta.
 4. **Contagem por comando, não por estimativa.** Todo critério com número mínimo (≥3, ≥8, ≥2 por estória etc.) deve ser conferido contando de fato: listar e contar os itens, não estimar.
 5. **Não encerrar com itens abertos.** Se a lista ainda tem itens abertos, não encerre com um resumo, uma oferta de continuar ou uma pergunta que não bloqueia o resto. Continue. Só pare se houver bloqueio real, e nesse caso diga **qual critério** está bloqueado e **por quê**.
 6. **Verificação independente ao final.** Ao terminar, faça uma segunda passagem de verificação **separada da escrita**: de preferência um subagente ou uma sessão nova que receba **apenas** este arquivo e o documento produzido, e percorra todos os IDs marcando atendido / não atendido / evidência. Qualquer "não atendido" volta para a lista de tarefas.
@@ -171,12 +171,12 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 **Template:** tabela `# | REQUISITO FUNCIONAL | ATOR / USUÁRIO | SPRINT`. Relacionar **todos** os requisitos do sistema completo.
 
-- [x] **C06.1** Todos os requisitos do sistema completo estão relacionados. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (RF001-RF018)
-- [x] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: mantém a numeração da v11 e os requisitos novos entram no fim (RF017, RF018…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (sem lacunas, sem ID provisorio)
+- [x] **C06.1** Todos os requisitos do sistema completo estão relacionados. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (RF001-RF019)
+- [x] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: mantém a numeração da v11 e os requisitos novos entram no fim (RF017, RF018, RF019…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (sem lacunas, sem ID provisorio)
 - [ ] **C06.3** Cada RF está redigido de forma clara e **testável**: uma ação verificável, sem "etc." e sem termos vagos. — pendente: testabilidade de cada RF nao conferida
-- [x] **C06.4** Cada RF é rastreado a um **ator** (coluna preenchida, com ator do item 5). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (coluna ator preenchida)
+- [x] **C06.4** Cada RF é rastreado a um **ator** (coluna preenchida, com ator do item 5). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (coluna ator preenchida)
 - [x] **C06.5** Cada RF está ligado a um objetivo do item 1 (coluna Objetivo da rastreabilidade do item 9), como pede a rubrica do item 6. — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md:11-28 (coluna OBJETIVO) e PR #68
-- [x] **C06.6** A **priorização** está presente: coluna SPRINT preenchida e/ou prioridade. A coluna fica vazia enquanto as áreas escrevem; o grupo divide em sprints na consolidação (T06), depois que todos os RFs e RNFs estiverem definidos. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 (coluna SPRINT preenchida)
+- [x] **C06.6** A **priorização** está presente: coluna SPRINT preenchida e/ou prioridade. A coluna fica vazia enquanto as áreas escrevem; o grupo divide em sprints na consolidação (T06), depois que todos os RFs e RNFs estiverem definidos. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (coluna SPRINT preenchida)
 - [ ] **C06.7** Há uma **breve justificativa** da priorização. — pendente: justificativa da priorizacao nao encontrada na rodada
 - [ ] **C06.8** Os RFs cobrem o núcleo do produto: cadastro de curso, módulos, aulas e quiz com gabarito; matrícula, progresso e avaliação do curso; correção automática do quiz; conversa com o Tutor de IA no contexto da aula; dashboard com filtro; gestão de usuários e perfis; acesso a área protegida por perfil. Não se limitam a CRUD. — pendente: cobertura do nucleo do produto nao conferida
 - [ ] **C06.9** Nenhum RF descreve atributo de qualidade (desempenho, segurança, usabilidade etc.): isso é RNF e vai para o item 8. O RF descreve o que o sistema faz (plano de ensino, ID1.3). — pendente: RFs com atributo de qualidade nao conferidos
@@ -185,7 +185,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 **Template:** para cada estória, `USnnn – REQUISITO n: <nome>` (ex.: `US001 – REQUISITO 1: <nome>`; ADR-0001), **COMO / POSSO / PARA** e Critérios de Aceite numerados em **DADO QUE / QUANDO / ENTÃO** (ADR-0002).
 
-- [x] **C07.1** Pelo menos uma estória por RF. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 US cobrem RF001-RF018)
+- [x] **C07.1** Pelo menos uma estória por RF. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/07-estorias-de-usuario/area-*.md (21 US cobrem RF001-RF019)
 - [x] **C07.2** Todas no formato **COMO / POSSO / PARA**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (20 COMO/POSSO/PARA)
 - [x] **C07.3** Cada estória cita no cabeçalho o RF que atende, no formato `USnnn – REQUISITO n: <nome>` do template. A numeração das estórias é contínua e independente da dos RFs (adendo do ADR-0001). — evidência: docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md:42 (adendo 08/10/2026) e cabeçalhos em especificacao/07-estorias-de-usuario/area-*.md:1, 17, 33, 49 etc.
 - [x] **C07.4** Cada estória tem **≥2 critérios de aceite**. — evidência: especificacao/07-estorias-de-usuario/area-*.md (3 criterios por US)
@@ -275,14 +275,14 @@ Itens 1, 2, 3  (base do produto)
 Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 
 - [ ] **K.1** Os mesmos atores (nomes idênticos) aparecem nos itens 4, 5, 6, 7, 9, 10 e 11. — pendente: UC013 usa 'Usuario' (puml:52 USU) e US020 usa 'Instrutor'; decisao do Lucas cobre o mapeamento RF x UC, nao a grafia dos atores; demais itens nao conferidos
-- [x] **K.2** Todo RF (item 6) tem **pelo menos uma** estória (item 7) e toda estória aponta para um RF existente. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-24 e especificacao/07-estorias-de-usuario/area-*.md
+- [x] **K.2** Todo RF (item 6) tem **pelo menos uma** estória (item 7) e toda estória aponta para um RF existente. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 e especificacao/07-estorias-de-usuario/area-*.md
 - [x] **K.3** Todo RF está coberto por **pelo menos um** caso de uso no diagrama (item 9). — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md (todo RF mapeado a UC)
 - [ ] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — pendente: UC013 conferido (puml:31); demais 19 UCs nao conferidos item a item
 - [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito. — pendente: US020 x UC013 A1 sem contradicao (area-a.md:189-196); demais estorias x fluxos nao conferidas
 - [ ] **K.6** Os objetivos (item 1) são atendidos por algum RF e aparecem refletidos na Visão (item 3). — pendente: objetivos x RFs x visao nao conferidos
 - [ ] **K.7** Nada listado em "Não faz" (item 2) aparece como RF, estória ou caso de uso. — pendente: 'Nao faz' x RFs/US/UCs nao conferido item a item
 - [ ] **K.8** As lanes do BPMN (item 4) e as raias do diagrama de atividades (item 11) usam os atores do item 5. — pendente: lanes BPMN e raias UML nao conferidas
-- [x] **K.9** As contagens conferem por contagem real: especificações ≥8 (mínimo oficial), cada estória com ≥2 critérios, ≥1 estória por RF; a meta interna (16 RF, 16 RNF, 16 casos de uso) é conferida à parte. — evidência: contagens reais: 20 UCs, 20 US (3 criterios cada), 18 RFs
+- [x] **K.9** As contagens conferem por contagem real: especificações ≥8 (mínimo oficial), cada estória com ≥2 critérios, ≥1 estória por RF; a meta interna (16 RF, 16 RNF, 16 casos de uso) é conferida à parte. — evidência: contagens reais: 20 UCs, 21 US (3 criterios cada), 19 RFs
 - [ ] **K.10** Todos os critérios gerais X.1 a X.10 estão atendidos. — pendente: X.1, X.5, X.6 e X.10 pendentes
 - [ ] **K.11** Nenhum item contradiz o `CONTEXT.md` nem as decisões D1–D6 (`docs/adr/`), e todo número, preço ou recurso de concorrente usado na especificação cita a fonte da pesquisa (`pesquisa/fontes.md`). — pendente: CONTEXT.md e fontes da pesquisa nao conferidos
 - [x] **K.12** Não há issue aberta com o rótulo `pendencia-cruzada`: toda amarração entre áreas foi resolvida, com o ID do requisito que a atende ou com a decisão do grupo registrada (`entregas/ra1-tarefas.md`, seção 1.4). — evidência: gh issue list --label pendencia-cruzada --state open (vazio)

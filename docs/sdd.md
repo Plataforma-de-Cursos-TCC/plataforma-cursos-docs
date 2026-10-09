@@ -147,7 +147,7 @@ flowchart TB
 | Área | Componente | Casos de uso e RFs que atende (v11) |
 |---|---|---|
 | A | Autenticação | UC005 Realizar Login, UC012 (cadastro), UC011 Recuperar Senha; RF001, RF013, RF017 |
-| A | Perfil do usuário | UC013 Editar Dados do Perfil, UC017 Alterar Senha; RF001 |
+| A | Perfil do usuário | UC013 Editar Dados do Perfil, UC017 Alterar Senha; RF001, RF019 |
 | B | Cursos e categorias | UC006 Cadastrar Curso; RF002 |
 | B | Módulos e aulas | UC014, UC015; RF003, RF004 |
 | B | Quiz e gabarito | UC004 Cadastrar Quiz com Gabarito; RF007 |

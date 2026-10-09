@@ -19,7 +19,7 @@ relacionados: [ra1-criterios-de-aceite, ra1-tarefas, propostas-lacunas, contexto
 ## 1. O que mudou com as decisões de 08/10/2026
 
 - **Mínimo por integrante:** "4 por integrante" passou a ser meta interna ([ADR-0001](../docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md)). O mínimo oficial do plano de ensino é de 8 especificações de caso de uso. As marcações "abaixo do mínimo de 4" deixam de bloquear a entrega.
-- **Numeração:** fica a da v11 (RF001, US001, RNF001, UC001). Os IDs provisórios (RF-A1, US-A1…) saem do texto, e os IDs novos entram no fim (RF017, RF018, RNF017, RNF018).
+- **Numeração:** fica a da v11 (RF001, US001, RNF001, UC001). Os IDs provisórios (RF-A1, US-A1…) saem do texto, e os IDs novos entram no fim (RF017, RF018, RF019, RNF017, RNF018).
 - **Pagamento:** a proposta RF-A4 (pagamento simulado na área A) foi descartada, porque repete o RF014, que já está na área C. O pagamento continua simulado, como diz o item 2.
 - **«extend»:** a seta sai do caso de uso opcional e aponta para o base ([ADR-0003](../docs/adr/0003-extend-no-sentido-do-te3-3.md)).
 - **Diagramas:** item 4 em BPMN 2.0 (`.bpmn`), itens 9 e 11 em PlantUML ([ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)).

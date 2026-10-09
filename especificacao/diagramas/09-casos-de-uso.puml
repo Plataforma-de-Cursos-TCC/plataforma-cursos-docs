@@ -49,7 +49,9 @@ rectangle "Plataforma de Cursos" {
 VIS -- UC012
 VIS -- UC020
 USU -- UC005
+USU -- UC011
 USU -- UC013
+USU -- UC017
 ALU -- UC003
 ALU -- UC020
 ALU -- UC009

@@ -7,7 +7,7 @@ atualizado: 2026-10-08
 ---
 # Casos de teste
 
-63 casos de teste (TC001–TC063), derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US020) possuem cobertura de testes associada.
+64 casos de teste (TC001–TC064), derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US021) possuem cobertura de testes associada.
 
 Padrão TE6. Os casos nascem dos critérios de aceite das estórias (ADR-0002) e das especificações de casos de uso.
 
@@ -79,4 +79,5 @@ Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem 
 | TC061 | UC017 | Positivo | Dado que estou logado e informo a senha atual correta e nova senha válida | 1. Quando aciono "Salvar senha". | Então a senha é substituída pela nova e recebo confirmação de alteração. | Fluxo básico (passos 1-6) |
 | TC062 | UC017 | Negativo | Dado que informo uma senha atual incorreta | 1. Quando aciono "Salvar senha". | Então o sistema recusa a troca e exibe aviso de senha atual incorreta. | Fluxo de exceção E1 |
 | TC063 | UC018 | Negativo | Dado que estou logado como Administrador e tento excluir minha própria conta | 1. Quando tento confirmar a exclusão. | Então o sistema impede a exclusão e exibe o aviso "Não é possível excluir a própria conta". | Fluxo de exceção E1 |
+| TC064 | UC017 | Negativo | Dado que informo uma nova senha e uma confirmação diferente dela | 1. Quando aciono "Salvar senha". | Então o sistema bloqueia a troca, indica o campo de confirmação e a senha não é alterada. | Critério 3 (US021) / Fluxo de exceção E3 |
 
