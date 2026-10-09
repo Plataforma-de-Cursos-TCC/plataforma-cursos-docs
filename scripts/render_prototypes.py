@@ -3,7 +3,8 @@
 
 Lê prototipos/html/estados-*.txt (um por autor). Cada captura sai em dois temas:
 claro em prototipos/png/<png>.png (é a que entra no DOCX) e escuro em
-prototipos/png/escuro/<png>.png, com &tema=escuro na URL.
+prototipos/png/escuro/<png>.png, com &tema=claro e &tema=escuro na URL (o tema do sistema
+do Chrome não pode decidir a captura clara).
 Linhas: "<tela>.html <estado> <png> | <legenda>" ou, para reusar uma captura em
 outro fluxo, "@ <png-existente> <UC>-<fluxo> | <legenda>". --check só valida a lista; filtro opcional por
 prefixos de PNG (ex.: UC005 UC006) renderizam só as linhas que casam.
@@ -50,7 +51,7 @@ def check():
     return not erros
 
 
-TEMAS = (("", PNG), ("&tema=escuro", PNG / "escuro"))
+TEMAS = (("&tema=claro", PNG), ("&tema=escuro", PNG / "escuro"))
 
 
 def render(filtros=("",)):

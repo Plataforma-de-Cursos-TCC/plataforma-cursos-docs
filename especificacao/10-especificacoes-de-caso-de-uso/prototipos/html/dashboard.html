@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dashboard</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -18,21 +19,21 @@
 </header>
 <main class="page stack">
   <h1>Dashboard</h1>
-  <div class="banner erro" data-estado="intervalo-invalido">Data final anterior à data inicial.</div>
-  <div class="banner info" data-estado="sem-dados">Nenhum aluno com atividade no período selecionado.</div>
+  <div class="banner erro" data-estado="intervalo-invalido" aria-live="polite">Data final anterior à data inicial.</div>
+  <div class="banner info" data-estado="sem-dados" aria-live="polite">Nenhum aluno com atividade no período selecionado.</div>
   <div class="grid c3">
-    <div class="field"><label>Data inicial</label>
-      <div class="input" data-estado="padrao curso-selecionado admin sem-dados">01/09/2026</div>
-      <div class="input" data-estado="intervalo-invalido">30/09/2026</div>
+    <div class="field"><label for="data-inicial">Data inicial</label>
+      <input class="input" type="text" id="data-inicial" aria-label="Data inicial" value="01/09/2026" data-estado="padrao curso-selecionado admin sem-dados">
+      <input class="input" type="text" aria-label="Data inicial" value="30/09/2026" data-estado="intervalo-invalido">
     </div>
-    <div class="field"><label>Data final</label>
-      <div class="input" data-estado="padrao curso-selecionado admin sem-dados">30/09/2026</div>
-      <div class="input erro" data-estado="intervalo-invalido">01/09/2026</div>
+    <div class="field"><label for="data-final">Data final</label>
+      <input class="input" type="text" id="data-final" aria-label="Data final" value="30/09/2026" data-estado="padrao curso-selecionado admin sem-dados">
+      <input class="input erro" type="text" aria-label="Data final" value="01/09/2026" data-estado="intervalo-invalido">
     </div>
-    <div class="field"><label>Curso</label>
-      <div class="input" data-estado="padrao intervalo-invalido sem-dados">Todos os meus cursos</div>
-      <div class="input" data-estado="admin">Todos os cursos</div>
-      <div class="input" data-estado="curso-selecionado">Fundamentos de Pesquisa</div>
+    <div class="field"><label for="curso">Curso</label>
+      <input class="input" type="text" id="curso" aria-label="Curso" value="Todos os meus cursos" data-estado="padrao intervalo-invalido sem-dados">
+      <input class="input" type="text" aria-label="Curso" value="Todos os cursos" data-estado="admin">
+      <input class="input" type="text" aria-label="Curso" value="Fundamentos de Pesquisa" data-estado="curso-selecionado">
     </div>
   </div>
   <div class="grid c3">

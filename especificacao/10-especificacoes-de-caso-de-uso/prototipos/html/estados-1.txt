@@ -15,11 +15,13 @@ meu-perfil.html padrao UC013-FB-1 | perfil do Aluno
 meu-perfil.html salvo UC013-FB-2 | perfil com aviso "Alterações salvas"
 meu-perfil.html instrutor UC013-A1-1 | perfil do Instrutor com minibiografia e links
 meu-perfil.html campo-invalido UC013-E1-1 | erro "Informe o nome" no campo Nome
-# UC013-A2 executa o UC017 (sem tela propria)
+meu-perfil.html foto-invalida UC013-E1-2 | erro de formato na foto de perfil ("Formato não aceito. Envie PNG ou JPEG.")
+# UC013-A2 usa a tela do UC017 (bloco de senha em meu-perfil.html)
 # UC017
 meu-perfil.html senha UC017-FB-1 | perfil com bloco de alteração de senha
 meu-perfil.html senha-alterada UC017-FB-2 | perfil com aviso "Senha alterada"
 @ UC013-FB-1 UC017-A1-1 | perfil sem alteração de senha após cancelar
+@ UC017-FB-1 UC013-A2-1 | bloco de alteração de senha aberto por "Alterar senha" (UC017)
 meu-perfil.html senha-atual-incorreta UC017-E1-1 | erro "Senha atual incorreta"
 meu-perfil.html senha-fora-da-politica UC017-E2-1 | erro de nova senha fora da política
 dashboard.html padrao UC007-FB-1 | dashboard do Aluno com todos os cursos

@@ -2,14 +2,15 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Página do curso</title>
 <link rel="stylesheet" href="_base.css">
 </head>
 <body>
 <header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#">Meus cursos</a><a href="#">Catálogo</a></nav><span class="avatar">LS</span></header>
 <main class="page stack">
-  <div class="banner erro" data-estado="indisponivel">Este curso não está mais disponível.</div>
-  <div class="banner erro" data-estado="pagamento-recusado">Pagamento recusado.</div>
+  <div class="banner erro" data-estado="indisponivel" aria-live="polite">Este curso não está mais disponível.</div>
+  <div class="banner erro" data-estado="pagamento-recusado" aria-live="polite">Pagamento recusado.</div>
 
   <div class="grid" style="grid-template-columns:1fr 320px;align-items:start">
     <section class="stack">
@@ -63,12 +64,12 @@
       </div>
     </div>
     <div class="field">
-      <label>Comentário (opcional)</label>
-      <div class="input placeholder" data-estado="avaliar-vazio avaliar-sem-nota">Comentário</div>
-      <div class="input" data-estado="avaliar-preenchido">Trilha clara, exemplos bons.</div>
-      <div class="input" data-estado="avaliar-existente">Conteúdo ótimo, faltou prática.</div>
+      <label for="comentario-opcional">Comentário (opcional)</label>
+      <input class="input placeholder" type="text" id="comentario-opcional" aria-label="Comentário (opcional)" placeholder="Comentário" data-estado="avaliar-vazio avaliar-sem-nota">
+      <input class="input" type="text" aria-label="Comentário (opcional)" value="Trilha clara, exemplos bons." data-estado="avaliar-preenchido">
+      <input class="input" type="text" aria-label="Comentário (opcional)" value="Conteúdo ótimo, faltou prática." data-estado="avaliar-existente">
     </div>
-    <div class="banner erro" data-estado="avaliar-sem-nota">A nota é obrigatória.</div>
+    <div class="banner erro" data-estado="avaliar-sem-nota" aria-live="polite">A nota é obrigatória.</div>
     <div class="acoes">
       <button class="btn secondary" type="button">Cancelar</button>
       <button class="btn primary" type="button">Confirmar envio</button>

@@ -165,14 +165,14 @@
 
 - **Nome do caso de uso:** Editar Dados do Perfil
 - **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
-- **Descrição:** o Usuário autenticado altera os seus dados de perfil: nome e foto (US003, RF001). O Instrutor também mantém por aqui a minibiografia e os links do perfil de Instrutor (US020, RF016). A troca de senha fica no UC017, acionado a partir desta tela.
+- **Descrição:** o Usuário autenticado altera os seus dados de perfil: nome, telefone, endereço, CPF, data de nascimento, foto de perfil e tema da interface (US003, RF001). O Instrutor também mantém por aqui a minibiografia e os links do perfil de Instrutor (US020, RF016). A troca de senha fica no UC017, acionado a partir desta tela.
 - **Pré-condições:** o Usuário ter realizado login na plataforma.
-- **Pós-condições:** dados do perfil atualizados e confirmados ao Usuário.
-- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário.
-- **Protótipo(s) de tela:** tela “Meu perfil” com campos de nome e foto, opção “Alterar senha” e botão “Salvar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Pós-condições:** dados do perfil atualizados e confirmados ao Usuário; o tema escolhido aplicado imediatamente e salvo no perfil.
+- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário; R-2 apenas o nome é obrigatório, os demais campos são opcionais; R-3 o CPF deve ter 11 dígitos com dígitos verificadores válidos, caso contrário o sistema exibe erro no campo; R-4 a data de nascimento deve ser válida e não pode ser futura; R-5 o telefone deve incluir o DDD; R-6 a foto de perfil aceita somente JPG ou PNG, com até 2 MB, e é armazenada no storage com a URL gravada no perfil; R-7 o tema aceita três opções (claro, escuro ou sistema), é aplicado imediatamente e salvo no perfil.
+- **Protótipo(s) de tela:** tela “Meu perfil” com campos de nome, telefone, endereço, CPF, data de nascimento, foto e tema, opção “Alterar senha” e botão “Salvar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Usuário acessa a tela “Meu perfil”.
-  2. O Usuário altera nome ou foto. (A-1) (A-2)
+  2. O Usuário altera um ou mais dados do perfil (nome, telefone, endereço, CPF, data de nascimento, foto ou tema). (A-1) (A-2)
   3. O Usuário aciona “Salvar”.
   4. O sistema valida os dados informados. (E-1)
   5. O sistema atualiza o perfil e confirma a alteração.
@@ -200,13 +200,17 @@
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 - **Fluxos de exceção:**
   - **E1 – Campo inválido**
-    - E-1.1 O sistema identifica um campo com valor inválido (nome vazio ou imagem fora do formato aceito).
-    - E-1.2 O sistema indica o campo e solicita a correção.
+    - E-1.1 O sistema identifica um campo com valor inválido: nome vazio; CPF com dígitos verificadores incorretos ou fora de 11 dígitos; data de nascimento inválida ou futura; telefone sem DDD; ou foto fora do formato JPG/PNG ou acima de 2 MB.
+    - E-1.2 O sistema indica o campo, informa a regra não atendida e solicita a correção.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
     ![erro "Informe o nome" no campo Nome](prototipos/png/UC013-E1-1.png)
 
     *Figura 0 – UC013, fluxo de exceção E1: erro "Informe o nome" no campo Nome*
+
+    ![erro "Formato não aceito" no campo Foto](prototipos/png/UC013-E1-2.png)
+
+    *Figura 0 – UC013, fluxo de exceção E1: erro "Formato não aceito" no campo Foto*
 
 ## UC017 – Alterar Senha
 
