@@ -345,6 +345,26 @@ def assemble(pandoc_docx, template, out_docx, pages):
             if c.get(qn("w:val")) == "00B0F0":
                 c.set(qn("w:val"), "000000")
 
+    # "Curitiba" e ano saem do fluxo e ficam numa moldura ancorada na página, perto do rodapé
+    # da capa: não dependem de contar parágrafos vazios, então não empurram o sumário.
+    cover_frame_y = 13600  # twips a partir do topo da página (~24 cm)
+    for el in (cover[20], cover[21]):
+        ppr = child(el, "w:pPr", 0)
+        for old_frame in ppr.findall(qn("w:framePr")):
+            ppr.remove(old_frame)
+        frame = OxmlElement("w:framePr")
+        for name, value in (
+            ("w:w", "9000"),
+            ("w:wrap", "around"),
+            ("w:vAnchor", "page"),
+            ("w:hAnchor", "margin"),
+            ("w:xAlign", "center"),
+            ("w:y", str(cover_frame_y)),
+        ):
+            frame.set(qn(name), value)
+        before = {qn(t) for t in ("w:pStyle", "w:keepNext", "w:keepLines", "w:pageBreakBefore")}
+        ppr.insert(sum(1 for c in ppr if c.tag in before), frame)
+
     # Sumário estático: mostra apenas itens de nível 1.
     headings = [
         (1, p.text.strip())
@@ -431,18 +451,28 @@ def assemble(pandoc_docx, template, out_docx, pages):
         child(child(p_break1, "w:pPr", 0), "w:sectPr", 0).extend(list(port_sect))
         p11._p.addprevious(p_break1)
 
-        # Ajusta a imagem do diagrama de atividades para caber na página paisagem:
+        # Ajusta a imagem do diagrama de atividades para ocupar a largura útil da página paisagem
+        # proporcionalmente, mantendo a altura calculada pela proporção real da imagem nova:
         curr = p11._p.getnext()
         while curr is not None and curr.find(".//" + qn("w:drawing")) is None:
             curr = curr.getnext()
         if curr is not None:
             extent = curr.find(".//" + qn("wp:extent"))
             if extent is not None:
-                # Altura útil de 11.5 cm (4.140.000 EMU) para manter título, introdução,
-                # diagrama e legenda juntos na página paisagem com proporção travada:
-                h_diag = 4140000
-                extent.set("cy", str(h_diag))
-                extent.set("cx", str(int(h_diag * 1454 / 1627)))
+                orig_cx = int(extent.get("cx"))
+                orig_cy = int(extent.get("cy"))
+                # Largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm = 8.532.000 EMU):
+                # Altura máxima permitida para caber na página com título e legenda (~11.1 cm = 4.000.000 EMU):
+                max_w = 8532000
+                max_h = 4000000
+                ratio = orig_cy / orig_cx if orig_cx else (1644 / 2699)
+                target_w = max_w
+                target_h = int(target_w * ratio)
+                if target_h > max_h:
+                    target_h = max_h
+                    target_w = int(target_h / ratio)
+                extent.set("cx", str(target_w))
+                extent.set("cy", str(target_h))
 
         # Quebra de seção retornando ao retrato após o item 11:
         if p_next_h1 is not None:
