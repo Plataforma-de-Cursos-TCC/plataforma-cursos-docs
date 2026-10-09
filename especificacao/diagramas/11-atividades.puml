@@ -1,89 +1,70 @@
-@startuml 11-atividades
 ' Item 11 - Diagrama de atividades do UC009 (Assistir aula), com o UC001
 ' (Conversar com Tutor de IA) iniciado pelo fluxo alternativo A-3.
-' Raias por ator: Aluno, Plataforma de Cursos e Tutor de IA.
-'
-' ROTAÇÃO E PROPORÇÃO:
-' Para manter a proporção entre 1.8:1 e 2.6:1 em página paisagem A4
-' (com raias horizontais por ator e fluxo da esquerda para a direita)
-' e garantir legibilidade sem sobreposição de rótulos, este diagrama
-' foi desenhado com raias verticais compactas e rotacionado 270 graus.
-'
-' Comando de geração e rotação:
-'   plantuml -tpng 11-atividades.puml && python3 -c "from PIL import Image; Image.open('11-atividades.png').rotate(270, expand=True).save('11-atividades.png')"
-' Ou alternativamente no macOS:
-'   plantuml -tpng 11-atividades.puml && sips -r 270 11-atividades.png
+' Atores agrupados por ator: Aluno, Plataforma de Cursos e Tutor de IA.
+' Fonte principal em Graphviz dot: 11-atividades.dot (rankdir=LR, texto upright, ratio 2.50:1).
+' Comando de geração da imagem oficial:
+'   dot -Tpng especificacao/diagramas/11-atividades.dot -o especificacao/diagramas/11-atividades.png
 
+@startuml 11-atividades
+' Este diagrama é espelhado no arquivo 11-atividades.dot para compilação com Graphviz dot.
+left to right direction
 skinparam shadowing false
 skinparam defaultFontName Arial
-skinparam defaultFontSize 28
-skinparam ArrowFontSize 25
-skinparam ActivityFontSize 28
-skinparam ArrowColor #333333
+skinparam defaultFontSize 14
+skinparam ArrowFontSize 12
 skinparam ActivityBackgroundColor white
 skinparam ActivityBorderColor black
 skinparam ActivityDiamondBackgroundColor white
 skinparam ActivityDiamondBorderColor black
-skinparam SwimlaneBorderColor black
-skinparam SwimlaneBorderThickness 1.2
-skinparam SwimlaneTitleFontSize 30
-skinparam SwimlaneTitleFontStyle bold
 
-|Aluno|
-start
-:1. Acessa\na aula\nno curso;
-
-|Plataforma de Cursos|
-:Verifica\nmatrícula\ne status prévio;
-
-if (Pode assistir?) then ([não:\nsem acesso])
-  :E-1. Bloqueia\ne sugere\nmatrícula;
-  stop
-else ([sim:\nliberado])
+(*) --> "Aluno\n1. Acessa a aula no curso"
+--> if "Pode assistir?" then
+  -->[não: sem matrícula\ne aula não prévia] "Plataforma\nE-1. Bloqueia acesso e\nsugere matrícula"
+  --> (*)
+else
+  -->[sim: matriculado\nou aula prévia] if "Aula iniciada\nanteriormente?" then
+    -->[sim: há ponto salvo] "Plataforma\nA-2. Posiciona vídeo\nno ponto salvo"
+    --> "Plataforma\n2. Carrega e reproduz\no vídeo da aula"
+  else
+    -->[não: início] "Plataforma\n2. Carrega e reproduz\no vídeo da aula"
+  endif
 endif
 
-if (Aula iniciada\nanteriormente?) then ([sim:\nretomar])
-  :A-2. Posiciona\nvídeo no\nponto salvo;
-else ([não:\ndo início])
+"Plataforma\n2. Carrega e reproduz\no vídeo da aula" --> if "Vídeo carregou?" then
+  -->[não: falha na entrega] "Plataforma\nE-2. Exibe erro e\noferece recarregar"
+  --> (*)
+else
+  -->[sim: carregado] "Aluno\n3. Assiste ao\nvídeo da aula"
 endif
 
-:2. Carrega e\nreproduz vídeo\nda aula;
-
-if (Vídeo\ncarregou?) then ([não:\nfalha])
-  :E-2. Exibe\nerro e oferece\nrecarregar;
-  stop
-else ([sim:\nsucesso])
-endif
-
-repeat
-  |Aluno|
-  :3. Assiste\nao vídeo\nda aula;
-  if (Tem dúvida?) then ([tem dúvida])
-    :A-3. Envia\npergunta\nno chat;
-    |Plataforma de Cursos|
-    if (Limite de\nmensagens?) then ([atingido])
-      :UC001 E-2.\nInforma tempo\nde espera;
-    else ([dentro do\nlimite])
-      |Tutor de IA|
-      :Busca trechos\nrestritos\nao curso;
-      if (Trecho\nrelevante?) then ([encontrado])
-        :Gera resposta\ncitando aula\ne timestamp;
-      else ([não\nencontrado])
-        :UC001 A-1.\nInforma que\nnão cobre;
+"Aluno\n3. Assiste ao\nvídeo da aula" --> if "Tem dúvida\nno conteúdo?" as Duvida then
+  -->[sim: tem dúvida] "Aluno\nA-3. Envia pergunta\nno chat"
+  --> if "Limite de\nmensagens?" as Limite then
+    -->[sim: limite atingido] "Plataforma\nUC001 E-2. Informa\ntempo de espera"
+    --> if "Aluno saiu\nda tela?" as Saida then
+      -->[sim: saiu antes do fim] "Plataforma\nA-1. Salva os\nsegundos assistidos"
+      --> (*)
+    else
+      -->[não: continua na aula] if "Vídeo da aula\nterminou?" as Fim then
+        -->[sim: vídeo terminou] "Plataforma\n4. Marca aula concluída\ne atualiza progresso"
+        --> (*)
+      else
+        -->[não: continua assistindo] "Aluno\n3. Assiste ao\nvídeo da aula"
       endif
-      |Plataforma de Cursos|
-      :Exibe resposta\ndo tutor e salva\nno histórico;
     endif
-  else ([sem dúvida])
+  else
+    -->[não: dentro do limite] "Tutor de IA\nBusca trechos restritos\nao conteúdo do curso"
+    --> if "Trecho relevante\nencontrado?" then
+      -->[sim: trecho encontrado] "Tutor de IA\nGera resposta citando\naula e timestamp"
+      --> "Plataforma\nExibe resposta e\nsalva no histórico"
+    else
+      -->[não: não encontrado] "Tutor de IA\nUC001 A-1. Informa que não\ncobre e sugere reformular"
+      --> "Plataforma\nExibe resposta e\nsalva no histórico"
+    endif
+    --> Saida
   endif
-  |Plataforma de Cursos|
-  if (Aluno saiu\nda tela?) then ([saiu antes\ndo fim])
-    :A-1. Salva\nsegundos\nassistidos;
-    stop
-  else ([continua\nna aula])
-  endif
-repeat while (Vídeo\nterminou?) is ([não terminou]) not ([terminou])
+else
+  -->[não: sem dúvida] Saida
+endif
 
-:4. Marca aula\ncomo concluída e\natualiza progresso;
-stop
 @enduml

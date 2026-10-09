@@ -1,0 +1,125 @@
+// Item 11 - Diagrama de atividades do UC009 (Assistir aula), com o UC001
+// (Conversar com Tutor de IA) iniciado pelo fluxo alternativo A-3.
+// Atores agrupados em clusters: Aluno, Plataforma de Cursos e Tutor de IA.
+// Fluxo horizontal (rankdir=LR), texto upright, proporção 2.49:1 para página paisagem A4.
+//
+// Comando de geração:
+//   dot -Tpng especificacao/diagramas/11-atividades.dot -o especificacao/diagramas/11-atividades.png
+
+digraph G {
+  rankdir=LR;
+  compound=true;
+  newrank=true;
+  nodesep=0.45;
+  ranksep=0.35;
+  fontname="Arial";
+  fontsize=16;
+
+  node [fontname="Arial", fontsize=13, shape=box, style="rounded,filled", fillcolor=white, color=black];
+  edge [fontname="Arial", fontsize=12, color="#333333"];
+
+  start [shape=circle, style=filled, fillcolor=black, width=0.25, label=""];
+  end1 [shape=doublecircle, style=filled, fillcolor=black, width=0.25, label=""];
+  end2 [shape=doublecircle, style=filled, fillcolor=black, width=0.25, label=""];
+  end3 [shape=doublecircle, style=filled, fillcolor=black, width=0.25, label=""];
+  end4 [shape=doublecircle, style=filled, fillcolor=black, width=0.25, label=""];
+
+  subgraph cluster_aluno {
+    label="Aluno";
+    style=rounded;
+    color="#444444";
+    fontname="Arial Bold";
+    fontsize=16;
+
+    start;
+    a1 [label="1. Acessa a aula\nno curso"];
+    a3 [label="3. Assiste ao\nvídeo da aula"];
+    d_duvida [shape=diamond, style=filled, fillcolor=white, label="Tem dúvida\nno conteúdo?"];
+    a_duvida [label="A-3. Envia pergunta\nno chat"];
+  }
+
+  subgraph cluster_plataforma {
+    label="Plataforma de Cursos";
+    style=rounded;
+    color="#444444";
+    fontname="Arial Bold";
+    fontsize=16;
+
+    d_pode [shape=diamond, style=filled, fillcolor=white, label="Pode\nassistir?"];
+    e1 [label="E-1. Bloqueia acesso e\nsugere matrícula"];
+    d_inicio [shape=diamond, style=filled, fillcolor=white, label="Aula iniciada\nanteriormente?"];
+    a2 [label="A-2. Posiciona vídeo\nno ponto salvo"];
+    p2 [label="2. Carrega e reproduz\no vídeo da aula"];
+    d_video [shape=diamond, style=filled, fillcolor=white, label="Vídeo\ncarregou?"];
+    e2 [label="E-2. Exibe erro e\noferece recarregar"];
+
+    d_limite [shape=diamond, style=filled, fillcolor=white, label="Limite\natingido?"];
+    uc1_e2 [label="UC001 E-2. Informa\ntempo de espera"];
+    p_exibe [label="Exibe resposta e\nsalva no histórico"];
+
+    d_saiu [shape=diamond, style=filled, fillcolor=white, label="Aluno saiu\nda tela?"];
+    a1_salva [label="A-1. Salva os\nsegundos assistidos"];
+    d_fim [shape=diamond, style=filled, fillcolor=white, label="Vídeo da aula\nterminou?"];
+    p4 [label="4. Marca aula concluída\ne atualiza progresso"];
+  }
+
+  subgraph cluster_tutor {
+    label="Tutor de IA";
+    style=rounded;
+    color="#444444";
+    fontname="Arial Bold";
+    fontsize=16;
+
+    t_busca [label="Busca trechos restritos\nao conteúdo do curso"];
+    d_trecho [shape=diamond, style=filled, fillcolor=white, label="Trecho relevante\nencontrado?"];
+    t_resp [label="Gera resposta citando\naula e timestamp"];
+    t_nao [label="UC001 A-1. Informa que não\ncobre e sugere reformular"];
+  }
+
+  // Alinhamento de colunas em 8 níveis para fluxo equilibrado LR sem sobreposição:
+  { rank=same; start; a1; }
+  { rank=same; d_pode; e1; }
+  { rank=same; d_inicio; a2; p2; }
+  { rank=same; d_video; e2; a3; }
+  { rank=same; d_duvida; a_duvida; d_limite; }
+  { rank=same; uc1_e2; t_busca; d_saiu; }
+  { rank=same; d_trecho; a1_salva; d_fim; }
+  { rank=same; t_resp; t_nao; p_exibe; p4; }
+
+  // Arestas do fluxo
+  start -> a1;
+  a1 -> d_pode;
+  d_pode -> e1 [label="não: sem matrícula\ne aula não prévia"];
+  e1 -> end1;
+  d_pode -> d_inicio [label="sim: matriculado\nou aula prévia"];
+  d_inicio -> a2 [label="sim: há ponto salvo"];
+  d_inicio -> p2 [label="não: início"];
+  a2 -> p2;
+  p2 -> d_video;
+  d_video -> e2 [label="não: falha na entrega"];
+  e2 -> end2;
+  d_video -> a3 [label="sim: carregado"];
+
+  a3 -> d_duvida;
+  d_duvida -> a_duvida [label="sim: tem dúvida"];
+  d_duvida -> d_saiu [label="não: sem dúvida"];
+
+  a_duvida -> d_limite;
+  d_limite -> uc1_e2 [label="sim: limite atingido"];
+  d_limite -> t_busca [label="não: dentro do limite"];
+  t_busca -> d_trecho;
+  d_trecho -> t_resp [label="sim: trecho encontrado"];
+  d_trecho -> t_nao [label="não: não encontrado"];
+  t_resp -> p_exibe;
+  t_nao -> p_exibe;
+
+  uc1_e2 -> d_saiu;
+  p_exibe -> d_saiu;
+
+  d_saiu -> a1_salva [label="sim: saiu antes do fim"];
+  a1_salva -> end3;
+  d_saiu -> d_fim [label="não: continua na aula"];
+  d_fim -> p4 [label="sim: vídeo terminou"];
+  p4 -> end4;
+  d_fim -> a3 [label="não: continua assistindo"];
+}
