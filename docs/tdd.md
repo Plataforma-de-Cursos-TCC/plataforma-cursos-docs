@@ -46,7 +46,9 @@ erDiagram
     Enrollment ||--o{ LessonProgress : ""
     Lesson ||--o{ LessonProgress : ""
     Course ||--o{ Enrollment : ""
-    Enrollment ||--|| Payment : ""
+    Payment |o--|| Enrollment : ""
+    User ||--o{ Payment : ""
+    Course ||--o{ Payment : ""
     Course ||--o{ Review : ""
     User ||--o{ Course : ""
     User ||--o{ Enrollment : ""
@@ -164,7 +166,9 @@ erDiagram
     }
     Payment {
         UUID id PK
-        UUID enrollmentId FK
+        UUID userId FK
+        UUID courseId FK
+        UUID enrollmentId FK "nulo se recusado"
         INT amountCents
         CHAR currency
         ENUM status
@@ -281,7 +285,9 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | optionId | Simples | Texto | - | Referência à alternativa escolhida. |
 | **Entidade: Payment** | | | | Registro de pagamento simulado; não guarda dado de cartão ou de conta. |
 | id | Determinante | Texto | - | Identificador único do pagamento (UUID). |
-| enrollmentId | Simples | Texto | - | Referência à matrícula paga. |
+| userId | Simples | Texto | - | Referência ao aluno que pagou. |
+| courseId | Simples | Texto | - | Referência ao curso pago. |
+| enrollmentId | Simples | Texto | - | Referência à matrícula criada; fica nulo quando o pagamento é recusado, pois a matrícula só existe após aprovação (UC003, E-2). |
 | amountCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
 | status | Simples | Texto | - | Aprovado ou recusado (simulado). |
@@ -414,7 +420,7 @@ classDiagram
     Course "1" --> "0..*" Enrollment
     Course "1" --> "0..*" Review
 
-    Enrollment "1" --> "1" Payment
+    Payment "1" --> "0..1" Enrollment
     Enrollment "1" --> "0..*" LessonProgress
     Enrollment "1" --> "0..*" QuizAttempt
 
