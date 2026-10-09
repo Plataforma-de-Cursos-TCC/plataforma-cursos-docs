@@ -7,7 +7,7 @@ atualizado: 2026-10-08
 ---
 # Cobertura de testes
 
-As medições de cobertura de código serão coletadas automaticamente e registradas a cada execução do pipeline de integração contínua (CI) no repositório de implementação, tendo como meta mínima 75% de cobertura no backend conforme estabelecido no RNF006 e na [Estratégia de testes](estrategia.md).
+As medições de cobertura de código serão coletadas automaticamente e registradas a cada execução do pipeline de integração contínua (CI) no repositório de implementação, tendo como meta mínima 75% de cobertura no backend e no frontend conforme estabelecido no RNF006 e no RNF021 e na [Estratégia de testes](estrategia.md).
 
 ## 1. Rastreabilidade de Casos de Uso e Estórias de Usuário
 
@@ -40,10 +40,10 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 
 ## 2. Histórico de Medições do CI
 
-As linhas desta tabela serão preenchidas automaticamente pelo pipeline de CI a cada execução da suíte de testes automatizados na branch principal do repositório de código, aferindo a conformidade do backend com a meta de 75% estabelecida no RNF006 (o frontend é apenas acompanhado, sem meta mínima):
+As linhas desta tabela serão preenchidas automaticamente pelo pipeline de CI a cada execução da suíte de testes automatizados na branch principal do repositório de código, aferindo a conformidade com a meta de 75% estabelecida no RNF006 (backend) e no RNF021 (frontend):
 
 | Data | Módulo | Cobertura | Meta | Observação |
 |---|---|---|---|---|
 | *Aguardando início do desenvolvimento do código* | Backend (Core API) | — | 75% | Medição a ser gerada via Pest coverage no CI |
 | *Aguardando início do desenvolvimento do código* | Backend (ai-service) | — | 75% | Medição a ser gerada via Pest coverage no CI |
-| *Aguardando início do desenvolvimento do código* | Frontend (Web SPA) | — | sem meta | Medição a ser gerada via Vitest coverage no CI, apenas para acompanhamento: o RNF006 fixa a meta de 75% somente para o backend |
+| *Aguardando início do desenvolvimento do código* | Frontend (Web SPA) | — | 75% | Medição a ser gerada via Vitest coverage no CI (RNF021) |

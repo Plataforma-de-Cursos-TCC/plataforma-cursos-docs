@@ -7,7 +7,7 @@ atualizado: 2026-10-08
 ---
 # Estratégia de testes
 
-A estratégia de testes da Plataforma de Cursos estabelece diretrizes formais de qualidade e verificação contínua, alinhadas aos requisitos não-funcionais do sistema (em especial RNF006 para cobertura mínima de 75%), às decisões arquiteturais ([ADR-0007](../adr/0007-stack-e-bancos.md), [ADR-0005](../adr/0005-tutor-de-ia-como-ator-sistemico.md)) e ao ciclo de integração contínua ([CI do repositório de código](../ci-repo-codigo.md)).
+A estratégia de testes da Plataforma de Cursos estabelece diretrizes formais de qualidade e verificação contínua, alinhadas aos requisitos não-funcionais do sistema (em especial RNF006 e RNF021 para cobertura mínima de 75% no backend e no frontend), às decisões arquiteturais ([ADR-0007](../adr/0007-stack-e-bancos.md), [ADR-0005](../adr/0005-tutor-de-ia-como-ator-sistemico.md)) e ao ciclo de integração contínua ([CI do repositório de código](../ci-repo-codigo.md)).
 
 ## 1. Pirâmide de testes
 
@@ -59,11 +59,12 @@ A equipe adota o ciclo clássico de **TDD (Red → Green → Refactor)** como me
 
 ## 3. Cobertura de testes
 
-- **Meta e Limite Mínimo:** Conforme definido no **RNF006**, a cobertura de código mínima obrigatória é de **75%** nas linhas do backend.
+- **Meta e Limite Mínimo:** Conforme definido no **RNF006**, a cobertura de código mínima obrigatória é de **75%** nas linhas do backend. O **RNF021** fixa a mesma meta de **75%** para o frontend (Vitest).
 - **Portão de Qualidade no CI:** O pipeline de Integração Contínua ([CI do repositório de código](../ci-repo-codigo.md)) executa a verificação em cada Pull Request via:
   ```bash
   php artisan test --coverage --min=75
   ```
+  No frontend, o equivalente é `vitest run --coverage` com `thresholds` de 75% em linhas (provider `v8`).
   Caso a cobertura caia abaixo do limiar de 75%, o pipeline falha e o Pull Request é automaticamente **bloqueado para merge**.
 - **Motor de Cobertura:** No ambiente de CI utiliza-se o driver de alta performance **PCOV** integrado ao PHP 8.3, reduzindo o tempo de execução dos builds.
 - **Acompanhamento:** A evolução histórica da cobertura por módulo e release é registrada na planilha de acompanhamento em [cobertura.md](cobertura.md).
