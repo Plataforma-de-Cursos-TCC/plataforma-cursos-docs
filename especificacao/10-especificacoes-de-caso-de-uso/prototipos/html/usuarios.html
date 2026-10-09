@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Usuários</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -12,14 +13,14 @@
 </header>
 <main class="page stack">
   <h1>Usuários</h1>
-  <div class="banner erro" data-estado="proprio-bloqueio">Não é possível bloquear a própria conta.</div>
-  <div class="banner erro" data-estado="propria-exclusao">Não é possível excluir a própria conta.</div>
-  <div class="banner erro" data-estado="nao-encontrado">Usuário não encontrado.</div>
-  <div class="banner sucesso" data-estado="excluido">Usuário excluído.</div>
+  <div class="banner erro" data-estado="proprio-bloqueio" aria-live="polite">Não é possível bloquear a própria conta.</div>
+  <div class="banner erro" data-estado="propria-exclusao" aria-live="polite">Não é possível excluir a própria conta.</div>
+  <div class="banner erro" data-estado="nao-encontrado" aria-live="polite">Usuário não encontrado.</div>
+  <div class="banner sucesso" data-estado="excluido" aria-live="polite">Usuário excluído.</div>
   <div class="row">
-    <div class="input placeholder" style="flex:1">Buscar por nome ou e-mail</div>
-    <div class="input" style="width:220px" data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">Todos os perfis</div>
-    <div class="input" style="width:220px" data-estado="filtro-aluno">Aluno</div>
+    <input class="input placeholder" type="text" aria-label="Buscar por nome ou e-mail" placeholder="Buscar por nome ou e-mail" style="flex:1">
+    <input class="input" type="text" aria-label="Todos os perfis" value="Todos os perfis" style="width:220px" data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">
+    <input class="input" type="text" aria-label="Aluno" value="Aluno" style="width:220px" data-estado="filtro-aluno">
   </div>
   <table>
     <thead><tr><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Status</th><th></th></tr></thead>

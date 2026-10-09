@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -10,17 +11,17 @@
 <main class="center">
   <form class="card form stack">
     <h1>Entrar</h1>
-    <div class="banner aviso" data-estado="sessao-expirada">Sua sessão expirou. Entre novamente para continuar.</div>
-    <div class="banner sucesso" data-estado="senha-redefinida">Senha redefinida. Entre com a nova senha.</div>
-    <div class="banner sucesso" data-estado="conta-criada">Conta criada. Entre para continuar.</div>
-    <div class="banner erro" data-estado="erro-credencial">E-mail ou senha inválidos.</div>
-    <div class="field"><label>E-mail</label>
-      <div class="input" data-estado="padrao erro-credencial">aluno@email.com</div>
-      <div class="input placeholder" data-estado="sessao-expirada senha-redefinida conta-criada">voce@email.com</div>
+    <div class="banner aviso" data-estado="sessao-expirada" aria-live="polite">Sua sessão expirou. Entre novamente para continuar.</div>
+    <div class="banner sucesso" data-estado="senha-redefinida" aria-live="polite">Senha redefinida. Entre com a nova senha.</div>
+    <div class="banner sucesso" data-estado="conta-criada" aria-live="polite">Conta criada. Entre para continuar.</div>
+    <div class="banner erro" data-estado="erro-credencial" aria-live="polite">E-mail ou senha inválidos.</div>
+    <div class="field"><label for="e-mail">E-mail</label>
+      <input class="input" type="text" id="e-mail" aria-label="E-mail" value="aluno@email.com" data-estado="padrao erro-credencial">
+      <input class="input placeholder" type="text" aria-label="E-mail" placeholder="voce@email.com" data-estado="sessao-expirada senha-redefinida conta-criada">
     </div>
-    <div class="field"><label>Senha</label>
-      <div class="input" data-estado="padrao erro-credencial">••••••••</div>
-      <div class="input placeholder" data-estado="sessao-expirada senha-redefinida conta-criada">Sua senha</div>
+    <div class="field"><label for="senha">Senha</label>
+      <input class="input" type="password" id="senha" aria-label="Senha" value="••••••••" data-estado="padrao erro-credencial">
+      <input class="input placeholder" type="text" aria-label="Senha" placeholder="Sua senha" data-estado="sessao-expirada senha-redefinida conta-criada">
     </div>
     <a href="#" class="small">Esqueci minha senha</a>
     <button class="btn primary block" type="button">Entrar</button>

@@ -14,7 +14,7 @@ curso-modulos.html exclusao-modulo UC014-A2-1 | confirmação de exclusão do m�
 modulo-form.html padrao UC014-FB-3 | formulário "Novo módulo" vazio
 modulo-form.html edicao UC014-A1-1 | formulário "Editar módulo" com dados atuais
 modulo-form.html erro-titulo UC014-E1-1 | erro "Campo obrigatório" no título do módulo
-modulo-form.html erro-posicao UC014-E2-1 | erro "Posição já em uso" no módulo
+modulo-form.html erro-posicao UC014-E2-1 | erro "Ordem já em uso" no módulo
 modulo-aulas.html padrao UC015-FB-1 | tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"
 modulo-aulas.html aula-salva UC015-FB-7 | tela "Aulas do módulo" após salvar aula
 modulo-aulas.html exclusao-aula UC015-A2-1 | confirmação de exclusão da aula

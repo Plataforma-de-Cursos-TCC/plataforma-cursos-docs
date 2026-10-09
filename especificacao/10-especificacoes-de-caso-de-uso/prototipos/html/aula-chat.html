@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aula com Tutor de IA</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -25,9 +26,9 @@
       <div style="height:360px;border-radius:12px;background:linear-gradient(135deg,var(--accent-bg),var(--primary));position:relative;display:flex;align-items:center;justify-content:center" data-estado="padrao retomando chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens aula-concluida bloqueada erro-video">
         <span class="chip neutral" style="position:absolute;left:16px;top:16px">Aula 2</span>
         <div class="stack" style="align-items:center;text-align:center;width:70%" data-estado="bloqueada erro-video">
-          <div class="banner erro" data-estado="bloqueada">Matricule-se no curso para assistir esta aula.</div>
+          <div class="banner erro" data-estado="bloqueada" aria-live="polite">Matricule-se no curso para assistir esta aula.</div>
           <button class="btn primary" type="button" data-estado="bloqueada">Matricular-se</button>
-          <div class="banner erro" data-estado="erro-video">Não foi possível carregar o vídeo.</div>
+          <div class="banner erro" data-estado="erro-video" aria-live="polite">Não foi possível carregar o vídeo.</div>
           <button class="btn secondary" type="button" data-estado="erro-video">Tentar novamente</button>
         </div>
         <div class="row" style="position:absolute;left:0;right:0;bottom:0;padding:12px 16px;gap:12px;background:rgba(0,0,0,.45);color:#fff" data-estado="padrao retomando chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens aula-concluida">
@@ -64,17 +65,17 @@
         <div class="card" style="padding:12px" data-estado="sem-informacao">Não tenho essa informação no material do curso. Tente reformular a pergunta.</div>
       </div>
 
-      <div class="banner aviso" data-estado="conteudo-em-preparo">Este conteúdo ainda está sendo preparado. Tente novamente mais tarde.</div>
-      <div class="banner aviso" data-estado="limite-mensagens">Limite de mensagens atingido. Aguarde 42 min para enviar.</div>
+      <div class="banner aviso" data-estado="conteudo-em-preparo" aria-live="polite">Este conteúdo ainda está sendo preparado. Tente novamente mais tarde.</div>
+      <div class="banner aviso" data-estado="limite-mensagens" aria-live="polite">Limite de mensagens atingido. Aguarde 42 min para enviar.</div>
 
       <div class="field" data-estado="chat">
-        <div class="input placeholder">Sua pergunta</div>
+        <input class="input placeholder" type="text" aria-label="Sua pergunta" placeholder="Sua pergunta">
       </div>
       <div class="field" data-estado="pergunta resposta historico sem-informacao">
-        <div class="input placeholder">Sua pergunta</div>
+        <input class="input placeholder" type="text" aria-label="Sua pergunta" placeholder="Sua pergunta">
       </div>
       <div class="field" data-estado="conteudo-em-preparo limite-mensagens" style="opacity:.5">
-        <div class="input placeholder">Sua pergunta</div>
+        <input class="input placeholder" type="text" aria-label="Sua pergunta" placeholder="Sua pergunta">
       </div>
       <div class="row between" data-estado="chat pergunta resposta historico sem-informacao conteudo-em-preparo limite-mensagens">
         <span class="small muted"></span>

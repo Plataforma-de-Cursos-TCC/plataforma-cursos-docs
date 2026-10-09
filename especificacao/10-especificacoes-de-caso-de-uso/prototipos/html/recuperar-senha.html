@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Recuperar senha</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -10,16 +11,16 @@
 <main class="center">
   <form class="card form stack">
     <h1>Recuperar senha</h1>
-    <div class="banner info" data-estado="enviado">Se o e-mail existir, enviamos um link de redefinição de senha.</div>
-    <div class="banner erro" data-estado="link-expirado">Este link expirou.</div>
-    <div class="field" data-estado="padrao"><label>E-mail</label>
-      <div class="input">aluno@email.com</div>
+    <div class="banner info" data-estado="enviado" aria-live="polite">Se o e-mail existir, enviamos um link de redefinição de senha.</div>
+    <div class="banner erro" data-estado="link-expirado" aria-live="polite">Este link expirou.</div>
+    <div class="field" data-estado="padrao"><label for="e-mail">E-mail</label>
+      <input class="input" type="text" id="e-mail" aria-label="E-mail" value="aluno@email.com">
     </div>
-    <div class="field" data-estado="nova-senha"><label>Nova senha</label>
-      <div class="input">••••••••</div>
+    <div class="field" data-estado="nova-senha"><label for="nova-senha">Nova senha</label>
+      <input class="input" type="password" id="nova-senha" aria-label="Nova senha" value="••••••••">
     </div>
-    <div class="field" data-estado="nova-senha"><label>Confirmar nova senha</label>
-      <div class="input">••••••••</div>
+    <div class="field" data-estado="nova-senha"><label for="confirmar-nova-senha">Confirmar nova senha</label>
+      <input class="input" type="password" id="confirmar-nova-senha" aria-label="Confirmar nova senha" value="••••••••">
     </div>
     <button class="btn primary block" data-estado="padrao" type="button">Enviar link</button>
     <button class="btn primary block" data-estado="nova-senha" type="button">Redefinir senha</button>

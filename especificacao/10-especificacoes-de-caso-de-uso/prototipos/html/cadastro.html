@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Criar conta</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -10,24 +11,24 @@
 <main class="center">
   <form class="card form stack">
     <h1>Criar conta</h1>
-    <div class="field"><label>E-mail</label>
-      <div class="input" data-estado="padrao instrutor senha-fraca">aluno@email.com</div>
-      <div class="input erro" data-estado="email-em-uso">aluno@email.com</div>
-      <p class="msg-erro" data-estado="email-em-uso">Este e-mail já está em uso.</p>
+    <div class="field"><label for="e-mail">E-mail</label>
+      <input class="input" type="text" id="e-mail" aria-label="E-mail" value="aluno@email.com" data-estado="padrao instrutor senha-fraca">
+      <input class="input erro" type="text" aria-label="E-mail" value="aluno@email.com" data-estado="email-em-uso">
+      <p class="msg-erro" data-estado="email-em-uso" aria-live="polite">Este e-mail já está em uso.</p>
       <p class="small" style="margin-top:6px" data-estado="email-em-uso"><a href="#">Fazer login</a> ou <a href="#">recuperar senha</a></p>
     </div>
-    <div class="field"><label>Senha</label>
-      <div class="input" data-estado="padrao instrutor email-em-uso">••••••••</div>
-      <div class="input erro" data-estado="senha-fraca">••••</div>
-      <p class="msg-erro" data-estado="senha-fraca">A senha não atende aos critérios:</p>
+    <div class="field"><label for="senha">Senha</label>
+      <input class="input" type="password" id="senha" aria-label="Senha" value="••••••••" data-estado="padrao instrutor email-em-uso">
+      <input class="input erro" type="password" aria-label="Senha" value="••••" data-estado="senha-fraca">
+      <p class="msg-erro" data-estado="senha-fraca" aria-live="polite">A senha não atende aos critérios:</p>
       <ul class="small muted" data-estado="senha-fraca" style="margin:6px 0 0 20px">
         <li>ao menos 8 caracteres</li>
         <li>ao menos uma letra e um número</li>
       </ul>
     </div>
-    <div class="field"><label>Confirmar senha</label>
-      <div class="input" data-estado="padrao instrutor email-em-uso">••••••••</div>
-      <div class="input" data-estado="senha-fraca">••••</div>
+    <div class="field"><label for="confirmar-senha">Confirmar senha</label>
+      <input class="input" type="password" id="confirmar-senha" aria-label="Confirmar senha" value="••••••••" data-estado="padrao instrutor email-em-uso">
+      <input class="input" type="password" aria-label="Confirmar senha" value="••••" data-estado="senha-fraca">
     </div>
     <div class="field"><label>Perfil</label>
       <div class="row" style="margin-top:8px" data-estado="padrao email-em-uso senha-fraca"><span class="radio on"></span>Aluno</div>

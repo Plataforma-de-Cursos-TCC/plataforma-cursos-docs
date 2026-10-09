@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Quiz</title>
 <link rel="stylesheet" href="_base.css">
 <style>
@@ -17,10 +18,10 @@
     <h1>Quiz — Módulo 1</h1>
   </div>
 
-  <div class="banner erro" data-estado="pendentes">Questões pendentes: 1 e 2. Responda todas para enviar.</div>
-  <div class="banner sucesso" data-estado="rascunho">Rascunho salvo.</div>
-  <div class="banner erro" data-estado="gabarito-incompleto">Não foi possível calcular a nota. O erro foi registrado para o Instrutor.</div>
-  <div class="banner info" data-estado="resultado-salvo">Você já respondeu este quiz.</div>
+  <div class="banner erro" data-estado="pendentes" aria-live="polite">Questões pendentes: 1 e 2. Responda todas para enviar.</div>
+  <div class="banner sucesso" data-estado="rascunho" aria-live="polite">Rascunho salvo.</div>
+  <div class="banner erro" data-estado="gabarito-incompleto" aria-live="polite">Não foi possível calcular a nota. O erro foi registrado para o Instrutor.</div>
+  <div class="banner info" data-estado="resultado-salvo" aria-live="polite">Você já respondeu este quiz.</div>
   <div class="card stack" data-estado="resultado resultado-salvo resultado-salvo-refazer">
     <h3>Nota 50%</h3>
     <p class="muted">Acertos: 1 de 2</p>
@@ -37,7 +38,7 @@
 
   <div class="card stack">
     <div class="row between"><h3>1. Qual técnica é mais indicada para descoberta aberta de necessidades?</h3><span class="chip success" data-estado="resultado resultado-salvo resultado-salvo-refazer">Correta</span></div>
-    <p class="msg-erro" data-estado="pendentes">Pendente</p>
+    <p class="msg-erro" data-estado="pendentes" aria-live="polite">Pendente</p>
     <div class="row" data-estado="respondidas rascunho resultado resultado-salvo resultado-salvo-refazer gabarito-incompleto"><span class="radio on"></span><span>Entrevista semiestruturada</span></div>
     <div class="row" data-estado="padrao pendentes"><span class="radio"></span><span>Entrevista semiestruturada</span></div>
     <div class="row"><span class="radio"></span><span>Survey fechado</span></div>
@@ -46,7 +47,7 @@
 
   <div class="card stack">
     <div class="row between"><h3>2. O que caracteriza um bom insight de pesquisa?</h3><span class="chip danger" data-estado="resultado resultado-salvo resultado-salvo-refazer">Incorreta</span></div>
-    <p class="msg-erro" data-estado="pendentes">Pendente</p>
+    <p class="msg-erro" data-estado="pendentes" aria-live="polite">Pendente</p>
     <div class="row"><span class="radio"></span><span>É acionável e específico</span></div>
     <div class="row" data-estado="respondidas rascunho resultado resultado-salvo resultado-salvo-refazer gabarito-incompleto"><span class="radio on"></span><span>É uma opinião do pesquisador</span></div>
     <div class="row" data-estado="padrao pendentes"><span class="radio"></span><span>É uma opinião do pesquisador</span></div>
