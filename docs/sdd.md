@@ -434,6 +434,7 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme a v11
 | RNF014 | Capacidade de interação | Claro/escuro em 100% das telas, preferência salva por usuário | Tema no front-end; preferência persistida no perfil |
 | RNF015 | Manutenibilidade | 100% dos endpoints em OpenAPI, online | API documentada em OpenAPI e publicada |
 | RNF016 | Segurança | 100% das ações administrativas registradas, por 12 meses | Registro de auditoria no componente de gerenciamento de usuários |
+| RNF021 | Manutenibilidade | Cobertura de testes de 75% no frontend, com merge bloqueado abaixo | Verificação de cobertura (Vitest) no pipeline de integração contínua |
 
 <!-- proposta: balanceador e mais de uma instância da API, cache de listagens e hospedagem com réplica ou reinício automático para atingir 1000 usuários simultâneos (RNF009) e 99% de disponibilidade (RNF010). A v11 define as metas, não o mecanismo. Motivo: a API sem estado permite escalar horizontalmente -->
 
