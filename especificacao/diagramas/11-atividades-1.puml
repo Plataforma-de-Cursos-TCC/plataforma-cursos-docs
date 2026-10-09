@@ -1,0 +1,37 @@
+' Item 11 - Diagrama de atividades do UC009 (Assistir aula), parte 1: fluxo básico (passos 1 a 4) e exceções E-1 e E-2.
+' Os fluxos alternativos A-x estão na parte 2.
+' Rótulos: número = passo do fluxo básico; A-x/E-x = fluxo alternativo/exceção.
+' Primeira linha do rótulo = ator (Aluno, Plataforma ou Tutor de IA).
+' Gerar o PNG: plantuml -tpng 11-atividades-1.puml
+@startuml 11-atividades-1
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 18
+skinparam ArrowFontSize 16
+skinparam ArrowColor #333333
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor black
+skinparam ActivityDiamondBackgroundColor white
+skinparam ActivityDiamondBorderColor black
+
+(*) --> "Aluno\n1. Acessa a aula"
+--> if "Pode\nassistir?" then
+  -->[sem matrícula] "Plataforma\nE-1. Bloqueia e\nsugere matrícula"
+  --> (*)
+else
+  -->[matriculado] "Plataforma\n2. Carrega e\nreproduz o vídeo"
+  --> if "Vídeo\ncarregou?" then
+    -->[sim] "Aluno\n3. Assiste ao vídeo"
+    --> if "Vídeo\nterminou?" then
+      -->[sim] "Plataforma\n4. Marca aula\nconcluída"
+      --> (*)
+    else
+      -->[não] "Aluno\n3. Assiste ao vídeo"
+    endif
+  else
+    -->[falha] "Plataforma\nE-2. Exibe erro e\noferece recarregar"
+    --> (*)
+  endif
+endif
+@enduml
