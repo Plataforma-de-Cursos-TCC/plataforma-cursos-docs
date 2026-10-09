@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Módulo</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -12,19 +13,19 @@
     <h2 data-estado="padrao erro-titulo erro-posicao">Novo módulo</h2>
     <h2 data-estado="edicao">Editar módulo</h2>
 
-    <div class="field"><label>Título</label>
-      <div class="input placeholder" data-estado="padrao">Título do módulo</div>
-      <div class="input erro placeholder" data-estado="erro-titulo">Título do módulo</div>
-      <div class="input" data-estado="edicao">Entrevistas</div>
-      <div class="input" data-estado="erro-posicao">Síntese de achados</div>
-      <div class="msg-erro" data-estado="erro-titulo">Campo obrigatório.</div>
+    <div class="field"><label for="titulo">Título</label>
+      <input class="input placeholder" type="text" id="titulo" aria-label="Título" placeholder="Título do módulo" data-estado="padrao">
+      <input class="input erro placeholder" type="text" aria-label="Título" placeholder="Título do módulo" data-estado="erro-titulo">
+      <input class="input" type="text" aria-label="Título" value="Entrevistas" data-estado="edicao">
+      <input class="input" type="text" aria-label="Título" value="Síntese de achados" data-estado="erro-posicao">
+      <div class="msg-erro" data-estado="erro-titulo" aria-live="polite">Campo obrigatório.</div>
     </div>
 
-    <div class="field"><label>Posição</label>
-      <div class="input placeholder" data-estado="padrao erro-titulo">Ex.: 1</div>
-      <div class="input" data-estado="edicao">2</div>
-      <div class="input erro" data-estado="erro-posicao">2</div>
-      <div class="msg-erro" data-estado="erro-posicao">Posição já em uso. Informe outra.</div>
+    <div class="field"><label for="ordem">Ordem</label>
+      <input class="input placeholder" type="text" id="ordem" aria-label="Ordem" placeholder="Ex.: 1" data-estado="padrao erro-titulo">
+      <input class="input" type="text" aria-label="Ordem" value="2" data-estado="edicao">
+      <input class="input erro" type="text" aria-label="Ordem" value="2" data-estado="erro-posicao">
+      <div class="msg-erro" data-estado="erro-posicao" aria-live="polite">Ordem já em uso. Informe outra.</div>
     </div>
 
     <button class="btn primary block" type="button">Salvar</button>

@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aula</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -11,21 +12,21 @@
   <form class="card form stack">
     <h2 data-estado="padrao enviando erro-formato erro-envio">Nova aula</h2>
     <h2 data-estado="edicao">Editar aula</h2>
-    <div class="banner erro" data-estado="erro-envio">Falha no envio ou link expirado.</div>
+    <div class="banner erro" data-estado="erro-envio" aria-live="polite">Falha no envio ou link expirado.</div>
 
-    <div class="field"><label>Título</label>
-      <div class="input placeholder" data-estado="padrao">Título da aula</div>
-      <div class="input" data-estado="enviando erro-formato erro-envio edicao">Recrutamento de participantes</div>
+    <div class="field"><label for="titulo">Título</label>
+      <input class="input placeholder" type="text" id="titulo" aria-label="Título" placeholder="Título da aula" data-estado="padrao">
+      <input class="input" type="text" aria-label="Título" value="Recrutamento de participantes" data-estado="enviando erro-formato erro-envio edicao">
     </div>
 
-    <div class="field"><label>Descrição</label>
-      <div class="input placeholder" data-estado="padrao">Descrição da aula</div>
-      <div class="input" data-estado="enviando erro-formato erro-envio edicao">Como definir critérios e convidar participantes.</div>
+    <div class="field"><label for="descricao">Descrição</label>
+      <input class="input placeholder" type="text" id="descricao" aria-label="Descrição" placeholder="Descrição da aula" data-estado="padrao">
+      <input class="input" type="text" aria-label="Descrição" value="Como definir critérios e convidar participantes." data-estado="enviando erro-formato erro-envio edicao">
     </div>
 
-    <div class="field"><label>Ordem</label>
-      <div class="input placeholder" data-estado="padrao">Ex.: 3</div>
-      <div class="input" data-estado="enviando erro-formato erro-envio edicao">3</div>
+    <div class="field"><label for="ordem">Ordem</label>
+      <input class="input placeholder" type="text" id="ordem" aria-label="Ordem" placeholder="Ex.: 3" data-estado="padrao">
+      <input class="input" type="text" aria-label="Ordem" value="3" data-estado="enviando erro-formato erro-envio edicao">
     </div>
 
     <div class="field"><label>Prévia</label>
@@ -33,12 +34,12 @@
       <div class="row" data-estado="enviando erro-formato erro-envio edicao"><span class="radio"></span><span>Sim</span><span class="radio on"></span><span>Não</span></div>
     </div>
 
-    <div class="field"><label>Vídeo</label>
-      <div class="input placeholder" data-estado="padrao">Selecione o arquivo</div>
+    <div class="field"><label for="video">Vídeo</label>
+      <input class="input placeholder" type="text" id="video" aria-label="Vídeo" placeholder="Selecione o arquivo" data-estado="padrao">
       <p class="small muted" data-estado="padrao" style="margin-top:6px">mp4 ou webm, até 500 MB</p>
-      <div class="input" data-estado="enviando erro-envio edicao">aula-03.mp4</div>
-      <div class="input erro" data-estado="erro-formato">aula-03.avi</div>
-      <div class="msg-erro" data-estado="erro-formato">Formato não aceito. Use mp4 ou webm, até 500 MB.</div>
+      <input class="input" type="text" aria-label="Vídeo" value="aula-03.mp4" data-estado="enviando erro-envio edicao">
+      <input class="input erro" type="text" aria-label="Vídeo" value="aula-03.avi" data-estado="erro-formato">
+      <div class="msg-erro" data-estado="erro-formato" aria-live="polite">Formato não aceito. Use mp4 ou webm, até 500 MB.</div>
     </div>
 
     <div data-estado="enviando" style="height:8px;background:var(--surface-raised);border-radius:4px;overflow:hidden"><div style="width:45%;height:100%;background:var(--primary)"></div></div>

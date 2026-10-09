@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Novo curso</title>
 <link rel="stylesheet" href="_base.css">
 </head>
@@ -12,30 +13,30 @@
     <h2 data-estado="padrao preenchido erro-campos">Novo curso</h2>
     <h2 data-estado="edicao">Editar curso</h2>
 
-    <div class="field"><label>Título</label>
-      <div class="input placeholder" data-estado="padrao">Título do curso</div>
-      <div class="input erro placeholder" data-estado="erro-campos">Título do curso</div>
-      <div class="input" data-estado="preenchido edicao">Fundamentos de Pesquisa com Usuários</div>
-      <div class="msg-erro" data-estado="erro-campos">Campo obrigatório.</div>
+    <div class="field"><label for="titulo">Título</label>
+      <input class="input placeholder" type="text" id="titulo" aria-label="Título" placeholder="Título do curso" data-estado="padrao">
+      <input class="input erro placeholder" type="text" aria-label="Título" placeholder="Título do curso" data-estado="erro-campos">
+      <input class="input" type="text" aria-label="Título" value="Fundamentos de Pesquisa com Usuários" data-estado="preenchido edicao">
+      <div class="msg-erro" data-estado="erro-campos" aria-live="polite">Campo obrigatório.</div>
     </div>
 
-    <div class="field"><label>Descrição</label>
-      <div class="input placeholder" data-estado="padrao" style="min-height:96px">Descrição do curso</div>
-      <div class="input erro placeholder" data-estado="erro-campos" style="min-height:96px">Descrição do curso</div>
-      <div class="input" data-estado="preenchido edicao" style="min-height:96px">Pesquisa com usuários do início ao fim: planejamento, entrevistas e síntese de achados.</div>
-      <div class="msg-erro" data-estado="erro-campos">Campo obrigatório.</div>
+    <div class="field"><label for="descricao">Descrição</label>
+      <textarea class="input placeholder" id="descricao" aria-label="Descrição" placeholder="Descrição do curso" data-estado="padrao" style="min-height:96px"></textarea>
+      <textarea class="input erro placeholder" aria-label="Descrição" placeholder="Descrição do curso" data-estado="erro-campos" style="min-height:96px"></textarea>
+      <textarea class="input" aria-label="Descrição" data-estado="preenchido edicao" style="min-height:96px">Pesquisa com usuários do início ao fim: planejamento, entrevistas e síntese de achados.</textarea>
+      <div class="msg-erro" data-estado="erro-campos" aria-live="polite">Campo obrigatório.</div>
     </div>
 
-    <div class="field"><label>Preço (R$)</label>
-      <div class="input placeholder" data-estado="padrao">0,00</div>
-      <div class="input erro placeholder" data-estado="erro-campos">0,00</div>
-      <div class="input" data-estado="preenchido edicao">249,90</div>
-      <div class="msg-erro" data-estado="erro-campos">Campo obrigatório.</div>
+    <div class="field"><label for="preco-r">Preço (R$)</label>
+      <input class="input placeholder" type="text" id="preco-r" aria-label="Preço (R$)" placeholder="0,00" data-estado="padrao">
+      <input class="input erro placeholder" type="text" aria-label="Preço (R$)" placeholder="0,00" data-estado="erro-campos">
+      <input class="input" type="text" aria-label="Preço (R$)" value="249,90" data-estado="preenchido edicao">
+      <div class="msg-erro" data-estado="erro-campos" aria-live="polite">Campo obrigatório.</div>
     </div>
 
-    <div class="field"><label>Categoria</label>
-      <div class="input placeholder" data-estado="padrao erro-campos">Selecione</div>
-      <div class="input" data-estado="preenchido edicao">Design de Produto</div>
+    <div class="field"><label for="categoria">Categoria</label>
+      <input class="input placeholder" type="text" id="categoria" aria-label="Categoria" placeholder="Selecione" data-estado="padrao erro-campos">
+      <input class="input" type="text" aria-label="Categoria" value="Design de Produto" data-estado="preenchido edicao">
     </div>
 
     <div class="grid c2" data-estado="padrao preenchido erro-campos">
