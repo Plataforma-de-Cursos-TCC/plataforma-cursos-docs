@@ -228,7 +228,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 - [x] **C10.5** Cada especificação tem ao menos um **fluxo alternativo** (variação intencional do ator). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo alternativo em todos os UCs)
 - [x] **C10.6** Cada especificação tem ao menos um **fluxo de exceção** (variação não intencional ou erro). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo de excecao em todos os UCs)
 - [ ] **C10.7** A linguagem é testável: cada passo é observável. — pendente: testabilidade de cada passo nao conferida
-- [ ] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores. — pendente: UC013 conferido (nome e ator iguais no diagrama: especificacao/diagramas/09-casos-de-uso.puml:31,52); demais 19 UCs nao conferidos item a item
+- [x] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores. — evidência: os 20 UCs (UC001-UC020) conferidos item a item entre especificacao/diagramas/09-casos-de-uso.puml, a matriz 9.1 (especificacao/09-diagrama-geral-de-casos-de-uso.md) e especificacao/10-especificacoes-de-caso-de-uso/area-a.md a area-d.md: mesmo nome e mesmos atores; revisão cruzada de 09/10/2026 e correções dos PRs #81 e #82
 - [ ] **C10.9** As regras de negócio são coerentes com as estórias e os RFs. — pendente: regras de negocio x estorias x RFs nao conferidas
 
 ### 3.11 Item 11 — Diagrama de Atividades (0,2)
@@ -277,7 +277,7 @@ Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 - [ ] **K.1** Os mesmos atores (nomes idênticos) aparecem nos itens 4, 5, 6, 7, 9, 10 e 11. — pendente: UC013 usa 'Usuario' (puml:52 USU) e US020 usa 'Instrutor'; decisao do Lucas cobre o mapeamento RF x UC, nao a grafia dos atores; demais itens nao conferidos
 - [x] **K.2** Todo RF (item 6) tem **pelo menos uma** estória (item 7) e toda estória aponta para um RF existente. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 e especificacao/07-estorias-de-usuario/area-*.md
 - [x] **K.3** Todo RF está coberto por **pelo menos um** caso de uso no diagrama (item 9). — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md (todo RF mapeado a UC)
-- [ ] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — pendente: UC013 conferido (puml:31); demais 19 UCs nao conferidos item a item
+- [x] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — evidência: os 20 UCs (UC001-UC020) conferidos item a item entre especificacao/diagramas/09-casos-de-uso.puml, a matriz 9.1 (especificacao/09-diagrama-geral-de-casos-de-uso.md) e especificacao/10-especificacoes-de-caso-de-uso/area-a.md a area-d.md: mesmo nome e mesmos atores; revisão cruzada de 09/10/2026 e correções dos PRs #81 e #82
 - [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito. — pendente: US020 x UC013 A1 sem contradicao (area-a.md:189-196); demais estorias x fluxos nao conferidas
 - [ ] **K.6** Os objetivos (item 1) são atendidos por algum RF e aparecem refletidos na Visão (item 3). — pendente: objetivos x RFs x visao nao conferidos
 - [ ] **K.7** Nada listado em "Não faz" (item 2) aparece como RF, estória ou caso de uso. — pendente: 'Nao faz' x RFs/US/UCs nao conferido item a item
