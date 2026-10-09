@@ -1,17 +1,9 @@
 # 11 DIAGRAMA DE ATIVIDADES
 
-Fonte: `especificacao/diagramas/11-atividades-1.puml`, `11-atividades-2.puml` e `11-atividades-3.puml` (PlantUML, [ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)). O diagrama do UC009 (Assistir aula) está dividido em três partes, cada uma em página paisagem inteira, para ficar legível.
+Fonte: `especificacao/diagramas/11-atividades.svg` gerado por `scripts/gen_activity_diagram.py` ([ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)). Os arquivos `11-atividades.dot` e `11-atividades.puml` permanecem como registro.
 
-A primeira parte mostra o fluxo básico, com os passos 1 a 4, e as exceções E-1 e E-2. A segunda parte mostra os fluxos alternativos A-1 e A-2. A terceira parte mostra o fluxo alternativo A-3, que inicia o UC001 (Conversar com Tutor de IA), com o fluxo alternativo A-1 e a exceção E-2 desse caso de uso. Os números nas atividades indicam o passo do fluxo básico, e A-x e E-x indicam o fluxo alternativo ou de exceção.
+Diagrama de atividades do UC009 (Assistir aula), com o UC001 (Conversar com Tutor de IA) iniciado pelo fluxo alternativo A-3. Os números nas atividades indicam o passo do fluxo básico (passos 1 a 4), e A-x e E-x indicam o fluxo alternativo ou de exceção. O fluxo é particionado em raias horizontais por ator responsável (Aluno, Plataforma de Cursos e Tutor de IA), com fluxo estritamente orientado da esquerda para a direita e arestas ortogonais sem sobreposição de rótulos. As três partes anteriores ficam preservadas em `diagramas/11-atividades-*.png` como registro.
 
-![Diagrama de Atividades do UC009, parte 1: fluxo básico e exceções](diagramas/11-atividades-1.png)
+![Diagrama de Atividades do UC009](diagramas/11-atividades.png)
 
-*Figura 12 – Diagrama de Atividades do UC009, parte 1 (fluxo básico e exceções E-1 e E-2)*
-
-![Diagrama de Atividades do UC009, parte 2: fluxos alternativos A-1 e A-2](diagramas/11-atividades-2.png)
-
-*Figura 13 – Diagrama de Atividades do UC009, parte 2 (fluxos alternativos A-1 e A-2)*
-
-![Diagrama de Atividades do UC009, parte 3: fluxo alternativo A-3 e UC001](diagramas/11-atividades-3.png)
-
-*Figura 14 – Diagrama de Atividades do UC009, parte 3 (fluxo alternativo A-3, com o UC001)*
+*Figura 12 – Diagrama de Atividades do UC009 (Assistir Aula)*

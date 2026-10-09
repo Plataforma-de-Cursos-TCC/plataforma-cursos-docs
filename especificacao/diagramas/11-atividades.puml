@@ -1,0 +1,70 @@
+' Item 11 - Diagrama de atividades do UC009 (Assistir aula), com o UC001
+' (Conversar com Tutor de IA) iniciado pelo fluxo alternativo A-3.
+' Atores agrupados por ator: Aluno, Plataforma de Cursos e Tutor de IA.
+' Fonte principal em Graphviz dot: 11-atividades.dot (rankdir=LR, texto upright, ratio 2.50:1).
+' Comando de geração da imagem oficial:
+'   dot -Tpng especificacao/diagramas/11-atividades.dot -o especificacao/diagramas/11-atividades.png
+
+@startuml 11-atividades
+' Este diagrama é espelhado no arquivo 11-atividades.dot para compilação com Graphviz dot.
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 14
+skinparam ArrowFontSize 12
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor black
+skinparam ActivityDiamondBackgroundColor white
+skinparam ActivityDiamondBorderColor black
+
+(*) --> "Aluno\n1. Acessa a aula no curso"
+--> if "Pode assistir?" then
+  -->[não: sem matrícula\ne aula não prévia] "Plataforma\nE-1. Bloqueia acesso e\nsugere matrícula"
+  --> (*)
+else
+  -->[sim: matriculado\nou aula prévia] if "Aula iniciada\nanteriormente?" then
+    -->[sim: há ponto salvo] "Plataforma\nA-2. Posiciona vídeo\nno ponto salvo"
+    --> "Plataforma\n2. Carrega e reproduz\no vídeo da aula"
+  else
+    -->[não: início] "Plataforma\n2. Carrega e reproduz\no vídeo da aula"
+  endif
+endif
+
+"Plataforma\n2. Carrega e reproduz\no vídeo da aula" --> if "Vídeo carregou?" then
+  -->[não: falha na entrega] "Plataforma\nE-2. Exibe erro e\noferece recarregar"
+  --> (*)
+else
+  -->[sim: carregado] "Aluno\n3. Assiste ao\nvídeo da aula"
+endif
+
+"Aluno\n3. Assiste ao\nvídeo da aula" --> if "Tem dúvida\nno conteúdo?" as Duvida then
+  -->[sim: tem dúvida] "Aluno\nA-3. Envia pergunta\nno chat"
+  --> if "Limite de\nmensagens?" as Limite then
+    -->[sim: limite atingido] "Plataforma\nUC001 E-2. Informa\ntempo de espera"
+    --> if "Aluno saiu\nda tela?" as Saida then
+      -->[sim: saiu antes do fim] "Plataforma\nA-1. Salva os\nsegundos assistidos"
+      --> (*)
+    else
+      -->[não: continua na aula] if "Vídeo da aula\nterminou?" as Fim then
+        -->[sim: vídeo terminou] "Plataforma\n4. Marca aula concluída\ne atualiza progresso"
+        --> (*)
+      else
+        -->[não: continua assistindo] "Aluno\n3. Assiste ao\nvídeo da aula"
+      endif
+    endif
+  else
+    -->[não: dentro do limite] "Tutor de IA\nBusca trechos restritos\nao conteúdo do curso"
+    --> if "Trecho relevante\nencontrado?" then
+      -->[sim: trecho encontrado] "Tutor de IA\nGera resposta citando\naula e timestamp"
+      --> "Plataforma\nExibe resposta e\nsalva no histórico"
+    else
+      -->[não: não encontrado] "Tutor de IA\nUC001 A-1. Informa que não\ncobre e sugere reformular"
+      --> "Plataforma\nExibe resposta e\nsalva no histórico"
+    endif
+    --> Saida
+  endif
+else
+  -->[não: sem dúvida] Saida
+endif
+
+@enduml
