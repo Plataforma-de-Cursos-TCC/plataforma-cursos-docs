@@ -1,0 +1,69 @@
+' Item 11 - Diagrama de atividades do UC009 (Assistir aula), com o UC001
+' (Conversar com Tutor de IA) iniciado pelo fluxo alternativo A3.
+' Rótulos: número = passo do fluxo básico; A-x/E-x = fluxo alternativo/exceção.
+' Primeira linha do rótulo = ator (Aluno, Plataforma ou Tutor de IA).
+' Gerar o PNG: plantuml -tpng 11-atividades.puml
+
+@startuml 11-atividades
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 16
+skinparam ArrowFontSize 14
+skinparam ArrowColor #333333
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor black
+skinparam ActivityDiamondBackgroundColor white
+skinparam ActivityDiamondBorderColor black
+
+(*) --> "Aluno\n1. Acessa a aula no curso"
+--> if "Pode assistir?" then
+  -->[sem matrícula e\naula não prévia] "Plataforma\nE-1. Bloqueia acesso e\nsugere matrícula"
+  --> (*)
+else
+  -->[matriculado ou\naula prévia] if "Aula iniciada\nantes?" then
+    -->[há ponto salvo] "Plataforma\nA-2. Posiciona o vídeo\nno ponto salvo"
+    --> "Plataforma\n2. Carrega e reproduz o vídeo"
+  else
+    -->[sem ponto salvo] "Plataforma\n2. Carrega e reproduz o vídeo"
+  endif
+endif
+
+"Plataforma\n2. Carrega e reproduz o vídeo" --> if "Vídeo carregou?" then
+  -->[falha na entrega] "Plataforma\nE-2. Exibe erro e\noferece recarregar"
+  --> (*)
+else
+  -->[vídeo carregado] "Aluno\n3. Assiste ao vídeo"
+endif
+
+"Aluno\n3. Assiste ao vídeo" --> if "Tem dúvida?" then
+  -->[tem dúvida] "Aluno\nA-3. Envia pergunta no chat"
+  --> if "Limite de\nmensagens?" then
+    -->[limite atingido] "Plataforma\nUC001 E-2. Informa\no tempo de espera"
+    --> if "Aluno saiu\nda tela?" as Saida then
+      -->[saiu antes do fim] "Plataforma\nA-1. Salva os\nsegundos assistidos"
+      --> (*)
+    else
+      -->[continua na aula] if "Vídeo\nterminou?" as Fim then
+        -->[terminou] "Plataforma\n4. Marca aula concluída e\natualiza progresso"
+        --> (*)
+      else
+        -->[não terminou] "Aluno\n3. Assiste ao vídeo"
+      endif
+    endif
+  else
+    -->[dentro do limite] "Tutor de IA\nBusca trechos restritos\nao curso"
+    --> if "Trecho\nrelevante?" then
+      -->[encontrado] "Tutor de IA\nGera resposta citando\naula e timestamp"
+      --> "Plataforma\nExibe resposta e\nsalva no histórico"
+    else
+      -->[não encontrado] "Tutor de IA\nUC001 A-1. Informa que não\ncobre e sugere reformular"
+      --> "Plataforma\nExibe resposta e\nsalva no histórico"
+    endif
+    --> Saida
+  endif
+else
+  -->[sem dúvida] Saida
+endif
+
+@enduml
