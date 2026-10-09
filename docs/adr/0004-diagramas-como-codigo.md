@@ -31,14 +31,14 @@ relacionados: [adr-0003]
 **(c)**:
 
 - **Item 4:** BPMN 2.0 em `especificacao/diagramas/04-mapeamento-de-negocios.bpmn`, com diagrama (DI), editável no bpmn.io ou no Camunda Modeler.
-- **Itens 9 e 11:** PlantUML em `especificacao/diagramas/09-casos-de-uso.puml` e `11-atividades.puml`.
+- **Itens 9 e 11:** PlantUML no item 9 (`especificacao/diagramas/09-casos-de-uso.puml`); no item 11, script Python determinístico (`scripts/gen_activity_diagram.py`) gerando SVG e PNG com raias horizontais nativas e controle ortogonal de arestas (os testes anteriores com PlantUML, Mermaid e Graphviz dot ficam preservados em `11-atividades.puml` e `11-atividades.dot` como registro).
 - **Mermaid** fica só nos documentos de apoio em `docs/` (fora do PDF do RA1).
 - A imagem PNG usada no documento é gerada a partir do código e versionada ao lado da fonte, nunca editada à mão.
 
 ## Consequências
 
 - Todo diagrama tem fonte versionada e revisada por PR.
-- Para regerar: `plantuml -tpng <arquivo>.puml`; o `.bpmn` é renderizado com bpmn-js.
+- Para regerar: `plantuml -tpng <arquivo>.puml`; o `.bpmn` é renderizado com bpmn-js; o item 11 é regerado com `python3 scripts/gen_activity_diagram.py`.
 - O sentido do «extend» segue a [ADR-0003](0003-extend-no-sentido-do-te3-3.md).
 
 ---
