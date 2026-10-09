@@ -1,6 +1,6 @@
 # UC017 — Alterar Senha
 
-Diagrama de sequência do sistema para o caso de uso UC017 (Alterar Senha). Representa a alteração de senha pelo Usuário logado, no bloco da tela Meu perfil, com validação da senha atual e da nova senha pela API.
+Diagrama de sequência do sistema para o caso de uso UC017 (Alterar Senha, RF019), acionado a partir da tela Meu perfil (UC013). Representa a alteração de senha pelo Usuário logado, com conferência local de confirmação (R-3), validação da senha atual e da nova senha pela API e erro exibido no campo correspondente.
 
 ```mermaid
 sequenceDiagram
@@ -16,17 +16,21 @@ sequenceDiagram
         FE-->>Usuário: Descarta os campos preenchidos
     else usuário confirma
         Usuário->>FE: Confirma alteração
-        FE->>API: PUT /api/v1/profile/password (senha atual, nova senha)
-        API->>DB: Busca senha atual do usuário logado
-        DB-->>API: Senha atual
-        alt senha atual correta e nova senha válida
-            API->>DB: Atualiza senha do usuário
-            DB-->>API: OK
-            API-->>FE: 200 OK
-            FE-->>Usuário: Exibe confirmação de alteração
-        else senha atual incorreta ou nova senha fora da política
-            API-->>FE: 422 VALIDATION_FAILED
-            FE-->>Usuário: Exibe erro no campo correspondente
+        alt confirmação diferente da nova senha (R-3)
+            FE-->>Usuário: Exibe erro no campo de confirmação, sem chamar a API
+        else confirmação igual à nova senha
+            FE->>API: PUT /api/v1/profile/password (senha atual, nova senha)
+            API->>DB: Busca senha atual do usuário logado
+            DB-->>API: Senha atual
+            alt senha atual correta e nova senha válida
+                API->>DB: Atualiza senha do usuário
+                DB-->>API: OK
+                API-->>FE: 200 OK
+                FE-->>Usuário: Exibe confirmação de alteração
+            else senha atual incorreta ou nova senha fora da política (E1 e E2)
+                API-->>FE: 422 VALIDATION_FAILED
+                FE-->>Usuário: Exibe erro no campo correspondente
+            end
         end
     end
 ```

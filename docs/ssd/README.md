@@ -3,11 +3,11 @@ id: ssd-indice
 titulo: "SSD — System Sequence Diagrams"
 tipo: documento-projeto
 status: rascunho
-atualizado: 2026-10-07
+atualizado: 2026-10-09
 ---
 # SSD — System Sequence Diagrams
 
-Um diagrama de sequência do sistema por caso de uso, em Mermaid (ADR-0004), no arquivo `UC<n>-<titulo>.md` (IDs provisórios da ADR-0001).
+Um diagrama de sequência do sistema por caso de uso, em Mermaid (ADR-0004), no arquivo `UC<n>-<titulo>.md`.
 
 | Caso de uso | Área | Arquivo |
 |---|---|---|
