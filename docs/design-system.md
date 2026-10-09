@@ -115,7 +115,16 @@ Estimado do protótipo:
 - Aula: duas colunas, vídeo (cerca de 60%) e chat do Tutor de IA (cerca de 30%).
 - Raio de borda: cerca de 6 a 8 px em campos e botões, 10 a 12 px em cartões, pílula total em etiquetas.
 
-Breakpoints: o protótipo mostra só a largura de computador. <!-- proposta: breakpoints do Tailwind (sm 640, md 768, lg 1024, xl 1280); em largura menor que `lg`, a aula empilha o chat do Tutor de IA abaixo do vídeo e a tabela de usuários vira lista de cartões -->
+Breakpoints (RNF019, largura útil de 360 a 1920 px). São implementados no código, não nos protótipos, que mostram só a largura de computador e não usam `@media` de largura.
+
+| Faixa | Largura | Comportamento esperado |
+|---|---|---|
+| mobile | 0 a 639 px | uma coluna; a aula empilha o chat do Tutor de IA abaixo do vídeo; a tabela de usuários vira lista de cartões |
+| tablet | 640 a 1023 px | uma a duas colunas; chat do Tutor de IA ainda abaixo do vídeo |
+| laptop | 1024 a 1439 px | layout dos protótipos: aula em duas colunas, dashboard com três KPIs em linha |
+| desktop | 1440 px ou mais | mesmo layout do laptop, com largura máxima de conteúdo centralizada |
+
+Os valores das faixas são uma proposta para o grupo confirmar na implementação.
 
 ## 4. Componentes
 
@@ -202,5 +211,5 @@ Os protótipos de alta fidelidade cobrem os fluxos dos casos de uso do item 10 (
 ## Pendências para o grupo
 
 - A tela 2 e a tela 5 mostram **preço** do curso ("R$ 249,90", "Preço (R$)"), e o CONTEXT.md manda não assumir pagamento. Decidir se preço é só informativo.
-- As correções de contraste da seção 1.3 (escuro) precisam de aprovação antes de virar token de código. O tema claro da seção 1.2 já está nos protótipos.
+- As correções de contraste da seção 1.3 (escuro) precisam de aprovação antes de virar token de código. Até a aprovação, o contraste do tema escuro e o token `--warning` (`#E3B341` sobre `#332B17`) são provisórios. O tema claro da seção 1.2 já está nos protótipos.
 - O arquivo de origem do protótipo (Figma ou equivalente) não está no repositório; os hex deste documento são amostras de imagem JPEG.
