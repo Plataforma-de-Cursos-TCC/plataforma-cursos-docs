@@ -22,7 +22,7 @@ relacionados: [adr-0005, adr-0006]
   2. Uma API central responsável pelas regras de negócio dos domínios principais (autenticação, catálogo, aprendizagem, pagamentos e métricas);
   3. Um serviço de inteligência artificial (`ai-service`) responsável pelo Tutor de IA com arquitetura RAG (busca semântica em transcrições e geração de respostas contextualizadas com timestamps);
   4. Um serviço de mídia (`media-service`) para upload e streaming de vídeos via Cloudflare R2 (já estabelecido no SDD).
-- Para o `ai-service`, era necessário escolher a engine de banco de dados para armazenamento de vetores e busca por similaridade restrita ao curso (`course_id`), considerando que a infraestrutura prevista é uma VPS única rodando containers Docker Compose para uma equipe de 4 desenvolvedores.
+- Para o `ai-service`, era necessário escolher a engine de banco de dados para armazenamento de vetores e busca por similaridade restrita ao curso (`course_id`), considerando que a infraestrutura prevista era uma VPS única rodando containers Docker Compose para uma equipe de 4 desenvolvedores (hospedagem posteriormente alterada pela [ADR-0010](0010-hospedagem-e-armazenamento.md)).
 
 ## Opções consideradas (ai-service)
 
@@ -44,8 +44,8 @@ O grupo decidiu pela seguinte arquitetura de stack e bancos:
 
 ## Consequências
 
-- **Dois SGBDs na VPS:** A infraestrutura exigirá a execução de duas instâncias de banco de dados na VPS (um container para o MySQL 8 do core e um container dedicado para o PostgreSQL 16 + pgvector do `ai-service`).
-- **Composição no Docker Compose:** Mais um container de banco adicionado à orquestração (`pgvector/pgvector:pg16`), consumindo aproximadamente 100 MB adicionais de memória RAM, o que permanece perfeitamente dentro da capacidade da VPS.
+- **Dois SGBDs:** A infraestrutura exigirá duas instâncias de banco de dados (uma para o MySQL 8 do core e uma dedicada ao PostgreSQL 16 + pgvector do `ai-service`). Em produção rodam no Railway ([ADR-0010](0010-hospedagem-e-armazenamento.md)).
+- **Composição no Docker Compose (desenvolvimento local):** Mais um container de banco adicionado à orquestração (`pgvector/pgvector:pg16`), consumindo aproximadamente 100 MB adicionais de memória RAM. Em produção, o `pgvector` no Railway exige imagem própria (a confirmar).
 - **Isolamento de dados e dependências:** O core da aplicação permanece simples e focado no MySQL 8 relacional, enquanto a carga pesada de vetores e processamento de RAG fica isolada no `ai-service` sem afetar a performance transacional do core.
 - **Produtividade do time:** O uso do Laravel 13 em ambas as partes (API central e `ai-service`) unifica o ferramental de desenvolvimento, migrations, Eloquent e testes, aproveitando a integração de primeira classe com `pgvector`.
 
