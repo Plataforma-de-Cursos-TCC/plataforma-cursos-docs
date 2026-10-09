@@ -13,7 +13,10 @@ sequenceDiagram
     User->>FE: Seleciona intervalo de datas
     User->>FE: (Opcional) filtra por curso
     FE->>API: GET /api/v1/analytics/dashboard?inicio&fim&curso_id
-    alt intervalo válido
+    alt curso_id de outro Instrutor (R-2)
+        API-->>FE: 403 Forbidden (FORBIDDEN)
+        FE-->>User: Exibe acesso negado
+    else intervalo válido
         API->>DB: Agrega progresso e engajamento do período
         DB-->>API: Dados agregados
         alt existem dados no período
@@ -24,7 +27,7 @@ sequenceDiagram
             FE-->>User: Exibe estado vazio claro
         end
     else intervalo inválido
-        API-->>FE: 400 Bad Request
+        API-->>FE: 422 Unprocessable Entity (VALIDATION_FAILED)
         FE-->>User: Exibe erro e mantém último intervalo válido
     end
 ```

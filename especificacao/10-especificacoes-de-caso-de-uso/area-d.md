@@ -190,13 +190,13 @@
 - **Descrição:** o Administrador exclui a conta de um usuário; o sistema remove os dados pessoais e mantém o histórico de matrícula e pagamento anonimizado (US016, RF012). Estende o UC008 – Gerenciar Usuários, a partir da ação “Excluir”.
 - **Pré-condições:** o Administrador ter realizado login e estar na lista de usuários (UC008).
 - **Pós-condições:** dados pessoais do usuário removidos, histórico de matrícula e pagamento mantido anonimizado, acesso revogado e usuário fora da lista.
-- **Regras de negócio:** R-1 a exclusão remove os dados pessoais, mas mantém o histórico de matrícula e pagamento anonimizado; R-2 o Administrador não pode excluir a própria conta; R-3 a exclusão é irreversível e exige confirmação explícita.
+- **Regras de negócio:** R-1 a exclusão remove os dados pessoais, mas mantém o histórico de matrícula e pagamento anonimizado; R-2 o Administrador não pode excluir a própria conta; R-3 a exclusão é irreversível e exige confirmação explícita; R-4 a exclusão é registrada na trilha de auditoria (RNF016), sem manter dados pessoais no registro.
 - **Protótipo(s) de tela:** modal de confirmação “Excluir usuário?” com aviso de anonimização irreversível sobre a lista de usuários. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O sistema exibe a confirmação de exclusão com o nome do usuário e o aviso de que a ação é irreversível. (A-1)
   2. O Administrador aciona “Excluir”.
   3. O sistema valida o usuário-alvo. (E-1) (E-2)
-  4. O sistema anonimiza os dados pessoais, mantém o histórico anonimizado e revoga o acesso.
+  4. O sistema anonimiza os dados pessoais, mantém o histórico anonimizado, revoga o acesso e registra a exclusão na trilha de auditoria.
   5. O sistema retira o usuário da lista e confirma a exclusão.
   6. Este caso de uso é finalizado.
 

@@ -27,14 +27,14 @@ sequenceDiagram
             API-->>FE: Erro, curso não está mais disponível
             FE-->>Aluno: Exibe aviso, sem matrícula registrada
         else curso disponível
-            API->>DB: Cria matrícula
+            API->>DB: Cria matrícula (ou reaproveita a pendente de tentativa anterior recusada)
             alt curso gratuito (A2)
                 API->>DB: Matrícula com status ativa
                 DB-->>API: OK
                 API-->>FE: 201 Created (ativa)
                 FE-->>Aluno: Curso aparece em "Meus cursos"
             else curso pago (A3)
-                API->>DB: Matrícula com status pendente
+                API->>DB: Matrícula com status pendente (única por Aluno e curso)
                 DB-->>API: OK
                 API-->>FE: 201 Created (pendente)
                 FE-->>Aluno: Exibe resumo do pagamento (UC019)
@@ -52,7 +52,7 @@ sequenceDiagram
                         API->>DB: Registra pagamento com status recusado
                         DB-->>API: OK
                         API-->>FE: 422 PAYMENT_DECLINED
-                        FE-->>Aluno: Exibe aviso "Pagamento recusado" e botão "Matricular-se"
+                        FE-->>Aluno: Exibe aviso "Pagamento recusado" e volta à página do curso (passo 2), com o botão "Matricular-se"
                     end
                 end
             end

@@ -86,7 +86,7 @@ Quando o plano de ensino e uma meta do grupo divergirem, o plano define o mínim
 - [x] **X.7 — Declaração de uso de IA.** O documento contém a declaração obrigatória (plano de ensino, seção 7.1): *"Durante a preparação deste [TIPO DE CONTEÚDO], o(s) autor(es) usaram [FERRAMENTA, VERSÃO] para [EXPLICITAR MOTIVOS]. Após usar essa ferramenta, o(s) autor(es) revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo."*, preenchida. — evidência: entregas/declaracao-uso-de-ia.md:1-5; scripts/build_doc.py:30
 - [x] **X.8 — Mínimos.** O mínimo oficial do plano de ensino é de **8 especificações de caso de uso** (aula 8). A meta interna do grupo é de **4 itens por integrante** nos itens 6, 7, 8 e 10, o que dá 16 com 4 integrantes; ela organiza a divisão do trabalho e não é exigência da disciplina (ADR-0001). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (20 UCs, minimo 8)
 - [x] **X.9 — Nome do produto.** O nome **Plataforma de Cursos** (exatamente assim) aparece em todos os campos "NOME DO PRODUTO" / "PRODUTO" dos quadros. — evidência: especificacao/01-3-objetivos.md:5 (NOME DO PRODUTO: Plataforma de Cursos)
-- [ ] **X.10 — Legibilidade dos diagramas.** Os diagramas (itens 4, 9 e 11) estão legíveis no documento final, sem texto cortado ou ilegível. As imagens são geradas a partir do código-fonte versionado, nunca editadas à mão (ADR-0004). — pendente: legibilidade dos diagramas nao verificada visualmente
+- [x] **X.10 — Legibilidade dos diagramas.** Os diagramas (itens 4, 9 e 11) estão legíveis no documento final, sem texto cortado ou ilegível. As imagens são geradas a partir do código-fonte versionado, nunca editadas à mão (ADR-0004). — evidência: PDF reconstruído em 09/10/2026 (scripts/build_doc.py): BPMN do item 4 em seção paisagem (páginas 6-7), diagrama de casos de uso do item 9 em retrato (página 24) e diagramas do item 11 em paisagem, todos legíveis e sem corte; imagens geradas do código versionado (ADR-0004)
 
 ---
 
@@ -172,7 +172,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 **Template:** tabela `# | REQUISITO FUNCIONAL | ATOR / USUÁRIO | SPRINT`. Relacionar **todos** os requisitos do sistema completo.
 
 - [x] **C06.1** Todos os requisitos do sistema completo estão relacionados. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (RF001-RF019)
-- [x] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: mantém a numeração da v11 e os requisitos novos entram no fim (RF017, RF018, RF019…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (sem lacunas, sem ID provisorio)
+- [x] **C06.2** Enumeração **RF001, RF002…**, sem lacunas: segue a numeração da ADR-0001 e os requisitos novos entram no fim (RF017, RF018, RF019…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (sem lacunas, sem ID provisorio)
 - [ ] **C06.3** Cada RF está redigido de forma clara e **testável**: uma ação verificável, sem "etc." e sem termos vagos. — pendente: testabilidade de cada RF nao conferida
 - [x] **C06.4** Cada RF é rastreado a um **ator** (coluna preenchida, com ator do item 5). — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 (coluna ator preenchida)
 - [x] **C06.5** Cada RF está ligado a um objetivo do item 1 (coluna Objetivo da rastreabilidade do item 9), como pede a rubrica do item 6. — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md:11-28 (coluna OBJETIVO) e PR #68
@@ -197,8 +197,8 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 **Template:** tabela `# | REQUISITO NÃO-FUNCIONAL | NORMA ISO/IEC 25010`. O plano de ensino exige a classificação pela ISO/IEC 25010. Usar as características da edição vigente (25010:2023, como na v11) e acrescentar a coluna de métrica ou critério de aceitação.
 
-- [x] **C08.1** Os RNFs cobrem as características de qualidade relevantes. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/08-requisitos-nao-funcionais/00-item.md:7-26 (20 RNF)
-- [x] **C08.2** Enumeração **RNF001, RNF002…**: mantém a numeração da v11 e os novos entram no fim (RNF017…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/08-requisitos-nao-funcionais/00-item.md (RNF001-RNF020 sequenciais)
+- [x] **C08.1** Os RNFs cobrem as características de qualidade relevantes. Meta interna: 4 por integrante, ≥16 no total (ADR-0001). — evidência: especificacao/08-requisitos-nao-funcionais/00-item.md:7-27 (21 RNF)
+- [x] **C08.2** Enumeração **RNF001, RNF002…**: segue a numeração da ADR-0001 e os novos entram no fim (RNF017…). Não há ID provisório por área (ADR-0001). — evidência: especificacao/08-requisitos-nao-funcionais/00-item.md (RNF001-RNF021 sequenciais)
 - [ ] **C08.3** Cada RNF está classificado em uma característica da **ISO/IEC 25010**. — pendente: RNF019 'Flexibilidade' nao e caracteristica nomeada da ISO/IEC 25010:2011; confirmar versao
 - [ ] **C08.4** Cada RNF é **mensurável**, com medida ou critério de aceitação objetivo (ex.: tempo de resposta ≤ X s no percentil 95). Nada de "ser rápido" ou "ser seguro". — pendente: RNF017 e RNF018 em rascunho (especificacao/08-requisitos-nao-funcionais/00-item.md:28)
 - [ ] **C08.5** Os RNFs das quatro áreas somados cobrem, no mínimo, eficiência de desempenho, segurança/LGPD, confiabilidade, capacidade de interação (usabilidade) e manutenibilidade. Sugestão por área ([ADR-0006](../docs/adr/0006-divisao-por-areas.md)): A segurança (LGPD) e compatibilidade; B manutenibilidade e portabilidade; C capacidade de interação (na ISO/IEC 25010:2023, a acessibilidade virou a subcaracterística inclusividade dentro dela); D eficiência de desempenho e confiabilidade. — pendente: cobertura minima por caracteristica nao conferida
@@ -284,9 +284,9 @@ Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 - [ ] **K.8** As lanes do BPMN (item 4) e as raias do diagrama de atividades (item 11) usam os atores do item 5. — pendente: lanes BPMN e raias UML nao conferidas
 - [x] **K.9** As contagens conferem por contagem real: especificações ≥8 (mínimo oficial), cada estória com ≥2 critérios, ≥1 estória por RF; a meta interna (16 RF, 16 RNF, 16 casos de uso) é conferida à parte. — evidência: contagens reais: 20 UCs, 21 US (3 criterios cada), 19 RFs
 - [ ] **K.10** Todos os critérios gerais X.1 a X.10 estão atendidos. — pendente: X.1, X.5, X.6 e X.10 pendentes
-- [ ] **K.11** Nenhum item contradiz o `CONTEXT.md` nem as decisões D1–D6 (`docs/adr/`), e todo número, preço ou recurso de concorrente usado na especificação cita a fonte da pesquisa (`pesquisa/fontes.md`). — pendente: CONTEXT.md e fontes da pesquisa nao conferidos
+- [ ] **K.11** Nenhum item contradiz o `CONTEXT.md` nem as decisões D1–D10 (`docs/adr/`), e todo número, preço ou recurso de concorrente usado na especificação cita a fonte da pesquisa (`pesquisa/fontes.md`). — pendente: CONTEXT.md e fontes da pesquisa nao conferidos
 - [x] **K.12** Não há issue aberta com o rótulo `pendencia-cruzada`: toda amarração entre áreas foi resolvida, com o ID do requisito que a atende ou com a decisão do grupo registrada (`entregas/ra1-tarefas.md`, seção 1.4). — evidência: gh issue list --label pendencia-cruzada --state open (vazio)
-- [x] **K.13** A numeração segue a v11 (RF001…, US001…, RNF001…, UC001…) com os IDs novos no fim, e não restou ID provisório (`-A1`, `-B2`…) em nenhum arquivo da especificação (ADR-0001). — evidência: grep de IDs provisorios (-A1, -B2...) em especificacao/ sem ocorrencias
+- [x] **K.13** A numeração segue a ADR-0001 (RF001…, US001…, RNF001…, UC001…) com os IDs novos no fim, e não restou ID provisório (`-A1`, `-B2`…) em nenhum arquivo da especificação (ADR-0001). — evidência: grep de IDs provisorios (-A1, -B2...) em especificacao/ sem ocorrencias
 
 ---
 

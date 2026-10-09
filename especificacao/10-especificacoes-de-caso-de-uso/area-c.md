@@ -5,7 +5,7 @@
 - **Descrição:** o Visitante ou o Aluno consulta o catálogo de cursos publicados e filtra a lista por categoria (US019, RF015).
 - **Pré-condições:** nenhuma, porque o catálogo é público.
 - **Pós-condições:** lista de cursos exibida conforme o filtro selecionado.
-- **Regras de negócio:** R-1 só cursos publicados aparecem no catálogo; R-2 o card mostra título, nome do instrutor e preço em R$, ou “Gratuito”; R-3 uma categoria por vez, e “Todas” mostra todos os cursos.
+- **Regras de negócio:** R-1 só cursos publicados aparecem no catálogo; R-2 o card mostra título, nome do instrutor e preço em R$, ou “Gratuito”; R-3 uma categoria por vez, e “Todas” mostra todos os cursos; R-4 a lista é paginada (20 cursos por página por padrão) e o estado de filtro e página fica na URL (ADR-0009).
 - **Protótipo(s) de tela:** página do catálogo com chips de categoria e grade de cards, com estados de lista filtrada, catálogo vazio e categoria vazia. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O ator acessa o catálogo.

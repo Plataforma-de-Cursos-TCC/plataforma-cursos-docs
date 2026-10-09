@@ -35,9 +35,14 @@ sequenceDiagram
         Instrutor->>FE: Aciona "Tentar novamente"
         FE->>API: POST /api/v1/instructor/lessons/{id}/upload-url
         API->>DB: Verifica que o Instrutor é dono do curso
-        API-->>FE: 200 OK (novo link de envio, válido por 15 min)
-        FE->>R2: Reenvia o vídeo pela nova URL assinada
-        R2-->>FE: Recebimento confirmado
+        alt Instrutor não é dono do curso (R-1)
+            API-->>FE: 403 FORBIDDEN
+            FE-->>Instrutor: Informa que o envio não é permitido
+        else dono do curso
+            API-->>FE: 200 OK (novo link de envio, válido por 15 min)
+            FE->>R2: Reenvia o vídeo pela nova URL assinada
+            R2-->>FE: Recebimento confirmado
+        end
     end
     opt Edita aula ou substitui vídeo (A1)
         Instrutor->>FE: Seleciona uma aula e altera os dados ou escolhe novo vídeo
@@ -52,10 +57,20 @@ sequenceDiagram
             FE-->>Instrutor: Informa que a aula não pode ser alterada
         end
         opt Novo vídeo escolhido
-            FE->>API: POST /api/v1/instructor/lessons/{id}/upload-url
-            API-->>FE: 200 OK (URL assinada de envio)
-            FE->>R2: Envia o novo vídeo pela URL assinada
-            R2-->>FE: Recebimento confirmado
+            FE->>API: POST /api/v1/instructor/lessons/{id}/upload-url (formato e tamanho do vídeo)
+            API->>DB: Verifica que o Instrutor é dono do curso
+            alt Instrutor não é dono do curso (R-1)
+                API-->>FE: 403 FORBIDDEN
+                FE-->>Instrutor: Informa que o envio não é permitido
+            else formato ou tamanho inválido (E1)
+                API-->>FE: 422 VALIDATION_FAILED (mp4 ou webm, até 500 MB)
+                FE-->>Instrutor: Recusa o arquivo e informa os limites aceitos
+            else vídeo mp4 ou webm até 500 MB
+                API-->>FE: 200 OK (URL assinada de envio, válida por 15 min)
+                FE->>R2: Envia o novo vídeo pela URL assinada
+                R2-->>FE: Recebimento confirmado
+                Note over API,DB: a troca de vídeo reprocessa a transcrição e substitui a anterior (exceção a R-4)
+            end
         end
     end
     opt Exclui aula (A2)

@@ -11,7 +11,7 @@ sequenceDiagram
 
     Aluno->>FE: Aciona "Matricular-se" (UC003)
     FE->>API: POST /api/v1/courses/{id}/enroll
-    API->>DB: Cria matrícula pendente
+    API->>DB: Cria matrícula pendente ou reaproveita a existente de tentativa anterior recusada
     DB-->>API: OK
     API-->>FE: 201 Created
     FE-->>Aluno: Exibe resumo com título do curso e valor
@@ -33,7 +33,7 @@ sequenceDiagram
             API->>DB: Registra Payment.status = recusado
             DB-->>API: Recusa registrada
             API-->>FE: 422 PAYMENT_DECLINED
-            FE-->>Aluno: Aviso "Pagamento recusado." e botão Matricular-se
+            FE-->>Aluno: Aviso "Pagamento recusado." e retorno à página do curso (UC003, passo 2), com o botão Matricular-se
         end
     end
 ```

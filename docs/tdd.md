@@ -542,10 +542,11 @@ Para garantir consistência no consumo pelo front-end SPA e facilitar o tratamen
 
 Códigos de erro padrão da API:
 - `UNAUTHENTICATED` (401): Token JWT ausente, inválido ou expirado.
-- `FORBIDDEN` (403): Perfil sem permissão para acessar o recurso ou violação de propriedade (`assertOwnership`).
+- `FORBIDDEN` (403): Perfil sem permissão para acessar o recurso ou violação de propriedade (`assertOwnership`) ou ação proibida sobre a própria conta (bloquear ou excluir a si mesmo, UC008 E1 e UC018 E1).
 - `NOT_FOUND` (404): Entidade solicitada inexistente.
 - `VALIDATION_FAILED` (422): Falha de validação estrutural ou semântica dos dados da requisição.
 - `PAYMENT_DECLINED` (422): Pagamento simulado recusado (UC019); o pagamento é registrado como `recusado` e a matrícula continua `pendente`.
+- `LESSON_NOT_INDEXED` (409): Aula ainda sem transcrição e embeddings; o Tutor de IA não responde até a indexação terminar (UC001, E1).
 - `TOO_MANY_REQUESTS` (429): Limite de taxa de requisições excedido (rate limit).
 - `INTERNAL_SERVER_ERROR` (500): Falha inesperada no processamento interno do servidor.
 
@@ -580,7 +581,7 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | Área | Método e Endpoint | Descrição e Acesso | UC Relacionado |
 |---|---|---|---|
 | **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma, com o papel escolhido (Aluno ou Instrutor) e o aceite dos termos (público) | UC012 |
-| | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público) | UC005 |
+| | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público). Credencial inválida: 401 `UNAUTHENTICATED` com mensagem genérica; bloqueio por força bruta: 429 `TOO_MANY_REQUESTS` | UC005 |
 | | `POST /api/v1/auth/refresh` | Troca o refresh token do cookie por novo par de cookies, com rotação (cookie de refresh presente apenas com `rememberMe`) | UC005 |
 | | `GET /api/v1/auth/me` | Dados do usuário autenticado, para restaurar a sessão ao carregar a SPA (autenticado) | UC005 |
 | | `POST /api/v1/auth/logout` | Encerramento de sessão e invalidação do token (autenticado) | UC005 |
@@ -604,22 +605,22 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | | `DELETE /api/v1/instructor/lessons/{id}` | Exclusão de aula; responde `204` (Instrutor dono) | UC015 |
 | | `PUT /api/v1/instructor/lessons/{id}` | Edição de dados da aula e marcação de `isPreview` (Instrutor dono) | UC015 |
 | | `POST /api/v1/instructor/modules/{id}/quiz` | Cadastro de quiz com perguntas e alternativas com gabarito (Instrutor dono) | UC004 |
-| | `PUT /api/v1/instructor/quizzes/{id}` | Edição de perguntas e gabarito do quiz (Instrutor dono) | UC004 |
+| | `PUT /api/v1/instructor/quizzes/{id}` | Edição de perguntas, gabarito e `status` (`rascunho` ou `publicado`) do quiz (Instrutor dono); preserva tentativas e notas já registradas (R-2). Gabarito ausente ou menos de 2 alternativas: 422 `VALIDATION_FAILED` | UC004 |
 | **Área C: Aprendizagem do aluno** | `GET /api/v1/catalog/courses` | Listagem paginada de cursos publicados com filtro `category` e ordenação `sort`: `GET /api/v1/catalog/courses?category=&page=&per_page=&sort=` (público) | UC020 |
 | | `GET /api/v1/catalog/courses/{id}` | Detalhes públicos do curso com lista de módulos e aulas prévia (público) | UC020 |
 | | `POST /api/v1/courses/{id}/enroll` | Criação da matrícula: `ativa` em curso gratuito; `pendente` em curso pago, devolvendo os dados para o pagamento (Aluno) | UC003 |
 | | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado (Aluno dono). Aprovado: registra o pagamento, a matrícula vira `ativa` e o acesso é liberado (`200`). Recusado: registra `Payment.status = recusado`, mantém a matrícula `pendente` e responde `422 PAYMENT_DECLINED` | UC019 |
-| | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview) | UC009 |
-| | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado) | UC009 |
+| | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview). Aula inexistente: 404 `NOT_FOUND`; Aluno sem matrícula em aula que não é prévia: 403 `FORBIDDEN`; vídeo indisponível ou ainda em processamento: 404 `NOT_FOUND` | UC009 |
+| | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado). Corpo: `{ "segundos_assistidos": inteiro >= 0, "concluida": booleano }`; valor inválido: 422 `VALIDATION_FAILED` | UC009 |
 | | `GET /api/v1/quizzes/{id}` | Carga do quiz: perguntas e alternativas, sem gabarito (Aluno matriculado no curso do quiz, com as aulas do módulo concluídas); `404` para quiz inexistente ou sem matrícula, `403` se as aulas não estão concluídas | UC002 |
 | | `PUT /api/v1/quizzes/{id}/attempt/draft` | Salvamento do rascunho das respostas do quiz (Aluno matriculado) | UC002 |
 | | `GET /api/v1/quizzes/{id}/attempt/result` | Consulta do resultado da última tentativa enviada, com as respostas do Aluno e o gabarito, que só aparece depois do envio (Aluno matriculado) | UC002 |
 | | `POST /api/v1/quizzes/{id}/attempt` | Submissão de respostas do quiz e correção automática imediata (Aluno matriculado) | UC002 |
-| | `POST /api/v1/courses/{id}/reviews` | Criação ou substituição da avaliação e comentário do aluno sobre o curso, uma por aluno e curso (Aluno matriculado) | UC010 |
-| | `GET /api/v1/courses/{id}/reviews/me` | Consulta da avaliação anterior do próprio aluno para o curso, para pré-preencher o formulário (Aluno matriculado) | UC010 |
+| | `POST /api/v1/courses/{id}/reviews` | Criação ou substituição da avaliação e comentário do aluno sobre o curso, uma por aluno e curso (Aluno matriculado). Primeira avaliação: 201 Created; substituição da existente: 200 OK; Aluno sem matrícula: 403 `FORBIDDEN` | UC010 |
+| | `GET /api/v1/courses/{id}/reviews/me` | Consulta da avaliação anterior do próprio aluno para o curso, para pré-preencher o formulário (Aluno matriculado). Sem avaliação anterior: 404 `NOT_FOUND`, e o formulário abre vazio | UC010 |
 | **Área D: Tutor de IA e Administração** | `GET /api/v1/ai/tutor/conversations/{id}/messages` | Histórico da conversa com rolagem infinita, paginado por cursor (Aluno dono) | UC001 |
 | | `POST /api/v1/ai/tutor/chat` | Envio de dúvida ao Tutor de IA com streaming SSE da resposta contextualizada (Aluno matriculado) | UC001 |
-| | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos com filtros de período (Instrutor / Administrador) | UC007 |
+| | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos; parâmetros `inicio` e `fim` (datas ISO, `inicio` ≤ `fim`, senão `422 VALIDATION_FAILED`) e `curso_id` opcional; o Instrutor só vê os próprios cursos (`403 FORBIDDEN` para curso de outro Instrutor, R-2) (Instrutor / Administrador) | UC007 |
 | | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma (Administrador) | UC008 |
 | | `PUT /api/v1/admin/users/{id}/status` | Bloqueio ou desbloqueio de conta de usuário (Administrador) | UC008 |
 | | `DELETE /api/v1/admin/users/{id}` | Exclusão de conta com anonimização de dados conforme LGPD (Administrador) | UC018 |
@@ -635,7 +636,7 @@ A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) assin
 - **Emissão e Assinatura:** No login bem-sucedido (UC005), a API assina o JWT utilizando sua chave privada. O token carrega claims padrão (`sub` com UUID do usuário, `role`, `iat`, `exp`).
 - **Validação:** Requisições subsequentes são validadas pelo middleware da API utilizando a chave pública, que os microsserviços também usam para validar o token sem acesso à chave privada, eliminando queries ao banco de dados apenas para checagem criptográfica do token.
 - **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Strict`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
-- **Tempo de Vida (TTL):** O JWT possui TTL de 1 hora (RNF001 e UC005). Ao expirar, o front-end renova a sessão com o refresh token da opção "manter conectado", quando existir; sem ele, o usuário reautentica.
+- **Tempo de Vida (TTL):** O JWT possui TTL de 1 hora (RNF001 e UC005). O TTL implementa a expiração por inatividade da regra R-2 do UC005: a sessão sem renovação expira em 1 hora. Ao expirar, o front-end renova a sessão com o refresh token da opção "manter conectado", quando existir; sem ele, o usuário reautentica.
 - **Manter conectado:** No login, o campo booleano `rememberMe` decide se a API também emite um refresh token rotativo, em cookie `HttpOnly` de vida longa. Cada renovação invalida o anterior. A duração (30 dias) e a rotação estão definidas no [ADR-0008](adr/0008-sessao-jwt-em-cookie.md).
 - **Revogação e Blocklist:** Na Sprint 2, a invalidação antecipada (logout imediato ou bloqueio administrativo de usuário, UC008/UC018) será realizada por meio de uma blocklist mantida em Redis pelo tempo residual de expiração do token.
 
@@ -647,7 +648,7 @@ O sistema adota o modelo RBAC (*Role-Based Access Control*) com três perfis for
 3. **Administrador (`admin`):** Permissão irrestrita de gestão, incluindo governança de usuários, bloqueios de contas, exclusão e auditoria de ações administrativas retida por 12 meses (RNF016).
 
 **Regras de proteção e controle de acesso:**
-- **Guarda por Perfil (UC016):** 100% das rotas privadas passam por middlewares dedicados de autorização (`EnsureUserHasRole`). Usuários que tentarem acessar rotas fora de seu perfil recebem HTTP 403 (*Forbidden*) e são redirecionados à sua respectiva interface no front-end.
+- **Guarda por Perfil (UC016):** 100% das rotas privadas passam por middlewares dedicados de autorização (`EnsureUserHasRole`). Usuários que tentarem acessar rotas fora de seu perfil recebem HTTP 403 (*Forbidden*) e são redirecionados à sua respectiva interface no front-end. Toda negação de acesso por perfil (UC016 E2) e por propriedade é registrada na trilha de auditoria (RNF016).
 - **Identificador do quiz e vazamento de gabarito (UC002):** O quiz é localizado por UUID aleatório, não sequencial, o que dificulta a enumeração de identificadores; a proteção real é a autorização. `GET /quizzes/{id}`, `PUT .../attempt/draft`, `POST .../attempt` e `GET .../attempt/result` exigem Aluno matriculado no curso do módulo do quiz, e a API responde `404` com o mesmo corpo para quiz inexistente e para quiz de curso em que o Aluno não está matriculado, sem revelar que o quiz existe. O gabarito nunca sai em `GET /quizzes/{id}`; só aparece em `GET .../attempt/result`, depois do envio, ao lado das respostas do próprio Aluno.
 - **Verificação Estrita de Propriedade (`assertOwnership`):** Em todas as operações mutáveis de recursos pertencentes a instrutores ou alunos (ex.: edição de curso, alteração de módulo, resposta de quiz ou progresso de aula), a API executa obrigatoriamente a verificação de pertencimento: o `userId` autenticado no token deve corresponder ao proprietário da entidade ou o solicitante deve possuir o perfil de Administrador. Tentativas de acesso a recursos alheios são imediatamente rejeitadas.
 

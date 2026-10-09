@@ -6,4 +6,4 @@ Diagrama de atividades do UC009 (Assistir aula), com o UC001 (Conversar com Tuto
 
 ![Diagrama de Atividades do UC009](diagramas/11-atividades.png)
 
-*Figura 12 – Diagrama de Atividades do UC009 (Assistir Aula)*
+*Figura 0 – Diagrama de Atividades do UC009 (Assistir Aula)*

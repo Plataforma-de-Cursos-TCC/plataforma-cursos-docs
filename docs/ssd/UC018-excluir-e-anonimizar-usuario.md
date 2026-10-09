@@ -28,6 +28,7 @@ sequenceDiagram
         else usuário válido
             API->>DB: Anonimiza dados pessoais, mantém histórico anonimizado e revoga acesso
             DB-->>API: OK
+            API->>DB: Registra a exclusão na trilha de auditoria (RNF016)
             API-->>FE: 204 No Content
             FE-->>Administrador: Exibe "Usuário excluído" e retira o usuário da lista
         end

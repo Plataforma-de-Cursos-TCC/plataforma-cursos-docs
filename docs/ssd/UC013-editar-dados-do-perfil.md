@@ -16,7 +16,7 @@ sequenceDiagram
     API-->>FE: 200 OK (dados do perfil)
     FE-->>Usuário: Exibe os campos do perfil, o tema e a opção "Alterar senha"
     opt Usuário é Instrutor (A1)
-        FE->>API: GET /api/v1/instructor/profile
+        FE->>API: GET /api/v1/profile/instructor
         API-->>FE: 200 OK (minibiografia e links)
         FE-->>Usuário: Exibe minibiografia e links
     end
@@ -33,7 +33,7 @@ sequenceDiagram
         FE-->>Usuário: Indica o campo e solicita a correção
     end
     opt Instrutor altera minibiografia ou links (A1)
-        FE->>API: PUT /api/v1/instructor/profile (minibiografia, links)
+        FE->>API: PUT /api/v1/profile/instructor (minibiografia, links)
         API->>DB: Atualiza o perfil de Instrutor
         DB-->>API: OK
         API-->>FE: 200 OK

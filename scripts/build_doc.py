@@ -946,63 +946,64 @@ def assemble(pandoc_docx, template, out_docx, pages):
                 pstyle = ppr.find(qn("w:pStyle"))
                 ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
 
-    # Item 11 em seção paisagem (cabeçalho e rodapé preservados):
-    p11 = None
-    p_next_h1 = None
-    for p in doc.paragraphs:
-        if p.text.startswith("11 "):
+    # Itens 4 (BPMN largo) e 11 em seção paisagem (cabeçalho e rodapé preservados):
+    for land_prefix in ("4 ", "11 "):
+      p11 = None
+      p_next_h1 = None
+      for p in doc.paragraphs:
+        if p11 is None and p.style.name == "Heading 1" and p.text.startswith(land_prefix):
             p11 = p
         elif p11 is not None and p_next_h1 is None and p.style.name == "Heading 1":
             p_next_h1 = p
 
-    if p11 is not None:
-        port_sect = copy.deepcopy(body.find(qn("w:sectPr")))
-        land_sect = copy.deepcopy(port_sect)
-        pgSz = land_sect.find(qn("w:pgSz"))
-        pgSz.set(qn("w:w"), "16838")
-        pgSz.set(qn("w:h"), "11906")
-        pgSz.set(qn("w:orient"), "landscape")
+      if p11 is not None:
+          port_sect = copy.deepcopy(body.find(qn("w:sectPr")))
+          land_sect = copy.deepcopy(port_sect)
+          pgSz = land_sect.find(qn("w:pgSz"))
+          pgSz.set(qn("w:w"), "16838")
+          pgSz.set(qn("w:h"), "11906")
+          pgSz.set(qn("w:orient"), "landscape")
 
-        # Quebra de seção contínua para paisagem antes do item 11:
-        p_break1 = OxmlElement("w:p")
-        child(child(p_break1, "w:pPr", 0), "w:sectPr", 0).extend(list(port_sect))
-        p11._p.addprevious(p_break1)
+          # Quebra de seção contínua para paisagem antes do item 11:
+          p_break1 = OxmlElement("w:p")
+          child(child(p_break1, "w:pPr", 0), "w:sectPr", 0).extend(list(port_sect))
+          p11._p.addprevious(p_break1)
 
-        # Ajusta as imagens do diagrama de atividades (todas as partes) para ocupar a largura útil
-        # da página paisagem, mantendo a altura calculada pela proporção real de cada imagem.
-        # Cada imagem começa em página própria, com a legenda logo abaixo dela:
-        max_w = 8532000  # largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm)
-        max_h = 3400000  # altura máxima para caber com título, texto e legenda na mesma página
-        imgs = []
-        started = False
-        for p in doc.paragraphs:
-            if p._p is p11._p:
-                started = True
-            elif started and p_next_h1 is not None and p._p is p_next_h1._p:
-                break
-            elif started and p._p.find(".//" + qn("w:drawing")) is not None:
-                imgs.append(p)
-        for i, para in enumerate(imgs):
-            extent = para._p.find(".//" + qn("wp:extent"))
-            orig_cx = int(extent.get("cx"))
-            orig_cy = int(extent.get("cy"))
-            ratio = orig_cy / orig_cx
-            target_w = max_w
-            target_h = int(target_w * ratio)
-            if target_h > max_h:
-                target_h = max_h
-                target_w = int(target_h / ratio)
-            extent.set("cx", str(target_w))
-            extent.set("cy", str(target_h))
-            sync_pic_ext(para._p, extent)
-            if i > 0:
-                para.paragraph_format.page_break_before = True
+          # Ajusta as imagens do diagrama de atividades (todas as partes) para ocupar a largura útil
+          # da página paisagem, mantendo a altura calculada pela proporção real de cada imagem.
+          # Cada imagem começa em página própria, com a legenda logo abaixo dela:
+          max_w = 8532000  # largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm)
+          max_h = 3400000  # altura máxima para caber com título, texto e legenda na mesma página
+          imgs = []
+          started = False
+          for p in doc.paragraphs:
+              if p._p is p11._p:
+                  started = True
+              elif started and p_next_h1 is not None and p._p is p_next_h1._p:
+                  break
+              elif started and p._p.find(".//" + qn("w:drawing")) is not None:
+                  imgs.append(p)
+          for i, para in enumerate(imgs):
+              extent = para._p.find(".//" + qn("wp:extent"))
+              orig_cx = int(extent.get("cx"))
+              orig_cy = int(extent.get("cy"))
+              ratio = orig_cy / orig_cx
+              target_w = max_w
+              target_h = int(target_w * ratio)
+              if target_h > max_h:
+                  target_h = max_h
+                  target_w = int(target_h / ratio)
+              extent.set("cx", str(target_w))
+              extent.set("cy", str(target_h))
+              sync_pic_ext(para._p, extent)
+              if i > 0:
+                  para.paragraph_format.page_break_before = True
 
-        # Quebra de seção retornando ao retrato após o item 11:
-        if p_next_h1 is not None:
-            p_break2 = OxmlElement("w:p")
-            child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
-            p_next_h1._p.addprevious(p_break2)
+          # Quebra de seção retornando ao retrato após o item 11:
+          if p_next_h1 is not None:
+              p_break2 = OxmlElement("w:p")
+              child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
+              p_next_h1._p.addprevious(p_break2)
 
     # O texto do .md já traz o número do item; a numeração automática duplicaria.
     for name in ("Heading 1", "Heading 2", "Heading 3"):
