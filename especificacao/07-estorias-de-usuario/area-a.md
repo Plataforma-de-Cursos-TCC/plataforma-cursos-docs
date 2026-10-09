@@ -61,3 +61,19 @@
 | 1 | **DADO QUE:** informo um e-mail cadastrado <br> **QUANDO:** solicito a recuperação <br> **ENTÃO:** recebo um link de redefinição com validade limitada. |
 | 2 | **DADO QUE:** informo um e-mail não cadastrado <br> **QUANDO:** solicito a recuperação <br> **ENTÃO:** vejo a mesma mensagem de sucesso, sem revelar se o e-mail existe. |
 | 3 | **DADO QUE:** abro um link de redefinição expirado <br> **QUANDO:** tento definir a nova senha <br> **ENTÃO:** o sistema recusa e permite solicitar um novo link. |
+
+## US021 – REQUISITO RF019: Alterar senha
+
+**COMO:** Usuário logado\
+**POSSO:** trocar a minha senha informando a senha atual e a nova senha\
+**PARA:** manter a segurança da minha conta.\
+**PRIORIDADE:** Should Have\
+**AUTOR(A):** Lucas Stopinski da Silva
+
+**Critérios de Aceite:**
+
+| | |
+|---|---|
+| 1 | **DADO QUE:** informo a senha atual correta e uma nova senha válida com a confirmação igual <br> **QUANDO:** salvo a senha <br> **ENTÃO:** a senha é substituída, recebo a confirmação da alteração e o acesso segue com a nova senha. |
+| 2 | **DADO QUE:** informo uma senha atual que não confere <br> **QUANDO:** salvo a senha <br> **ENTÃO:** recebo erro no campo de senha atual e a senha não é alterada. |
+| 3 | **DADO QUE:** informo uma nova senha fora da política ou uma confirmação diferente da nova senha <br> **QUANDO:** tento salvar <br> **ENTÃO:** o sistema bloqueia a alteração, indica o campo com erro e a senha não é alterada. |

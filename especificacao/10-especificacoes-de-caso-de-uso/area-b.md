@@ -8,11 +8,11 @@
 - **Regras de negócio:** R-1 o curso é criado com status rascunho por padrão; R-2 a exclusão é bloqueada se houver alunos matriculados (nesse caso, o Instrutor só pode despublicar o curso).
 - **Protótipo(s) de tela:** formulário de cadastro de curso com título, descrição, preço e categoria. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
-  1. O Instrutor acessa “Meus cursos”. (A-2) (E-2)
+  1. O Instrutor acessa “Meus cursos”.
   2. O Instrutor aciona “Novo curso”.
   3. O Instrutor preenche título, descrição, preço e categoria.
   4. O sistema salva o curso com status rascunho. (E-1)
-  5. O Instrutor aciona “Publicar” quando estiver pronto. (A-1)
+  5. O Instrutor aciona “Publicar” quando estiver pronto.
   6. O sistema torna o curso visível no catálogo.
   7. Este caso de uso é finalizado.
 
@@ -45,8 +45,8 @@
 
     *Figura 0 – UC006, fluxo alternativo A1: formulário "Editar curso" com dados atuais*
   - **A2 – O Instrutor exclui um curso sem matrículas**
-    - A-2.1 O Instrutor aciona “Excluir curso” em um curso sem alunos matriculados.
-    - A-2.2 O sistema remove o curso do catálogo.
+    - A-2.1 O Instrutor aciona “Excluir curso”. (E-2)
+    - A-2.2 O sistema confirma que não há alunos matriculados e remove o curso do catálogo.
     - A-2.3 Este caso de uso é finalizado.
 
     ![confirmação de exclusão do curso na lista](prototipos/png/UC006-A2-1.png)
@@ -80,8 +80,8 @@
 - **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia os seus módulos; R-2 a posição do módulo deve ser única dentro do curso; R-3 a exclusão de um módulo remove as suas aulas e o seu quiz.
 - **Protótipo(s) de tela:** tela do curso com lista de módulos, botão “Novo módulo” e formulário de título e posição. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
-  1. O Instrutor acessa o curso.
-  2. O Instrutor aciona “Novo módulo”. (A-1) (A-2)
+  1. O Instrutor acessa o curso. (A-1) (A-2)
+  2. O Instrutor aciona “Novo módulo”.
   3. O Instrutor informa o título e a posição do módulo.
   4. O sistema valida os dados informados. (E-1) (E-2)
   5. O sistema salva o módulo e atualiza a lista de módulos.
@@ -90,10 +90,6 @@
   ![tela "Módulos do curso" com botão "Novo módulo"](prototipos/png/UC014-FB-1.png)
 
   *Figura 0 – UC014, fluxo básico: tela "Módulos do curso" com botão "Novo módulo"*
-
-  ![botão "Novo módulo" na tela "Módulos do curso"](prototipos/png/UC014-FB-1.png)
-
-  *Figura 0 – UC014, fluxo básico: botão "Novo módulo" na tela "Módulos do curso"*
 
   ![formulário "Novo módulo" vazio](prototipos/png/UC014-FB-3.png)
 
@@ -150,8 +146,8 @@
 - **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia as suas aulas; R-2 o vídeo aceita os formatos mp4 e webm, com até 500 MB por arquivo (RNF018); R-3 o envio do vídeo usa um link de envio temporário, válido por 15 minutos (RNF002); R-4 a transcrição e a indexação do conteúdo são geradas uma única vez por aula (RNF004).
 - **Protótipo(s) de tela:** tela do módulo com lista de aulas e formulário de título, descrição, ordem, indicador de prévia e seleção do vídeo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
-  1. O Instrutor acessa o módulo.
-  2. O Instrutor aciona “Nova aula”. (A-1) (A-2)
+  1. O Instrutor acessa o módulo. (A-1) (A-2)
+  2. O Instrutor aciona “Nova aula”.
   3. O Instrutor informa título, descrição, ordem e se a aula é prévia, e seleciona o vídeo.
   4. O sistema valida o formato e o tamanho do vídeo. (E-1)
   5. O sistema gera um link de envio temporário, válido por 15 minutos.
@@ -162,10 +158,6 @@
   ![tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"](prototipos/png/UC015-FB-1.png)
 
   *Figura 0 – UC015, fluxo básico: tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"*
-
-  ![botão "Nova aula" na tela "Aulas do módulo"](prototipos/png/UC015-FB-1.png)
-
-  *Figura 0 – UC015, fluxo básico: botão "Nova aula" na tela "Aulas do módulo"*
 
   ![formulário "Nova aula" vazio](prototipos/png/UC015-FB-3.png)
 
