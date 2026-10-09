@@ -150,7 +150,7 @@ Resumo dos pesos por item (rubrica do Canvas, a conferir; seção 6, A4). O tota
 - [ ] **C04.3** Tem evento de **início** e de **fim**. — pendente: diagrama BPMN nao inspecionado
 - [ ] **C04.4** Tem **atividades** rotuladas de forma padronizada (verbo no infinitivo + objeto). — pendente: diagrama BPMN nao inspecionado
 - [ ] **C04.5** Tem **gateways com condições** escritas nas saídas. — pendente: diagrama BPMN nao inspecionado
-- [ ] **C04.6** Tem **pools/lanes** coerentes com os atores do item 5. — pendente: diagrama BPMN nao inspecionado
+- [x] **C04.6** Tem **pools/lanes** coerentes com os atores do item 5. — evidência: especificacao/05-atores-usuarios.md (6 atores e nota sobre a raia Plataforma de Cursos); PDF verificado de forma independente
 - [ ] **C04.7** Tem eventos e mensagens quando aplicável, por exemplo a pergunta do Aluno ao Tutor de IA e a resposta com o contexto da aula. — pendente: diagrama BPMN nao inspecionado
 - [ ] **C04.8** O caminho principal está representado (do curso publicado ao Aluno que estuda, é avaliado e tira dúvidas com o Tutor de IA); o nível de detalhe é adequado e o diagrama é legível. — pendente: diagrama BPMN nao inspecionado
 - [ ] **C04.9** É consistente com a Visão do Produto. — pendente: consistencia com item 3 nao conferida
@@ -161,9 +161,9 @@ Resumo dos pesos por item (rubrica do Canvas, a conferir; seção 6, A4). O tota
 
 - [x] **C05.1** **≥3 atores**. — evidência: especificacao/05-atores-usuarios.md:3-10 (6 atores)
 - [x] **C05.2** Cada ator tem **papel e responsabilidades** descritos. Como a tabela do template só tem nome, acrescentar descrição, em coluna extra ou texto abaixo. — evidência: especificacao/05-atores-usuarios.md:3 (coluna DESCRICAO / RESPONSABILIDADES)
-- [ ] **C05.3** Cada ator tem sua relação com o processo e com o sistema explicitada. — pendente: relacao com processo e sistema nao conferida por ator
-- [ ] **C05.4** As descrições são sucintas, sem ambiguidade e sem sobreposição de papéis. — pendente: sobreposicao de papeis nao conferida
-- [ ] **C05.5** Os atores são os mesmos usados nas lanes do BPMN (item 4), nos RFs (item 6), nas estórias (item 7) e nos casos de uso (itens 9 e 10). — pendente: nomes de atores nas lanes, RFs, US e UCs nao conferidos (ver K.1)
+- [x] **C05.3** Cada ator tem sua relação com o processo e com o sistema explicitada. — evidência: especificacao/05-atores-usuarios.md (6 atores e nota sobre a raia Plataforma de Cursos); PDF verificado de forma independente
+- [x] **C05.4** As descrições são sucintas, sem ambiguidade e sem sobreposição de papéis. — evidência: especificacao/05-atores-usuarios.md (6 atores e nota sobre a raia Plataforma de Cursos); PDF verificado de forma independente
+- [x] **C05.5** Os atores são os mesmos usados nas lanes do BPMN (item 4), nos RFs (item 6), nas estórias (item 7) e nos casos de uso (itens 9 e 10). — evidência: especificacao/05-atores-usuarios.md (6 atores e nota sobre a raia Plataforma de Cursos); PDF verificado de forma independente
 
 Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante**, **Aluno**, **Instrutor**, **Administrador** e o ator não humano **Tutor de IA** (ator sistêmico, [ADR-0005](../docs/adr/0005-tutor-de-ia-como-ator-sistemico.md)). Os nomes são idênticos em todos os itens.
 
@@ -223,7 +223,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 - [x] **C10.1** **≥8 especificações** (mínimo oficial do plano de ensino, aula 8). Meta interna: 4 por integrante, 16 no total (ADR-0001). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (20 UCs)
 - [x] **C10.2** Cada especificação tem os **10 campos** preenchidos. — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (10 campos por UC)
-- [ ] **C10.3** Cada especificação tem **protótipos de tela de alta fidelidade** que cobrem todos os fluxos do caso de uso (básico, alternativos e de exceção), com a sequência de telas e estados, e não uma tela só. — pendente: UC016 sem tela propria (area-d.md:245); demais UCs sem tela nao confirmados
+- [ ] **C10.3** Cada especificação tem **protótipos de tela de alta fidelidade** que cobrem todos os fluxos do caso de uso (básico, alternativos e de exceção), com a sequência de telas e estados, e não uma tela só. — pendente: verificação independente apontou ausência de tela para UC016 e para alguns fluxos alternativos/de exceção (UC012 E3, UC005 A1/A2, UC011 A2/E3, UC013 A2, UC003 A3, UC009 A1, UC010 A2, UC008 A3)
 - [x] **C10.4** Cada especificação tem **fluxo básico** completo, em passos numerados. — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo basico em todos os UCs)
 - [x] **C10.5** Cada especificação tem ao menos um **fluxo alternativo** (variação intencional do ator). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo alternativo em todos os UCs)
 - [x] **C10.6** Cada especificação tem ao menos um **fluxo de exceção** (variação não intencional ou erro). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo de excecao em todos os UCs)
@@ -238,8 +238,8 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 - [ ] **C11.1** Representa o **fluxo principal**. — pendente: diagrama 11-atividades.png nao inspecionado
 - [ ] **C11.2** Representa os **fluxos alternativos**. — pendente: diagrama 11-atividades.png nao inspecionado
 - [ ] **C11.3** Tem **decisões** com **condições de guarda** escritas. — pendente: diagrama 11-atividades.png nao inspecionado
-- [ ] **C11.4** Tem **atividades paralelas** (fork/join) onde houver ramos concorrentes, por exemplo o Aluno assistir à aula enquanto o Tutor de IA está disponível para dúvidas. — pendente: diagrama 11-atividades.png nao inspecionado
-- [ ] **C11.5** Tem **responsabilidades** (partições/raias) coerentes com os atores. — pendente: diagrama 11-atividades.png nao inspecionado
+- [ ] **C11.4** Tem **atividades paralelas** (fork/join) onde houver ramos concorrentes, por exemplo o Aluno assistir à aula enquanto o Tutor de IA está disponível para dúvidas. — pendente: verificação independente (PDF final) não encontrou fork/join; o diagrama do UC009 só tem fluxo sequencial com a pergunta ao Tutor via A-3; incluir fork/join exige refazer as coordenadas de `scripts/gen_activity_diagram.py`
+- [x] **C11.5** Tem **responsabilidades** (partições/raias) coerentes com os atores. — evidência: especificacao/05-atores-usuarios.md (6 atores e nota sobre a raia Plataforma de Cursos); PDF verificado de forma independente
 - [ ] **C11.6** A notação UML é usada corretamente: nó inicial e final, ações, decisão/merge, fork/join. — pendente: diagrama 11-atividades.png nao inspecionado
 - [ ] **C11.7** É legível e aderente à documentação (atores, casos de uso, BPMN). — pendente: diagrama 11-atividades.png nao inspecionado
 
@@ -281,7 +281,7 @@ Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 - [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito. — pendente: US020 x UC013 A1 sem contradicao (area-a.md:189-196); demais estorias x fluxos nao conferidas
 - [ ] **K.6** Os objetivos (item 1) são atendidos por algum RF e aparecem refletidos na Visão (item 3). — pendente: objetivos x RFs x visao nao conferidos
 - [ ] **K.7** Nada listado em "Não faz" (item 2) aparece como RF, estória ou caso de uso. — pendente: 'Nao faz' x RFs/US/UCs nao conferido item a item
-- [ ] **K.8** As lanes do BPMN (item 4) e as raias do diagrama de atividades (item 11) usam os atores do item 5. — pendente: lanes BPMN e raias UML nao conferidas
+- [x] **K.8** As lanes do BPMN (item 4) e as raias do diagrama de atividades (item 11) usam os atores do item 5. — evidência: especificacao/05-atores-usuarios.md (6 atores e nota sobre a raia Plataforma de Cursos); PDF verificado de forma independente
 - [x] **K.9** As contagens conferem por contagem real: especificações ≥8 (mínimo oficial), cada estória com ≥2 critérios, ≥1 estória por RF; a meta interna (16 RF, 16 RNF, 16 casos de uso) é conferida à parte. — evidência: contagens reais: 20 UCs, 21 US (3 criterios cada), 19 RFs
 - [ ] **K.10** Todos os critérios gerais X.1 a X.10 estão atendidos. — pendente: X.1, X.5, X.6 e X.10 pendentes
 - [ ] **K.11** Nenhum item contradiz o `CONTEXT.md` nem as decisões D1–D10 (`docs/adr/`), e todo número, preço ou recurso de concorrente usado na especificação cita a fonte da pesquisa (`pesquisa/fontes.md`). — pendente: CONTEXT.md e fontes da pesquisa nao conferidos
