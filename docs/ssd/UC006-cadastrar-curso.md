@@ -12,7 +12,7 @@ sequenceDiagram
     Instrutor->>FE: Acessa "Meus cursos"
     Instrutor->>FE: Aciona "Novo curso"
     Instrutor->>FE: Preenche título, descrição, preço, categoria
-    FE->>API: POST /cursos
+    FE->>API: POST /api/v1/instructor/courses
     alt campos válidos
         API->>DB: Insere curso (status = rascunho)
         DB-->>API: Curso criado
@@ -24,7 +24,7 @@ sequenceDiagram
     end
 
     Instrutor->>FE: Aciona "Publicar"
-    FE->>API: PATCH /cursos/{id} (status = publicado)
+    FE->>API: PUT /api/v1/instructor/courses/{id} (status = publicado)
     API->>DB: Atualiza status do curso
     DB-->>API: OK
     API-->>FE: 200 OK

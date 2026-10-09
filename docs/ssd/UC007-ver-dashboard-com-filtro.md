@@ -12,7 +12,7 @@ sequenceDiagram
     User->>FE: Acessa dashboard
     User->>FE: Seleciona intervalo de datas
     User->>FE: (Opcional) filtra por curso
-    FE->>API: GET /dashboard?inicio&fim&curso_id
+    FE->>API: GET /api/v1/analytics/dashboard?inicio&fim&curso_id
     alt intervalo válido
         API->>DB: Agrega progresso e engajamento do período
         DB-->>API: Dados agregados

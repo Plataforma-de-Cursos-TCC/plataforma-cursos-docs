@@ -11,7 +11,7 @@ sequenceDiagram
 
     Visitante->>FE: Aciona "Esqueci minha senha"
     Visitante->>FE: Informa e-mail
-    FE->>API: POST /recuperar-senha (email)
+    FE->>API: POST /api/v1/auth/forgot-password (email)
     API->>DB: Busca usuário pelo e-mail
     DB-->>API: Usuário (ou não encontrado)
     alt e-mail cadastrado
@@ -22,7 +22,7 @@ sequenceDiagram
     end
     FE-->>Visitante: Exibe confirmação de envio
     Visitante->>FE: Acessa link e informa nova senha
-    FE->>API: POST /redefinir-senha (token, nova_senha)
+    FE->>API: POST /api/v1/auth/reset-password (token, nova_senha)
     alt token válido
         API->>DB: Atualiza senha do usuário
         DB-->>API: OK
