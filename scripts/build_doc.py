@@ -1109,6 +1109,12 @@ def patch_docx_files(path):
                     rf.attrib[k] = "Arial"
         data["word/document.xml"] = ET.tostring(doc_root, encoding="utf-8")
 
+    # ElementTree renomeia prefixos (ns1...) e deixa mc:Ignorable apontando para
+    # prefixos inexistentes (w14, w15...), o que o Word rejeita como conteúdo ilegível.
+    for n in ("word/styles.xml", "word/document.xml"):
+        if n in data:
+            data[n] = re.sub(rb'\s\w+:Ignorable="[^"]*"', b"", data[n])
+
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         for n, b in data.items():
             z.writestr(n, b)
