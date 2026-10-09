@@ -253,6 +253,29 @@ def bold_run(r):
     child(rpr, "w:b", len(head))
 
 
+def set_run_font(r, font_name="Arial", size_half_pts=None):
+    rpr = child(r, "w:rPr", 0)
+    rf = rpr.find(qn("w:rFonts"))
+    if rf is None:
+        rf = OxmlElement("w:rFonts")
+        rpr.insert(0, rf)
+    for k in list(rf.attrib.keys()):
+        del rf.attrib[k]
+    for k in ("ascii", "hAnsi", "cs", "eastAsia"):
+        rf.set(qn(f"w:{k}"), font_name)
+    if size_half_pts is not None:
+        sz = rpr.find(qn("w:sz"))
+        if sz is None:
+            sz = OxmlElement("w:sz")
+            rpr.append(sz)
+        sz.set(qn("w:val"), str(size_half_pts))
+        szCs = rpr.find(qn("w:szCs"))
+        if szCs is None:
+            szCs = OxmlElement("w:szCs")
+            rpr.append(szCs)
+        szCs.set(qn("w:val"), str(size_half_pts))
+
+
 def format_tables_and_captions(doc):
     """Negrito e centro no cabeçalho, no título do quadro e na coluna de número; legenda em Caption."""
     def para_fmt(cell, bold, v_center=False):
@@ -272,6 +295,16 @@ def format_tables_and_captions(doc):
                     bold_run(r)
 
     for tbl in doc.element.body.iter(qn("w:tbl")):
+        rows_txt = [
+            " ".join(text_of(c).strip() for c in tr.findall(qn("w:tc")))
+            for tr in tbl.findall(qn("w:tr"))[:3]
+        ]
+        full_head = " | ".join(rows_txt)
+        first_p = tbl.find(".//" + qn("w:p"))
+        first_txt = text_of(first_p).strip() if first_p is not None else ""
+        is_us = bool(re.match(r"^US\d{3}\s*–", first_txt))
+        is_box1 = "QUADRO “3 OBJETIVOS”" in full_head
+
         for tr in tbl.findall(qn("w:tr")):
             tcs = tr.findall(qn("w:tc"))
             if len(tcs) == 1 and tr.find(".//" + qn("w:gridSpan")) is not None:
@@ -280,13 +313,35 @@ def format_tables_and_captions(doc):
                 for tc in tcs:
                     para_fmt(tc, True)
             elif tcs and re.fullmatch(r"\d+", text_of(tcs[0]).strip()):
-                para_fmt(tcs[0], True, v_center=True)
+                if is_box1:
+                    # Item 1: numeração 1/2/3 sem a centralização extra de hoje, Arial sz 24, vAlign center
+                    tcPr = tcs[0].get_or_add_tcPr()
+                    vAlign = tcPr.find(qn("w:vAlign"))
+                    if vAlign is None:
+                        vAlign = OxmlElement("w:vAlign")
+                        tcPr.append(vAlign)
+                    vAlign.set(qn("w:val"), "center")
+                    for p in tcs[0].iter(qn("w:p")):
+                        ppr = child(p, "w:pPr", 0)
+                        jc = ppr.find(qn("w:jc"))
+                        if jc is not None:
+                            ppr.remove(jc)
+                else:
+                    para_fmt(tcs[0], True, v_center=True)
     caption = doc.styles["Caption"].style_id
     for p in doc.element.body.iter(qn("w:p")):
         if re.match(r"Figura \d+ –", text_of(p).strip()):
             child(child(p, "w:pPr", 0), "w:pStyle", 0).set(qn("w:val"), caption)
             for i in list(p.iter(qn("w:i"), qn("w:iCs"))):
                 i.getparent().remove(i)
+
+
+def sync_pic_ext(root, extent):
+    """Iguala a:ext do pic:spPr ao wp:extent, senão o renderizador usa o tamanho antigo."""
+    for ext in root.iter(qn("a:ext")):
+        if ext.getparent().tag == qn("a:xfrm"):
+            ext.set("cx", extent.get("cx"))
+            ext.set("cy", extent.get("cy"))
 
 
 def format_images(doc):
@@ -306,6 +361,7 @@ def format_images(doc):
                 cy = int(extent.get("cy"))
                 extent.set("cx", str(w_15cm))
                 extent.set("cy", str(int(cy * w_15cm / cx)))
+                sync_pic_ext(dr, extent)
             for cNvPicPr in dr.iter(qn("pic:cNvPicPr")):
                 picLocks = cNvPicPr.find(qn("a:picLocks"))
                 if picLocks is None:
@@ -315,6 +371,391 @@ def format_images(doc):
             ppr = child(p._p, "w:pPr", 0)
             rpr = ppr.find(qn("w:rPr"))
             child(ppr, "w:jc", None if rpr is None else list(ppr).index(rpr)).set(qn("w:val"), "center")
+            nxt = p._p.getnext()
+            flat = [ppr]
+            # FirstParagraph não existe em styles.xml; o LibreOffice ignora o jc nesse caso.
+            for ps in ppr.findall(qn("w:pStyle")):
+                if ps.get(qn("w:val")) == "FirstParagraph":
+                    ppr.remove(ps)
+            if nxt is not None and nxt.tag == qn("w:p") and re.match(r"Figura \d+ –", text_of(nxt).strip()):
+                flat.append(child(nxt, "w:pPr", 0))
+            for fp in flat:
+                # Imagem e legenda centralizadas na página: sem lista (recuo) e sem recuo próprio.
+                for np_ in fp.findall(qn("w:numPr")):
+                    fp.remove(np_)
+                for old_ind in fp.findall(qn("w:ind")):
+                    fp.remove(old_ind)
+                ind = OxmlElement("w:ind")
+                for k in ("w:left", "w:right", "w:firstLine", "w:hanging"):
+                    ind.set(qn(k), "0")
+                jc = fp.find(qn("w:jc"))
+                if jc is not None:
+                    jc.addprevious(ind)
+                else:
+                    fp.append(ind)
+                child(fp, "w:jc", None).set(qn("w:val"), "center")
+
+    # Prototipos dos UC (item 10): linha em branco antes, legenda centralizada e borda de 1 px.
+    # Itens 9 e 11 ficam de fora (o 11 tem tratamento próprio em paisagem).
+    item = ""
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            item = p.text.split(" ")[0]
+            continue
+        pictures = [d for d in p._p.iter(qn("wp:docPr")) if "Caixa de Texto" not in d.get("name", "")]
+        if item != "10" or not pictures:
+            continue
+
+        prev = p._p.getprevious()
+        has_blank = (
+            prev is not None
+            and prev.tag == qn("w:p")
+            and not text_of(prev).strip()
+            and prev.find(".//" + qn("w:drawing")) is None
+        )
+        if not has_blank:
+            p._p.addprevious(OxmlElement("w:p"))
+
+        ppr = child(p._p, "w:pPr", 0)
+        if ppr.find(qn("w:keepNext")) is None:
+            pstyle = ppr.find(qn("w:pStyle"))
+            ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:keepNext"))
+
+        caption = p._p.getnext()
+        if caption is not None and caption.tag == qn("w:p") and re.match(r"Figura \d+ –", text_of(caption).strip()):
+            cppr = child(caption, "w:pPr", 0)
+            crpr = cppr.find(qn("w:rPr"))
+            child(cppr, "w:jc", None if crpr is None else list(cppr).index(crpr)).set(qn("w:val"), "center")
+
+        for pic_sppr in p._p.iter(qn("pic:spPr")):
+            for old in pic_sppr.findall(qn("a:ln")):
+                pic_sppr.remove(old)
+            ln = OxmlElement("a:ln")
+            ln.set("w", "9525")  # 1 px
+            fill = OxmlElement("a:solidFill")
+            color = OxmlElement("a:srgbClr")
+            color.set("val", "000000")
+            fill.append(color)
+            ln.append(fill)
+            pic_sppr.append(ln)
+
+
+def apply_table_box_layout(tbl, kind):
+    """Aplica métricas do template aos quadros dos itens 1, 2, 3 e 5."""
+    tblPr = tbl.find(qn("w:tblPr"))
+    if tblPr is None:
+        tblPr = OxmlElement("w:tblPr")
+        tbl.insert(0, tblPr)
+    tblW = tblPr.find(qn("w:tblW"))
+    if tblW is None:
+        tblW = OxmlElement("w:tblW")
+        tblPr.append(tblW)
+    tblW.set(qn("w:type"), "dxa")
+    tblW.set(qn("w:w"), "10490")
+
+    tblInd = tblPr.find(qn("w:tblInd"))
+    if tblInd is None:
+        tblInd = OxmlElement("w:tblInd")
+        tblPr.append(tblInd)
+    tblInd.set(qn("w:type"), "dxa")
+    tblInd.set(qn("w:w"), "-5")
+
+    tblStyle = tblPr.find(qn("w:tblStyle"))
+    if tblStyle is None:
+        tblStyle = OxmlElement("w:tblStyle")
+        tblPr.append(tblStyle)
+    tblStyle.set(qn("w:val"), "Tabelacomgrade")
+
+    tblGrid = tbl.find(qn("w:tblGrid"))
+    if tblGrid is None:
+        tblGrid = OxmlElement("w:tblGrid")
+        tbl.insert(1, tblGrid)
+    for col in tblGrid.findall(qn("w:gridCol")):
+        tblGrid.remove(col)
+
+    if kind == "1":
+        col_widths = [2019, 8471]
+    elif kind == "2":
+        col_widths = [5030, 5460]
+    elif kind == "3.1":
+        col_widths = [2268, 8222]
+    elif kind == "3.2":
+        col_widths = [3402, 7088]
+    elif kind == "5":
+        col_widths = [718, 9772]
+    else:
+        col_widths = [10490]
+
+    for w in col_widths:
+        gc = OxmlElement("w:gridCol")
+        gc.set(qn("w:w"), str(w))
+        tblGrid.append(gc)
+
+    rows = tbl.findall(qn("w:tr"))
+    for r_idx, r in enumerate(rows):
+        trPr = child(r, "w:trPr", 0)
+        # Item 2 tem células de texto muito altas no template; só define trHeight nos cabeçalhos
+        if kind != "2" or r_idx in (0, 1):
+            trHeight = trPr.find(qn("w:trHeight"))
+            if trHeight is None:
+                trHeight = OxmlElement("w:trHeight")
+                trPr.append(trHeight)
+            trHeight.set(qn("w:val"), "567")
+
+        tcs = r.findall(qn("w:tc"))
+        for c_idx, tc in enumerate(tcs):
+            tcPr = tc.find(qn("w:tcPr"))
+            if tcPr is None:
+                tcPr = OxmlElement("w:tcPr")
+                tc.insert(0, tcPr)
+
+            gridSpan = tcPr.find(qn("w:gridSpan"))
+            span = int(gridSpan.get(qn("w:val"))) if gridSpan is not None else 1
+            if span > 1:
+                tc_w = sum(col_widths[:span])
+            else:
+                tc_w = col_widths[c_idx] if c_idx < len(col_widths) else col_widths[-1]
+
+            tcW = tcPr.find(qn("w:tcW"))
+            if tcW is None:
+                tcW = OxmlElement("w:tcW")
+                tcPr.append(tcW)
+            tcW.set(qn("w:type"), "dxa")
+            tcW.set(qn("w:w"), str(tc_w))
+
+            if kind != "2" or r_idx in (0, 1):
+                vAlign = tcPr.find(qn("w:vAlign"))
+                if vAlign is None:
+                    vAlign = OxmlElement("w:vAlign")
+                    tcPr.append(vAlign)
+                vAlign.set(qn("w:val"), "center")
+
+            for p in tc.findall(qn("w:p")):
+                ppr = child(p, "w:pPr", 0)
+                jc = ppr.find(qn("w:jc"))
+                r_txt = text_of(tc).strip()
+                # Título e cabeçalho centralizados (exceto linha NOME DO PRODUTO)
+                if r_idx == 0:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                elif r_idx == 1 and ("OBJETIVOS" in r_txt or "DESCRIÇÃO" in r_txt or "ATOR / USUÁRIO" in r_txt):
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                elif r_idx == 2 and ("OBJETIVOS" in r_txt or "DESCRIÇÃO" in r_txt):
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                elif "NOME DO PRODUTO:" in r_txt and jc is not None:
+                    ppr.remove(jc)
+
+                for run in p.findall(qn("w:r")):
+                    set_run_font(run, font_name="Arial", size_half_pts=24)
+
+
+US_PER_PAGE = 2
+
+
+def apply_us_table_layout(tbl, is_first_us=False):
+    """Aplica layout do template à tabela de estória de usuário (item 7)."""
+    tblPr = tbl.find(qn("w:tblPr"))
+    if tblPr is None:
+        tblPr = OxmlElement("w:tblPr")
+        tbl.insert(0, tblPr)
+    tblW = tblPr.find(qn("w:tblW"))
+    if tblW is None:
+        tblW = OxmlElement("w:tblW")
+        tblPr.append(tblW)
+    tblW.set(qn("w:type"), "dxa")
+    tblW.set(qn("w:w"), "10490")
+
+    tblInd = tblPr.find(qn("w:tblInd"))
+    if tblInd is None:
+        tblInd = OxmlElement("w:tblInd")
+        tblPr.append(tblInd)
+    tblInd.set(qn("w:type"), "dxa")
+    tblInd.set(qn("w:w"), "-5")
+
+    tblStyle = tblPr.find(qn("w:tblStyle"))
+    if tblStyle is None:
+        tblStyle = OxmlElement("w:tblStyle")
+        tblPr.append(tblStyle)
+    tblStyle.set(qn("w:val"), "Tabelacomgrade")
+
+    tblLayout = tblPr.find(qn("w:tblLayout"))
+    if tblLayout is None:
+        tblLayout = OxmlElement("w:tblLayout")
+        tblPr.append(tblLayout)
+    tblLayout.set(qn("w:type"), "fixed")
+
+    tblGrid = tbl.find(qn("w:tblGrid"))
+    if tblGrid is None:
+        tblGrid = OxmlElement("w:tblGrid")
+        tbl.insert(1, tblGrid)
+    for col in tblGrid.findall(qn("w:gridCol")):
+        tblGrid.remove(col)
+
+    col_widths = [567, 9923]
+    for w in col_widths:
+        gc = OxmlElement("w:gridCol")
+        gc.set(qn("w:w"), str(w))
+        tblGrid.append(gc)
+
+    rows = tbl.findall(qn("w:tr"))
+    for r_idx, r in enumerate(rows):
+        trPr = child(r, "w:trPr", 0)
+        if r_idx == 0:
+            trHeight = trPr.find(qn("w:trHeight"))
+            if trHeight is None:
+                trHeight = OxmlElement("w:trHeight")
+                trPr.append(trHeight)
+            trHeight.set(qn("w:val"), "380")
+
+        tcs = r.findall(qn("w:tc"))
+        for c_idx, tc in enumerate(tcs):
+            tcPr = tc.find(qn("w:tcPr"))
+            if tcPr is None:
+                tcPr = OxmlElement("w:tcPr")
+                tc.insert(0, tcPr)
+
+            gridSpan = tcPr.find(qn("w:gridSpan"))
+            span = int(gridSpan.get(qn("w:val"))) if gridSpan is not None else 1
+            if span > 1:
+                tc_w = sum(col_widths[:span])
+            else:
+                tc_w = col_widths[c_idx] if c_idx < len(col_widths) else col_widths[-1]
+
+            tcW = tcPr.find(qn("w:tcW"))
+            if tcW is None:
+                tcW = OxmlElement("w:tcW")
+                tcPr.append(tcW)
+            tcW.set(qn("w:type"), "dxa")
+            tcW.set(qn("w:w"), str(tc_w))
+
+            if r_idx == 0 or (r_idx >= 3 and c_idx == 0):
+                vAlign = tcPr.find(qn("w:vAlign"))
+                if vAlign is None:
+                    vAlign = OxmlElement("w:vAlign")
+                    tcPr.append(vAlign)
+                vAlign.set(qn("w:val"), "center")
+
+            for p in tc.findall(qn("w:p")):
+                ppr = child(p, "w:pPr", 0)
+                jc = ppr.find(qn("w:jc"))
+                if r_idx >= 3 and c_idx == 0:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                else:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "left")
+
+                sp = ppr.find(qn("w:spacing"))
+                if sp is None:
+                    sp = OxmlElement("w:spacing")
+                    ppr.append(sp)
+                sp.set(qn("w:before"), "60")
+                sp.set(qn("w:after"), "60")
+
+                ind = ppr.find(qn("w:ind"))
+                if ind is None:
+                    ind = OxmlElement("w:ind")
+                    ppr.append(ind)
+                ind.set(qn("w:left"), "30")
+                ind.set(qn("w:hanging"), "30")
+
+                for run in p.findall(qn("w:r")):
+                    set_run_font(run, font_name="Arial", size_half_pts=22)
+                    if r_idx == 0:
+                        bold_run(run)
+
+                # Mantém as linhas da tabela juntas (sem separar título do corpo/critérios)
+                if r_idx < len(rows) - 1:
+                    child(ppr, "w:keepNext", 0)
+
+
+def apply_us_summary_table_layout(tbl):
+    """Aplica layout da tabela de relação de estórias de usuário (item 7)."""
+    tblPr = tbl.find(qn("w:tblPr"))
+    if tblPr is None:
+        tblPr = OxmlElement("w:tblPr")
+        tbl.insert(0, tblPr)
+    tblW = tblPr.find(qn("w:tblW"))
+    if tblW is None:
+        tblW = OxmlElement("w:tblW")
+        tblPr.append(tblW)
+    tblW.set(qn("w:type"), "dxa")
+    tblW.set(qn("w:w"), "10490")
+
+    tblInd = tblPr.find(qn("w:tblInd"))
+    if tblInd is None:
+        tblInd = OxmlElement("w:tblInd")
+        tblPr.append(tblInd)
+    tblInd.set(qn("w:type"), "dxa")
+    tblInd.set(qn("w:w"), "-5")
+
+    tblStyle = tblPr.find(qn("w:tblStyle"))
+    if tblStyle is None:
+        tblStyle = OxmlElement("w:tblStyle")
+        tblPr.append(tblStyle)
+    tblStyle.set(qn("w:val"), "Tabelacomgrade")
+
+    tblLayout = tblPr.find(qn("w:tblLayout"))
+    if tblLayout is None:
+        tblLayout = OxmlElement("w:tblLayout")
+        tblPr.append(tblLayout)
+    tblLayout.set(qn("w:type"), "fixed")
+
+    tblGrid = tbl.find(qn("w:tblGrid"))
+    if tblGrid is None:
+        tblGrid = OxmlElement("w:tblGrid")
+        tbl.insert(1, tblGrid)
+    for col in tblGrid.findall(qn("w:gridCol")):
+        tblGrid.remove(col)
+
+    col_widths = [1200, 8090, 1200]
+    for w in col_widths:
+        gc = OxmlElement("w:gridCol")
+        gc.set(qn("w:w"), str(w))
+        tblGrid.append(gc)
+
+    rows = tbl.findall(qn("w:tr"))
+    for r_idx, r in enumerate(rows):
+        tcs = r.findall(qn("w:tc"))
+        for c_idx, tc in enumerate(tcs):
+            tcPr = tc.find(qn("w:tcPr"))
+            if tcPr is None:
+                tcPr = OxmlElement("w:tcPr")
+                tc.insert(0, tcPr)
+
+            gridSpan = tcPr.find(qn("w:gridSpan"))
+            span = int(gridSpan.get(qn("w:val"))) if gridSpan is not None else 1
+            if span > 1:
+                tc_w = sum(col_widths[:span])
+            else:
+                tc_w = col_widths[c_idx] if c_idx < len(col_widths) else col_widths[-1]
+
+            tcW = tcPr.find(qn("w:tcW"))
+            if tcW is None:
+                tcW = OxmlElement("w:tcW")
+                tcPr.append(tcW)
+            tcW.set(qn("w:type"), "dxa")
+            tcW.set(qn("w:w"), str(tc_w))
+
+            vAlign = tcPr.find(qn("w:vAlign"))
+            if vAlign is None:
+                vAlign = OxmlElement("w:vAlign")
+                tcPr.append(vAlign)
+            vAlign.set(qn("w:val"), "center")
+
+            for p in tc.findall(qn("w:p")):
+                ppr = child(p, "w:pPr", 0)
+                jc = ppr.find(qn("w:jc"))
+                if r_idx == 0:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                elif r_idx == 1:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                elif c_idx in (0, 2):
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                else:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "left")
+
+                for run in p.findall(qn("w:r")):
+                    set_run_font(run, font_name="Arial", size_half_pts=22)
+                    if r_idx in (0, 1):
+                        bold_run(run)
 
 
 def assemble(pandoc_docx, template, out_docx, pages):
@@ -402,10 +843,78 @@ def assemble(pandoc_docx, template, out_docx, pages):
     # Tabelas com borda, como as do template.
     for ts in body.iter(qn("w:tblStyle")):
         ts.set(qn("w:val"), "Tabelacomgrade")
-    # O leitor gfm do pandoc divide a largura por igual; a coluna "#" ficava com
-    # metade da página. Coluna curta (até 20 caracteres) recebe a largura do seu
-    # maior texto; as longas repartem o resto pelo tamanho do texto.
+
+    # Identificação e estilização de tabelas de quadros (itens 1, 2, 3, 5) e estórias de usuário (item 7)
+    us_count = 0
     for tbl in body.iter(qn("w:tbl")):
+        rows_txt = [
+            " ".join(text_of(c).strip() for c in tr.findall(qn("w:tc")))
+            for tr in tbl.findall(qn("w:tr"))[:3]
+        ]
+        full_head = " | ".join(rows_txt)
+        first_p = tbl.find(".//" + qn("w:p"))
+        first_txt = text_of(first_p).strip() if first_p is not None else ""
+
+        box_kind = None
+        if "QUADRO “3 OBJETIVOS”" in full_head:
+            box_kind = "1"
+        elif "QUADRO “É – NÃO É" in full_head:
+            box_kind = "2"
+        elif "PROBLEMAS" in full_head and "EXPECTATIVAS" in full_head:
+            box_kind = "3.1"
+        elif "VISÃO DE PRODUTO" in full_head:
+            box_kind = "3.2"
+        elif "ATOR / USUÁRIO" in full_head and "#" in full_head and "REQUISITO FUNCIONAL" not in full_head:
+            box_kind = "5"
+
+        is_us = bool(re.match(r"^US\d{3}\s*–", first_txt))
+        is_us_summary = ("PRODUTO:" in full_head and "USESTÓRIARF" in full_head.replace(" ", ""))
+
+        if box_kind:
+            apply_table_box_layout(tbl, box_kind)
+            continue
+        elif is_us_summary:
+            apply_us_summary_table_layout(tbl)
+            continue
+        elif is_us:
+            is_first = (us_count == 0)
+            apply_us_table_layout(tbl, is_first_us=is_first)
+            # Duas estórias por página (três não cabem de forma estável); a primeira abre página.
+            new_page = us_count % US_PER_PAGE == 0
+            prev_el = tbl.getprevious()
+            while prev_el is not None and prev_el.tag in (qn("w:bookmarkStart"), qn("w:bookmarkEnd")):
+                prev_el = prev_el.getprevious()
+            if prev_el is not None and prev_el.tag == qn("w:p"):
+                if new_page:
+                    child(child(prev_el, "w:pPr", 0), "w:pageBreakBefore", 0)
+            else:
+                p_break = OxmlElement("w:p")
+                if new_page:
+                    child(child(p_break, "w:pPr", 0), "w:pageBreakBefore", 0)
+                tbl.addprevious(p_break)
+            us_count += 1
+            continue
+
+        if first_txt == "RF" and "OBJETIVO" in full_head and "JUSTIFICATIVA" in full_head:
+            # Matriz de rastreabilidade (9.1): larguras fixas somando a largura útil de 10490.
+            widths = [1000, 1500, 1400, 900, 1600, 4090]
+            tblPr = tbl.find(qn("w:tblPr"))
+            tblW = tblPr.find(qn("w:tblW"))
+            tblW.set(qn("w:type"), "dxa")
+            tblW.set(qn("w:w"), str(sum(widths)))
+            lay = OxmlElement("w:tblLayout")
+            lay.set(qn("w:type"), "fixed")
+            tblW.addnext(lay)
+            for g, w in zip(tbl.find(qn("w:tblGrid")).findall(qn("w:gridCol")), widths):
+                g.set(qn("w:w"), str(w))
+            for tr in tbl.findall(qn("w:tr")):
+                for tc, w in zip(tr.findall(qn("w:tc")), widths):
+                    tcW = child(tc.find(qn("w:tcPr")), "w:tcW", 0)
+                    tcW.set(qn("w:type"), "dxa")
+                    tcW.set(qn("w:w"), str(w))
+            continue
+
+        # Heurística para demais tabelas
         cols = tbl.find(qn("w:tblGrid")).findall(qn("w:gridCol"))
         lens = [1] * len(cols)
         for tr in tbl.findall(qn("w:tr")):
@@ -428,6 +937,14 @@ def assemble(pandoc_docx, template, out_docx, pages):
     for p in doc.paragraphs:
         if p.style.name == "Heading 1" and not p.text.startswith("1 ") and not p.text.startswith("11 "):
             child(child(p._p, "w:pPr", 0), "w:pageBreakBefore", 0)
+
+    # Subseção 9.1 começa em página nova, depois da Figura 2.
+    for p in doc.paragraphs:
+        if p.style.name.startswith("Heading") and p.text.startswith("9.1 "):
+            ppr = child(p._p, "w:pPr", 0)
+            if ppr.find(qn("w:pageBreakBefore")) is None:
+                pstyle = ppr.find(qn("w:pStyle"))
+                ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
 
     # Item 11 em seção paisagem (cabeçalho e rodapé preservados):
     p11 = None
@@ -455,7 +972,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
         # da página paisagem, mantendo a altura calculada pela proporção real de cada imagem.
         # Cada imagem começa em página própria, com a legenda logo abaixo dela:
         max_w = 8532000  # largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm)
-        max_h = 4000000  # altura máxima para caber com título, texto e legenda (~11.1 cm)
+        max_h = 3400000  # altura máxima para caber com título, texto e legenda na mesma página
         imgs = []
         started = False
         for p in doc.paragraphs:
@@ -477,6 +994,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
                 target_w = int(target_h / ratio)
             extent.set("cx", str(target_w))
             extent.set("cy", str(target_h))
+            sync_pic_ext(para._p, extent)
             if i > 0:
                 para.paragraph_format.page_break_before = True
 
@@ -493,34 +1011,103 @@ def assemble(pandoc_docx, template, out_docx, pages):
             ppr.remove(ppr.find(qn("w:numPr")))
 
     doc.save(out_docx)
-    patch_parts(out_docx, {
-        "word/header1.xml": [(r"(>202</w:t>.*?<w:t[^>]*>)5<", r"\g<1>6<")],
-        "word/footer2.xml": [(r">Nome do Produto de Software<", f">{PRODUTO}<"),
-                             (r"w:val=\"00B0F0\"", "w:val=\"000000\"")],
-        # O pandoc marca as células de tabela com o estilo Compact. Sem ele no
-        # styles.xml, o LibreOffice tira o texto das células e desmonta a tabela.
-        "word/styles.xml": [(r"</w:styles>", COMPACT_STYLE + "</w:styles>")],
-    })
+    patch_docx_files(out_docx)
     return headings
 
 
-COMPACT_STYLE = (
-    '<w:style w:type="paragraph" w:customStyle="1" w:styleId="Compact">'
-    '<w:name w:val="Compact"/><w:qFormat/>'
-    '<w:pPr><w:spacing w:before="36" w:after="36"/></w:pPr></w:style>'
-)
+def patch_docx_files(path):
+    """Ajusta cabeçalho, rodapé, estilos e fontes Arial no pacote docx."""
+    import xml.etree.ElementTree as ET
+    ET.register_namespace("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")
+    ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
+    def set_arial_fonts(rPr):
+        rf = rPr.find("w:rFonts", ns)
+        if rf is None:
+            rf = ET.SubElement(rPr, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rFonts")
+        for k in list(rf.attrib.keys()):
+            del rf.attrib[k]
+        for k in ("ascii", "hAnsi", "cs", "eastAsia"):
+            rf.set(f"{{http://schemas.openxmlformats.org/wordprocessingml/2006/main}}{k}", "Arial")
 
-def patch_parts(path, subs):
-    """Substituições de texto nas partes XML do cabeçalho e do rodapé."""
     with zipfile.ZipFile(path) as z:
         data = {n: z.read(n) for n in z.namelist()}
-    for name, rules in subs.items():
-        xml = data[name].decode("utf-8")
-        for pat, rep in rules:
-            xml, n = re.subn(pat, rep, xml, count=1, flags=re.S)
-            assert n == 1, (name, pat)
-        data[name] = xml.encode("utf-8")
+
+    # word/header1.xml
+    if "word/header1.xml" in data:
+        xml = data["word/header1.xml"].decode("utf-8")
+        xml, n = re.subn(r"(>202</w:t>.*?<w:t[^>]*>)5<", r"\g<1>6<", xml, count=1, flags=re.S)
+        if n == 1:
+            data["word/header1.xml"] = xml.encode("utf-8")
+
+    # word/footer2.xml
+    if "word/footer2.xml" in data:
+        xml = data["word/footer2.xml"].decode("utf-8")
+        xml, _ = re.subn(r">Nome do Produto de Software<", f">{PRODUTO}<", xml, count=1, flags=re.S)
+        xml = xml.replace('w:val="00B0F0"', 'w:val="000000"')
+        data["word/footer2.xml"] = xml.encode("utf-8")
+
+    # word/styles.xml
+    if "word/styles.xml" in data:
+        root = ET.fromstring(data["word/styles.xml"])
+        dd_rpr = root.find(".//w:docDefaults/w:rPrDefault/w:rPr", ns)
+        if dd_rpr is not None:
+            set_arial_fonts(dd_rpr)
+            sz = dd_rpr.find("w:sz", ns)
+            if sz is None:
+                sz = ET.SubElement(dd_rpr, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}sz")
+            sz.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val", "22")
+            szCs = dd_rpr.find("w:szCs", ns)
+            if szCs is None:
+                szCs = ET.SubElement(dd_rpr, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}szCs")
+            szCs.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val", "22")
+
+        for s_id in ["Normal", "Sumrio1", "Sumrio2", "Sumrio3", "Legenda"]:
+            s = root.find(f'.//w:style[@w:styleId="{s_id}"]', ns)
+            if s is not None:
+                rpr = s.find("w:rPr", ns)
+                if rpr is None:
+                    rpr = ET.SubElement(s, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rPr")
+                set_arial_fonts(rpr)
+
+        compact = root.find('.//w:style[@w:styleId="Compact"]', ns)
+        if compact is None:
+            compact = ET.SubElement(root, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}style")
+            compact.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}type", "paragraph")
+            compact.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}customStyle", "1")
+            compact.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}styleId", "Compact")
+            name_el = ET.SubElement(compact, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}name")
+            name_el.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}val", "Compact")
+            ET.SubElement(compact, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}qFormat")
+            pPr_el = ET.SubElement(compact, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}pPr")
+            sp_el = ET.SubElement(pPr_el, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}spacing")
+            sp_el.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}before", "36")
+            sp_el.set("{http://schemas.openxmlformats.org/wordprocessingml/2006/main}after", "36")
+            rPr_c = ET.SubElement(compact, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rPr")
+            set_arial_fonts(rPr_c)
+        else:
+            rpr_c = compact.find("w:rPr", ns)
+            if rpr_c is None:
+                rpr_c = ET.SubElement(compact, "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}rPr")
+            set_arial_fonts(rpr_c)
+
+        # Varre runs/estilos com rFonts explícito diferente de Arial
+        for rf in root.findall(".//w:rFonts", ns):
+            for k in list(rf.attrib.keys()):
+                if rf.attrib[k] != "Arial":
+                    rf.attrib[k] = "Arial"
+
+        data["word/styles.xml"] = ET.tostring(root, encoding="utf-8")
+
+    # Varre runs em word/document.xml com rFonts explícito diferente de Arial
+    if "word/document.xml" in data:
+        doc_root = ET.fromstring(data["word/document.xml"])
+        for rf in doc_root.findall(".//w:rFonts", ns):
+            for k in list(rf.attrib.keys()):
+                if rf.attrib[k] != "Arial":
+                    rf.attrib[k] = "Arial"
+        data["word/document.xml"] = ET.tostring(doc_root, encoding="utf-8")
+
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as z:
         for n, b in data.items():
             z.writestr(n, b)
