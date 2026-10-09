@@ -11,13 +11,13 @@ sequenceDiagram
 
     Aluno->>FE: Acessa página do curso
     Aluno->>FE: Aciona "Avaliar curso"
-    FE->>API: GET /avaliacoes/minha?curso_id
+    FE->>API: GET /api/v1/courses/{id}/reviews/me
     API->>DB: Busca avaliação existente do aluno
     DB-->>API: Avaliação (ou vazio)
     API-->>FE: 200 OK
     Aluno->>FE: Informa nota e comentário
     Aluno->>FE: Confirma envio
-    FE->>API: POST /avaliacoes (nota, comentário)
+    FE->>API: POST /api/v1/courses/{id}/reviews (nota, comentário)
     alt aluno matriculado no curso
         API->>DB: Salva/atualiza avaliação
         DB-->>API: OK

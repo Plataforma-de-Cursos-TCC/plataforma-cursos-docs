@@ -10,14 +10,14 @@ sequenceDiagram
     participant DB as Banco de Dados
 
     Administrador->>FE: Busca usuário (nome/e-mail/perfil)
-    FE->>API: GET /usuarios?filtro
+    FE->>API: GET /api/v1/admin/users?filtro
     API->>DB: Consulta usuários
     DB-->>API: Lista de usuários
     API-->>FE: 200 OK
     Administrador->>FE: Seleciona ação (bloquear/desbloquear/excluir)
     alt usuário-alvo != administrador logado
         Administrador->>FE: Confirma ação
-        FE->>API: PATCH /usuarios/{id} (status)
+        FE->>API: PUT /api/v1/admin/users/{id}/status
         API->>DB: Atualiza status do usuário
         DB-->>API: OK
         API-->>FE: 200 OK
