@@ -611,8 +611,9 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado (Aluno dono). Aprovado: registra o pagamento, a matrícula vira `ativa` e o acesso é liberado (`200`). Recusado: registra `Payment.status = recusado`, mantém a matrícula `pendente` e responde `422 PAYMENT_DECLINED` | UC019 |
 | | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview) | UC009 |
 | | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado) | UC009 |
+| | `GET /api/v1/quizzes/{id}` | Carga do quiz: perguntas e alternativas, sem gabarito (Aluno matriculado no curso do quiz, com as aulas do módulo concluídas); `404` para quiz inexistente ou sem matrícula, `403` se as aulas não estão concluídas | UC002 |
 | | `PUT /api/v1/quizzes/{id}/attempt/draft` | Salvamento do rascunho das respostas do quiz (Aluno matriculado) | UC002 |
-| | `GET /api/v1/quizzes/{id}/attempt/result` | Consulta do resultado da última tentativa enviada (Aluno matriculado) | UC002 |
+| | `GET /api/v1/quizzes/{id}/attempt/result` | Consulta do resultado da última tentativa enviada, com as respostas do Aluno e o gabarito, que só aparece depois do envio (Aluno matriculado) | UC002 |
 | | `POST /api/v1/quizzes/{id}/attempt` | Submissão de respostas do quiz e correção automática imediata (Aluno matriculado) | UC002 |
 | | `POST /api/v1/courses/{id}/reviews` | Criação ou substituição da avaliação e comentário do aluno sobre o curso, uma por aluno e curso (Aluno matriculado) | UC010 |
 | | `GET /api/v1/courses/{id}/reviews/me` | Consulta da avaliação anterior do próprio aluno para o curso, para pré-preencher o formulário (Aluno matriculado) | UC010 |
@@ -647,6 +648,7 @@ O sistema adota o modelo RBAC (*Role-Based Access Control*) com três perfis for
 
 **Regras de proteção e controle de acesso:**
 - **Guarda por Perfil (UC016):** 100% das rotas privadas passam por middlewares dedicados de autorização (`EnsureUserHasRole`). Usuários que tentarem acessar rotas fora de seu perfil recebem HTTP 403 (*Forbidden*) e são redirecionados à sua respectiva interface no front-end.
+- **Identificador do quiz e vazamento de gabarito (UC002):** O quiz é localizado por UUID aleatório, não sequencial, o que dificulta a enumeração de identificadores; a proteção real é a autorização. `GET /quizzes/{id}`, `PUT .../attempt/draft`, `POST .../attempt` e `GET .../attempt/result` exigem Aluno matriculado no curso do módulo do quiz, e a API responde `404` com o mesmo corpo para quiz inexistente e para quiz de curso em que o Aluno não está matriculado, sem revelar que o quiz existe. O gabarito nunca sai em `GET /quizzes/{id}`; só aparece em `GET .../attempt/result`, depois do envio, ao lado das respostas do próprio Aluno.
 - **Verificação Estrita de Propriedade (`assertOwnership`):** Em todas as operações mutáveis de recursos pertencentes a instrutores ou alunos (ex.: edição de curso, alteração de módulo, resposta de quiz ou progresso de aula), a API executa obrigatoriamente a verificação de pertencimento: o `userId` autenticado no token deve corresponder ao proprietário da entidade ou o solicitante deve possuir o perfil de Administrador. Tentativas de acesso a recursos alheios são imediatamente rejeitadas.
 
 ### 4.3 Fluxos de Login e Recuperação de Senha
@@ -707,7 +709,7 @@ As decisões arquiteturais do projeto são formalizadas e mantidas como Architec
 
 | ADR | Identificador | Título e Síntese da Decisão | Itens Afetados |
 |---|---|---|---|
-| [ADR-0001](adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) | D1 | **Meta interna de 4 por integrante e numeração final da v11:** Estabelece divisão de trabalho com meta de 4 artefatos por aluno e consolida identificadores definitivos sequenciais. | 6, 7, 8, 9, 10 |
+| [ADR-0001](adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) | D1 | **Meta interna de 4 por integrante e numeração final:** Estabelece divisão de trabalho com meta de 4 artefatos por aluno e consolida identificadores definitivos sequenciais. | 6, 7, 8, 9, 10 |
 | [ADR-0002](adr/0002-formato-de-estoria-e-criterios.md) | D2 | **Formato de estória e critérios de aceite:** Padroniza estórias de usuário no padrão *Como / Posso / Para* com ao menos 2 critérios em formato *DADO QUE / QUANDO / ENTÃO*. | 7 |
 | [ADR-0003](adr/0003-extend-no-sentido-do-te3-3.md) | D3 | **«extend» no sentido do TE3_3 e UML:** Fixa a direção correta do relacionamento de extensão nos casos de uso (do caso opcional/estendido para o caso base). | 9, 10 |
 | [ADR-0004](adr/0004-diagramas-como-codigo.md) | D4 | **Diagramas como código:** Adoção de BPMN 2.0 (item 4) e PlantUML (itens 9 e 11) mantidos em código versionável no repositório. | 4, 9, 11 |
