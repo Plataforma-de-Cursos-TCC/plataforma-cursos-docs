@@ -582,6 +582,102 @@ def apply_us_table_layout(tbl, is_first_us=False):
                     if r_idx == 0:
                         bold_run(run)
 
+                # Mantém as linhas da tabela juntas (sem separar título do corpo/critérios)
+                if r_idx < len(rows) - 1:
+                    child(ppr, "w:keepNext", 0)
+
+
+def apply_us_summary_table_layout(tbl):
+    """Aplica layout da tabela de relação de estórias de usuário (item 7)."""
+    tblPr = tbl.find(qn("w:tblPr"))
+    if tblPr is None:
+        tblPr = OxmlElement("w:tblPr")
+        tbl.insert(0, tblPr)
+    tblW = tblPr.find(qn("w:tblW"))
+    if tblW is None:
+        tblW = OxmlElement("w:tblW")
+        tblPr.append(tblW)
+    tblW.set(qn("w:type"), "dxa")
+    tblW.set(qn("w:w"), "10490")
+
+    tblInd = tblPr.find(qn("w:tblInd"))
+    if tblInd is None:
+        tblInd = OxmlElement("w:tblInd")
+        tblPr.append(tblInd)
+    tblInd.set(qn("w:type"), "dxa")
+    tblInd.set(qn("w:w"), "-5")
+
+    tblStyle = tblPr.find(qn("w:tblStyle"))
+    if tblStyle is None:
+        tblStyle = OxmlElement("w:tblStyle")
+        tblPr.append(tblStyle)
+    tblStyle.set(qn("w:val"), "Tabelacomgrade")
+
+    tblLayout = tblPr.find(qn("w:tblLayout"))
+    if tblLayout is None:
+        tblLayout = OxmlElement("w:tblLayout")
+        tblPr.append(tblLayout)
+    tblLayout.set(qn("w:type"), "fixed")
+
+    tblGrid = tbl.find(qn("w:tblGrid"))
+    if tblGrid is None:
+        tblGrid = OxmlElement("w:tblGrid")
+        tbl.insert(1, tblGrid)
+    for col in tblGrid.findall(qn("w:gridCol")):
+        tblGrid.remove(col)
+
+    col_widths = [1200, 8090, 1200]
+    for w in col_widths:
+        gc = OxmlElement("w:gridCol")
+        gc.set(qn("w:w"), str(w))
+        tblGrid.append(gc)
+
+    rows = tbl.findall(qn("w:tr"))
+    for r_idx, r in enumerate(rows):
+        tcs = r.findall(qn("w:tc"))
+        for c_idx, tc in enumerate(tcs):
+            tcPr = tc.find(qn("w:tcPr"))
+            if tcPr is None:
+                tcPr = OxmlElement("w:tcPr")
+                tc.insert(0, tcPr)
+
+            gridSpan = tcPr.find(qn("w:gridSpan"))
+            span = int(gridSpan.get(qn("w:val"))) if gridSpan is not None else 1
+            if span > 1:
+                tc_w = sum(col_widths[:span])
+            else:
+                tc_w = col_widths[c_idx] if c_idx < len(col_widths) else col_widths[-1]
+
+            tcW = tcPr.find(qn("w:tcW"))
+            if tcW is None:
+                tcW = OxmlElement("w:tcW")
+                tcPr.append(tcW)
+            tcW.set(qn("w:type"), "dxa")
+            tcW.set(qn("w:w"), str(tc_w))
+
+            vAlign = tcPr.find(qn("w:vAlign"))
+            if vAlign is None:
+                vAlign = OxmlElement("w:vAlign")
+                tcPr.append(vAlign)
+            vAlign.set(qn("w:val"), "center")
+
+            for p in tc.findall(qn("w:p")):
+                ppr = child(p, "w:pPr", 0)
+                jc = ppr.find(qn("w:jc"))
+                if r_idx == 0:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                elif r_idx == 1:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                elif c_idx in (0, 2):
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "center")
+                else:
+                    child(ppr, "w:jc", 0).set(qn("w:val"), "left")
+
+                for run in p.findall(qn("w:r")):
+                    set_run_font(run, font_name="Arial", size_half_pts=22)
+                    if r_idx in (0, 1):
+                        bold_run(run)
+
 
 def assemble(pandoc_docx, template, out_docx, pages):
     """Capa, sumário, cabeçalho e rodapé do template sobre a saída do pandoc."""
@@ -693,24 +789,27 @@ def assemble(pandoc_docx, template, out_docx, pages):
             box_kind = "5"
 
         is_us = bool(re.match(r"^US\d{3}\s*–", first_txt))
+        is_us_summary = ("PRODUTO:" in full_head and "USESTÓRIARF" in full_head.replace(" ", ""))
 
         if box_kind:
             apply_table_box_layout(tbl, box_kind)
             continue
+        elif is_us_summary:
+            apply_us_summary_table_layout(tbl)
+            continue
         elif is_us:
             is_first = (us_count == 0)
             apply_us_table_layout(tbl, is_first_us=is_first)
-            if not is_first:
-                # Cada estória em página própria (exceto a primeira)
-                prev_el = tbl.getprevious()
-                while prev_el is not None and prev_el.tag in (qn("w:bookmarkStart"), qn("w:bookmarkEnd")):
-                    prev_el = prev_el.getprevious()
-                if prev_el is not None and prev_el.tag == qn("w:p"):
-                    child(child(prev_el, "w:pPr", 0), "w:pageBreakBefore", 0)
-                else:
-                    p_break = OxmlElement("w:p")
-                    child(child(p_break, "w:pPr", 0), "w:pageBreakBefore", 0)
-                    tbl.addprevious(p_break)
+            # Cada estória em página própria (inclusive a primeira US)
+            prev_el = tbl.getprevious()
+            while prev_el is not None and prev_el.tag in (qn("w:bookmarkStart"), qn("w:bookmarkEnd")):
+                prev_el = prev_el.getprevious()
+            if prev_el is not None and prev_el.tag == qn("w:p"):
+                child(child(prev_el, "w:pPr", 0), "w:pageBreakBefore", 0)
+            else:
+                p_break = OxmlElement("w:p")
+                child(child(p_break, "w:pPr", 0), "w:pageBreakBefore", 0)
+                tbl.addprevious(p_break)
             us_count += 1
             continue
 
