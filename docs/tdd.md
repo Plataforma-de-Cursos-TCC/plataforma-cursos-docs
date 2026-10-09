@@ -28,6 +28,8 @@ A infraestrutura e as escolhas tecnológicas da plataforma estão consolidadas n
 | **Testes Automatizados (Frontend)** | Vitest e Playwright | Mais recentes | Vitest para testes unitários/componentes do Next.js e Playwright para validação de testes ponta a ponta (E2E) dos fluxos principais. | <!-- proposta: alinhado ao Obsidian Vault --> |
 | **Hospedagem e Deploy** | Docker Compose em VPS única | Docker 26+, Debian/Ubuntu LTS | Deploy orquestrado em VPS única com múltiplos containers coordenados via Docker Compose, com portas de bancos de dados, cache e mensageria fechadas para a rede externa, expondo apenas reverse proxy HTTPS (Nginx/Traefik). | [ADR-0007](adr/0007-stack-e-bancos.md) |
 
+Os protótipos de alta fidelidade do front-end (24 telas em HTML, com PNGs em tema claro e escuro) ficam em `especificacao/10-especificacoes-de-caso-de-uso/prototipos/` e seguem o [design system](design-system.md).
+
 ## 2. Modelo de dados
 
 ```mermaid
@@ -55,6 +57,10 @@ erDiagram
     User ||--o{ Review : ""
     User ||--o{ Address : ""
     User ||--|| InstructorProfile : ""
+    User ||--o{ Conversation : ""
+    Course ||--o{ Conversation : ""
+    Lesson ||--o{ Conversation : ""
+    Conversation ||--|{ Message : ""
 
     User {
         UUID id PK
@@ -62,11 +68,13 @@ erDiagram
         VARCHAR email
         VARCHAR passwordHash
         ENUM role
-        VARCHAR locale
         VARCHAR phone
         VARCHAR documentNumber
         DATE birthDate
+        VARCHAR photo
+        ENUM theme
         ENUM status
+        DATETIME anonymizedAt
     }
     Address {
         UUID id PK
@@ -114,6 +122,7 @@ erDiagram
         UUID id PK
         UUID moduleId FK
         VARCHAR title
+        TEXT description
         VARCHAR videoKey
         INT durationSeconds
         INT order
@@ -168,7 +177,7 @@ erDiagram
         UUID id PK
         UUID userId FK
         UUID courseId FK
-        UUID enrollmentId FK "nulo se recusado"
+        UUID enrollmentId FK "nulo até a aprovação"
         INT amountCents
         CHAR currency
         ENUM status
@@ -176,10 +185,25 @@ erDiagram
     }
     Review {
         UUID id PK
-        UUID userId FK
+        UUID userId FK "única por curso"
         UUID courseId FK
         TINYINT rating
         TEXT comment
+    }
+    Conversation {
+        UUID id PK
+        UUID userId FK
+        UUID courseId FK
+        UUID lessonId FK
+        DATETIME createdAt
+    }
+    Message {
+        UUID id PK
+        UUID conversationId FK
+        ENUM role
+        TEXT content
+        INT videoTimestampSeconds "opcional"
+        DATETIME createdAt
     }
 ```
 
@@ -190,19 +214,21 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | Entidade / Atributo | Classe | Domínio | Tamanho | Descrição |
 |---|---|---|---|---|
 | **Entidade: User** | | | | |
-| id | Determinante | Texto | - | Identificador único do usuário (UUID). |
+| id | Determinante | UUID | - | Identificador único do usuário. |
 | name | Simples | Texto | 150 | Nome completo do usuário. |
 | email | Simples | Texto | 150 | E-mail, usado no login. |
 | passwordHash | Simples | Texto | 255 | Hash da senha. |
-| role | Simples | Texto | - | Perfil: aluno, instrutor ou administrador. |
-| locale | Simples | Texto | 10 | Idioma/localidade preferida. |
+| role | Simples | Texto | - | Perfil: student, instructor ou admin. |
 | phone | Simples | Texto | 20 | Telefone de contato. |
 | documentNumber | Simples | Texto | 14 | CPF do usuário. |
 | birthDate | Simples | Data | - | Data de nascimento. |
+| photo | Simples | Texto | 255 | URL ou chave da foto de perfil no storage (R2). |
+| theme | Simples | Texto | - | Tema da interface: claro, escuro ou sistema. |
 | status | Simples | Texto | - | Ativo, bloqueado ou excluído. |
+| anonymizedAt | Simples | Data | - | Data/hora da anonimização dos dados na exclusão da conta (UC018); nulo enquanto a conta não for anonimizada. |
 | **Entidade: Address** | | | | |
-| id | Determinante | Texto | - | Identificador único do endereço (UUID). |
-| userId | Simples | Texto | - | Referência ao usuário dono do endereço. |
+| id | Determinante | UUID | - | Identificador único do endereço. |
+| userId | Simples | UUID | - | Referência ao usuário dono do endereço. |
 | type | Simples | Texto | - | Tipo: cobrança ou entrega. |
 | street | Simples | Texto | 150 | Logradouro. |
 | number | Simples | Texto | 10 | Número. |
@@ -214,90 +240,104 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | country | Simples | Texto | 2 | País (ISO 3166-1 alpha-2). |
 | isDefault | Simples | Booleano | - | Indica se é o endereço padrão do usuário. |
 | **Entidade: InstructorProfile** | | | | |
-| userId | Determinante | Texto | - | Referência ao usuário instrutor (PK e FK). |
+| userId | Determinante | UUID | - | Referência ao usuário instrutor (PK e FK). |
 | bio | Simples | Texto | - | Biografia curta do instrutor. |
 | headline | Simples | Texto | 150 | Chamada/título de apresentação. |
-| socialLinks | Composto | Texto | - | Conjunto de links de redes sociais (JSON). |
+| socialLinks | Composto | JSON | - | Conjunto de links de redes sociais. |
 | **Entidade: Category** | | | | |
-| id | Determinante | Texto | - | Identificador único da categoria (UUID). |
+| id | Determinante | UUID | - | Identificador único da categoria. |
 | name | Simples | Texto | 80 | Nome da categoria de curso. |
 | **Entidade: Course** | | | | |
-| id | Determinante | Texto | - | Identificador único do curso (UUID). |
-| instructorId | Simples | Texto | - | Referência ao instrutor dono do curso. |
-| categoryId | Simples | Texto | - | Referência à categoria do curso. |
+| id | Determinante | UUID | - | Identificador único do curso. |
+| instructorId | Simples | UUID | - | Referência ao instrutor dono do curso. |
+| categoryId | Simples | UUID | - | Referência à categoria do curso. |
 | title | Simples | Texto | 150 | Título do curso. |
-| description | Simples | Texto | - | Descrição do curso. |
+| description | Simples | Texto longo | TEXT | Descrição do curso. |
 | priceCents | Simples | Numérico | - | Preço do curso, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
 | level | Simples | Texto | - | Nível: iniciante, intermediário, avançado. |
 | status | Simples | Texto | - | Rascunho ou publicado. |
 | thumbnailKey | Simples | Texto | 255 | Chave da imagem de capa no storage. |
 | **Entidade: Module** | | | | |
-| id | Determinante | Texto | - | Identificador único do módulo (UUID). |
-| courseId | Simples | Texto | - | Referência ao curso dono do módulo. |
+| id | Determinante | UUID | - | Identificador único do módulo. |
+| courseId | Simples | UUID | - | Referência ao curso dono do módulo. |
 | title | Simples | Texto | 150 | Título do módulo. |
 | order | Simples | Numérico | - | Posição do módulo dentro do curso. |
 | **Entidade: Lesson** | | | | |
-| id | Determinante | Texto | - | Identificador único da aula (UUID). |
-| moduleId | Simples | Texto | - | Referência ao módulo dono da aula. |
+| id | Determinante | UUID | - | Identificador único da aula. |
+| moduleId | Simples | UUID | - | Referência ao módulo dono da aula. |
 | title | Simples | Texto | 150 | Título da aula. |
+| description | Simples | Texto longo | TEXT | Descrição da aula. |
 | videoKey | Simples | Texto | 255 | Chave do vídeo no storage (R2). |
 | durationSeconds | Simples | Numérico | - | Duração do vídeo em segundos. |
 | order | Simples | Numérico | - | Posição da aula dentro do módulo. |
 | isPreview | Simples | Booleano | - | Indica se a aula é liberada sem matrícula. |
 | **Entidade: Enrollment** | | | | |
-| id | Determinante | Texto | - | Identificador único da matrícula (UUID). |
-| userId | Simples | Texto | - | Referência ao aluno matriculado. |
-| courseId | Simples | Texto | - | Referência ao curso da matrícula. |
+| id | Determinante | UUID | - | Identificador único da matrícula. |
+| userId | Simples | UUID | - | Referência ao aluno matriculado. |
+| courseId | Simples | UUID | - | Referência ao curso da matrícula. |
 | pricePaidCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
 | status | Simples | Texto | - | Ativa, cancelada ou concluída. |
 | **Entidade: LessonProgress** | | | | |
-| id | Determinante | Texto | - | Identificador único do registro de progresso (UUID). |
-| enrollmentId | Simples | Texto | - | Referência à matrícula. |
-| lessonId | Simples | Texto | - | Referência à aula assistida. |
+| id | Determinante | UUID | - | Identificador único do registro de progresso. |
+| enrollmentId | Simples | UUID | - | Referência à matrícula. |
+| lessonId | Simples | UUID | - | Referência à aula assistida. |
 | completed | Simples | Booleano | - | Indica se a aula foi concluída. |
 | watchedSeconds | Simples | Numérico | - | Segundos assistidos, pra retomar de onde parou. |
 | completedAt | Simples | Data | - | Data/hora de conclusão da aula. |
 | **Entidade: Quiz** | | | | |
-| id | Determinante | Texto | - | Identificador único do quiz (UUID). |
-| moduleId | Simples | Texto | - | Referência ao módulo dono do quiz. |
+| id | Determinante | UUID | - | Identificador único do quiz. |
+| moduleId | Simples | UUID | - | Referência ao módulo dono do quiz. Cada quiz pertence a exatamente um módulo, e cada módulo tem zero ou mais quizzes (UC014). |
 | title | Simples | Texto | 150 | Título do quiz. |
 | **Entidade: Question** | | | | |
-| id | Determinante | Texto | - | Identificador único da pergunta (UUID). |
-| quizId | Simples | Texto | - | Referência ao quiz dono da pergunta. |
+| id | Determinante | UUID | - | Identificador único da pergunta. |
+| quizId | Simples | UUID | - | Referência ao quiz dono da pergunta. |
 | text | Simples | Texto | - | Enunciado da pergunta. |
 | **Entidade: QuestionOption** | | | | |
-| id | Determinante | Texto | - | Identificador único da alternativa (UUID). |
-| questionId | Simples | Texto | - | Referência à pergunta dona da alternativa. |
+| id | Determinante | UUID | - | Identificador único da alternativa. |
+| questionId | Simples | UUID | - | Referência à pergunta dona da alternativa. |
 | text | Simples | Texto | - | Texto da alternativa. |
 | isCorrect | Simples | Booleano | - | Indica se é a alternativa do gabarito. |
 | **Entidade: QuizAttempt** | | | | |
-| id | Determinante | Texto | - | Identificador único da tentativa (UUID). |
-| enrollmentId | Simples | Texto | - | Referência à matrícula do aluno. |
-| quizId | Simples | Texto | - | Referência ao quiz respondido. |
+| id | Determinante | UUID | - | Identificador único da tentativa. |
+| enrollmentId | Simples | UUID | - | Referência à matrícula do aluno. |
+| quizId | Simples | UUID | - | Referência ao quiz respondido. |
 | score | Simples | Numérico | - | Nota calculada da tentativa. |
 | submittedAt | Simples | Data | - | Data/hora de envio das respostas. |
 | **Entidade: QuizAnswer** | | | | |
-| id | Determinante | Texto | - | Identificador único da resposta (UUID). |
-| attemptId | Simples | Texto | - | Referência à tentativa. |
-| questionId | Simples | Texto | - | Referência à pergunta respondida. |
-| optionId | Simples | Texto | - | Referência à alternativa escolhida. |
+| id | Determinante | UUID | - | Identificador único da resposta. |
+| attemptId | Simples | UUID | - | Referência à tentativa. |
+| questionId | Simples | UUID | - | Referência à pergunta respondida. |
+| optionId | Simples | UUID | - | Referência à alternativa escolhida. |
 | **Entidade: Payment** | | | | Registro de pagamento simulado; não guarda dado de cartão ou de conta. |
-| id | Determinante | Texto | - | Identificador único do pagamento (UUID). |
-| userId | Simples | Texto | - | Referência ao aluno que pagou. |
-| courseId | Simples | Texto | - | Referência ao curso pago. |
-| enrollmentId | Simples | Texto | - | Referência à matrícula criada; fica nulo quando o pagamento é recusado, pois a matrícula só existe após aprovação (UC003, E-2). |
+| id | Determinante | UUID | - | Identificador único do pagamento. |
+| userId | Simples | UUID | - | Referência ao aluno que pagou. |
+| courseId | Simples | UUID | - | Referência ao curso pago. |
+| enrollmentId | Simples | UUID | - | Referência à matrícula criada. Fica nulo até o pagamento ser aprovado e permanece nulo se for recusado (UC003, E-2). |
 | amountCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
 | status | Simples | Texto | - | Aprovado ou recusado (simulado). |
 | paidAt | Simples | Data | - | Data/hora do pagamento. |
-| **Entidade: Review** | | | | |
-| id | Determinante | Texto | - | Identificador único da avaliação (UUID). |
-| userId | Simples | Texto | - | Referência ao aluno autor da avaliação. |
-| courseId | Simples | Texto | - | Referência ao curso avaliado. |
-| rating | Simples | Numérico | - | Nota de 1 a 5. |
+| **Entidade: Review** | | | | Uma avaliação por aluno e curso: nova avaliação substitui a anterior (UC010, R-2). |
+| id | Determinante | UUID | - | Identificador único da avaliação. |
+| userId | Simples | UUID | - | Referência ao aluno autor da avaliação. |
+| courseId | Simples | UUID | - | Referência ao curso avaliado. |
+| rating | Simples | Inteiro | - | Nota de 1 a 5. |
 | comment | Simples | Texto | - | Comentário do aluno. |
+| **Entidade: Conversation** | | | | Conversa do Aluno com o Tutor de IA no contexto de uma aula (UC001). |
+| id | Determinante | UUID | - | Identificador único da conversa. |
+| userId | Simples | UUID | - | Referência ao aluno que conversa com o Tutor. |
+| courseId | Simples | UUID | - | Referência ao curso da aula. |
+| lessonId | Simples | UUID | - | Referência à aula em reprodução, contexto da conversa. |
+| createdAt | Simples | Data | - | Data/hora de início da conversa. |
+| **Entidade: Message** | | | | Mensagem trocada em uma conversa com o Tutor de IA (UC001). |
+| id | Determinante | UUID | - | Identificador único da mensagem. |
+| conversationId | Simples | UUID | - | Referência à conversa dona da mensagem. |
+| role | Simples | Texto | - | Autor da mensagem: user ou assistant. |
+| content | Simples | Texto longo | TEXT | Texto da pergunta ou da resposta. |
+| videoTimestampSeconds | Simples | Numérico | - | Segundo da aula citado na resposta; opcional. |
+| createdAt | Simples | Data | - | Data/hora da mensagem. |
 
 ### Diagrama de Classes
 
@@ -305,118 +345,159 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 classDiagram
     direction TB
 
-    class Usuario {
-        #id: número
-        #nome: texto
-        #email: texto
-        #telefone: texto
-        #status: StatusUsuario
-        +editarPerfil(dados: PerfilDTO)
+    class User {
+        #id: UUID
+        #name: string
+        #email: string
+        #phone: string
+        #photo: string
+        #theme: ThemeType
+        #status: UserStatus
+        +editProfile(data: ProfileDTO)
     }
 
-    class Instrutor {
-        -bio: texto
-        -headline: texto
-        +cadastrarCurso(dados: CourseDTO): Course
-        +cadastrarQuiz(modulo: Module, dados: QuizDTO): Quiz
+    class Address {
+        -id: UUID
+        -street: string
+        -city: string
+        -zipCode: string
+        -isDefault: boolean
     }
 
-    class Aluno {
-        +matricular(curso: Course)
-        +responderQuiz(quiz: Quiz): QuizAttempt
-        +avaliar(curso: Course, nota: número)
+    class Instructor {
+        -bio: string
+        -headline: string
+        -socialLinks: JSON
+        +createCourse(data: CourseDTO): Course
+        +createQuiz(module: Module, data: QuizDTO): Quiz
     }
 
-    class Administrador {
-        +bloquearUsuario(usuario: Usuario)
+    class Student {
+        +enroll(course: Course)
+        +submitQuiz(quiz: Quiz): QuizAttempt
+        +reviewCourse(course: Course, rating: number)
+    }
+
+    class Administrator {
+        +blockUser(user: User)
     }
 
     class Course {
-        -id: número
-        -titulo: texto
-        -descricao: texto
-        -precoCentavos: número
-        -status: StatusCurso
-        +publicar()
-        +adicionarModulo(dados: ModuleDTO): Module
+        -id: UUID
+        -title: string
+        -description: string
+        -priceCents: number
+        -status: CourseStatus
+        +publish()
+        +addModule(data: ModuleDTO): Module
     }
 
     class Module {
-        -id: número
-        -titulo: texto
-        -ordem: número
-        +adicionarAula(dados: LessonDTO): Lesson
-        +adicionarQuiz(dados: QuizDTO): Quiz
+        -id: UUID
+        -title: string
+        -order: number
+        +addLesson(data: LessonDTO): Lesson
+        +addQuiz(data: QuizDTO): Quiz
     }
 
     class Lesson {
-        -id: número
-        -titulo: texto
-        -videoKey: texto
-        -duracaoSegundos: número
-        -isPreview: booleano
+        -id: UUID
+        -title: string
+        -description: string
+        -videoKey: string
+        -durationSeconds: number
+        -isPreview: boolean
     }
 
     class Quiz {
-        -id: número
-        -titulo: texto
-        +adicionarPergunta(dados: QuestionDTO): Question
+        -id: UUID
+        -title: string
+        +addQuestion(data: QuestionDTO): Question
     }
 
     class Question {
-        -texto: texto
+        -id: UUID
+        -text: string
     }
 
     class QuestionOption {
-        -texto: texto
-        -correta: booleano
+        -id: UUID
+        -text: string
+        -isCorrect: boolean
+    }
+
+    class QuizAnswer {
+        -id: UUID
     }
 
     class Enrollment {
-        -id: número
-        -precoPagoCentavos: número
-        -status: StatusMatricula
+        -id: UUID
+        -pricePaidCents: number
+        -status: EnrollmentStatus
     }
 
     class Payment {
-        -valorCentavos: número
-        -status: StatusPagamento
+        -id: UUID
+        -userId: UUID
+        -courseId: UUID
+        -enrollmentId: UUID
+        -amountCents: number
+        -status: PaymentStatus
     }
 
     class LessonProgress {
-        -concluida: booleano
-        -segundosAssistidos: número
+        -id: UUID
+        -completed: boolean
+        -watchedSeconds: number
     }
 
     class QuizAttempt {
-        -nota: número
-        -enviadoEm: dataHora
+        -id: UUID
+        -score: number
+        -submittedAt: datetime
     }
 
     class Review {
-        -nota: número
-        -comentario: texto
+        -id: UUID
+        -rating: number
+        -comment: string
+    }
+
+    class Conversation {
+        -id: UUID
+        -createdAt: datetime
+    }
+
+    class Message {
+        -id: UUID
+        -role: MessageRole
+        -content: string
+        -videoTimestampSeconds: number
+        -createdAt: datetime
     }
 
     class Category {
-        -id: número
-        -nome: texto
+        -id: UUID
+        -name: string
     }
 
-    Usuario <|-- Instrutor
-    Usuario <|-- Aluno
-    Usuario <|-- Administrador
+    User <|-- Instructor
+    User <|-- Student
+    User <|-- Administrator
+    User "1" *-- "0..*" Address : possui
 
-    Instrutor "1" --> "0..*" Course : ministrado por
+    Instructor "1" --> "0..*" Course : ministrado por
     Course "1" *-- "1..*" Module : compõe
     Module "1" *-- "1..*" Lesson
-    Module "1" *-- "0..1" Quiz
+    Module "1" *-- "0..*" Quiz
 
     Quiz "1" *-- "1..*" Question
     Question "1" *-- "2..*" QuestionOption
+    QuizAttempt "1" *-- "1..*" QuizAnswer : contém
+    QuizAnswer "0..*" --> "1" QuestionOption : escolhe
 
-    Aluno "1" --> "0..*" Enrollment
-    Aluno "1" --> "0..*" Review
+    Student "1" --> "0..*" Enrollment
+    Student "1" --> "0..*" Review
     Course "1" --> "0..*" Enrollment
     Course "1" --> "0..*" Review
 
@@ -424,8 +505,13 @@ classDiagram
     Enrollment "1" --> "0..*" LessonProgress
     Enrollment "1" --> "0..*" QuizAttempt
 
+    Student "1" --> "0..*" Conversation
+    Course "1" --> "0..*" Conversation
+    Lesson "1" --> "0..*" Conversation
+    Conversation "1" *-- "0..*" Message
+
     Category "1" --o "0..*" Course : agrega
-    Aluno ..> LessonProgress : «depende»
+    Student ..> LessonProgress : «depende»
 ```
 
 ## 3. APIs
@@ -491,12 +577,12 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | Área | Método e Endpoint | Descrição e Acesso | UC Relacionado |
 |---|---|---|---|
 | **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma (público) | UC012 |
-| | `POST /api/v1/auth/login` | Autenticação com e-mail/senha e emissão de JWT em cookie HttpOnly (público) | UC005 |
+| | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público) | UC005 |
 | | `POST /api/v1/auth/logout` | Encerramento de sessão e invalidação do token (autenticado) | UC005 |
 | | `POST /api/v1/auth/forgot-password` | Solicitação de link de redefinição de senha com validade de 30 min (público) | UC011 |
 | | `POST /api/v1/auth/reset-password` | Redefinição de senha com token recebido por e-mail (público) | UC011 |
 | | `GET /api/v1/profile` | Obtenção dos dados cadastrais do usuário logado (autenticado) | UC013 |
-| | `PUT /api/v1/profile` | Atualização de nome, telefone, idioma preferido e endereço (autenticado) | UC013 |
+| | `PUT /api/v1/profile` | Atualização de nome, telefone, endereço, CPF, data de nascimento, foto e tema (autenticado) | UC013 |
 | | `PUT /api/v1/profile/password` | Alteração de senha do usuário logado com confirmação de senha atual (autenticado) | UC017 |
 | **Área B: Autoria do instrutor** | `POST /api/v1/instructor/courses` | Criação de novo curso em status de rascunho (Instrutor) | UC006 |
 | | `PUT /api/v1/instructor/courses/{id}` | Atualização de metadados, título, preço e publicação do curso (Instrutor dono) | UC006 |
@@ -513,7 +599,8 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview) | UC009 |
 | | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado) | UC009 |
 | | `POST /api/v1/quizzes/{id}/attempt` | Submissão de respostas do quiz e correção automática imediata (Aluno matriculado) | UC002 |
-| | `POST /api/v1/courses/{id}/reviews` | Envio de avaliação e comentário sobre o curso concluído (Aluno matriculado) | UC010 |
+| | `POST /api/v1/courses/{id}/reviews` | Criação ou substituição da avaliação e comentário do aluno sobre o curso, uma por aluno e curso (Aluno matriculado) | UC010 |
+| | `GET /api/v1/courses/{id}/reviews/me` | Consulta da avaliação anterior do próprio aluno para o curso, para pré-preencher o formulário (Aluno matriculado) | UC010 |
 | **Área D: Tutor de IA e Administração** | `POST /api/v1/ai/tutor/chat` | Envio de dúvida ao Tutor de IA com streaming SSE da resposta contextualizada (Aluno matriculado) | UC001 |
 | | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos com filtros de período (Instrutor / Administrador) | UC007 |
 | | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma (Administrador) | UC008 |
@@ -527,11 +614,12 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 
 ### 4.1 Mecanismo de Autenticação e Emissão de Token
 
-A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) com criptografia assimétrica (chaves pública e privada RSA/EdDSA), dispensando sessões com estado no servidor web da API e assegurando alta escalabilidade (RNF001, RNF009).
-- **Emissão e Assinatura:** No login bem-sucedido (UC005), a API assina o JWT utilizando sua chave privada. O token carrega claims padrão (`sub` com UUID do usuário, `role`, `locale`, `iat`, `exp`).
+A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) com criptografia assimétrica (chaves pública e privada RSA/EdDSA), dispensando sessões com estado no servidor web da API e assegurando alta escalabilidade (RNF001).
+- **Emissão e Assinatura:** No login bem-sucedido (UC005), a API assina o JWT utilizando sua chave privada. O token carrega claims padrão (`sub` com UUID do usuário, `role`, `iat`, `exp`).
 - **Validação:** Requisições subsequentes são validadas pelo middleware da API utilizando a chave pública, eliminando queries ao banco de dados apenas para checagem criptográfica do token.
-- **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Lax/Strict`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
-- **Tempo de Vida (TTL):** O JWT possui tempo de expiração curto (TTL definido entre 15 e 30 minutos, com limite máximo de 1 hora conforme RNF001 e UC005). Tokens expirados exigem reautenticação.
+- **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Lax`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
+- **Tempo de Vida (TTL):** O JWT possui TTL de 1 hora (RNF001 e UC005). Ao expirar, o front-end renova a sessão com o refresh token da opção "manter conectado", quando existir; sem ele, o usuário reautentica.
+- **Manter conectado:** No login, o campo booleano `rememberMe` decide se a API também emite um refresh token rotativo, em cookie `HttpOnly` de vida longa. Cada renovação invalida o anterior. A duração será definida em ADR próprio.
 - **Revogação e Blocklist:** Na Sprint 2, a invalidação antecipada (logout imediato ou bloqueio administrativo de usuário, UC008/UC018) será realizada por meio de uma blocklist mantida em Redis pelo tempo residual de expiração do token.
 
 ### 4.2 Autorização, Perfis e Verificação de Propriedade (*Ownership*)
@@ -592,7 +680,7 @@ flowchart TD
 ### 5.2 Limites de Uso, Controle de Custo e Privacidade
 
 - **Rate Limiting:** Para conter custos de chamadas de inferência de LLM e evitar abusos, cada aluno matriculado possui uma cota de perguntas por janela de tempo (ex.: máximo de 20 perguntas por hora, monitoradas em Redis). Requisições excedentes recebem HTTP 429 com aviso de tempo de espera.
-- **Privacidade e LGPD:** Em estrito cumprimento à privacidade do aluno (RNF007), nenhuma informação de identificação pessoal (PII) — como nome, e-mail, telefone ou CPF — é enviada aos provedores de modelos de linguagem externos. A mensagem enviada contém apenas a dúvida formulada pelo aluno e os fragmentos de contexto extraídos das aulas do curso.
+- **Privacidade e LGPD:** Em estrito cumprimento à privacidade do aluno (RNF020), nenhuma informação de identificação pessoal (PII) — como nome, e-mail, telefone ou CPF — é enviada aos provedores de modelos de linguagem externos. A mensagem enviada contém apenas a dúvida formulada pelo aluno e os fragmentos de contexto extraídos das aulas do curso.
 - **Tratamento de Indisponibilidade do Modelo:** Conforme determinado no [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md), o Tutor de IA é tratado como ator sistêmico externo. Caso a API de inferência externa falhe ou atinja timeout, o sistema ativa um fluxo alternativo/de degradação graciosa: o chat exibe uma mensagem informativa amigável (*"O Tutor de IA está temporariamente indisponível no momento. Por favor, tente novamente em alguns instantes."*), sem interromper a reprodução do vídeo ou o progresso da aula pelo aluno.
 
 ---

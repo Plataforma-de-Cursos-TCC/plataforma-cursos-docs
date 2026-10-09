@@ -9,11 +9,11 @@ Esqueleto dos 11 itens do template da disciplina. Cada arquivo traz o título do
 | 3 | Visão do produto | `03-visao-do-produto.md` |
 | 4 | Mapeamento de negócios | `04-mapeamento-de-negocios.md` |
 | 5 | Atores / usuários | `05-atores-usuarios.md` |
-| 6 | Requisitos funcionais | `06-requisitos-funcionais/` (`00-item.md`, `area-a.md` a `area-d.md`) |
-| 7 | Estórias de usuário | `07-estorias-de-usuario/` (idem) |
-| 8 | Requisitos não-funcionais | `08-requisitos-nao-funcionais/` (idem) |
+| 6 | Requisitos funcionais | `06-requisitos-funcionais/` (`00-item.md`) |
+| 7 | Estórias de usuário | `07-estorias-de-usuario/` (`00-item.md`, `area-a.md` a `area-d.md`) |
+| 8 | Requisitos não-funcionais | `08-requisitos-nao-funcionais/` (`00-item.md`) |
 | 9 | Diagrama geral de casos de uso | `09-diagrama-geral-de-casos-de-uso.md` |
-| 10 | Especificações de caso de uso | `10-especificacoes-de-caso-de-uso/` (idem, mais `prototipos/`) |
+| 10 | Especificações de caso de uso | `10-especificacoes-de-caso-de-uso/` (`00-item.md`, `area-a.md` a `area-d.md`, mais `prototipos/`) |
 | 11 | Diagrama de atividades | `11-diagrama-de-atividades.md` |
 
 Diagramas como código (fontes `.bpmn` e `.puml`, e imagens PNG geradas) ficam em `diagramas/` (ADR-0004).

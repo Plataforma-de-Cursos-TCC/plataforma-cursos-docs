@@ -57,6 +57,7 @@ flowchart TB
         api["API<br/>regras de negócio das áreas A a D, JWT, documentação OpenAPI"]
         tutorsvc["Serviço do Tutor de IA<br/>transcrição, embeddings, busca por similaridade, geração de resposta"]
         db[("Banco de dados<br/>dados relacionais e índice de embeddings")]
+        fila["RabbitMQ<br/>mensageria AMQP: jobs de transcrição e ingestão vetorial"]
     end
 
     r2["Armazenamento de vídeo (R2)<br/>externo"]
@@ -69,6 +70,8 @@ flowchart TB
     api -->|"URL assinada (15 min)"| r2
     api -->|"leitura e escrita"| db
     api -->|"pergunta do Aluno e contexto da aula"| tutorsvc
+    api -->|"publica jobs de transcrição e ingestão"| fila
+    fila -->|"consome jobs"| tutorsvc
     tutorsvc -->|"trechos indexados do curso"| db
     tutorsvc -->|"leitura do vídeo, transcrição"| r2
     tutorsvc -->|"prompt com trechos, resposta em streaming"| llm
@@ -77,9 +80,10 @@ flowchart TB
 
 | Contêiner | Responsabilidade | Origem da definição |
 |---|---|---|
-| Front-end web | Telas de todos os perfis; chat do Tutor de IA ao lado do vídeo; validação de campo obrigatório com mensagem de erro; layout de 360 a 1920 px (RNF005); textos em pt-BR e en (RNF013); modo escuro (RNF014) | v11 (RNF005, RNF013, RNF014, UC001) |
+| Front-end web | Telas de todos os perfis; chat do Tutor de IA ao lado do vídeo; validação de campo obrigatório com mensagem de erro (RNF005); layout de 360 a 1920 px (RNF019); textos em pt-BR e en (RNF013); modo escuro (RNF014) | v11 (RNF005, RNF013, RNF014, RNF019, UC001) |
 | API | Autenticação e perfis, cursos, módulos, aulas, matrícula, pagamento simulado, progresso, quiz com correção automática, avaliação, dashboard, administração; documentação OpenAPI online (RNF015) | v11 |
 | Serviço do Tutor de IA | Transcrever a aula, gerar embeddings uma única vez por aula (RNF004), buscar trechos restritos ao curso, gerar resposta com aula e timestamp, responder em streaming (RNF003) | v11 |
+| Mensageria (RabbitMQ) | Fila AMQP entre a API e o Serviço do Tutor de IA para os jobs de transcrição e ingestão vetorial, executados em background | Proposta (TDD, seção de tecnologias) |
 | Banco de dados | Entidades do dicionário de dados da v11 (seção 5); histórico de conversa do Tutor de IA | v11 |
 | Armazenamento de vídeo | Arquivos de vídeo, referenciados por `videoKey` (storage R2) | v11 (dicionário de dados) |
 
@@ -89,6 +93,7 @@ A stack tecnológica e os bancos de dados seguem a decisão do grupo registrada 
 - **Banco de dados do Core:** MySQL 8 como SGBD relacional primário para todas as entidades do sistema.
 - **Serviço do Tutor de IA (`ai-service`):** Serviço físico separado rodando em seu próprio container (Laravel 13 / PHP 8.3) com banco de dados dedicado **PostgreSQL 16 com extensão pgvector** para índice vetorial HNSW e busca restrita a `course_id`. A separação física isola a dependência de LLM, pipelines assíncronos de transcrição/embeddings e a carga pesada de cálculo vetorial.
 - **Armazenamento de mídia (`media-service`):** Serviço separado com storage Cloudflare R2 para vídeos (`videoKey`).
+- **Mensageria:** RabbitMQ 3.13+ com protocolo AMQP, para os jobs assíncronos de transcrição e ingestão vetorial entre a API e o `ai-service`.
 
 ## 3. Componentes
 
@@ -141,21 +146,21 @@ flowchart TB
 
 | Área | Componente | Casos de uso e RFs que atende (v11) |
 |---|---|---|
-| A | Autenticação | UC005 Realizar Login, UC012 (cadastro), UC011 Recuperar Senha; RF001, RF013 |
-| A | Perfil do usuário | UC013 Editar dados do perfil; RF001 |
+| A | Autenticação | UC005 Realizar Login, UC012 (cadastro), UC011 Recuperar Senha; RF001, RF013, RF017 |
+| A | Perfil do usuário | UC013 Editar Dados do Perfil, UC017 Alterar Senha; RF001 |
 | B | Cursos e categorias | UC006 Cadastrar Curso; RF002 |
 | B | Módulos e aulas | UC014, UC015; RF003, RF004 |
 | B | Quiz e gabarito | UC004 Cadastrar Quiz com Gabarito; RF007 |
-| B | Perfil do instrutor | RF016 (sem UC na v11) |
-| C | Catálogo e busca | RF015 (sem UC na v11) |
-| C | Matrícula e pagamento simulado | UC003 Matricular-se em Curso; RF005, RF014 |
+| B | Perfil do instrutor | UC013 (fluxo A1); RF016 |
+| C | Catálogo e busca | UC020 Consultar Catálogo de Cursos; RF015 |
+| C | Matrícula e pagamento simulado | UC003 Matricular-se em Curso, UC019 Processar Pagamento Simulado; RF005, RF014 |
 | C | Progresso | UC009 Assistir Aula; RF006 |
 | C | Resposta de quiz | UC002 Responder Quiz; RF008 |
 | C | Avaliação do curso | UC010 Avaliar Curso; RF011 |
 | D | Conversa com o Tutor de IA | UC001 Conversar com Tutor de IA; RF009 |
 | D | Dashboard | UC007 Ver Dashboard com Filtro; RF010 |
-| D | Usuários e auditoria | UC008 Gerenciar Usuários; RF012; RNF016 |
-| D | Controle de acesso por perfil | UC016; RF012; RNF001 |
+| D | Usuários e auditoria | UC008 Gerenciar Usuários, UC018 Excluir e Anonimizar Usuário; RF012; RNF016 |
+| D | Controle de acesso por perfil | UC016 Acessar Área Protegida por Perfil; RF018; RNF001 |
 
 <!-- proposta: a divisão em componentes, os nomes e as dependências entre eles não constam na v11, que traz só casos de uso e diagramas de sequência. Foram derivados dos RFs e das regras de negócio dos casos de uso. Motivo: C4 nível 3 exige componentes -->
 
@@ -252,17 +257,17 @@ O detalhamento completo dos campos, tipos, tamanhos e regras de normalização d
 | Matrícula, pagamento simulado, progresso | Banco de dados | Entidades Enrollment, Payment, LessonProgress (`watchedSeconds` para retomar de onde parou) |
 | Quiz, perguntas, alternativas, gabarito, tentativas, respostas | Banco de dados | Entidades Quiz, Question, QuestionOption (`isCorrect` é o gabarito), QuizAttempt, QuizAnswer |
 | Avaliação do curso | Banco de dados | Entidade Review, nota de 1 a 5 e comentário |
-| Transcrição, embeddings e histórico de conversa do Tutor de IA | Banco de dados | Gerados uma única vez por aula (RNF004); busca restrita por `course_id`. O histórico guarda mensagem e resposta por Aluno e curso (UC001). Entidades ainda não constam no dicionário de dados da v11 |
+| Transcrição, embeddings e histórico de conversa do Tutor de IA | Banco de dados | Gerados uma única vez por aula (RNF004); busca restrita por `course_id`. O histórico de mensagens e respostas por Aluno é guardado nas entidades Conversation e Message (UC001, seção 5.1). Entidades ainda não constam no dicionário de dados da v11 |
 | Trilha de auditoria das ações administrativas | Banco de dados | Registro de 100% das ações, retido por 12 meses (RNF016) |
 | Backup | Banco de dados | Backup diário, com restauração testada mensalmente (RNF011) |
 
-<!-- proposta: tabelas LessonTranscript (transcrição com marcação de tempo), LessonEmbedding (vetor, trecho, timestamp, course_id), ChatMessage (aluno, curso, aula, pergunta, resposta, citação) e AuditLog (autor, ação, data). O dicionário da v11 não traz essas entidades, embora o UC001 e o RNF004 exijam os dados. Motivo: dar lugar aos dados que a v11 manda gerar e guardar -->
+<!-- proposta: tabelas LessonTranscript (transcrição com marcação de tempo), LessonEmbedding (vetor, trecho, timestamp, course_id) e AuditLog (autor, ação, data). O dicionário da v11 não traz essas entidades, embora o UC001 e o RNF004 exijam os dados. Motivo: dar lugar aos dados que a v11 manda gerar e guardar -->
 
 <!-- proposta: retenção de dados pessoais após exclusão da conta. A v11 diz, na estória US016, que os dados pessoais são removidos e o histórico de matrícula e pagamento permanece anonimizado, mas não fixa prazo. Prazos de retenção do histórico de conversa e dos arquivos de vídeo ficam para decisão do grupo -->
 
 ### 5.1 Modelo de classes de domínio
 
-Transcrito do dicionário de dados da v11 (seção 12). O diagrama de classes da v11 (figura 14) é imagem e não foi reproduzido; este diagrama é uma reconstrução a partir dos atributos e das referências do dicionário.
+Transcrito do dicionário de dados da v11 (seção 12). O diagrama de classes da v11 (figura 14) é imagem e não foi reproduzido; este diagrama é uma reconstrução a partir dos atributos e das referências do dicionário. As entidades `Conversation` e `Message` (histórico do Tutor de IA, UC001) e os campos `userId`, `courseId` e `enrollmentId` de `Payment` não constam no dicionário da v11; seguem o TDD.
 
 ```mermaid
 classDiagram
@@ -272,7 +277,8 @@ classDiagram
         +email
         +passwordHash
         +role
-        +locale
+        +photo
+        +theme
         +phone
         +documentNumber
         +birthDate
@@ -354,8 +360,12 @@ classDiagram
     class QuizAnswer {
         +id
     }
+    %% Payment: enrollmentId fica nulo até a aprovação do pagamento
     class Payment {
         +id
+        +userId
+        +courseId
+        +enrollmentId
         +amountCents
         +currency
         +status
@@ -365,6 +375,21 @@ classDiagram
         +id
         +rating
         +comment
+    }
+    class Conversation {
+        +id
+        +userId
+        +courseId
+        +lessonId
+        +createdAt
+    }
+    class Message {
+        +id
+        +conversationId
+        +role
+        +content
+        +timestampRef
+        +createdAt
     }
 
     User "1" --> "*" Address
@@ -388,6 +413,8 @@ classDiagram
     Payment "1" --> "0..1" Enrollment
     User "1" --> "*" Review
     Course "1" --> "*" Review
+    User "1" --> "*" Conversation
+    Conversation "1" --> "*" Message
 ```
 
 <!-- proposta: multiplicidades do diagrama (por exemplo, InstructorProfile 0..1 por User, Payment 1 para 0..1 Enrollment, pois pagamento recusado não cria matrícula). O dicionário da v11 só informa as chaves de referência, não a cardinalidade. Motivo: o classDiagram exige multiplicidade -->
@@ -396,7 +423,7 @@ classDiagram
 
 | Tema | Decisão | Origem |
 |---|---|---|
-| Autenticação | Token JWT com expiração de 1 h; token expirado exige novo login | v11 (RNF001, UC005) |
+| Autenticação | Token JWT de acesso com expiração de 1 h, em cookie HttpOnly, Secure e SameSite. Com a opção "manter conectado" marcada no login, a sessão é renovada por refresh token com rotação, em cookie HttpOnly de vida longa, sem novo login. Sem a opção, a sessão termina ao expirar o token de acesso | v11 (RNF001, UC005); cookie, refresh token e opção "manter conectado": decisão arquitetural deste SDD, detalhe em ADR a criar |
 | Perfis e área protegida (área D) | Perfis aluno, instrutor e administrador; 100% das rotas protegidas verificam o perfil; acesso negado redireciona o usuário à própria área | v11 (RNF001, US015, UC016) |
 | Senhas | Armazenadas só com hash; mínimo de 8 caracteres, com letra e número | v11 (RNF007, UC012) |
 | Enumeração de usuários | Mensagem de login inválido e de recuperação de senha não revela se o e-mail existe | v11 (UC005, UC011) |
@@ -405,12 +432,12 @@ classDiagram
 | Vídeo | Upload e reprodução só por URL assinada, com expiração de 15 min; sem acesso direto ao armazenamento | v11 (RNF002) |
 | Matrícula | Só o Aluno matriculado acessa as aulas, salvo aula marcada como prévia (`isPreview`) | v11 (US006, UC003) |
 | Tutor de IA | Responde só com base no material do próprio curso (RAG restrito por `course_id`); limite de mensagens por Aluno por período | v11 (UC001) |
-| LGPD | Aceite de termos e política de privacidade registrado em 100% dos cadastros; dados pessoais removidos na exclusão da conta, com histórico anonimizado | v11 (RNF007, UC012, US016) |
+| LGPD | Aceite de termos e política de privacidade registrado em 100% dos cadastros; dados pessoais removidos na exclusão da conta, com histórico anonimizado | v11 (RNF020, UC012, US016) |
 | Administração | Registro de 100% das ações administrativas, retido por 12 meses; o administrador não bloqueia a própria conta | v11 (RNF016, US016) |
 
-<!-- proposta: o token JWT é guardado em cookie HttpOnly com `SameSite` e a API envia a política de CORS restrita ao domínio do front-end. A v11 não diz onde fica o token. Motivo: reduz o risco de roubo do token por XSS -->
+<!-- proposta: a API envia política de CORS restrita ao domínio do front-end. A v11 não trata de CORS. Motivo: limita quais origens podem usar a sessão do usuário no navegador -->
 
-<!-- proposta: mensagens ao provedor do modelo de linguagem não incluem nome, e-mail, CPF nem outros dados pessoais do Aluno; seguem só a pergunta e os trechos do curso. Motivo: a v11 pede LGPD (RNF007), mas não trata do envio de dados a terceiros -->
+<!-- proposta: mensagens ao provedor do modelo de linguagem não incluem nome, e-mail, CPF nem outros dados pessoais do Aluno; seguem só a pergunta e os trechos do curso. Motivo: a v11 pede LGPD (RNF020), mas não trata do envio de dados a terceiros -->
 
 ## 7. Qualidade
 
@@ -422,22 +449,26 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme a v11
 | RNF002 | Segurança | URL assinada de 15 min; 0 acessos diretos | A API gera a URL; o front-end nunca recebe credencial do armazenamento |
 | RNF003 | Eficiência de desempenho | Primeiro trecho da resposta do Tutor de IA em até 3 s (p95) | Resposta em streaming do provedor até o chat |
 | RNF004 | Eficiência de desempenho | 0 reprocessamentos por aula | Transcrição e embeddings guardados no banco e gerados uma vez, após o upload |
-| RNF005 | Capacidade de interação | 100% dos campos obrigatórios com erro claro; 360 a 1920 px | Front-end SPA responsiva com validação nos formulários |
+| RNF005 | Capacidade de interação | 100% dos campos obrigatórios validados com mensagem de erro clara | Front-end SPA com validação nos formulários |
 | RNF006 | Manutenibilidade | Cobertura de testes de 75% no backend, com merge bloqueado abaixo | Verificação de cobertura no pipeline de integração contínua |
-| RNF007 | Segurança | 0 senhas em texto puro; aceite registrado em 100% dos cadastros | Hash de senha na área A; campo de aceite no cadastro |
+| RNF007 | Segurança | 0 senhas em texto puro (armazenadas com hash) | Hash de senha na área A |
 | RNF008 | Segurança | Bloqueio de 15 min após 5 tentativas | Contador de tentativas na autenticação (área A) |
-| RNF009 | Eficiência de desempenho | p95 das listagens de até 2 s com 1000 usuários simultâneos | API sem estado (JWT), que permite várias instâncias; paginação das listagens |
+| RNF009 | Eficiência de desempenho | p95 das listagens de até 2 s com 1000 usuários simultâneos | API sem estado (JWT), que permite várias instâncias; toda listagem é paginada; a API não devolve campo que o front-end não use |
 | RNF010 | Confiabilidade | Disponibilidade mensal mínima de 99% | Sem fonte na v11 para o mecanismo |
 | RNF011 | Confiabilidade | Backup diário; restauração testada mensalmente | Backup do banco de dados, que concentra os dados da plataforma |
 | RNF012 | Acessibilidade | WCAG 2.1 AA; contraste 4,5:1; navegação por teclado | Front-end com componentes acessíveis e revisão de contraste |
-| RNF013 | Capacidade de interação | pt-BR e en em 100% dos textos; datas e valores por idioma | Textos em arquivos de tradução e formatação por localidade; campo `locale` do usuário |
+| RNF013 | Capacidade de interação | pt-BR e en em 100% dos textos; datas e valores por idioma | Textos em arquivos de tradução e formatação por localidade |
 | RNF014 | Capacidade de interação | Claro/escuro em 100% das telas, preferência salva por usuário | Tema no front-end; preferência persistida no perfil |
 | RNF015 | Manutenibilidade | 100% dos endpoints em OpenAPI, online | API documentada em OpenAPI e publicada |
 | RNF016 | Segurança | 100% das ações administrativas registradas, por 12 meses | Registro de auditoria no componente de gerenciamento de usuários |
+| RNF017 | Segurança | Link de redefinição de senha de uso único, com expiração de 30 min | Token de uso único com validade de 30 min, gerado na área A e enviado por e-mail |
+| RNF018 | Eficiência de desempenho | Vídeo de aula aceito somente em mp4 ou webm, com até 500 MB por arquivo | Validação de tipo e tamanho na emissão da URL assinada de envio (área B) |
+| RNF019 | Flexibilidade | Layout funcional de 360 a 1920 px de largura | Front-end SPA responsiva, mesmo componente de layout do RNF005 |
+| RNF020 | Segurança | Aceite de termos e da política de dados pessoais (LGPD) registrado em 100% dos cadastros | Campo de aceite no cadastro (área A) |
 | RNF021 | Manutenibilidade | Cobertura de testes de 75% no frontend, com merge bloqueado abaixo | Verificação de cobertura (Vitest) no pipeline de integração contínua |
 
 <!-- proposta: balanceador e mais de uma instância da API, cache de listagens e hospedagem com réplica ou reinício automático para atingir 1000 usuários simultâneos (RNF009) e 99% de disponibilidade (RNF010). A v11 define as metas, não o mecanismo. Motivo: a API sem estado permite escalar horizontalmente -->
 
-<!-- proposta: preferência de tema (RNF014) persistida no perfil do usuário, em campo que o dicionário de dados da v11 não traz (a entidade User tem só `locale`). Motivo: a meta exige preferência salva por usuário -->
+<!-- proposta: preferência de tema (RNF014: claro, escuro ou sistema) persistida no perfil do usuário, em campo `theme` que o dicionário de dados da v11 não traz (a entidade User da v11 tem `locale`, removido porque o sistema é monoidioma). Motivo: a meta exige preferência salva por usuário -->
 
 <!-- proposta: matriz de rastreabilidade RNF para componente fica para o TDD. Motivo: o item 8 está dividido por área (ADR-0006) e a renumeração definitiva dos RNFs ainda não foi feita (ADR-0001) -->

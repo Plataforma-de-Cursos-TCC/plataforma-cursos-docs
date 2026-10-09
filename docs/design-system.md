@@ -197,7 +197,7 @@ Imagens em [especificacao/10-especificacoes-de-caso-de-uso/prototipos/](../espec
 | 7. Dashboard com filtro | UC007, Ver dashboard com filtro | [alta-tela7-dashboard.jpg](../especificacao/10-especificacoes-de-caso-de-uso/prototipos/alta-tela7-dashboard.jpg) | [baixa-tela7-dashboard.jpg](../especificacao/10-especificacoes-de-caso-de-uso/prototipos/baixa-tela7-dashboard.jpg) |
 | 8. Gerenciar usuários | UC008, Gerenciar usuários | [alta-tela8-usuarios.jpg](../especificacao/10-especificacoes-de-caso-de-uso/prototipos/alta-tela8-usuarios.jpg) | [baixa-tela8-usuarios.jpg](../especificacao/10-especificacoes-de-caso-de-uso/prototipos/baixa-tela8-usuarios.jpg) |
 
-Sem protótipo na v11: UC010 em diante. Os componentes deste documento cobrem esses casos (formulário, botão, lista); as telas faltantes seguem os mesmos tokens.
+Os protótipos de alta fidelidade cobrem os fluxos dos casos de uso do item 10 (24 telas em `especificacao/10-especificacoes-de-caso-de-uso/prototipos/html/`). Os componentes deste documento seguem os mesmos tokens.
 
 ## Pendências para o grupo
 

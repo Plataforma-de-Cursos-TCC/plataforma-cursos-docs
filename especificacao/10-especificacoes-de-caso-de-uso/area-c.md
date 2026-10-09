@@ -65,7 +65,7 @@
 - **Fluxo básico:**
   1. O Aluno acessa a página de um curso publicado. (A-1)
   2. O Aluno aciona “Matricular-se”.
-  3. O sistema verifica que o curso é pago e executa o UC019 – Processar Pagamento Simulado. (A-2) (E-1) (E-2)
+  3. O sistema verifica que o curso é pago e executa o UC019 – Processar Pagamento Simulado. (A-2) (A-3) (E-1) (E-2)
   4. O sistema registra a matrícula do Aluno no curso.
   5. O curso passa a aparecer em “Meus cursos” e o Aluno pode iniciar as aulas.
   6. Este caso de uso é finalizado.
@@ -94,6 +94,9 @@
     ![curso gratuito: matrícula sem preço](prototipos/png/UC003-A2-1.png)
 
     *Figura 0 – UC003, fluxo alternativo A2: curso gratuito: matrícula sem preço*
+  - **A3 – O pagamento simulado é aprovado**
+    - A-3.1 O UC019 termina com pagamento aprovado para o curso pago.
+    - A-3.2 Este caso de uso retorna ao fluxo básico (passo 4).
 - **Fluxos de exceção:**
   - **E1 – Curso despublicado durante a matrícula**
     - E-1.1 O sistema verifica que o curso deixou de estar publicado.
