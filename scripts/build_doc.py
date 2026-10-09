@@ -1020,6 +1020,21 @@ def patch_docx_files(path):
     """Ajusta cabeçalho, rodapé, estilos e fontes Arial no pacote docx."""
     import xml.etree.ElementTree as ET
     ET.register_namespace("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main")
+    # Mantém os prefixos originais: mc:Choice Requires="wps" depende deles.
+    for pfx, uri in {
+        "mc": "http://schemas.openxmlformats.org/markup-compatibility/2006",
+        "wps": "http://schemas.microsoft.com/office/word/2010/wordprocessingShape",
+        "wp14": "http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing",
+        "w14": "http://schemas.microsoft.com/office/word/2010/wordml",
+        "wp": "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing",
+        "a": "http://schemas.openxmlformats.org/drawingml/2006/main",
+        "pic": "http://schemas.openxmlformats.org/drawingml/2006/picture",
+        "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+        "v": "urn:schemas-microsoft-com:vml",
+        "o": "urn:schemas-microsoft-com:office:office",
+        "w10": "urn:schemas-microsoft-com:office:word",
+    }.items():
+        ET.register_namespace(pfx, uri)
     ns = {"w": "http://schemas.openxmlformats.org/wordprocessingml/2006/main"}
 
     def set_arial_fonts(rPr):
