@@ -49,7 +49,7 @@ Decisão: [ADR-0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md).
 
 | | Decisão | ADR |
 |---|---|---|
-| D1 | **Meta interna de 4 por integrante** (mínimo oficial: 8 especificações de caso de uso); numeração final da v11 (RF001, US001, RNF001, UC001), com IDs novos no fim (RF017…) | [0001](docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) |
+| D1 | **Meta interna de 4 por integrante** (mínimo oficial: 8 especificações de caso de uso); numeração final (RF001, US001, RNF001, UC001), com IDs novos no fim (RF017…) | [0001](docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) |
 | D2 | Estória no formato **Como / Posso / Para**, com **pelo menos 2 critérios** DADO QUE / QUANDO / ENTÃO | [0002](docs/adr/0002-formato-de-estoria-e-criterios.md) |
 | D3 | **«extend»** no sentido do TE3_3 e da UML: a seta sai do caso de uso opcional e aponta para o base | [0003](docs/adr/0003-extend-no-sentido-do-te3-3.md) |
 | D4 | **Diagramas como código**: BPMN 2.0 (`.bpmn`) no item 4, PlantUML (`.puml`) nos itens 9 e 11, PNG gerado da fonte | [0004](docs/adr/0004-diagramas-como-codigo.md) |
