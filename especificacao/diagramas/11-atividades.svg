@@ -51,42 +51,42 @@
   <text x="1725" y="347.0" font-family="Arial" font-size="13" font-weight="bold" fill="#222222" text-anchor="middle">tela?</text>  <rect x="1840" y="311" width="120" height="48" rx="8" ry="8" fill="#ffffff" stroke="#222222" stroke-width="1.8" filter="url(#shadow)" />
   <text x="1900.0" y="331.0" font-family="Arial" font-size="14" font-weight="bold" fill="#111111" text-anchor="middle">A-1. Salva</text>
   <text x="1900.0" y="349.0" font-family="Arial" font-size="14" font-weight="normal" fill="#111111" text-anchor="middle">segundos</text>  <circle cx="1900" cy="225" r="14" fill="#ffffff" stroke="#222222" stroke-width="1.8" />
-  <circle cx="1900" cy="225" r="8" fill="#222222" />  <polygon points="1725,429 1780,465 1725,501 1670,465" fill="#ffffff" stroke="#222222" stroke-width="1.8" filter="url(#shadow)" />
-  <text x="1725" y="461.0" font-family="Arial" font-size="13" font-weight="bold" fill="#222222" text-anchor="middle">Vídeo</text>
-  <text x="1725" y="477.0" font-family="Arial" font-size="13" font-weight="bold" fill="#222222" text-anchor="middle">terminou?</text>  <rect x="1650" y="550" width="150" height="50" rx="8" ry="8" fill="#ffffff" stroke="#222222" stroke-width="1.8" filter="url(#shadow)" />
-  <text x="1725.0" y="571.0" font-family="Arial" font-size="14" font-weight="bold" fill="#111111" text-anchor="middle">4. Conclui aula e</text>
-  <text x="1725.0" y="589.0" font-family="Arial" font-size="14" font-weight="normal" fill="#111111" text-anchor="middle">atualiza progresso</text>  <circle cx="1725" cy="635" r="14" fill="#ffffff" stroke="#222222" stroke-width="1.8" />
-  <circle cx="1725" cy="635" r="8" fill="#222222" />  <path d="M 232 131 L 260 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 400 131 L 470 131 L 470 314" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 470 386 L 470 460" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="451.0" y="411" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <circle cx="1900" cy="225" r="8" fill="#222222" />  <polygon points="1725,419 1780,455 1725,491 1670,455" fill="#ffffff" stroke="#222222" stroke-width="1.8" filter="url(#shadow)" />
+  <text x="1725" y="451.0" font-family="Arial" font-size="13" font-weight="bold" fill="#222222" text-anchor="middle">Vídeo</text>
+  <text x="1725" y="467.0" font-family="Arial" font-size="13" font-weight="bold" fill="#222222" text-anchor="middle">terminou?</text>  <rect x="1650" y="535" width="150" height="48" rx="8" ry="8" fill="#ffffff" stroke="#222222" stroke-width="1.8" filter="url(#shadow)" />
+  <text x="1725.0" y="555.0" font-family="Arial" font-size="14" font-weight="bold" fill="#111111" text-anchor="middle">4. Conclui aula e</text>
+  <text x="1725.0" y="573.0" font-family="Arial" font-size="14" font-weight="normal" fill="#111111" text-anchor="middle">atualiza progresso</text>  <circle cx="1725" cy="615" r="14" fill="#ffffff" stroke="#222222" stroke-width="1.8" />
+  <circle cx="1725" cy="615" r="8" fill="#222222" />  <path d="M 232 131 L 260 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 400 131 L 470 131 L 470 314" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 470 386 L 470 460" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
+  <rect x="451.0" y="411" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="470" y="425" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 470 510 L 470 551" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 525 350 L 552 350" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="519.0" y="328" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="519.0" y="328" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="538" y="342" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 610 314 L 610 309 L 720 309" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="636.0" y="287" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="636.0" y="287" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="655" y="301" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 610 386 L 610 415 L 720 415" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="636.0" y="413" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="636.0" y="413" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="655" y="427" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 870 309 L 895 309 L 895 365 L 795 365 L 795 390" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 870 415 L 890 415" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 945 451 L 945 505" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="926.0" y="466" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
-  <text x="945" y="480" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 945 555 L 945 591" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 945 379 L 945 360 L 990 360 L 990 131 L 1030 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="971.0" y="233" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
-  <text x="990" y="247" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1180 131 L 1192 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1288 131 L 1340 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1295.0" y="108" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="926.0" y="466" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
+  <text x="945" y="480" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 945 555 L 945 591" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 945 379 L 945 360 L 955 360 L 955 131 L 1030 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
+  <rect x="936.0" y="233" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
+  <text x="955" y="247" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1180 131 L 1192 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1288 131 L 1340 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
+  <rect x="1295.0" y="108" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="1314" y="122" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1240 97 L 1240 60 L 1725 60 L 1725 299" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1461.0" y="38" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="1461.0" y="38" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="1480" y="52" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 1415 157 L 1415 299" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1357 335 L 1305 335 L 1305 425" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1286.0" y="363" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="1286.0" y="363" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="1305" y="377" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1415 371 L 1415 740" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1396.0" y="588" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="1396.0" y="588" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="1415" y="602" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 1490 765 L 1508 765" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1560 729 L 1560 738 L 1650 738" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1586.0" y="716" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="1586.0" y="716" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="1605" y="730" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1560 801 L 1560 808 L 1650 808" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1586.0" y="806" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
+  <rect x="1586.0" y="806" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
   <text x="1605" y="820" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 1725 715 L 1725 670 L 1610 670 L 1610 475" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1800 808 L 1830 808 L 1830 660 L 1550 660 L 1550 475" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1350 425 L 1350 390 L 1460 390 L 1460 335 L 1670 335" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1565 425 L 1565 350 L 1670 350" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1780 335 L 1840 335" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1791.0" y="313" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
-  <text x="1810" y="327" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1900 311 L 1900 241" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1725 371 L 1725 429" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1706.0" y="388" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
-  <text x="1725" y="402" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 1725 501 L 1725 550" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1706.0" y="513" width="38" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
-  <text x="1725" y="527" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1725 600 L 1725 621" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1780 465 L 1975 465 L 1975 645 L 1010 645 L 1010 131 L 1030 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
-  <rect x="1391.0" y="623" width="118" height="18" fill="#ffffff" stroke="#e0e0e0" stroke-width="0.8" rx="3" />
-  <text x="1450" y="637" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não: continua]</text>
+  <rect x="1791.0" y="313" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
+  <text x="1810" y="327" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1900 311 L 1900 241" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1725 371 L 1725 419" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
+  <rect x="1706.0" y="383" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
+  <text x="1725" y="397" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não]</text>  <path d="M 1725 491 L 1725 535" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
+  <rect x="1706.0" y="501" width="38" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
+  <text x="1725" y="515" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[sim]</text>  <path d="M 1725 583 L 1725 601" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />  <path d="M 1780 455 L 1975 455 L 1975 662 L 1010 662 L 1010 131 L 1030 131" fill="none" stroke="#222222" stroke-width="1.8" marker-end="url(#arrow)" />
+  <rect x="1391.0" y="640" width="118" height="18" fill="#ffffff" stroke="#d0d0d0" stroke-width="0.8" rx="3" />
+  <text x="1450" y="654" font-family="Arial" font-size="12" font-weight="bold" fill="#333333" text-anchor="middle">[não: continua]</text>
 </svg>
