@@ -67,13 +67,6 @@ function RawInline(el)
     return pandoc.LineBreak()
   end
 end
-
--- A declaração de IA começa em página nova (o título ficava órfão no pé da página).
-function Header(el)
-  if el.level == 1 and pandoc.utils.stringify(el):match('^Declaração') then
-    return {pandoc.RawBlock('openxml', '<w:p><w:r><w:br w:type="page"/></w:r></w:p>'), el}
-  end
-end
 """
 
 # Parágrafos que, logo antes de uma tabela, são o título do quadro no template
@@ -262,7 +255,14 @@ def bold_run(r):
 
 def format_tables_and_captions(doc):
     """Negrito e centro no cabeçalho, no título do quadro e na coluna de número; legenda em Caption."""
-    def para_fmt(cell, bold):
+    def para_fmt(cell, bold, v_center=False):
+        if v_center:
+            tcPr = cell.get_or_add_tcPr()
+            vAlign = tcPr.find(qn("w:vAlign"))
+            if vAlign is None:
+                vAlign = OxmlElement("w:vAlign")
+                tcPr.append(vAlign)
+            vAlign.set(qn("w:val"), "center")
         for p in cell.iter(qn("w:p")):
             ppr = child(p, "w:pPr", 0)
             rpr = ppr.find(qn("w:rPr"))  # jc vem antes de rPr no schema
@@ -280,13 +280,41 @@ def format_tables_and_captions(doc):
                 for tc in tcs:
                     para_fmt(tc, True)
             elif tcs and re.fullmatch(r"\d+", text_of(tcs[0]).strip()):
-                para_fmt(tcs[0], True)
+                para_fmt(tcs[0], True, v_center=True)
     caption = doc.styles["Caption"].style_id
     for p in doc.element.body.iter(qn("w:p")):
         if re.match(r"Figura \d+ –", text_of(p).strip()):
             child(child(p, "w:pPr", 0), "w:pStyle", 0).set(qn("w:val"), caption)
             for i in list(p.iter(qn("w:i"), qn("w:iCs"))):
                 i.getparent().remove(i)
+
+
+def format_images(doc):
+    """Padroniza imagens em 15 cm de largura, proporção travada e centralizadas."""
+    w_15cm = 5400000  # 15 cm em EMUs (15 * 360000)
+    for p in doc.paragraphs:
+        for dr in p._p.iter(qn("w:drawing")):
+            inline = dr.find(qn("wp:inline"))
+            if inline is None:
+                continue
+            docPr = inline.find(qn("wp:docPr"))
+            if docPr is not None and "Caixa de Texto" in docPr.get("name", ""):
+                continue
+            extent = inline.find(qn("wp:extent"))
+            if extent is not None:
+                cx = int(extent.get("cx"))
+                cy = int(extent.get("cy"))
+                extent.set("cx", str(w_15cm))
+                extent.set("cy", str(int(cy * w_15cm / cx)))
+            for cNvPicPr in dr.iter(qn("pic:cNvPicPr")):
+                picLocks = cNvPicPr.find(qn("a:picLocks"))
+                if picLocks is None:
+                    picLocks = OxmlElement("a:picLocks")
+                    cNvPicPr.append(picLocks)
+                picLocks.set("noChangeAspect", "1")
+            ppr = child(p._p, "w:pPr", 0)
+            rpr = ppr.find(qn("w:rPr"))
+            child(ppr, "w:jc", None if rpr is None else list(ppr).index(rpr)).set(qn("w:val"), "center")
 
 
 def assemble(pandoc_docx, template, out_docx, pages):
@@ -297,6 +325,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
     tbody = list(tdoc.element.body)
     titles_into_tables(body)
     format_tables_and_captions(doc)
+    format_images(doc)
 
     # Elementos 0-28 do template: capa, folha de rosto, sumário e quebra de seção.
     cover = [copy.deepcopy(e) for e in tbody[:29]]
@@ -316,12 +345,31 @@ def assemble(pandoc_docx, template, out_docx, pages):
             if c.get(qn("w:val")) == "00B0F0":
                 c.set(qn("w:val"), "000000")
 
-    # Sumário estático: o LibreOffice não atualiza o campo TOC na conversão.
-    # ponytail: sem campo, o Word não atualiza o sumário; regere pelo script.
+    # "Curitiba" e ano saem do fluxo e ficam numa moldura ancorada na página, perto do rodapé
+    # da capa: não dependem de contar parágrafos vazios, então não empurram o sumário.
+    cover_frame_y = 13600  # twips a partir do topo da página (~24 cm)
+    for el in (cover[20], cover[21]):
+        ppr = child(el, "w:pPr", 0)
+        for old_frame in ppr.findall(qn("w:framePr")):
+            ppr.remove(old_frame)
+        frame = OxmlElement("w:framePr")
+        for name, value in (
+            ("w:w", "9000"),
+            ("w:wrap", "around"),
+            ("w:vAnchor", "page"),
+            ("w:hAnchor", "margin"),
+            ("w:xAlign", "center"),
+            ("w:y", str(cover_frame_y)),
+        ):
+            frame.set(qn(name), value)
+        before = {qn(t) for t in ("w:pStyle", "w:keepNext", "w:keepLines", "w:pageBreakBefore")}
+        ppr.insert(sum(1 for c in ppr if c.tag in before), frame)
+
+    # Sumário estático: mostra apenas itens de nível 1.
     headings = [
-        (int(p.style.name[-1]), p.text.strip())
+        (1, p.text.strip())
         for p in doc.paragraphs
-        if p.style.name in ("Heading 1", "Heading 2") and p.text.strip()
+        if p.style.name == "Heading 1" and p.text.strip()
     ]
     sdt = cover[25]
     content = sdt.find(qn("w:sdtContent"))
@@ -329,10 +377,10 @@ def assemble(pandoc_docx, template, out_docx, pages):
         content.remove(p)
     for (level, text), page in zip(headings, pages or [0] * len(headings)):
         content.append(toc_entry(level, text, page))
-    # Campo TOC em volta das entradas: o Word mostra as estáticas e atualiza com F9.
+    # Campo TOC em volta das entradas: nível 1-1.
     entries = list(content)[2:]
     first_ppr = entries[0].find(qn("w:pPr"))
-    for kind, instr in (("separate", None), (None, ' TOC \\o "1-2" \\h \\z \\u '), ("begin", None)):
+    for kind, instr in (("separate", None), (None, ' TOC \\o "1-1" \\h \\z \\u '), ("begin", None)):
         first_ppr.addnext(fld_run(kind, instr))
     entries[-1].append(fld_run("end"))
 
@@ -374,6 +422,69 @@ def assemble(pandoc_docx, template, out_docx, pages):
         for c, g in enumerate(cols):
             w = fixed[c] if c in fixed else rest * longs[c] // sum(longs.values())
             g.set(qn("w:w"), str(w))
+
+    # Cada item de nível 1 (2 em diante) e a declaração de IA começam em página nova.
+    # O item 1 já começa na página seguinte à do sumário pela quebra de seção da capa.
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1" and not p.text.startswith("1 ") and not p.text.startswith("11 "):
+            child(child(p._p, "w:pPr", 0), "w:pageBreakBefore", 0)
+
+    # Item 11 em seção paisagem (cabeçalho e rodapé preservados):
+    p11 = None
+    p_next_h1 = None
+    for p in doc.paragraphs:
+        if p.text.startswith("11 "):
+            p11 = p
+        elif p11 is not None and p_next_h1 is None and p.style.name == "Heading 1":
+            p_next_h1 = p
+
+    if p11 is not None:
+        port_sect = copy.deepcopy(body.find(qn("w:sectPr")))
+        land_sect = copy.deepcopy(port_sect)
+        pgSz = land_sect.find(qn("w:pgSz"))
+        pgSz.set(qn("w:w"), "16838")
+        pgSz.set(qn("w:h"), "11906")
+        pgSz.set(qn("w:orient"), "landscape")
+
+        # Quebra de seção contínua para paisagem antes do item 11:
+        p_break1 = OxmlElement("w:p")
+        child(child(p_break1, "w:pPr", 0), "w:sectPr", 0).extend(list(port_sect))
+        p11._p.addprevious(p_break1)
+
+        # Ajusta as imagens do diagrama de atividades (todas as partes) para ocupar a largura útil
+        # da página paisagem, mantendo a altura calculada pela proporção real de cada imagem.
+        # Cada imagem começa em página própria, com a legenda logo abaixo dela:
+        max_w = 8532000  # largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm)
+        max_h = 4000000  # altura máxima para caber com título, texto e legenda (~11.1 cm)
+        imgs = []
+        started = False
+        for p in doc.paragraphs:
+            if p._p is p11._p:
+                started = True
+            elif started and p_next_h1 is not None and p._p is p_next_h1._p:
+                break
+            elif started and p._p.find(".//" + qn("w:drawing")) is not None:
+                imgs.append(p)
+        for i, para in enumerate(imgs):
+            extent = para._p.find(".//" + qn("wp:extent"))
+            orig_cx = int(extent.get("cx"))
+            orig_cy = int(extent.get("cy"))
+            ratio = orig_cy / orig_cx
+            target_w = max_w
+            target_h = int(target_w * ratio)
+            if target_h > max_h:
+                target_h = max_h
+                target_w = int(target_h / ratio)
+            extent.set("cx", str(target_w))
+            extent.set("cy", str(target_h))
+            if i > 0:
+                para.paragraph_format.page_break_before = True
+
+        # Quebra de seção retornando ao retrato após o item 11:
+        if p_next_h1 is not None:
+            p_break2 = OxmlElement("w:p")
+            child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
+            p_next_h1._p.addprevious(p_break2)
 
     # O texto do .md já traz o número do item; a numeração automática duplicaria.
     for name in ("Heading 1", "Heading 2", "Heading 3"):
