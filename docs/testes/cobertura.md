@@ -40,10 +40,10 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 
 ## 2. Histórico de Medições do CI
 
-As linhas desta tabela serão preenchidas automaticamente pelo pipeline de CI a cada execução da suíte de testes automatizados na branch principal do repositório de código, aferindo a conformidade com a meta de 75% estabelecida no RNF006:
+As linhas desta tabela serão preenchidas automaticamente pelo pipeline de CI a cada execução da suíte de testes automatizados na branch principal do repositório de código, aferindo a conformidade do backend com a meta de 75% estabelecida no RNF006 (o frontend é apenas acompanhado, sem meta mínima):
 
 | Data | Módulo | Cobertura | Meta | Observação |
 |---|---|---|---|---|
 | *Aguardando início do desenvolvimento do código* | Backend (Core API) | — | 75% | Medição a ser gerada via Pest coverage no CI |
 | *Aguardando início do desenvolvimento do código* | Backend (ai-service) | — | 75% | Medição a ser gerada via Pest coverage no CI |
-| *Aguardando início do desenvolvimento do código* | Frontend (Web SPA) | — | 75% | Medição a ser gerada via Vitest coverage no CI |
+| *Aguardando início do desenvolvimento do código* | Frontend (Web SPA) | — | sem meta | Medição a ser gerada via Vitest coverage no CI, apenas para acompanhamento: o RNF006 fixa a meta de 75% somente para o backend |
