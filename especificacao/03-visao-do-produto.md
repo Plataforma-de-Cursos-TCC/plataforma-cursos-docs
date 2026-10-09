@@ -17,4 +17,4 @@
 | **CATEGORIA-SEGMENTO** | Plataforma SaaS de hospedagem, venda e gestão de cursos online. |
 | **BENEFÍCIO-CHAVE** | Aluno tira dúvida na hora com um tutor de IA restrito ao conteúdo do curso, com citação de aula e timestamp na resposta. |
 | **DIFERENCIADO-CHAVE** | Tutor com escopo fechado por curso (RAG restrito ao material próprio), não um chatbot genérico plugado por cima. |
-| **META-VALOR.** | Aumentar a taxa de conclusão de curso para pelo menos 60% em 6 meses e reduzir em 30% as dúvidas respondidas manualmente pelo instrutor. |
+| **META-VALOR** | Aumentar a taxa de conclusão de curso para pelo menos 60% em 6 meses e reduzir em 30% as dúvidas respondidas manualmente pelo instrutor. |

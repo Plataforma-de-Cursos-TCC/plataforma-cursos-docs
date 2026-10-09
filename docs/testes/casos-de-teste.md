@@ -11,7 +11,7 @@ atualizado: 2026-10-08
 
 Padrão TE6. Os casos nascem dos critérios de aceite das estórias (ADR-0002) e das especificações de casos de uso.
 
-Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem do caso (fluxo do UC ou critério da estória). Onde a planilha de casos de teste e a v11 divergem, vale a v11.
+Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem do caso (fluxo do UC ou critério da estória). Onde a planilha de casos de teste e a v11 divergem, vale a especificação (`especificacao/`), conforme a ADR-0001.
 
 
 | ID | UC | Tipo | Pré-condição | Passos | Resultado esperado | Cenário |

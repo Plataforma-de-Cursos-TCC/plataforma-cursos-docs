@@ -8,12 +8,12 @@
 - **Regras de negócio:** R-1 o curso é criado com status rascunho por padrão; R-2 a exclusão é bloqueada se houver alunos matriculados (nesse caso, o Instrutor só pode despublicar o curso).
 - **Protótipo(s) de tela:** formulário de cadastro de curso com título, descrição, preço e categoria. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
-  1. O Instrutor acessa “Meus cursos”.
+  1. O Instrutor acessa “Meus cursos”. (A-2)
   2. O Instrutor aciona “Novo curso”.
   3. O Instrutor preenche título, descrição, preço e categoria.
   4. O sistema salva o curso com status rascunho. (E-1)
   5. O Instrutor aciona “Publicar” quando estiver pronto.
-  6. O sistema torna o curso visível no catálogo.
+  6. O sistema torna o curso visível no catálogo. (A-1)
   7. Este caso de uso é finalizado.
 
   ![lista "Meus cursos" do instrutor](prototipos/png/UC006-FB-1.png)
@@ -80,7 +80,7 @@
 - **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia os seus módulos; R-2 a posição do módulo deve ser única dentro do curso; R-3 a exclusão de um módulo remove as suas aulas e o seu quiz.
 - **Protótipo(s) de tela:** tela do curso com lista de módulos, botão “Novo módulo” e formulário de título e posição. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
-  1. O Instrutor acessa o curso. (A-1) (A-2)
+  1. O Instrutor acessa o curso. (A-1) (A-2) (E-3)
   2. O Instrutor aciona “Novo módulo”.
   3. O Instrutor informa o título e a posição do módulo.
   4. O sistema valida os dados informados. (E-1) (E-2)
@@ -135,6 +135,10 @@
     ![erro "Posição já em uso" no módulo](prototipos/png/UC014-E2-1.png)
 
     *Figura 0 – UC014, fluxo de exceção E2: erro "Posição já em uso" no módulo*
+  - **E3 – Instrutor não é dono do curso**
+    - E-3.1 O sistema identifica que o curso pertence a outro Instrutor (R-1).
+    - E-3.2 O sistema nega o acesso (403) e não executa nenhuma alteração nos módulos.
+    - E-3.3 Este caso de uso é finalizado.
 
 ## UC015 – Gerenciar Aulas do Curso
 
@@ -146,7 +150,7 @@
 - **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia as suas aulas; R-2 o vídeo aceita os formatos mp4 e webm, com até 500 MB por arquivo (RNF018); R-3 o envio do vídeo usa um link de envio temporário, válido por 15 minutos (RNF002); R-4 a transcrição e a indexação do conteúdo são geradas uma única vez por aula (RNF004).
 - **Protótipo(s) de tela:** tela do módulo com lista de aulas e formulário de título, descrição, ordem, indicador de prévia e seleção do vídeo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
-  1. O Instrutor acessa o módulo. (A-1) (A-2)
+  1. O Instrutor acessa o módulo. (A-1) (A-2) (E-3)
   2. O Instrutor aciona “Nova aula”.
   3. O Instrutor informa título, descrição, ordem e se a aula é prévia, e seleciona o vídeo.
   4. O sistema valida o formato e o tamanho do vídeo. (E-1)
@@ -175,7 +179,8 @@
     - A-1.1 O Instrutor seleciona uma aula existente.
     - A-1.2 O sistema exibe o formulário preenchido com os dados atuais.
     - A-1.3 O Instrutor altera os dados da aula ou escolhe um novo vídeo.
-    - A-1.4 Este caso de uso retorna ao fluxo básico (passo 4).
+    - A-1.4 Se um novo vídeo foi escolhido, o sistema reprocessa a transcrição e a indexação, substituindo as anteriores (única exceção a R-4: a geração única vale por vídeo).
+    - A-1.5 Este caso de uso retorna ao fluxo básico (passo 4).
 
     ![formulário "Editar aula" com dados atuais](prototipos/png/UC015-A1-1.png)
 
@@ -205,6 +210,10 @@
     ![erro "Falha no envio" com botão "Tentar novamente"](prototipos/png/UC015-E2-1.png)
 
     *Figura 0 – UC015, fluxo de exceção E2: erro "Falha no envio" com botão "Tentar novamente"*
+  - **E3 – Instrutor não é dono do curso**
+    - E-3.1 O sistema identifica que o curso da aula pertence a outro Instrutor (R-1).
+    - E-3.2 O sistema nega o acesso (403), sem gerar link de envio nem alterar a aula.
+    - E-3.3 Este caso de uso é finalizado.
 
 ## UC004 – Cadastrar Quiz com Gabarito
 

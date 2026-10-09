@@ -9,9 +9,9 @@
 - **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política, opção de perfil e botão “Criar conta”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Visitante acessa a tela de cadastro.
-  2. O Visitante informa e-mail e senha e aceita os termos de uso e a política de privacidade. (A-1)
-  3. O Visitante aciona “Criar conta”.
-  4. O sistema valida a unicidade do e-mail e os critérios da senha. (E-1) (E-2)
+  2. O Visitante informa e-mail, senha e confirmação da senha e aceita os termos de uso e a política de privacidade. (A-1)
+  3. O Visitante aciona “Criar conta”. (E-3)
+  4. O sistema valida a unicidade do e-mail, os critérios da senha e o aceite dos termos. (E-1) (E-2)
   5. O sistema cria a conta com perfil Aluno e armazena a senha com hash.
   6. O sistema confirma o cadastro e direciona o Visitante ao login (UC005).
   7. Este caso de uso é finalizado.
@@ -49,6 +49,10 @@
     ![erro de senha fraca com critérios listados](prototipos/png/UC012-E2-1.png)
 
     *Figura 0 – UC012, fluxo de exceção E2: erro de senha fraca com critérios listados*
+  - **E3 – Termos de uso e política de privacidade não aceitos**
+    - E-3.1 O sistema identifica que o aceite dos termos não foi marcado (R-4); a confirmação da senha também é conferida no front-end antes do envio.
+    - E-3.2 O sistema rejeita o cadastro (422), mantém os dados preenchidos e solicita o aceite.
+    - E-3.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
 ## UC005 – Realizar Login
 
@@ -111,8 +115,8 @@
   1. O Usuário aciona “Esqueci minha senha” na tela de login.
   2. O Usuário informa o e-mail cadastrado. (A-1)
   3. O sistema envia um e-mail com link de redefinição de senha. (E-1)
-  4. O Usuário acessa o link e informa a nova senha. (A-2)
-  5. O sistema salva a nova senha e confirma a redefinição. (E-2)
+  4. O Usuário acessa o link e informa a nova senha. (A-2) (E-2) (E-3)
+  5. O sistema salva a nova senha e confirma a redefinição.
   6. Este caso de uso é finalizado, retornando à tela de login (UC005).
 
   ![formulário de recuperação de senha com e-mail preenchido](prototipos/png/UC011-FB-1.png)
@@ -160,6 +164,10 @@
     ![aviso "Este link expirou" com botão "Solicitar novo link"](prototipos/png/UC011-E2-1.png)
 
     *Figura 0 – UC011, fluxo de exceção E2: aviso "Este link expirou" com botão "Solicitar novo link"*
+  - **E3 – Link de redefinição já utilizado ou inválido**
+    - E-3.1 O sistema identifica que o link acessado já foi utilizado ou não corresponde a um token válido (R-1).
+    - E-3.2 O sistema rejeita a redefinição (422), informa que o link é inválido e oferece a opção de solicitar um novo.
+    - E-3.3 Este caso de uso retorna ao fluxo básico (passo 1).
 
 ## UC013 – Editar Dados do Perfil
 
