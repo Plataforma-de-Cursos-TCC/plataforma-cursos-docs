@@ -336,6 +336,14 @@ def format_tables_and_captions(doc):
                 i.getparent().remove(i)
 
 
+def sync_pic_ext(root, extent):
+    """Iguala a:ext do pic:spPr ao wp:extent, senão o renderizador usa o tamanho antigo."""
+    for ext in root.iter(qn("a:ext")):
+        if ext.getparent().tag == qn("a:xfrm"):
+            ext.set("cx", extent.get("cx"))
+            ext.set("cy", extent.get("cy"))
+
+
 def format_images(doc):
     """Padroniza imagens em 15 cm de largura, proporção travada e centralizadas."""
     w_15cm = 5400000  # 15 cm em EMUs (15 * 360000)
@@ -353,6 +361,7 @@ def format_images(doc):
                 cy = int(extent.get("cy"))
                 extent.set("cx", str(w_15cm))
                 extent.set("cy", str(int(cy * w_15cm / cx)))
+                sync_pic_ext(dr, extent)
             for cNvPicPr in dr.iter(qn("pic:cNvPicPr")):
                 picLocks = cNvPicPr.find(qn("a:picLocks"))
                 if picLocks is None:
@@ -362,6 +371,29 @@ def format_images(doc):
             ppr = child(p._p, "w:pPr", 0)
             rpr = ppr.find(qn("w:rPr"))
             child(ppr, "w:jc", None if rpr is None else list(ppr).index(rpr)).set(qn("w:val"), "center")
+            nxt = p._p.getnext()
+            flat = [ppr]
+            # FirstParagraph não existe em styles.xml; o LibreOffice ignora o jc nesse caso.
+            for ps in ppr.findall(qn("w:pStyle")):
+                if ps.get(qn("w:val")) == "FirstParagraph":
+                    ppr.remove(ps)
+            if nxt is not None and nxt.tag == qn("w:p") and re.match(r"Figura \d+ –", text_of(nxt).strip()):
+                flat.append(child(nxt, "w:pPr", 0))
+            for fp in flat:
+                # Imagem e legenda centralizadas na página: sem lista (recuo) e sem recuo próprio.
+                for np_ in fp.findall(qn("w:numPr")):
+                    fp.remove(np_)
+                for old_ind in fp.findall(qn("w:ind")):
+                    fp.remove(old_ind)
+                ind = OxmlElement("w:ind")
+                for k in ("w:left", "w:right", "w:firstLine", "w:hanging"):
+                    ind.set(qn(k), "0")
+                jc = fp.find(qn("w:jc"))
+                if jc is not None:
+                    jc.addprevious(ind)
+                else:
+                    fp.append(ind)
+                child(fp, "w:jc", None).set(qn("w:val"), "center")
 
     # Prototipos dos UC (item 10): linha em branco antes, legenda centralizada e borda de 1 px.
     # Itens 9 e 11 ficam de fora (o 11 tem tratamento próprio em paisagem).
@@ -514,6 +546,9 @@ def apply_table_box_layout(tbl, kind):
 
                 for run in p.findall(qn("w:r")):
                     set_run_font(run, font_name="Arial", size_half_pts=24)
+
+
+US_PER_PAGE = 2
 
 
 def apply_us_table_layout(tbl, is_first_us=False):
@@ -844,17 +879,39 @@ def assemble(pandoc_docx, template, out_docx, pages):
         elif is_us:
             is_first = (us_count == 0)
             apply_us_table_layout(tbl, is_first_us=is_first)
-            # Cada estória em página própria (inclusive a primeira US)
+            # Duas estórias por página (três não cabem de forma estável); a primeira abre página.
+            new_page = us_count % US_PER_PAGE == 0
             prev_el = tbl.getprevious()
             while prev_el is not None and prev_el.tag in (qn("w:bookmarkStart"), qn("w:bookmarkEnd")):
                 prev_el = prev_el.getprevious()
             if prev_el is not None and prev_el.tag == qn("w:p"):
-                child(child(prev_el, "w:pPr", 0), "w:pageBreakBefore", 0)
+                if new_page:
+                    child(child(prev_el, "w:pPr", 0), "w:pageBreakBefore", 0)
             else:
                 p_break = OxmlElement("w:p")
-                child(child(p_break, "w:pPr", 0), "w:pageBreakBefore", 0)
+                if new_page:
+                    child(child(p_break, "w:pPr", 0), "w:pageBreakBefore", 0)
                 tbl.addprevious(p_break)
             us_count += 1
+            continue
+
+        if first_txt == "RF" and "OBJETIVO" in full_head and "JUSTIFICATIVA" in full_head:
+            # Matriz de rastreabilidade (9.1): larguras fixas somando a largura útil de 10490.
+            widths = [1000, 1500, 1400, 900, 1600, 4090]
+            tblPr = tbl.find(qn("w:tblPr"))
+            tblW = tblPr.find(qn("w:tblW"))
+            tblW.set(qn("w:type"), "dxa")
+            tblW.set(qn("w:w"), str(sum(widths)))
+            lay = OxmlElement("w:tblLayout")
+            lay.set(qn("w:type"), "fixed")
+            tblW.addnext(lay)
+            for g, w in zip(tbl.find(qn("w:tblGrid")).findall(qn("w:gridCol")), widths):
+                g.set(qn("w:w"), str(w))
+            for tr in tbl.findall(qn("w:tr")):
+                for tc, w in zip(tr.findall(qn("w:tc")), widths):
+                    tcW = child(tc.find(qn("w:tcPr")), "w:tcW", 0)
+                    tcW.set(qn("w:type"), "dxa")
+                    tcW.set(qn("w:w"), str(w))
             continue
 
         # Heurística para demais tabelas
@@ -915,7 +972,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
         # da página paisagem, mantendo a altura calculada pela proporção real de cada imagem.
         # Cada imagem começa em página própria, com a legenda logo abaixo dela:
         max_w = 8532000  # largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm)
-        max_h = 4000000  # altura máxima para caber com título, texto e legenda (~11.1 cm)
+        max_h = 3400000  # altura máxima para caber com título, texto e legenda na mesma página
         imgs = []
         started = False
         for p in doc.paragraphs:
@@ -937,6 +994,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
                 target_w = int(target_h / ratio)
             extent.set("cx", str(target_w))
             extent.set("cy", str(target_h))
+            sync_pic_ext(para._p, extent)
             if i > 0:
                 para.paragraph_format.page_break_before = True
 
