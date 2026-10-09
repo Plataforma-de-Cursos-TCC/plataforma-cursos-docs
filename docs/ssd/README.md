@@ -9,7 +9,7 @@ atualizado: 2026-10-07
 
 > Esqueleto. Cada seção traz um comentário-guia; apague o comentário quando escrever a seção. Regras de escrita no [CONTEXT.md](../../CONTEXT.md).
 
-Um diagrama de sequência do sistema por caso de uso, em Mermaid (ADR-0004), no arquivo `UC-<área><n>.mmd` (IDs provisórios da ADR-0001).
+Um diagrama de sequência do sistema por caso de uso, em Mermaid (ADR-0004), no arquivo `UC<n>-<titulo>.md` (IDs provisórios da ADR-0001).
 
 | Caso de uso | Área | Arquivo |
 |---|---|---|

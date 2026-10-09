@@ -127,7 +127,7 @@
 - **Protótipo(s) de tela:** lista de usuários com busca, filtro por perfil e ações de bloquear, desbloquear e excluir. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Administrador busca um usuário por nome, e-mail ou perfil. (A-1)
-  2. O Administrador seleciona a ação: bloquear ou desbloquear. (A-3)
+  2. O Administrador seleciona a ação: bloquear, desbloquear ou excluir. (A-3)
   3. O Administrador confirma a ação. (A-2)
   4. O sistema aplica a mudança de status. (E-1) (E-2)
   5. O sistema revoga ou restaura imediatamente o acesso do usuário.
