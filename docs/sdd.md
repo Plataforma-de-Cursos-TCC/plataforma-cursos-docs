@@ -385,12 +385,12 @@ classDiagram
     QuizAttempt "1" --> "*" QuizAnswer
     Question "1" --> "*" QuizAnswer
     QuestionOption "1" --> "*" QuizAnswer
-    Enrollment "1" --> "*" Payment
+    Payment "1" --> "0..1" Enrollment
     User "1" --> "*" Review
     Course "1" --> "*" Review
 ```
 
-<!-- proposta: multiplicidades do diagrama (por exemplo, InstructorProfile 0..1 por User, Payment * por Enrollment). O dicionário da v11 só informa as chaves de referência, não a cardinalidade. Motivo: o classDiagram exige multiplicidade -->
+<!-- proposta: multiplicidades do diagrama (por exemplo, InstructorProfile 0..1 por User, Payment 1 para 0..1 Enrollment, pois pagamento recusado não cria matrícula). O dicionário da v11 só informa as chaves de referência, não a cardinalidade. Motivo: o classDiagram exige multiplicidade -->
 
 ## 6. Segurança
 
