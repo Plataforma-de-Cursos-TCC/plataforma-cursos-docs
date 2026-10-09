@@ -6,7 +6,7 @@ Fonte: `especificacao/diagramas/09-casos-de-uso.puml` (PlantUML, [ADR-0004](../d
 
 *Figura 2 – Diagrama Geral de Casos de Uso*
 
-## Rastreabilidade entre requisitos funcionais e casos de uso
+### 9.1 RASTREABILIDADE ENTRE REQUISITOS FUNCIONAIS E CASOS DE USO
 
 A coluna Objetivo indica qual dos 3 objetivos do item 1 o RF atende.
 

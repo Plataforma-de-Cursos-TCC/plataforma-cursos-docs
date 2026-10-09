@@ -363,6 +363,50 @@ def format_images(doc):
             rpr = ppr.find(qn("w:rPr"))
             child(ppr, "w:jc", None if rpr is None else list(ppr).index(rpr)).set(qn("w:val"), "center")
 
+    # Prototipos dos UC (item 10): linha em branco antes, legenda centralizada e borda de 1 px.
+    # Itens 9 e 11 ficam de fora (o 11 tem tratamento próprio em paisagem).
+    item = ""
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            item = p.text.split(" ")[0]
+            continue
+        pictures = [d for d in p._p.iter(qn("wp:docPr")) if "Caixa de Texto" not in d.get("name", "")]
+        if item != "10" or not pictures:
+            continue
+
+        prev = p._p.getprevious()
+        has_blank = (
+            prev is not None
+            and prev.tag == qn("w:p")
+            and not text_of(prev).strip()
+            and prev.find(".//" + qn("w:drawing")) is None
+        )
+        if not has_blank:
+            p._p.addprevious(OxmlElement("w:p"))
+
+        ppr = child(p._p, "w:pPr", 0)
+        if ppr.find(qn("w:keepNext")) is None:
+            pstyle = ppr.find(qn("w:pStyle"))
+            ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:keepNext"))
+
+        caption = p._p.getnext()
+        if caption is not None and caption.tag == qn("w:p") and re.match(r"Figura \d+ –", text_of(caption).strip()):
+            cppr = child(caption, "w:pPr", 0)
+            crpr = cppr.find(qn("w:rPr"))
+            child(cppr, "w:jc", None if crpr is None else list(cppr).index(crpr)).set(qn("w:val"), "center")
+
+        for pic_sppr in p._p.iter(qn("pic:spPr")):
+            for old in pic_sppr.findall(qn("a:ln")):
+                pic_sppr.remove(old)
+            ln = OxmlElement("a:ln")
+            ln.set("w", "9525")  # 1 px
+            fill = OxmlElement("a:solidFill")
+            color = OxmlElement("a:srgbClr")
+            color.set("val", "000000")
+            fill.append(color)
+            ln.append(fill)
+            pic_sppr.append(ln)
+
 
 def apply_table_box_layout(tbl, kind):
     """Aplica métricas do template aos quadros dos itens 1, 2, 3 e 5."""
@@ -836,6 +880,14 @@ def assemble(pandoc_docx, template, out_docx, pages):
     for p in doc.paragraphs:
         if p.style.name == "Heading 1" and not p.text.startswith("1 ") and not p.text.startswith("11 "):
             child(child(p._p, "w:pPr", 0), "w:pageBreakBefore", 0)
+
+    # Subseção 9.1 começa em página nova, depois da Figura 2.
+    for p in doc.paragraphs:
+        if p.style.name.startswith("Heading") and p.text.startswith("9.1 "):
+            ppr = child(p._p, "w:pPr", 0)
+            if ppr.find(qn("w:pageBreakBefore")) is None:
+                pstyle = ppr.find(qn("w:pStyle"))
+                ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
 
     # Item 11 em seção paisagem (cabeçalho e rodapé preservados):
     p11 = None
