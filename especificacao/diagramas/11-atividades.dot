@@ -1,22 +1,24 @@
 // Item 11 - Diagrama de atividades do UC009 (Assistir aula), com o UC001
 // (Conversar com Tutor de IA) iniciado pelo fluxo alternativo A-3.
 // Atores agrupados em clusters: Aluno, Plataforma de Cursos e Tutor de IA.
-// Fluxo horizontal (rankdir=LR), texto upright, proporção 2.49:1 para página paisagem A4.
+// Fluxo horizontal (rankdir=LR), texto upright, proporção ~2.24:1 para página paisagem A4.
 //
 // Comando de geração:
 //   dot -Tpng especificacao/diagramas/11-atividades.dot -o especificacao/diagramas/11-atividades.png
 
 digraph G {
   rankdir=LR;
+  size="12.5,7.0!";
+  dpi=150;
   compound=true;
   newrank=true;
-  nodesep=0.45;
-  ranksep=0.35;
+  nodesep=0.70;
+  ranksep=0.22;
   fontname="Arial";
-  fontsize=16;
+  fontsize=22;
 
-  node [fontname="Arial", fontsize=13, shape=box, style="rounded,filled", fillcolor=white, color=black];
-  edge [fontname="Arial", fontsize=12, color="#333333"];
+  node [fontname="Arial", fontsize=20, shape=box, style="rounded,filled", fillcolor=white, color=black, margin="0.12,0.06"];
+  edge [fontname="Arial", fontsize=18, color="#333333"];
 
   start [shape=circle, style=filled, fillcolor=black, width=0.25, label=""];
   end1 [shape=doublecircle, style=filled, fillcolor=black, width=0.25, label=""];
@@ -29,7 +31,7 @@ digraph G {
     style=rounded;
     color="#444444";
     fontname="Arial Bold";
-    fontsize=16;
+    fontsize=22;
 
     start;
     a1 [label="1. Acessa a aula\nno curso"];
@@ -43,7 +45,7 @@ digraph G {
     style=rounded;
     color="#444444";
     fontname="Arial Bold";
-    fontsize=16;
+    fontsize=22;
 
     d_pode [shape=diamond, style=filled, fillcolor=white, label="Pode\nassistir?"];
     e1 [label="E-1. Bloqueia acesso e\nsugere matrícula"];
@@ -68,7 +70,7 @@ digraph G {
     style=rounded;
     color="#444444";
     fontname="Arial Bold";
-    fontsize=16;
+    fontsize=22;
 
     t_busca [label="Busca trechos restritos\nao conteúdo do curso"];
     d_trecho [shape=diamond, style=filled, fillcolor=white, label="Trecho relevante\nencontrado?"];
@@ -76,7 +78,7 @@ digraph G {
     t_nao [label="UC001 A-1. Informa que não\ncobre e sugere reformular"];
   }
 
-  // Alinhamento de colunas em 8 níveis para fluxo equilibrado LR sem sobreposição:
+  // Alinhamento balanceado em 8 ranks sem conflitos de ordenação
   { rank=same; start; a1; }
   { rank=same; d_pode; e1; }
   { rank=same; d_inicio; a2; p2; }
@@ -86,40 +88,40 @@ digraph G {
   { rank=same; d_trecho; a1_salva; d_fim; }
   { rank=same; t_resp; t_nao; p_exibe; p4; }
 
-  // Arestas do fluxo
+  // Arestas de fluxo
   start -> a1;
   a1 -> d_pode;
-  d_pode -> e1 [label="não: sem matrícula\ne aula não prévia"];
+  d_pode -> e1 [label="não: sem matrícula"];
   e1 -> end1;
-  d_pode -> d_inicio [label="sim: matriculado\nou aula prévia"];
-  d_inicio -> a2 [label="sim: há ponto salvo"];
+  d_pode -> d_inicio [label="sim: matriculado"];
+  d_inicio -> a2 [label="sim: há ponto"];
   d_inicio -> p2 [label="não: início"];
   a2 -> p2;
   p2 -> d_video;
-  d_video -> e2 [label="não: falha na entrega"];
+  d_video -> e2 [label="não: falha"];
   e2 -> end2;
   d_video -> a3 [label="sim: carregado"];
 
   a3 -> d_duvida;
-  d_duvida -> a_duvida [label="sim: tem dúvida"];
-  d_duvida -> d_saiu [label="não: sem dúvida"];
+  d_duvida -> a_duvida [label="sim"];
+  d_duvida -> d_saiu [label="não"];
 
   a_duvida -> d_limite;
-  d_limite -> uc1_e2 [label="sim: limite atingido"];
-  d_limite -> t_busca [label="não: dentro do limite"];
+  d_limite -> uc1_e2 [label="sim: limite"];
+  d_limite -> t_busca [label="não: livre"];
   t_busca -> d_trecho;
-  d_trecho -> t_resp [label="sim: trecho encontrado"];
-  d_trecho -> t_nao [label="não: não encontrado"];
+  d_trecho -> t_resp [label="sim"];
+  d_trecho -> t_nao [label="não"];
   t_resp -> p_exibe;
   t_nao -> p_exibe;
 
   uc1_e2 -> d_saiu;
   p_exibe -> d_saiu;
 
-  d_saiu -> a1_salva [label="sim: saiu antes do fim"];
+  d_saiu -> a1_salva [label="sim: saiu antes"];
   a1_salva -> end3;
-  d_saiu -> d_fim [label="não: continua na aula"];
-  d_fim -> p4 [label="sim: vídeo terminou"];
+  d_saiu -> d_fim [label="não: continua"];
+  d_fim -> p4 [label="sim: terminou"];
   p4 -> end4;
-  d_fim -> a3 [label="não: continua assistindo"];
+  d_fim -> a3 [label="não: assistindo"];
 }
