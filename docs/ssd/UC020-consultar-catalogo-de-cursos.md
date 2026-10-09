@@ -1,6 +1,6 @@
 # UC020 — Consultar Catálogo de Cursos
 
-Diagrama de sequência do sistema para o caso de uso UC020 (Consultar Catálogo de Cursos). Representa a listagem paginada de cursos publicados, o filtro por categoria e a abertura da página pública de um curso, acessíveis a Visitante e Aluno.
+Diagrama de sequência do sistema para o caso de uso UC020 (Consultar Catálogo de Cursos). Representa a listagem paginada de cursos publicados, o filtro por categoria, a volta à lista completa ("Todas" ou "Ver todos os cursos") e a abertura da página pública de um curso, acessíveis a Visitante e Aluno.
 
 ```mermaid
 sequenceDiagram
@@ -10,22 +10,34 @@ sequenceDiagram
     participant DB as Banco de Dados
 
     User->>FE: Acessa catálogo
-    FE->>API: GET /api/v1/catalog/courses
+    FE->>API: GET /api/v1/catalog/courses?page=&per_page=&sort=
     API->>DB: Busca cursos publicados
     DB-->>API: Lista de cursos
     alt existem cursos publicados
         API-->>FE: 200 OK (lista paginada)
         FE-->>User: Exibe cursos
-        opt usuário filtra por categoria
+        opt usuário seleciona categoria
             User->>FE: Seleciona categoria
-            FE->>API: GET /api/v1/catalog/courses?categoria=
+            FE->>API: GET /api/v1/catalog/courses?category=&page=&per_page=&sort=
             alt categoria com cursos
                 API-->>FE: 200 OK (lista paginada)
                 FE-->>User: Exibe cursos da categoria
             else categoria sem cursos
                 API-->>FE: 200 OK (lista vazia)
                 FE-->>User: "Nenhum curso encontrado nesta categoria." e "Ver todos os cursos"
+                opt usuário aciona "Ver todos os cursos"
+                    User->>FE: Aciona "Ver todos os cursos"
+                    FE->>API: GET /api/v1/catalog/courses?page=&per_page=&sort=
+                    API-->>FE: 200 OK (lista paginada)
+                    FE-->>User: Exibe todos os cursos publicados
+                end
             end
+        end
+        opt usuário seleciona "Todas" ou limpa o filtro
+            User->>FE: Seleciona "Todas"
+            FE->>API: GET /api/v1/catalog/courses?page=&per_page=&sort=
+            API-->>FE: 200 OK (lista paginada)
+            FE-->>User: Exibe todos os cursos publicados
         end
         User->>FE: Abre página de um curso
         FE->>API: GET /api/v1/catalog/courses/{id}

@@ -217,14 +217,16 @@ sequenceDiagram
     else já matriculado (A-1)
         API-->>Web: exibe Continuar assistindo
     else curso gratuito (A-2)
-        API->>DB: registra matrícula sem pagamento
+        API->>DB: registra matrícula ativa, sem pagamento
         API-->>Web: curso em meus cursos
     else curso pago
+        API->>DB: registra matrícula pendente
         API->>API: processa pagamento simulado, sem gateway externo
         alt pagamento recusado (E-2)
-            API-->>Web: erro, sem matrícula, nova tentativa permitida
+            API->>DB: registra Payment recusado, matrícula segue pendente
+            API-->>Web: 422 PAYMENT_DECLINED, nova tentativa permitida
         else pagamento aprovado
-            API->>DB: registra Payment e Enrollment
+            API->>DB: registra Payment aprovado e muda a matrícula para ativa
             API-->>Web: curso em meus cursos
         end
     end
@@ -237,7 +239,7 @@ sequenceDiagram
 | Provedor do modelo de linguagem (Tutor de IA) | Pergunta do Aluno e trechos do curso recuperados por similaridade; resposta em streaming | Sem fonte na v11 para o comportamento em indisponibilidade | Sem fonte na v11. |
 | Armazenamento e entrega de vídeo (R2) | Arquivo de vídeo, por URL assinada de envio com validade de 15 min (RNF002); `videoKey` guardada no banco; reprodução por URL assinada | Upload com URL expirada ou indisponível: o sistema informa o erro e gera nova URL assinada (UC015, E-2); falha na entrega do vídeo na reprodução (UC009) | Nova URL assinada para nova tentativa (v11, UC015) |
 | Envio de e-mail (recuperar senha) | Link de redefinição, com validade de 30 minutos (UC011) | Sem fonte na v11 | Sem fonte na v11. |
-| Pagamento | Não há integração externa: o pagamento é simulado (RF014; entidade Payment com status aprovado ou recusado) | Pagamento recusado: nenhuma matrícula criada, nova tentativa permitida (UC003, E-2) | Nova tentativa pelo Aluno |
+| Pagamento | Não há integração externa: o pagamento é simulado (RF014; entidade Payment com status aprovado ou recusado) | Pagamento recusado: fica registrado como recusado, a matrícula segue pendente (sem acesso) e a API responde 422 PAYMENT_DECLINED; nova tentativa permitida (UC019, E-1) | Nova tentativa pelo Aluno |
 
 <!-- proposta: provedor de e-mail transacional (por exemplo, serviço SMTP ou API de e-mail) com envio assíncrono e nova solicitação pelo usuário em caso de falha. A v11 diz que o e-mail é enviado, mas não escolhe serviço nem trata falha. Motivo: o fluxo de recuperar senha depende do envio -->
 
@@ -360,7 +362,7 @@ classDiagram
     class QuizAnswer {
         +id
     }
-    %% Payment: enrollmentId fica nulo até a aprovação do pagamento
+    %% Payment: referencia a matrícula pendente criada antes do pagamento
     class Payment {
         +id
         +userId
@@ -410,20 +412,20 @@ classDiagram
     QuizAttempt "1" --> "*" QuizAnswer
     Question "1" --> "*" QuizAnswer
     QuestionOption "1" --> "*" QuizAnswer
-    Payment "1" --> "0..1" Enrollment
+    Payment "1" --> "1" Enrollment
     User "1" --> "*" Review
     Course "1" --> "*" Review
     User "1" --> "*" Conversation
     Conversation "1" --> "*" Message
 ```
 
-<!-- proposta: multiplicidades do diagrama (por exemplo, InstructorProfile 0..1 por User, Payment 1 para 0..1 Enrollment, pois pagamento recusado não cria matrícula). O dicionário da v11 só informa as chaves de referência, não a cardinalidade. Motivo: o classDiagram exige multiplicidade -->
+<!-- proposta: multiplicidades do diagrama (por exemplo, InstructorProfile 0..1 por User, Payment 1 para 1 Enrollment, pois a matrícula pendente existe antes do pagamento). O dicionário da v11 só informa as chaves de referência, não a cardinalidade. Motivo: o classDiagram exige multiplicidade -->
 
 ## 6. Segurança
 
 | Tema | Decisão | Origem |
 |---|---|---|
-| Autenticação | Token JWT de acesso com expiração de 1 h, em cookie HttpOnly, Secure e SameSite. Com a opção "manter conectado" marcada no login, a sessão é renovada por refresh token com rotação, em cookie HttpOnly de vida longa, sem novo login. Sem a opção, a sessão termina ao expirar o token de acesso | v11 (RNF001, UC005); cookie, refresh token e opção "manter conectado": decisão arquitetural deste SDD, detalhe em ADR a criar |
+| Autenticação | Token JWT de acesso com expiração de 1 h, assinado com RS256 (biblioteca `php-open-source-saver/jwt-auth`; os serviços de mídia e de IA validam com a chave pública, ADR-0008), em cookie HttpOnly, Secure e SameSite. Com a opção "manter conectado" marcada no login, a sessão é renovada por refresh token com rotação, em cookie HttpOnly de vida longa, sem novo login. Sem a opção, a sessão termina ao expirar o token de acesso | v11 (RNF001, UC005); cookie, refresh token e opção "manter conectado": decisão arquitetural deste SDD, detalhe em ADR a criar |
 | Perfis e área protegida (área D) | Perfis aluno, instrutor e administrador; 100% das rotas protegidas verificam o perfil; acesso negado redireciona o usuário à própria área | v11 (RNF001, US015, UC016) |
 | Senhas | Armazenadas só com hash; mínimo de 8 caracteres, com letra e número | v11 (RNF007, UC012) |
 | Enumeração de usuários | Mensagem de login inválido e de recuperação de senha não revela se o e-mail existe | v11 (UC005, UC011) |

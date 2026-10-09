@@ -26,7 +26,7 @@ A infraestrutura e as escolhas tecnológicas da plataforma estão consolidadas n
 | **Cache e Gerenciamento de Sessão** | Redis | 7.2+ | Cache de listagens em memória (RNF009), rate limiting de requisições e suporte à blocklist de tokens JWT revogados na Sprint 2. | <!-- proposta: alinhado ao Obsidian Vault para rate limit e blocklist --> |
 | **Testes Automatizados (Backend)** | Pest PHP | 2.x / 3.x | Framework de testes fluente para PHP que assegura cobertura mínima de testes de 75% no backend com validação em pipeline de CI (RNF006). | <!-- proposta: alinhado ao Obsidian Vault e RNF006 --> |
 | **Testes Automatizados (Frontend)** | Vitest e Playwright | Mais recentes | Vitest para testes unitários/componentes do Next.js e Playwright para validação de testes ponta a ponta (E2E) dos fluxos principais. | <!-- proposta: alinhado ao Obsidian Vault --> |
-| **Hospedagem e Deploy** | Docker Compose em VPS única | Docker 26+, Debian/Ubuntu LTS | Deploy orquestrado em VPS única com múltiplos containers coordenados via Docker Compose, com portas de bancos de dados, cache e mensageria fechadas para a rede externa, expondo apenas reverse proxy HTTPS (Nginx/Traefik). | [ADR-0007](adr/0007-stack-e-bancos.md) |
+| **Hospedagem e Deploy** | Vercel (front-end), Railway (API e serviços) e Cloudflare R2 (mídia) | Planos gratuitos ou de entrada | Front-end SPA na Vercel, com `rewrites` de `/api/*` para a API no Railway, de modo que navegador e API compartilham o mesmo host e o cookie `__Host-` do ADR-0008 continua válido. API, `media-service`, `ai-service` e bancos no Railway; bancos, cache e mensageria sem exposição pública. Docker Compose fica só para o ambiente de desenvolvimento local. Domínio ainda pendente. | [ADR-0010](adr/0010-hospedagem-e-armazenamento.md), [ADR-0007](adr/0007-stack-e-bancos.md) |
 
 Os protótipos de alta fidelidade do front-end (24 telas em HTML, com PNGs em tema claro e escuro) ficam em `especificacao/10-especificacoes-de-caso-de-uso/prototipos/` e seguem o [design system](design-system.md).
 
@@ -177,7 +177,7 @@ erDiagram
         UUID id PK
         UUID userId FK
         UUID courseId FK
-        UUID enrollmentId FK "nulo até a aprovação"
+        UUID enrollmentId FK
         INT amountCents
         CHAR currency
         ENUM status
@@ -278,7 +278,7 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | courseId | Simples | UUID | - | Referência ao curso da matrícula. |
 | pricePaidCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| status | Simples | Texto | - | Ativa, cancelada ou concluída. |
+| status | Simples | Texto | - | `pendente` (criada, aguardando pagamento), `ativa`, `cancelada` ou `concluida`. Curso gratuito nasce `ativa`; curso pago nasce `pendente` e vira `ativa` quando o pagamento é aprovado (UC003, UC019). |
 | **Entidade: LessonProgress** | | | | |
 | id | Determinante | UUID | - | Identificador único do registro de progresso. |
 | enrollmentId | Simples | UUID | - | Referência à matrícula. |
@@ -314,10 +314,10 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | id | Determinante | UUID | - | Identificador único do pagamento. |
 | userId | Simples | UUID | - | Referência ao aluno que pagou. |
 | courseId | Simples | UUID | - | Referência ao curso pago. |
-| enrollmentId | Simples | UUID | - | Referência à matrícula criada. Fica nulo até o pagamento ser aprovado e permanece nulo se for recusado (UC003, E-2). |
+| enrollmentId | Simples | UUID | - | Referência à matrícula pendente criada antes do pagamento; se o pagamento for recusado, a matrícula segue pendente (UC019, E-1). |
 | amountCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| status | Simples | Texto | - | Aprovado ou recusado (simulado). |
+| status | Simples | Texto | - | `aprovado` ou `recusado` (simulado). A recusa fica registrada e não gera matrícula ativa (UC019, E-1). |
 | paidAt | Simples | Data | - | Data/hora do pagamento. |
 | **Entidade: Review** | | | | Uma avaliação por aluno e curso: nova avaliação substitui a anterior (UC010, R-2). |
 | id | Determinante | UUID | - | Identificador único da avaliação. |
@@ -501,7 +501,7 @@ classDiagram
     Course "1" --> "0..*" Enrollment
     Course "1" --> "0..*" Review
 
-    Payment "1" --> "0..1" Enrollment
+    Payment "1" --> "1" Enrollment
     Enrollment "1" --> "0..*" LessonProgress
     Enrollment "1" --> "0..*" QuizAttempt
 
@@ -545,12 +545,15 @@ Códigos de erro padrão da API:
 - `FORBIDDEN` (403): Perfil sem permissão para acessar o recurso ou violação de propriedade (`assertOwnership`).
 - `NOT_FOUND` (404): Entidade solicitada inexistente.
 - `VALIDATION_FAILED` (422): Falha de validação estrutural ou semântica dos dados da requisição.
+- `PAYMENT_DECLINED` (422): Pagamento simulado recusado (UC019); o pagamento é registrado como `recusado` e a matrícula continua `pendente`.
 - `TOO_MANY_REQUESTS` (429): Limite de taxa de requisições excedido (rate limit).
 - `INTERNAL_SERVER_ERROR` (500): Falha inesperada no processamento interno do servidor.
 
+Respostas de sucesso: `200 OK` com corpo em leituras e atualizações, `201 Created` em criações e `204 No Content`, sem corpo, em todo `DELETE` bem-sucedido.
+
 ### 3.2 Paginação
 
-Toda listagem é paginada ([ADR-0009](adr/0009-listagens-na-url-e-paginacao.md)). Os parâmetros são `page` (padrão 1), `per_page` (padrão 20, máximo 100), `sort` (lista branca de campos; prefixo `-` para decrescente, com desempate por `id`) e os filtros próprios de cada rota. Os mesmos parâmetros ficam na URL da tela, que é a fonte do estado de filtros e página. Cada tela usa um API Resource que devolve somente os campos que ela exibe. Metadados consolidados seguem no envelope da resposta (RNF009):
+Toda listagem é paginada ([ADR-0009](adr/0009-listagens-na-url-e-paginacao.md)). Os parâmetros são `page` (padrão 1), `per_page` (padrão 20, máximo 100), `sort` (lista branca de campos; prefixo `-` para decrescente, com desempate por `id`) e os filtros próprios de cada rota. Os mesmos parâmetros ficam na URL da tela, que é a fonte do estado de filtros e página. A única exceção é o histórico de mensagens do Tutor de IA (`Message`), paginado por cursor (`cursor` e `per_page`, resposta com `meta.nextCursor`) para a rolagem infinita da conversa; todo o resto usa `page` e `per_page`. Cada tela usa um API Resource que devolve somente os campos que ela exibe. Metadados consolidados seguem no envelope da resposta (RNF009):
 
 ```json
 {
@@ -576,7 +579,7 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 
 | Área | Método e Endpoint | Descrição e Acesso | UC Relacionado |
 |---|---|---|---|
-| **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma (público) | UC012 |
+| **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma, com o papel escolhido (Aluno ou Instrutor) e o aceite dos termos (público) | UC012 |
 | | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público) | UC005 |
 | | `POST /api/v1/auth/refresh` | Troca o refresh token do cookie por novo par de cookies, com rotação (cookie de refresh presente apenas com `rememberMe`) | UC005 |
 | | `GET /api/v1/auth/me` | Dados do usuário autenticado, para restaurar a sessão ao carregar a SPA (autenticado) | UC005 |
@@ -585,25 +588,36 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | | `POST /api/v1/auth/reset-password` | Redefinição de senha com token recebido por e-mail (público) | UC011 |
 | | `GET /api/v1/profile` | Obtenção dos dados cadastrais do usuário logado (autenticado) | UC013 |
 | | `PUT /api/v1/profile` | Atualização de nome, telefone, endereço, CPF, data de nascimento, foto e tema (autenticado) | UC013 |
-| | `PUT /api/v1/profile/password` | Alteração de senha do usuário logado com confirmação de senha atual (autenticado) | UC017 |
-| **Área B: Autoria do instrutor** | `POST /api/v1/instructor/courses` | Criação de novo curso em status de rascunho (Instrutor) | UC006 |
+| | `PUT /api/v1/profile/password` | Alteração de senha do usuário logado com confirmação da senha atual e da nova senha (autenticado) | UC017 (RF019) |
+| | `GET /api/v1/profile/instructor` | Leitura do perfil de instrutor: `headline`, `bio` e `socialLinks` (Instrutor) | UC013 |
+| | `PUT /api/v1/profile/instructor` | Atualização do perfil de instrutor: `headline`, `bio` e `socialLinks` (Instrutor) | UC013 |
+| **Área B: Autoria do instrutor** | `GET /api/v1/instructor/courses` | Listagem paginada de "Meus cursos" do instrutor (Instrutor) | UC006 |
+| | `GET /api/v1/instructor/courses/{id}` | Leitura de um curso do instrutor, para edição (Instrutor dono) | UC006 |
+| | `POST /api/v1/instructor/courses` | Criação de novo curso em status de rascunho (Instrutor) | UC006 |
 | | `PUT /api/v1/instructor/courses/{id}` | Atualização de metadados, título, preço e publicação do curso (Instrutor dono) | UC006 |
+| | `DELETE /api/v1/instructor/courses/{id}` | Exclusão de curso e de seus módulos e aulas; responde `204` (Instrutor dono) | UC006 |
 | | `POST /api/v1/instructor/courses/{id}/modules` | Criação e ordenação de módulos do curso (Instrutor dono) | UC014 |
 | | `PUT /api/v1/instructor/modules/{id}` | Edição e reordenação de módulos (Instrutor dono) | UC014 |
+| | `DELETE /api/v1/instructor/modules/{id}` | Exclusão de módulo; responde `204` (Instrutor dono) | UC014 |
 | | `POST /api/v1/instructor/modules/{id}/lessons` | Criação de aula e solicitação de URL assinada para upload de vídeo (Instrutor dono) | UC015 |
+| | `POST /api/v1/instructor/lessons/{id}/upload-url` | Novo link assinado de upload, para trocar o vídeo de uma aula existente (Instrutor dono) | UC015 |
+| | `DELETE /api/v1/instructor/lessons/{id}` | Exclusão de aula; responde `204` (Instrutor dono) | UC015 |
 | | `PUT /api/v1/instructor/lessons/{id}` | Edição de dados da aula e marcação de `isPreview` (Instrutor dono) | UC015 |
 | | `POST /api/v1/instructor/modules/{id}/quiz` | Cadastro de quiz com perguntas e alternativas com gabarito (Instrutor dono) | UC004 |
 | | `PUT /api/v1/instructor/quizzes/{id}` | Edição de perguntas e gabarito do quiz (Instrutor dono) | UC004 |
-| **Área C: Aprendizagem do aluno** | `GET /api/v1/catalog/courses` | Listagem paginada de cursos publicados com filtros por categoria e nível (público) | UC020 |
+| **Área C: Aprendizagem do aluno** | `GET /api/v1/catalog/courses` | Listagem paginada de cursos publicados com filtro `category` e ordenação `sort`: `GET /api/v1/catalog/courses?category=&page=&per_page=&sort=` (público) | UC020 |
 | | `GET /api/v1/catalog/courses/{id}` | Detalhes públicos do curso com lista de módulos e aulas prévia (público) | UC020 |
-| | `POST /api/v1/courses/{id}/enroll` | Criação de matrícula e início do fluxo de pagamento (Aluno) | UC003 |
-| | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado e liberação de acesso (Aluno dono) | UC019 |
+| | `POST /api/v1/courses/{id}/enroll` | Criação da matrícula: `ativa` em curso gratuito; `pendente` em curso pago, devolvendo os dados para o pagamento (Aluno) | UC003 |
+| | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado (Aluno dono). Aprovado: registra o pagamento, a matrícula vira `ativa` e o acesso é liberado (`200`). Recusado: registra `Payment.status = recusado`, mantém a matrícula `pendente` e responde `422 PAYMENT_DECLINED` | UC019 |
 | | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview) | UC009 |
 | | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado) | UC009 |
+| | `PUT /api/v1/quizzes/{id}/attempt/draft` | Salvamento do rascunho das respostas do quiz (Aluno matriculado) | UC002 |
+| | `GET /api/v1/quizzes/{id}/attempt/result` | Consulta do resultado da última tentativa enviada (Aluno matriculado) | UC002 |
 | | `POST /api/v1/quizzes/{id}/attempt` | Submissão de respostas do quiz e correção automática imediata (Aluno matriculado) | UC002 |
 | | `POST /api/v1/courses/{id}/reviews` | Criação ou substituição da avaliação e comentário do aluno sobre o curso, uma por aluno e curso (Aluno matriculado) | UC010 |
 | | `GET /api/v1/courses/{id}/reviews/me` | Consulta da avaliação anterior do próprio aluno para o curso, para pré-preencher o formulário (Aluno matriculado) | UC010 |
-| **Área D: Tutor de IA e Administração** | `POST /api/v1/ai/tutor/chat` | Envio de dúvida ao Tutor de IA com streaming SSE da resposta contextualizada (Aluno matriculado) | UC001 |
+| **Área D: Tutor de IA e Administração** | `GET /api/v1/ai/tutor/conversations/{id}/messages` | Histórico da conversa com rolagem infinita, paginado por cursor (Aluno dono) | UC001 |
+| | `POST /api/v1/ai/tutor/chat` | Envio de dúvida ao Tutor de IA com streaming SSE da resposta contextualizada (Aluno matriculado) | UC001 |
 | | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos com filtros de período (Instrutor / Administrador) | UC007 |
 | | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma (Administrador) | UC008 |
 | | `PUT /api/v1/admin/users/{id}/status` | Bloqueio ou desbloqueio de conta de usuário (Administrador) | UC008 |
@@ -616,9 +630,9 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 
 ### 4.1 Mecanismo de Autenticação e Emissão de Token
 
-A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) com criptografia assimétrica (chaves pública e privada RSA/EdDSA), dispensando sessões com estado no servidor web da API e assegurando alta escalabilidade (RNF001).
+A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) assinados com RS256, criptografia assimétrica de par de chaves RSA, pela biblioteca `php-open-source-saver/jwt-auth` ([ADR-0008](adr/0008-sessao-jwt-em-cookie.md)), dispensando sessões com estado no servidor web da API e assegurando alta escalabilidade (RNF001).
 - **Emissão e Assinatura:** No login bem-sucedido (UC005), a API assina o JWT utilizando sua chave privada. O token carrega claims padrão (`sub` com UUID do usuário, `role`, `iat`, `exp`).
-- **Validação:** Requisições subsequentes são validadas pelo middleware da API utilizando a chave pública, eliminando queries ao banco de dados apenas para checagem criptográfica do token.
+- **Validação:** Requisições subsequentes são validadas pelo middleware da API utilizando a chave pública, que os microsserviços também usam para validar o token sem acesso à chave privada, eliminando queries ao banco de dados apenas para checagem criptográfica do token.
 - **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Strict`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
 - **Tempo de Vida (TTL):** O JWT possui TTL de 1 hora (RNF001 e UC005). Ao expirar, o front-end renova a sessão com o refresh token da opção "manter conectado", quando existir; sem ele, o usuário reautentica.
 - **Manter conectado:** No login, o campo booleano `rememberMe` decide se a API também emite um refresh token rotativo, em cookie `HttpOnly` de vida longa. Cada renovação invalida o anterior. A duração (30 dias) e a rotação estão definidas no [ADR-0008](adr/0008-sessao-jwt-em-cookie.md).
