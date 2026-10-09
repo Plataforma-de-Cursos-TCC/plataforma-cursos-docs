@@ -78,12 +78,12 @@
   5. O sistema exibe os gráficos atualizados no dashboard.
   6. Este caso de uso é finalizado.
 
-  ![dashboard do Aluno com todos os cursos](prototipos/png/UC007-FB-1.png)
+  ![dashboard do Instrutor com todos os cursos](prototipos/png/UC007-FB-1.png)
 
-  *Figura 0 – UC007, fluxo básico: dashboard do Aluno com todos os cursos*
+  *Figura 0 – UC007, fluxo básico: dashboard do Instrutor com todos os cursos*
 - **Fluxos alternativos:**
-  - **A1 – O Instrutor filtra por um curso específico**
-    - A-1.1 O Instrutor seleciona um dos seus cursos no filtro.
+  - **A1 – O Instrutor ou o Administrador filtra por um curso específico**
+    - A-1.1 O Instrutor seleciona um dos seus cursos no filtro; o Administrador seleciona qualquer curso da plataforma.
     - A-1.2 O sistema restringe a agregação aos dados desse curso.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 4).
 
