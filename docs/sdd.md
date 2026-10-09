@@ -458,7 +458,7 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 | RNF009 | Eficiência de desempenho | p95 das listagens de até 2 s com 1000 usuários simultâneos | API sem estado (JWT), que permite várias instâncias; toda listagem é paginada; a API não devolve campo que o front-end não use |
 | RNF010 | Confiabilidade | Disponibilidade mensal mínima de 99% | Sem fonte na especificação para o mecanismo |
 | RNF011 | Confiabilidade | Backup diário; restauração testada mensalmente | Backup do banco de dados, que concentra os dados da plataforma |
-| RNF012 | Acessibilidade | WCAG 2.1 AA; contraste 4,5:1; navegação por teclado | Front-end com componentes acessíveis e revisão de contraste |
+| RNF012 | Capacidade de interação (inclusividade) | WCAG 2.1 AA; contraste 4,5:1; navegação por teclado | Front-end com componentes acessíveis e revisão de contraste |
 | RNF013 | Capacidade de interação | pt-BR e en em 100% dos textos; datas e valores por idioma | Textos em arquivos de tradução e formatação por localidade |
 | RNF014 | Capacidade de interação | Claro/escuro em 100% das telas, preferência salva por usuário | Tema no front-end; preferência persistida no perfil |
 | RNF015 | Manutenibilidade | 100% dos endpoints em OpenAPI, online | API documentada em OpenAPI e publicada |
