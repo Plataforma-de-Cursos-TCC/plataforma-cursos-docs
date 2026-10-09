@@ -451,28 +451,34 @@ def assemble(pandoc_docx, template, out_docx, pages):
         child(child(p_break1, "w:pPr", 0), "w:sectPr", 0).extend(list(port_sect))
         p11._p.addprevious(p_break1)
 
-        # Ajusta a imagem do diagrama de atividades para ocupar a largura útil da página paisagem
-        # proporcionalmente, mantendo a altura calculada pela proporção real da imagem nova:
-        curr = p11._p.getnext()
-        while curr is not None and curr.find(".//" + qn("w:drawing")) is None:
-            curr = curr.getnext()
-        if curr is not None:
-            extent = curr.find(".//" + qn("wp:extent"))
-            if extent is not None:
-                orig_cx = int(extent.get("cx"))
-                orig_cy = int(extent.get("cy"))
-                # Largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm = 8.532.000 EMU):
-                # Altura máxima permitida para caber na página com título e legenda (~11.1 cm = 4.000.000 EMU):
-                max_w = 8532000
-                max_h = 4000000
-                ratio = orig_cy / orig_cx if orig_cx else (1644 / 2699)
-                target_w = max_w
-                target_h = int(target_w * ratio)
-                if target_h > max_h:
-                    target_h = max_h
-                    target_w = int(target_h / ratio)
-                extent.set("cx", str(target_w))
-                extent.set("cy", str(target_h))
+        # Ajusta as imagens do diagrama de atividades (todas as partes) para ocupar a largura útil
+        # da página paisagem, mantendo a altura calculada pela proporção real de cada imagem.
+        # Cada imagem começa em página própria, com a legenda logo abaixo dela:
+        max_w = 8532000  # largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm)
+        max_h = 4000000  # altura máxima para caber com título, texto e legenda (~11.1 cm)
+        imgs = []
+        started = False
+        for p in doc.paragraphs:
+            if p._p is p11._p:
+                started = True
+            elif started and p_next_h1 is not None and p._p is p_next_h1._p:
+                break
+            elif started and p._p.find(".//" + qn("w:drawing")) is not None:
+                imgs.append(p)
+        for i, para in enumerate(imgs):
+            extent = para._p.find(".//" + qn("wp:extent"))
+            orig_cx = int(extent.get("cx"))
+            orig_cy = int(extent.get("cy"))
+            ratio = orig_cy / orig_cx
+            target_w = max_w
+            target_h = int(target_w * ratio)
+            if target_h > max_h:
+                target_h = max_h
+                target_w = int(target_h / ratio)
+            extent.set("cx", str(target_w))
+            extent.set("cy", str(target_h))
+            if i > 0:
+                para.paragraph_format.page_break_before = True
 
         # Quebra de seção retornando ao retrato após o item 11:
         if p_next_h1 is not None:

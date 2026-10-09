@@ -1,0 +1,31 @@
+' Item 11 - Diagrama de atividades do UC009 (Assistir aula), parte 2: fluxos alternativos A-1, A-2 e A-3 (A-3 na parte 3).
+' Os passos do fluxo básico estão na parte 1.
+' Rótulos: número = passo do fluxo básico; A-x/E-x = fluxo alternativo/exceção.
+' Primeira linha do rótulo = ator (Aluno, Plataforma ou Tutor de IA).
+' Gerar o PNG: plantuml -tpng 11-atividades-2.puml
+@startuml 11-atividades-2
+left to right direction
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 18
+skinparam ArrowFontSize 16
+skinparam ArrowColor #333333
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor black
+skinparam ActivityDiamondBackgroundColor white
+skinparam ActivityDiamondBorderColor black
+
+(*) --> if "Aula iniciada\nantes?" then
+  -->[há ponto salvo] "Plataforma\nA-2. Posiciona o\nvídeo no ponto salvo"
+  --> "Aluno\n3. Assiste ao vídeo"
+else
+  -->[sem ponto salvo] "Aluno\n3. Assiste ao vídeo"
+endif
+--> if "Tem\ndúvida?" then
+  -->[sim] "Aluno\nA-3. Envia pergunta\n(ver parte 3)"
+  --> (*)
+else
+  -->[não] "Aluno\nA-1. Sai da aula antes\ndo fim: salva segundos"
+  --> (*)
+endif
+@enduml
