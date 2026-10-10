@@ -204,7 +204,7 @@ def rel_targets(doc):
     return {rid: r.target_ref for rid, r in doc.part.rels.items()}
 
 
-def toc_entry(level, text, page):
+def toc_entry(level, text, page, anchor):
     p = OxmlElement("w:p")
     ppr = OxmlElement("w:pPr")
     style = OxmlElement("w:pStyle")
@@ -220,6 +220,10 @@ def toc_entry(level, text, page):
     p.append(ppr)
     num, _, rest = text.partition(" ")
     pieces = [num, "\t", rest] if level == 1 and num.isdigit() else [text]
+    link = OxmlElement("w:hyperlink")
+    link.set(qn("w:anchor"), anchor)
+    link.set(qn("w:history"), "1")
+    p.append(link)
     for piece in pieces + ["\t", str(page)]:
         r = OxmlElement("w:r")
         if piece == "\t":
@@ -229,7 +233,7 @@ def toc_entry(level, text, page):
             t.set(qn("xml:space"), "preserve")
             t.text = piece
             r.append(t)
-        p.append(r)
+        link.append(r)
     return p
 
 
@@ -455,6 +459,10 @@ def format_images(doc):
 
         for pic_sppr in p._p.iter(qn("pic:spPr")):
             set_picture_border(pic_sppr)
+        # A linha de 1 pt passa metade para fora da imagem; sem isso o Word corta a borda de cima.
+        for ee in p._p.iter(qn("wp:effectExtent")):
+            for k in ("l", "t", "r", "b"):
+                ee.set(k, "6350")
 
 
 def apply_table_box_layout(tbl, kind):
@@ -809,10 +817,18 @@ def assemble(pandoc_docx, template, out_docx, pages):
     ppr = child(cover[20], "w:pPr", 0)
     child(ppr, "w:keepNext", 0)
     child(ppr, "w:spacing", 1).set(qn("w:before"), str(COVER_PLACE_BEFORE))
+    # Se o Word ainda deixar a caixa de texto ao lado, a quebra com clear empurra "Curitiba" para baixo dela.
+    br = OxmlElement("w:br")
+    br.set(qn("w:type"), "textWrapping")
+    br.set(qn("w:clear"), "all")
+    first_run = cover[20].find(qn("w:r"))
+    run_br = OxmlElement("w:r")
+    run_br.append(br)
+    first_run.addprevious(run_br)
 
     # Sumário estático: mostra apenas itens de nível 1.
     headings = [
-        (1, p.text.strip())
+        (1, p.text.strip(), p._p)
         for p in doc.paragraphs
         if p.style.name == "Heading 1" and p.text.strip()
     ]
@@ -822,8 +838,15 @@ def assemble(pandoc_docx, template, out_docx, pages):
     child(child(content[0], "w:pPr", 0), "w:pageBreakBefore", 1)
     for p in list(content)[2:]:
         content.remove(p)
-    for (level, text), page in zip(headings, pages or [0] * len(headings)):
-        content.append(toc_entry(level, text, page))
+    for i, ((level, text, hp), page) in enumerate(zip(headings, pages or [0] * len(headings))):
+        name = f"_Toc{900000 + i}"
+        bs, be = OxmlElement("w:bookmarkStart"), OxmlElement("w:bookmarkEnd")
+        bs.set(qn("w:id"), str(900000 + i)); bs.set(qn("w:name"), name)
+        be.set(qn("w:id"), str(900000 + i))
+        ppr_h = hp.find(qn("w:pPr"))
+        (hp.insert(0, bs) if ppr_h is None else ppr_h.addnext(bs))
+        hp.append(be)
+        content.append(toc_entry(level, text, page, name))
     # Campo TOC em volta das entradas: nível 1-1.
     entries = list(content)[2:]
     first_ppr = entries[0].find(qn("w:pPr"))
@@ -1020,7 +1043,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
 
     doc.save(out_docx)
     patch_docx_files(out_docx)
-    return headings
+    return [(lv, tx) for lv, tx, _ in headings]
 
 
 def patch_docx_files(path):
@@ -1150,6 +1173,7 @@ def patch_docx_files(path):
         [('w:tblW w:w="10473"', 'w:tblW w:w="15398"'),
          ('<w:gridCol w:w="8293"/>', '<w:gridCol w:w="13218"/>'),
          ('<w:tcW w:w="8312"', '<w:tcW w:w="13218"')]).encode("utf-8")
+    data["word/_rels/header_land.xml.rels"] = data["word/_rels/header1.xml.rels"]
     data["word/footer_land.xml"] = swap(
         data["word/footer2.xml"].decode("utf-8"),
         [('w:pos="5103"', 'w:pos="7699"'), ('w:pos="10348"', 'w:pos="15398"')]).encode("utf-8")
