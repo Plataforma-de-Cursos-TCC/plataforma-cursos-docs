@@ -37,6 +37,7 @@ AUTORES = [
 ]
 PRODUTO = "Plataforma de Cursos"
 ANO = "2026"
+COVER_PLACE_BEFORE = 4600  # twips antes de "Curitiba"; calibrado para ela e o ano ficarem no fim da capa
 
 # Item -> lista de arquivos (relativos a especificacao/) ou (título, nota) quando
 # a fonte ainda não está pronta para o documento.
@@ -344,6 +345,31 @@ def sync_pic_ext(root, extent):
             ext.set("cy", extent.get("cy"))
 
 
+def set_picture_border(pic_sppr):
+    """Linha sólida preta de 1 pt (cap flat, join round), como no painel Format Shape do Word."""
+    for old in pic_sppr.findall(qn("a:ln")):
+        pic_sppr.remove(old)
+    ln = OxmlElement("a:ln")
+    ln.set("w", "12700")
+    ln.set("cap", "flat")
+    fill = OxmlElement("a:solidFill")
+    color = OxmlElement("a:srgbClr")
+    color.set("val", "000000")
+    fill.append(color)
+    ln.append(fill)
+    dash = OxmlElement("a:prstDash")
+    dash.set("val", "solid")
+    ln.append(dash)
+    ln.append(OxmlElement("a:round"))
+    # Ordem do schema: xfrm, geometria, preenchimento, ln, efeitos.
+    after_ln = [qn("a:effectLst"), qn("a:effectDag"), qn("a:scene3d"), qn("a:sp3d"), qn("a:extLst")]
+    nxt = next((c for c in pic_sppr if c.tag in after_ln), None)
+    if nxt is None:
+        pic_sppr.append(ln)
+    else:
+        nxt.addprevious(ln)
+
+
 def format_images(doc):
     """Padroniza imagens em 15 cm de largura, proporção travada e centralizadas."""
     w_15cm = 5400000  # 15 cm em EMUs (15 * 360000)
@@ -428,16 +454,7 @@ def format_images(doc):
             child(cppr, "w:jc", None if crpr is None else list(cppr).index(crpr)).set(qn("w:val"), "center")
 
         for pic_sppr in p._p.iter(qn("pic:spPr")):
-            for old in pic_sppr.findall(qn("a:ln")):
-                pic_sppr.remove(old)
-            ln = OxmlElement("a:ln")
-            ln.set("w", "9525")  # 1 px
-            fill = OxmlElement("a:solidFill")
-            color = OxmlElement("a:srgbClr")
-            color.set("val", "000000")
-            fill.append(color)
-            ln.append(fill)
-            pic_sppr.append(ln)
+            set_picture_border(pic_sppr)
 
 
 def apply_table_box_layout(tbl, kind):
@@ -786,25 +803,12 @@ def assemble(pandoc_docx, template, out_docx, pages):
             if c.get(qn("w:val")) == "00B0F0":
                 c.set(qn("w:val"), "000000")
 
-    # "Curitiba" e ano saem do fluxo e ficam numa moldura ancorada na página, perto do rodapé
-    # da capa: não dependem de contar parágrafos vazios, então não empurram o sumário.
-    cover_frame_y = 13600  # twips a partir do topo da página (~24 cm)
-    for el in (cover[20], cover[21]):
-        ppr = child(el, "w:pPr", 0)
-        for old_frame in ppr.findall(qn("w:framePr")):
-            ppr.remove(old_frame)
-        frame = OxmlElement("w:framePr")
-        for name, value in (
-            ("w:w", "9000"),
-            ("w:wrap", "around"),
-            ("w:vAnchor", "page"),
-            ("w:hAnchor", "margin"),
-            ("w:xAlign", "center"),
-            ("w:y", str(cover_frame_y)),
-        ):
-            frame.set(qn(name), value)
-        before = {qn(t) for t in ("w:pStyle", "w:keepNext", "w:keepLines", "w:pageBreakBefore")}
-        ppr.insert(sum(1 for c in ppr if c.tag in before), frame)
+    # "Curitiba" e ano ficam no fluxo, nas duas últimas linhas da capa: os parágrafos vazios
+    # entre o texto e eles viram um único espaçamento antes de "Curitiba".
+    drop = cover[14:20] + cover[22:25]
+    ppr = child(cover[20], "w:pPr", 0)
+    child(ppr, "w:keepNext", 0)
+    child(ppr, "w:spacing", 1).set(qn("w:before"), str(COVER_PLACE_BEFORE))
 
     # Sumário estático: mostra apenas itens de nível 1.
     headings = [
@@ -814,6 +818,8 @@ def assemble(pandoc_docx, template, out_docx, pages):
     ]
     sdt = cover[25]
     content = sdt.find(qn("w:sdtContent"))
+    # Sem os parágrafos vazios da capa, o sumário precisa de quebra de página explícita.
+    child(child(content[0], "w:pPr", 0), "w:pageBreakBefore", 1)
     for p in list(content)[2:]:
         content.remove(p)
     for (level, text), page in zip(headings, pages or [0] * len(headings)):
@@ -835,7 +841,8 @@ def assemble(pandoc_docx, template, out_docx, pages):
 
     first = body[0]
     for el in cover:
-        first.addprevious(el)
+        if el not in drop:
+            first.addprevious(el)
 
     # Seção final do template (só o rodapé com o nome do produto e a página).
     body.replace(body.find(qn("w:sectPr")), copy.deepcopy(tbody[-1]))
@@ -1123,6 +1130,54 @@ def patch_docx_files(path):
                 if rf.attrib[k] != "Arial":
                     rf.attrib[k] = "Arial"
         data["word/document.xml"] = ET.tostring(doc_root, encoding="utf-8")
+
+    # Seções paisagem (itens 4 e 11): cabeçalho e rodapé próprios, na largura da página paisagem;
+    # as seções retrato apontam explicitamente para o cabeçalho de retrato.
+    rels = data["word/_rels/document.xml.rels"].decode("utf-8")
+    hdr_id = re.search(r'<Relationship [^>]*Id="(\w+)"[^>]*Target="header1.xml"', rels) or re.search(
+        r'<Relationship [^>]*Target="header1.xml"[^>]*Id="(\w+)"', rels)
+    assert hdr_id, "header1.xml sem relação"
+    hdr_id = hdr_id.group(1)
+
+    def swap(xml, pairs):
+        for old, new in pairs:
+            assert xml.count(old) >= 1, old
+            xml = xml.replace(old, new)
+        return xml
+
+    data["word/header_land.xml"] = swap(
+        data["word/header1.xml"].decode("utf-8"),
+        [('w:tblW w:w="10473"', 'w:tblW w:w="15398"'),
+         ('<w:gridCol w:w="8293"/>', '<w:gridCol w:w="13218"/>'),
+         ('<w:tcW w:w="8312"', '<w:tcW w:w="13218"')]).encode("utf-8")
+    data["word/footer_land.xml"] = swap(
+        data["word/footer2.xml"].decode("utf-8"),
+        [('w:pos="5103"', 'w:pos="7699"'), ('w:pos="10348"', 'w:pos="15398"')]).encode("utf-8")
+    ct = data["[Content_Types].xml"].decode("utf-8")
+    ct = ct.replace("</Types>",
+        '<Override PartName="/word/header_land.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.header+xml"/>'
+        '<Override PartName="/word/footer_land.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.footer+xml"/></Types>')
+    data["[Content_Types].xml"] = ct.encode("utf-8")
+    rel_ns = "http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    rels = rels.replace("</Relationships>",
+        f'<Relationship Id="rIdHdrLand" Type="{rel_ns}/header" Target="header_land.xml"/>'
+        f'<Relationship Id="rIdFtrLand" Type="{rel_ns}/footer" Target="footer_land.xml"/></Relationships>')
+    data["word/_rels/document.xml.rels"] = rels.encode("utf-8")
+
+    def fix_sect(m):
+        sect = m.group(0)
+        if 'w:orient="landscape"' in sect:
+            sect = re.sub(r"<w:(header|footer)Reference [^>]*/>", "", sect)
+            return re.sub(r"(<w:sectPr[^>]*>)", r'\1<w:headerReference w:type="default" r:id="rIdHdrLand"/>'
+                          r'<w:footerReference w:type="default" r:id="rIdFtrLand"/>', sect, count=1)
+        if "<w:headerReference" not in sect:
+            return re.sub(r"(<w:sectPr[^>]*>)", rf'\1<w:headerReference w:type="default" r:id="{hdr_id}"/>', sect, count=1)
+        return sect
+
+    doc_xml = data["word/document.xml"].decode("utf-8")
+    doc_xml, n_sect = re.subn(r"<w:sectPr[ >].*?</w:sectPr>", fix_sect, doc_xml, flags=re.S)
+    assert n_sect >= 2, n_sect
+    data["word/document.xml"] = doc_xml.encode("utf-8")
 
     # ElementTree renomeia prefixos (ns1...) e deixa mc:Ignorable apontando para
     # prefixos inexistentes (w14, w15...), o que o Word rejeita como conteúdo ilegível.
