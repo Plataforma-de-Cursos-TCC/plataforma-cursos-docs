@@ -10,12 +10,12 @@ Este repositório não tem código do sistema. Ele guarda três coisas:
 2. a **base de conhecimento** que sustenta a especificação: pesquisa de mercado, decisões e regras de escrita;
 3. o **processo** de trabalho do grupo: plano de tarefas, critérios de aceite e convenções.
 
-| Integrante | GitHub | Área funcional |
-|---|---|---|
-| Adrian Antônio de Souza Gomes | [@adrian69-droid](https://github.com/adrian69-droid) | Área B: autoria do instrutor |
-| Lucas Bruno e Silva | [@Luc-Bruno](https://github.com/Luc-Bruno) | Área C: aprendizagem do aluno |
-| Lucas Stopinski da Silva | [@LucasStop](https://github.com/LucasStop) | Área A: acesso e conta |
-| Vinicius Lima Teider | [@Teider011](https://github.com/Teider011) | Área D: Tutor de IA, analytics e administração |
+| Integrante | GitHub | E-mail vinculado | Área funcional |
+|---|---|---|---|
+| Adrian Antônio de Souza Gomes | [@adrian69-droid](https://github.com/adrian69-droid) | a preencher | Área B: autoria do instrutor |
+| Lucas Bruno e Silva | [@Luc-Bruno](https://github.com/Luc-Bruno) | cucabruno06@gmail.com | Área C: aprendizagem do aluno |
+| Lucas Stopinski da Silva | [@LucasStop](https://github.com/LucasStop) | lucasstopinskidasilva@gmail.com | Área A: acesso e conta |
+| Vinicius Lima Teider | [@Teider011](https://github.com/Teider011) | teider.vinicius11@gmail.com | Área D: Tutor de IA, analytics e administração |
 
 Áreas, uma por integrante: **A** acesso e conta; **B** autoria do instrutor; **C** aprendizagem do aluno; **D** Tutor de IA, analytics e administração. Escopo de cada uma no [CONTEXT.md](CONTEXT.md).
 
@@ -61,7 +61,7 @@ python3 scripts/build_doc.py [de] [até] --template "caminho/ESSW - Especificaca
 
 Gera `build/Especificação - itens <de>-<até>.docx` (e o `.pdf`, com `--pdf`) com capa, sumário, cabeçalho, rodapé e a declaração de uso de IA no fim. O padrão é `1 11` (escopo do RA1); `1 15` inclui os itens do RA2, que entram como "em elaboração" enquanto não tiverem fonte pronta. O template também pode vir da variável `ESSW_TEMPLATE`. Precisa de pandoc, LibreOffice (`soffice`) e python-docx. A pasta `build/` não é versionada.
 
-Os protótipos de tela do item 10 são HTML em `especificacao/10-especificacoes-de-caso-de-uso/prototipos/html/`, um layout por arquivo, com o estado escolhido por `?estado=`. A lista de capturas fica em `html/estados-*.txt`, e `python3 scripts/render_prototypes.py` gera as PNG em `prototipos/png/` (Google Chrome instalado; `--check` só valida a lista).
+Os protótipos de tela do item 10 são HTML em `especificacao/10-especificacoes-de-caso-de-uso/prototipos/html/`, um layout por arquivo, com o estado escolhido por `?estado=`. A lista de capturas fica em `html/estados-*.txt`, e `python3 scripts/render_prototypes.py` gera as PNG em `prototipos/png/<UC>/` (claro, as do DOCX) e `prototipos/png/escuro/<UC>/`; requer Google Chrome instalado; `--check` só valida a lista).
 
 ## Como trabalhamos
 

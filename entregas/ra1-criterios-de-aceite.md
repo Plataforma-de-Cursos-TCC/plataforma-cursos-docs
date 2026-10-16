@@ -55,12 +55,12 @@ Este protocolo reúne boas práticas para agentes de IA: manter uma lista de tar
 
 ### 1.1 Integrantes
 
-| Integrante | GitHub | Área |
-|---|---|---|
-| Adrian Antônio de Souza Gomes | `adrian69-droid` | Área B: autoria do instrutor |
-| Lucas Bruno e Silva | `Luc-Bruno` | Área C: aprendizagem do aluno |
-| Lucas Stopinski da Silva | `LucasStop` | Área A: acesso e conta |
-| Vinicius Lima Teider | `Teider011` | Área D: Tutor de IA, analytics e administração |
+| Integrante | GitHub | E-mail vinculado | Área |
+|---|---|---|---|
+| Adrian Antônio de Souza Gomes | `adrian69-droid` | a preencher | Área B: autoria do instrutor |
+| Lucas Bruno e Silva | `Luc-Bruno` | cucabruno06@gmail.com | Área C: aprendizagem do aluno |
+| Lucas Stopinski da Silva | `LucasStop` | lucasstopinskidasilva@gmail.com | Área A: acesso e conta |
+| Vinicius Lima Teider | `Teider011` | teider.vinicius11@gmail.com | Área D: Tutor de IA, analytics e administração |
 
 O responsável por cada área (A a D) fica no [README](../README.md) e é preenchido quando o grupo distribuir as áreas. Este arquivo não nomeia responsável por área.
 
