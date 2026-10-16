@@ -10,33 +10,34 @@
 <header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#" class="ativo">Meus cursos</a><a href="#">Novo curso</a></nav><span class="avatar">ML</span></header>
 <main class="center">
   <form class="card form stack">
-    <h2 data-estado="padrao gabarito erro-alternativas erro-gabarito rascunho-salvo publicado">Novo quiz</h2>
+    <h2 data-estado="padrao gabarito erro-alternativas erro-gabarito rascunho-salvo publicado modulo-inexistente">Novo quiz</h2>
     <h2 data-estado="edicao">Editar quiz</h2>
+    <div class="banner erro" data-estado="modulo-inexistente" aria-live="polite">Módulo não encontrado. Ele pode ter sido removido; volte ao curso e tente de novo.</div>
     <div class="banner sucesso" data-estado="rascunho-salvo" aria-live="polite">Rascunho salvo.</div>
     <div class="banner sucesso" data-estado="publicado" aria-live="polite">Quiz publicado.</div>
     <button class="btn secondary block" type="button" data-estado="publicado">Voltar ao módulo</button>
     <div class="banner aviso" data-estado="edicao" aria-live="polite">Edição não altera as notas dos alunos.</div>
 
     <div class="field"><label for="titulo-do-quiz">Título do quiz</label>
-      <input class="input placeholder" type="text" id="titulo-do-quiz" aria-label="Título do quiz" placeholder="Título do quiz" data-estado="padrao">
+      <input class="input placeholder" type="text" id="titulo-do-quiz" aria-label="Título do quiz" placeholder="Título do quiz" data-estado="padrao modulo-inexistente">
       <input class="input" type="text" aria-label="Título do quiz" value="Quiz — Módulo 1" data-estado="gabarito rascunho-salvo publicado edicao erro-alternativas erro-gabarito">
     </div>
 
     <div class="field"><label for="enunciado-da-pergunta-1">Enunciado da pergunta 1</label>
-      <input class="input placeholder" type="text" id="enunciado-da-pergunta-1" aria-label="Enunciado da pergunta 1" placeholder="Enunciado" data-estado="padrao">
+      <input class="input placeholder" type="text" id="enunciado-da-pergunta-1" aria-label="Enunciado da pergunta 1" placeholder="Enunciado" data-estado="padrao modulo-inexistente">
       <input class="input" type="text" aria-label="Enunciado da pergunta 1" value="Qual método usa roteiro aberto e perguntas de aprofundamento?" data-estado="gabarito rascunho-salvo publicado edicao erro-alternativas erro-gabarito">
     </div>
 
     <div class="field"><label for="alternativas">Alternativas</label>
-      <div class="row" data-estado="padrao"><span class="radio"></span><input class="input placeholder" type="text" id="alternativas" aria-label="Alternativas" placeholder="Alternativa 1" style="flex:1"></div>
+      <div class="row" data-estado="padrao modulo-inexistente"><span class="radio"></span><input class="input placeholder" type="text" id="alternativas" aria-label="Alternativas" placeholder="Alternativa 1" style="flex:1"></div>
       <div class="row" data-estado="gabarito rascunho-salvo publicado edicao"><span class="radio on"></span><input class="input" type="text" aria-label="Alternativas" value="Entrevista semiestruturada" style="flex:1"></div>
       <div class="row" data-estado="erro-alternativas erro-gabarito"><span class="radio"></span><input class="input" type="text" aria-label="Alternativas" value="Entrevista semiestruturada" style="flex:1"></div>
 
-      <div class="row" data-estado="padrao"><span class="radio"></span><input class="input placeholder" type="text" aria-label="Alternativas" placeholder="Alternativa 2" style="flex:1"></div>
+      <div class="row" data-estado="padrao modulo-inexistente"><span class="radio"></span><input class="input placeholder" type="text" aria-label="Alternativas" placeholder="Alternativa 2" style="flex:1"></div>
       <div class="row" data-estado="gabarito rascunho-salvo publicado edicao erro-gabarito"><span class="radio"></span><input class="input" type="text" aria-label="Alternativas" value="Survey fechado" style="flex:1"></div>
       <div class="row" data-estado="erro-alternativas"><span class="radio"></span><input class="input erro placeholder" type="text" aria-label="Alternativas" placeholder="Alternativa 2" style="flex:1"></div>
 
-      <div class="row" data-estado="padrao"><span class="radio"></span><input class="input placeholder" type="text" aria-label="Alternativas" placeholder="Alternativa 3" style="flex:1"></div>
+      <div class="row" data-estado="padrao modulo-inexistente"><span class="radio"></span><input class="input placeholder" type="text" aria-label="Alternativas" placeholder="Alternativa 3" style="flex:1"></div>
       <div class="row" data-estado="gabarito rascunho-salvo publicado edicao erro-gabarito"><span class="radio"></span><input class="input" type="text" aria-label="Alternativas" value="Teste A/B" style="flex:1"></div>
 
       <p class="small" style="color:var(--success)" data-estado="gabarito rascunho-salvo publicado edicao">Gabarito marcado — alternativa 1</p>
@@ -46,9 +47,9 @@
 
     <button class="btn secondary block" type="button">+ Adicionar pergunta</button>
 
-    <div class="grid c2" data-estado="padrao gabarito erro-alternativas erro-gabarito edicao rascunho-salvo">
+    <div class="grid c2" data-estado="padrao gabarito erro-alternativas erro-gabarito edicao rascunho-salvo modulo-inexistente">
       <button class="btn secondary" type="button">Salvar como rascunho</button>
-      <button class="btn primary" type="button" data-estado="padrao gabarito erro-alternativas erro-gabarito rascunho-salvo">Salvar quiz</button>
+      <button class="btn primary" type="button" data-estado="padrao gabarito erro-alternativas erro-gabarito rascunho-salvo modulo-inexistente">Salvar quiz</button>
       <button class="btn primary" type="button" data-estado="edicao">Salvar alterações</button>
     </div>
   </form>

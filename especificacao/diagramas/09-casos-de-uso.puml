@@ -55,6 +55,7 @@ USU -- UC017
 ALU -- UC003
 ALU -- UC020
 ALU -- UC009
+VIS -- UC009
 ALU -- UC002
 ALU -- UC010
 INS -- UC006
@@ -65,6 +66,7 @@ INS -- UC007
 ADM -- UC007
 ADM -- UC008
 UC001 -- TUT
+ALU -- UC001
 
 UC005 ..> UC016 : <<include>>
 UC005 <.. UC011 : <<extend>>

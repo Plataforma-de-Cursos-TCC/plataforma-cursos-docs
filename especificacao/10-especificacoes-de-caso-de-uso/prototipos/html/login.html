@@ -15,12 +15,14 @@
     <div class="banner sucesso" data-estado="senha-redefinida" aria-live="polite">Senha redefinida. Entre com a nova senha.</div>
     <div class="banner sucesso" data-estado="conta-criada" aria-live="polite">Conta criada. Entre para continuar.</div>
     <div class="banner erro" data-estado="erro-credencial" aria-live="polite">E-mail ou senha inválidos.</div>
+    <div class="banner erro" data-estado="conta-bloqueada" aria-live="polite">Sua conta está bloqueada. Procure o Administrador da plataforma.</div>
+    <div class="banner erro" data-estado="bloqueio-temporario" aria-live="polite">Muitas tentativas inválidas. Tente novamente em 15 minutos.</div>
     <div class="field"><label for="e-mail">E-mail</label>
-      <input class="input" type="text" id="e-mail" aria-label="E-mail" value="aluno@email.com" data-estado="padrao erro-credencial">
+      <input class="input" type="text" id="e-mail" aria-label="E-mail" value="aluno@email.com" data-estado="padrao erro-credencial conta-bloqueada bloqueio-temporario">
       <input class="input placeholder" type="text" aria-label="E-mail" placeholder="voce@email.com" data-estado="sessao-expirada senha-redefinida conta-criada">
     </div>
     <div class="field"><label for="senha">Senha</label>
-      <input class="input" type="password" id="senha" aria-label="Senha" value="••••••••" data-estado="padrao erro-credencial">
+      <input class="input" type="password" id="senha" aria-label="Senha" value="••••••••" data-estado="padrao erro-credencial conta-bloqueada bloqueio-temporario">
       <input class="input placeholder" type="text" aria-label="Senha" placeholder="Sua senha" data-estado="sessao-expirada senha-redefinida conta-criada">
     </div>
     <a href="#" class="small">Esqueci minha senha</a>

@@ -14,7 +14,9 @@
 <main class="center">
   <section class="card form stack">
     <h1>Acesso negado</h1>
-    <div class="banner erro" aria-live="polite">Seu perfil de Aluno não tem acesso a esta área.</div>
+    <div class="banner erro" data-estado="padrao" aria-live="polite">Seu perfil de Aluno não tem acesso a esta área.</div>
+    <div class="banner erro" data-estado="perfil-de-outro" aria-live="polite">Você não pode editar o perfil de outro Instrutor.</div>
+    <div class="banner erro" data-estado="curso-de-outro" aria-live="polite">Este curso pertence a outro Instrutor. Você não pode alterá-lo.</div>
     <p class="small"><a href="#">Ir para Meus cursos</a></p>
   </section>
 </main>

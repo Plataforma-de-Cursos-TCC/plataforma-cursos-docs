@@ -2,8 +2,8 @@
 """Renderiza os protótipos HTML em PNG (Chrome headless, 1440x900).
 
 Lê prototipos/html/estados-*.txt (um por autor). Cada captura sai em dois temas:
-claro em prototipos/png/<png>.png (é a que entra no DOCX) e escuro em
-prototipos/png/escuro/<png>.png, com &tema=claro e &tema=escuro na URL (o tema do sistema
+claro em prototipos/png/<UC>/<png>.png (é a que entra no DOCX) e escuro em
+prototipos/png/escuro/<UC>/<png>.png, com &tema=claro e &tema=escuro na URL (o tema do sistema
 do Chrome não pode decidir a captura clara).
 Linhas: "<tela>.html <estado> <png> | <legenda>" ou, para reusar uma captura em
 outro fluxo, "@ <png-existente> <UC>-<fluxo> | <legenda>". --check só valida a lista; filtro opcional por
@@ -59,6 +59,7 @@ def render(filtros=("",)):
         if not png.startswith(filtros):
             continue
         for extra, pasta in TEMAS:
+            pasta = pasta / png[:5]  # uma pasta por caso de uso (UCnnn)
             pasta.mkdir(parents=True, exist_ok=True)
             url = f"{(HTML / tela).as_uri()}?estado={estado}{extra}"
             subprocess.run([CHROME, "--headless", "--disable-gpu", "--hide-scrollbars",

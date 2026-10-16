@@ -1,0 +1,15 @@
+# Revisão cruzada de 16/10/2026: fluxos de exceção novos e variação do Visitante
+login.html conta-bloqueada UC005-E3-1 | aviso "Sua conta está bloqueada"
+login.html bloqueio-temporario UC005-E4-1 | aviso de bloqueio de 15 minutos por tentativas inválidas
+@ UC009-E1-1 UC001-E4-1 | Aluno sem matrícula: chat não abre e a aula pede matrícula
+aula-chat.html tutor-indisponivel UC001-E3-1 | Tutor de IA indisponível, pergunta mantida
+quiz.html aulas-pendentes UC002-E3-1 | Quiz bloqueado: aulas do módulo pendentes
+meu-perfil.html link-invalido UC013-E2-1 | erro "Informe um link válido" no perfil do Instrutor
+acesso-negado.html perfil-de-outro UC013-E3-1 | acesso negado à edição de perfil de outro Instrutor
+pagina-curso.html preco-alterado UC019-E2-1 | resumo de pagamento com aviso de preço alterado
+pagina-curso.html ja-matriculado UC019-E3-1 | aviso de matrícula já existente, sem novo pagamento
+acesso-negado.html curso-de-outro UC004-E3-1 | acesso negado: curso de outro Instrutor
+quiz-form.html modulo-inexistente UC004-E4-1 | erro "Módulo não encontrado" no formulário de quiz
+@ UC004-E3-1 UC006-E3-1 | acesso negado: curso de outro Instrutor
+meus-cursos-instrutor.html publicar-sem-conteudo UC006-E4-1 | erro ao publicar curso sem módulos ou aulas
+aula-chat.html visitante-previa UC009-A4-1 | Visitante assiste à aula prévia, sem login

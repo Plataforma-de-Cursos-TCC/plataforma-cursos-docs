@@ -1,4 +1,4 @@
-## US001 – REQUISITO RF017: Realizar login de usuário
+## 1. US001 – REQUISITO RF017: Realizar login de usuário
 
 **COMO:** Usuário já cadastrado na plataforma\
 **POSSO:** fazer login com e-mail e senha\
@@ -14,7 +14,7 @@
 | 2 | **DADO QUE:** informo senha incorreta <br> **QUANDO:** envio o formulário <br> **ENTÃO:** recebo mensagem de erro sem indicar se o e-mail existe ou não. |
 | 3 | **DADO QUE:** a minha sessão expirou <br> **QUANDO:** tento acessar uma área protegida <br> **ENTÃO:** sou direcionado para a tela de login. |
 
-## US002 – REQUISITO RF001: Cadastrar-se na plataforma
+## 2. US002 – REQUISITO RF001: Cadastrar-se na plataforma
 
 **COMO:** Visitante ainda não cadastrado\
 **POSSO:** criar uma conta com e-mail e senha\
@@ -30,7 +30,7 @@
 | 2 | **DADO QUE:** informo um e-mail já cadastrado <br> **QUANDO:** envio o cadastro <br> **ENTÃO:** recebo erro informando que o e-mail já está em uso. |
 | 3 | **DADO QUE:** informo senha fora dos critérios mínimos (tamanho e complexidade) <br> **QUANDO:** envio o cadastro <br> **ENTÃO:** recebo erro apontando o requisito não atendido. |
 
-## US003 – REQUISITO RF001: Editar dados do perfil
+## 3. US003 – REQUISITO RF001: Editar dados do perfil
 
 **COMO:** Usuário logado\
 **POSSO:** editar os meus dados cadastrais (nome, telefone, endereço, CPF, data de nascimento, foto de perfil e tema)\
@@ -46,7 +46,7 @@
 | 2 | **DADO QUE:** informo um CPF com dígitos verificadores inválidos ou fora de 11 dígitos <br> **QUANDO:** salvo <br> **ENTÃO:** recebo erro no campo CPF e o perfil não é alterado. |
 | 3 | **DADO QUE:** deixo o nome em branco ou envio uma foto que não seja JPG/PNG ou tenha mais de 2 MB <br> **QUANDO:** tento salvar <br> **ENTÃO:** o sistema bloqueia o envio e indica o campo pendente. |
 
-## US017 – REQUISITO RF013: Recuperar senha por e-mail
+## 4. US017 – REQUISITO RF013: Recuperar senha por e-mail
 
 **COMO:** Usuário que esqueceu a senha\
 **POSSO:** solicitar a redefinição por e-mail\
@@ -62,7 +62,7 @@
 | 2 | **DADO QUE:** informo um e-mail não cadastrado <br> **QUANDO:** solicito a recuperação <br> **ENTÃO:** vejo a mesma mensagem de sucesso, sem revelar se o e-mail existe. |
 | 3 | **DADO QUE:** abro um link de redefinição expirado <br> **QUANDO:** tento definir a nova senha <br> **ENTÃO:** o sistema recusa e permite solicitar um novo link. |
 
-## US021 – REQUISITO RF019: Alterar senha
+## 5. US021 – REQUISITO RF019: Alterar senha
 
 **COMO:** Usuário logado\
 **POSSO:** trocar a minha senha informando a senha atual e a nova senha\
