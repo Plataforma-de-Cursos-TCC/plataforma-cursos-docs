@@ -73,9 +73,9 @@ end
 # Parágrafos que, logo antes de uma tabela, são o título do quadro no template
 # (linhas mescladas no topo da tabela). O título da estória é um Heading 2.
 TITULO = re.compile(
-    r"^(QUADRO “|VISÃO DE PRODUTO$|NOME DO PRODUTO:|PRODUTO:|COMO:|Critérios de Aceite:$|US\d{3} –)"
+    r"^(QUADRO “|VISÃO DE PRODUTO$|NOME DO PRODUTO:|PRODUTO:|COMO:|Critérios de Aceite:$|(?:\d+\. )?US\d{3} –)"
 )
-US = re.compile(r"^US\d{3} –")
+US = re.compile(r"^(?:\d+\. )?US\d{3} –")
 
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
@@ -307,7 +307,7 @@ def format_tables_and_captions(doc):
         full_head = " | ".join(rows_txt)
         first_p = tbl.find(".//" + qn("w:p"))
         first_txt = text_of(first_p).strip() if first_p is not None else ""
-        is_us = bool(re.match(r"^US\d{3}\s*–", first_txt))
+        is_us = bool(re.match(r"^(?:\d+\.\s*)?US\d{3}\s*–", first_txt))
         is_box1 = "QUADRO “3 OBJETIVOS”" in full_head
 
         for tr in tbl.findall(qn("w:tr")):
@@ -730,7 +730,7 @@ def apply_us_summary_table_layout(tbl):
     for col in tblGrid.findall(qn("w:gridCol")):
         tblGrid.remove(col)
 
-    col_widths = [1200, 8090, 1200]
+    col_widths = [800, 1300, 7090, 1300]
     for w in col_widths:
         gc = OxmlElement("w:gridCol")
         gc.set(qn("w:w"), str(w))
@@ -772,7 +772,7 @@ def apply_us_summary_table_layout(tbl):
                     child(ppr, "w:jc", 0).set(qn("w:val"), "center")
                 elif r_idx == 1:
                     child(ppr, "w:jc", 0).set(qn("w:val"), "center")
-                elif c_idx in (0, 2):
+                elif c_idx != 2:
                     child(ppr, "w:jc", 0).set(qn("w:val"), "center")
                 else:
                     child(ppr, "w:jc", 0).set(qn("w:val"), "left")
@@ -897,7 +897,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
         elif "ATOR / USUÁRIO" in full_head and "#" in full_head and "REQUISITO FUNCIONAL" not in full_head:
             box_kind = "5"
 
-        is_us = bool(re.match(r"^US\d{3}\s*–", first_txt))
+        is_us = bool(re.match(r"^(?:\d+\.\s*)?US\d{3}\s*–", first_txt))
         is_us_summary = ("PRODUTO:" in full_head and "USESTÓRIARF" in full_head.replace(" ", ""))
 
         if box_kind:

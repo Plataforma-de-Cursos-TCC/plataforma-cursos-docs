@@ -44,3 +44,23 @@ Os pontos abaixo são de `docs/` (TDD, SSD, casos de teste) e ficam para a entre
 - SSDs com uma arquitetura única e `alt` nos fluxos de exceção (#7);
 - casos de teste com as colunas da disciplina e casos para o UC011 e as US017–US020 (#8);
 - entidade `Payment` e campo `payoutInfo`, que contradizem o pagamento simulado (#51).
+
+## 5. Revisão cruzada de 16/10/2026 (RA1, antes do RA2)
+
+Aplicado em `fix/ra1-review-gaps`:
+- exceções novas: UC013 (E2, E3), UC019 (E2, E3), UC005 (E3, E4), UC001 (E3, E4), UC002 (E3), UC004 (E3, E4), UC006 (E3, E4); pós-condição do UC012;
+- critério de erro novo: US008, US009, US013 (quarta linha, tirada de exceção que o UC já tinha);
+- RNF005, RNF008, RNF014 e RNF016 reescritos como medida.
+
+Os fluxos novos ainda não têm protótipo de tela (C10.3), e as US novas ainda não passaram pelo autor da estória.
+
+Decididas em 16/10/2026 e aplicadas:
+- RNF019 reclassificado como Portabilidade (adaptabilidade), conforme a ISO/IEC 25010:2011.
+- Visitante é ator do UC009 só para aulas prévias (item 10, `09-casos-de-uso.puml` e PNG regerado); Aluno ligado ao UC001 no item 9.
+- UC002 A2 "Salvar rascunho" mantido; cobertura criada como critério 4 da US011.
+- Raia "Plataforma de Cursos" no item 4 (`.bpmn`, texto e PNG regerado com bpmn-js).
+- Protótipos (C10.3) das 13 exceções novas e da variação do Visitante (UC009 A4, fluxo novo), em claro e escuro; PNGs organizados em `prototipos/png/<UC>/` e `prototipos/png/escuro/<UC>/`.
+
+Abertos:
+
+- **(G)** Autores revisam as linhas novas de US008, US009, US011 e US013.

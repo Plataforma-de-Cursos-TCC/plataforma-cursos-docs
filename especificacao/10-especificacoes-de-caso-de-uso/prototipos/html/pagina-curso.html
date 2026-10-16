@@ -9,6 +9,8 @@
 <body>
 <header class="topbar"><span class="logo">Plataforma de Cursos</span><nav><a href="#">Meus cursos</a><a href="#">Catálogo</a></nav><span class="avatar">LS</span></header>
 <main class="page stack">
+  <div class="banner aviso" data-estado="preco-alterado" aria-live="polite">O preço do curso mudou depois do resumo. Revise o novo valor antes de confirmar.</div>
+  <div class="banner info" data-estado="ja-matriculado" aria-live="polite">Você já está matriculado neste curso. Nenhum novo pagamento foi registrado.</div>
   <div class="banner erro" data-estado="indisponivel" aria-live="polite">Este curso não está mais disponível.</div>
   <div class="banner erro" data-estado="pagamento-recusado" aria-live="polite">Pagamento recusado.</div>
 
@@ -34,11 +36,11 @@
     </section>
 
     <aside class="card stack">
-      <p data-estado="padrao pagamento-recusado processando-pagamento resumo-pagamento"><strong style="font-size:24px">R$ 249,90</strong></p>
+      <p data-estado="padrao pagamento-recusado processando-pagamento resumo-pagamento preco-alterado"><strong style="font-size:24px">R$ 249,90</strong></p>
       <p data-estado="gratuito"><strong style="font-size:24px">Gratuito</strong></p>
-      <button class="btn primary block" type="button" data-estado="padrao gratuito pagamento-recusado processando-pagamento resumo-pagamento">Matricular-se</button>
-      <button class="btn primary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado avaliacao-salva">Continuar assistindo</button>
-      <button class="btn secondary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado">Avaliar curso</button>
+      <button class="btn primary block" type="button" data-estado="padrao gratuito pagamento-recusado processando-pagamento resumo-pagamento preco-alterado">Matricular-se</button>
+      <button class="btn primary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado avaliacao-salva ja-matriculado">Continuar assistindo</button>
+      <button class="btn secondary block" type="button" data-estado="matriculado avaliar-vazio avaliar-preenchido avaliar-existente avaliar-sem-nota avaliar-bloqueado ja-matriculado">Avaliar curso</button>
       <button class="btn secondary block" type="button" data-estado="avaliacao-salva">Editar avaliação</button>
       <div class="stack" data-estado="indisponivel">
         <p>Este curso não está mais disponível.</p>
@@ -85,7 +87,7 @@
   </div>
 </div>
 
-<div class="overlay" data-estado="resumo-pagamento">
+<div class="overlay" data-estado="resumo-pagamento preco-alterado">
   <div class="modal stack">
     <h2>Resumo do pagamento</h2>
     <p class="small muted">Fundamentos de Pesquisa com Usuários</p>

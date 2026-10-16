@@ -23,7 +23,7 @@
         <bpmn:flowNodeRef>a12</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>a13</bpmn:flowNodeRef>
       </bpmn:lane>
-      <bpmn:lane id="L_pla" name="Plataforma">
+      <bpmn:lane id="L_pla" name="Plataforma de Cursos">
         <bpmn:flowNodeRef>p2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>p3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>p4</bpmn:flowNodeRef>
