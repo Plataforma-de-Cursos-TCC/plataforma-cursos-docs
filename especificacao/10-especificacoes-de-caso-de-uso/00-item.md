@@ -16,7 +16,7 @@
 | UC020 | Consultar catálogo de cursos | Visitante, Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC003 | Matricular-se em curso | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC019 | Processar pagamento simulado | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
-| UC009 | Assistir aula | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
+| UC009 | Assistir aula | Aluno, Visitante (aula prévia) | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC002 | Responder quiz | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC010 | Avaliar curso | Aluno | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
 | UC001 | Conversar com Tutor de IA | Aluno (primário); Tutor de IA (secundário) | D (Tutor de IA, analytics e administração) | [area-d.md](area-d.md) |

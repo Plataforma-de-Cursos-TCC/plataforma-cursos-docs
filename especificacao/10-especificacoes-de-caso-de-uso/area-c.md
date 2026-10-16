@@ -15,15 +15,15 @@
   5. O ator seleciona um curso e o sistema abre a página do curso. Se o ator for Aluno, ele pode executar o UC003 – Matricular-se em Curso.
   6. Este caso de uso é finalizado.
 
-  ![catálogo de cursos com todas as categorias](prototipos/png/UC020-FB-1.png)
+  ![catálogo de cursos com todas as categorias](prototipos/png/UC020/UC020-FB-1.png)
 
   *Figura 0 – UC020, fluxo básico: catálogo de cursos com todas as categorias*
 
-  ![catálogo filtrado por categoria](prototipos/png/UC020-FB-2.png)
+  ![catálogo filtrado por categoria](prototipos/png/UC020/UC020-FB-2.png)
 
   *Figura 0 – UC020, fluxo básico: catálogo filtrado por categoria*
 
-  ![página do curso aberta a partir do catálogo](prototipos/png/UC003-FB-1.png)
+  ![página do curso aberta a partir do catálogo](prototipos/png/UC003/UC003-FB-1.png)
 
   *Figura 0 – UC020, fluxo básico: página do curso aberta a partir do catálogo*
 - **Fluxos alternativos:**
@@ -32,7 +32,7 @@
     - A-1.2 O sistema exibe a lista completa de cursos publicados.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![filtro limpo: catálogo com todas as categorias](prototipos/png/UC020-FB-1.png)
+    ![filtro limpo: catálogo com todas as categorias](prototipos/png/UC020/UC020-FB-1.png)
 
     *Figura 0 – UC020, fluxo alternativo A1: filtro limpo: catálogo com todas as categorias*
 - **Fluxos de exceção:**
@@ -41,7 +41,7 @@
     - E-1.2 O sistema exibe “Nenhum curso disponível no momento.”
     - E-1.3 Este caso de uso é finalizado.
 
-    ![nenhum curso publicado no catálogo](prototipos/png/UC020-E1-1.png)
+    ![nenhum curso publicado no catálogo](prototipos/png/UC020/UC020-E1-1.png)
 
     *Figura 0 – UC020, fluxo de exceção E1: nenhum curso publicado no catálogo*
   - **E2 – Categoria sem cursos**
@@ -49,7 +49,7 @@
     - E-2.2 O sistema exibe “Nenhum curso encontrado nesta categoria.” e o botão “Ver todos os cursos” (A-1).
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![categoria sem cursos publicados](prototipos/png/UC020-E2-1.png)
+    ![categoria sem cursos publicados](prototipos/png/UC020/UC020-E2-1.png)
 
     *Figura 0 – UC020, fluxo de exceção E2: categoria sem cursos publicados*
 
@@ -70,11 +70,11 @@
   5. O curso passa a aparecer em “Meus cursos” e o Aluno pode iniciar as aulas.
   6. Este caso de uso é finalizado.
 
-  ![página do curso com botão Matricular-se](prototipos/png/UC003-FB-1.png)
+  ![página do curso com botão Matricular-se](prototipos/png/UC003/UC003-FB-1.png)
 
   *Figura 0 – UC003, fluxo básico: página do curso com botão Matricular-se*
 
-  ![meus cursos do aluno após matrícula](prototipos/png/UC003-FB-2.png)
+  ![meus cursos do aluno após matrícula](prototipos/png/UC003/UC003-FB-2.png)
 
   *Figura 0 – UC003, fluxo básico: meus cursos do aluno após matrícula*
 - **Fluxos alternativos:**
@@ -83,7 +83,7 @@
     - A-1.2 O sistema exibe o botão “Continuar assistindo” no lugar de “Matricular-se”.
     - A-1.3 Este caso de uso é finalizado.
 
-    ![aluno matriculado: Continuar assistindo](prototipos/png/UC003-A1-1.png)
+    ![aluno matriculado: Continuar assistindo](prototipos/png/UC003/UC003-A1-1.png)
 
     *Figura 0 – UC003, fluxo alternativo A1: aluno matriculado: Continuar assistindo*
   - **A2 – O curso é gratuito**
@@ -91,7 +91,7 @@
     - A-2.2 O sistema não executa o UC019.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 4).
 
-    ![curso gratuito: matrícula sem preço](prototipos/png/UC003-A2-1.png)
+    ![curso gratuito: matrícula sem preço](prototipos/png/UC003/UC003-A2-1.png)
 
     *Figura 0 – UC003, fluxo alternativo A2: curso gratuito: matrícula sem preço*
   - **A3 – O pagamento simulado é aprovado**
@@ -103,7 +103,7 @@
     - E-1.2 O sistema informa que o curso não está mais disponível e não registra a matrícula.
     - E-1.3 Este caso de uso é finalizado.
 
-    ![curso indisponível: aviso e sem matrícula](prototipos/png/UC003-E1-1.png)
+    ![curso indisponível: aviso e sem matrícula](prototipos/png/UC003/UC003-E1-1.png)
 
     *Figura 0 – UC003, fluxo de exceção E1: curso indisponível: aviso e sem matrícula*
   - **E2 – Pagamento não concluído**
@@ -111,7 +111,7 @@
     - E-2.2 O sistema mantém a matrícula pendente, sem ativá-la, e mantém o botão “Matricular-se”.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![página do curso com aviso Pagamento recusado e botão Matricular-se](prototipos/png/UC019-E1-1.png)
+    ![página do curso com aviso Pagamento recusado e botão Matricular-se](prototipos/png/UC019/UC019-E1-1.png)
 
     *Figura 0 – UC003, fluxo de exceção E2: página do curso com aviso “Pagamento recusado.” e botão “Matricular-se”*
 
@@ -131,11 +131,11 @@
   4. O sistema registra o pagamento aprovado.
   5. Este caso de uso retorna ao UC003 (passo 4).
 
-  ![resumo do pagamento com Confirmar pagamento](prototipos/png/UC019-FB-1.png)
+  ![resumo do pagamento com Confirmar pagamento](prototipos/png/UC019/UC019-FB-1.png)
 
   *Figura 0 – UC019, fluxo básico: resumo do pagamento com Confirmar pagamento*
 
-  ![processando pagamento simulado](prototipos/png/UC019-FB-2.png)
+  ![processando pagamento simulado](prototipos/png/UC019/UC019-FB-2.png)
 
   *Figura 0 – UC019, fluxo básico: processando pagamento simulado*
 - **Fluxos alternativos:**
@@ -144,7 +144,7 @@
     - A-1.2 O sistema fecha o resumo sem registrar pagamento.
     - A-1.3 Este caso de uso é finalizado.
 
-    ![página do curso sem matrícula após cancelar](prototipos/png/UC003-FB-1.png)
+    ![página do curso sem matrícula após cancelar](prototipos/png/UC003/UC003-FB-1.png)
 
     *Figura 0 – UC019, fluxo alternativo A1: página do curso sem matrícula após cancelar*
 - **Fluxos de exceção:**
@@ -153,15 +153,31 @@
     - E-1.2 O sistema informa o erro ao Aluno, registra o pagamento como recusado e não ativa a matrícula.
     - E-1.3 O sistema volta à página do curso com o botão “Matricular-se” e este caso de uso retorna ao fluxo básico (passo 1).
 
-    ![página do curso com aviso Pagamento recusado e botão Matricular-se](prototipos/png/UC019-E1-1.png)
+    ![página do curso com aviso Pagamento recusado e botão Matricular-se](prototipos/png/UC019/UC019-E1-1.png)
 
     *Figura 0 – UC019, fluxo de exceção E1: página do curso com aviso “Pagamento recusado.” e botão “Matricular-se”*
+  - **E2 – Curso indisponível ou preço alterado**
+    - E-2.1 O sistema identifica que o curso foi despublicado ou teve o preço alterado depois de o resumo ser exibido.
+    - E-2.2 O sistema não registra pagamento, informa o motivo e, se o preço mudou, exibe o novo resumo.
+    - E-2.3 Este caso de uso retorna ao fluxo básico (passo 1), ou é finalizado se o curso está indisponível.
+
+    ![resumo de pagamento com aviso de preço alterado](prototipos/png/UC019/UC019-E2-1.png)
+
+    *Figura 0 – UC019, fluxo de exceção E2: resumo de pagamento com aviso de preço alterado*
+  - **E3 – Matrícula já existente**
+    - E-3.1 O sistema identifica que o Aluno já possui matrícula ativa no curso, por exemplo por duplo acionamento de “Confirmar pagamento”.
+    - E-3.2 O sistema não registra novo pagamento e informa que o Aluno já está matriculado.
+    - E-3.3 Este caso de uso é finalizado.
+
+    ![aviso de matrícula já existente, sem novo pagamento](prototipos/png/UC019/UC019-E3-1.png)
+
+    *Figura 0 – UC019, fluxo de exceção E3: aviso de matrícula já existente, sem novo pagamento*
 
 ## UC009 – Assistir Aula
 
 - **Nome do caso de uso:** Assistir Aula
-- **Ator(es):** Aluno.
-- **Descrição:** o Aluno reproduz o vídeo de uma aula do curso em que está matriculado, com o progresso registrado automaticamente, e pode abrir o chat com o Tutor de IA a qualquer momento (US008, US009, RF006). UC001 «extend» UC009.
+- **Ator(es):** Aluno; Visitante (somente aulas prévias).
+- **Descrição:** o Aluno, ou o Visitante no caso de aula prévia, reproduz o vídeo de uma aula do curso em que está matriculado, com o progresso registrado automaticamente, e pode abrir o chat com o Tutor de IA a qualquer momento (US008, US009, RF006). UC001 «extend» UC009.
 - **Pré-condições:** o Aluno ter realizado login na plataforma; a aula estar cadastrada com vídeo.
 - **Pós-condições:** progresso de visualização do Aluno atualizado; aula marcada como concluída quando o vídeo termina.
 - **Regras de negócio:** R-1 só o Aluno matriculado assiste às aulas do curso, exceto as aulas marcadas como prévia, que podem ser assistidas sem matrícula; R-2 o progresso é salvo em segundos assistidos, e não só como concluído ou não concluído; R-3 o ponto salvo é o mesmo em qualquer dispositivo.
@@ -173,11 +189,11 @@
   4. O sistema marca a aula como concluída e atualiza o progresso do Aluno no curso.
   5. Este caso de uso é finalizado.
 
-  ![aula com vídeo e Tutor de IA fechado](prototipos/png/UC009-FB-1.png)
+  ![aula com vídeo e Tutor de IA fechado](prototipos/png/UC009/UC009-FB-1.png)
 
   *Figura 0 – UC009, fluxo básico: aula com vídeo e Tutor de IA fechado*
 
-  ![aula concluída](prototipos/png/UC009-FB-2.png)
+  ![aula concluída](prototipos/png/UC009/UC009-FB-2.png)
 
   *Figura 0 – UC009, fluxo básico: aula concluída*
 - **Fluxos alternativos:**
@@ -190,7 +206,7 @@
     - A-2.2 O sistema inicia a reprodução a partir do ponto salvo anteriormente.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![aula retomada do ponto salvo](prototipos/png/UC009-A2-1.png)
+    ![aula retomada do ponto salvo](prototipos/png/UC009/UC009-A2-1.png)
 
     *Figura 0 – UC009, fluxo alternativo A2: aula retomada do ponto salvo*
   - **A3 – O Aluno tem dúvida sobre a aula**
@@ -198,16 +214,24 @@
     - A-3.2 O caso de uso UC001 (Conversar com Tutor de IA) é iniciado.
     - A-3.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![aula com painel do Tutor de IA aberto, com campo Sua pergunta e botão Enviar](prototipos/png/UC001-FB-1.png)
+    ![aula com painel do Tutor de IA aberto, com campo Sua pergunta e botão Enviar](prototipos/png/UC001/UC001-FB-1.png)
 
     *Figura 0 – UC009, fluxo alternativo A3: aula “Aula 2 · Entrevistas de descoberta” com painel do Tutor de IA aberto, campo “Sua pergunta” e botão “Enviar”*
+  - **A4 – O Visitante assiste a uma aula prévia**
+    - A-4.1 O Visitante, sem login, acessa uma aula marcada como prévia (R-1).
+    - A-4.2 O sistema reproduz o vídeo sem registrar progresso e indica que é uma aula prévia.
+    - A-4.3 Este caso de uso é finalizado.
+
+    ![aula prévia sem login](prototipos/png/UC009/UC009-A4-1.png)
+
+    *Figura 0 – UC009, fluxo alternativo A4: aula prévia sem login*
 - **Fluxos de exceção:**
   - **E1 – Aula indisponível (sem matrícula e sem prévia)**
     - E-1.1 O sistema identifica que o Aluno não está matriculado no curso e a aula não é prévia.
     - E-1.2 O sistema bloqueia o acesso e sugere a matrícula no curso (UC003).
     - E-1.3 Este caso de uso é finalizado.
 
-    ![aula bloqueada: matricule-se para assistir](prototipos/png/UC009-E1-1.png)
+    ![aula bloqueada: matricule-se para assistir](prototipos/png/UC009/UC009-E1-1.png)
 
     *Figura 0 – UC009, fluxo de exceção E1: aula bloqueada: matricule-se para assistir*
   - **E2 – Falha ao carregar o vídeo**
@@ -215,7 +239,7 @@
     - E-2.2 O sistema exibe o erro e oferece a opção de tentar carregar novamente.
     - E-2.3 Este caso de uso é finalizado.
 
-    ![erro ao carregar o vídeo](prototipos/png/UC009-E2-1.png)
+    ![erro ao carregar o vídeo](prototipos/png/UC009/UC009-E2-1.png)
 
     *Figura 0 – UC009, fluxo de exceção E2: erro ao carregar o vídeo*
 
@@ -236,15 +260,15 @@
   5. O sistema exibe o resultado ao Aluno e salva o progresso.
   6. Este caso de uso é finalizado.
 
-  ![quiz sem respostas](prototipos/png/UC002-FB-1.png)
+  ![quiz sem respostas](prototipos/png/UC002/UC002-FB-1.png)
 
   *Figura 0 – UC002, fluxo básico: quiz sem respostas*
 
-  ![quiz com respostas preenchidas](prototipos/png/UC002-FB-2.png)
+  ![quiz com respostas preenchidas](prototipos/png/UC002/UC002-FB-2.png)
 
   *Figura 0 – UC002, fluxo básico: quiz com respostas preenchidas*
 
-  ![resultado do quiz com nota e gabarito](prototipos/png/UC002-FB-3.png)
+  ![resultado do quiz com nota e gabarito](prototipos/png/UC002/UC002-FB-3.png)
 
   *Figura 0 – UC002, fluxo básico: resultado do quiz com nota e gabarito*
 - **Fluxos alternativos:**
@@ -253,11 +277,11 @@
     - A-1.2 O sistema exibe o resultado salvo; se o Instrutor permitir refazer, oferece a opção de novo envio.
     - A-1.3 Este caso de uso é finalizado, ou retorna ao fluxo básico (passo 2) se o Aluno escolher refazer.
 
-    ![resultado salvo](prototipos/png/UC002-A1-1.png)
+    ![resultado salvo](prototipos/png/UC002/UC002-A1-1.png)
 
     *Figura 0 – UC002, fluxo alternativo A1: resultado salvo*
 
-    ![resultado salvo com opção de refazer](prototipos/png/UC002-A1-2.png)
+    ![resultado salvo com opção de refazer](prototipos/png/UC002/UC002-A1-2.png)
 
     *Figura 0 – UC002, fluxo alternativo A1: resultado salvo com opção de refazer*
   - **A2 – O Aluno salva um rascunho e retoma depois**
@@ -265,7 +289,7 @@
     - A-2.2 O sistema salva as respostas parciais vinculadas ao Aluno e ao quiz.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 2) na próxima vez que o Aluno acessar o quiz.
 
-    ![rascunho salvo do quiz](prototipos/png/UC002-A2-1.png)
+    ![rascunho salvo do quiz](prototipos/png/UC002/UC002-A2-1.png)
 
     *Figura 0 – UC002, fluxo alternativo A2: rascunho salvo do quiz*
 - **Fluxos de exceção:**
@@ -274,7 +298,7 @@
     - E-1.2 O sistema bloqueia o envio e indica as questões pendentes.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![questões pendentes impedem o envio](prototipos/png/UC002-E1-1.png)
+    ![questões pendentes impedem o envio](prototipos/png/UC002/UC002-E1-1.png)
 
     *Figura 0 – UC002, fluxo de exceção E1: questões pendentes impedem o envio*
   - **E2 – Falha ao calcular a nota (gabarito incompleto)**
@@ -282,9 +306,17 @@
     - E-2.2 O sistema informa o erro ao Aluno e registra a falha para o Instrutor responsável.
     - E-2.3 Este caso de uso é finalizado.
 
-    ![gabarito incompleto: nota não calculada](prototipos/png/UC002-E2-1.png)
+    ![gabarito incompleto: nota não calculada](prototipos/png/UC002/UC002-E2-1.png)
 
     *Figura 0 – UC002, fluxo de exceção E2: gabarito incompleto: nota não calculada*
+  - **E3 – Aulas do módulo não concluídas**
+    - E-3.1 O sistema identifica que o Aluno ainda não concluiu todas as aulas do módulo.
+    - E-3.2 O sistema bloqueia o acesso ao quiz e indica as aulas pendentes.
+    - E-3.3 Este caso de uso é finalizado.
+
+    ![quiz bloqueado: aulas do módulo pendentes](prototipos/png/UC002/UC002-E3-1.png)
+
+    *Figura 0 – UC002, fluxo de exceção E3: quiz bloqueado: aulas do módulo pendentes*
 
 ## UC010 – Avaliar Curso
 
@@ -303,19 +335,19 @@
   5. O sistema salva a avaliação e recalcula a nota média do curso.
   6. Este caso de uso é finalizado.
 
-  ![avaliar curso: abrir a partir de Avaliar curso](prototipos/png/UC003-A1-1.png)
+  ![avaliar curso: abrir a partir de Avaliar curso](prototipos/png/UC003/UC003-A1-1.png)
 
   *Figura 0 – UC010, fluxo básico: avaliar curso: abrir a partir de Avaliar curso*
 
-  ![modal Avaliar curso vazio](prototipos/png/UC010-FB-2.png)
+  ![modal Avaliar curso vazio](prototipos/png/UC010/UC010-FB-2.png)
 
   *Figura 0 – UC010, fluxo básico: modal Avaliar curso vazio*
 
-  ![modal Avaliar curso preenchido](prototipos/png/UC010-FB-3.png)
+  ![modal Avaliar curso preenchido](prototipos/png/UC010/UC010-FB-3.png)
 
   *Figura 0 – UC010, fluxo básico: modal Avaliar curso preenchido*
 
-  ![avaliação salva na página do curso](prototipos/png/UC010-FB-4.png)
+  ![avaliação salva na página do curso](prototipos/png/UC010/UC010-FB-4.png)
 
   *Figura 0 – UC010, fluxo básico: avaliação salva na página do curso*
 - **Fluxos alternativos:**
@@ -324,7 +356,7 @@
     - A-1.2 O sistema preenche o formulário com a avaliação existente, pronta para edição.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3), atualizando a avaliação existente em vez de criar uma nova.
 
-    ![avaliação existente para editar](prototipos/png/UC010-A1-1.png)
+    ![avaliação existente para editar](prototipos/png/UC010/UC010-A1-1.png)
 
     *Figura 0 – UC010, fluxo alternativo A1: avaliação existente para editar*
   - **A2 – O Aluno cancela antes de confirmar**
@@ -337,7 +369,7 @@
     - E-1.2 O sistema bloqueia a avaliação e informa que é preciso concluir ao menos uma aula.
     - E-1.3 Este caso de uso é finalizado.
 
-    ![avaliação bloqueada: concluir uma aula antes](prototipos/png/UC010-E1-1.png)
+    ![avaliação bloqueada: concluir uma aula antes](prototipos/png/UC010/UC010-E1-1.png)
 
     *Figura 0 – UC010, fluxo de exceção E1: avaliação bloqueada: concluir uma aula antes*
   - **E2 – Envio sem nota selecionada**
@@ -345,6 +377,6 @@
     - E-2.2 O sistema bloqueia o envio e indica que a nota é obrigatória.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![avaliação sem nota: aviso obrigatório](prototipos/png/UC010-E2-1.png)
+    ![avaliação sem nota: aviso obrigatório](prototipos/png/UC010/UC010-E2-1.png)
 
     *Figura 0 – UC010, fluxo de exceção E2: avaliação sem nota: aviso obrigatório*

@@ -29,6 +29,7 @@
 | 1 | **DADO QUE:** estou assistindo a uma aula <br> **QUANDO:** assisto ao vídeo até o fim <br> **ENTÃO:** a aula é marcada como concluída no meu progresso. |
 | 2 | **DADO QUE:** pauso a aula na metade <br> **QUANDO:** saio e volto depois <br> **ENTÃO:** o progresso mostra os segundos assistidos até aquele ponto. |
 | 3 | **DADO QUE:** já completei todas as aulas de um módulo <br> **QUANDO:** acesso o curso <br> **ENTÃO:** vejo o percentual de conclusão do curso atualizado. |
+| 4 | **DADO QUE:** não estou matriculado no curso e a aula não é prévia <br> **QUANDO:** tento assistir à aula <br> **ENTÃO:** o acesso é bloqueado, nenhum progresso é registrado e o sistema sugere a matrícula. |
 
 ## US009 – REQUISITO RF006: Retomar aula de onde parou
 
@@ -45,6 +46,7 @@
 | 1 | **DADO QUE:** assisti a 5 minutos de uma aula de 10 e saí <br> **QUANDO:** volto a acessá-la <br> **ENTÃO:** o vídeo inicia a partir do minuto 5. |
 | 2 | **DADO QUE:** já concluí uma aula <br> **QUANDO:** acesso a aula de novo <br> **ENTÃO:** o vídeo inicia do começo, mas o status de concluída é mantido. |
 | 3 | **DADO QUE:** assisto à aula em outro dispositivo <br> **QUANDO:** retomo a reprodução <br> **ENTÃO:** o ponto salvo é o mesmo, independentemente do dispositivo usado. |
+| 4 | **DADO QUE:** o vídeo da aula falha ao carregar <br> **QUANDO:** tento retomar a aula <br> **ENTÃO:** vejo o erro e a opção de tentar carregar novamente, sem perder o ponto salvo. |
 
 ## US011 – REQUISITO RF008: Responder quiz
 
@@ -61,6 +63,7 @@
 | 1 | **DADO QUE:** completei as aulas do módulo <br> **QUANDO:** envio as respostas do quiz <br> **ENTÃO:** recebo a nota calculada e o resultado fica salvo no meu progresso. |
 | 2 | **DADO QUE:** não respondo a todas as questões <br> **QUANDO:** tento enviar <br> **ENTÃO:** recebo aviso de questão pendente e o envio é bloqueado. |
 | 3 | **DADO QUE:** já respondi ao quiz antes <br> **QUANDO:** acesso de novo <br> **ENTÃO:** vejo o meu resultado anterior, sem poder refazer, salvo se o Instrutor permitir. |
+| 4 | **DADO QUE:** estou respondendo ao quiz e ainda não respondi a todas as questões <br> **QUANDO:** aciono “Salvar rascunho” e volto depois <br> **ENTÃO:** as respostas parciais são mantidas e posso continuar de onde parei. |
 
 ## US014 – REQUISITO RF011: Avaliar curso
 

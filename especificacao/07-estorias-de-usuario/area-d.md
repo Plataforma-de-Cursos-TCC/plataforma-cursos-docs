@@ -29,6 +29,7 @@
 | 1 | **DADO QUE:** tenho alunos matriculados <br> **QUANDO:** seleciono um intervalo de datas <br> **ENTÃO:** vejo progresso e engajamento agregados só daquele período. |
 | 2 | **DADO QUE:** nenhum aluno teve atividade no período selecionado <br> **QUANDO:** aplico o filtro <br> **ENTÃO:** vejo um aviso claro de que não há dados, e não um erro. |
 | 3 | **DADO QUE:** tenho mais de um curso <br> **QUANDO:** acesso o dashboard <br> **ENTÃO:** consigo filtrar também por curso, além do período. |
+| 4 | **DADO QUE:** informo uma data final anterior à data inicial <br> **QUANDO:** aplico o filtro <br> **ENTÃO:** vejo mensagem de erro e o último intervalo válido é mantido. |
 
 ## US015 – REQUISITO RF018: Acessar área protegida por perfil
 

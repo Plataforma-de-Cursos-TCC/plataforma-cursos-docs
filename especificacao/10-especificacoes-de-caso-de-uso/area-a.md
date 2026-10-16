@@ -4,7 +4,7 @@
 - **Ator(es):** Visitante.
 - **Descrição:** o Visitante cria uma conta na plataforma informando e-mail e senha e aceitando os termos de uso e a política de privacidade (US002, RF001).
 - **Pré-condições:** o Visitante ter acessado a plataforma sem estar autenticado.
-- **Pós-condições:** conta criada com perfil Aluno (ou Instrutor, se escolhido) e senha armazenada com hash; Visitante direcionado ao login.
+- **Pós-condições:** conta criada com perfil Aluno (ou Instrutor, se escolhido no fluxo alternativo A1) e senha armazenada com hash; Visitante direcionado ao login.
 - **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório (LGPD, RNF020).
 - **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política, opção de perfil e botão “Criar conta”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
@@ -16,11 +16,11 @@
   6. O sistema confirma o cadastro e direciona o Visitante ao login (UC005).
   7. Este caso de uso é finalizado.
 
-  ![formulário de cadastro vazio](prototipos/png/UC012-FB-1.png)
+  ![formulário de cadastro vazio](prototipos/png/UC012/UC012-FB-1.png)
 
   *Figura 0 – UC012, fluxo básico: formulário de cadastro vazio*
 
-  ![login com aviso "Conta criada. Entre para continuar"](prototipos/png/UC012-FB-2.png)
+  ![login com aviso "Conta criada. Entre para continuar"](prototipos/png/UC012/UC012-FB-2.png)
 
   *Figura 0 – UC012, fluxo básico: login com aviso "Conta criada. Entre para continuar"*
 - **Fluxos alternativos:**
@@ -29,7 +29,7 @@
     - A-1.2 O sistema marca a conta para criação com perfil Instrutor e orienta o preenchimento do perfil de Instrutor depois do login.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![formulário de cadastro com perfil Instrutor marcado](prototipos/png/UC012-A1-1.png)
+    ![formulário de cadastro com perfil Instrutor marcado](prototipos/png/UC012/UC012-A1-1.png)
 
     *Figura 0 – UC012, fluxo alternativo A1: formulário de cadastro com perfil Instrutor marcado*
 - **Fluxos de exceção:**
@@ -38,7 +38,7 @@
     - E-1.2 O sistema informa que o e-mail está em uso e sugere fazer login ou recuperar a senha (UC011).
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![erro "Este e-mail já está em uso"](prototipos/png/UC012-E1-1.png)
+    ![erro "Este e-mail já está em uso"](prototipos/png/UC012/UC012-E1-1.png)
 
     *Figura 0 – UC012, fluxo de exceção E1: erro "Este e-mail já está em uso"*
   - **E2 – Senha fora dos critérios**
@@ -46,7 +46,7 @@
     - E-2.2 O sistema exibe os critérios exigidos e solicita nova senha.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![erro de senha fraca com critérios listados](prototipos/png/UC012-E2-1.png)
+    ![erro de senha fraca com critérios listados](prototipos/png/UC012/UC012-E2-1.png)
 
     *Figura 0 – UC012, fluxo de exceção E2: erro de senha fraca com critérios listados*
   - **E3 – Termos de uso e política de privacidade não aceitos**
@@ -72,7 +72,7 @@
   6. O sistema inicia o caso de uso UC016 (Acessar Área Protegida por Perfil) e direciona o Usuário para a sua área conforme o perfil (Aluno, Instrutor ou Administrador). (E-2)
   7. Este caso de uso é finalizado.
 
-  ![formulário de login vazio](prototipos/png/UC005-FB-1.png)
+  ![formulário de login vazio](prototipos/png/UC005/UC005-FB-1.png)
 
   *Figura 0 – UC005, fluxo básico: formulário de login vazio*
 - **Fluxos alternativos:**
@@ -90,7 +90,7 @@
     - E-1.2 O sistema exibe mensagem de erro genérica, sem indicar qual campo está incorreto.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![erro "E-mail ou senha inválidos"](prototipos/png/UC005-E1-1.png)
+    ![erro "E-mail ou senha inválidos"](prototipos/png/UC005/UC005-E1-1.png)
 
     *Figura 0 – UC005, fluxo de exceção E1: erro "E-mail ou senha inválidos"*
   - **E2 – Sessão expirada**
@@ -98,9 +98,25 @@
     - E-2.2 O sistema direciona o Usuário para a tela de login.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 1).
 
-    ![aviso "Sua sessão expirou. Entre novamente para continuar"](prototipos/png/UC005-E2-1.png)
+    ![aviso "Sua sessão expirou. Entre novamente para continuar"](prototipos/png/UC005/UC005-E2-1.png)
 
     *Figura 0 – UC005, fluxo de exceção E2: aviso "Sua sessão expirou. Entre novamente para continuar"*
+  - **E3 – Conta bloqueada pelo Administrador**
+    - E-3.1 O sistema identifica que a conta do Usuário está com status bloqueado (UC008).
+    - E-3.2 O sistema nega o login e informa que a conta está bloqueada, sem iniciar sessão.
+    - E-3.3 Este caso de uso é finalizado.
+
+    ![aviso "Sua conta está bloqueada"](prototipos/png/UC005/UC005-E3-1.png)
+
+    *Figura 0 – UC005, fluxo de exceção E3: aviso "Sua conta está bloqueada"*
+  - **E4 – Bloqueio temporário por tentativas inválidas**
+    - E-4.1 O sistema identifica 5 tentativas de login inválidas consecutivas para a conta (RNF008).
+    - E-4.2 O sistema bloqueia novos logins da conta por 15 minutos e informa o tempo restante.
+    - E-4.3 Este caso de uso é finalizado.
+
+    ![aviso de bloqueio de 15 minutos por tentativas inválidas](prototipos/png/UC005/UC005-E4-1.png)
+
+    *Figura 0 – UC005, fluxo de exceção E4: aviso de bloqueio de 15 minutos por tentativas inválidas*
 
 ## UC011 – Recuperar Senha
 
@@ -119,19 +135,19 @@
   5. O sistema salva a nova senha e confirma a redefinição.
   6. Este caso de uso é finalizado, retornando à tela de login (UC005).
 
-  ![formulário de recuperação de senha com e-mail preenchido](prototipos/png/UC011-FB-1.png)
+  ![formulário de recuperação de senha com e-mail preenchido](prototipos/png/UC011/UC011-FB-1.png)
 
   *Figura 0 – UC011, fluxo básico: formulário de recuperação de senha com e-mail preenchido*
 
-  ![aviso de envio do link com botão "Voltar ao login"](prototipos/png/UC011-FB-2.png)
+  ![aviso de envio do link com botão "Voltar ao login"](prototipos/png/UC011/UC011-FB-2.png)
 
   *Figura 0 – UC011, fluxo básico: aviso de envio do link com botão "Voltar ao login"*
 
-  ![formulário de nova senha e confirmação](prototipos/png/UC011-FB-3.png)
+  ![formulário de nova senha e confirmação](prototipos/png/UC011/UC011-FB-3.png)
 
   *Figura 0 – UC011, fluxo básico: formulário de nova senha e confirmação*
 
-  ![login com aviso "Senha redefinida. Entre com a nova senha"](prototipos/png/UC011-FB-4.png)
+  ![login com aviso "Senha redefinida. Entre com a nova senha"](prototipos/png/UC011/UC011-FB-4.png)
 
   *Figura 0 – UC011, fluxo básico: login com aviso "Senha redefinida. Entre com a nova senha"*
 - **Fluxos alternativos:**
@@ -140,7 +156,7 @@
     - A-1.2 O sistema invalida o link anterior e envia um novo.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![novo link enviado: mesma confirmação](prototipos/png/UC011-FB-2.png)
+    ![novo link enviado: mesma confirmação](prototipos/png/UC011/UC011-FB-2.png)
 
     *Figura 0 – UC011, fluxo alternativo A1: novo link enviado: mesma confirmação*
   - **A2 – O Usuário cancela a redefinição**
@@ -153,7 +169,7 @@
     - E-1.2 O sistema exibe a mesma mensagem de confirmação genérica de envio, sem revelar que o e-mail não existe (evita enumeração de usuários).
     - E-1.3 Este caso de uso é finalizado.
 
-    ![e-mail não cadastrado: mesma confirmação genérica](prototipos/png/UC011-FB-2.png)
+    ![e-mail não cadastrado: mesma confirmação genérica](prototipos/png/UC011/UC011-FB-2.png)
 
     *Figura 0 – UC011, fluxo de exceção E1: e-mail não cadastrado: mesma confirmação genérica*
   - **E2 – Link de redefinição expirado**
@@ -161,7 +177,7 @@
     - E-2.2 O sistema informa que o link expirou e oferece a opção de solicitar um novo.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 1).
 
-    ![aviso "Este link expirou" com botão "Solicitar novo link"](prototipos/png/UC011-E2-1.png)
+    ![aviso "Este link expirou" com botão "Solicitar novo link"](prototipos/png/UC011/UC011-E2-1.png)
 
     *Figura 0 – UC011, fluxo de exceção E2: aviso "Este link expirou" com botão "Solicitar novo link"*
   - **E3 – Link de redefinição já utilizado ou inválido**
@@ -186,11 +202,11 @@
   5. O sistema atualiza o perfil e confirma a alteração.
   6. Este caso de uso é finalizado.
 
-  ![perfil do Aluno](prototipos/png/UC013-FB-1.png)
+  ![perfil do Aluno](prototipos/png/UC013/UC013-FB-1.png)
 
   *Figura 0 – UC013, fluxo básico: perfil do Aluno*
 
-  ![perfil com aviso "Alterações salvas"](prototipos/png/UC013-FB-2.png)
+  ![perfil com aviso "Alterações salvas"](prototipos/png/UC013/UC013-FB-2.png)
 
   *Figura 0 – UC013, fluxo básico: perfil com aviso "Alterações salvas"*
 - **Fluxos alternativos:**
@@ -199,7 +215,7 @@
     - A-1.2 O Instrutor altera a minibiografia ou os links.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![perfil do Instrutor com minibiografia e links](prototipos/png/UC013-A1-1.png)
+    ![perfil do Instrutor com minibiografia e links](prototipos/png/UC013/UC013-A1-1.png)
 
     *Figura 0 – UC013, fluxo alternativo A1: perfil do Instrutor com minibiografia e links*
   - **A2 – O Usuário aciona “Alterar senha”**
@@ -212,13 +228,29 @@
     - E-1.2 O sistema indica o campo, informa a regra não atendida e solicita a correção.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![erro "Informe o nome" no campo Nome](prototipos/png/UC013-E1-1.png)
+    ![erro "Informe o nome" no campo Nome](prototipos/png/UC013/UC013-E1-1.png)
 
     *Figura 0 – UC013, fluxo de exceção E1: erro "Informe o nome" no campo Nome*
 
-    ![erro "Formato não aceito" no campo Foto](prototipos/png/UC013-E1-2.png)
+    ![erro "Formato não aceito" no campo Foto](prototipos/png/UC013/UC013-E1-2.png)
 
     *Figura 0 – UC013, fluxo de exceção E1: erro "Formato não aceito" no campo Foto*
+  - **E2 – Link ou minibiografia do Instrutor inválidos**
+    - E-2.1 O sistema identifica, no perfil de Instrutor, um link com formato inválido ou uma minibiografia acima do limite (US020).
+    - E-2.2 O sistema indica o campo, informa a regra não atendida e solicita a correção.
+    - E-2.3 Este caso de uso retorna ao fluxo alternativo A1 (passo A-1.2).
+
+    ![erro "Informe um link válido" no perfil do Instrutor](prototipos/png/UC013/UC013-E2-1.png)
+
+    *Figura 0 – UC013, fluxo de exceção E2: erro "Informe um link válido" no perfil do Instrutor*
+  - **E3 – Edição de perfil de Instrutor por quem não é o dono**
+    - E-3.1 O sistema identifica que o Usuário autenticado tenta alterar dados de perfil de Instrutor de outra conta (Aluno ou Administrador).
+    - E-3.2 O sistema nega o acesso, não altera nenhum dado e informa que a ação não é permitida.
+    - E-3.3 Este caso de uso é finalizado.
+
+    ![acesso negado à edição de perfil de outro Instrutor](prototipos/png/UC013/UC013-E3-1.png)
+
+    *Figura 0 – UC013, fluxo de exceção E3: acesso negado à edição de perfil de outro Instrutor*
 
 ## UC017 – Alterar Senha
 
@@ -237,11 +269,11 @@
   5. O sistema substitui a senha e confirma a alteração.
   6. Este caso de uso é finalizado.
 
-  ![perfil com bloco de alteração de senha](prototipos/png/UC017-FB-1.png)
+  ![perfil com bloco de alteração de senha](prototipos/png/UC017/UC017-FB-1.png)
 
   *Figura 0 – UC017, fluxo básico: perfil com bloco de alteração de senha*
 
-  ![perfil com aviso "Senha alterada"](prototipos/png/UC017-FB-2.png)
+  ![perfil com aviso "Senha alterada"](prototipos/png/UC017/UC017-FB-2.png)
 
   *Figura 0 – UC017, fluxo básico: perfil com aviso "Senha alterada"*
 - **Fluxos alternativos:**
@@ -250,7 +282,7 @@
     - A-1.2 O sistema fecha o bloco “Alterar senha” sem alterar a senha.
     - A-1.3 Este caso de uso é finalizado.
 
-    ![perfil sem alteração de senha após cancelar](prototipos/png/UC013-FB-1.png)
+    ![perfil sem alteração de senha após cancelar](prototipos/png/UC013/UC013-FB-1.png)
 
     *Figura 0 – UC017, fluxo alternativo A1: perfil sem alteração de senha após cancelar*
 - **Fluxos de exceção:**
@@ -259,7 +291,7 @@
     - E-1.2 O sistema recusa a troca de senha e informa o erro.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![erro "Senha atual incorreta"](prototipos/png/UC017-E1-1.png)
+    ![erro "Senha atual incorreta"](prototipos/png/UC017/UC017-E1-1.png)
 
     *Figura 0 – UC017, fluxo de exceção E1: erro "Senha atual incorreta"*
   - **E2 – Nova senha fora da política**
@@ -267,7 +299,7 @@
     - E-2.2 O sistema indica o campo e informa a regra.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![erro de nova senha fora da política](prototipos/png/UC017-E2-1.png)
+    ![erro de nova senha fora da política](prototipos/png/UC017/UC017-E2-1.png)
 
     *Figura 0 – UC017, fluxo de exceção E2: erro de nova senha fora da política*
   - **E3 – Confirmação não confere**

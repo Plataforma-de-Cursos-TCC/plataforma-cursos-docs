@@ -16,23 +16,23 @@
   6. O sistema torna o curso visível no catálogo. (A-1)
   7. Este caso de uso é finalizado.
 
-  ![lista "Meus cursos" do instrutor](prototipos/png/UC006-FB-1.png)
+  ![lista "Meus cursos" do instrutor](prototipos/png/UC006/UC006-FB-1.png)
 
   *Figura 0 – UC006, fluxo básico: lista "Meus cursos" do instrutor*
 
-  ![formulário "Novo curso" vazio](prototipos/png/UC006-FB-2.png)
+  ![formulário "Novo curso" vazio](prototipos/png/UC006/UC006-FB-2.png)
 
   *Figura 0 – UC006, fluxo básico: formulário "Novo curso" vazio*
 
-  ![formulário "Novo curso" preenchido](prototipos/png/UC006-FB-3.png)
+  ![formulário "Novo curso" preenchido](prototipos/png/UC006/UC006-FB-3.png)
 
   *Figura 0 – UC006, fluxo básico: formulário "Novo curso" preenchido*
 
-  ![lista "Meus cursos" após salvar rascunho](prototipos/png/UC006-FB-4.png)
+  ![lista "Meus cursos" após salvar rascunho](prototipos/png/UC006/UC006-FB-4.png)
 
   *Figura 0 – UC006, fluxo básico: lista "Meus cursos" após salvar rascunho*
 
-  ![lista "Meus cursos" com curso publicado](prototipos/png/UC006-FB-6.png)
+  ![lista "Meus cursos" com curso publicado](prototipos/png/UC006/UC006-FB-6.png)
 
   *Figura 0 – UC006, fluxo básico: lista "Meus cursos" com curso publicado*
 - **Fluxos alternativos:**
@@ -41,7 +41,7 @@
     - A-1.2 O sistema salva as alterações e as reflete no catálogo, sem afetar as matrículas existentes.
     - A-1.3 Este caso de uso é finalizado.
 
-    ![formulário "Editar curso" com dados atuais](prototipos/png/UC006-A1-1.png)
+    ![formulário "Editar curso" com dados atuais](prototipos/png/UC006/UC006-A1-1.png)
 
     *Figura 0 – UC006, fluxo alternativo A1: formulário "Editar curso" com dados atuais*
   - **A2 – O Instrutor exclui um curso sem matrículas**
@@ -49,7 +49,7 @@
     - A-2.2 O sistema confirma que não há alunos matriculados e remove o curso do catálogo.
     - A-2.3 Este caso de uso é finalizado.
 
-    ![confirmação de exclusão do curso na lista](prototipos/png/UC006-A2-1.png)
+    ![confirmação de exclusão do curso na lista](prototipos/png/UC006/UC006-A2-1.png)
 
     *Figura 0 – UC006, fluxo alternativo A2: confirmação de exclusão do curso na lista*
 - **Fluxos de exceção:**
@@ -58,7 +58,7 @@
     - E-1.2 O sistema bloqueia o salvamento e indica os campos pendentes.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![erro "Campo obrigatório" no título](prototipos/png/UC006-E1-1.png)
+    ![erro "Campo obrigatório" no título](prototipos/png/UC006/UC006-E1-1.png)
 
     *Figura 0 – UC006, fluxo de exceção E1: erro "Campo obrigatório" no título*
   - **E2 – Tentativa de excluir curso com alunos matriculados**
@@ -66,9 +66,25 @@
     - E-2.2 O sistema impede a exclusão e sugere despublicar o curso.
     - E-2.3 Este caso de uso é finalizado.
 
-    ![exclusão bloqueada na lista "Meus cursos"](prototipos/png/UC006-E2-1.png)
+    ![exclusão bloqueada na lista "Meus cursos"](prototipos/png/UC006/UC006-E2-1.png)
 
     *Figura 0 – UC006, fluxo de exceção E2: exclusão bloqueada na lista "Meus cursos"*
+  - **E3 – Instrutor não é dono do curso**
+    - E-3.1 O sistema identifica que o curso pertence a outro Instrutor.
+    - E-3.2 O sistema nega o acesso (403) e não executa nenhuma alteração.
+    - E-3.3 Este caso de uso é finalizado.
+
+    ![acesso negado: curso de outro Instrutor](prototipos/png/UC004/UC004-E3-1.png)
+
+    *Figura 0 – UC006, fluxo de exceção E3: acesso negado: curso de outro Instrutor*
+  - **E4 – Publicação de curso sem módulos ou aulas**
+    - E-4.1 O sistema identifica que o curso não tem módulos ou aulas cadastrados ao acionar “Publicar”.
+    - E-4.2 O sistema mantém o curso como rascunho e indica o que falta.
+    - E-4.3 Este caso de uso retorna ao fluxo básico.
+
+    ![erro ao publicar curso sem módulos ou aulas](prototipos/png/UC006/UC006-E4-1.png)
+
+    *Figura 0 – UC006, fluxo de exceção E4: erro ao publicar curso sem módulos ou aulas*
 
 ## UC014 – Gerenciar Módulos do Curso
 
@@ -87,15 +103,15 @@
   5. O sistema salva o módulo e atualiza a lista de módulos.
   6. Este caso de uso é finalizado.
 
-  ![tela "Módulos do curso" com botão "Novo módulo"](prototipos/png/UC014-FB-1.png)
+  ![tela "Módulos do curso" com botão "Novo módulo"](prototipos/png/UC014/UC014-FB-1.png)
 
   *Figura 0 – UC014, fluxo básico: tela "Módulos do curso" com botão "Novo módulo"*
 
-  ![formulário "Novo módulo" vazio](prototipos/png/UC014-FB-3.png)
+  ![formulário "Novo módulo" vazio](prototipos/png/UC014/UC014-FB-3.png)
 
   *Figura 0 – UC014, fluxo básico: formulário "Novo módulo" vazio*
 
-  ![tela "Módulos do curso" após criar módulo](prototipos/png/UC014-FB-5.png)
+  ![tela "Módulos do curso" após criar módulo](prototipos/png/UC014/UC014-FB-5.png)
 
   *Figura 0 – UC014, fluxo básico: tela "Módulos do curso" após criar módulo*
 - **Fluxos alternativos:**
@@ -105,7 +121,7 @@
     - A-1.3 O Instrutor altera o título ou a posição do módulo.
     - A-1.4 Este caso de uso retorna ao fluxo básico (passo 4).
 
-    ![formulário "Editar módulo" com dados atuais](prototipos/png/UC014-A1-1.png)
+    ![formulário "Editar módulo" com dados atuais](prototipos/png/UC014/UC014-A1-1.png)
 
     *Figura 0 – UC014, fluxo alternativo A1: formulário "Editar módulo" com dados atuais*
   - **A2 – O Instrutor exclui um módulo**
@@ -115,7 +131,7 @@
     - A-2.4 O sistema remove o módulo, as suas aulas e o seu quiz e atualiza a lista.
     - A-2.5 Este caso de uso é finalizado.
 
-    ![confirmação de exclusão do módulo](prototipos/png/UC014-A2-1.png)
+    ![confirmação de exclusão do módulo](prototipos/png/UC014/UC014-A2-1.png)
 
     *Figura 0 – UC014, fluxo alternativo A2: confirmação de exclusão do módulo*
 - **Fluxos de exceção:**
@@ -124,7 +140,7 @@
     - E-1.2 O sistema bloqueia o salvamento e indica o campo obrigatório.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![erro "Campo obrigatório" no título do módulo](prototipos/png/UC014-E1-1.png)
+    ![erro "Campo obrigatório" no título do módulo](prototipos/png/UC014/UC014-E1-1.png)
 
     *Figura 0 – UC014, fluxo de exceção E1: erro "Campo obrigatório" no título do módulo*
   - **E2 – Posição já utilizada**
@@ -132,7 +148,7 @@
     - E-2.2 O sistema informa o conflito e solicita outra posição.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![erro "Posição já em uso" no módulo](prototipos/png/UC014-E2-1.png)
+    ![erro "Posição já em uso" no módulo](prototipos/png/UC014/UC014-E2-1.png)
 
     *Figura 0 – UC014, fluxo de exceção E2: erro "Posição já em uso" no módulo*
   - **E3 – Instrutor não é dono do curso**
@@ -159,19 +175,19 @@
   7. O sistema salva a aula e inicia a transcrição e a indexação do conteúdo.
   8. Este caso de uso é finalizado.
 
-  ![tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"](prototipos/png/UC015-FB-1.png)
+  ![tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"](prototipos/png/UC015/UC015-FB-1.png)
 
   *Figura 0 – UC015, fluxo básico: tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"*
 
-  ![formulário "Nova aula" vazio](prototipos/png/UC015-FB-3.png)
+  ![formulário "Nova aula" vazio](prototipos/png/UC015/UC015-FB-3.png)
 
   *Figura 0 – UC015, fluxo básico: formulário "Nova aula" vazio*
 
-  ![formulário "Nova aula" com envio em andamento](prototipos/png/UC015-FB-6.png)
+  ![formulário "Nova aula" com envio em andamento](prototipos/png/UC015/UC015-FB-6.png)
 
   *Figura 0 – UC015, fluxo básico: formulário "Nova aula" com envio em andamento*
 
-  ![tela "Aulas do módulo" após salvar aula](prototipos/png/UC015-FB-7.png)
+  ![tela "Aulas do módulo" após salvar aula](prototipos/png/UC015/UC015-FB-7.png)
 
   *Figura 0 – UC015, fluxo básico: tela "Aulas do módulo" após salvar aula*
 - **Fluxos alternativos:**
@@ -182,7 +198,7 @@
     - A-1.4 Se um novo vídeo foi escolhido, o sistema reprocessa a transcrição e a indexação, substituindo as anteriores (única exceção a R-4: a geração única vale por vídeo).
     - A-1.5 Este caso de uso retorna ao fluxo básico (passo 4).
 
-    ![formulário "Editar aula" com dados atuais](prototipos/png/UC015-A1-1.png)
+    ![formulário "Editar aula" com dados atuais](prototipos/png/UC015/UC015-A1-1.png)
 
     *Figura 0 – UC015, fluxo alternativo A1: formulário "Editar aula" com dados atuais*
   - **A2 – O Instrutor exclui uma aula**
@@ -190,7 +206,7 @@
     - A-2.2 O sistema remove a aula e o seu vídeo e atualiza a lista.
     - A-2.3 Este caso de uso é finalizado.
 
-    ![confirmação de exclusão da aula](prototipos/png/UC015-A2-1.png)
+    ![confirmação de exclusão da aula](prototipos/png/UC015/UC015-A2-1.png)
 
     *Figura 0 – UC015, fluxo alternativo A2: confirmação de exclusão da aula*
 - **Fluxos de exceção:**
@@ -199,7 +215,7 @@
     - E-1.2 O sistema recusa o arquivo e informa os limites aceitos.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![erro "Formato não aceito" no vídeo](prototipos/png/UC015-E1-1.png)
+    ![erro "Formato não aceito" no vídeo](prototipos/png/UC015/UC015-E1-1.png)
 
     *Figura 0 – UC015, fluxo de exceção E1: erro "Formato não aceito" no vídeo*
   - **E2 – Falha no envio do vídeo**
@@ -207,7 +223,7 @@
     - E-2.2 O sistema informa o erro e gera um novo link de envio para nova tentativa.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 6).
 
-    ![erro "Falha no envio" com botão "Tentar novamente"](prototipos/png/UC015-E2-1.png)
+    ![erro "Falha no envio" com botão "Tentar novamente"](prototipos/png/UC015/UC015-E2-1.png)
 
     *Figura 0 – UC015, fluxo de exceção E2: erro "Falha no envio" com botão "Tentar novamente"*
   - **E3 – Instrutor não é dono do curso**
@@ -234,27 +250,27 @@
   7. O sistema publica o quiz, que fica disponível para os alunos do módulo.
   8. Este caso de uso é finalizado.
 
-  ![botão "Novo quiz" na tela "Aulas do módulo"](prototipos/png/UC015-FB-1.png)
+  ![botão "Novo quiz" na tela "Aulas do módulo"](prototipos/png/UC015/UC015-FB-1.png)
 
   *Figura 0 – UC004, fluxo básico: botão "Novo quiz" na tela "Aulas do módulo"*
 
-  ![botão "Novo quiz" acionado na tela "Aulas do módulo"](prototipos/png/UC015-FB-1.png)
+  ![botão "Novo quiz" acionado na tela "Aulas do módulo"](prototipos/png/UC015/UC015-FB-1.png)
 
   *Figura 0 – UC004, fluxo básico: botão "Novo quiz" acionado na tela "Aulas do módulo"*
 
-  ![formulário "Novo quiz" vazio](prototipos/png/UC004-FB-3.png)
+  ![formulário "Novo quiz" vazio](prototipos/png/UC004/UC004-FB-3.png)
 
   *Figura 0 – UC004, fluxo básico: formulário "Novo quiz" vazio*
 
-  ![formulário "Novo quiz" com alternativa correta marcada](prototipos/png/UC004-FB-4.png)
+  ![formulário "Novo quiz" com alternativa correta marcada](prototipos/png/UC004/UC004-FB-4.png)
 
   *Figura 0 – UC004, fluxo básico: formulário "Novo quiz" com alternativa correta marcada*
 
-  !["Salvar quiz" dispara validação sobre o estado preenchido](prototipos/png/UC004-FB-4.png)
+  !["Salvar quiz" dispara validação sobre o estado preenchido](prototipos/png/UC004/UC004-FB-4.png)
 
   *Figura 0 – UC004, fluxo básico: "Salvar quiz" dispara validação sobre o estado preenchido*
 
-  ![formulário "Novo quiz" após publicar com "Voltar ao módulo"](prototipos/png/UC004-FB-7.png)
+  ![formulário "Novo quiz" após publicar com "Voltar ao módulo"](prototipos/png/UC004/UC004-FB-7.png)
 
   *Figura 0 – UC004, fluxo básico: formulário "Novo quiz" após publicar com "Voltar ao módulo"*
 - **Fluxos alternativos:**
@@ -263,7 +279,7 @@
     - A-1.2 O sistema mantém o histórico de respostas e as notas já lançadas.
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 5).
 
-    ![formulário "Editar quiz" com aviso de notas](prototipos/png/UC004-A1-1.png)
+    ![formulário "Editar quiz" com aviso de notas](prototipos/png/UC004/UC004-A1-1.png)
 
     *Figura 0 – UC004, fluxo alternativo A1: formulário "Editar quiz" com aviso de notas*
   - **A2 – O Instrutor salva o quiz como rascunho**
@@ -271,7 +287,7 @@
     - A-2.2 O sistema salva o quiz sem torná-lo visível aos alunos.
     - A-2.3 Este caso de uso é finalizado.
 
-    ![formulário "Novo quiz" após salvar rascunho](prototipos/png/UC004-A2-1.png)
+    ![formulário "Novo quiz" após salvar rascunho](prototipos/png/UC004/UC004-A2-1.png)
 
     *Figura 0 – UC004, fluxo alternativo A2: formulário "Novo quiz" após salvar rascunho*
 - **Fluxos de exceção:**
@@ -280,7 +296,7 @@
     - E-1.2 O sistema bloqueia o salvamento e pede para cadastrar ao menos duas alternativas.
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
 
-    ![erro "Informe pelo menos duas alternativas"](prototipos/png/UC004-E1-1.png)
+    ![erro "Informe pelo menos duas alternativas"](prototipos/png/UC004/UC004-E1-1.png)
 
     *Figura 0 – UC004, fluxo de exceção E1: erro "Informe pelo menos duas alternativas"*
   - **E2 – Pergunta sem alternativa marcada como correta**
@@ -288,6 +304,22 @@
     - E-2.2 O sistema bloqueia o salvamento e pede para marcar a alternativa correta.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 4).
 
-    ![erro "Marque a alternativa correta"](prototipos/png/UC004-E2-1.png)
+    ![erro "Marque a alternativa correta"](prototipos/png/UC004/UC004-E2-1.png)
 
     *Figura 0 – UC004, fluxo de exceção E2: erro "Marque a alternativa correta"*
+  - **E3 – Instrutor não é dono do curso**
+    - E-3.1 O sistema identifica que o curso pertence a outro Instrutor.
+    - E-3.2 O sistema nega o acesso (403) e não executa nenhuma alteração.
+    - E-3.3 Este caso de uso é finalizado.
+
+    ![acesso negado: curso de outro Instrutor](prototipos/png/UC004/UC004-E3-1.png)
+
+    *Figura 0 – UC004, fluxo de exceção E3: acesso negado: curso de outro Instrutor*
+  - **E4 – Módulo inexistente ou sem permissão de edição**
+    - E-4.1 O sistema identifica que o módulo informado não existe ou foi removido.
+    - E-4.2 O sistema informa o erro e não cadastra o quiz.
+    - E-4.3 Este caso de uso é finalizado.
+
+    ![erro "Módulo não encontrado" no formulário de quiz](prototipos/png/UC004/UC004-E4-1.png)
+
+    *Figura 0 – UC004, fluxo de exceção E4: erro "Módulo não encontrado" no formulário de quiz*
