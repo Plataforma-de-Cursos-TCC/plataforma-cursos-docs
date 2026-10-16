@@ -1,4 +1,4 @@
-## UC001 – Conversar com Tutor de IA
+## 16. UC001 – Conversar com Tutor de IA
 
 - **Nome do caso de uso:** Conversar com Tutor de IA
 - **Ator(es):** Aluno (primário); Tutor de IA (ator sistêmico, secundário).
@@ -77,7 +77,7 @@
 
     *Figura 0 – UC001, fluxo de exceção E4: aula bloqueada: matricule-se para assistir e usar o Tutor de IA*
 
-## UC007 – Ver Dashboard com Filtro
+## 17. UC007 – Ver Dashboard com Filtro
 
 - **Nome do caso de uso:** Ver Dashboard com Filtro
 - **Ator(es):** Instrutor, Administrador.
@@ -132,7 +132,7 @@
 
     *Figura 0 – UC007, fluxo de exceção E2: aviso "Nenhum aluno com atividade no período selecionado"*
 
-## UC008 – Gerenciar Usuários
+## 18. UC008 – Gerenciar Usuários
 
 - **Nome do caso de uso:** Gerenciar Usuários
 - **Ator(es):** Administrador.
@@ -199,58 +199,7 @@
 
     *Figura 0 – UC008, fluxo de exceção E2: erro "Usuário não encontrado"*
 
-## UC018 – Excluir e Anonimizar Usuário
-
-- **Nome do caso de uso:** Excluir e Anonimizar Usuário
-- **Ator(es):** Administrador.
-- **Descrição:** o Administrador exclui a conta de um usuário; o sistema remove os dados pessoais e mantém o histórico de matrícula e pagamento anonimizado (US016, RF012). Estende o UC008 – Gerenciar Usuários, a partir da ação “Excluir”.
-- **Pré-condições:** o Administrador ter realizado login e estar na lista de usuários (UC008).
-- **Pós-condições:** dados pessoais do usuário removidos, histórico de matrícula e pagamento mantido anonimizado, acesso revogado e usuário fora da lista.
-- **Regras de negócio:** R-1 a exclusão remove os dados pessoais, mas mantém o histórico de matrícula e pagamento anonimizado; R-2 o Administrador não pode excluir a própria conta; R-3 a exclusão é irreversível e exige confirmação explícita; R-4 a exclusão é registrada na trilha de auditoria (RNF016), sem manter dados pessoais no registro.
-- **Protótipo(s) de tela:** modal de confirmação “Excluir usuário?” com aviso de anonimização irreversível sobre a lista de usuários. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
-- **Fluxo básico:**
-  1. O sistema exibe a confirmação de exclusão com o nome do usuário e o aviso de que a ação é irreversível. (A-1)
-  2. O Administrador aciona “Excluir”.
-  3. O sistema valida o usuário-alvo. (E-1) (E-2)
-  4. O sistema anonimiza os dados pessoais, mantém o histórico anonimizado, revoga o acesso e registra a exclusão na trilha de auditoria.
-  5. O sistema retira o usuário da lista e confirma a exclusão.
-  6. Este caso de uso é finalizado.
-
-  ![modal de confirmação com aviso de anonimização irreversível](prototipos/png/UC018/UC018-FB-1.png)
-
-  *Figura 0 – UC018, fluxo básico: modal de confirmação com aviso de anonimização irreversível*
-
-  ![lista sem o usuário excluído e aviso "Usuário excluído"](prototipos/png/UC018/UC018-FB-2.png)
-
-  *Figura 0 – UC018, fluxo básico: lista sem o usuário excluído e aviso "Usuário excluído"*
-- **Fluxos alternativos:**
-  - **A1 – O Administrador cancela a exclusão**
-    - A-1.1 O Administrador aciona “Cancelar” na confirmação.
-    - A-1.2 O sistema fecha a confirmação sem alterar o usuário.
-    - A-1.3 Este caso de uso é finalizado.
-
-    ![lista de usuários sem alteração após cancelar](prototipos/png/UC008/UC008-FB-1.png)
-
-    *Figura 0 – UC018, fluxo alternativo A1: lista de usuários sem alteração após cancelar*
-- **Fluxos de exceção:**
-  - **E1 – Tentativa de excluir a própria conta**
-    - E-1.1 O sistema identifica que o usuário-alvo é a própria conta do Administrador que está logado.
-    - E-1.2 O sistema impede a exclusão e exibe um aviso.
-    - E-1.3 Este caso de uso é finalizado.
-
-    ![erro "Não é possível excluir a própria conta"](prototipos/png/UC018/UC018-E1-1.png)
-
-    *Figura 0 – UC018, fluxo de exceção E1: erro "Não é possível excluir a própria conta"*
-  - **E2 – Usuário-alvo já removido por outro Administrador**
-    - E-2.1 O sistema identifica que o usuário-alvo não existe mais.
-    - E-2.2 O sistema informa que o usuário não foi encontrado e atualiza a lista.
-    - E-2.3 Este caso de uso é finalizado.
-
-    ![erro "Usuário não encontrado"](prototipos/png/UC008/UC008-E2-1.png)
-
-    *Figura 0 – UC018, fluxo de exceção E2: erro "Usuário não encontrado"*
-
-## UC016 – Acessar Área Protegida por Perfil
+## 19. UC016 – Acessar Área Protegida por Perfil
 
 - **Nome do caso de uso:** Acessar Área Protegida por Perfil
 - **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
@@ -301,3 +250,54 @@
     ![tela "Acesso negado" com aviso de perfil sem acesso](prototipos/png/UC016/UC016-E2-1.png)
 
     *Figura 0 – UC016, fluxo de exceção E2: tela "Acesso negado" com aviso de perfil sem acesso*
+
+## 20. UC018 – Excluir e Anonimizar Usuário
+
+- **Nome do caso de uso:** Excluir e Anonimizar Usuário
+- **Ator(es):** Administrador.
+- **Descrição:** o Administrador exclui a conta de um usuário; o sistema remove os dados pessoais e mantém o histórico de matrícula e pagamento anonimizado (US016, RF012). Estende o UC008 – Gerenciar Usuários, a partir da ação “Excluir”.
+- **Pré-condições:** o Administrador ter realizado login e estar na lista de usuários (UC008).
+- **Pós-condições:** dados pessoais do usuário removidos, histórico de matrícula e pagamento mantido anonimizado, acesso revogado e usuário fora da lista.
+- **Regras de negócio:** R-1 a exclusão remove os dados pessoais, mas mantém o histórico de matrícula e pagamento anonimizado; R-2 o Administrador não pode excluir a própria conta; R-3 a exclusão é irreversível e exige confirmação explícita; R-4 a exclusão é registrada na trilha de auditoria (RNF016), sem manter dados pessoais no registro.
+- **Protótipo(s) de tela:** modal de confirmação “Excluir usuário?” com aviso de anonimização irreversível sobre a lista de usuários. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Fluxo básico:**
+  1. O sistema exibe a confirmação de exclusão com o nome do usuário e o aviso de que a ação é irreversível. (A-1)
+  2. O Administrador aciona “Excluir”.
+  3. O sistema valida o usuário-alvo. (E-1) (E-2)
+  4. O sistema anonimiza os dados pessoais, mantém o histórico anonimizado, revoga o acesso e registra a exclusão na trilha de auditoria.
+  5. O sistema retira o usuário da lista e confirma a exclusão.
+  6. Este caso de uso é finalizado.
+
+  ![modal de confirmação com aviso de anonimização irreversível](prototipos/png/UC018/UC018-FB-1.png)
+
+  *Figura 0 – UC018, fluxo básico: modal de confirmação com aviso de anonimização irreversível*
+
+  ![lista sem o usuário excluído e aviso "Usuário excluído"](prototipos/png/UC018/UC018-FB-2.png)
+
+  *Figura 0 – UC018, fluxo básico: lista sem o usuário excluído e aviso "Usuário excluído"*
+- **Fluxos alternativos:**
+  - **A1 – O Administrador cancela a exclusão**
+    - A-1.1 O Administrador aciona “Cancelar” na confirmação.
+    - A-1.2 O sistema fecha a confirmação sem alterar o usuário.
+    - A-1.3 Este caso de uso é finalizado.
+
+    ![lista de usuários sem alteração após cancelar](prototipos/png/UC008/UC008-FB-1.png)
+
+    *Figura 0 – UC018, fluxo alternativo A1: lista de usuários sem alteração após cancelar*
+- **Fluxos de exceção:**
+  - **E1 – Tentativa de excluir a própria conta**
+    - E-1.1 O sistema identifica que o usuário-alvo é a própria conta do Administrador que está logado.
+    - E-1.2 O sistema impede a exclusão e exibe um aviso.
+    - E-1.3 Este caso de uso é finalizado.
+
+    ![erro "Não é possível excluir a própria conta"](prototipos/png/UC018/UC018-E1-1.png)
+
+    *Figura 0 – UC018, fluxo de exceção E1: erro "Não é possível excluir a própria conta"*
+  - **E2 – Usuário-alvo já removido por outro Administrador**
+    - E-2.1 O sistema identifica que o usuário-alvo não existe mais.
+    - E-2.2 O sistema informa que o usuário não foi encontrado e atualiza a lista.
+    - E-2.3 Este caso de uso é finalizado.
+
+    ![erro "Usuário não encontrado"](prototipos/png/UC008/UC008-E2-1.png)
+
+    *Figura 0 – UC018, fluxo de exceção E2: erro "Usuário não encontrado"*

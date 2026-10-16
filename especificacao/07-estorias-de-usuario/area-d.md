@@ -1,4 +1,4 @@
-## US012 – REQUISITO RF009: Conversar com Tutor de IA
+## 18. US012 – REQUISITO RF009: Conversar com Tutor de IA
 
 **COMO:** Aluno matriculado em um curso\
 **POSSO:** conversar com o Tutor de IA daquele curso\
@@ -14,7 +14,7 @@
 | 2 | **DADO QUE:** pergunto algo fora do conteúdo do curso <br> **QUANDO:** envio a mensagem <br> **ENTÃO:** o Tutor de IA responde que não tem essa informação no material do curso. |
 | 3 | **DADO QUE:** excedo o limite de mensagens por período <br> **QUANDO:** tento enviar nova pergunta <br> **ENTÃO:** recebo aviso de limite atingido. |
 
-## US013 – REQUISITO RF010: Ver dashboard com filtro
+## 19. US013 – REQUISITO RF010: Ver dashboard com filtro
 
 **COMO:** Instrutor\
 **POSSO:** ver o dashboard da minha turma com filtro de período\
@@ -31,7 +31,7 @@
 | 3 | **DADO QUE:** tenho mais de um curso <br> **QUANDO:** acesso o dashboard <br> **ENTÃO:** consigo filtrar também por curso, além do período. |
 | 4 | **DADO QUE:** informo uma data final anterior à data inicial <br> **QUANDO:** aplico o filtro <br> **ENTÃO:** vejo mensagem de erro e o último intervalo válido é mantido. |
 
-## US015 – REQUISITO RF018: Acessar área protegida por perfil
+## 20. US015 – REQUISITO RF018: Acessar área protegida por perfil
 
 **COMO:** Usuário autenticado\
 **POSSO:** acessar apenas as áreas permitidas para o meu perfil (Aluno, Instrutor ou Administrador)\
@@ -47,7 +47,7 @@
 | 2 | **DADO QUE:** estou logado como Instrutor <br> **QUANDO:** acesso a minha área <br> **ENTÃO:** vejo o meu nome e o meu perfil na interface. |
 | 3 | **DADO QUE:** a minha sessão expira enquanto navego em uma área protegida <br> **QUANDO:** tento uma ação <br> **ENTÃO:** sou direcionado para o login, sem exposição dos dados da área. |
 
-## US016 – REQUISITO RF012: Gerenciar usuários
+## 21. US016 – REQUISITO RF012: Gerenciar usuários
 
 **COMO:** Administrador\
 **POSSO:** gerenciar os usuários da plataforma\

@@ -1,60 +1,4 @@
-## UC012 – Cadastrar-se na Plataforma
-
-- **Nome do caso de uso:** Cadastrar-se na Plataforma
-- **Ator(es):** Visitante.
-- **Descrição:** o Visitante cria uma conta na plataforma informando e-mail e senha e aceitando os termos de uso e a política de privacidade (US002, RF001).
-- **Pré-condições:** o Visitante ter acessado a plataforma sem estar autenticado.
-- **Pós-condições:** conta criada com perfil Aluno (ou Instrutor, se escolhido no fluxo alternativo A1) e senha armazenada com hash; Visitante direcionado ao login.
-- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório (LGPD, RNF020).
-- **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política, opção de perfil e botão “Criar conta”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
-- **Fluxo básico:**
-  1. O Visitante acessa a tela de cadastro.
-  2. O Visitante informa e-mail, senha e confirmação da senha e aceita os termos de uso e a política de privacidade. (A-1)
-  3. O Visitante aciona “Criar conta”. (E-3)
-  4. O sistema valida a unicidade do e-mail, os critérios da senha e o aceite dos termos. (E-1) (E-2)
-  5. O sistema cria a conta com perfil Aluno e armazena a senha com hash.
-  6. O sistema confirma o cadastro e direciona o Visitante ao login (UC005).
-  7. Este caso de uso é finalizado.
-
-  ![formulário de cadastro vazio](prototipos/png/UC012/UC012-FB-1.png)
-
-  *Figura 0 – UC012, fluxo básico: formulário de cadastro vazio*
-
-  ![login com aviso "Conta criada. Entre para continuar"](prototipos/png/UC012/UC012-FB-2.png)
-
-  *Figura 0 – UC012, fluxo básico: login com aviso "Conta criada. Entre para continuar"*
-- **Fluxos alternativos:**
-  - **A1 – O Visitante escolhe o perfil de Instrutor**
-    - A-1.1 O Visitante seleciona a opção de cadastro como Instrutor.
-    - A-1.2 O sistema marca a conta para criação com perfil Instrutor e orienta o preenchimento do perfil de Instrutor depois do login.
-    - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
-
-    ![formulário de cadastro com perfil Instrutor marcado](prototipos/png/UC012/UC012-A1-1.png)
-
-    *Figura 0 – UC012, fluxo alternativo A1: formulário de cadastro com perfil Instrutor marcado*
-- **Fluxos de exceção:**
-  - **E1 – E-mail já cadastrado**
-    - E-1.1 O sistema identifica que o e-mail informado já possui conta.
-    - E-1.2 O sistema informa que o e-mail está em uso e sugere fazer login ou recuperar a senha (UC011).
-    - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
-
-    ![erro "Este e-mail já está em uso"](prototipos/png/UC012/UC012-E1-1.png)
-
-    *Figura 0 – UC012, fluxo de exceção E1: erro "Este e-mail já está em uso"*
-  - **E2 – Senha fora dos critérios**
-    - E-2.1 O sistema identifica que a senha não atende aos critérios mínimos.
-    - E-2.2 O sistema exibe os critérios exigidos e solicita nova senha.
-    - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
-
-    ![erro de senha fraca com critérios listados](prototipos/png/UC012/UC012-E2-1.png)
-
-    *Figura 0 – UC012, fluxo de exceção E2: erro de senha fraca com critérios listados*
-  - **E3 – Termos de uso e política de privacidade não aceitos**
-    - E-3.1 O sistema identifica que o aceite dos termos não foi marcado (R-4); a confirmação da senha também é conferida no front-end antes do envio.
-    - E-3.2 O sistema rejeita o cadastro (422), mantém os dados preenchidos e solicita o aceite.
-    - E-3.3 Este caso de uso retorna ao fluxo básico (passo 2).
-
-## UC005 – Realizar Login
+## 1. UC005 – Realizar Login
 
 - **Nome do caso de uso:** Realizar Login
 - **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
@@ -118,7 +62,7 @@
 
     *Figura 0 – UC005, fluxo de exceção E4: aviso de bloqueio de 15 minutos por tentativas inválidas*
 
-## UC011 – Recuperar Senha
+## 2. UC011 – Recuperar Senha
 
 - **Nome do caso de uso:** Recuperar Senha
 - **Ator(es):** Usuário (ainda não autenticado).
@@ -185,7 +129,63 @@
     - E-3.2 O sistema rejeita a redefinição (422), informa que o link é inválido e oferece a opção de solicitar um novo.
     - E-3.3 Este caso de uso retorna ao fluxo básico (passo 1).
 
-## UC013 – Editar Dados do Perfil
+## 3. UC012 – Cadastrar-se na Plataforma
+
+- **Nome do caso de uso:** Cadastrar-se na Plataforma
+- **Ator(es):** Visitante.
+- **Descrição:** o Visitante cria uma conta na plataforma informando e-mail e senha e aceitando os termos de uso e a política de privacidade (US002, RF001).
+- **Pré-condições:** o Visitante ter acessado a plataforma sem estar autenticado.
+- **Pós-condições:** conta criada com perfil Aluno (ou Instrutor, se escolhido no fluxo alternativo A1) e senha armazenada com hash; Visitante direcionado ao login.
+- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório (LGPD, RNF020).
+- **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política, opção de perfil e botão “Criar conta”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Fluxo básico:**
+  1. O Visitante acessa a tela de cadastro.
+  2. O Visitante informa e-mail, senha e confirmação da senha e aceita os termos de uso e a política de privacidade. (A-1)
+  3. O Visitante aciona “Criar conta”. (E-3)
+  4. O sistema valida a unicidade do e-mail, os critérios da senha e o aceite dos termos. (E-1) (E-2)
+  5. O sistema cria a conta com perfil Aluno e armazena a senha com hash.
+  6. O sistema confirma o cadastro e direciona o Visitante ao login (UC005).
+  7. Este caso de uso é finalizado.
+
+  ![formulário de cadastro vazio](prototipos/png/UC012/UC012-FB-1.png)
+
+  *Figura 0 – UC012, fluxo básico: formulário de cadastro vazio*
+
+  ![login com aviso "Conta criada. Entre para continuar"](prototipos/png/UC012/UC012-FB-2.png)
+
+  *Figura 0 – UC012, fluxo básico: login com aviso "Conta criada. Entre para continuar"*
+- **Fluxos alternativos:**
+  - **A1 – O Visitante escolhe o perfil de Instrutor**
+    - A-1.1 O Visitante seleciona a opção de cadastro como Instrutor.
+    - A-1.2 O sistema marca a conta para criação com perfil Instrutor e orienta o preenchimento do perfil de Instrutor depois do login.
+    - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3).
+
+    ![formulário de cadastro com perfil Instrutor marcado](prototipos/png/UC012/UC012-A1-1.png)
+
+    *Figura 0 – UC012, fluxo alternativo A1: formulário de cadastro com perfil Instrutor marcado*
+- **Fluxos de exceção:**
+  - **E1 – E-mail já cadastrado**
+    - E-1.1 O sistema identifica que o e-mail informado já possui conta.
+    - E-1.2 O sistema informa que o e-mail está em uso e sugere fazer login ou recuperar a senha (UC011).
+    - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
+
+    ![erro "Este e-mail já está em uso"](prototipos/png/UC012/UC012-E1-1.png)
+
+    *Figura 0 – UC012, fluxo de exceção E1: erro "Este e-mail já está em uso"*
+  - **E2 – Senha fora dos critérios**
+    - E-2.1 O sistema identifica que a senha não atende aos critérios mínimos.
+    - E-2.2 O sistema exibe os critérios exigidos e solicita nova senha.
+    - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
+
+    ![erro de senha fraca com critérios listados](prototipos/png/UC012/UC012-E2-1.png)
+
+    *Figura 0 – UC012, fluxo de exceção E2: erro de senha fraca com critérios listados*
+  - **E3 – Termos de uso e política de privacidade não aceitos**
+    - E-3.1 O sistema identifica que o aceite dos termos não foi marcado (R-4); a confirmação da senha também é conferida no front-end antes do envio.
+    - E-3.2 O sistema rejeita o cadastro (422), mantém os dados preenchidos e solicita o aceite.
+    - E-3.3 Este caso de uso retorna ao fluxo básico (passo 2).
+
+## 4. UC013 – Editar Dados do Perfil
 
 - **Nome do caso de uso:** Editar Dados do Perfil
 - **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
@@ -252,7 +252,7 @@
 
     *Figura 0 – UC013, fluxo de exceção E3: acesso negado à edição de perfil de outro Instrutor*
 
-## UC017 – Alterar Senha
+## 5. UC017 – Alterar Senha
 
 - **Nome do caso de uso:** Alterar Senha
 - **Ator(es):** Usuário (Aluno, Instrutor ou Administrador).
