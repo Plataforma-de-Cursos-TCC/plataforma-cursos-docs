@@ -21,9 +21,9 @@ Nome no formato `<tipo>/<assunto>`, por exemplo `docs/uc020-catalog` ou `ci/comm
 
 ## Fluxo de uma tarefa
 
-1. `scripts/task.sh start <issue> <tipo/assunto>` cria a branch ligada à issue, a partir da `main`.
+1. Na issue, use **Create a branch** (barra lateral, "Development"). A branch nasce da `main` e fica ligada à issue.
 2. Commit no padrão acima, sempre em branch; a `main` não aceita push direto.
-3. `scripts/task.sh pr <issue>` envia a branch e abre o PR com o template e `Closes #<issue>`.
+3. Abra o PR pela própria branch, mantendo `Closes #<issue>` no corpo (o template já traz a linha).
 4. O CI (`checks` e `conventions`) precisa passar e **outro integrante** precisa aprovar; o autor não aprova o próprio PR.
 5. Merge por merge commit (único método liberado). A branch é apagada no merge.
 6. O board move os cartões sozinho: PR ligado leva a In review, merge leva a Done.
