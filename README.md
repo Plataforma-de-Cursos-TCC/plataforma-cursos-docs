@@ -12,7 +12,7 @@ Este repositório não tem código do sistema. Ele guarda três coisas:
 
 | Integrante | GitHub | E-mail vinculado | Área funcional |
 |---|---|---|---|
-| Adrian Antônio de Souza Gomes | [@adrian69-droid](https://github.com/adrian69-droid) | a preencher | Área B: autoria do instrutor |
+| Adrian Antônio de Souza Gomes | [@adrian69-droid](https://github.com/adrian69-droid) | adangom3112@gmail.com | Área B: autoria do instrutor |
 | Lucas Bruno e Silva | [@Luc-Bruno](https://github.com/Luc-Bruno) | cucabruno06@gmail.com | Área C: aprendizagem do aluno |
 | Lucas Stopinski da Silva | [@LucasStop](https://github.com/LucasStop) | lucasstopinskidasilva@gmail.com | Área A: acesso e conta |
 | Vinicius Lima Teider | [@Teider011](https://github.com/Teider011) | teider.vinicius11@gmail.com | Área D: Tutor de IA, analytics e administração |

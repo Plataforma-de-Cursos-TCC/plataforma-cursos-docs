@@ -57,7 +57,7 @@ Este protocolo reúne boas práticas para agentes de IA: manter uma lista de tar
 
 | Integrante | GitHub | E-mail vinculado | Área |
 |---|---|---|---|
-| Adrian Antônio de Souza Gomes | `adrian69-droid` | a preencher | Área B: autoria do instrutor |
+| Adrian Antônio de Souza Gomes | `adrian69-droid` | adangom3112@gmail.com | Área B: autoria do instrutor |
 | Lucas Bruno e Silva | `Luc-Bruno` | cucabruno06@gmail.com | Área C: aprendizagem do aluno |
 | Lucas Stopinski da Silva | `LucasStop` | lucasstopinskidasilva@gmail.com | Área A: acesso e conta |
 | Vinicius Lima Teider | `Teider011` | teider.vinicius11@gmail.com | Área D: Tutor de IA, analytics e administração |
