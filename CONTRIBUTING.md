@@ -21,12 +21,12 @@ Nome no formato `<tipo>/<assunto>`, por exemplo `docs/uc020-catalog` ou `ci/comm
 
 ## Fluxo de uma tarefa
 
-1. Na issue, use **Create a branch** (barra lateral, "Development"). A branch nasce da `main` e fica ligada à issue.
+1. Na issue, use **Create a branch** (barra lateral, "Development"). A branch nasce da `main`, fica ligada à issue e o cartão vai para **In progress**.
 2. Commit no padrão acima, sempre em branch; a `main` não aceita push direto.
-3. Abra o PR pela própria branch, mantendo `Closes #<issue>` no corpo (o template já traz a linha).
-4. O CI (`checks` e `conventions`) precisa passar e **outro integrante** precisa aprovar; o autor não aprova o próprio PR.
-5. Merge por merge commit (único método liberado). A branch é apagada no merge.
-6. O board move os cartões sozinho: PR ligado leva a In review, merge leva a Done.
+3. Abra o PR pela branch com `Closes #<issue>` no corpo (o CI `issue-link` exige; PR sem issue usa o label `sem-issue`). Os outros integrantes entram como revisores pelo `CODEOWNERS` e o cartão vai para **In review**.
+4. O CI (`checks`, `conventions` e `issue-link`) precisa passar e **outro integrante** precisa aprovar; o autor não aprova o próprio PR.
+5. Merge por merge commit (único método liberado). A branch é apagada, a issue fecha e o cartão vai para **Done**.
+6. Issue não fecha à mão: fechada como "completed" sem PR, ela é reaberta (vale a partir da #90; issue `tarefa-mae` e "not planned" ficam de fora).
 
 ## Pull requests
 
