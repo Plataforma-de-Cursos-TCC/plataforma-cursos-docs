@@ -1,5 +1,5 @@
 ' Item 14 - Diagrama de sequência do UC011 Recuperar Senha, solicitação do link (ADR-0011). Camadas e métodos do item 13.
-' Gerar o PNG: plantuml -tpng 14-sequencia-uc011-1.puml
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 14-sequencia-uc011-1.puml
 @startuml 14-sequencia-uc011-1
 skinparam shadowing false
 skinparam dpi 192

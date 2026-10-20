@@ -1,5 +1,5 @@
 ' Item 14 - Diagrama de sequência do UC012 Cadastrar-se na Plataforma (ADR-0011). Camadas e métodos do item 13.
-' Gerar o PNG: plantuml -tpng 14-sequencia-uc012.puml
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 14-sequencia-uc012.puml
 @startuml 14-sequencia-uc012
 skinparam shadowing false
 skinparam dpi 192
