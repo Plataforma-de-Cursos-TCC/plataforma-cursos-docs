@@ -75,7 +75,7 @@ erDiagram
         DATE birthDate
         VARCHAR photo
         ENUM theme
-        ENUM locale
+        VARCHAR locale
         ENUM status
         DATETIME termsAcceptedAt
         DATETIME anonymizedAt
@@ -246,7 +246,7 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | birthDate | Simples | Data | - | Data de nascimento. |
 | photo | Simples | Texto | 255 | URL ou chave da foto de perfil no storage (R2). |
 | theme | Simples | Texto | - | Tema da interface: claro, escuro ou sistema. |
-| locale | Simples | Texto | 5 | Idioma da interface e das mensagens: pt-BR (padrão) ou en (RNF013). |
+| locale | Simples | Texto | 5 | Idioma da interface e das mensagens, validado contra a lista de idiomas ativos: pt-BR (padrão; en e es entram sem migração) (RNF013). |
 | status | Simples | Texto | - | Ativo, bloqueado ou excluído. |
 | termsAcceptedAt | Simples | Data e hora | - | Quando o usuário aceitou os termos e a política de privacidade no cadastro (RNF020). |
 | anonymizedAt | Simples | Data | - | Data/hora da anonimização dos dados na exclusão da conta (UC018); nulo enquanto a conta não for anonimizada. |
