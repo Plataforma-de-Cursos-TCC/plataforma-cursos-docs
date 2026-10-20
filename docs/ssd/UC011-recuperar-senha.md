@@ -33,8 +33,11 @@ sequenceDiagram
         DB-->>API: OK
         API-->>FE: 200 OK
         FE-->>Usuário: Senha redefinida, redireciona para o login
-    else link expirado ou já utilizado (E2)
-        API-->>FE: 422 Unprocessable Entity VALIDATION_FAILED (token expirado ou já utilizado)
+    else link expirado (E2)
+        API-->>FE: 422 RESET_TOKEN_EXPIRED
         FE-->>Usuário: Informa expiração e oferece solicitar novo link
+    else link já utilizado ou inválido (E3)
+        API-->>FE: 422 RESET_TOKEN_INVALID
+        FE-->>Usuário: Informa que o link não é válido e oferece solicitar novo link
     end
 ```

@@ -20,14 +20,20 @@ sequenceDiagram
         FE->>API: POST /api/v1/auth/login (email, senha, rememberMe)
         API->>DB: Busca usuário pelo e-mail
         DB-->>API: Retorna usuário (ou vazio)
-        alt credenciais válidas
+        alt 5 tentativas inválidas nos últimos 15 min (E4)
+            API-->>FE: 429 TOO_MANY_REQUESTS + Retry-After
+            FE-->>Usuário: Informa o bloqueio e o tempo restante
+        else credenciais válidas e conta bloqueada (E3)
+            API-->>FE: 403 ACCOUNT_BLOCKED
+            FE-->>Usuário: Informa que a conta está bloqueada
+        else credenciais válidas
             API->>API: Valida senha e gera JWT e cookie de sessão
             API-->>FE: 200 OK + cookie de sessão
             FE->>API: GET /api/v1/me/permissions
             API-->>FE: Perfil do Usuário
             FE-->>Usuário: Direciona para a área do perfil (UC016)
         else credenciais inválidas (E1)
-            API-->>FE: 401 Unauthorized
+            API-->>FE: 401 UNAUTHENTICATED
             FE-->>Usuário: Exibe mensagem de erro genérica
         end
     end
