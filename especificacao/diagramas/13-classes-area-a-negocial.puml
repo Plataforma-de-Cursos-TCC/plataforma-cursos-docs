@@ -1,0 +1,95 @@
+' Item 13 - Diagrama de classes, Área A (Acesso e conta). Notação do TE5_1 (ADR-0011).
+' Perspectiva Negocial (classes do domínio).
+' Regra do TE5_1: a classe referencia o tipo (user: User), nunca o id da FK (userId).
+' Gerar o PNG: plantuml -tpng 13-classes-area-a-negocial.puml
+@startuml 13-classes-area-a-negocial
+hide empty members
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor white
+  BorderColor black
+}
+
+  abstract class User {
+    #id: UUID
+    #name: string
+    #email: string
+    #role: Role
+    #status: UserStatus
+    #theme: ThemeType
+    #phone: string
+    #documentNumber: string
+    #birthDate: Date
+    #photo: string
+    #termsAcceptedAt: DateTime
+    -passwordHash: string
+    +editProfile(data: ProfileDTO): User
+    +changePassword(current: string, novaSenha: string): void
+    +checkPassword(senha: string): boolean
+  }
+  class Student
+  class Administrator
+  class Instructor {
+    +updateProfile(bio: string, links: JSON): InstructorProfile
+  }
+  class InstructorProfile {
+    -bio: string
+    -headline: string
+    -socialLinks: JSON
+  }
+  class Address {
+    -id: UUID
+    -type: AddressType
+    -street: string
+    -number: string
+    -district: string
+    -city: string
+    -state: string
+    -zipCode: string
+    -country: string
+    -isDefault: boolean
+  }
+  class PasswordResetToken {
+    -id: UUID
+    -tokenHash: string
+    -expiresAt: DateTime
+    -usedAt: DateTime
+    +isExpired(): boolean
+    +isUsed(): boolean
+    +consume(): void
+  }
+  class RefreshSession {
+    -id: UUID
+    -tokenHash: string
+    -familyId: UUID
+    -expiresAt: DateTime
+    -revokedAt: DateTime
+    +rotate(): RefreshSession
+    +revoke(): void
+  }
+  enum Role {
+    student
+    instructor
+    admin
+  }
+  enum UserStatus {
+    active
+    blocked
+    deleted
+  }
+
+User <|-- Student
+User <|-- Instructor
+User <|-- Administrator
+User "1" *-- "0..*" Address
+Instructor "1" *-- "0..1" InstructorProfile
+User "1" o-- "0..*" PasswordResetToken
+User "1" o-- "0..*" RefreshSession
+User --> Role
+User --> UserStatus
+UserRepository ..> User
+@enduml

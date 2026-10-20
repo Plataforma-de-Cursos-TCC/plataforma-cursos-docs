@@ -48,5 +48,6 @@ A Área A já está pronta e serve de exemplo. Copie a estrutura, troque as tabe
 | Item | Modelo | O que fazer na sua área |
 |---|---|---|
 | 12 | [area-a.md](../especificacao/12-modelo-de-dados/area-a.md), [.puml](../especificacao/diagramas/12-modelo-de-dados-area-a.puml) | Um diagrama PlantUML das tabelas da área (PK/FK à esquerda, obrigatórios em negrito, seta da FK para a PK, cardinalidade `1` e `n`) e o dicionário de dados. |
+| 13 | [area-a.md](../especificacao/13-diagrama-de-classes/area-a.md), [negocial](../especificacao/diagramas/13-classes-area-a-negocial.puml), [implementação](../especificacao/diagramas/13-classes-area-a-implementacao.puml) | Duas figuras: classes negociais e de implementação (Controller, Service, FormRequest). Sem id de FK como atributo. |
 
-Gerar o PNG: `plantuml -tpng especificacao/diagramas/<arquivo>.puml`. Gerar o DOCX para conferir: `python3 scripts/build_doc.py 12 12 --pdf`. Se o seu texto supõe algo que outra área ainda não definiu, registre na issue `pendencia-cruzada` dela (AGENTS.md, regra 8).
+Gerar o PNG: `plantuml -tpng especificacao/diagramas/<arquivo>.puml`. Gerar o DOCX para conferir: `python3 scripts/build_doc.py 12 13 --pdf`. Se o seu texto supõe algo que outra área ainda não definiu, registre na issue `pendencia-cruzada` dela (AGENTS.md, regra 8).
