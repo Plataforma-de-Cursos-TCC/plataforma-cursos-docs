@@ -19,22 +19,24 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 | UC002 – Responder Quiz | US011 | RF008 | TC031, TC032, TC033 | Coberto |
 | UC003 – Matricular-se em Curso | US007 | RF005 | TC019, TC020, TC021 | Coberto |
 | UC004 – Cadastrar Quiz com Gabarito | US010 | RF007 | TC028, TC029, TC030 | Coberto |
-| UC005 – Realizar Login | US001 | RF017 | TC001, TC002, TC003 | Coberto |
+| UC005 – Realizar Login | US001 | RF017 | TC001, TC002, TC003, TC065, TC066, TC067, TC068, TC069, TC070, TC071 | Coberto |
 | UC006 – Cadastrar Curso | US004 | RF002 | TC010, TC011, TC012 | Coberto |
 | UC007 – Ver Dashboard com Filtro | US013 | RF010 | TC037, TC038, TC039 | Coberto |
 | UC008 – Gerenciar Usuários | US016 | RF012 | TC046, TC047, TC048 | Coberto |
 | UC009 – Assistir Aula | US008, US009 | RF006 | TC022, TC023, TC024, TC025, TC026, TC027 | Coberto |
 | UC010 – Avaliar Curso | US014 | RF011 | TC040, TC041, TC042 | Coberto |
-| UC011 – Recuperar Senha | US017 | RF013 | TC049, TC050, TC051 | Coberto |
-| UC012 – Cadastrar-se na Plataforma | US002 | RF001 | TC004, TC005, TC006 | Coberto |
-| UC013 – Editar Dados do Perfil | US003, US020 | RF001, RF016 | TC007, TC008, TC009, TC058, TC059, TC060 | Coberto |
+| UC011 – Recuperar Senha | US017 | RF013 | TC049, TC050, TC051, TC072, TC073, TC074, TC075, TC076 | Coberto |
+| UC012 – Cadastrar-se na Plataforma | US002 | RF001 | TC004, TC005, TC006, TC077, TC078, TC079 | Coberto |
+| UC013 – Editar Dados do Perfil | US003, US020 | RF001, RF016 | TC007, TC009, TC058, TC059, TC060, TC080, TC081, TC082, TC083, TC084, TC085, TC086, TC087 | Coberto |
 | UC014 – Gerenciar Módulos do Curso | US005 | RF003 | TC013, TC014, TC015 | Coberto |
 | UC015 – Gerenciar Aulas do Curso | US006 | RF004 | TC016, TC017, TC018 | Coberto |
 | UC016 – Acessar Área Protegida por Perfil | US015 | RF018 | TC043, TC044, TC045 | Coberto |
-| UC017 – Alterar Senha | US021 | RF019 | TC061, TC062, TC064 | Coberto |
+| UC017 – Alterar Senha | US021 | RF019 | TC061, TC062, TC064, TC088, TC089 | Coberto |
 | UC018 – Excluir e Anonimizar Usuário | US016 | RF012 | TC063 | Coberto |
 | UC019 – Processar Pagamento Simulado | US018 | RF014 | TC052, TC053, TC054 | Coberto |
 | UC020 – Consultar Catálogo de Cursos | US019 | RF015 | TC055, TC056, TC057 | Coberto |
+
+*Os casos de UC005, UC011, UC012, UC013 e UC017 vêm do [item 15](../../especificacao/15-casos-de-teste/area-a.md), que é a fonte desses casos; o TC008 foi descartado porque o UC013 não permite editar o e-mail.*
 
 *Todos os 20 casos de uso e as 21 estórias de usuário possuem casos de teste especificados.*
 

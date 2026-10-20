@@ -38,7 +38,7 @@ relacionados: [ra2-tarefas, ra1-criterios-de-aceite]
 
 - [ ] **C15.1** No mínimo 4 casos de uso (meta: pelo menos 1 por integrante).
 - [ ] **C15.2** Cada caso de uso cobre fluxo básico, alternativo e de exceção.
-- [ ] **C15.3** Colunas da disciplina: ID, objetivo, pré-condição, passos, dado de entrada, resultado esperado (conferir no enunciado).
+- [ ] **C15.3** Colunas do TE6: Cenário, Caso de Teste, Entradas e Resultado Esperado, mais ID à esquerda; o rastreio (UC, US, RF) vai na linha acima de cada tabela.
 - [ ] **C15.4** Rastreável a UC, US e RF.
 
 ## Gerais

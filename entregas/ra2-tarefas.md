@@ -50,5 +50,17 @@ A Área A já está pronta e serve de exemplo. Copie a estrutura, troque as tabe
 | 12 | [area-a.md](../especificacao/12-modelo-de-dados/area-a.md), [.puml](../especificacao/diagramas/12-modelo-de-dados-area-a.puml) | Um diagrama PlantUML das tabelas da área (PK/FK à esquerda, obrigatórios em negrito, seta da FK para a PK, cardinalidade `1` e `n`) e o dicionário de dados. |
 | 13 | [area-a.md](../especificacao/13-diagrama-de-classes/area-a.md), [negocial](../especificacao/diagramas/13-classes-area-a-negocial.puml), implementação ([cadastro e login](../especificacao/diagramas/13-classes-area-a-implementacao-login.puml), [recuperação de senha](../especificacao/diagramas/13-classes-area-a-implementacao-recuperacao.puml), [perfil](../especificacao/diagramas/13-classes-area-a-implementacao-perfil.puml)) | Uma figura negocial e uma ou mais de implementação (Controller, Service, FormRequest, DTO). Sem id de FK como atributo; identificadores em inglês. |
 | 14 | [area-a.md](../especificacao/14-diagramas-de-sequencia/area-a.md), [exemplo](../especificacao/diagramas/14-sequencia-uc005.puml) | Um diagrama por UC (mínimo 4 no total; a Área A entrega 5), com `alt` para exceções e `opt` para alternativos; mensagens são os métodos do item 13. |
+| 15 | [area-a.md](../especificacao/15-casos-de-teste/area-a.md) | Uma seção por UC com a linha de rastreio e a tabela ID, Cenário, Caso de Teste, Entradas e Resultado Esperado; FP é o cenário 1 e cada FA e FE vira cenário. Os IDs seguem os de `docs/testes/casos-de-teste.md`: a Área A usou TC065 a TC089, e as outras áreas numeram a partir de TC090 (conferir o último ID antes de criar). Resultados com erro de API citam o status e o `code` da tabela de erros do TDD (seção 3.1). |
 
-Gerar o PNG: `PLANTUML_LIMIT_SIZE=8192 plantuml -tpng especificacao/diagramas/<arquivo>.puml` (sem o limite maior, o PlantUML corta a imagem em 4096 px). Cada imagem deve caber legível na página: diagrama largo, divida em dois. Gerar o DOCX para conferir: `python3 scripts/build_doc.py 12 14 --pdf`. Se o seu texto supõe algo que outra área ainda não definiu, registre na issue `pendencia-cruzada` dela (AGENTS.md, regra 8).
+Gerar o PNG: `PLANTUML_LIMIT_SIZE=8192 plantuml -tpng especificacao/diagramas/<arquivo>.puml` (sem o limite maior, o PlantUML corta a imagem em 4096 px). Cada imagem deve caber legível na página: diagrama largo, divida em dois. Gerar o DOCX para conferir: `python3 scripts/build_doc.py 12 15 --pdf`. Se o seu texto supõe algo que outra área ainda não definiu, registre na issue `pendencia-cruzada` dela (AGENTS.md, regra 8).
+
+## 6. Quando entrar o segundo idioma (en ou es)
+
+Decisão do grupo: a interface e as mensagens ficam só em pt-BR; a estrutura já está pronta (`User.locale`, arquivos de tradução, regra `locale` > `Accept-Language` > pt-BR no TDD seção 3.1), e o seletor de idioma só entra junto com o segundo idioma. Quando isso acontecer, ajustar:
+
+- RNF013 (item 8 e `docs/sdd.md`): voltar a citar o idioma novo.
+- RF001 e US003 (itens 6 e 7), UC012 (idioma inicial no cadastro) e UC013 (campo Idioma no perfil), com os critérios de aceite correspondentes.
+- Protótipos `meu-perfil` e `cadastro` (item 10): incluir o seletor e regerar as capturas com `python3 scripts/render_prototypes.py`.
+- Item 12: incluir o idioma novo na lista de idiomas ativos do dicionário de `User.locale`; item 13: novo valor em `Locale`; regerar os PNGs com `PLANTUML_LIMIT_SIZE=8192`.
+- Item 15: casos de teste do UC012 e do UC013 para o seletor e para o idioma padrão.
+- Conteúdo do curso e resposta do Tutor de IA: decidir à parte (fora do escopo hoje).
