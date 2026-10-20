@@ -15,7 +15,7 @@ relacionados: [ra2-tarefas, ra1-criterios-de-aceite]
 
 - [ ] **C12.1** Diagrama em notação UML, perspectiva relacional.
 - [ ] **C12.2** Toda tabela tem PK, FKs, tipos e nulabilidade; cardinalidades nos relacionamentos.
-- [ ] **C12.3** Normalizado até 3FN, ou desvio justificado.
+- [ ] **C12.3** Extra da equipe (a disciplina não exige): normalizado até 3FN, ou desvio justificado.
 - [ ] **C12.4** Cobre as entidades dos itens 6 e 10 (relação Módulo–Quiz resolvida).
 - [ ] **C12.5** Pagamento só como registro simulado, sem `payoutInfo` nem dado de cartão.
 - [ ] **C12.6** Fonte do diagrama versionada (ADR-0004).

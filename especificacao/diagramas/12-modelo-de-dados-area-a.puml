@@ -1,0 +1,89 @@
+' Item 12 - Modelo lógico relacional, Área A (Acesso e conta). Notação do TE4 (ADR-0011).
+' Campo em negrito = obrigatório (NOT NULL); PK/FK à esquerda; seta da FK aponta para a tabela da PK.
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 12-modelo-de-dados-area-a.puml
+@startuml 12-modelo-de-dados-area-a
+hide circle
+hide empty members
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam linetype ortho
+skinparam class {
+  BackgroundColor white
+  BorderColor black
+}
+
+class User {
+  <b>PK</b>    <b>id: UUID</b>
+  --
+  <b>name: VARCHAR(150)</b>
+  <b>email: VARCHAR(150)</b>
+  <b>passwordHash: VARCHAR(255)</b>
+  <b>role: ENUM</b>
+  <b>status: ENUM</b>
+  <b>theme: ENUM</b>
+  <b>locale: VARCHAR(5)</b>
+  <b>termsAcceptedAt: DATETIME</b>
+  phone: VARCHAR(20)
+  documentNumber: VARCHAR(14)
+  birthDate: DATE
+  photo: VARCHAR(255)
+  anonymizedAt: DATETIME
+}
+
+class Address {
+  <b>PK</b>    <b>id: UUID</b>
+  --
+  <b>FK</b>    <b>userId: UUID</b>
+  <b>type: ENUM</b>
+  <b>street: VARCHAR(150)</b>
+  <b>number: VARCHAR(10)</b>
+  <b>district: VARCHAR(80)</b>
+  <b>city: VARCHAR(80)</b>
+  <b>state: CHAR(2)</b>
+  <b>zipCode: VARCHAR(9)</b>
+  <b>country: CHAR(2)</b>
+  <b>isDefault: BOOLEAN</b>
+  complement: VARCHAR(60)
+}
+
+class InstructorProfile {
+  <b>PK, FK</b>    <b>userId: UUID</b>
+  --
+  bio: TEXT
+  headline: VARCHAR(150)
+  socialLinks: JSON
+}
+
+class PasswordResetToken {
+  <b>PK</b>    <b>id: UUID</b>
+  --
+  <b>FK</b>    <b>userId: UUID</b>
+  <b>tokenHash: CHAR(64)</b>
+  <b>expiresAt: DATETIME</b>
+  <b>createdAt: DATETIME</b>
+  usedAt: DATETIME
+}
+
+class RefreshSession {
+  <b>PK</b>    <b>id: UUID</b>
+  --
+  <b>FK</b>    <b>userId: UUID</b>
+  <b>tokenHash: CHAR(64)</b>
+  <b>familyId: UUID</b>
+  <b>expiresAt: DATETIME</b>
+  <b>createdAt: DATETIME</b>
+  revokedAt: DATETIME
+  replacedBy: UUID
+}
+
+Address "n" --> "1" User
+InstructorProfile "0..1" --> "1" User
+PasswordResetToken "n" --> "1" User
+RefreshSession "n" --> "1" User
+
+note bottom of RefreshSession
+  Contador de tentativas de login (RNF008: 5 falhas, bloqueio de 15 min)
+  fica no Redis, fora do modelo relacional.
+end note
+@enduml

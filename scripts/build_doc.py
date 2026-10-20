@@ -55,7 +55,8 @@ ITEMS = {
     10: ["10-especificacoes-de-caso-de-uso/00-item.md"]
     + [f"10-especificacoes-de-caso-de-uso/area-{a}.md" for a in "abcd"],
     11: ["11-diagrama-de-atividades.md"],
-    12: ("MODELO DE DADOS", "docs/tdd.md, seção 2"),
+    12: ["12-modelo-de-dados/00-item.md"]
+    + [f"12-modelo-de-dados/area-{a}.md" for a in "abcd"],
     13: ("DIAGRAMA DE CLASSES", "docs/tdd.md, seção Diagrama de Classes"),
     14: ("DIAGRAMAS DE SEQUÊNCIA", "docs/ssd/"),
     15: ("CASOS DE TESTE", "docs/testes/casos-de-teste.md"),
@@ -425,7 +426,7 @@ def format_images(doc):
                     fp.append(ind)
                 child(fp, "w:jc", None).set(qn("w:val"), "center")
 
-    # Prototipos dos UC (item 10): linha em branco antes, legenda centralizada e borda de 1 px.
+    # Prototipos dos UC (item 10) e diagrama do item 12: linha em branco antes, legenda centralizada e borda de 1 px.
     # Itens 9 e 11 ficam de fora (o 11 tem tratamento próprio em paisagem).
     item = ""
     for p in doc.paragraphs:
@@ -433,7 +434,7 @@ def format_images(doc):
             item = p.text.split(" ")[0]
             continue
         pictures = [d for d in p._p.iter(qn("wp:docPr")) if "Caixa de Texto" not in d.get("name", "")]
-        if item != "10" or not pictures:
+        if item not in ("10", "12") or not pictures:
             continue
 
         prev = p._p.getprevious()
@@ -925,9 +926,14 @@ def assemble(pandoc_docx, template, out_docx, pages):
             us_count += 1
             continue
 
+        widths = None
         if first_txt == "RF" and "OBJETIVO" in full_head and "JUSTIFICATIVA" in full_head:
             # Matriz de rastreabilidade (9.1): larguras fixas somando a largura útil de 10490.
             widths = [1000, 1500, 1400, 900, 1600, 4090]
+        elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAMANHO" in full_head:
+            # Dicionário de dados (item 12): colunas curtas não quebram o nome do atributo.
+            widths = [2000, 1700, 1300, 1200, 4290]
+        if widths:
             tblPr = tbl.find(qn("w:tblPr"))
             tblW = tblPr.find(qn("w:tblW"))
             tblW.set(qn("w:type"), "dxa")

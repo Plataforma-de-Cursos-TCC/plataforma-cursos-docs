@@ -4,7 +4,7 @@ titulo: "Decisões do projeto (ADRs)"
 tipo: decisao-indice
 status: vigente
 atualizado: 2026-10-08
-relacionados: [adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006, adr-0007, adr-0008, adr-0009, adr-0010]
+relacionados: [adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006, adr-0007, adr-0008, adr-0009, adr-0010, adr-0011]
 ---
 # Decisões do projeto (ADRs)
 
@@ -22,6 +22,7 @@ relacionados: [adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006, adr-0
 | [0008](0008-sessao-jwt-em-cookie.md) | D8 | Sessão com JWT de 1 h em cookie HttpOnly, refresh rotacionado e «manter conectado» | 5, 11 |
 | [0009](0009-listagens-na-url-e-paginacao.md) | D9 | Filtros, ordenação e página na URL; paginação obrigatória; resposta mínima da API | 5, 11 |
 | [0010](0010-hospedagem-e-armazenamento.md) | D10 | Front na Vercel, back no Railway, mídia no Cloudflare R2; domínio pendente | 5, 11 |
+| [0011](0011-diagramas-do-ra2-em-plantuml.md) | D11 | Diagramas do RA2 (modelo de dados, classes e sequência) em PlantUML, PNG gerado da fonte | 12, 13, 14 |
 
 ---
 
