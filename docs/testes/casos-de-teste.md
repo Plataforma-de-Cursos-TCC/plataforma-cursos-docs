@@ -9,6 +9,8 @@ atualizado: 2026-10-08
 
 64 casos de teste (TC001–TC064), derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US021) possuem cobertura de testes associada.
 
+> **Item 15 da especificação:** os casos da Área A (UC005, UC011, UC012, UC013 e UC017) foram revisados e ampliados em [especificacao/15-casos-de-teste/area-a.md](../../especificacao/15-casos-de-teste/area-a.md), que é a fonte vigente para esses UCs. O TC008 foi descartado (editava o e-mail, que o UC013 não permite) e o TC060 foi reclassificado.
+
 Padrão TE6. Os casos nascem dos critérios de aceite das estórias (ADR-0002) e das especificações de casos de uso.
 
 Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem do caso (fluxo do UC ou critério da estória). Onde a planilha de casos de teste e a v11 divergem, vale a especificação (`especificacao/`), conforme a ADR-0001.
