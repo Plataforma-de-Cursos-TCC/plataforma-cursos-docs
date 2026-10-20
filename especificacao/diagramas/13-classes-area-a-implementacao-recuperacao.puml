@@ -1,0 +1,58 @@
+' Item 13 - Diagrama de classes, Área A (Acesso e conta). Notação do TE5_1 (ADR-0011).
+' Perspectiva de Implementação (camadas MVC da API Laravel): recuperação de senha.
+' Regra do TE5_1: a classe referencia o tipo (user: User), nunca o id da FK (userId).
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 13-classes-area-a-implementacao-recuperacao.puml
+@startuml 13-classes-area-a-implementacao-recuperacao
+hide empty members
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor white
+  BorderColor black
+}
+
+class User
+class PasswordResetToken
+
+  class AuthController <<Controller>> {
+    +register(req: RegisterRequest): UserResource
+    +login(req: LoginRequest): UserResource
+    +me(): UserResource
+    +forgotPassword(req: ForgotPasswordRequest): void
+    +resetPassword(req: ResetPasswordRequest): void
+  }
+  class ForgotPasswordRequest <<FormRequest>> {
+    +rules(): array
+  }
+  class ResetPasswordRequest <<FormRequest>> {
+    +rules(): array
+  }
+  class PasswordResetService <<Service>> {
+    +requestReset(email: string): void
+    +reset(token: string, newPassword: string): void
+  }
+  class ResetMailer <<Service>> {
+    +sendLink(user: User, token: string): void
+  }
+  class UserRepository <<Repository>> {
+    +findByEmail(email: string): User
+    +save(user: User): User
+  }
+  class PasswordResetTokenRepository <<Repository>> {
+    +issueFor(user: User): string
+    +findValid(token: string): PasswordResetToken
+    +save(token: PasswordResetToken): void
+  }
+
+AuthController ..> ForgotPasswordRequest
+AuthController ..> ResetPasswordRequest
+AuthController --> PasswordResetService
+PasswordResetService --> UserRepository
+PasswordResetService --> PasswordResetTokenRepository
+PasswordResetService --> ResetMailer
+UserRepository ..> User
+PasswordResetTokenRepository ..> PasswordResetToken
+@enduml
