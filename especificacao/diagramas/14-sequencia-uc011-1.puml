@@ -7,7 +7,6 @@ skinparam defaultFontName Arial
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
 skinparam wrapMessageWidth 170
-skinparam ParticipantPadding 12
 skinparam BoxPadding 8
 
 actor "Usuário" as USU
@@ -25,7 +24,7 @@ C -> S ++ : requestReset(email)
 S -> R ++ : findByEmail(email)
 R -> BD ++ : SELECT users WHERE email
 BD --> R -- : linha
-R --> S -- : user
+R --> S -- : user (ou nulo)
 alt E1 - e-mail não cadastrado (R-2, anti-enumeração)
   S --> C : nada é enviado
 else e-mail cadastrado
@@ -34,10 +33,10 @@ else e-mail cadastrado
   BD --> TR --
   TR --> S -- : token
   S -> M ++ : sendLink(user, token)
-  M --> S --
+  M --> S -- : enfileirado (o tempo de resposta não muda)
   S --> C : ok
 end
-C --> V : 202 (mesma resposta nos dois casos)
+C --> V : 200 (mesma mensagem nos dois casos)
 V --> USU : confirma que, se o e-mail existir, o link foi enviado
 deactivate S
 deactivate C

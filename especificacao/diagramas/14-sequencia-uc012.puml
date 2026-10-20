@@ -7,7 +7,6 @@ skinparam defaultFontName Arial
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
 skinparam wrapMessageWidth 170
-skinparam ParticipantPadding 12
 skinparam BoxPadding 8
 
 actor Visitante as VIS
@@ -16,6 +15,7 @@ control AuthController as C
 control RegisterRequest as Q
 control AuthService as S
 control UserRepository as R
+control InstructorProfileRepository as IR
 entity User as U
 database BD
 
@@ -27,30 +27,36 @@ V -> C ++ : register(req: RegisterRequest)
 C -> Q ++ : rules()
 Q --> C -- : erros de validação
 alt E3 - termos não aceitos (RNF020)
-  C --> V : 422
+  C --> V : 422 VALIDATION_FAILED (fields.termsAccepted)
   V --> VIS : pede o aceite dos termos e da política de privacidade
 else E2 - senha fora da política (8 ou mais caracteres, letra e número)
-  C --> V : 422
+  C --> V : 422 VALIDATION_FAILED (fields.password)
   V --> VIS : informa a regra de senha
 else dados válidos
   C -> S ++ : register(dto: RegisterDTO)
   S -> R ++ : findByEmail(email)
   R -> BD ++ : SELECT users WHERE email
   BD --> R -- : linha
-  R --> S -- : user
+  R --> S -- : user (ou nulo)
   alt E1 - e-mail já em uso
     S --> C : EmailTakenException
-    C --> V : 422
+    C --> V : 422 VALIDATION_FAILED (fields.email)
     V --> VIS : informa que o e-mail já está em uso
   else e-mail livre
-    S -> U ++ : cria User (Student ou Instructor se A1), hash da senha (RNF007), termsAcceptedAt
+    S -> U ++ : cria Student, ou Instructor se A1, com hash da senha (RNF007), termsAcceptedAt e locale
     U --> S --
     S -> R ++ : save(user)
     R -> BD ++ : INSERT users
     BD --> R --
     R --> S -- : User
+    opt A1 - perfil Instrutor
+      S -> IR ++ : save(profile) com o InstructorProfile vazio
+      IR -> BD ++ : INSERT instructor_profile (userId)
+      BD --> IR --
+      IR --> S --
+    end
     S --> C : User
-    C --> V : 201
+    C --> V : 201 (UserResource)
     V --> VIS : confirma o cadastro e leva ao login (UC005)
   end
   deactivate S

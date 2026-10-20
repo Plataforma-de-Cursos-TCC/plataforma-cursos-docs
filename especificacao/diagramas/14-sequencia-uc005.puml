@@ -7,7 +7,6 @@ skinparam defaultFontName Arial
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
 skinparam wrapMessageWidth 170
-skinparam ParticipantPadding 12
 skinparam BoxPadding 8
 
 actor "Usuário" as USU
@@ -20,6 +19,13 @@ entity User as U
 control JwtGuard as J
 database BD
 
+opt A2 - já existe uma sessão válida no navegador
+  USU -> V ++ : acessa a tela de login
+  V -> C ++ : me()
+  C --> V -- : 200 (UserResource)
+  V --> USU -- : vai direto para a sua área, sem exibir o login
+end
+
 USU -> V ++ : informa e-mail e senha e aciona "Entrar"
 V -> C ++ : login(req: LoginRequest)
 C -> S ++ : login(dto: LoginDTO)
@@ -28,28 +34,28 @@ T --> S -- : bloqueado?
 
 alt E4 - 5 tentativas inválidas (RNF008): bloqueado por 15 min
   S --> C : TooManyAttemptsException
-  C --> V : 429
-  V --> USU : informa o bloqueio temporário
+  C --> V : 429 TOO_MANY_REQUESTS + Retry-After
+  V --> USU : informa o bloqueio e o tempo restante
 else dentro do limite
   S -> R ++ : findByEmail(email)
   R -> BD ++ : SELECT users WHERE email
   BD --> R -- : linha
-  R --> S -- : user
+  R --> S -- : user (ou nulo)
+  opt o e-mail existe
+    S -> U ++ : checkPassword(password)
+    U --> S -- : válida?
+  end
   alt E1 - e-mail inexistente ou senha incorreta
-    S -> U ++ : checkPassword(senha)
-    U --> S -- : false
     S -> T ++ : recordFailure(email)
     T --> S --
     S --> C : InvalidCredentialsException
-    C --> V : 401
+    C --> V : 401 UNAUTHENTICATED
     V --> USU : mensagem genérica, sem revelar se o e-mail existe (R-1)
-  else E3 - conta bloqueada pelo Administrador (status = blocked)
+  else E3 - credenciais válidas e conta bloqueada pelo Administrador
     S --> C : AccountBlockedException
-    C --> V : 403
+    C --> V : 403 ACCOUNT_BLOCKED
     V --> USU : informa que a conta está bloqueada
   else credenciais válidas
-    S -> U ++ : checkPassword(senha)
-    U --> S -- : true
     S -> T ++ : reset(email)
     T --> S --
     S -> J ++ : issue(user)
@@ -61,13 +67,20 @@ else dentro do limite
       J --> S -- : RefreshSession
     end
     S --> C : AuthTokens
-    C --> V : 200 com cookies HttpOnly (UC016 direciona por perfil)
+    C --> V : 200 (UserResource) com cookies HttpOnly (UC016 direciona por perfil)
     V --> USU : exibe a área do perfil (Aluno, Instrutor ou Administrador)
   end
 end
 deactivate S
 deactivate C
 deactivate V
+
+opt E2 - sessão expirada ao acessar uma área protegida
+  USU -> V ++ : acessa uma área protegida
+  V -> C ++ : me()
+  C --> V -- : 401 UNAUTHENTICATED
+  V --> USU -- : leva à tela de login (tenta antes o refresh, se houver «manter conectado»)
+end
 
 opt A1 - "Esqueci minha senha"
   USU -> V ++ : aciona "Esqueci minha senha"

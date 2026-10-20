@@ -7,7 +7,6 @@ skinparam defaultFontName Arial
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
 skinparam wrapMessageWidth 170
-skinparam ParticipantPadding 12
 skinparam BoxPadding 8
 
 actor "Usuário" as USU
@@ -27,21 +26,21 @@ V -> C ++ : changePassword(req: ChangePasswordRequest)
 C -> Q ++ : rules()
 Q --> C -- : erros de validação
 alt E2 - nova senha fora da política (R-2)
-  C --> V : 422
+  C --> V : 422 VALIDATION_FAILED (fields.newPassword)
   V --> USU : informa a regra de senha
 else E3 - confirmação diferente da nova senha (R-3)
-  C --> V : 422
+  C --> V : 422 VALIDATION_FAILED (fields.confirmation)
   V --> USU : informa que a confirmação não confere
 else dados válidos
-  C -> S ++ : changePassword(user, current, novaSenha)
+  C -> S ++ : changePassword(user, current, newPassword)
   S -> U ++ : checkPassword(current)
   U --> S -- : válida?
   alt E1 - senha atual incorreta (R-1)
     S --> C : WrongPasswordException
-    C --> V : 422
+    C --> V : 422 VALIDATION_FAILED (fields.currentPassword)
     V --> USU : informa que a senha atual está incorreta
   else senha atual correta
-    S -> U ++ : changePassword(current, novaSenha)
+    S -> U ++ : changePassword(current, newPassword)
     U --> S -- : hash da nova senha (RNF007)
     S -> R ++ : save(user)
     R -> BD ++ : UPDATE users SET passwordHash

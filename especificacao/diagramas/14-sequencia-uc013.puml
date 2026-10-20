@@ -7,53 +7,76 @@ skinparam defaultFontName Arial
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
 skinparam wrapMessageWidth 170
-skinparam ParticipantPadding 12
 skinparam BoxPadding 8
 
 actor "Usuário" as USU
 boundary PerfilView as V
 control ProfileController as C
 control UpdateProfileRequest as Q
+control UpdateInstructorRequest as QI
 control ProfileService as S
 control PhotoStorage as P
 control UserRepository as R
-entity Instructor as I
+control AddressRepository as AR
+control InstructorProfileRepository as IR
 database BD
 
-USU -> V ++ : altera nome, telefone, CPF, nascimento, foto ou tema e aciona "Salvar"
+USU -> V ++ : altera nome, telefone, endereço, CPF, nascimento, foto ou tema e aciona "Salvar"
 V -> C ++ : update(req: UpdateProfileRequest)
 C -> Q ++ : rules()
 Q --> C -- : erros de validação
-alt E1 - campo inválido (CPF, nascimento futuro, telefone sem DDD, foto fora de JPG/PNG até 2 MB) ou E2 - link ou bio do Instrutor inválidos
-  C --> V : 422
+alt E1 - campo inválido (nome, CPF, nascimento futuro, telefone sem DDD, foto fora de JPG/PNG ou acima de 2 MB)
+  C --> V : 422 VALIDATION_FAILED (fields)
   V --> USU : indica o campo e o motivo
 else dados válidos
   C -> S ++ : update(user, dto: ProfileDTO)
-  alt E3 - edição do perfil de Instrutor por quem não é o dono
-    S --> C : ForbiddenException
-    C --> V : 403
-    V --> USU : informa o acesso negado
-  else usuário é o dono
-    opt envia nova foto
-      S -> P ++ : store(file)
-      P --> S -- : chave da foto no R2
-    end
-    opt A1 - Instrutor edita minibiografia e links
-      S -> I ++ : updateProfile(bio, links)
-      I --> S -- : InstructorProfile
-    end
-    S -> R ++ : save(user)
-    R -> BD ++ : UPDATE users
-    BD --> R --
-    R --> S -- : User
-    S --> C : User
-    C --> V : 200 (UserResource)
-    V --> USU : confirma a atualização e aplica o tema salvo (R-7)
+  opt envia nova foto
+    S -> P ++ : store(file)
+    P --> S -- : chave da foto no R2
   end
-  deactivate S
+  opt envia endereço
+    S -> AR ++ : replaceFor(user, address)
+    AR -> BD ++ : INSERT ou UPDATE address
+    BD --> AR --
+    AR --> S -- : Address
+  end
+  S -> R ++ : save(user)
+  R -> BD ++ : UPDATE users
+  BD --> R --
+  R --> S -- : User
+  S --> C -- : User
+  C --> V : 200 (UserResource)
+  V --> USU : confirma a atualização e aplica o tema e o idioma salvos (R-7)
 end
 deactivate C
+
+opt A1 - Instrutor edita minibiografia e links
+  USU -> V : altera minibiografia ou links e aciona "Salvar"
+  V -> C ++ : updateInstructor(req: UpdateInstructorRequest)
+  alt E3 - o Usuário não é Instrutor (guarda de perfil do UC016)
+    C --> V : 403 FORBIDDEN
+    V --> USU : informa que a ação não é permitida
+  else é Instrutor
+    C -> QI ++ : rules()
+    QI --> C -- : erros de validação
+    alt E2 - link com formato inválido ou minibiografia acima do limite
+      C --> V : 422 VALIDATION_FAILED (fields)
+      V --> USU : indica o campo e o motivo
+    else dados válidos
+      C -> S ++ : updateInstructor(instructor, dto: InstructorProfileDTO)
+      S -> IR ++ : save(profile)
+      IR -> BD ++ : UPDATE instructor_profile
+      BD --> IR --
+      IR --> S -- : InstructorProfile
+      S --> C -- : InstructorProfile
+      C --> V : 200 (InstructorProfileResource)
+      V --> USU : confirma a atualização do perfil de Instrutor
+    end
+  end
+  deactivate C
+end
 deactivate V
+
 opt A2 - "Alterar senha"
   USU -> V ++ : aciona "Alterar senha"
   V --> USU -- : inicia o UC017 Alterar Senha
