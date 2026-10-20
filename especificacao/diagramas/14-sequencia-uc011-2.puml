@@ -1,0 +1,60 @@
+' Item 14 - Diagrama de sequência do UC011 Recuperar Senha, redefinição da senha (ADR-0011). Camadas e métodos do item 13.
+' Gerar o PNG: plantuml -tpng 14-sequencia-uc011-2.puml
+@startuml 14-sequencia-uc011-2
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam ParticipantPadding 12
+skinparam BoxPadding 8
+
+actor "Usuário" as USU
+boundary RecuperarSenhaView as V
+control AuthController as C
+control PasswordResetService as S
+control UserRepository as R
+control PasswordResetTokenRepository as TR
+entity PasswordResetToken as PT
+database BD
+
+USU -> V ++ : abre o link, informa nova senha e confirmação e aciona "Redefinir"
+opt A2 - o Usuário cancela
+  V --> USU : mantém a senha atual
+end
+V -> C ++ : resetPassword(req: ResetPasswordRequest)
+C -> S ++ : reset(token, novaSenha)
+S -> TR ++ : findValid(token)
+TR -> BD ++ : SELECT password_reset_token WHERE tokenHash
+BD --> TR -- : linha
+TR --> S -- : PasswordResetToken
+S -> PT ++ : isExpired()
+PT --> S -- : expirado?
+S -> PT ++ : isUsed()
+PT --> S -- : usado?
+alt E2 - link expirado (30 min, RNF017)
+  S --> C : ExpiredTokenException
+  C --> V : 422
+  V --> USU : informa a expiração e oferece solicitar novo link
+else E3 - link já usado ou inválido
+  S --> C : InvalidTokenException
+  C --> V : 422
+  V --> USU : informa que o link não é válido
+else link válido
+  S -> R ++ : save(user) com o hash da nova senha (RNF007)
+  R -> BD ++ : UPDATE users SET passwordHash
+  BD --> R --
+  R --> S --
+  S -> PT ++ : consume()
+  PT --> S --
+  S -> TR ++ : save(token)
+  TR --> S --
+  S --> C : ok
+  C --> V : 200
+  V --> USU : confirma e leva ao login (UC005)
+end
+deactivate S
+deactivate C
+deactivate V
+@enduml

@@ -1,0 +1,45 @@
+' Item 14 - Diagrama de sequência do UC011 Recuperar Senha, solicitação do link (ADR-0011). Camadas e métodos do item 13.
+' Gerar o PNG: plantuml -tpng 14-sequencia-uc011-1.puml
+@startuml 14-sequencia-uc011-1
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam ParticipantPadding 12
+skinparam BoxPadding 8
+
+actor "Usuário" as USU
+boundary RecuperarSenhaView as V
+control AuthController as C
+control PasswordResetService as S
+control UserRepository as R
+control PasswordResetTokenRepository as TR
+control ResetMailer as M
+database BD
+
+USU -> V ++ : informa o e-mail e aciona "Enviar link"
+V -> C ++ : forgotPassword(req: ForgotPasswordRequest)
+C -> S ++ : requestReset(email)
+S -> R ++ : findByEmail(email)
+R -> BD ++ : SELECT users WHERE email
+BD --> R -- : linha
+R --> S -- : user
+alt E1 - e-mail não cadastrado (R-2, anti-enumeração)
+  S --> C : nada é enviado
+else e-mail cadastrado
+  S -> TR ++ : issueFor(user)
+  TR -> BD ++ : invalida o link anterior (A1) e INSERT password_reset_token
+  BD --> TR --
+  TR --> S -- : token
+  S -> M ++ : sendLink(user, token)
+  M --> S --
+  S --> C : ok
+end
+C --> V : 202 (mesma resposta nos dois casos)
+V --> USU : confirma que, se o e-mail existir, o link foi enviado
+deactivate S
+deactivate C
+deactivate V
+@enduml

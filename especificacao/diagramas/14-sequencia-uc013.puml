@@ -1,0 +1,61 @@
+' Item 14 - Diagrama de sequência do UC013 Editar Dados do Perfil (ADR-0011). Camadas e métodos do item 13.
+' Gerar o PNG: plantuml -tpng 14-sequencia-uc013.puml
+@startuml 14-sequencia-uc013
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam ParticipantPadding 12
+skinparam BoxPadding 8
+
+actor "Usuário" as USU
+boundary PerfilView as V
+control ProfileController as C
+control UpdateProfileRequest as Q
+control ProfileService as S
+control PhotoStorage as P
+control UserRepository as R
+entity Instructor as I
+database BD
+
+USU -> V ++ : altera nome, telefone, CPF, nascimento, foto ou tema e aciona "Salvar"
+V -> C ++ : update(req: UpdateProfileRequest)
+C -> Q ++ : rules()
+Q --> C -- : erros de validação
+alt E1 - campo inválido (CPF, nascimento futuro, telefone sem DDD, foto fora de JPG/PNG até 2 MB) ou E2 - link ou bio do Instrutor inválidos
+  C --> V : 422
+  V --> USU : indica o campo e o motivo
+else dados válidos
+  C -> S ++ : update(user, dto: ProfileDTO)
+  alt E3 - edição do perfil de Instrutor por quem não é o dono
+    S --> C : ForbiddenException
+    C --> V : 403
+    V --> USU : informa o acesso negado
+  else usuário é o dono
+    opt envia nova foto
+      S -> P ++ : store(file)
+      P --> S -- : chave da foto no R2
+    end
+    opt A1 - Instrutor edita minibiografia e links
+      S -> I ++ : updateProfile(bio, links)
+      I --> S -- : InstructorProfile
+    end
+    S -> R ++ : save(user)
+    R -> BD ++ : UPDATE users
+    BD --> R --
+    R --> S -- : User
+    S --> C : User
+    C --> V : 200 (UserResource)
+    V --> USU : confirma a atualização e aplica o tema salvo (R-7)
+  end
+  deactivate S
+end
+deactivate C
+deactivate V
+opt A2 - "Alterar senha"
+  USU -> V ++ : aciona "Alterar senha"
+  V --> USU -- : inicia o UC017 Alterar Senha
+end
+@enduml

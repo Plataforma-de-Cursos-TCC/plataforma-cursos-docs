@@ -1,0 +1,60 @@
+' Item 14 - Diagrama de sequência do UC012 Cadastrar-se na Plataforma (ADR-0011). Camadas e métodos do item 13.
+' Gerar o PNG: plantuml -tpng 14-sequencia-uc012.puml
+@startuml 14-sequencia-uc012
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam ParticipantPadding 12
+skinparam BoxPadding 8
+
+actor Visitante as VIS
+boundary CadastroView as V
+control AuthController as C
+control RegisterRequest as Q
+control AuthService as S
+control UserRepository as R
+entity User as U
+database BD
+
+VIS -> V ++ : informa e-mail, senha, confirmação, aceita os termos e aciona "Criar conta"
+opt A1 - escolhe o perfil Instrutor
+  VIS -> V : marca "Quero ser instrutor"
+end
+V -> C ++ : register(req: RegisterRequest)
+C -> Q ++ : rules()
+Q --> C -- : erros de validação
+alt E3 - termos não aceitos (RNF020)
+  C --> V : 422
+  V --> VIS : pede o aceite dos termos e da política de privacidade
+else E2 - senha fora da política (8 ou mais caracteres, letra e número)
+  C --> V : 422
+  V --> VIS : informa a regra de senha
+else dados válidos
+  C -> S ++ : register(dto: RegisterDTO)
+  S -> R ++ : findByEmail(email)
+  R -> BD ++ : SELECT users WHERE email
+  BD --> R -- : linha
+  R --> S -- : user
+  alt E1 - e-mail já em uso
+    S --> C : EmailTakenException
+    C --> V : 422
+    V --> VIS : informa que o e-mail já está em uso
+  else e-mail livre
+    S -> U ++ : cria User (Student ou Instructor se A1), hash da senha (RNF007), termsAcceptedAt
+    U --> S --
+    S -> R ++ : save(user)
+    R -> BD ++ : INSERT users
+    BD --> R --
+    R --> S -- : User
+    S --> C : User
+    C --> V : 201
+    V --> VIS : confirma o cadastro e leva ao login (UC005)
+  end
+  deactivate S
+end
+deactivate C
+deactivate V
+@enduml
