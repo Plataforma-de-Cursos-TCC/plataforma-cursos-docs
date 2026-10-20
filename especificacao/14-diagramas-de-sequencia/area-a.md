@@ -28,11 +28,15 @@ Validação pelo Form Request (E2 senha fora da política, E3 termos não aceito
 
 ## 4. UC013 – Editar Dados do Perfil
 
-Validação do perfil (E1), com foto no R2 e endereço; o alternativo A1 do Instrutor (`PUT /profile/instructor`), com validação de link e minibiografia (E2) e 403 `FORBIDDEN` para quem não é Instrutor (E3); e A2 (alterar senha).
+Duas partes. Dados do perfil (`PUT /profile`): validação (E1), foto no R2, endereço e A2 (alterar senha). Perfil de Instrutor (A1, `PUT /profile/instructor`): validação de link e minibiografia (E2) e 403 `FORBIDDEN` para quem não é Instrutor (E3).
 
-![Diagrama de sequência do UC013](../diagramas/14-sequencia-uc013.png)
+![Diagrama de sequência do UC013, dados do perfil](../diagramas/14-sequencia-uc013-1.png)
 
-*Figura 0 – UC013, diagrama de sequência: editar dados do perfil*
+*Figura 0 – UC013, diagrama de sequência: dados do perfil*
+
+![Diagrama de sequência do UC013, perfil de Instrutor](../diagramas/14-sequencia-uc013-2.png)
+
+*Figura 0 – UC013, diagrama de sequência: perfil de Instrutor (A1)*
 
 ## 5. UC017 – Alterar Senha
 
