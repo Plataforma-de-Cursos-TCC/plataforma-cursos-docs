@@ -1043,7 +1043,26 @@ def assemble(pandoc_docx, template, out_docx, pages):
               child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
               p_next_h1._p.addprevious(p_break2)
 
-    # O texto do .md já traz o número do item; a numeração automática duplicaria.
+    # Item 14: cada caso de uso (Heading 2) começa em página própria e o diagrama é limitado à altura
+    # útil da página em retrato (título, texto e legenda ocupam o resto).
+    max_h14 = 7020000  # 19,5 cm
+    in14 = False
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            in14 = p.text.startswith("14 ")
+        elif in14 and p.style.name == "Heading 2":
+            ppr = child(p._p, "w:pPr", 0)
+            if ppr.find(qn("w:pageBreakBefore")) is None:
+                pstyle = ppr.find(qn("w:pStyle"))
+                ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
+        elif in14:
+            extent = p._p.find(".//" + qn("wp:extent"))
+            if extent is not None and int(extent.get("cy")) > max_h14:
+                cx, cy = int(extent.get("cx")), int(extent.get("cy"))
+                extent.set("cx", str(cx * max_h14 // cy))
+                extent.set("cy", str(max_h14))
+                sync_pic_ext(p._p, extent)
+
     for name in ("Heading 1", "Heading 2", "Heading 3"):
         ppr = doc.styles[name].element.find(qn("w:pPr"))
         if ppr is not None and ppr.find(qn("w:numPr")) is not None:
