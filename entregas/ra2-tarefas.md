@@ -40,3 +40,13 @@ relacionados: [ra2-criterios-de-aceite, ra1-tarefas, contexto, adr-0004, adr-000
 ## 4. Ordem
 
 12 -> 13 -> 14. O 15 parte dos fluxos do item 10 e roda em paralelo. A mãe de cada item integra as 4 áreas antes de fechar. A revisão cruzada e o envio vêm depois das quatro mães.
+
+## 5. Como fazer (modelo: Área A)
+
+A Área A já está pronta e serve de exemplo. Copie a estrutura, troque as tabelas pelas da sua área e preencha o `area-X.md` correspondente (hoje com "a preencher"). Decisão de formato: [ADR-0011](../docs/adr/0011-diagramas-do-ra2-em-plantuml.md).
+
+| Item | Modelo | O que fazer na sua área |
+|---|---|---|
+| 12 | [area-a.md](../especificacao/12-modelo-de-dados/area-a.md), [.puml](../especificacao/diagramas/12-modelo-de-dados-area-a.puml) | Um diagrama PlantUML das tabelas da área (PK/FK à esquerda, obrigatórios em negrito, seta da FK para a PK, cardinalidade `1` e `n`) e o dicionário de dados. |
+
+Gerar o PNG: `plantuml -tpng especificacao/diagramas/<arquivo>.puml`. Gerar o DOCX para conferir: `python3 scripts/build_doc.py 12 12 --pdf`. Se o seu texto supõe algo que outra área ainda não definiu, registre na issue `pendencia-cruzada` dela (AGENTS.md, regra 8).
