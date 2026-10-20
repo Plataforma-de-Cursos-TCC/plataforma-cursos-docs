@@ -1,0 +1,44 @@
+' Item 14 - Diagrama de sequência do UC013 Editar Dados do Perfil, parte 2 (perfil de Instrutor, A1) (ADR-0011). Camadas e métodos do item 13.
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 14-sequencia-uc013-2.puml
+@startuml 14-sequencia-uc013-2
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam BoxPadding 8
+
+actor "Instrutor" as INS
+boundary PerfilView as V
+control ProfileController as C
+control UpdateInstructorRequest as QI
+control ProfileService as S
+control InstructorProfileRepository as IR
+database BD
+
+INS -> V ++ : altera minibiografia ou links e aciona "Salvar"
+V -> C ++ : updateInstructor(req: UpdateInstructorRequest)
+alt E3 - o Usuário não é Instrutor (guarda de perfil do UC016)
+  C --> V : 403 FORBIDDEN
+  V --> INS : informa que a ação não é permitida
+else é Instrutor
+  C -> QI ++ : rules()
+  QI --> C -- : erros de validação
+  alt E2 - link com formato inválido ou minibiografia acima do limite
+    C --> V : 422 VALIDATION_FAILED (fields)
+    V --> INS : indica o campo e o motivo
+  else dados válidos
+    C -> S ++ : updateInstructor(instructor, dto: InstructorProfileDTO)
+    S -> IR ++ : save(profile)
+    IR -> BD ++ : UPDATE instructor_profile
+    BD --> IR --
+    IR --> S -- : InstructorProfile
+    S --> C -- : InstructorProfile
+    C --> V : 200 (InstructorProfileResource)
+    V --> INS : confirma a atualização do perfil de Instrutor
+  end
+end
+deactivate C
+deactivate V
+@enduml

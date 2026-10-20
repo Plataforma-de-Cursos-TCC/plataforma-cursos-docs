@@ -59,7 +59,8 @@ ITEMS = {
     + [f"12-modelo-de-dados/area-{a}.md" for a in "abcd"],
     13: ["13-diagrama-de-classes/00-item.md"]
     + [f"13-diagrama-de-classes/area-{a}.md" for a in "abcd"],
-    14: ("DIAGRAMAS DE SEQUÊNCIA", "docs/ssd/"),
+    14: ["14-diagramas-de-sequencia/00-item.md"]
+    + [f"14-diagramas-de-sequencia/area-{a}.md" for a in "abcd"],
     15: ("CASOS DE TESTE", "docs/testes/casos-de-teste.md"),
 }
 
@@ -427,7 +428,7 @@ def format_images(doc):
                     fp.append(ind)
                 child(fp, "w:jc", None).set(qn("w:val"), "center")
 
-    # Prototipos dos UC (item 10) e diagramas dos itens 12 e 13: linha em branco antes, legenda centralizada e borda de 1 px.
+    # Prototipos dos UC (item 10) e diagramas dos itens 12 a 14: linha em branco antes, legenda centralizada e borda de 1 px.
     # Itens 9 e 11 ficam de fora (o 11 tem tratamento próprio em paisagem).
     item = ""
     for p in doc.paragraphs:
@@ -435,7 +436,7 @@ def format_images(doc):
             item = p.text.split(" ")[0]
             continue
         pictures = [d for d in p._p.iter(qn("wp:docPr")) if "Caixa de Texto" not in d.get("name", "")]
-        if item not in ("10", "12", "13") or not pictures:
+        if item not in ("10", "12", "13", "14") or not pictures:
             continue
 
         prev = p._p.getprevious()
@@ -1042,7 +1043,26 @@ def assemble(pandoc_docx, template, out_docx, pages):
               child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
               p_next_h1._p.addprevious(p_break2)
 
-    # O texto do .md já traz o número do item; a numeração automática duplicaria.
+    # Item 14: cada caso de uso (Heading 2) começa em página própria e o diagrama é limitado à altura
+    # útil da página em retrato (título, texto e legenda ocupam o resto).
+    max_h14 = 7020000  # 19,5 cm
+    in14 = False
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            in14 = p.text.startswith("14 ")
+        elif in14 and p.style.name == "Heading 2":
+            ppr = child(p._p, "w:pPr", 0)
+            if ppr.find(qn("w:pageBreakBefore")) is None:
+                pstyle = ppr.find(qn("w:pStyle"))
+                ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
+        elif in14:
+            extent = p._p.find(".//" + qn("wp:extent"))
+            if extent is not None and int(extent.get("cy")) > max_h14:
+                cx, cy = int(extent.get("cx")), int(extent.get("cy"))
+                extent.set("cx", str(cx * max_h14 // cy))
+                extent.set("cy", str(max_h14))
+                sync_pic_ext(p._p, extent)
+
     for name in ("Heading 1", "Heading 2", "Heading 3"):
         ppr = doc.styles[name].element.find(qn("w:pPr"))
         if ppr is not None and ppr.find(qn("w:numPr")) is not None:
