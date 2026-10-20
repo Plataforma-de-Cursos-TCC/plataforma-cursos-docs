@@ -1,0 +1,86 @@
+' Item 13 - Diagrama de classes, Área A (Acesso e conta). Notação do TE5_1 (ADR-0011).
+' Perspectiva de Implementação (camadas MVC da API Laravel): cadastro e login.
+' Regra do TE5_1: a classe referencia o tipo (user: User), nunca o id da FK (userId).
+' Gerar o PNG: plantuml -tpng 13-classes-area-a-implementacao-login.puml
+@startuml 13-classes-area-a-implementacao-login
+hide empty members
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor white
+  BorderColor black
+}
+
+class User
+class RefreshSession
+
+  class SetLocale <<Middleware>> {
+    +handle(req: Request): Response
+  }
+  class AuthController <<Controller>> {
+    +register(req: RegisterRequest): UserResource
+    +login(req: LoginRequest): UserResource
+    +me(): UserResource
+    +forgotPassword(req: ForgotPasswordRequest): void
+    +resetPassword(req: ResetPasswordRequest): void
+  }
+  class RegisterRequest <<FormRequest>> {
+    +rules(): array
+  }
+  class LoginRequest <<FormRequest>> {
+    +rules(): array
+  }
+  class RegisterDTO <<DTO>> {
+    +email: string
+    +password: string
+    +role: Role
+    +termsAccepted: boolean
+    +locale: Locale
+  }
+  class LoginDTO <<DTO>> {
+    +email: string
+    +password: string
+    +rememberMe: boolean
+  }
+  class AuthTokens <<DTO>> {
+    +accessToken: string
+    +refresh: RefreshSession
+  }
+  class UserResource <<Resource>> {
+    +toArray(): array
+  }
+  class AuthService <<Service>> {
+    +register(dto: RegisterDTO): User
+    +login(dto: LoginDTO): AuthTokens
+  }
+  class JwtGuard <<Service>> {
+    +issue(user: User): string
+    +issueRefresh(user: User): RefreshSession
+  }
+  class LoginThrottle <<Redis>> {
+    +isBlocked(email: string): boolean
+    +recordFailure(email: string): void
+    +reset(email: string): void
+  }
+  class UserRepository <<Repository>> {
+    +findByEmail(email: string): User
+    +save(user: User): User
+  }
+
+AuthController ..> RegisterRequest
+AuthController ..> LoginRequest
+AuthController ..> UserResource
+RegisterRequest ..> RegisterDTO
+LoginRequest ..> LoginDTO
+AuthController --> AuthService
+AuthService --> UserRepository
+AuthService --> JwtGuard
+AuthService --> LoginThrottle
+AuthService ..> AuthTokens
+SetLocale ..> User
+UserRepository ..> User
+JwtGuard ..> RefreshSession
+@enduml

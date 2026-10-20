@@ -1,8 +1,8 @@
 ' Item 13 - Diagrama de classes, Área A (Acesso e conta). Notação do TE5_1 (ADR-0011).
-' Perspectiva de Implementação (camadas MVC da API Laravel): cadastro, login e recuperação de senha.
+' Perspectiva de Implementação (camadas MVC da API Laravel): recuperação de senha.
 ' Regra do TE5_1: a classe referencia o tipo (user: User), nunca o id da FK (userId).
-' Gerar o PNG: plantuml -tpng 13-classes-area-a-implementacao-auth.puml
-@startuml 13-classes-area-a-implementacao-auth
+' Gerar o PNG: plantuml -tpng 13-classes-area-a-implementacao-recuperacao.puml
+@startuml 13-classes-area-a-implementacao-recuperacao
 hide empty members
 skinparam shadowing false
 skinparam dpi 192
@@ -16,11 +16,7 @@ skinparam class {
 
 class User
 class PasswordResetToken
-class RefreshSession
 
-  class SetLocale <<Middleware>> {
-    +handle(req: Request): Response
-  }
   class AuthController <<Controller>> {
     +register(req: RegisterRequest): UserResource
     +login(req: LoginRequest): UserResource
@@ -28,53 +24,15 @@ class RefreshSession
     +forgotPassword(req: ForgotPasswordRequest): void
     +resetPassword(req: ResetPasswordRequest): void
   }
-  class RegisterRequest <<FormRequest>> {
-    +rules(): array
-  }
-  class LoginRequest <<FormRequest>> {
-    +rules(): array
-  }
   class ForgotPasswordRequest <<FormRequest>> {
     +rules(): array
   }
   class ResetPasswordRequest <<FormRequest>> {
     +rules(): array
   }
-  class RegisterDTO <<DTO>> {
-    +email: string
-    +password: string
-    +role: Role
-    +termsAccepted: boolean
-    +locale: Locale
-  }
-  class LoginDTO <<DTO>> {
-    +email: string
-    +password: string
-    +rememberMe: boolean
-  }
-  class AuthTokens <<DTO>> {
-    +accessToken: string
-    +refresh: RefreshSession
-  }
-  class UserResource <<Resource>> {
-    +toArray(): array
-  }
-  class AuthService <<Service>> {
-    +register(dto: RegisterDTO): User
-    +login(dto: LoginDTO): AuthTokens
-  }
   class PasswordResetService <<Service>> {
     +requestReset(email: string): void
     +reset(token: string, newPassword: string): void
-  }
-  class JwtGuard <<Service>> {
-    +issue(user: User): string
-    +issueRefresh(user: User): RefreshSession
-  }
-  class LoginThrottle <<Redis>> {
-    +isBlocked(email: string): boolean
-    +recordFailure(email: string): void
-    +reset(email: string): void
   }
   class ResetMailer <<Service>> {
     +sendLink(user: User, token: string): void
@@ -89,24 +47,12 @@ class RefreshSession
     +save(token: PasswordResetToken): void
   }
 
-AuthController ..> RegisterRequest
-AuthController ..> LoginRequest
 AuthController ..> ForgotPasswordRequest
 AuthController ..> ResetPasswordRequest
-AuthController ..> UserResource
-RegisterRequest ..> RegisterDTO
-LoginRequest ..> LoginDTO
-AuthController --> AuthService
 AuthController --> PasswordResetService
-AuthService --> UserRepository
-AuthService --> JwtGuard
-AuthService --> LoginThrottle
-AuthService ..> AuthTokens
 PasswordResetService --> UserRepository
 PasswordResetService --> PasswordResetTokenRepository
 PasswordResetService --> ResetMailer
-SetLocale ..> User
 UserRepository ..> User
 PasswordResetTokenRepository ..> PasswordResetToken
-JwtGuard ..> RefreshSession
 @enduml
