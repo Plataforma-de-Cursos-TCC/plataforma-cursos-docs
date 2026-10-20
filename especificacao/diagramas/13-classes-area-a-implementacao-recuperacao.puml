@@ -1,7 +1,7 @@
 ' Item 13 - Diagrama de classes, Área A (Acesso e conta). Notação do TE5_1 (ADR-0011).
 ' Perspectiva de Implementação (camadas MVC da API Laravel): recuperação de senha.
 ' Regra do TE5_1: a classe referencia o tipo (user: User), nunca o id da FK (userId).
-' Gerar o PNG: plantuml -tpng 13-classes-area-a-implementacao-recuperacao.puml
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 13-classes-area-a-implementacao-recuperacao.puml
 @startuml 13-classes-area-a-implementacao-recuperacao
 hide empty members
 skinparam shadowing false
