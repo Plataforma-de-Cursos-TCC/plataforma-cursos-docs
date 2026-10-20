@@ -580,7 +580,7 @@ Para garantir consistência no consumo pelo front-end SPA e facilitar o tratamen
 }
 ```
 
-Códigos de erro padrão da API (o `code` é estável e é o que o front-end e os testes comparam; `message` e os textos de `fields` saem no idioma do usuário, por `User.locale` ou `Accept-Language`, RNF013):
+Códigos de erro padrão da API (o `code` é estável e é o que o front-end e os testes comparam; `message` e os textos de `fields` saem no idioma do usuário, RNF013). O idioma vem de `User.locale`; sem sessão, de `Accept-Language`; sem tradução para o idioma pedido, cai em pt-BR. Hoje só o pt-BR está ativo, e en e es entram com novos arquivos de tradução, sem mudar o `code`:
 
 | Código | HTTP | Quando | Fluxos |
 |---|---|---|---|
