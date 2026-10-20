@@ -59,7 +59,8 @@ ITEMS = {
     + [f"12-modelo-de-dados/area-{a}.md" for a in "abcd"],
     13: ["13-diagrama-de-classes/00-item.md"]
     + [f"13-diagrama-de-classes/area-{a}.md" for a in "abcd"],
-    14: ("DIAGRAMAS DE SEQUÊNCIA", "docs/ssd/"),
+    14: ["14-diagramas-de-sequencia/00-item.md"]
+    + [f"14-diagramas-de-sequencia/area-{a}.md" for a in "abcd"],
     15: ("CASOS DE TESTE", "docs/testes/casos-de-teste.md"),
 }
 
@@ -427,7 +428,7 @@ def format_images(doc):
                     fp.append(ind)
                 child(fp, "w:jc", None).set(qn("w:val"), "center")
 
-    # Prototipos dos UC (item 10) e diagramas dos itens 12 e 13: linha em branco antes, legenda centralizada e borda de 1 px.
+    # Prototipos dos UC (item 10) e diagramas dos itens 12 a 14: linha em branco antes, legenda centralizada e borda de 1 px.
     # Itens 9 e 11 ficam de fora (o 11 tem tratamento próprio em paisagem).
     item = ""
     for p in doc.paragraphs:
@@ -435,7 +436,7 @@ def format_images(doc):
             item = p.text.split(" ")[0]
             continue
         pictures = [d for d in p._p.iter(qn("wp:docPr")) if "Caixa de Texto" not in d.get("name", "")]
-        if item not in ("10", "12", "13") or not pictures:
+        if item not in ("10", "12", "13", "14") or not pictures:
             continue
 
         prev = p._p.getprevious()
