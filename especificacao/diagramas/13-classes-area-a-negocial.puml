@@ -21,6 +21,7 @@ skinparam class {
     #role: Role
     #status: UserStatus
     #theme: ThemeType
+    #locale: Locale
     #phone: string
     #documentNumber: string
     #birthDate: Date
@@ -28,8 +29,8 @@ skinparam class {
     #termsAcceptedAt: DateTime
     -passwordHash: string
     +editProfile(data: ProfileDTO): User
-    +changePassword(current: string, novaSenha: string): void
-    +checkPassword(senha: string): boolean
+    +changePassword(current: string, newPassword: string): void
+    +checkPassword(password: string): boolean
   }
   class Student
   class Administrator
@@ -81,15 +82,30 @@ skinparam class {
     blocked
     deleted
   }
+  enum ThemeType {
+    light
+    dark
+    system
+  }
+  enum Locale {
+    pt_BR
+    en
+  }
+  enum AddressType {
+    billing
+    shipping
+  }
 
 User <|-- Student
 User <|-- Instructor
 User <|-- Administrator
 User "1" *-- "0..*" Address
-Instructor "1" *-- "0..1" InstructorProfile
+Instructor "1" *-- "1" InstructorProfile
 User "1" o-- "0..*" PasswordResetToken
 User "1" o-- "0..*" RefreshSession
 User --> Role
 User --> UserStatus
-UserRepository ..> User
+User --> ThemeType
+User --> Locale
+Address --> AddressType
 @enduml

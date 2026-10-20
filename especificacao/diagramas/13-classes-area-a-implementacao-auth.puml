@@ -1,8 +1,8 @@
 ' Item 13 - Diagrama de classes, Área A (Acesso e conta). Notação do TE5_1 (ADR-0011).
-' Perspectiva de Implementação (camadas MVC da API Laravel).
+' Perspectiva de Implementação (camadas MVC da API Laravel): cadastro, login e recuperação de senha.
 ' Regra do TE5_1: a classe referencia o tipo (user: User), nunca o id da FK (userId).
-' Gerar o PNG: plantuml -tpng 13-classes-area-a-implementacao.puml
-@startuml 13-classes-area-a-implementacao
+' Gerar o PNG: plantuml -tpng 13-classes-area-a-implementacao-auth.puml
+@startuml 13-classes-area-a-implementacao-auth
 hide empty members
 skinparam shadowing false
 skinparam dpi 192
@@ -18,15 +18,15 @@ class User
 class PasswordResetToken
 class RefreshSession
 
+  class SetLocale <<Middleware>> {
+    +handle(req: Request): Response
+  }
   class AuthController <<Controller>> {
     +register(req: RegisterRequest): UserResource
-    +login(req: LoginRequest): AuthResponse
+    +login(req: LoginRequest): UserResource
+    +me(): UserResource
     +forgotPassword(req: ForgotPasswordRequest): void
     +resetPassword(req: ResetPasswordRequest): void
-  }
-  class ProfileController <<Controller>> {
-    +update(req: UpdateProfileRequest): UserResource
-    +changePassword(req: ChangePasswordRequest): void
   }
   class RegisterRequest <<FormRequest>> {
     +rules(): array
@@ -40,11 +40,24 @@ class RefreshSession
   class ResetPasswordRequest <<FormRequest>> {
     +rules(): array
   }
-  class UpdateProfileRequest <<FormRequest>> {
-    +rules(): array
+  class RegisterDTO <<DTO>> {
+    +email: string
+    +password: string
+    +role: Role
+    +termsAccepted: boolean
+    +locale: Locale
   }
-  class ChangePasswordRequest <<FormRequest>> {
-    +rules(): array
+  class LoginDTO <<DTO>> {
+    +email: string
+    +password: string
+    +rememberMe: boolean
+  }
+  class AuthTokens <<DTO>> {
+    +accessToken: string
+    +refresh: RefreshSession
+  }
+  class UserResource <<Resource>> {
+    +toArray(): array
   }
   class AuthService <<Service>> {
     +register(dto: RegisterDTO): User
@@ -52,11 +65,7 @@ class RefreshSession
   }
   class PasswordResetService <<Service>> {
     +requestReset(email: string): void
-    +reset(token: string, novaSenha: string): void
-  }
-  class ProfileService <<Service>> {
-    +update(user: User, dto: ProfileDTO): User
-    +changePassword(user: User, current: string, novaSenha: string): void
+    +reset(token: string, newPassword: string): void
   }
   class JwtGuard <<Service>> {
     +issue(user: User): string
@@ -69,9 +78,6 @@ class RefreshSession
   }
   class ResetMailer <<Service>> {
     +sendLink(user: User, token: string): void
-  }
-  class PhotoStorage <<R2>> {
-    +store(file: UploadedFile): string
   }
   class UserRepository <<Repository>> {
     +findByEmail(email: string): User
@@ -87,19 +93,19 @@ AuthController ..> RegisterRequest
 AuthController ..> LoginRequest
 AuthController ..> ForgotPasswordRequest
 AuthController ..> ResetPasswordRequest
-ProfileController ..> UpdateProfileRequest
-ProfileController ..> ChangePasswordRequest
+AuthController ..> UserResource
+RegisterRequest ..> RegisterDTO
+LoginRequest ..> LoginDTO
 AuthController --> AuthService
 AuthController --> PasswordResetService
-ProfileController --> ProfileService
 AuthService --> UserRepository
 AuthService --> JwtGuard
 AuthService --> LoginThrottle
+AuthService ..> AuthTokens
 PasswordResetService --> UserRepository
 PasswordResetService --> PasswordResetTokenRepository
 PasswordResetService --> ResetMailer
-ProfileService --> UserRepository
-ProfileService --> PhotoStorage
+SetLocale ..> User
 UserRepository ..> User
 PasswordResetTokenRepository ..> PasswordResetToken
 JwtGuard ..> RefreshSession
