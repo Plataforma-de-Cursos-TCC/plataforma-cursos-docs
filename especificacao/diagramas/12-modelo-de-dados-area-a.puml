@@ -22,6 +22,7 @@ class User {
   <b>role: ENUM</b>
   <b>status: ENUM</b>
   <b>theme: ENUM</b>
+  <b>locale: ENUM</b>
   <b>termsAcceptedAt: DATETIME</b>
   phone: VARCHAR(20)
   documentNumber: VARCHAR(14)

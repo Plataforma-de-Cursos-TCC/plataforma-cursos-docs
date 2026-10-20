@@ -8,7 +8,8 @@ Tabelas que sustentam o cadastro, o login, a recuperação e a alteração de se
 
 Decisões do modelo:
 
-- `InstructorProfile` existe só para o Usuário com perfil de Instrutor (UC013, fluxo alternativo A1), por isso a relação é de `0..1` perfil por `User`.
+- `InstructorProfile` existe só para o Usuário com perfil de Instrutor (UC012 A1 e UC013 A1): a linha nasce vazia no cadastro como Instrutor e usa a própria chave do `User` (PK e FK), o que faz do Instrutor e do seu perfil uma relação 1 para 1. Como Aluno e Administrador não têm linha nessa tabela, do lado do `User` a relação é `0..1`.
+- `User.locale` guarda o idioma da interface e das mensagens (pt-BR ou en, RNF013); o padrão é pt-BR. Os textos ficam em arquivos de tradução e a API devolve o `code` do erro, que é estável, com a mensagem no idioma do usuário.
 - `User.termsAcceptedAt` registra o aceite dos termos e da política de privacidade no cadastro (RNF020, UC012 R-4).
 - Os tokens de redefinição e de refresh são guardados só como hash (`tokenHash`); o valor original nunca é persistido.
 
@@ -22,6 +23,7 @@ Decisões do modelo:
 | role | Simples | Texto | - | Perfil: student, instructor ou admin. |
 | status | Simples | Texto | - | Ativo, bloqueado ou excluído. |
 | theme | Simples | Texto | - | Tema da interface: claro, escuro ou sistema (UC013 R-7). |
+| locale | Simples | Texto | 5 | Idioma da interface e das mensagens: pt-BR (padrão) ou en (RNF013). |
 | termsAcceptedAt | Simples | Data e hora | - | Quando o usuário aceitou os termos no cadastro. |
 | phone | Simples | Texto | 20 | Telefone com DDD (opcional). |
 | documentNumber | Simples | Texto | 14 | CPF (opcional). |

@@ -471,6 +471,6 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 
 <!-- proposta: balanceador e mais de uma instância da API, cache de listagens e hospedagem com réplica ou reinício automático para atingir 1000 usuários simultâneos (RNF009) e 99% de disponibilidade (RNF010). A especificação define as metas, não o mecanismo. Motivo: a API sem estado permite escalar horizontalmente -->
 
-<!-- proposta: preferência de tema (RNF014: claro, escuro ou sistema) persistida no perfil do usuário, em campo `theme` que o dicionário de dados da especificação não traz (a entidade User da especificação tem `locale`, removido porque o sistema é monoidioma). Motivo: a meta exige preferência salva por usuário -->
+<!-- proposta: preferência de tema (RNF014: claro, escuro ou sistema) persistida no perfil do usuário, em campo `theme`, junto do idioma em `locale` (RNF013), ambos no dicionário de dados do item 12. Motivo: a meta exige preferência salva por usuário -->
 
 <!-- proposta: matriz de rastreabilidade RNF para componente fica para o TDD. Motivo: o item 8 está dividido por área (ADR-0006) e a renumeração definitiva dos RNFs ainda não foi feita (ADR-0001) -->

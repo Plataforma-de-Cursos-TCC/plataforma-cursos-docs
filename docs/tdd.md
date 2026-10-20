@@ -56,7 +56,9 @@ erDiagram
     User ||--o{ Enrollment : ""
     User ||--o{ Review : ""
     User ||--o{ Address : ""
-    User ||--|| InstructorProfile : ""
+    User ||--o| InstructorProfile : ""
+    User ||--o{ PasswordResetToken : ""
+    User ||--o{ RefreshSession : ""
     User ||--o{ Conversation : ""
     Course ||--o{ Conversation : ""
     Lesson ||--o{ Conversation : ""
@@ -73,7 +75,9 @@ erDiagram
         DATE birthDate
         VARCHAR photo
         ENUM theme
+        ENUM locale
         ENUM status
+        DATETIME termsAcceptedAt
         DATETIME anonymizedAt
     }
     Address {
@@ -95,6 +99,24 @@ erDiagram
         TEXT bio
         VARCHAR headline
         JSON socialLinks
+    }
+    PasswordResetToken {
+        UUID id PK
+        UUID userId FK
+        CHAR tokenHash
+        DATETIME expiresAt
+        DATETIME createdAt
+        DATETIME usedAt
+    }
+    RefreshSession {
+        UUID id PK
+        UUID userId FK
+        CHAR tokenHash
+        UUID familyId
+        DATETIME expiresAt
+        DATETIME createdAt
+        DATETIME revokedAt
+        UUID replacedBy
     }
     Category {
         UUID id PK
@@ -224,7 +246,9 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | birthDate | Simples | Data | - | Data de nascimento. |
 | photo | Simples | Texto | 255 | URL ou chave da foto de perfil no storage (R2). |
 | theme | Simples | Texto | - | Tema da interface: claro, escuro ou sistema. |
+| locale | Simples | Texto | 5 | Idioma da interface e das mensagens: pt-BR (padrão) ou en (RNF013). |
 | status | Simples | Texto | - | Ativo, bloqueado ou excluído. |
+| termsAcceptedAt | Simples | Data e hora | - | Quando o usuário aceitou os termos e a política de privacidade no cadastro (RNF020). |
 | anonymizedAt | Simples | Data | - | Data/hora da anonimização dos dados na exclusão da conta (UC018); nulo enquanto a conta não for anonimizada. |
 | **Entidade: Address** | | | | |
 | id | Determinante | UUID | - | Identificador único do endereço. |
@@ -244,6 +268,22 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | bio | Simples | Texto | - | Biografia curta do instrutor. |
 | headline | Simples | Texto | 150 | Chamada/título de apresentação. |
 | socialLinks | Composto | JSON | - | Conjunto de links de redes sociais. |
+| **Entidade: PasswordResetToken** | | | | |
+| id | Determinante | UUID | - | Identificador único do pedido de redefinição. |
+| userId | Simples | UUID | - | Referência ao usuário que pediu a redefinição. |
+| tokenHash | Simples | Texto | 64 | Hash do token enviado por e-mail; o valor original não é guardado. |
+| expiresAt | Simples | Data e hora | - | Validade de 30 minutos após o pedido (RNF017). |
+| createdAt | Simples | Data e hora | - | Quando o link foi gerado; um novo link invalida o anterior. |
+| usedAt | Simples | Data e hora | - | Quando o token foi usado (uso único); nulo enquanto válido. |
+| **Entidade: RefreshSession** | | | | |
+| id | Determinante | UUID | - | Identificador único do refresh token. |
+| userId | Simples | UUID | - | Referência ao usuário dono da sessão. |
+| tokenHash | Simples | Texto | 64 | Hash do refresh token opaco (ADR-0008). |
+| familyId | Simples | UUID | - | Agrupa os tokens de uma sessão; o reuso de um token consumido revoga a família. |
+| expiresAt | Simples | Data e hora | - | Validade de 30 dias. |
+| createdAt | Simples | Data e hora | - | Emissão do token. |
+| revokedAt | Simples | Data e hora | - | Revogação (rotação, logout, bloqueio ou exclusão); nulo enquanto ativo. |
+| replacedBy | Simples | UUID | - | Token que substituiu este na rotação. |
 | **Entidade: Category** | | | | |
 | id | Determinante | UUID | - | Identificador único da categoria. |
 | name | Simples | Texto | 80 | Nome da categoria de curso. |
