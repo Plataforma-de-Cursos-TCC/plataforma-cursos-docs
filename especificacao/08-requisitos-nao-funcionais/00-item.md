@@ -16,7 +16,7 @@
 | RNF010 | Disponibilidade mensal mínima de 99%. | Confiabilidade (disponibilidade) |
 | RNF011 | Backup diário do banco de dados, com restauração testada mensalmente. | Confiabilidade (recuperabilidade) |
 | RNF012 | Interface conforme WCAG 2.1 AA: contraste mínimo de 4,5:1 e navegação completa por teclado. | Capacidade de interação (inclusividade) |
-| RNF013 | 100% dos textos em pt-BR e en; datas, números e valores formatados conforme o idioma. | Capacidade de interação (inclusividade) |
+| RNF013 | 100% dos textos em pt-BR, em arquivos de tradução prontos para receber en e es sem mudança de código; datas, números e valores formatados conforme o idioma. | Capacidade de interação (inclusividade) |
 | RNF014 | Alternância entre modo claro e escuro em 100% das telas, aplicada em até 1 s sem recarregar a página. | Capacidade de interação (engajamento do usuário) |
 | RNF015 | 100% dos endpoints da API documentados em OpenAPI e acessíveis online. | Manutenibilidade (analisabilidade) |
 | RNF016 | 100% das ações administrativas com registro auditável (autor, ação e data), retido por 12 meses. | Segurança (responsabilização) |

@@ -53,7 +53,7 @@ flowchart TB
     usuario["Visitante, Aluno, Instrutor, Administrador"]
 
     subgraph plataforma["Plataforma de Cursos"]
-        web["Front-end web<br/>SPA responsiva, pt-BR e en, modo claro/escuro"]
+        web["Front-end web<br/>SPA responsiva, pt-BR (pronta para en e es), modo claro/escuro"]
         api["API<br/>regras de negócio das áreas A a D, JWT, documentação OpenAPI"]
         tutorsvc["Serviço do Tutor de IA<br/>transcrição, embeddings, busca por similaridade, geração de resposta"]
         db[("Banco de dados<br/>dados relacionais e índice de embeddings")]
@@ -80,7 +80,7 @@ flowchart TB
 
 | Contêiner | Responsabilidade | Origem da definição |
 |---|---|---|
-| Front-end web | Telas de todos os perfis; chat do Tutor de IA ao lado do vídeo; validação de campo obrigatório com mensagem de erro (RNF005); layout de 360 a 1920 px (RNF019); textos em pt-BR e en (RNF013); modo escuro (RNF014) | especificação (RNF005, RNF013, RNF014, RNF019, UC001) |
+| Front-end web | Telas de todos os perfis; chat do Tutor de IA ao lado do vídeo; validação de campo obrigatório com mensagem de erro (RNF005); layout de 360 a 1920 px (RNF019); textos em pt-BR, em arquivos de tradução prontos para en e es (RNF013); modo escuro (RNF014) | especificação (RNF005, RNF013, RNF014, RNF019, UC001) |
 | API | Autenticação e perfis, cursos, módulos, aulas, matrícula, pagamento simulado, progresso, quiz com correção automática, avaliação, dashboard, administração; documentação OpenAPI online (RNF015) | especificação |
 | Serviço do Tutor de IA | Transcrever a aula, gerar embeddings uma única vez por aula (RNF004), buscar trechos restritos ao curso, gerar resposta com aula e timestamp, responder em streaming (RNF003) | especificação |
 | Mensageria (RabbitMQ) | Fila AMQP entre a API e o Serviço do Tutor de IA para os jobs de transcrição e ingestão vetorial, executados em background | Proposta (TDD, seção de tecnologias) |
@@ -459,7 +459,7 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 | RNF010 | Confiabilidade | Disponibilidade mensal mínima de 99% | Sem fonte na especificação para o mecanismo |
 | RNF011 | Confiabilidade | Backup diário; restauração testada mensalmente | Backup do banco de dados, que concentra os dados da plataforma |
 | RNF012 | Capacidade de interação (inclusividade) | WCAG 2.1 AA; contraste 4,5:1; navegação por teclado | Front-end com componentes acessíveis e revisão de contraste |
-| RNF013 | Capacidade de interação | pt-BR e en em 100% dos textos; datas e valores por idioma | Textos em arquivos de tradução e formatação por localidade |
+| RNF013 | Capacidade de interação | 100% dos textos em pt-BR, em arquivos de tradução prontos para receber en e es sem mudança de código; datas e valores por idioma | Textos em arquivos de tradução e formatação por localidade |
 | RNF014 | Capacidade de interação | Claro/escuro em 100% das telas, preferência salva por usuário | Tema no front-end; preferência persistida no perfil |
 | RNF015 | Manutenibilidade | 100% dos endpoints em OpenAPI, online | API documentada em OpenAPI e publicada |
 | RNF016 | Segurança | 100% das ações administrativas registradas, por 12 meses | Registro de auditoria no componente de gerenciamento de usuários |
@@ -471,6 +471,6 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 
 <!-- proposta: balanceador e mais de uma instância da API, cache de listagens e hospedagem com réplica ou reinício automático para atingir 1000 usuários simultâneos (RNF009) e 99% de disponibilidade (RNF010). A especificação define as metas, não o mecanismo. Motivo: a API sem estado permite escalar horizontalmente -->
 
-<!-- proposta: preferência de tema (RNF014: claro, escuro ou sistema) persistida no perfil do usuário, em campo `theme`, junto do idioma em `locale` (RNF013), ambos no dicionário de dados do item 12. Motivo: a meta exige preferência salva por usuário -->
+A preferência de tema (RNF014: claro, escuro ou sistema) fica no perfil do usuário, em `theme`, junto do idioma em `locale` (RNF013), ambos no dicionário de dados do item 12, porque a meta exige preferência salva por usuário.
 
 <!-- proposta: matriz de rastreabilidade RNF para componente fica para o TDD. Motivo: o item 8 está dividido por área (ADR-0006) e a renumeração definitiva dos RNFs ainda não foi feita (ADR-0001) -->
