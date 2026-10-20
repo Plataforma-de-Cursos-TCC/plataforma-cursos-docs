@@ -1,6 +1,6 @@
 ' Item 12 - Modelo lógico relacional, Área A (Acesso e conta). Notação do TE4 (ADR-0011).
 ' Campo em negrito = obrigatório (NOT NULL); PK/FK à esquerda; seta da FK aponta para a tabela da PK.
-' Gerar o PNG: plantuml -tpng 12-modelo-de-dados-area-a.puml
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 12-modelo-de-dados-area-a.puml
 @startuml 12-modelo-de-dados-area-a
 hide circle
 hide empty members

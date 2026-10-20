@@ -36,7 +36,7 @@ relacionados: [adr-0004]
 ## Consequências
 
 - Todo diagrama do RA2 tem fonte versionada e revisada por PR.
-- Para regerar: `plantuml -tpng <arquivo>.puml`, dentro de `especificacao/diagramas/`.
+- Para regerar: `PLANTUML_LIMIT_SIZE=8192 plantuml -tpng <arquivo>.puml` (sem o limite maior o PlantUML corta a imagem em 4096 px), dentro de `especificacao/diagramas/`.
 - A ADR-0004 continua valendo para os itens 4, 9 e 11.
 
 ---
