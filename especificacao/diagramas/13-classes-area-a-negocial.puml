@@ -89,7 +89,6 @@ skinparam class {
   }
   enum Locale {
     pt_BR
-    en
   }
   enum AddressType {
     billing
@@ -108,4 +107,9 @@ User --> UserStatus
 User --> ThemeType
 User --> Locale
 Address --> AddressType
+
+note right of Locale
+  Só pt_BR está ativo; en e es entram
+  como novos valores, sem mudar o modelo.
+end note
 @enduml
