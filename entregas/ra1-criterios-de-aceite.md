@@ -143,9 +143,9 @@ Resumo dos pesos por item (rubrica do Canvas, a conferir; seção 6, A4). O tota
 
 ### 3.4 Item 4 — Mapeamento de Negócios (0,2)
 
-**Template:** diagrama **BPMN** do processo de negócio na versão **TO BE**, ou seja, como o processo fica com o sistema. Arquivo `.bpmn` (BPMN 2.0), editável no bpmn.io ou no Camunda Modeler (ADR-0004).
+**Template:** diagrama **BPMN** do processo de negócio na versão **TO BE**, ou seja, como o processo fica com o sistema. Fonte `.drawio` com notação BPMN 2.0 (ADR-0012).
 
-- [x] **C04.1** A notação é BPMN 2.0 de verdade (arquivo `.bpmn` com PNG gerado da fonte), não um fluxograma improvisado. — evidência: especificacao/diagramas/04-mapeamento-de-negocios.bpmn e .png
+- [x] **C04.1** A notação é BPMN 2.0 de verdade (arquivo `.drawio` com PNG gerado da fonte), não um fluxograma improvisado. — evidência: especificacao/diagramas/04-mapeamento-de-negocios.drawio e .png
 - [ ] **C04.2** O diagrama representa apenas o TO BE, sem misturar com o AS IS. — pendente: diagrama BPMN nao inspecionado
 - [ ] **C04.3** Tem evento de **início** e de **fim**. — pendente: diagrama BPMN nao inspecionado
 - [ ] **C04.4** Tem **atividades** rotuladas de forma padronizada (verbo no infinitivo + objeto). — pendente: diagrama BPMN nao inspecionado
@@ -206,7 +206,7 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 
 ### 3.9 Item 9 — Diagrama Geral de Casos de Uso (0,2)
 
-**Template:** diagrama geral considerando **generalização de atores** e **inclusão e extensão** de casos de uso. Notação UML (boneco, elipse e fronteira do sistema), código em PlantUML (`.puml`) com PNG gerado da fonte (ADR-0004).
+**Template:** diagrama geral considerando **generalização de atores** e **inclusão e extensão** de casos de uso. Notação UML (boneco, elipse e fronteira do sistema), fonte em draw.io (`.drawio`) com PNG gerado da fonte (ADR-0012).
 
 - [ ] **C09.1** Tem **fronteira do sistema** com o nome do produto. — pendente: diagrama 09-casos-de-uso.png nao inspecionado
 - [ ] **C09.2** Os atores estão corretos e são os mesmos do item 5. — pendente: atores do diagrama nao conferidos (ver K.1)
@@ -228,17 +228,17 @@ Referência do projeto (já definida pelo grupo, CONTEXT seção 2): **Visitante
 - [x] **C10.5** Cada especificação tem ao menos um **fluxo alternativo** (variação intencional do ator). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo alternativo em todos os UCs)
 - [x] **C10.6** Cada especificação tem ao menos um **fluxo de exceção** (variação não intencional ou erro). — evidência: especificacao/10-especificacoes-de-caso-de-uso/area-*.md (fluxo de excecao em todos os UCs)
 - [ ] **C10.7** A linguagem é testável: cada passo é observável. — pendente: testabilidade de cada passo nao conferida
-- [x] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores. — evidência: os 20 UCs (UC001-UC020) conferidos item a item entre especificacao/diagramas/09-casos-de-uso.puml, a matriz 9.1 (especificacao/09-diagrama-geral-de-casos-de-uso.md) e especificacao/10-especificacoes-de-caso-de-uso/area-a.md a area-d.md: mesmo nome e mesmos atores; revisão cruzada de 09/10/2026 e correções dos PRs #81 e #82
+- [x] **C10.8** Cada especificação corresponde a um caso de uso do diagrama (item 9), com o mesmo nome e os mesmos atores. — evidência: os 20 UCs (UC001-UC020) conferidos item a item entre especificacao/diagramas/09-casos-de-uso.drawio, a matriz 9.1 (especificacao/09-diagrama-geral-de-casos-de-uso.md) e especificacao/10-especificacoes-de-caso-de-uso/area-a.md a area-d.md: mesmo nome e mesmos atores; revisão cruzada de 09/10/2026 e correções dos PRs #81 e #82
 - [ ] **C10.9** As regras de negócio são coerentes com as estórias e os RFs. — pendente: regras de negocio x estorias x RFs nao conferidas
 
 ### 3.11 Item 11 — Diagrama de Atividades (0,2)
 
-**Template:** diagrama de atividades do sistema, em notação UML. Código em PlantUML (`.puml`) com PNG gerado da fonte (ADR-0004).
+**Template:** diagrama de atividades do sistema, em notação UML. Fonte em draw.io (`.drawio`) com PNG gerado da fonte (ADR-0012).
 
 - [ ] **C11.1** Representa o **fluxo principal**. — pendente: diagrama 11-atividades.png nao inspecionado
 - [ ] **C11.2** Representa os **fluxos alternativos**. — pendente: diagrama 11-atividades.png nao inspecionado
 - [ ] **C11.3** Tem **decisões** com **condições de guarda** escritas. — pendente: diagrama 11-atividades.png nao inspecionado
-- [ ] **C11.4** Tem **atividades paralelas** (fork/join) onde houver ramos concorrentes, por exemplo o Aluno assistir à aula enquanto o Tutor de IA está disponível para dúvidas. — pendente: verificação independente (PDF final) não encontrou fork/join; o diagrama do UC009 só tem fluxo sequencial com a pergunta ao Tutor via A-3; incluir fork/join exige refazer as coordenadas de `scripts/gen_activity_diagram.py`
+- [ ] **C11.4** Tem **atividades paralelas** (fork/join) onde houver ramos concorrentes, por exemplo o Aluno assistir à aula enquanto o Tutor de IA está disponível para dúvidas. — pendente: verificação independente (PDF final) não encontrou fork/join; o diagrama do UC009 só tem fluxo sequencial com a pergunta ao Tutor via A-3; incluir fork/join exige redesenhar `especificacao/diagramas/11-atividades.drawio`
 - [x] **C11.5** Tem **responsabilidades** (partições/raias) coerentes com os atores. — evidência: especificacao/05-atores-usuarios.md (6 atores e nota sobre a raia Plataforma de Cursos); PDF verificado de forma independente
 - [ ] **C11.6** A notação UML é usada corretamente: nó inicial e final, ações, decisão/merge, fork/join. — pendente: diagrama 11-atividades.png nao inspecionado
 - [ ] **C11.7** É legível e aderente à documentação (atores, casos de uso, BPMN). — pendente: diagrama 11-atividades.png nao inspecionado
@@ -277,7 +277,7 @@ Executar depois que todos os itens estiverem prontos, e de novo antes do envio.
 - [ ] **K.1** Os mesmos atores (nomes idênticos) aparecem nos itens 4, 5, 6, 7, 9, 10 e 11. — pendente: UC013 usa 'Usuario' (puml:52 USU) e US020 usa 'Instrutor'; decisao do Lucas cobre o mapeamento RF x UC, nao a grafia dos atores; demais itens nao conferidos
 - [x] **K.2** Todo RF (item 6) tem **pelo menos uma** estória (item 7) e toda estória aponta para um RF existente. — evidência: especificacao/06-requisitos-funcionais/00-item.md:7-25 e especificacao/07-estorias-de-usuario/area-*.md
 - [x] **K.3** Todo RF está coberto por **pelo menos um** caso de uso no diagrama (item 9). — evidência: especificacao/09-diagrama-geral-de-casos-de-uso.md (todo RF mapeado a UC)
-- [x] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — evidência: os 20 UCs (UC001-UC020) conferidos item a item entre especificacao/diagramas/09-casos-de-uso.puml, a matriz 9.1 (especificacao/09-diagrama-geral-de-casos-de-uso.md) e especificacao/10-especificacoes-de-caso-de-uso/area-a.md a area-d.md: mesmo nome e mesmos atores; revisão cruzada de 09/10/2026 e correções dos PRs #81 e #82
+- [x] **K.4** Toda especificação (item 10) corresponde a um caso de uso do diagrama (item 9), com o mesmo nome. — evidência: os 20 UCs (UC001-UC020) conferidos item a item entre especificacao/diagramas/09-casos-de-uso.drawio, a matriz 9.1 (especificacao/09-diagrama-geral-de-casos-de-uso.md) e especificacao/10-especificacoes-de-caso-de-uso/area-a.md a area-d.md: mesmo nome e mesmos atores; revisão cruzada de 09/10/2026 e correções dos PRs #81 e #82
 - [ ] **K.5** Os critérios de aceite das estórias não contradizem as regras de negócio nem os fluxos das especificações do mesmo requisito. — pendente: US020 x UC013 A1 sem contradicao (area-a.md:189-196); demais estorias x fluxos nao conferidas
 - [ ] **K.6** Os objetivos (item 1) são atendidos por algum RF e aparecem refletidos na Visão (item 3). — pendente: objetivos x RFs x visao nao conferidos
 - [ ] **K.7** Nada listado em "Não faz" (item 2) aparece como RF, estória ou caso de uso. — pendente: 'Nao faz' x RFs/US/UCs nao conferido item a item
