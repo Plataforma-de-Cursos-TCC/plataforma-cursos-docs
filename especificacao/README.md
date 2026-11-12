@@ -17,4 +17,4 @@ Esqueleto dos 11 itens do template da disciplina. Cada arquivo traz o título do
 | 11 | Diagrama de atividades | `11-diagrama-de-atividades.md` |
 | 12 | Modelo de dados | `12-modelo-de-dados/` (`00-item.md`, `area-a.md` a `area-d.md`) |
 
-Diagramas como código (fontes `.bpmn` e `.puml`, e imagens PNG geradas) ficam em `diagramas/` (ADR-0004 e ADR-0011).
+Os diagramas ficam em `diagramas/`: itens 4, 9 e 11 com fonte `.drawio` e PNG exportado da fonte (ADR-0012); itens 12 a 14 com fonte `.puml` e PNG gerado da fonte (ADR-0011).

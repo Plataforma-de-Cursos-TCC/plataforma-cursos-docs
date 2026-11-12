@@ -1010,6 +1010,8 @@ def assemble(pandoc_docx, template, out_docx, pages):
           # Cada imagem começa em página própria, com a legenda logo abaixo dela:
           max_w = 8532000  # largura útil em paisagem A4 com margens de 3cm/2cm (~23.7 cm)
           max_h = 3400000  # altura máxima para caber com título, texto e legenda na mesma página
+          if land_prefix == "4 ":
+              max_h = 4400000  # o BPMN fica em página própria (o texto ocupa a anterior): usa a largura toda
           imgs = []
           started = False
           for p in doc.paragraphs:
@@ -1040,6 +1042,22 @@ def assemble(pandoc_docx, template, out_docx, pages):
               p_break2 = OxmlElement("w:p")
               child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
               p_next_h1._p.addprevious(p_break2)
+
+    # Item 9 (casos de uso): diagrama com 18 cm, 1 cm além de cada margem (recuo negativo),
+    # centralizado na mesma linha da legenda; os 15 cm padrão deixam os rótulos pequenos.
+    item = ""
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            item = p.text.split(" ")[0]
+        elif item == "9":
+            for extent in p._p.iter(qn("wp:extent")):
+                w_18cm = 6480000
+                extent.set("cy", str(int(int(extent.get("cy")) * w_18cm / int(extent.get("cx")))))
+                extent.set("cx", str(w_18cm))
+                sync_pic_ext(p._p, extent)
+                ind = child(p._p, "w:pPr", 0).find(qn("w:ind"))
+                ind.set(qn("w:left"), "-567")
+                ind.set(qn("w:right"), "-567")
 
     # O texto do .md já traz o número do item; a numeração automática duplicaria.
     for name in ("Heading 1", "Heading 2", "Heading 3"):
