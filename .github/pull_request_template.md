@@ -10,5 +10,6 @@ Closes #
 
 - [ ] `python3 scripts/build_doc.py --check` e `python3 scripts/render_prototypes.py --check` passam
 - [ ] Título no padrão Conventional Commits (`docs(escopo): resumo`)
+- [ ] Linha no `CHANGELOG.md`, em `[Não lançado]`, com o que mudou e por quê (ou o label `sem-changelog`)
 - [ ] Dúvida sobre outra área registrada na issue `pendencia-cruzada`, sem inventar o requisito dela
 - [ ] Outro integrante da equipe revisou e aprovou (o autor não aprova o próprio PR)

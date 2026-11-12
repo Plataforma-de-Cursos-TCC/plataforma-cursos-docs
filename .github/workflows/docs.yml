@@ -70,3 +70,21 @@ jobs:
           case ",$LABELS," in *,sem-issue,*) exit 0;; esac
           printf '%s' "$PR_BODY" | grep -Eiq '(closes|fixes|resolves) #[0-9]+' \
             || { echo "O corpo do PR precisa de 'Closes #N' (ou o label sem-issue)."; exit 1; }
+
+  changelog:
+    name: changelog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Exigir linha no CHANGELOG.md
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          LABELS: ${{ join(github.event.pull_request.labels.*.name, ',') }}
+        run: |
+          case ",$LABELS," in *,sem-changelog,*) exit 0;; esac
+          # Três pontos: compara com o ponto em que a branch saiu da main, não com a main de agora.
+          git diff --name-only "$BASE_SHA...$HEAD_SHA" | grep -qx 'CHANGELOG.md' \
+            || { echo "O PR precisa de uma linha no CHANGELOG.md, em [Não lançado] (ou o label sem-changelog)."; exit 1; }
