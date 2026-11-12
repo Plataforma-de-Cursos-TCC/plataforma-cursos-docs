@@ -24,32 +24,32 @@
     <input class="input" type="text" aria-label="Aluno" value="Aluno" style="width:220px" data-estado="filtro-aluno">
   </div>
   <table>
-    <thead><tr><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Status</th><th></th></tr></thead>
+    <thead><tr><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Status</th><th style="width:380px"></th></tr></thead>
     <tbody>
       <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">CM</span>Carla Mendes</div></td><td>carla.mendes@email.com</td>
         <td><span class="chip accent">Administrador</span></td><td><span class="chip success">Ativo</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
       <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">MA</span>Marina Alves</div></td><td>marina.alves@email.com</td>
         <td><span class="chip accent">Instrutor</span></td><td><span class="chip success">Ativo</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
       <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno confirmar-exclusao propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">JS</span>João Silva</div></td><td>joao.silva@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip success">Ativo</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
       <tr data-estado="atualizado">
         <td><div class="row"><span class="avatar">JS</span>João Silva</div></td><td>joao.silva@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip danger">Bloqueado</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
       <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno atualizado nao-encontrado confirmar-exclusao excluido propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">RC</span>Rafael Costa</div></td><td>rafael.costa@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip danger">Bloqueado</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
     </tbody>
   </table>
@@ -62,9 +62,17 @@
   </div>
 </div>
 <div class="overlay" data-estado="confirmar-perfil">
-  <div class="modal">
+  <div class="modal stack">
     <h3>Alterar perfil de João Silva?</h3>
-    <p class="small muted" style="margin-top:8px">O perfil de João Silva será alterado de Aluno para Instrutor. O novo perfil valerá a partir do próximo acesso a uma área protegida.</p>
+    <div class="field">
+      <label for="novo-perfil">Novo perfil</label>
+      <select class="input" id="novo-perfil">
+        <option value="Aluno">Aluno</option>
+        <option value="Instrutor" selected>Instrutor</option>
+        <option value="Administrador">Administrador</option>
+      </select>
+    </div>
+    <p class="small muted">O perfil de João Silva será alterado de Aluno para Instrutor. O novo perfil valerá a partir do próximo acesso a uma área protegida.</p>
     <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn primary" type="button">Confirmar</button></div>
   </div>
 </div>
