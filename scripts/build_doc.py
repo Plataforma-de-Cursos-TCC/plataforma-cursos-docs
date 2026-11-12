@@ -61,7 +61,8 @@ ITEMS = {
     + [f"13-diagrama-de-classes/area-{a}.md" for a in "abcd"],
     14: ["14-diagramas-de-sequencia/00-item.md"]
     + [f"14-diagramas-de-sequencia/area-{a}.md" for a in "abcd"],
-    15: ("CASOS DE TESTE", "docs/testes/casos-de-teste.md"),
+    15: ["15-casos-de-teste/00-item.md"]
+    + [f"15-casos-de-teste/area-{a}.md" for a in "abcd"],
 }
 
 # Converte <br> (HTML cru dentro das células de tabela) em quebra de linha do Word.
@@ -932,6 +933,9 @@ def assemble(pandoc_docx, template, out_docx, pages):
         if first_txt == "RF" and "OBJETIVO" in full_head and "JUSTIFICATIVA" in full_head:
             # Matriz de rastreabilidade (9.1): larguras fixas somando a largura útil de 10490.
             widths = [1000, 1500, 1400, 900, 1600, 4090]
+        elif first_txt == "ID" and "CENÁRIO" in full_head and "ENTRADAS" in full_head:
+            # Casos de teste (item 15): mesma largura útil.
+            widths = [900, 1700, 2300, 2690, 2900]
         elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAMANHO" in full_head:
             # Dicionário de dados (item 12): colunas curtas não quebram o nome do atributo.
             widths = [2000, 1700, 1300, 1200, 4290]

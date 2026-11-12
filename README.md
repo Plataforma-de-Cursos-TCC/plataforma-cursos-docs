@@ -59,7 +59,7 @@ O repositório começa cru. Cada parte da estrutura abaixo entra por um pull req
 python3 scripts/build_doc.py [de] [até] --template "caminho/ESSW - Especificacao de Projeto - Template.docx"
 ```
 
-Gera `build/Especificação - itens <de>-<até>.docx` (e o `.pdf`, com `--pdf`) com capa, sumário, cabeçalho, rodapé e a declaração de uso de IA no fim. O padrão é `1 11` (escopo do RA1); `1 15` inclui os itens do RA2, que entram como "em elaboração" enquanto não tiverem fonte pronta. O template também pode vir da variável `ESSW_TEMPLATE`. Precisa de pandoc, LibreOffice (`soffice`) e python-docx. A pasta `build/` não é versionada.
+Gera `build/Especificação - itens <de>-<até>.docx` (e o `.pdf`, com `--pdf`) com capa, sumário, cabeçalho, rodapé e a declaração de uso de IA no fim. O padrão é `1 11` (escopo do RA1); `1 15` inclui os itens do RA2 (12 a 15), com as áreas ainda sem conteúdo marcadas como "a preencher". O template também pode vir da variável `ESSW_TEMPLATE`. Precisa de pandoc, LibreOffice (`soffice`) e python-docx. A pasta `build/` não é versionada.
 
 Os protótipos de tela do item 10 são HTML em `especificacao/10-especificacoes-de-caso-de-uso/prototipos/html/`, um layout por arquivo, com o estado escolhido por `?estado=`. A lista de capturas fica em `html/estados-*.txt`, e `python3 scripts/render_prototypes.py` gera as PNG em `prototipos/png/<UC>/` (claro, as do DOCX) e `prototipos/png/escuro/<UC>/`; requer Google Chrome instalado; `--check` só valida a lista).
 
