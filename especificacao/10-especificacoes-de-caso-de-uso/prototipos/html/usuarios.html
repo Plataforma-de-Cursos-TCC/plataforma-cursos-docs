@@ -15,40 +15,41 @@
   <h1>Usuários</h1>
   <div class="banner erro" data-estado="proprio-bloqueio" aria-live="polite">Não é possível bloquear a própria conta.</div>
   <div class="banner erro" data-estado="propria-exclusao" aria-live="polite">Não é possível excluir a própria conta.</div>
+  <div class="banner erro" data-estado="proprio-perfil" aria-live="polite">Não é possível alterar o próprio perfil.</div>
   <div class="banner erro" data-estado="nao-encontrado" aria-live="polite">Usuário não encontrado.</div>
   <div class="banner sucesso" data-estado="excluido" aria-live="polite">Usuário excluído.</div>
   <div class="row">
     <input class="input placeholder" type="text" aria-label="Buscar por nome ou e-mail" placeholder="Buscar por nome ou e-mail" style="flex:1">
-    <input class="input" type="text" aria-label="Todos os perfis" value="Todos os perfis" style="width:220px" data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">
+    <input class="input" type="text" aria-label="Todos os perfis" value="Todos os perfis" style="width:220px" data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao confirmar-perfil proprio-perfil">
     <input class="input" type="text" aria-label="Aluno" value="Aluno" style="width:220px" data-estado="filtro-aluno">
   </div>
   <table>
-    <thead><tr><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Status</th><th></th></tr></thead>
+    <thead><tr><th>Usuário</th><th>E-mail</th><th>Perfil</th><th>Status</th><th style="width:380px"></th></tr></thead>
     <tbody>
-      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">
+      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">CM</span>Carla Mendes</div></td><td>carla.mendes@email.com</td>
         <td><span class="chip accent">Administrador</span></td><td><span class="chip success">Ativo</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
-      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao">
+      <tr data-estado="padrao confirmar-bloqueio atualizado proprio-bloqueio nao-encontrado confirmar-exclusao excluido propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">MA</span>Marina Alves</div></td><td>marina.alves@email.com</td>
         <td><span class="chip accent">Instrutor</span></td><td><span class="chip success">Ativo</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
-      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno confirmar-exclusao propria-exclusao">
+      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno confirmar-exclusao propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">JS</span>João Silva</div></td><td>joao.silva@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip success">Ativo</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Bloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
       <tr data-estado="atualizado">
         <td><div class="row"><span class="avatar">JS</span>João Silva</div></td><td>joao.silva@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip danger">Bloqueado</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
-      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno atualizado nao-encontrado confirmar-exclusao excluido propria-exclusao">
+      <tr data-estado="padrao confirmar-bloqueio proprio-bloqueio filtro-aluno atualizado nao-encontrado confirmar-exclusao excluido propria-exclusao confirmar-perfil proprio-perfil">
         <td><div class="row"><span class="avatar">RC</span>Rafael Costa</div></td><td>rafael.costa@email.com</td>
         <td><span class="chip neutral">Aluno</span></td><td><span class="chip danger">Bloqueado</span></td>
-        <td><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
+        <td style="white-space:nowrap"><div class="row" style="justify-content:flex-end"><button class="btn secondary" type="button">Alterar perfil</button><button class="btn secondary" type="button">Desbloquear</button><button class="btn danger" type="button">Excluir</button></div></td>
       </tr>
     </tbody>
   </table>
@@ -57,6 +58,21 @@
   <div class="modal">
     <h3>Bloquear João Silva?</h3>
     <p class="small muted" style="margin-top:8px">O acesso de João Silva será revogado imediatamente.</p>
+    <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn primary" type="button">Confirmar</button></div>
+  </div>
+</div>
+<div class="overlay" data-estado="confirmar-perfil">
+  <div class="modal stack">
+    <h3>Alterar perfil de João Silva?</h3>
+    <div class="field">
+      <label for="novo-perfil">Novo perfil</label>
+      <select class="input" id="novo-perfil">
+        <option value="Aluno">Aluno</option>
+        <option value="Instrutor" selected>Instrutor</option>
+        <option value="Administrador">Administrador</option>
+      </select>
+    </div>
+    <p class="small muted">O perfil de João Silva será alterado de Aluno para Instrutor. O novo perfil valerá a partir do próximo acesso a uma área protegida.</p>
     <div class="acoes"><button class="btn secondary" type="button">Cancelar</button><button class="btn primary" type="button">Confirmar</button></div>
   </div>
 </div>

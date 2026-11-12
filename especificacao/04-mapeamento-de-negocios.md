@@ -8,9 +8,9 @@ O mapeamento representa o fluxo de valor do produto (TO BE) em um pool, a Plataf
 
 **Visitante e Aluno:** o Visitante consulta o catálogo, escolhe um curso e se cadastra ou faz login; a partir daí atua como Aluno. O Aluno solicita a matrícula (com pagamento simulado se o curso for pago), assiste às aulas e, se tiver dúvida, pergunta ao Tutor de IA. Ao final do módulo, responde ao quiz e pode avaliar o curso.
 
-**Plataforma de Cursos e Tutor de IA:** a Plataforma de Cursos armazena, transcreve e indexa as aulas, processa o pagamento simulado, registra a matrícula, calcula a nota do quiz, registra o progresso e agrega o engajamento da turma. O Tutor de IA busca trechos do curso e responde citando a aula e o timestamp, ou informa que o curso não cobre a dúvida.
+**Plataforma de Cursos e Tutor de IA:** a Plataforma de Cursos armazena, transcreve e indexa as aulas, processa o pagamento simulado e registra a matrícula. A Plataforma de Cursos registra o progresso a cada aula assistida e calcula a nota quando o Aluno responde ao quiz, e a agregação usa os dois. O Tutor de IA busca trechos do curso e responde citando a aula e o timestamp, ou informa que o curso não cobre a dúvida.
 
-**Administrador:** depois que o progresso é registrado, a agregação alimenta em paralelo o painel do Instrutor e o dashboard da plataforma, que o Administrador consulta.
+**Administrador:** depois da agregação, o fluxo alimenta em paralelo o painel do Instrutor e o dashboard da plataforma, que o Administrador consulta.
 
 O gateway paralelo (+) indica caminhos que seguem ao mesmo tempo; os gateways exclusivos (X) indicam decisões com um único caminho. Esse fluxo é a base para a Relação de Requisitos Funcionais (item 6) e para as Especificações de Caso de Uso (item 10).
 

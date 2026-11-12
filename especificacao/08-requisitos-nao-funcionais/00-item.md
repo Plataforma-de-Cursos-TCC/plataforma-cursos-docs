@@ -14,7 +14,7 @@
 | RNF008 | 0 logins aceitos durante os 15 min seguintes a 5 tentativas inválidas consecutivas na mesma conta. | Segurança (resistência) |
 | RNF009 | Listagens da API com p95 de até 2 s com 1000 usuários simultâneos; listagens paginadas (`per_page` padrão 20, máximo 100). | Eficiência de desempenho (comportamento temporal) |
 | RNF010 | Disponibilidade mensal mínima de 99%. | Confiabilidade (disponibilidade) |
-| RNF011 | Backup diário do banco de dados, com restauração testada mensalmente. | Confiabilidade (recuperabilidade) |
+| RNF011 | Backup diário do banco de dados e dos arquivos de vídeo e material das aulas, com restauração dos dois testada mensalmente. | Confiabilidade (recuperabilidade) |
 | RNF012 | Interface conforme WCAG 2.1 AA: contraste mínimo de 4,5:1 e navegação completa por teclado. | Capacidade de interação (inclusividade) |
 | RNF013 | 100% dos textos em pt-BR, em arquivos de tradução prontos para receber en e es sem mudança de código; datas, números e valores formatados conforme o idioma. | Capacidade de interação (inclusividade) |
 | RNF014 | Alternância entre modo claro e escuro em 100% das telas, aplicada em até 1 s sem recarregar a página. | Capacidade de interação (engajamento do usuário) |

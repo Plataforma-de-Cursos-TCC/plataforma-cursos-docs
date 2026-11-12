@@ -34,6 +34,7 @@ relacionados: [adr-0006]
 - O diagrama geral (item 9) mostra o Tutor de IA como ator secundário ligado a "Conversar com Tutor de IA".
 - RNFs de tempo de resposta, disponibilidade e privacidade do Tutor ficam na área D.
 - A especificação do caso de uso trata a indisponibilidade do Tutor como fluxo alternativo.
+- O Tutor de IA fica fora da fronteira do sistema: representa o serviço externo de modelo de linguagem que a Plataforma de Cursos aciona. O item 5 não o descreve como componente do sistema (precisão registrada em 12/11/2026, depois da análise do professor).
 
 ---
 

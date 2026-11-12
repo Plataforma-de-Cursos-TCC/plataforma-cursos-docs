@@ -185,9 +185,9 @@
 - **Ator(es):** Instrutor.
 - **Descrição:** o Instrutor cria, edita, reordena e exclui módulos de um curso seu, definindo título e posição (US005, RF003).
 - **Pré-condições:** o Instrutor ter realizado login e ter cadastrado o curso (UC006).
-- **Pós-condições:** módulo criado, alterado ou excluído e lista de módulos do curso atualizada.
-- **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia os seus módulos; R-2 a posição do módulo deve ser única dentro do curso; R-3 a exclusão de um módulo remove as suas aulas e o seu quiz.
-- **Protótipo(s) de tela:** tela do curso com lista de módulos, botão “Novo módulo” e formulário de título e posição. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Pós-condições:** módulo criado, alterado ou excluído (quando sem histórico de alunos) e lista de módulos do curso atualizada; histórico de alunos preservado caso a exclusão seja bloqueada.
+- **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia os seus módulos; R-2 a posição do módulo deve ser única dentro do curso; R-3 a exclusão de um módulo sem histórico de alunos remove as suas aulas e o seu quiz; R-4 a exclusão de um módulo é bloqueada se algum Aluno tiver progresso registrado em aula do módulo ou resposta ao quiz do módulo (nesse caso o histórico de progresso, respostas e notas é preservado e o Instrutor pode editar o módulo, mas não removê-lo).
+- **Protótipo(s) de tela:** tela do curso com lista de módulos, botão “Novo módulo”, formulário de título e posição e aviso de exclusão bloqueada. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Instrutor acessa o curso. (A-1) (A-2) (E-3)
   2. O Instrutor aciona “Novo módulo”.
@@ -219,10 +219,11 @@
     *Figura 0 – UC014, fluxo alternativo A1: formulário "Editar módulo" com dados atuais*
   - **A2 – O Instrutor exclui um módulo**
     - A-2.1 O Instrutor aciona “Excluir” em um módulo.
-    - A-2.2 O sistema avisa que as aulas e o quiz do módulo também serão removidos e pede confirmação.
-    - A-2.3 O Instrutor confirma a exclusão.
-    - A-2.4 O sistema remove o módulo, as suas aulas e o seu quiz e atualiza a lista.
-    - A-2.5 Este caso de uso é finalizado.
+    - A-2.2 O sistema verifica se há histórico de alunos no módulo. (E-4)
+    - A-2.3 O sistema avisa que as aulas e o quiz do módulo também serão removidos e pede confirmação.
+    - A-2.4 O Instrutor confirma a exclusão.
+    - A-2.5 O sistema remove o módulo, as suas aulas e o seu quiz e atualiza a lista.
+    - A-2.6 Este caso de uso é finalizado.
 
     ![confirmação de exclusão do módulo](prototipos/png/UC014/UC014-A2-1.png)
 
@@ -248,6 +249,14 @@
     - E-3.1 O sistema identifica que o curso pertence a outro Instrutor (R-1).
     - E-3.2 O sistema nega o acesso (403) e não executa nenhuma alteração nos módulos.
     - E-3.3 Este caso de uso é finalizado.
+  - **E4 – Tentativa de excluir módulo com histórico de alunos**
+    - E-4.1 O sistema identifica progresso registrado em aula ou resposta ao quiz do módulo por algum Aluno.
+    - E-4.2 O sistema impede a exclusão, informa que o módulo possui histórico de alunos e orienta que o módulo pode ser editado, mas não removido.
+    - E-4.3 Este caso de uso é finalizado.
+
+    ![exclusão bloqueada na tela "Módulos do curso"](prototipos/png/UC014/UC014-E4-1.png)
+
+    *Figura 0 – UC014, fluxo de exceção E4: exclusão bloqueada na tela "Módulos do curso"*
 
 ## 9. UC015 – Gerenciar Aulas do Curso
 
@@ -255,9 +264,9 @@
 - **Ator(es):** Instrutor.
 - **Descrição:** o Instrutor cria, edita e exclui aulas de um módulo, incluindo o envio do vídeo da aula (US006, RF004).
 - **Pré-condições:** o Instrutor ter realizado login e ter cadastrado o módulo (UC014).
-- **Pós-condições:** aula salva com o vídeo armazenado; transcrição e indexação do conteúdo iniciadas para uso do Tutor de IA.
-- **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia as suas aulas; R-2 o vídeo aceita os formatos mp4 e webm, com até 500 MB por arquivo (RNF018); R-3 o envio do vídeo usa um link de envio temporário, válido por 15 minutos (RNF002); R-4 a transcrição e a indexação do conteúdo são geradas uma única vez por aula (RNF004).
-- **Protótipo(s) de tela:** tela do módulo com lista de aulas e formulário de título, descrição, ordem, indicador de prévia e seleção do vídeo. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Pós-condições:** aula salva com o vídeo armazenado ou aula sem histórico excluída; transcrição e indexação do conteúdo iniciadas para uso do Tutor de IA; histórico de alunos preservado caso a exclusão seja bloqueada.
+- **Regras de negócio:** R-1 só o Instrutor dono do curso gerencia as suas aulas; R-2 o vídeo aceita os formatos mp4 e webm, com até 500 MB por arquivo (RNF018); R-3 o envio do vídeo usa um link de envio temporário, válido por 15 minutos (RNF002); R-4 a transcrição e a indexação do conteúdo são geradas uma única vez por aula (RNF004); R-5 a exclusão de uma aula é bloqueada se algum Aluno tiver progresso registrado na aula (nesse caso o histórico de progresso é preservado e o Instrutor pode editar a aula, mas não removê-la).
+- **Protótipo(s) de tela:** tela do módulo com lista de aulas, formulário de título, descrição, ordem, indicador de prévia e seleção do vídeo e aviso de exclusão bloqueada. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Instrutor acessa o módulo. (A-1) (A-2) (E-3)
   2. O Instrutor aciona “Nova aula”.
@@ -295,9 +304,12 @@
 
     *Figura 0 – UC015, fluxo alternativo A1: formulário "Editar aula" com dados atuais*
   - **A2 – O Instrutor exclui uma aula**
-    - A-2.1 O Instrutor aciona “Excluir” em uma aula e confirma a exclusão.
-    - A-2.2 O sistema remove a aula e o seu vídeo e atualiza a lista.
-    - A-2.3 Este caso de uso é finalizado.
+    - A-2.1 O Instrutor aciona “Excluir” em uma aula.
+    - A-2.2 O sistema verifica se há histórico de alunos na aula. (E-4)
+    - A-2.3 O sistema avisa que a aula e o vídeo serão removidos e pede confirmação.
+    - A-2.4 O Instrutor confirma a exclusão.
+    - A-2.5 O sistema remove a aula e o seu vídeo e atualiza a lista.
+    - A-2.6 Este caso de uso é finalizado.
 
     ![confirmação de exclusão da aula](prototipos/png/UC015/UC015-A2-1.png)
 
@@ -323,3 +335,11 @@
     - E-3.1 O sistema identifica que o curso da aula pertence a outro Instrutor (R-1).
     - E-3.2 O sistema nega o acesso (403), sem gerar link de envio nem alterar a aula.
     - E-3.3 Este caso de uso é finalizado.
+  - **E4 – Tentativa de excluir aula com histórico de alunos**
+    - E-4.1 O sistema identifica progresso registrado na aula por algum Aluno.
+    - E-4.2 O sistema impede a exclusão, informa que a aula possui histórico de alunos e orienta que a aula pode ser editada, mas não removida.
+    - E-4.3 Este caso de uso é finalizado.
+
+    ![exclusão bloqueada na tela "Aulas do módulo"](prototipos/png/UC015/UC015-E4-1.png)
+
+    *Figura 0 – UC015, fluxo de exceção E4: exclusão bloqueada na tela "Aulas do módulo"*

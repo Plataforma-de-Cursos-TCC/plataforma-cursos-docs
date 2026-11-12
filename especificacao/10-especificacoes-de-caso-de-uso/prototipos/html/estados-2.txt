@@ -11,6 +11,7 @@ curso-form.html erro-campos UC006-E1-1 | erro "Campo obrigatório" no título
 curso-modulos.html padrao UC014-FB-1 | tela "Módulos do curso" com botão "Novo módulo"
 curso-modulos.html modulo-criado UC014-FB-5 | tela "Módulos do curso" após criar módulo
 curso-modulos.html exclusao-modulo UC014-A2-1 | confirmação de exclusão do módulo
+curso-modulos.html exclusao-bloqueada UC014-E4-1 | exclusão bloqueada na tela "Módulos do curso"
 modulo-form.html padrao UC014-FB-3 | formulário "Novo módulo" vazio
 modulo-form.html edicao UC014-A1-1 | formulário "Editar módulo" com dados atuais
 modulo-form.html erro-titulo UC014-E1-1 | erro "Campo obrigatório" no título do módulo
@@ -18,6 +19,7 @@ modulo-form.html erro-posicao UC014-E2-1 | erro "Ordem já em uso" no módulo
 modulo-aulas.html padrao UC015-FB-1 | tela "Aulas do módulo" com botões "Novo quiz" e "Nova aula"
 modulo-aulas.html aula-salva UC015-FB-7 | tela "Aulas do módulo" após salvar aula
 modulo-aulas.html exclusao-aula UC015-A2-1 | confirmação de exclusão da aula
+modulo-aulas.html exclusao-bloqueada UC015-E4-1 | exclusão bloqueada na tela "Aulas do módulo"
 aula-form.html padrao UC015-FB-3 | formulário "Nova aula" vazio
 aula-form.html enviando UC015-FB-6 | formulário "Nova aula" com envio em andamento
 aula-form.html edicao UC015-A1-1 | formulário "Editar aula" com dados atuais
