@@ -16,6 +16,18 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 - `CHANGELOG.md`, a regra de registrar toda mudança (`AGENTS.md`, `CONTRIBUTING.md` e template de PR) e o job `changelog` no CI, para que o caminho do documento até a versão final fique registrado e nenhum PR entre sem a sua linha (#127).
 
+### Corrigido
+
+Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129):
+
+- Item 4: o BPMN registra o progresso a cada aula assistida ("Registra o progresso da aula") e calcula a nota só no quiz, porque a tarefa única fazia o progresso depender do quiz, contra o RF006 e o UC009.
+- Item 5: o Tutor de IA é descrito como serviço externo de IA, fora da fronteira do sistema, porque o texto o chamava de componente do sistema e de ator ao mesmo tempo.
+- Item 6: o UC008 ganha o fluxo de alteração de perfil pelo Administrador (A4, E3 e regras), com critérios novos na US016 e protótipo, porque o RF012 fala em perfis de acesso e nenhum caso de uso trocava o perfil.
+- Item 7: na US018, o pagamento recusado deixa a matrícula pendente, sem liberar o conteúdo, para concordar com o UC003.
+- Item 8: o RNF011 passa a cobrir o backup de vídeos e materiais, além do banco de dados.
+- Item 10: o UC014 e o UC015 bloqueiam a exclusão de módulo ou aula com histórico de alunos (regra, passo de verificação, exceção E4 e protótipo), porque a exclusão apagaria progresso e respostas.
+- Item 11: o diagrama de atividades verifica se a aula está transcrita e indexada antes da busca do Tutor de IA (E-1 do UC001), que antes ficava de fora.
+
 ## [1.2.0] - 2026-11-12
 
 Pré-versão enviada ao professor para aprovação, com os diagramas do RA1 refeitos.
