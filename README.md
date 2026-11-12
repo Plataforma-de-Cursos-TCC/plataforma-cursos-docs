@@ -31,6 +31,7 @@ O repositório começa cru. Cada parte da estrutura abaixo entra por um pull req
 ├── CONTEXT.md                 porta de entrada: o que está decidido e o que ler para cada item
 ├── AGENTS.md                  regras para assistentes de IA (Codex, Copilot, Cursor e outros)
 ├── CLAUDE.md                  faz o Claude Code carregar o AGENTS.md e o CONTEXT.md
+├── CHANGELOG.md               o que mudou em cada versão enviada ao professor, e por quê
 │
 ├── especificacao/             a entrega: itens 1 a 11 do template da disciplina
 ├── entregas/                  plano de tarefas e critérios de aceite de cada entrega

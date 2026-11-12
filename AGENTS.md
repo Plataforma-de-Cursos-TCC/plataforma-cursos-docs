@@ -10,6 +10,7 @@
 6. Grafo: se existir `graphify-out/`, use `graphify-out/GRAPH_REPORT.md` (ou a consulta do Graphify) para **achar** o que ler; decida sempre pelos arquivos Markdown. Não regenere o grafo em branches de tarefa: ele é regerado só a partir da `main`, via PR.
 7. Arquivo novo de pesquisa segue o mesmo formato: cabeçalho YAML (`id`, `titulo`, `tipo`, `itens_template`, `areas`, `decisoes`, `fontes`, `relacionados`, `status`, `atualizado`) e seção "Ligações" com links Markdown relativos (os links viram ligações no grafo). Decisão nova segue o formato dos ADRs em `docs/adr/`.
 8. Pendência entre áreas: se o texto que você escreve supõe algo que outra área ainda não definiu, não pare e não invente o requisito da outra área. Registre a suposição na issue `pendencia-cruzada` da área que precisa resolver.
+9. Changelog: todo pull request acrescenta em `CHANGELOG.md`, na seção `[Não lançado]`, uma linha com o que mudou e por quê, seguida do número do PR. O CI (`changelog`) exige; só PR sem efeito no documento ou no repositório (merge de sincronização, teste de fluxo) usa o label `sem-changelog`. Não crie tag nem feche versão: isso é decisão do grupo, feita no envio ao professor.
 
 ## Agent skills
 
