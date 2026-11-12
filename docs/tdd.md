@@ -580,15 +580,26 @@ Para garantir consistência no consumo pelo front-end SPA e facilitar o tratamen
 }
 ```
 
-Códigos de erro padrão da API:
-- `UNAUTHENTICATED` (401): Token JWT ausente, inválido ou expirado.
-- `FORBIDDEN` (403): Perfil sem permissão para acessar o recurso ou violação de propriedade (`assertOwnership`) ou ação proibida sobre a própria conta (bloquear ou excluir a si mesmo, UC008 E1 e UC018 E1).
-- `NOT_FOUND` (404): Entidade solicitada inexistente.
-- `VALIDATION_FAILED` (422): Falha de validação estrutural ou semântica dos dados da requisição.
-- `PAYMENT_DECLINED` (422): Pagamento simulado recusado (UC019); o pagamento é registrado como `recusado` e a matrícula continua `pendente`.
-- `LESSON_NOT_INDEXED` (409): Aula ainda sem transcrição e embeddings; o Tutor de IA não responde até a indexação terminar (UC001, E1).
-- `TOO_MANY_REQUESTS` (429): Limite de taxa de requisições excedido (rate limit).
-- `INTERNAL_SERVER_ERROR` (500): Falha inesperada no processamento interno do servidor.
+Códigos de erro padrão da API (o `code` é estável e é o que o front-end e os testes comparam; `message` e os textos de `fields` saem no idioma do usuário, RNF013). O idioma vem de `User.locale`; sem sessão, de `Accept-Language`; sem tradução para o idioma pedido, cai em pt-BR. Hoje só o pt-BR está ativo, e en e es entram com novos arquivos de tradução, sem mudar o `code`:
+
+| Código | HTTP | Quando | Fluxos |
+|---|---|---|---|
+| `UNAUTHENTICATED` | 401 | JWT ausente, inválido ou expirado; credencial de login incorreta, com mensagem genérica (UC005 R-1). O front-end tenta o refresh uma vez e, sem sucesso, leva ao login. | UC005 E1 e E2; UC016 E1 |
+| `ACCOUNT_BLOCKED` | 403 | Conta com status bloqueado. No login só é devolvido depois da credencial correta, para não revelar o status a quem não conhece a senha. | UC005 E3; UC008 |
+| `FORBIDDEN` | 403 | Perfil sem permissão, propriedade (`assertOwnership`), Aluno sem matrícula, quiz com aulas não concluídas, ação proibida sobre a própria conta, cabeçalho `Origin` inválido (ADR-0008). | UC016 E2; UC004, UC006, UC014 e UC015 E3; UC001 E4; UC002 E3; UC008 E1; UC018 E1; UC010 |
+| `NOT_FOUND` | 404 | Recurso inexistente. Também no lugar do 403 quando confirmar a existência vazaria dado (quiz sem matrícula, UC002), vídeo indisponível e usuário já removido. | UC002; UC008 E2; UC009 E1; UC018 E2 |
+| `VALIDATION_FAILED` | 422 | Validação dos campos, com `fields` por campo (RNF005): e-mail em uso, senha fora da política, confirmação diferente, termos não aceitos, senha atual incorreta (não é 401, que o front-end trataria como sessão expirada), CPF, data, foto, link, posição de módulo em uso, intervalo de datas. | UC012 E1 a E3; UC013 E1 e E2; UC017 E1 a E3; UC004 E1 e E2; UC006 E1 e E4; UC007 E1; UC010 E2; UC014 E1 e E2; UC015 E1; UC002 E1 |
+| `RESET_TOKEN_EXPIRED` | 422 | Link de redefinição com mais de 30 minutos (RNF017). | UC011 E2 |
+| `RESET_TOKEN_INVALID` | 422 | Link já usado, adulterado ou inexistente. | UC011 E3 |
+| `PAYMENT_DECLINED` | 422 | Pagamento simulado recusado; o pagamento é registrado como `recusado` e a matrícula continua `pendente`. Como não há operadora de cartão, não se usa o 402 do Stripe. | UC003 E2; UC019 E1 |
+| `CONFLICT` | 409 | O estado atual do recurso impede a operação: curso com alunos matriculados no `DELETE`, curso despublicado ou preço alterado durante a matrícula, matrícula já existente. A mensagem diz o motivo. | UC006 E2; UC003 E1; UC019 E2 e E3 |
+| `LESSON_NOT_INDEXED` | 409 | Aula ainda sem transcrição e embeddings; o Tutor de IA não responde até a indexação terminar. | UC001 E1 |
+| `PAYLOAD_TOO_LARGE` | 413 | Corpo acima do limite do servidor. Abaixo dele, a regra de 2 MB da foto (UC013 R-6) é `VALIDATION_FAILED`. | UC013 E1 |
+| `TOO_MANY_REQUESTS` | 429 | Limite de taxa: 5 logins inválidos seguidos bloqueiam a conta por 15 minutos (RNF008) e o Tutor de IA tem cota de mensagens. Sempre com o cabeçalho `Retry-After` (segundos) e `error.retryAfterSeconds`, que alimentam o tempo restante mostrado ao Usuário. | UC005 E4; UC001 E2 |
+| `INTERNAL_SERVER_ERROR` | 500 | Falha inesperada, inclusive quiz publicado com gabarito incompleto (UC002 E2). A resposta não expõe detalhe interno; o detalhe vai para o log. | UC002 E2 |
+| `SERVICE_UNAVAILABLE` | 503 | Dependência fora do ar (ai-service, Cloudflare R2, envio de e-mail), com `Retry-After`. | UC001 E3; UC009 E2; UC015 E2 |
+
+Regras do padrão: um erro tem um só `code`, sempre na estrutura acima, e o status HTTP segue a semântica do código (4xx erro do cliente, 5xx falha do servidor). Respostas que protegem contra enumeração de usuários (UC005 R-1 e UC011 R-2) têm o mesmo status e o mesmo corpo nos dois casos, e o e-mail de recuperação sai por fila para o tempo de resposta também não diferenciar. Os códigos de B a D são os que a especificação já pedia; os de `CONFLICT` e `SERVICE_UNAVAILABLE` nos UCs dessas áreas aguardam a confirmação de cada área. Na prática de mercado há duas alternativas ao envelope próprio, o `application/problem+json` da RFC 9457 e o formato `{message, errors}` padrão do Laravel; o envelope daqui mantém o `fields` do segundo e o `code` estável do primeiro.
 
 Respostas de sucesso: `200 OK` com corpo em leituras e atualizações, `201 Created` em criações e `204 No Content`, sem corpo, em todo `DELETE` bem-sucedido.
 
@@ -620,18 +631,18 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 
 | Área | Método e Endpoint | Descrição e Acesso | UC Relacionado |
 |---|---|---|---|
-| **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma, com o papel escolhido (Aluno ou Instrutor) e o aceite dos termos (público) | UC012 |
-| | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público). Credencial inválida: 401 `UNAUTHENTICATED` com mensagem genérica; bloqueio por força bruta: 429 `TOO_MANY_REQUESTS` | UC005 |
+| **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma, com o papel escolhido (Aluno ou Instrutor) e o aceite dos termos (público). E-mail em uso, senha fora da política ou termos não aceitos: 422 `VALIDATION_FAILED` com `fields` | UC012 |
+| | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público). Credencial inválida: 401 `UNAUTHENTICATED` com mensagem genérica; conta bloqueada, com a credencial correta: 403 `ACCOUNT_BLOCKED`; bloqueio por força bruta: 429 `TOO_MANY_REQUESTS` com `Retry-After` | UC005 |
 | | `POST /api/v1/auth/refresh` | Troca o refresh token do cookie por novo par de cookies, com rotação (cookie de refresh presente apenas com `rememberMe`) | UC005 |
 | | `GET /api/v1/auth/me` | Dados do usuário autenticado, para restaurar a sessão ao carregar a SPA (autenticado) | UC005 |
 | | `POST /api/v1/auth/logout` | Encerramento de sessão e invalidação do token (autenticado) | UC005 |
-| | `POST /api/v1/auth/forgot-password` | Solicitação de link de redefinição de senha com validade de 30 min (público) | UC011 |
-| | `POST /api/v1/auth/reset-password` | Redefinição de senha com token recebido por e-mail (público) | UC011 |
+| | `POST /api/v1/auth/forgot-password` | Solicitação de link de redefinição de senha com validade de 30 min (público). Responde `200` com a mesma mensagem exista ou não o e-mail (UC011 R-2); e-mail malformado: 422 `VALIDATION_FAILED`; excesso de pedidos: 429 | UC011 |
+| | `POST /api/v1/auth/reset-password` | Redefinição de senha com token recebido por e-mail (público). Link expirado: 422 `RESET_TOKEN_EXPIRED`; usado ou inválido: 422 `RESET_TOKEN_INVALID` | UC011 |
 | | `GET /api/v1/profile` | Obtenção dos dados cadastrais do usuário logado (autenticado) | UC013 |
 | | `PUT /api/v1/profile` | Atualização de nome, telefone, endereço, CPF, data de nascimento, foto e tema (autenticado) | UC013 |
-| | `PUT /api/v1/profile/password` | Alteração de senha do usuário logado com confirmação da senha atual e da nova senha (autenticado) | UC017 (RF019) |
+| | `PUT /api/v1/profile/password` | Alteração de senha do usuário logado com confirmação da senha atual e da nova senha (autenticado). Senha atual incorreta, nova senha fora da política ou confirmação diferente: 422 `VALIDATION_FAILED` com `fields`, nunca 401 | UC017 (RF019) |
 | | `GET /api/v1/profile/instructor` | Leitura do perfil de instrutor: `headline`, `bio` e `socialLinks` (Instrutor) | UC013 |
-| | `PUT /api/v1/profile/instructor` | Atualização do perfil de instrutor: `headline`, `bio` e `socialLinks` (Instrutor) | UC013 |
+| | `PUT /api/v1/profile/instructor` | Atualização do perfil de instrutor: `headline`, `bio` e `socialLinks` (Instrutor). Aluno ou Administrador: 403 `FORBIDDEN`; link ou bio inválidos: 422 `VALIDATION_FAILED` | UC013 |
 | **Área B: Autoria do instrutor** | `GET /api/v1/instructor/courses` | Listagem paginada de "Meus cursos" do instrutor (Instrutor) | UC006 |
 | | `GET /api/v1/instructor/courses/{id}` | Leitura de um curso do instrutor, para edição (Instrutor dono) | UC006 |
 | | `POST /api/v1/instructor/courses` | Criação de novo curso em status de rascunho (Instrutor) | UC006 |
