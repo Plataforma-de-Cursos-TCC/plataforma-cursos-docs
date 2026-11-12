@@ -3,16 +3,16 @@ id: adr-0004
 titulo: "ADR-0004 — Diagramas como código"
 tipo: decisao
 decisao: D4
-status: aceita
+status: substituída pela ADR-0012
 data: 2026-10-08
 decisor: Grupo (proposta de Lucas Stopinski)
 itens_template: [4, 5, 9, 10, 11]
 areas: [A, B, C, D]
-relacionados: [adr-0003]
+relacionados: [adr-0003, adr-0012]
 ---
 # ADR-0004 — Diagramas como código
 
-- **Status:** aceita · **Data:** 08/10/2026 (revisão da versão de 07/10/2026) · **Decisor:** grupo, por proposta de Lucas Stopinski
+- **Status:** substituída pela [ADR-0012](0012-diagramas-do-ra1-em-drawio.md) em 12/11/2026 · **Data:** 08/10/2026 (revisão da versão de 07/10/2026) · **Decisor:** grupo, por proposta de Lucas Stopinski
 
 ## Contexto
 
@@ -46,5 +46,5 @@ relacionados: [adr-0003]
 ## Ligações
 
 - **Itens da especificação:** itens 4, 9 e 11 em [especificacao/](../../especificacao/)
-- **Outras decisões:** [D3](0003-extend-no-sentido-do-te3-3.md)
+- **Outras decisões:** [D3](0003-extend-no-sentido-do-te3-3.md), [ADR-0012](0012-diagramas-do-ra1-em-drawio.md) (substitui esta)
 - **Índice das decisões:** [README.md](README.md) · **Contexto geral:** [CONTEXT.md](../../CONTEXT.md)
