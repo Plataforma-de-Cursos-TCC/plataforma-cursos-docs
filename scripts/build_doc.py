@@ -989,7 +989,8 @@ def assemble(pandoc_docx, template, out_docx, pages):
                 ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
 
     # Itens 4 (BPMN largo), 11 e 13 (classes) em seção paisagem (cabeçalho e rodapé preservados):
-    for land_prefix, max_h in (("4 ", 3400000), ("11 ", 3400000), ("13 ", 4400000)):
+    # O BPMN do item 4 fica em página própria (o texto ocupa a anterior), por isso a altura maior.
+    for land_prefix, max_h in (("4 ", 4400000), ("11 ", 3400000), ("13 ", 4400000)):
       p11 = None
       p_next_h1 = None
       for p in doc.paragraphs:
@@ -1067,6 +1068,23 @@ def assemble(pandoc_docx, template, out_docx, pages):
                 extent.set("cy", str(max_h14))
                 sync_pic_ext(p._p, extent)
 
+    # Item 9 (casos de uso): diagrama com 18 cm, 1 cm além de cada margem (recuo negativo),
+    # centralizado na mesma linha da legenda; os 15 cm padrão deixam os rótulos pequenos.
+    item = ""
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            item = p.text.split(" ")[0]
+        elif item == "9":
+            for extent in p._p.iter(qn("wp:extent")):
+                w_18cm = 6480000
+                extent.set("cy", str(int(int(extent.get("cy")) * w_18cm / int(extent.get("cx")))))
+                extent.set("cx", str(w_18cm))
+                sync_pic_ext(p._p, extent)
+                ind = child(p._p, "w:pPr", 0).find(qn("w:ind"))
+                ind.set(qn("w:left"), "-567")
+                ind.set(qn("w:right"), "-567")
+
+    # O texto do .md já traz o número do item; a numeração automática duplicaria.
     for name in ("Heading 1", "Heading 2", "Heading 3"):
         ppr = doc.styles[name].element.find(qn("w:pPr"))
         if ppr is not None and ppr.find(qn("w:numPr")) is not None:
