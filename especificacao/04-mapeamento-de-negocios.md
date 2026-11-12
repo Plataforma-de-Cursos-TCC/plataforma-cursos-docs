@@ -1,6 +1,6 @@
 # 4 MAPEAMENTO DE NEGÓCIOS
 
-Fonte: `especificacao/diagramas/04-mapeamento-de-negocios.bpmn` (BPMN 2.0, [ADR-0004](../docs/adr/0004-diagramas-como-codigo.md)). O arquivo abre em qualquer editor BPMN, como o bpmn.io e o Camunda Modeler.
+Fonte: `especificacao/diagramas/04-mapeamento-de-negocios.drawio` (BPMN 2.0 desenhado no draw.io, [ADR-0012](../docs/adr/0012-diagramas-do-ra1-em-drawio.md)).
 
 O mapeamento representa o fluxo de valor do produto (TO BE) em um pool, a Plataforma de Cursos, com seis raias: Visitante, Aluno, Plataforma de Cursos, Tutor de IA, Instrutor e Administrador.
 
