@@ -14,7 +14,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
-- `CHANGELOG.md`, a regra de registrar toda mudança (`AGENTS.md`, `CONTRIBUTING.md` e template de PR) e o job `changelog` no CI, para que o caminho do documento até a versão final fique registrado e nenhum PR entre sem a sua linha (#126).
+- `CHANGELOG.md`, a regra de registrar toda mudança (`AGENTS.md`, `CONTRIBUTING.md` e template de PR) e o job `changelog` no CI, para que o caminho do documento até a versão final fique registrado e nenhum PR entre sem a sua linha (#127).
 
 ## [1.2.0] - 2026-11-12
 
