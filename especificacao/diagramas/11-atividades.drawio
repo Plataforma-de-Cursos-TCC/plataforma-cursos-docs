@@ -104,6 +104,15 @@
         <mxCell id="act_uc001_a1" value="&lt;b&gt;UC001 A-1. Informa&lt;/b&gt;&lt;br&gt;que não cobre" style="rounded=1;whiteSpace=wrap;html=1;arcSize=20;fillColor=#FFFFFF;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;spacing=4;align=center;verticalAlign=middle;" parent="1" vertex="1">
           <mxGeometry as="geometry" x="1560" y="840" width="140" height="60" />
         </mxCell>
+        <mxCell id="dec_transcrita" value="Aula transcrita&lt;br&gt;e indexada?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="1390" y="500" width="120" height="80" />
+        </mxCell>
+        <mxCell id="act_uc001_e1" value="&lt;b&gt;UC001 E-1. Avisa que&lt;/b&gt;&lt;br&gt;o conteúdo está&lt;br&gt;em preparo" style="rounded=1;whiteSpace=wrap;html=1;arcSize=20;fillColor=#FFFFFF;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;spacing=4;align=center;verticalAlign=middle;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="1550" y="510" width="140" height="60" />
+        </mxCell>
+        <mxCell id="merge_uc001_exc" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#222222;strokeWidth=1.5;" parent="1" vertex="1">
+          <mxGeometry as="geometry" x="1600" y="130" width="40" height="40" />
+        </mxCell>
         <mxCell id="e1" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" edge="1" source="start" target="act_1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
@@ -172,7 +181,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e19" value="[não]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" edge="1" source="dec_limite" target="act_busca">
+        <mxCell id="e19" value="[não]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" edge="1" source="dec_limite" target="dec_transcrita">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e20" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" edge="1" source="act_busca" target="dec_trecho">
@@ -194,7 +203,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" parent="1" edge="1" source="act_uc001_e2" target="merge_act3">
+        <mxCell id="e25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" parent="1" edge="1" source="merge_uc001_exc" target="merge_act3">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
               <mxPoint x="1620" y="80" />
@@ -243,6 +252,23 @@
             <Array as="points">
               <mxPoint x="770" y="210" />
               <mxPoint x="700" y="210" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e35" value="[sim]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" parent="1" edge="1" source="dec_transcrita" target="act_busca">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e36" value="[não]" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" parent="1" edge="1" source="dec_transcrita" target="act_uc001_e1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e37" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" parent="1" edge="1" source="act_uc001_e2" target="merge_uc001_exc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e38" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#222222;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#222222;labelBackgroundColor=#FFFFFF;align=center;verticalAlign=middle;exitX=1;exitY=0.5;entryX=1;entryY=0.5;" parent="1" edge="1" source="act_uc001_e1" target="merge_uc001_exc">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1710" y="540" />
+              <mxPoint x="1710" y="150" />
             </Array>
           </mxGeometry>
         </mxCell>
