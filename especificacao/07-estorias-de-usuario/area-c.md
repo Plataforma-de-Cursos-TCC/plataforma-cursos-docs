@@ -94,7 +94,7 @@
 | | |
 |---|---|
 | 1 | **DADO QUE:** escolhi um curso pago <br> **QUANDO:** confirmo o pagamento simulado <br> **ENTÃO:** o pagamento é registrado como aprovado e a matrícula é criada. |
-| 2 | **DADO QUE:** informo dados de pagamento simulado inválidos <br> **QUANDO:** confirmo o pagamento simulado <br> **ENTÃO:** o pagamento é recusado, nenhuma matrícula é criada e posso tentar novamente. |
+| 2 | **DADO QUE:** informo dados de pagamento simulado inválidos <br> **QUANDO:** confirmo o pagamento simulado <br> **ENTÃO:** o pagamento é recusado, a matrícula permanece pendente, sem liberar o acesso ao conteúdo, e posso tentar novamente na mesma matrícula. |
 | 3 | **DADO QUE:** o curso é gratuito <br> **QUANDO:** solicito a matrícula <br> **ENTÃO:** nenhum pagamento é exigido. |
 
 ## 17. US019 – REQUISITO RF015: Consultar catálogo de cursos por categoria

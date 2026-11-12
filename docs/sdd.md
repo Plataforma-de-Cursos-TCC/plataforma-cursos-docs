@@ -261,7 +261,7 @@ O detalhamento completo dos campos, tipos, tamanhos e regras de normalização d
 | Avaliação do curso | Banco de dados | Entidade Review, nota de 1 a 5 e comentário |
 | Transcrição, embeddings e histórico de conversa do Tutor de IA | Banco de dados | Gerados uma única vez por aula (RNF004); busca restrita por `course_id`. O histórico de mensagens e respostas por Aluno é guardado nas entidades Conversation e Message (UC001, seção 5.1). Entidades ainda não constam no dicionário de dados da especificação |
 | Trilha de auditoria das ações administrativas | Banco de dados | Registro de 100% das ações, retido por 12 meses (RNF016) |
-| Backup | Banco de dados | Backup diário, com restauração testada mensalmente (RNF011) |
+| Backup | Banco de dados e armazenamento de mídia (vídeos e materiais das aulas) | Backup diário dos dois, com restauração testada mensalmente (RNF011) |
 
 <!-- proposta: tabelas LessonTranscript (transcrição com marcação de tempo), LessonEmbedding (vetor, trecho, timestamp, course_id) e AuditLog (autor, ação, data). O dicionário da especificação não traz essas entidades, embora o UC001 e o RNF004 exijam os dados. Motivo: dar lugar aos dados que a especificação manda gerar e guardar -->
 
@@ -457,7 +457,7 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 | RNF008 | Segurança | Bloqueio de 15 min após 5 tentativas | Contador de tentativas na autenticação (área A) |
 | RNF009 | Eficiência de desempenho | p95 das listagens de até 2 s com 1000 usuários simultâneos | API sem estado (JWT), que permite várias instâncias; toda listagem é paginada; a API não devolve campo que o front-end não use |
 | RNF010 | Confiabilidade | Disponibilidade mensal mínima de 99% | Sem fonte na especificação para o mecanismo |
-| RNF011 | Confiabilidade | Backup diário; restauração testada mensalmente | Backup do banco de dados, que concentra os dados da plataforma |
+| RNF011 | Confiabilidade | Backup diário; restauração testada mensalmente | Backup do banco de dados e dos arquivos de vídeo e material das aulas; restaurar só o banco não recompõe as aulas |
 | RNF012 | Capacidade de interação (inclusividade) | WCAG 2.1 AA; contraste 4,5:1; navegação por teclado | Front-end com componentes acessíveis e revisão de contraste |
 | RNF013 | Capacidade de interação | 100% dos textos em pt-BR, em arquivos de tradução prontos para receber en e es sem mudança de código; datas e valores por idioma | Textos em arquivos de tradução e formatação por localidade |
 | RNF014 | Capacidade de interação | Claro/escuro em 100% das telas, preferência salva por usuário | Tema no front-end; preferência persistida no perfil |
