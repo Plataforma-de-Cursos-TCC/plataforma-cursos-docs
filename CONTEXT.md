@@ -52,7 +52,7 @@ Decisão: [ADR-0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md).
 | D1 | **Meta interna de 4 por integrante** (mínimo oficial: 8 especificações de caso de uso); numeração final (RF001, US001, RNF001, UC001), com IDs novos no fim (RF017…) | [0001](docs/adr/0001-minimo-por-integrante-e-numeracao-provisoria.md) |
 | D2 | Estória no formato **Como / Posso / Para**, com **pelo menos 2 critérios** DADO QUE / QUANDO / ENTÃO | [0002](docs/adr/0002-formato-de-estoria-e-criterios.md) |
 | D3 | **«extend»** no sentido do TE3_3 e da UML: a seta sai do caso de uso opcional e aponta para o base | [0003](docs/adr/0003-extend-no-sentido-do-te3-3.md) |
-| D4 | **Diagramas do RA1 em draw.io**: fonte `.drawio` nos itens 4 (BPMN 2.0), 9 e 11 (UML), PNG exportado da fonte | [0012](docs/adr/0012-diagramas-do-ra1-em-drawio.md) (substitui a [0004](docs/adr/0004-diagramas-como-codigo.md)) |
+| D4 | **Diagramas do RA1 em draw.io**: fonte `.drawio` nos itens 4 (BPMN 2.0), 9 e 11 (UML), PNG exportado da fonte; itens 12 a 14 (RA2) em PlantUML (`.puml`), PNG gerado da fonte | [0012](docs/adr/0012-diagramas-do-ra1-em-drawio.md) (substitui a [0004](docs/adr/0004-diagramas-como-codigo.md)), [0011](docs/adr/0011-diagramas-do-ra2-em-plantuml.md) |
 | D5 | **Tutor de IA como ator sistêmico** | [0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md) |
 | D6 | **Divisão por áreas A a D**, uma por integrante | [0006](docs/adr/0006-divisao-por-areas.md) |
 
