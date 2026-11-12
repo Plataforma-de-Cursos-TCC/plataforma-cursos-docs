@@ -34,9 +34,11 @@ usuarios.html confirmar-bloqueio UC008-FB-2 | modal de confirmação "Bloquear J
 usuarios.html atualizado UC008-FB-3 | lista com João Silva bloqueado
 usuarios.html filtro-aluno UC008-A1-1 | lista filtrada pelo perfil Aluno
 @ UC008-FB-1 UC008-A2-1 | lista de usuários sem alteração após cancelar
+# UC008-A3 executa o UC018 (sem tela propria)
+usuarios.html confirmar-perfil UC008-A4-1 | modal de confirmação "Alterar perfil de João Silva?"
 usuarios.html proprio-bloqueio UC008-E1-1 | erro "Não é possível bloquear a própria conta"
 usuarios.html nao-encontrado UC008-E2-1 | erro "Usuário não encontrado"
-# UC008-A3 executa o UC018 (sem tela propria)
+usuarios.html proprio-perfil UC008-E3-1 | aviso "Não é possível alterar o próprio perfil"
 # UC018
 usuarios.html confirmar-exclusao UC018-FB-1 | modal de confirmação com aviso de anonimização irreversível
 usuarios.html excluido UC018-FB-2 | lista sem o usuário excluído e aviso "Usuário excluído"

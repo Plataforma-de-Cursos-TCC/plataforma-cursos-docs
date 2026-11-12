@@ -62,3 +62,5 @@
 | 1 | **DADO QUE:** estou logado como Administrador <br> **QUANDO:** busco um usuário e altero o status dele para bloqueado <br> **ENTÃO:** o acesso dele é revogado imediatamente. |
 | 2 | **DADO QUE:** tento bloquear a minha própria conta de Administrador <br> **QUANDO:** confirmo a ação <br> **ENTÃO:** o sistema impede e mostra um aviso. |
 | 3 | **DADO QUE:** seleciono um usuário para exclusão <br> **QUANDO:** confirmo a exclusão <br> **ENTÃO:** os dados pessoais dele são removidos, mas o histórico de matrícula e pagamento permanece anonimizado. |
+| 4 | **DADO QUE:** estou logado como Administrador <br> **QUANDO:** altero o perfil de um usuário e confirmo a ação <br> **ENTÃO:** o novo perfil é salvo com registro na trilha de auditoria e passa a valer a partir do próximo acesso a uma área protegida. |
+| 5 | **DADO QUE:** tento alterar o meu próprio perfil de Administrador <br> **QUANDO:** aciono a alteração de perfil <br> **ENTÃO:** o sistema impede a ação e exibe um aviso. |

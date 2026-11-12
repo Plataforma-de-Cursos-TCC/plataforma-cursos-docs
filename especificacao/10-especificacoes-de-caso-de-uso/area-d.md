@@ -136,14 +136,14 @@
 
 - **Nome do caso de uso:** Gerenciar Usuários
 - **Ator(es):** Administrador.
-- **Descrição:** o Administrador consulta os usuários da plataforma e gerencia o seu status de acesso: bloqueio e desbloqueio (US016, RF012). A exclusão fica no UC018, acionado a partir desta lista.
+- **Descrição:** o Administrador consulta os usuários da plataforma e gerencia o seu perfil de acesso e o seu status de acesso: bloqueio e desbloqueio (US016, RF012). A exclusão fica no UC018, acionado a partir desta lista.
 - **Pré-condições:** o Administrador ter realizado login na plataforma.
-- **Pós-condições:** status do usuário atualizado e aplicado imediatamente, revogando ou restaurando o acesso.
-- **Regras de negócio:** R-1 o Administrador não pode bloquear a própria conta.
-- **Protótipo(s) de tela:** lista de usuários com busca, filtro por perfil e ações de bloquear, desbloquear e excluir. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Pós-condições:** status do usuário atualizado e aplicado imediatamente (revogando ou restaurando o acesso), ou perfil de acesso do usuário alterado, válido a partir do próximo acesso a uma área protegida.
+- **Regras de negócio:** R-1 o Administrador não pode bloquear a própria conta; R-2 o Administrador não pode alterar o próprio perfil; R-3 os perfis possíveis são Aluno, Instrutor e Administrador; R-4 toda alteração de perfil é registrada na trilha de auditoria (RNF016); R-5 o novo perfil vale a partir do próximo acesso do usuário a uma área protegida (UC016).
+- **Protótipo(s) de tela:** lista de usuários com busca, filtro por perfil e ações de bloquear, desbloquear, alterar perfil e excluir. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Administrador busca um usuário por nome, e-mail ou perfil. (A-1)
-  2. O Administrador seleciona a ação: bloquear, desbloquear ou excluir. (A-3)
+  2. O Administrador seleciona a ação: bloquear, desbloquear, alterar perfil ou excluir. (A-3) (A-4)
   3. O Administrador confirma a ação. (A-2)
   4. O sistema aplica a mudança de status. (E-1) (E-2)
   5. O sistema revoga ou restaura imediatamente o acesso do usuário.
@@ -181,6 +181,17 @@
     - A-3.1 O Administrador aciona “Excluir” na linha do usuário.
     - A-3.2 O sistema executa o UC018 – Excluir e Anonimizar Usuário.
     - A-3.3 Este caso de uso retorna ao fluxo básico (passo 1).
+  - **A4 – O Administrador altera o perfil de um usuário**
+    - A-4.1 O Administrador aciona a alteração de perfil de um usuário. (E-3)
+    - A-4.2 O Administrador escolhe o novo perfil: Aluno, Instrutor ou Administrador.
+    - A-4.3 O sistema pede confirmação da alteração de perfil. (A-2)
+    - A-4.4 O Administrador confirma a alteração.
+    - A-4.5 O sistema grava o novo perfil, registra a alteração na trilha de auditoria e atualiza a lista de usuários.
+    - A-4.6 Este caso de uso retorna ao fluxo básico (passo 1).
+
+    ![modal de confirmação "Alterar perfil de João Silva?"](prototipos/png/UC008/UC008-A4-1.png)
+
+    *Figura 0 – UC008, fluxo alternativo A4: modal de confirmação "Alterar perfil de João Silva?"*
 - **Fluxos de exceção:**
   - **E1 – Tentativa de bloquear a própria conta de Administrador**
     - E-1.1 O sistema identifica que o usuário-alvo é a própria conta do Administrador que está logado.
@@ -198,6 +209,14 @@
     ![erro "Usuário não encontrado"](prototipos/png/UC008/UC008-E2-1.png)
 
     *Figura 0 – UC008, fluxo de exceção E2: erro "Usuário não encontrado"*
+  - **E3 – Tentativa de alterar o próprio perfil**
+    - E-3.1 O sistema identifica que o usuário-alvo é a própria conta do Administrador que está logado.
+    - E-3.2 O sistema impede a ação e exibe um aviso.
+    - E-3.3 Este caso de uso retorna ao fluxo básico (passo 1).
+
+    ![aviso "Não é possível alterar o próprio perfil"](prototipos/png/UC008/UC008-E3-1.png)
+
+    *Figura 0 – UC008, fluxo de exceção E3: aviso "Não é possível alterar o próprio perfil"*
 
 ## 19. UC016 – Acessar Área Protegida por Perfil
 
