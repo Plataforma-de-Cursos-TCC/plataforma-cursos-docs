@@ -69,13 +69,13 @@
 - **Descrição:** o Usuário que esqueceu a senha solicita um link de redefinição por e-mail (US017, RF013). Iniciado a partir do UC005 (Realizar Login), fluxo alternativo A1: UC011 «extend» UC005 (a seta sai do UC011 e aponta para o UC005).
 - **Pré-condições:** o Usuário possui conta cadastrada na plataforma.
 - **Pós-condições:** senha do Usuário redefinida; ele consegue fazer login com a nova senha.
-- **Regras de negócio:** R-1 o link de redefinição é de uso único e expira em 30 minutos (RNF017); R-2 a mensagem de confirmação não revela se o e-mail existe ou não na base (mesma regra anti-enumeração do UC005).
+- **Regras de negócio:** R-1 o link de redefinição é de uso único e expira em 30 minutos (RNF017); R-2 a mensagem de confirmação não revela se o e-mail existe ou não na base (mesma regra anti-enumeração do UC005); R-3 a nova senha segue a mesma política do cadastro (UC012).
 - **Protótipo(s) de tela:** duas telas simples: formulário para informar o e-mail cadastrado e formulário para informar e confirmar a nova senha. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Usuário aciona “Esqueci minha senha” na tela de login.
   2. O Usuário informa o e-mail cadastrado. (A-1)
   3. O sistema envia um e-mail com link de redefinição de senha. (E-1)
-  4. O Usuário acessa o link e informa a nova senha. (A-2) (E-2) (E-3)
+  4. O Usuário acessa o link e informa a nova senha. (A-2) (E-2) (E-3) (E-4)
   5. O sistema salva a nova senha e confirma a redefinição.
   6. Este caso de uso é finalizado, retornando à tela de login (UC005).
 
@@ -128,6 +128,14 @@
     - E-3.1 O sistema identifica que o link acessado já foi utilizado ou não corresponde a um token válido (R-1).
     - E-3.2 O sistema rejeita a redefinição (422), informa que o link é inválido e oferece a opção de solicitar um novo.
     - E-3.3 Este caso de uso retorna ao fluxo básico (passo 1).
+  - **E4 – Nova senha fora da política**
+    - E-4.1 O sistema identifica que a nova senha não segue a política de senha (R-3).
+    - E-4.2 O sistema indica o campo e informa a regra, e o link continua válido.
+    - E-4.3 Este caso de uso retorna ao fluxo básico (passo 4).
+
+    ![erro de nova senha fora da política](prototipos/png/UC011/UC011-E4-1.png)
+
+    *Figura 0 – UC011, fluxo de exceção E4: erro de nova senha fora da política*
 
 ## 3. UC012 – Cadastrar-se na Plataforma
 

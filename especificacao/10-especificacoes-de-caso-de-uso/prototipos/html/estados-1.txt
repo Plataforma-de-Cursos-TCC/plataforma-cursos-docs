@@ -11,6 +11,7 @@ recuperar-senha.html enviado UC011-FB-2 | aviso de envio do link com botão "Vol
 recuperar-senha.html nova-senha UC011-FB-3 | formulário de nova senha e confirmação
 login.html senha-redefinida UC011-FB-4 | login com aviso "Senha redefinida. Entre com a nova senha"
 recuperar-senha.html link-expirado UC011-E2-1 | aviso "Este link expirou" com botão "Solicitar novo link"
+recuperar-senha.html senha-fora-da-politica UC011-E4-1 | erro de nova senha fora da política
 meu-perfil.html padrao UC013-FB-1 | perfil do Aluno
 meu-perfil.html salvo UC013-FB-2 | perfil com aviso "Alterações salvas"
 meu-perfil.html instrutor UC013-A1-1 | perfil do Instrutor com minibiografia e links
