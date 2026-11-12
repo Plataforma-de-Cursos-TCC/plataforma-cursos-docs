@@ -1,0 +1,103 @@
+' Item 13 - Diagrama de classes, Área A (Acesso e conta). Notação do TE5_1 (ADR-0011).
+' Perspectiva de Implementação (camadas MVC da API Laravel): perfil e troca de senha.
+' Regra do TE5_1: a classe referencia o tipo (user: User), nunca o id da FK (userId).
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 13-classes-area-a-implementacao-perfil.puml
+@startuml 13-classes-area-a-implementacao-perfil
+hide empty members
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+skinparam class {
+  BackgroundColor white
+  BorderColor black
+}
+
+class User
+class Address
+class InstructorProfile
+
+  class ProfileController <<Controller>> {
+    +show(): UserResource
+    +update(req: UpdateProfileRequest): UserResource
+    +updateInstructor(req: UpdateInstructorRequest): InstructorProfileResource
+    +changePassword(req: ChangePasswordRequest): void
+  }
+  class UpdateProfileRequest <<FormRequest>> {
+    +rules(): array
+  }
+  class UpdateInstructorRequest <<FormRequest>> {
+    +rules(): array
+  }
+  class ChangePasswordRequest <<FormRequest>> {
+    +rules(): array
+  }
+  class ProfileDTO <<DTO>> {
+    +name: string
+    +phone: string
+    +documentNumber: string
+    +birthDate: Date
+    +photo: UploadedFile
+    +theme: ThemeType
+    +locale: Locale
+    +address: AddressDTO
+  }
+  class AddressDTO <<DTO>> {
+    +type: AddressType
+    +street: string
+    +number: string
+    +complement: string
+    +district: string
+    +city: string
+    +state: string
+    +zipCode: string
+    +country: string
+  }
+  class InstructorProfileDTO <<DTO>> {
+    +headline: string
+    +bio: string
+    +socialLinks: JSON
+  }
+  class UserResource <<Resource>> {
+    +toArray(): array
+  }
+  class InstructorProfileResource <<Resource>> {
+    +toArray(): array
+  }
+  class ProfileService <<Service>> {
+    +update(user: User, dto: ProfileDTO): User
+    +updateInstructor(instructor: Instructor, dto: InstructorProfileDTO): InstructorProfile
+    +changePassword(user: User, current: string, newPassword: string): void
+  }
+  class PhotoStorage <<R2>> {
+    +store(file: UploadedFile): string
+  }
+  class UserRepository <<Repository>> {
+    +findByEmail(email: string): User
+    +save(user: User): User
+  }
+  class AddressRepository <<Repository>> {
+    +replaceFor(user: User, address: Address): Address
+  }
+  class InstructorProfileRepository <<Repository>> {
+    +save(profile: InstructorProfile): InstructorProfile
+  }
+
+ProfileController ..> UpdateProfileRequest
+ProfileController ..> UpdateInstructorRequest
+ProfileController ..> ChangePasswordRequest
+ProfileController ..> UserResource
+ProfileController ..> InstructorProfileResource
+UpdateProfileRequest ..> ProfileDTO
+UpdateInstructorRequest ..> InstructorProfileDTO
+ProfileDTO *-- AddressDTO
+ProfileController --> ProfileService
+ProfileService --> UserRepository
+ProfileService --> AddressRepository
+ProfileService --> InstructorProfileRepository
+ProfileService --> PhotoStorage
+UserRepository ..> User
+AddressRepository ..> Address
+InstructorProfileRepository ..> InstructorProfile
+@enduml

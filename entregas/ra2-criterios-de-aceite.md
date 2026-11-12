@@ -23,7 +23,7 @@ relacionados: [ra2-tarefas, ra1-criterios-de-aceite]
 ## Item 13 — Diagrama de classes
 
 - [ ] **C13.1** Notação UML correta: atributos, métodos, visibilidade, multiplicidade, associação, composição, herança.
-- [ ] **C13.2** Elementos negociais e de implementação presentes e distinguíveis.
+- [ ] **C13.2** Elementos negociais e de implementação presentes e distinguíveis; classes referenciam tipos, nunca o id de uma FK como atributo (regra do TE5_1).
 - [ ] **C13.3** Coerente com o item 12 e com atores e glossário do `CONTEXT.md`.
 - [ ] **C13.4** Fonte versionada.
 

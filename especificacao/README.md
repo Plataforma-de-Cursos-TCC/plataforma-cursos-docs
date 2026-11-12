@@ -16,5 +16,6 @@ Esqueleto dos 11 itens do template da disciplina. Cada arquivo traz o título do
 | 10 | Especificações de caso de uso | `10-especificacoes-de-caso-de-uso/` (`00-item.md`, `area-a.md` a `area-d.md`, mais `prototipos/`) |
 | 11 | Diagrama de atividades | `11-diagrama-de-atividades.md` |
 | 12 | Modelo de dados | `12-modelo-de-dados/` (`00-item.md`, `area-a.md` a `area-d.md`) |
+| 13 | Diagrama de classes | `13-diagrama-de-classes/` (`00-item.md`, `area-a.md` a `area-d.md`) |
 
 Os diagramas ficam em `diagramas/`: itens 4, 9 e 11 com fonte `.drawio` e PNG exportado da fonte (ADR-0012); itens 12 a 14 com fonte `.puml` e PNG gerado da fonte (ADR-0011).
