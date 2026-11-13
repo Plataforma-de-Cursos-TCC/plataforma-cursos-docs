@@ -18,6 +18,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Alterado
 
+- `entregas/ra2-tarefas.md` registra o que a Área A ensinou (tipo do elemento no item 13, gerador e `alt` no item 14, cenário negativo por regra e TC091 no item 15), para as Áreas B, C e D seguirem o mesmo padrão (#PR).
 - Diagramas dos itens 12 a 14 da Área A refeitos em draw.io, com a ADR-0013 no lugar da ADR-0011, para manter o leiaute sob controle e usar uma ferramenta só no documento; diagramas de classes com o tipo do elemento num círculo (C, A, I, E); os de sequência gerados com um estilo único (#131).
 
 ### Corrigido
