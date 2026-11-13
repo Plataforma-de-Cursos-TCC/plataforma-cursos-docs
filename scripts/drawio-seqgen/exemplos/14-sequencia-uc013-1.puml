@@ -1,0 +1,56 @@
+' Item 14 - Diagrama de sequência do UC013 Editar Dados do Perfil, parte 1 (dados do perfil) (ADR-0011). Camadas e métodos do item 13.
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 14-sequencia-uc013-1.puml
+@startuml 14-sequencia-uc013-1
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam BoxPadding 8
+
+actor "Usuário" as USU
+boundary PerfilView as V
+control ProfileController as C
+control UpdateProfileRequest as Q
+control ProfileService as S
+control PhotoStorage as P
+control UserRepository as R
+control AddressRepository as AR
+database BD
+
+USU -> V ++ : altera nome, telefone, endereço, CPF, nascimento, foto ou tema e aciona "Salvar"
+V -> C ++ : update(req: UpdateProfileRequest)
+C -> Q ++ : rules()
+Q --> C -- : erros de validação
+alt E1 - campo inválido (nome, CPF, nascimento futuro, telefone sem DDD, foto fora de JPG/PNG ou acima de 2 MB)
+  C --> V : 422 VALIDATION_FAILED (fields)
+  V --> USU : indica o campo e o motivo
+else dados válidos
+  C -> S ++ : update(user, dto: ProfileDTO)
+  opt envia nova foto
+    S -> P ++ : store(file)
+    P --> S -- : chave da foto no R2
+  end
+  opt envia endereço
+    S -> AR ++ : replaceFor(user, address)
+    AR -> BD ++ : INSERT ou UPDATE address
+    BD --> AR --
+    AR --> S -- : Address
+  end
+  S -> R ++ : save(user)
+  R -> BD ++ : UPDATE users
+  BD --> R --
+  R --> S -- : User
+  S --> C -- : User
+  C --> V : 200 (UserResource)
+  V --> USU : confirma a atualização e aplica o tema e o idioma salvos (R-7)
+end
+deactivate C
+deactivate V
+
+opt A2 - "Alterar senha"
+  USU -> V ++ : aciona "Alterar senha"
+  V --> USU -- : inicia o UC017 Alterar Senha
+end
+@enduml

@@ -1,0 +1,89 @@
+' Item 14 - Diagrama de sequência do UC005 Realizar Login (ADR-0011). Camadas e métodos do item 13.
+' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 14-sequencia-uc005.puml
+@startuml 14-sequencia-uc005
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam BoxPadding 8
+
+actor "Usuário" as USU
+boundary LoginView as V
+control AuthController as C
+control AuthService as S
+control LoginThrottle as T
+control UserRepository as R
+entity User as U
+control JwtGuard as J
+database BD
+
+opt A2 - já existe uma sessão válida no navegador
+  USU -> V ++ : acessa a tela de login
+  V -> C ++ : me()
+  C --> V -- : 200 (UserResource)
+  V --> USU -- : vai direto para a sua área, sem exibir o login
+end
+
+USU -> V ++ : informa e-mail e senha e aciona "Entrar"
+V -> C ++ : login(req: LoginRequest)
+C -> S ++ : login(dto: LoginDTO)
+S -> T ++ : isBlocked(email)
+T --> S -- : bloqueado?
+
+alt E4 - 5 tentativas inválidas (RNF008): bloqueado por 15 min
+  S --> C : TooManyAttemptsException
+  C --> V : 429 TOO_MANY_REQUESTS + Retry-After
+  V --> USU : informa o bloqueio e o tempo restante
+else dentro do limite
+  S -> R ++ : findByEmail(email)
+  R -> BD ++ : SELECT users WHERE email
+  BD --> R -- : linha
+  R --> S -- : user (ou nulo)
+  opt o e-mail existe
+    S -> U ++ : checkPassword(password)
+    U --> S -- : válida?
+  end
+  alt E1 - e-mail inexistente ou senha incorreta
+    S -> T ++ : recordFailure(email)
+    T --> S --
+    S --> C : InvalidCredentialsException
+    C --> V : 401 UNAUTHENTICATED
+    V --> USU : mensagem genérica, sem revelar se o e-mail existe (R-1)
+  else E3 - credenciais válidas e conta bloqueada pelo Administrador
+    S --> C : AccountBlockedException
+    C --> V : 403 ACCOUNT_BLOCKED
+    V --> USU : informa que a conta está bloqueada
+  else credenciais válidas
+    S -> T ++ : reset(email)
+    T --> S --
+    S -> J ++ : issue(user)
+    J --> S -- : jwt (1 h)
+    opt rememberMe verdadeiro
+      S -> J ++ : issueRefresh(user)
+      J -> BD ++ : INSERT refresh_session (tokenHash, familyId)
+      BD --> J --
+      J --> S -- : RefreshSession
+    end
+    S --> C : AuthTokens
+    C --> V : 200 (UserResource) com cookies HttpOnly (UC016 direciona por perfil)
+    V --> USU : exibe a área do perfil (Aluno, Instrutor ou Administrador)
+  end
+end
+deactivate S
+deactivate C
+deactivate V
+
+opt E2 - sessão expirada ao acessar uma área protegida
+  USU -> V ++ : acessa uma área protegida
+  V -> C ++ : me()
+  C --> V -- : 401 UNAUTHENTICATED
+  V --> USU -- : leva à tela de login (tenta antes o refresh, se houver «manter conectado»)
+end
+
+opt A1 - "Esqueci minha senha"
+  USU -> V ++ : aciona "Esqueci minha senha"
+  V --> USU -- : inicia o UC011 Recuperar Senha
+end
+@enduml
