@@ -42,7 +42,7 @@ O [CHANGELOG.md](CHANGELOG.md) registra o caminho do documento até a versão fi
 - Em todo PR, acrescente na seção `[Não lançado]` uma linha com o que mudou e por quê, seguida do número do PR, no grupo certo: Adicionado, Alterado, Corrigido ou Removido.
 - PR sem efeito no documento ou no repositório (merge de sincronização, teste de fluxo) usa o label `sem-changelog`.
 - Versão corresponde a envio ao professor: `1.0.0` é o RA1 e `2.0.0` é o RA2. Novo envio dentro da mesma entrega sobe a secundária (`1.1.0`); ajuste sem novo envio sobe a correção (`1.0.1`).
-- No envio, a seção `[Não lançado]` vira a versão com a data, e o commit que gerou o PDF recebe a tag `vX.Y.Z`. Quem fecha a versão e cria a tag é quem faz o envio.
+- No envio, a seção `[Não lançado]` vira a versão com a data, o commit que gerou o PDF recebe a tag anotada `vX.Y.Z`, a Release é criada com o texto da seção (`gh release create vX.Y.Z --verify-tag --notes-file <seção>`) e os links de comparação no fim do `CHANGELOG.md` são atualizados. Quem fecha a versão e cria a tag é quem faz o envio.
 
 ## Verificação local
 

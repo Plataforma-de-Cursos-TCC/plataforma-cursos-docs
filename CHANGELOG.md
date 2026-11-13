@@ -7,7 +7,8 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 - Cada versão corresponde a um documento enviado ao professor: `1.0.0` é a entrega do RA1 e `2.0.0` é a entrega do RA2.
 - Um novo envio ao professor dentro da mesma entrega sobe a versão secundária (`1.1.0`).
 - Um ajuste sem novo envio sobe a correção (`1.0.1`).
-- Cada versão enviada recebe a tag `vX.Y.Z` no commit que gerou o PDF.
+- Cada versão enviada recebe a tag anotada `vX.Y.Z` no commit que gerou o PDF e uma Release no GitHub com o texto da sua seção. Para fechar uma versão: mover as linhas de `[Não lançado]` para a seção nova com a data, criar a tag, criar a Release (`gh release create vX.Y.Z --verify-tag --notes-file <seção>`) e atualizar os links de comparação no fim deste arquivo.
+- O PDF não fica no Git (`build/` é ignorado), então a tag é o único elo entre o arquivo enviado e o commit que o gerou.
 - Todo pull request registra em `[Não lançado]` o que mudou e por quê, com o número do PR. Os grupos são Adicionado, Alterado, Corrigido e Removido.
 
 ## [Não lançado]
@@ -20,6 +21,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Alterado
 
+- Tags e Releases `v1.0.0`, `v1.1.0` e `v1.2.0`, links de comparação e o passo a passo de fechar versão, para ligar cada envio ao professor ao commit que o gerou (#140).
 - `entregas/ra2-tarefas.md` registra o que a Área A ensinou (tipo do elemento no item 13, gerador e `alt` no item 14, cenário negativo por regra e TC091 no item 15), para as Áreas B, C e D seguirem o mesmo padrão (#133).
 - Diagramas dos itens 12 a 14 da Área A refeitos em draw.io, com a ADR-0013 no lugar da ADR-0011, para manter o leiaute sob controle e usar uma ferramenta só no documento; diagramas de classes com o tipo do elemento num círculo (C, A, I, E); os de sequência gerados com um estilo único (#131).
 
@@ -48,6 +50,8 @@ Pré-versão enviada ao professor para aprovação, com os diagramas do RA1 refe
 ## [1.1.0] - 2026-10-22
 
 Documento com os itens 1 a 15 (RA2 da Área A) enviado ao professor para análise.
+
+O PDF foi gerado em 22/10 a partir de branches: os PRs #118 a #121 só entraram na `main` em 12/11. A tag `v1.1.0` aponta para `ca3dc65`, a ponta real da branch do item 15 em 20/10, que é ancestral do merge do #121.
 
 ### Adicionado
 
@@ -131,3 +135,8 @@ Entrega do RA1: itens 1 a 11 da especificação.
 ### Removido
 
 - Critério `C06.5` em `entregas/`, porque a coluna de objetivo pertence à matriz de rastreabilidade do item 9 e não ao item 6 (#61).
+
+[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/releases/tag/v1.0.0
