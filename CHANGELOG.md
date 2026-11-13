@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 ### Adicionado
 
 - `CHANGELOG.md`, a regra de registrar toda mudança (`AGENTS.md`, `CONTRIBUTING.md` e template de PR) e o job `changelog` no CI, para que o caminho do documento até a versão final fique registrado e nenhum PR entre sem a sua linha (#127).
+- Rubrica do RA2 (Canvas) e as planilhas `Rubricas TCC 1` e `Rubricas TCC 2` em Markdown (`entregas/ra2-rubrica-canvas.md`, `rubricas-tcc-1.md`, `rubricas-tcc-2.md`), para o grupo desenvolver e revisar com os critérios do professor à mão (#PR).
 
 ### Alterado
 
