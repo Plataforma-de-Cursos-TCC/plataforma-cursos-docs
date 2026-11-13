@@ -2,14 +2,14 @@
 id: ra2-criterios-de-aceite
 titulo: "Critérios de aceite do RA2 (itens 12 a 15)"
 tipo: processo
-status: rascunho, aguardando conferência do enunciado no Canvas
-atualizado: 2026-10-16
-relacionados: [ra2-tarefas, ra1-criterios-de-aceite]
+status: vigente, conferido com a rubrica do Canvas em 13/11/2026
+atualizado: 2026-11-13
+relacionados: [ra2-tarefas, ra1-criterios-de-aceite, ra2-rubrica-canvas, ra2-analise-do-professor]
 ---
 
 # Critérios de Aceite do RA2 (itens 12 a 15)
 
-> Derivados do plano de ensino (TE4 a TE6). Conferir pesos e rubrica na página da tarefa do Canvas antes da entrega, como foi feito no RA1. Evidência de cada critério: arquivo e seção.
+> Derivados do plano de ensino (TE4 a TE6) e conferidos com a rubrica oficial, copiada em [ra2-rubrica-canvas.md](ra2-rubrica-canvas.md): 5 critérios de 1 ponto (Ajustes do RA 1, Modelo de Dados, Diagrama de Classes, Diagramas de Sequência, Casos de Teste). O critério "Ajustes do RA 1" pesa 1 ponto e se cumpre com [ra2-analise-do-professor.md](ra2-analise-do-professor.md). Se a página do Canvas mudar, ela vale mais que a cópia. Evidência de cada critério: arquivo e seção.
 
 ## Item 12 — Modelo lógico do banco
 

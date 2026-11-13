@@ -81,6 +81,8 @@ O responsável por cada área está no [README](README.md). Os itens 1 a 5, 9 e 
 - **Decisões:** [docs/adr/README.md](docs/adr/README.md)
 - **Pesquisa de mercado:** [pesquisa/README.md](pesquisa/README.md); fontes em [pesquisa/fontes.md](pesquisa/fontes.md)
 - **Plano e critérios do RA1:** [entregas/ra1-tarefas.md](entregas/ra1-tarefas.md), [entregas/ra1-criterios-de-aceite.md](entregas/ra1-criterios-de-aceite.md)
+- **Plano e critérios do RA2:** [entregas/ra2-tarefas.md](entregas/ra2-tarefas.md), [entregas/ra2-criterios-de-aceite.md](entregas/ra2-criterios-de-aceite.md), [análise do professor](entregas/ra2-analise-do-professor.md)
+- **Rubricas:** [RA1](entregas/ra1-rubrica-canvas.md), [RA2](entregas/ra2-rubrica-canvas.md), [TCC 1: sprints](entregas/rubricas-tcc-1.md), [TCC 2: implementação](entregas/rubricas-tcc-2.md)
 - **Documentos de projeto:** [docs/prd.md](docs/prd.md), [docs/sdd.md](docs/sdd.md), [docs/tdd.md](docs/tdd.md), [docs/ssd/](docs/ssd/README.md), [docs/testes/](docs/testes/estrategia.md), [docs/design-system.md](docs/design-system.md)
 - **Grafo** (quando existir): `graphify-out/GRAPH_REPORT.md` e `graphify-out/graph.html`. Use para achar o que ler; decida pelos arquivos.
 
