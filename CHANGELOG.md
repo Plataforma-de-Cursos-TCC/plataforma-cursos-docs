@@ -15,7 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 ### Adicionado
 
 - `CHANGELOG.md`, a regra de registrar toda mudança (`AGENTS.md`, `CONTRIBUTING.md` e template de PR) e o job `changelog` no CI, para que o caminho do documento até a versão final fique registrado e nenhum PR entre sem a sua linha (#127).
-- `scripts/drawio-seqgen/` (gerador de diagramas de sequência e ícone de tipo do item 13), `entregas/ra2-analise-do-professor.md` (pontos do professor para os itens 12 a 15 das Áreas B, C e D) e o comando `/review-saas-cursos`, para que ferramentas e orientação usadas pela Área A estejam no repositório e não só na máquina de um integrante (#PR).
+- `scripts/drawio-seqgen/` (gerador de diagramas de sequência e ícone de tipo do item 13), `entregas/ra2-analise-do-professor.md` (pontos do professor para os itens 12 a 15 das Áreas B, C e D) e o comando `/review-saas-cursos`, para que ferramentas e orientação usadas pela Área A estejam no repositório e não só na máquina de um integrante (#136).
 
 ### Alterado
 
