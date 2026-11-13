@@ -18,7 +18,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Alterado
 
-- Diagramas dos itens 12 a 14 da Área A refeitos em draw.io, com a ADR-0013 no lugar da ADR-0011, para manter o leiaute sob controle e usar uma ferramenta só no documento; diagramas de classes com o tipo do elemento num círculo (C, A, I, E); os de sequência gerados com um estilo único (#PR).
+- Diagramas dos itens 12 a 14 da Área A refeitos em draw.io, com a ADR-0013 no lugar da ADR-0011, para manter o leiaute sob controle e usar uma ferramenta só no documento; diagramas de classes com o tipo do elemento num círculo (C, A, I, E); os de sequência gerados com um estilo único (#131).
 
 ### Corrigido
 
@@ -31,8 +31,8 @@ Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129
 - Item 8: o RNF011 passa a cobrir o backup de vídeos e materiais, além do banco de dados.
 - Item 10: o UC014 e o UC015 bloqueiam a exclusão de módulo ou aula com histórico de alunos (regra, passo de verificação, exceção E4 e protótipo), porque a exclusão apagaria progresso e respostas.
 - Item 11: o diagrama de atividades verifica se a aula está transcrita e indexada antes da busca do Tutor de IA (E-1 do UC001), que antes ficava de fora.
-- Item 14: cancelar e confirmar em `alt` no UC011 (parte 2) e no UC017, porque o `opt` de cancelamento deixava o fluxo seguir (análise do professor) (#PR).
-- Item 15: UC011 ganha a regra R-3, a exceção E4 (nova senha fora da política), o protótipo `UC011-E4-1` e o caso de teste TC090, porque não havia cenário negativo para a política de senha (#PR).
+- Item 14: cancelar e confirmar em `alt` no UC011 (parte 2) e no UC017, porque o `opt` de cancelamento deixava o fluxo seguir (análise do professor) (#131).
+- Item 15: UC011 ganha a regra R-3, a exceção E4 (nova senha fora da política), o protótipo `UC011-E4-1` e o caso de teste TC090, porque não havia cenário negativo para a política de senha (#131).
 
 ## [1.2.0] - 2026-11-12
 
