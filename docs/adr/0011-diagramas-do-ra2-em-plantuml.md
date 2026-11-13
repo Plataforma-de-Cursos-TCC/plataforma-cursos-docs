@@ -3,16 +3,16 @@ id: adr-0011
 titulo: "ADR-0011 — Diagramas do RA2 em PlantUML"
 tipo: decisao
 decisao: D11
-status: aceita
+status: substituída
 data: 2026-10-20
 decisor: Grupo (proposta de Lucas Stopinski)
 itens_template: [12, 13, 14]
 areas: [A, B, C, D]
-relacionados: [adr-0004]
+relacionados: [adr-0004, adr-0013]
 ---
 # ADR-0011 — Diagramas do RA2 em PlantUML
 
-- **Status:** aceita · **Data:** 20/10/2026 · **Decisor:** grupo, por proposta de Lucas Stopinski
+- **Status:** substituída pela [ADR-0013](0013-diagramas-do-ra2-em-drawio.md) · **Data:** 20/10/2026 · **Decisor:** grupo, por proposta de Lucas Stopinski
 
 ## Contexto
 

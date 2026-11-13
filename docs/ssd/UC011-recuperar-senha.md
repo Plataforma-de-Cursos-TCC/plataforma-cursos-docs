@@ -1,6 +1,6 @@
 # UC011 — Recuperar Senha
 
-Diagrama de sequência do sistema para o caso de uso UC011 (Recuperar Senha). Representa a solicitação de redefinição de senha pelo Usuário que não lembra a senha, geração segura do link de uso único com expiração de 30 minutos, invalidação de link anterior ainda válido e atualização da senha com validação de token.
+Diagrama de sequência do sistema para o caso de uso UC011 (Recuperar Senha). Representa a solicitação de redefinição de senha pelo Usuário que não lembra a senha, geração segura do link de uso único com expiração de 30 minutos, invalidação de link anterior ainda válido e atualização da senha com validação de token e da nova senha pela API (R-3), com erro exibido no campo correspondente quando fora da política.
 
 ```mermaid
 sequenceDiagram
@@ -28,7 +28,7 @@ sequenceDiagram
     Note over Usuário,FE: A2 o Usuário fecha a tela sem informar nova senha, senha atual mantida
     Usuário->>FE: Acessa link e informa nova senha
     FE->>API: POST /api/v1/auth/reset-password (token, nova_senha)
-    alt token válido
+    alt token válido e nova senha válida
         API->>DB: Atualiza senha do usuário
         DB-->>API: OK
         API-->>FE: 200 OK
@@ -39,5 +39,8 @@ sequenceDiagram
     else link já utilizado ou inválido (E3)
         API-->>FE: 422 RESET_TOKEN_INVALID
         FE-->>Usuário: Informa que o link não é válido e oferece solicitar novo link
+    else nova senha fora da política (E4)
+        API-->>FE: 422 VALIDATION_FAILED
+        FE-->>Usuário: Exibe erro no campo e informa a regra, link continua válido
     end
 ```

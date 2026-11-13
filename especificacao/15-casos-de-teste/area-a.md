@@ -29,6 +29,7 @@
 | TC051 | 5 – E2 Link expirado | CT1 Usar o link após 30 minutos | Link emitido há mais de 30 minutos e nova senha `NovaSenha1` | Redefinição recusada com resposta 422 `RESET_TOKEN_EXPIRED` e opção de solicitar novo link. |
 | TC075 | 6 – E3 Link já usado | CT1 Reutilizar o link | Link já usado em uma redefinição anterior | Redefinição recusada com resposta 422 `RESET_TOKEN_INVALID`, informando que o link não é válido. |
 | TC076 | 6 – E3 Link inválido | CT2 Token adulterado | Link com o token alterado em um caractere | Redefinição recusada com resposta 422 `RESET_TOKEN_INVALID`, informando que o link não é válido. |
+| TC090 | 7 – E4 Nova senha fora da política | CT1 Nova senha curta | Link válido, nova senha `abc12` e confirmação `abc12` | Resposta 422 `VALIDATION_FAILED` em `fields.newPassword`, apontando a regra de senha (R-3), senha anterior inalterada e link ainda válido. |
 
 ## 3. UC012 – Cadastrar-se na Plataforma
 

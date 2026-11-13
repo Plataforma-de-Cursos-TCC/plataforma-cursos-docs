@@ -25,7 +25,7 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 | UC008 – Gerenciar Usuários | US016 | RF012 | TC046, TC047, TC048 | Coberto |
 | UC009 – Assistir Aula | US008, US009 | RF006 | TC022, TC023, TC024, TC025, TC026, TC027 | Coberto |
 | UC010 – Avaliar Curso | US014 | RF011 | TC040, TC041, TC042 | Coberto |
-| UC011 – Recuperar Senha | US017 | RF013 | TC049, TC050, TC051, TC072, TC073, TC074, TC075, TC076 | Coberto |
+| UC011 – Recuperar Senha | US017 | RF013 | TC049, TC050, TC051, TC072, TC073, TC074, TC075, TC076, TC090 | Coberto |
 | UC012 – Cadastrar-se na Plataforma | US002 | RF001 | TC004, TC005, TC006, TC077, TC078, TC079 | Coberto |
 | UC013 – Editar Dados do Perfil | US003, US020 | RF001, RF016 | TC007, TC009, TC058, TC059, TC060, TC080, TC081, TC082, TC083, TC084, TC085, TC086, TC087 | Coberto |
 | UC014 – Gerenciar Módulos do Curso | US005 | RF003 | TC013, TC014, TC015 | Coberto |
