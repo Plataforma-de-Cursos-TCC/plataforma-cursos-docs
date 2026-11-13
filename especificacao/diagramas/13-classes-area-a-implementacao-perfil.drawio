@@ -1,102 +1,102 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="Electron" modified="2026-11-12T00:00:00.000Z" agent="Mozilla/5.0" version="21.6.8" type="device" compressed="false">
   <diagram id="diagram_13_classes_perfil" name="Classes Implementação Perfil">
     <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1140" pageHeight="1200" math="0" shadow="0">
       <root>
-        <mxCell id="0"/>
-        <mxCell id="1" parent="0"/>
-        <mxCell id="UserResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="300" y="40" width="200" height="80" as="geometry"/>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="UserResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="300" y="40" width="200" height="80" as="geometry" />
         </mxCell>
         <mxCell id="UserResource_methods" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="UserResource">
-          <mxGeometry x="0" y="40" width="200" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="InstructorProfileResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorProfileResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="540" y="40" width="260" height="80" as="geometry"/>
+        <mxCell id="InstructorProfileResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorProfileResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="540" y="40" width="260" height="80" as="geometry" />
         </mxCell>
         <mxCell id="InstructorProfileResource_methods" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="InstructorProfileResource">
-          <mxGeometry x="0" y="40" width="260" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="ProfileController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ProfileController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="300" y="160" width="500" height="140" as="geometry"/>
+        <mxCell id="ProfileController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ProfileController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="300" y="160" width="500" height="140" as="geometry" />
         </mxCell>
         <mxCell id="ProfileController_methods" value="+show(): UserResource&lt;br&gt;+update(req: UpdateProfileRequest): UserResource&lt;br&gt;+updateInstructor(req: UpdateInstructorRequest): InstructorProfileResource&lt;br&gt;+changePassword(req: ChangePasswordRequest): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="ProfileController">
-          <mxGeometry x="0" y="40" width="500" height="100" as="geometry"/>
+          <mxGeometry x="0" y="40" width="500" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="ChangePasswordRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ChangePasswordRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="160" width="200" height="80" as="geometry"/>
+        <mxCell id="ChangePasswordRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ChangePasswordRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="160" width="200" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ChangePasswordRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="ChangePasswordRequest">
-          <mxGeometry x="0" y="40" width="200" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="UpdateInstructorRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateInstructorRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="280" width="200" height="80" as="geometry"/>
+        <mxCell id="UpdateInstructorRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateInstructorRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="280" width="200" height="80" as="geometry" />
         </mxCell>
         <mxCell id="UpdateInstructorRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="UpdateInstructorRequest">
-          <mxGeometry x="0" y="40" width="200" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="InstructorProfileDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorProfileDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="400" width="200" height="120" as="geometry"/>
+        <mxCell id="InstructorProfileDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorProfileDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="200" height="120" as="geometry" />
         </mxCell>
         <mxCell id="InstructorProfileDTO_attrs" value="+headline: string&lt;br&gt;+bio: string&lt;br&gt;+socialLinks: JSON" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="InstructorProfileDTO">
-          <mxGeometry x="0" y="40" width="200" height="80" as="geometry"/>
+          <mxGeometry x="0" y="40" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="UpdateProfileRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateProfileRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="560" width="200" height="80" as="geometry"/>
+        <mxCell id="UpdateProfileRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateProfileRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="560" width="200" height="80" as="geometry" />
         </mxCell>
         <mxCell id="UpdateProfileRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="UpdateProfileRequest">
-          <mxGeometry x="0" y="40" width="200" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="ProfileDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ProfileDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="680" width="200" height="210" as="geometry"/>
+        <mxCell id="ProfileDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ProfileDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="680" width="200" height="210" as="geometry" />
         </mxCell>
         <mxCell id="ProfileDTO_attrs" value="+name: string&lt;br&gt;+phone: string&lt;br&gt;+documentNumber: string&lt;br&gt;+birthDate: Date&lt;br&gt;+photo: UploadedFile&lt;br&gt;+theme: ThemeType&lt;br&gt;+locale: Locale&lt;br&gt;+address: AddressDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="ProfileDTO">
-          <mxGeometry x="0" y="40" width="200" height="170" as="geometry"/>
+          <mxGeometry x="0" y="40" width="200" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="AddressDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AddressDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="40" y="930" width="200" height="230" as="geometry"/>
+        <mxCell id="AddressDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AddressDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="930" width="200" height="230" as="geometry" />
         </mxCell>
         <mxCell id="AddressDTO_attrs" value="+type: AddressType&lt;br&gt;+street: string&lt;br&gt;+number: string&lt;br&gt;+complement: string&lt;br&gt;+district: string&lt;br&gt;+city: string&lt;br&gt;+state: string&lt;br&gt;+zipCode: string&lt;br&gt;+country: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="AddressDTO">
-          <mxGeometry x="0" y="40" width="200" height="190" as="geometry"/>
+          <mxGeometry x="0" y="40" width="200" height="190" as="geometry" />
         </mxCell>
-        <mxCell id="ProfileService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ProfileService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="300" y="340" width="500" height="120" as="geometry"/>
+        <mxCell id="ProfileService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ProfileService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="300" y="340" width="500" height="120" as="geometry" />
         </mxCell>
         <mxCell id="ProfileService_methods" value="+update(user: User, dto: ProfileDTO): User&lt;br&gt;+updateInstructor(instructor: Instructor, dto: InstructorProfileDTO): InstructorProfile&lt;br&gt;+changePassword(user: User, current: string, newPassword: string): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="ProfileService">
-          <mxGeometry x="0" y="40" width="500" height="80" as="geometry"/>
+          <mxGeometry x="0" y="40" width="500" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="PhotoStorage" value="&amp;lt;&amp;lt;R2&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PhotoStorage&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="840" y="320" width="260" height="80" as="geometry"/>
+        <mxCell id="PhotoStorage" value="&amp;lt;&amp;lt;R2&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PhotoStorage&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="840" y="320" width="260" height="80" as="geometry" />
         </mxCell>
         <mxCell id="PhotoStorage_methods" value="+store(file: UploadedFile): string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PhotoStorage">
-          <mxGeometry x="0" y="40" width="260" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="260" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="UserRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="840" y="430" width="260" height="100" as="geometry"/>
+        <mxCell id="UserRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="840" y="430" width="260" height="100" as="geometry" />
         </mxCell>
         <mxCell id="UserRepository_methods" value="+findByEmail(email: string): User&lt;br&gt;+save(user: User): User" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="UserRepository">
-          <mxGeometry x="0" y="40" width="260" height="60" as="geometry"/>
+          <mxGeometry x="0" y="40" width="260" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="User" value="&lt;b&gt;User&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="910" y="570" width="120" height="40" as="geometry"/>
+        <mxCell id="User" value="&lt;b&gt;User&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="910" y="570" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="AddressRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AddressRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="300" y="500" width="340" height="80" as="geometry"/>
+        <mxCell id="AddressRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AddressRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="300" y="500" width="340" height="80" as="geometry" />
         </mxCell>
         <mxCell id="AddressRepository_methods" value="+replaceFor(user: User, address: Address): Address" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="AddressRepository">
-          <mxGeometry x="0" y="40" width="340" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="340" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Address" value="&lt;b&gt;Address&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="410" y="620" width="120" height="40" as="geometry"/>
+        <mxCell id="Address" value="&lt;b&gt;Address&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="410" y="620" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="InstructorProfileRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorProfileRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="680" y="650" width="360" height="80" as="geometry"/>
+        <mxCell id="InstructorProfileRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorProfileRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="680" y="650" width="360" height="80" as="geometry" />
         </mxCell>
         <mxCell id="InstructorProfileRepository_methods" value="+save(profile: InstructorProfile): InstructorProfile" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="InstructorProfileRepository">
-          <mxGeometry x="0" y="40" width="360" height="40" as="geometry"/>
+          <mxGeometry x="0" y="40" width="360" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="InstructorProfile" value="&lt;b&gt;InstructorProfile&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="780" y="770" width="160" height="40" as="geometry"/>
+        <mxCell id="InstructorProfile" value="&lt;b&gt;InstructorProfile&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="780" y="770" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="rel_ctrl_usr_res" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.2;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="ProfileController" target="UserResource">
           <mxGeometry relative="1" as="geometry">
@@ -117,16 +117,16 @@
         <mxCell id="rel_ctrl_upd_ins_req" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.5;entryX=1;entryY=0.25;" edge="1" parent="1" source="ProfileController" target="UpdateInstructorRequest">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="260" y="230"/>
-              <mxPoint x="260" y="300"/>
+              <mxPoint x="260" y="230" />
+              <mxPoint x="260" y="300" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="rel_ctrl_upd_prof_req" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.8571428571428571;entryX=1;entryY=0.25;" edge="1" parent="1" source="ProfileController" target="UpdateProfileRequest">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="280" y="280"/>
-              <mxPoint x="280" y="580"/>
+              <mxPoint x="280" y="280" />
+              <mxPoint x="280" y="580" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -169,6 +169,57 @@
         <mxCell id="rel_ins_repo_ins" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="InstructorProfileRepository" target="InstructorProfile">
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
+        </mxCell>
+        <mxCell id="typeicon_UserResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="306" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_InstructorProfileResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="546" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ProfileController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="306" y="170" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ChangePasswordRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="170" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_UpdateInstructorRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="290" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_InstructorProfileDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="410" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_UpdateProfileRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="570" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ProfileDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="690" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_AddressDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="940" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ProfileService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="306" y="350" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PhotoStorage" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="846" y="330" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_UserRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="846" y="440" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_User" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="916" y="580" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_AddressRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="306" y="510" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_Address" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="416" y="630" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_InstructorProfileRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="686" y="660" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_InstructorProfile" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="786" y="780" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

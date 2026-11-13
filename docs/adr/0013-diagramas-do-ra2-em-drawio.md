@@ -32,7 +32,7 @@ relacionados: [adr-0011, adr-0012]
 **(b)**:
 
 - Um `.drawio` por diagrama em `especificacao/diagramas/`, com o PNG exportado ao lado e versionado, nunca editado à mão: `12-modelo-de-dados-area-a.drawio`, `13-classes-area-a-negocial.drawio`, `14-sequencia-uc005.drawio` e assim por diante.
-- **Notação:** continua a exigida pela disciplina. Item 12: coluna de PK/FK e campos obrigatórios em negrito (TE4). Item 13: visibilidade e multiplicidade (TE5_1). Item 14: estereótipos boundary, control e entity e fragmentos `alt`, `opt` e `loop` (TE5_2).
+- **Notação:** continua a exigida pela disciplina. Item 12: coluna de PK/FK e campos obrigatórios em negrito (TE4). Item 13: visibilidade e multiplicidade (TE5_1), com o tipo de cada elemento num círculo no canto esquerdo do cabeçalho (C classe, A classe abstrata, I interface, E enumeração) e o papel, quando houver, em estereótipo (`<<Controller>>`, `<<Service>>`). Item 14: estereótipos boundary, control e entity e fragmentos `alt`, `opt` e `loop` (TE5_2).
 - **Padrão de desenho:** o da [ADR-0012](0012-diagramas-do-ra1-em-drawio.md): grade de 10 px, arestas ortogonais com pontos de saída e entrada fixos, Helvetica 12, traço de 1,5 px, preto e branco, sem cruzamento de linhas.
 - **Fragmentos do item 14:** cancelar e confirmar são `alt` (cancelar encerra o diagrama), nunca `opt` seguido de continuação.
 - **Fontes antigas:** os `.puml` saem do repositório e ficam no histórico do Git.
