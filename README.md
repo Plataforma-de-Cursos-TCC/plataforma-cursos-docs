@@ -37,6 +37,8 @@ O repositório começa cru. Cada parte da estrutura abaixo entra por um pull req
 ├── entregas/                  plano de tarefas e critérios de aceite de cada entrega
 ├── scripts/build_doc.py       gera o DOCX da especificação a partir do Template.docx
 ├── scripts/render_prototypes.py  renderiza os protótipos HTML do item 10 em PNG
+├── scripts/drawio-seqgen/     gera os diagramas de sequência (.drawio) e o ícone de tipo do item 13
+├── .claude/commands/          comandos do Claude Code do projeto (`/review-saas-cursos`)
 │
 ├── pesquisa/                  pesquisa de mercado: produtos similares e concorrentes
 ├── docs/

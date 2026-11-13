@@ -54,10 +54,10 @@ A Área A já está pronta e serve de exemplo. Copie a estrutura, troque as tabe
 
 Gerar o PNG: `draw.io -x -f png -s 2 -b 20 -o <arquivo>.png <arquivo>.drawio`. Cada imagem deve caber legível na página: diagrama largo, divida em dois. Gerar o DOCX para conferir: `python3 scripts/build_doc.py 12 15 --pdf`. Se o seu texto supõe algo que outra área ainda não definiu, registre na issue `pendencia-cruzada` dela (AGENTS.md, regra 8).
 
-O que a Área A ensinou e vale para as outras áreas:
+O que a Área A ensinou e vale para as outras áreas (os pontos da análise do professor estão em [ra2-analise-do-professor.md](ra2-analise-do-professor.md)):
 
-- **Item 13:** o tipo de cada elemento vai num círculo no canto esquerdo do cabeçalho (C classe, A abstrata, I interface, E enumeração) e o papel em estereótipo (`<<Controller>>`, `<<Service>>`). No XML do draw.io, escape os sinais: `&lt;&lt;Controller&gt;&gt;`.
-- **Item 14:** cancelar e confirmar são `alt` (cancelar encerra o diagrama), nunca `opt` seguido de continuação. Para manter um estilo só, gere o `.drawio` com `~/Downloads/GitHub/_tools/drawio-seqgen/seqgen.py` (`seqgen.py entrada.puml saida.drawio`, exemplos em `seq/`).
+- **Item 13:** o tipo de cada elemento vai num círculo (use `scripts/drawio-seqgen/typeicon.py`) no canto esquerdo do cabeçalho (C classe, A abstrata, I interface, E enumeração) e o papel em estereótipo (`<<Controller>>`, `<<Service>>`). No XML do draw.io, escape os sinais: `&lt;&lt;Controller&gt;&gt;`.
+- **Item 14:** cancelar e confirmar são `alt` (cancelar encerra o diagrama), nunca `opt` seguido de continuação. Para manter um estilo só, gere o `.drawio` com [`scripts/drawio-seqgen/seqgen.py`](../scripts/drawio-seqgen/README.md) (`python3 scripts/drawio-seqgen/seqgen.py entrada.puml saida.drawio`, exemplos em `scripts/drawio-seqgen/exemplos/`).
 - **Item 15:** cada regra de negócio tem ao menos um cenário negativo (a Área A ganhou o TC090 por isso). Os IDs da Área A vão até TC090; as outras áreas começam em TC091.
 - **Fluxo:** a branch nasce pela issue (`N-slug`), o PR leva `Closes #N` e uma linha em `CHANGELOG.md`, `[Não lançado]`, com o número do PR.
 
