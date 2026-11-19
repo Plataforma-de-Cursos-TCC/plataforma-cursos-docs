@@ -66,10 +66,10 @@
           <mxGeometry x="0" y="40" width="370" height="60" as="geometry" />
         </mxCell>
         <mxCell id="EnrollmentController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;EnrollmentController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="380" y="160" width="370" height="80" as="geometry" />
+          <mxGeometry x="380" y="160" width="370" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="EnrollmentController_methods" value="+enroll(courseId: UUID): EnrollmentResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="EnrollmentController">
-          <mxGeometry x="0" y="40" width="370" height="40" as="geometry" />
+        <mxCell id="EnrollmentController_methods" value="+enroll(courseId: UUID): EnrollmentResource&lt;br&gt;+checkStatus(courseId: UUID): EnrollmentStatus" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="EnrollmentController">
+          <mxGeometry x="0" y="40" width="370" height="60" as="geometry" />
         </mxCell>
         <mxCell id="PaymentController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="380" y="260" width="370" height="80" as="geometry" />
@@ -104,7 +104,7 @@
         <mxCell id="PaymentRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="380" y="850" width="370" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="PaymentRepository_methods" value="+save(payment: Payment): Payment&lt;br&gt;+findByEnrollmentId(enrollmentId: UUID): Payment" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentRepository">
+        <mxCell id="PaymentRepository_methods" value="+save(payment: Payment): Payment&lt;br&gt;+findByEnrollmentId(enrollmentId: UUID): Collection&amp;lt;Payment&amp;gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentRepository">
           <mxGeometry x="0" y="40" width="370" height="40" as="geometry" />
         </mxCell>
         <mxCell id="CourseRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseRepository&lt;/b&gt;&lt;br&gt;[Área B]" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
@@ -176,6 +176,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
+        <mxCell id="CourseDetailResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseDetailResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="910" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="CourseDetailResource_methods" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="CourseDetailResource">
+          <mxGeometry x="0" y="40" width="200" height="30" as="geometry" />
+        </mxCell>
         <mxCell id="typeicon_CatalogFilterRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
         </mxCell>
@@ -229,6 +235,9 @@
         </mxCell>
         <mxCell id="typeicon_CourseRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="386" y="960" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_CourseDetailResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="920" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
