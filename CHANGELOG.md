@@ -21,6 +21,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 - Modelo de dados lógico relacional da Área B (Autoria do instrutor) em draw.io e dicionário de dados (`especificacao/12-modelo-de-dados/area-b.md` e `especificacao/diagramas/12-modelo-de-dados-area-b.drawio`), cobrindo Category, Course, Module, Lesson, Quiz, Question e QuestionOption e regras de integridade com histórico de alunos (#TBD).
 - Diagramas de classes da Área B (Autoria do instrutor) em draw.io (`especificacao/13-diagrama-de-classes/area-b.md` e diagramas correspondentes), com perspectivas negocial e de implementação técnica (cursos, módulos, aulas com upload de vídeo e quizzes com gabarito), tipos nos cabeçalhos e métodos de verificação de histórico acadêmico (#TBD).
 - Diagramas de sequência da Área B (Autoria do instrutor) em draw.io (`especificacao/14-diagramas-de-sequencia/area-b.md` e diagramas correspondentes), cobrindo UC004, UC006, UC014 e UC015 com alt para cancelamento, bloqueio de exclusão por histórico de alunos e alinhamento aos métodos das classes e endpoints do TDD (#TBD).
+- Planilha de casos de teste da Área B (Autoria do instrutor) em `especificacao/15-casos-de-teste/area-b.md`, cobrindo UC004, UC006, UC014 e UC015 nas faixas TC010-TC018, TC028 e TC091-TC117 com cenários negativos por regra de negócio, bloqueios de exclusão com histórico e rastreabilidade (#TBD).
 
 ### Alterado
 
