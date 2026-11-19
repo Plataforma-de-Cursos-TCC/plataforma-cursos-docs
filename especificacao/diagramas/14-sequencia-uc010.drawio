@@ -515,7 +515,7 @@
         <mxCell value="elegível" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_120">
           <mxGeometry x="670" y="1970" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="updateOrCreate( rating,&lt;br&gt;comment )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_121">
+        <mxCell value="update( rating, comment )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_121">
           <mxGeometry x="870" y="2010" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell value="review" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_122">
@@ -527,10 +527,10 @@
         <mxCell value="INSERT INTO reviews&lt;br&gt;ON DUPLICATE KEY&lt;br&gt;UPDATE" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_124">
           <mxGeometry x="1210" y="2140" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="recalculateAverageRating(&lt;br&gt;courseId )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_125">
+        <mxCell value="averageRatingByCourse(courseId )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_125">
           <mxGeometry x="670" y="2270" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="UPDATE courses SET&lt;br&gt;averageRating" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_126">
+        <mxCell value="SELECT AVG(rating)&lt;br&gt;FROM reviews WHERE courseId" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_126">
           <mxGeometry x="870" y="2320" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell value="review salva" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_127">

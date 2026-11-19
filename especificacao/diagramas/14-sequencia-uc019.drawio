@@ -557,7 +557,7 @@
         <mxCell value="dados validados" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_120">
           <mxGeometry x="480" y="590" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="processPayment(&lt;br&gt;enrollmentId, dto )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_121">
+        <mxCell value="processSimulatedPayment(enrollmentId, dto )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_121">
           <mxGeometry x="480" y="630" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell value="getEnrollment(&lt;br&gt;enrollmentId )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_122">
@@ -632,7 +632,7 @@
         <mxCell value="save( payment )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_145">
           <mxGeometry x="840" y="1920" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="INSERT INTO&lt;br&gt;payments (status =&lt;br&gt;&amp;#x27;recusado&amp;#x27;)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_146">
+        <mxCell value="INSERT INTO&lt;br&gt;payments (status ='declined')" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_146">
           <mxGeometry x="1320" y="1960" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell value="PaymentDeclinedException" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_147">
@@ -656,7 +656,7 @@
         <mxCell value="save( payment )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_153">
           <mxGeometry x="840" y="2410" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="INSERT INTO&lt;br&gt;payments (status =&lt;br&gt;&amp;#x27;aprovado&amp;#x27;)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_154">
+        <mxCell value="INSERT INTO&lt;br&gt;payments (status ='approved')" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_154">
           <mxGeometry x="1320" y="2450" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell value="activateEnrollment(&lt;br&gt;enrollmentId )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_155">
@@ -671,7 +671,7 @@
         <mxCell value="save( enrollment )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_158">
           <mxGeometry x="1000" y="2710" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="UPDATE enrollments&lt;br&gt;SET status = &amp;#x27;ativa&amp;#x27;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_159">
+        <mxCell value="UPDATE enrollments&lt;br&gt;SET status = 'active'" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_159">
           <mxGeometry x="1640" y="2750" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell value="enrollment ativa" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_160">

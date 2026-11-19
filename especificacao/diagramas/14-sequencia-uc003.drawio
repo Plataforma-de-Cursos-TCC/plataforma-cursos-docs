@@ -437,7 +437,7 @@
         <mxCell value="[A1 - Aluno já&lt;br&gt;matriculado no curso]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_94">
           <mxGeometry x="120" y="530" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="200&lt;br&gt;(EnrollmentResource&lt;br&gt;status ativa)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_95">
+        <mxCell value="200&lt;br&gt;(EnrollmentResource&lt;br&gt;status active)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_95">
           <mxGeometry x="290" y="580" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell value="exibe botão &amp;quot;Continuar&lt;br&gt;assistindo&amp;quot;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_96">
@@ -464,7 +464,7 @@
         <mxCell value="findPublishedById(&lt;br&gt;courseId )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_103">
           <mxGeometry x="670" y="1000" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="SELECT courses&lt;br&gt;WHERE id AND&lt;br&gt;status=&amp;#x27;publicado&amp;#x27;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_104">
+        <mxCell value="SELECT courses&lt;br&gt;WHERE id AND&lt;br&gt;status='published'" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_104">
           <mxGeometry x="850" y="1050" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell value="curso" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_105">
@@ -500,10 +500,10 @@
         <mxCell value="save( enrollment )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_115">
           <mxGeometry x="670" y="1700" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="INSERT INTO&lt;br&gt;enrollments (status =&lt;br&gt;&amp;#x27;ativa&amp;#x27;)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_116">
+        <mxCell value="INSERT INTO&lt;br&gt;enrollments (status ='active')" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_116">
           <mxGeometry x="1170" y="1740" width="130" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="enrollment (ativa)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_117">
+        <mxCell value="enrollment (active)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_117">
           <mxGeometry x="470" y="1870" width="160" height="30" as="geometry" />
         </mxCell>
         <mxCell value="201 Created&lt;br&gt;(EnrollmentResource)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_118">
@@ -524,13 +524,13 @@
         <mxCell value="save( enrollment )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_123">
           <mxGeometry x="670" y="2220" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="INSERT INTO&lt;br&gt;enrollments (status =&lt;br&gt;&amp;#x27;pendente&amp;#x27;)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_124">
+        <mxCell value="INSERT INTO&lt;br&gt;enrollments (status ='pending')" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_124">
           <mxGeometry x="1170" y="2260" width="130" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="enrollment (pendente)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_125">
+        <mxCell value="enrollment (pending)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_125">
           <mxGeometry x="470" y="2390" width="160" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="200 OK&lt;br&gt;(EnrollmentResource&lt;br&gt;pendente)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_126">
+        <mxCell value="201 Created (EnrollmentResource, pending)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_126">
           <mxGeometry x="290" y="2430" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell value="abre resumo do UC019&lt;br&gt;Processar Pagamento&lt;br&gt;Simulado" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_127">

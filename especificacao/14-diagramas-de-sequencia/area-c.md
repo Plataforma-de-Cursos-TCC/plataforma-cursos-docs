@@ -4,7 +4,7 @@ Diagramas de sequência para os casos de uso prioritários da Área C (UC003, UC
 
 ## 1. UC003 – Matricular-se em Curso
 
-Fluxo básico e alternativos A1 (Aluno já matriculado, exibindo botão "Continuar assistindo") e A2 (curso gratuito gerando matrícula com status `ativa` imediata, sem acionar gateway simulado). Em curso pago, gera matrícula inicial `pendente` e aciona o UC019. Exceção E1 trata a despublicação do curso durante a tentativa de matrícula, retornando `409 CONFLICT`.
+Fluxo básico e alternativos A1 (Aluno já matriculado, exibindo botão "Continuar assistindo") e A2 (curso gratuito gerando matrícula com status `active` imediata, sem acionar gateway simulado; resposta `201 Created`). Em curso pago, gera matrícula inicial `pending` (resposta `201 Created`) e aciona o UC019. Exceção E1 trata a despublicação do curso durante a tentativa de matrícula, retornando `409 CONFLICT`.
 
 ![Diagrama de sequência do UC003](../diagramas/14-sequencia-uc003.png)
 
@@ -12,7 +12,7 @@ Fluxo básico e alternativos A1 (Aluno já matriculado, exibindo botão "Continu
 
 ## 2. UC019 – Processar Pagamento Simulado
 
-Resumo do pagamento simulado com fragmento `alt` para cancelamento pelo Aluno (A1, encerrando o fluxo sem cobrança e mantendo a matrícula pendente). No fluxo de confirmação, valida disponibilidade e preço do curso (E2, `409 CONFLICT`) e verifica se a matrícula já se encontra ativa (E3, `409 CONFLICT` por duplo acionamento). Na simulação do pagamento (decisão #51), a recusa (E1) registra `Payment` com status `recusado`, responde `422 PAYMENT_DECLINED` e mantém a matrícula `pendente`; a aprovação registra `Payment` com status `aprovado`, invoca `EnrollmentService.activateEnrollment()`, transiciona a matrícula para `ativa` e libera o acesso às aulas.
+Resumo do pagamento simulado com fragmento `alt` para cancelamento pelo Aluno (A1, encerrando o fluxo sem cobrança e mantendo a matrícula `pending`). No fluxo de confirmação, valida disponibilidade e preço do curso (E2, `409 CONFLICT`) e verifica se a matrícula já se encontra ativa (E3, `409 CONFLICT` por duplo acionamento). Na simulação do pagamento (decisão #51), a recusa (E1) registra `Payment` com status `declined`, responde `422 PAYMENT_DECLINED` e mantém a matrícula `pending`; a aprovação registra `Payment` com status `approved`, invoca `EnrollmentService.activateEnrollment()`, transiciona a matrícula para `active` e libera o acesso às aulas.
 
 ![Diagrama de sequência do UC019](../diagramas/14-sequencia-uc019.png)
 
@@ -20,7 +20,7 @@ Resumo do pagamento simulado com fragmento `alt` para cancelamento pelo Aluno (A
 
 ## 3. UC009 – Assistir Aula
 
-Geração de URL assinada temporária de 15 minutos via `MediaService` no Cloudflare R2 (RNF002) para reprodução protegida do vídeo. Trata exceção de acesso sem matrícula em aula que não é prévia (E1, `403 FORBIDDEN`), falha no carregamento de vídeo (E2, `503 SERVICE_UNAVAILABLE`) e os fluxos alternativos: retomada do ponto salvo em segundos assistidos (A2, R-2, R-3), reprodução pública para Visitante em aula prévia sem persistência de progresso (A4, R-1) e saída antes do término com persistência parcial do progresso (A1). O fluxo básico conclui com a marcação de aula finalizada e atualização do progresso global.
+Geração de URL assinada temporária de 15 minutos via `MediaService` no Cloudflare R2 (RNF002) para reprodução protegida do vídeo. Trata a aula indisponível para o usuário, sem matrícula e sem prévia (E1, `404 NOT_FOUND`, sem revelar a existência da aula), falha no carregamento de vídeo (E2, `503 SERVICE_UNAVAILABLE`) e os fluxos alternativos: retomada do ponto salvo em segundos assistidos (A2, R-2, R-3), reprodução pública para Visitante em aula prévia sem persistência de progresso (A4, R-1) e saída antes do término com persistência parcial do progresso (A1). O fluxo básico conclui com a marcação de aula finalizada e atualização do progresso global.
 
 ![Diagrama de sequência do UC009](../diagramas/14-sequencia-uc009.png)
 
@@ -36,7 +36,7 @@ Carregamento do quiz condicionado à conclusão de todas as aulas do módulo cor
 
 ## 5. UC010 – Avaliar Curso
 
-Abertura do modal de avaliação com pré-carregamento de nota e comentário anteriores caso o aluno já tenha avaliado o curso (A1, R-2). Fragmento `alt` trata o cancelamento (A2, descartando alterações e encerrando o fluxo). No envio, valida se a nota obrigatória de 1 a 5 foi selecionada (E2, `422 VALIDATION_FAILED`) e verifica a regra R-1 exigindo a conclusão prévia de ao menos uma aula no curso (E1, `403 FORBIDDEN`). Com dados válidos, salva ou substitui a avaliação em `Review` e recalcula a nota média agregada exibida na página do curso.
+Abertura do modal de avaliação com pré-carregamento de nota e comentário anteriores caso o aluno já tenha avaliado o curso (A1, R-2). Fragmento `alt` trata o cancelamento (A2, descartando alterações e encerrando o fluxo). No envio, valida se a nota obrigatória de 1 a 5 foi selecionada (E2, `422 VALIDATION_FAILED`) e verifica a regra R-1 exigindo a conclusão prévia de ao menos uma aula no curso (E1, `403 FORBIDDEN`). Com dados válidos, salva ou substitui a avaliação em `Review` (método `update(rating, comment)`) e recalcula a média de notas do curso por `ReviewRepository.averageRatingByCourse()`, exibida na página do curso.
 
 ![Diagrama de sequência do UC010](../diagramas/14-sequencia-uc010.png)
 
