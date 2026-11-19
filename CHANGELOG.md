@@ -31,6 +31,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Corrigido
 
+- Área B (Autoria do instrutor): modelo com `Quiz.status`, `Quiz.allowRetake` e `Lesson.indexStatus`; classes e sequências com os nomes desenhados no item 13; bloqueios de exclusão como 409 `CONFLICT`, não 422; casos de teste sem regra no item 10 fora da planilha e cancelamento registrado em `pendencias-area-b.md`, porque o grupo ainda não definiu o fluxo (#TBD).
 Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129):
 
 - Item 4: o BPMN registra o progresso a cada aula assistida ("Registra o progresso da aula") e calcula a nota só no quiz, porque a tarefa única fazia o progresso depender do quiz, contra o RF006 e o UC009.
