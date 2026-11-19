@@ -19,6 +19,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 - `scripts/drawio-seqgen/` (gerador de diagramas de sequência e ícone de tipo do item 13), `entregas/ra2-analise-do-professor.md` (pontos do professor para os itens 12 a 15 das Áreas B, C e D) e o comando `/review-saas-cursos`, para que ferramentas e orientação usadas pela Área A estejam no repositório e não só na máquina de um integrante (#136).
 - Rubrica do RA2 (Canvas) e as planilhas `Rubricas TCC 1` e `Rubricas TCC 2` em Markdown (`entregas/ra2-rubrica-canvas.md`, `rubricas-tcc-1.md`, `rubricas-tcc-2.md`), para o grupo desenvolver e revisar com os critérios do professor à mão (#138).
 - Modelo de dados lógico relacional da Área B (Autoria do instrutor) em draw.io e dicionário de dados (`especificacao/12-modelo-de-dados/area-b.md` e `especificacao/diagramas/12-modelo-de-dados-area-b.drawio`), cobrindo Category, Course, Module, Lesson, Quiz, Question e QuestionOption e regras de integridade com histórico de alunos (#TBD).
+- Diagramas de classes da Área B (Autoria do instrutor) em draw.io (`especificacao/13-diagrama-de-classes/area-b.md` e diagramas correspondentes), com perspectivas negocial e de implementação técnica (cursos, módulos, aulas com upload de vídeo e quizzes com gabarito), tipos nos cabeçalhos e métodos de verificação de histórico acadêmico (#TBD).
 
 ### Alterado
 
