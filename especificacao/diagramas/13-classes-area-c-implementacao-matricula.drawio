@@ -1,0 +1,236 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mxfile host="Electron" version="32.6.10" type="device" compressed="false">
+  <diagram id="diagram_13_classes_matricula" name="13-classes-area-c-implementacao-matricula">
+    <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="1120" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="CatalogFilterRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CatalogFilterRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="CatalogFilterRequest_methods" value="+rules(): array&lt;br&gt;+toDTO(): CatalogFilterDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="CatalogFilterRequest">
+          <mxGeometry x="0" y="40" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="CatalogFilterDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CatalogFilterDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="140" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="CatalogFilterDTO_attrs" value="+category: string&lt;br&gt;+page: int&lt;br&gt;+perPage: int&lt;br&gt;+sort: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="CatalogFilterDTO">
+          <mxGeometry x="0" y="40" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentSimulatedRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentSimulatedRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="260" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentSimulatedRequest_methods" value="+rules(): array&lt;br&gt;+toDTO(): PaymentDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentSimulatedRequest">
+          <mxGeometry x="0" y="40" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="360" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentDTO_attrs" value="+enrollmentId: UUID&lt;br&gt;+confirmPayment: boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentDTO">
+          <mxGeometry x="0" y="40" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;EnrollmentResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="460" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentResource_methods" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="EnrollmentResource">
+          <mxGeometry x="0" y="40" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="550" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentResource_methods" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentResource">
+          <mxGeometry x="0" y="40" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="CourseCatalogResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseCatalogResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="640" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="CourseCatalogResource_methods" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="CourseCatalogResource">
+          <mxGeometry x="0" y="40" width="200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Enrollment" value="&lt;b&gt;Enrollment&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=50;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="730" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Enrollment_methods" value="+activate(): void&lt;br&gt;+isPending(): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="Enrollment">
+          <mxGeometry x="0" y="30" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment" value="&lt;b&gt;Payment&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=50;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="820" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="Payment_methods" value="+approve(): void&lt;br&gt;+decline(): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="Payment">
+          <mxGeometry x="0" y="30" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="CatalogController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CatalogController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="40" width="370" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="CatalogController_methods" value="+index(req: CatalogFilterRequest): AnonymousResourceCollection&lt;br&gt;+show(id: UUID): CourseDetailResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="CatalogController">
+          <mxGeometry x="0" y="40" width="370" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;EnrollmentController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="160" width="370" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentController_methods" value="+enroll(courseId: UUID): EnrollmentResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="EnrollmentController">
+          <mxGeometry x="0" y="40" width="370" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="260" width="370" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentController_methods" value="+pay(enrollmentId: UUID, req: PaymentSimulatedRequest): PaymentResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentController">
+          <mxGeometry x="0" y="40" width="370" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="CatalogService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CatalogService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="370" width="370" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="CatalogService_methods" value="+listPublishedCourses(dto: CatalogFilterDTO): LengthAwarePaginator&lt;br&gt;+getCourseDetails(courseId: UUID): Course" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="CatalogService">
+          <mxGeometry x="0" y="40" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;EnrollmentService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="480" width="370" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentService_methods" value="+enroll(userId: UUID, courseId: UUID): Enrollment&lt;br&gt;+activateEnrollment(enrollmentId: UUID): Enrollment&lt;br&gt;+getEnrollment(id: UUID): Enrollment&lt;br&gt;+checkExistingEnrollment(userId: UUID, courseId: UUID): bool" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="EnrollmentService">
+          <mxGeometry x="0" y="40" width="370" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="610" width="370" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentService_methods" value="+processSimulatedPayment(enrollmentId: UUID, dto: PaymentDTO): Payment&lt;br&gt;+validateCourseAvailability(courseId: UUID, expectedPrice: int): void&lt;br&gt;+simulateGateway(amountCents: int): bool" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentService">
+          <mxGeometry x="0" y="40" width="370" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;EnrollmentRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="740" width="370" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentRepository_methods" value="+findById(id: UUID): Enrollment&lt;br&gt;+findByUserAndCourse(userId: UUID, courseId: UUID): Enrollment&lt;br&gt;+save(enrollment: Enrollment): Enrollment" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="EnrollmentRepository">
+          <mxGeometry x="0" y="40" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="850" width="370" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PaymentRepository_methods" value="+save(payment: Payment): Payment&lt;br&gt;+findByEnrollmentId(enrollmentId: UUID): Payment" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="PaymentRepository">
+          <mxGeometry x="0" y="40" width="370" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="CourseRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseRepository&lt;/b&gt;&lt;br&gt;[Área B]" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="380" y="950" width="370" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="CourseRepository_methods" value="+findPublishedById(id: UUID): Course&lt;br&gt;+paginatePublished(category: string, sort: string, p: int): LengthAwarePaginator" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="CourseRepository">
+          <mxGeometry x="0" y="40" width="370" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cat_ctrl_req" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="CatalogController" target="CatalogFilterRequest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_req_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="CatalogFilterRequest" target="CatalogFilterDTO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pay_ctrl_req" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="PaymentController" target="PaymentSimulatedRequest">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pay_req_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="PaymentSimulatedRequest" target="PaymentDTO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cat_ctrl_srv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="CatalogController" target="CatalogService">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="140" />
+              <mxPoint x="760" y="360" />
+              <mxPoint x="565" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_enr_ctrl_srv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="EnrollmentController" target="EnrollmentService">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pay_ctrl_srv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="PaymentController" target="PaymentService">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="365" y="340" />
+              <mxPoint x="365" y="600" />
+              <mxPoint x="565" y="600" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_pay_srv_enr_srv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.25;exitY=0;entryX=0.25;entryY=1;" edge="1" parent="1" source="PaymentService" target="EnrollmentService">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_enr_srv_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="EnrollmentService" target="EnrollmentRepository">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="760" y="590" />
+              <mxPoint x="760" y="730" />
+              <mxPoint x="565" y="730" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_pay_srv_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="PaymentService" target="PaymentRepository">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="365" y="720" />
+              <mxPoint x="365" y="840" />
+              <mxPoint x="565" y="840" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_cat_srv_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.9;exitY=1;entryX=0.9;entryY=0;" edge="1" parent="1" source="CatalogService" target="CourseRepository">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="460" />
+              <mxPoint x="780" y="940" />
+              <mxPoint x="713" y="940" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="typeicon_CatalogFilterRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_CatalogFilterDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="150" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PaymentSimulatedRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="270" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PaymentDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="370" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_EnrollmentResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="470" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PaymentResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="560" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_CourseCatalogResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="650" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_Enrollment" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="745" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_Payment" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="835" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_CatalogController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_EnrollmentController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="170" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PaymentController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="270" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_CatalogService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="380" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_EnrollmentService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="490" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PaymentService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="620" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_EnrollmentRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="750" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PaymentRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="860" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_CourseRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="960" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

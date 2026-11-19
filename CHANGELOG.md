@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
+- Item 13: diagrama de classes da Área C (Aprendizagem do aluno) em draw.io, perspectivas negocial e de implementação técnica (matrícula/pagamento e aulas/quizzes/avaliações), com tipos nos cabeçalhos, estereótipos arquiteturais e transição de matrícula (#TBD).
 - Item 12: modelo lógico relacional da Área C (Aprendizagem do aluno) em draw.io e dicionário de dados cobrindo Enrollment, Payment, LessonProgress, QuizAttempt, QuizAnswer e Review, com suporte a matrícula pendente e ativa e pagamento simulado (#TBD).
 - `CHANGELOG.md`, a regra de registrar toda mudança (`AGENTS.md`, `CONTRIBUTING.md` e template de PR) e o job `changelog` no CI, para que o caminho do documento até a versão final fique registrado e nenhum PR entre sem a sua linha (#127).
 - `scripts/drawio-seqgen/` (gerador de diagramas de sequência e ícone de tipo do item 13), `entregas/ra2-analise-do-professor.md` (pontos do professor para os itens 12 a 15 das Áreas B, C e D) e o comando `/review-saas-cursos`, para que ferramentas e orientação usadas pela Área A estejam no repositório e não só na máquina de um integrante (#136).
