@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Antigravity" version="24.7.17" compressed="false">
   <diagram name="Item 12 Modelo de Dados Área D" id="diagram_item12_area_d">
-    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="860" math="0" shadow="0">
+    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="880" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -54,7 +54,7 @@
           <mxGeometry y="80" width="260" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_Conversation" value="Conversation" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="440" y="110" width="280" height="140" as="geometry" />
+          <mxGeometry x="440" y="90" width="280" height="160" as="geometry" />
         </mxCell>
         <mxCell id="row_conv_id" value="&lt;b&gt;PK&lt;/b&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&lt;b&gt;id: UUID&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Conversation">
           <mxGeometry y="30" width="280" height="20" as="geometry" />
@@ -74,8 +74,11 @@
         <mxCell id="row_conv_created" value="&lt;b&gt;createdAt: DATETIME&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Conversation">
           <mxGeometry y="120" width="280" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="row_conv_uniq" value="&lt;i&gt;UNIQUE(userId, lessonId)&lt;/i&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Conversation">
+          <mxGeometry y="140" width="280" height="20" as="geometry" />
+        </mxCell>
         <mxCell id="table_Message" value="Message" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="440" y="310" width="280" height="160" as="geometry" />
+          <mxGeometry x="440" y="290" width="280" height="160" as="geometry" />
         </mxCell>
         <mxCell id="row_msg_id" value="&lt;b&gt;PK&lt;/b&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&lt;b&gt;id: UUID&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Message">
           <mxGeometry y="30" width="280" height="20" as="geometry" />
@@ -99,7 +102,7 @@
           <mxGeometry y="140" width="280" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_AuditLog" value="AuditLog" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="440" y="530" width="280" height="220" as="geometry" />
+          <mxGeometry x="440" y="500" width="280" height="220" as="geometry" />
         </mxCell>
         <mxCell id="row_audit_id" value="&lt;b&gt;PK&lt;/b&gt;&amp;#160;&amp;#160;&amp;#160;&amp;#160;&lt;b&gt;id: UUID&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_AuditLog">
           <mxGeometry y="30" width="280" height="20" as="geometry" />
@@ -116,7 +119,7 @@
         <mxCell id="row_audit_ttype" value="&lt;b&gt;targetType: VARCHAR(40)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_AuditLog">
           <mxGeometry y="100" width="280" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_audit_tid" value="targetId: VARCHAR(36)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_AuditLog">
+        <mxCell id="row_audit_tid" value="targetId: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_AuditLog">
           <mxGeometry y="120" width="280" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_audit_ip" value="&lt;b&gt;ipAddress: VARCHAR(45)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_AuditLog">
@@ -131,19 +134,19 @@
         <mxCell id="row_audit_created" value="&lt;b&gt;createdAt: DATETIME&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_AuditLog">
           <mxGeometry y="200" width="280" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="note_audit" value="&lt;b&gt;AuditLog (RNF016):&lt;/b&gt;&amp;lt;br&amp;gt;Trilha retida por 12 meses. Registra 100% das ações administrativas (UC008, UC016, UC018). Em exclusão (LGPD), nenhum dado pessoal vai no registro." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="note_audit" value="&lt;b&gt;AuditLog (RNF016):&lt;/b&gt;&amp;lt;br&amp;gt;Trilha retida por 12 meses via rotina diária (cron/scheduler). Registra 100% das ações administrativas (UC008, UC016, UC018). Em exclusão (LGPD), nenhum dado pessoal vai no registro." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="40" y="480" width="340" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="note_ai" value="&lt;b&gt;Tutor de IA (UC001):&lt;/b&gt;&amp;lt;br&amp;gt;Conversas e mensagens no core relacional (MySQL). Embeddings vetoriais e busca semântica RAG residem no ai-service (PostgreSQL + pgvector)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="note_ai" value="&lt;b&gt;Tutor de IA (UC001):&lt;/b&gt;&amp;lt;br&amp;gt;Conversas e mensagens no core MySQL. Desvio justificado da 3FN em courseId para particionamento rápido no RAG (ai-service pgvector) sem joins multi-tabela." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="40" y="580" width="340" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="note_analytics" value="&lt;b&gt;Analytics (UC007):&lt;/b&gt;&amp;lt;br&amp;gt;Métricas do Dashboard calculadas via agregação direta de matrículas e progresso de aulas; sem redundância de tabelas (3FN)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="note_analytics" value="&lt;b&gt;Analytics (UC007):&lt;/b&gt;&amp;lt;br&amp;gt;Métricas do Dashboard calculadas via agregação direta de matrículas e progresso de aulas; sem redundância de tabelas (3FN preservada)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="40" y="680" width="340" height="70" as="geometry" />
         </mxCell>
         <mxCell id="edge_conv_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_Conversation" target="table_User">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="370" y="140" />
+              <mxPoint x="370" y="120" />
               <mxPoint x="370" y="70" />
             </Array>
           </mxGeometry>
@@ -152,12 +155,12 @@
           <mxGeometry x="310" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_conv_user_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="410" y="120" width="20" height="20" as="geometry" />
+          <mxGeometry x="410" y="100" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_conv_course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_Conversation" target="table_Course">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="370" y="180" />
+              <mxPoint x="370" y="160" />
               <mxPoint x="370" y="230" />
             </Array>
           </mxGeometry>
@@ -166,12 +169,12 @@
           <mxGeometry x="310" y="210" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_conv_course_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="410" y="160" width="20" height="20" as="geometry" />
+          <mxGeometry x="410" y="140" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_conv_lesson" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_Conversation" target="table_Lesson">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="390" y="200" />
+              <mxPoint x="390" y="180" />
               <mxPoint x="390" y="370" />
             </Array>
           </mxGeometry>
@@ -180,12 +183,12 @@
           <mxGeometry x="310" y="350" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_conv_lesson_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="410" y="190" width="20" height="20" as="geometry" />
+          <mxGeometry x="410" y="170" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_msg_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_Message" target="table_Conversation">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="580" y="310" />
+              <mxPoint x="580" y="290" />
               <mxPoint x="580" y="250" />
             </Array>
           </mxGeometry>
@@ -194,13 +197,13 @@
           <mxGeometry x="590" y="260" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_msg_conv_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="590" y="290" width="20" height="20" as="geometry" />
+          <mxGeometry x="590" y="275" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_audit_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_AuditLog" target="table_User">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="440" y="570" />
-              <mxPoint x="410" y="570" />
+              <mxPoint x="440" y="540" />
+              <mxPoint x="410" y="540" />
               <mxPoint x="410" y="100" />
               <mxPoint x="300" y="100" />
             </Array>
@@ -210,7 +213,7 @@
           <mxGeometry x="310" y="80" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_audit_user_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="415" y="550" width="20" height="20" as="geometry" />
+          <mxGeometry x="415" y="520" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
