@@ -47,6 +47,7 @@ Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129
 - Item 11: o diagrama de atividades verifica se a aula está transcrita e indexada antes da busca do Tutor de IA (E-1 do UC001), que antes ficava de fora.
 - Item 14: cancelar e confirmar em `alt` no UC011 (parte 2) e no UC017, porque o `opt` de cancelamento deixava o fluxo seguir (análise do professor) (#131).
 - Item 15: UC011 ganha a regra R-3, a exceção E4 (nova senha fora da política), o protótipo `UC011-E4-1` e o caso de teste TC090, porque não havia cenário negativo para a política de senha (#131).
+- Área C (itens 12 a 15): modelo de dados, classes, sequências e casos de teste alinhados às regras do item 10, ao TDD e entre si (Payment 0..* por matrícula, status em inglês, 404 em UC009 E1, TC054 removido, TC057 renomeado para TC178, TC179 de gabarito oculto), porque a revisão cruzada achou contradições que impediam a conferência (#TBD).
 
 ## [1.2.0] - 2026-11-12
 
