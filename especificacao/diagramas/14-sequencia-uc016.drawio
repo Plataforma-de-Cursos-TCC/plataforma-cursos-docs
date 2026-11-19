@@ -152,7 +152,7 @@
         <mxCell value="" style="html=1;rounded=0;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;endSize=8;" parent="1" edge="1" id="edge_34">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="450" y="580" as="sourcePoint" />
-            <mxPoint x="470" y="580" as="targetPoint" />
+            <mxPoint x="810" y="580" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;endSize=8;" parent="1" edge="1" id="edge_35">
@@ -245,10 +245,10 @@
         <mxCell value="navega para rota de área&lt;br&gt;protegida" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_53">
           <mxGeometry x="120" y="120" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="handle(request, role)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_54">
+        <mxCell value="handle(req, next, role)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_54">
           <mxGeometry x="300" y="170" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="parseToken(request)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_55">
+        <mxCell value="JwtGuard.parseToken(token)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_55">
           <mxGeometry x="480" y="210" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell value="token payload (ou&lt;br&gt;nulo/expirado)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_56">
@@ -266,13 +266,13 @@
         <mxCell value="[sessão ativa]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_60">
           <mxGeometry x="120" y="500" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="validateRole(tokenRole,&lt;br&gt;requiredRole)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_61">
-          <mxGeometry x="300" y="540" width="140" height="40" as="geometry" />
+        <mxCell value="JwtGuard.authorize(user, role)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_61">
+          <mxGeometry x="520" y="540" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell value="[E2 - perfil sem&lt;br&gt;permissão na rota (R-2)]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_62">
           <mxGeometry x="120" y="620" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="logAccessDenied(userId,&lt;br&gt;route, requiredRole)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_63">
+        <mxCell value="logAccessDenied(userId, targetArea, requiredRole)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_63">
           <mxGeometry x="480" y="670" width="150" height="40" as="geometry" />
         </mxCell>
         <mxCell value="INSERT audit_logs&lt;br&gt;(RNF016)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_64">
