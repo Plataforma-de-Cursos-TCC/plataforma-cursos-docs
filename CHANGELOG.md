@@ -19,6 +19,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 - Item 14: diagramas de sequência da Área C (Aprendizagem do aluno) em draw.io para UC002, UC003, UC009, UC010, UC019 e UC020, com alt para cancelamentos e exceções, endpoints do TDD e transição de matrícula no pagamento simulado (#TBD).
 - Item 13: diagrama de classes da Área C (Aprendizagem do aluno) em draw.io, perspectivas negocial e de implementação técnica (matrícula/pagamento e aulas/quizzes/avaliações), com tipos nos cabeçalhos, estereótipos arquiteturais e transição de matrícula (#TBD).
 - Item 12: modelo lógico relacional da Área C (Aprendizagem do aluno) em draw.io e dicionário de dados cobrindo Enrollment, Payment, LessonProgress, QuizAttempt, QuizAnswer e Review, com suporte a matrícula pendente e ativa e pagamento simulado (#TBD).
+- Casos de teste da Área D (TC211 a TC268) cobrindo fluxos básico, alternativo e de exceção, cenários negativos por regra de negócio e auditoria RNF016 no item 15 (#TBD).
 - Diagramas de sequência da Área D em draw.io (UC001, UC007, UC008, UC016 e UC018) com caminhos alt exclusivos, métodos do item 13 e auditoria RNF016 (#TBD).
 - Diagramas de classes da Área D em draw.io (perspectivas negocial e implementação de administração e tutor/analytics) com ícone de tipo e estereótipos no item 13 (#TBD).
 - Modelo lógico relacional de dados da Área D em draw.io e dicionário de dados (Conversation, Message, AuditLog) no item 12, cobrindo o Tutor de IA, analytics e administração (#TBD).
