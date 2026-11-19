@@ -15,12 +15,11 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
-- Item 15: casos de teste da Área C (Aprendizagem do aluno) cobrindo UC002, UC003, UC009, UC010, UC019 e UC020 (TC151 a TC177), com cenários negativos por regra de negócio e códigos de erro da API (#TBD).
+- Item 15: casos de teste da Área C (Aprendizagem do aluno) cobrindo UC002, UC003, UC009, UC010, UC019 e UC020 (TC151 a TC179, com IDs do catálogo para os UCs da área), com cenários negativos por regra de negócio e códigos de erro da API (#TBD).
 - Item 14: diagramas de sequência da Área C (Aprendizagem do aluno) em draw.io para UC002, UC003, UC009, UC010, UC019 e UC020, com alt para cancelamentos e exceções, endpoints do TDD e transição de matrícula no pagamento simulado (#TBD).
 - Item 13: diagrama de classes da Área C (Aprendizagem do aluno) em draw.io, perspectivas negocial e de implementação técnica (matrícula/pagamento e aulas/quizzes/avaliações), com tipos nos cabeçalhos, estereótipos arquiteturais e transição de matrícula (#TBD).
 - Item 12: modelo lógico relacional da Área C (Aprendizagem do aluno) em draw.io e dicionário de dados cobrindo Enrollment, Payment, LessonProgress, QuizAttempt, QuizAnswer e Review, com suporte a matrícula pendente e ativa e pagamento simulado (#TBD).
-- Casos de teste da Área D (TC211 a TC268) cobrindo fluxos básico, alternativo e de exceção, cenários negativos por regra de negócio e auditoria RNF016 no item 15 (#TBD).
-- Casos de teste da Área D (TC211 a TC267) cobrindo fluxos básico, alternativo e de exceção, cenários negativos por regra de negócio e auditoria RNF016 no item 15 (#TBD).
+- Casos de teste da Área D (TC211 a TC264) cobrindo fluxos básico, alternativo e de exceção, cenários negativos por regra de negócio e auditoria RNF016 no item 15 (#TBD).
 - Diagramas de sequência da Área D em draw.io (UC001, UC007, UC008, UC016 e UC018) com caminhos alt exclusivos, métodos do item 13 e auditoria RNF016 (#TBD).
 - Diagramas de classes da Área D em draw.io (perspectivas negocial e implementação de administração e tutor/analytics) com ícone de tipo e estereótipos no item 13 (#TBD).
 - Modelo lógico relacional de dados da Área D em draw.io e dicionário de dados (Conversation, Message, AuditLog) no item 12, cobrindo o Tutor de IA, analytics e administração (#TBD).
@@ -30,7 +29,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 - Modelo de dados lógico relacional da Área B (Autoria do instrutor) em draw.io e dicionário de dados (`especificacao/12-modelo-de-dados/area-b.md` e `especificacao/diagramas/12-modelo-de-dados-area-b.drawio`), cobrindo Category, Course, Module, Lesson, Quiz, Question e QuestionOption e regras de integridade com histórico de alunos (#TBD).
 - Diagramas de classes da Área B (Autoria do instrutor) em draw.io (`especificacao/13-diagrama-de-classes/area-b.md` e diagramas correspondentes), com perspectivas negocial e de implementação técnica (cursos, módulos, aulas com upload de vídeo e quizzes com gabarito), tipos nos cabeçalhos e métodos de verificação de histórico acadêmico (#TBD).
 - Diagramas de sequência da Área B (Autoria do instrutor) em draw.io (`especificacao/14-diagramas-de-sequencia/area-b.md` e diagramas correspondentes), cobrindo UC004, UC006, UC014 e UC015 com alt para cancelamento, bloqueio de exclusão por histórico de alunos e alinhamento aos métodos das classes e endpoints do TDD (#TBD).
-- Planilha de casos de teste da Área B (Autoria do instrutor) em `especificacao/15-casos-de-teste/area-b.md`, cobrindo UC004, UC006, UC014 e UC015 nas faixas TC010-TC018, TC028 e TC091-TC117 com cenários negativos por regra de negócio, bloqueios de exclusão com histórico e rastreabilidade (#TBD).
+- Planilha de casos de teste da Área B (Autoria do instrutor) em `especificacao/15-casos-de-teste/area-b.md`, cobrindo UC004, UC006, UC014 e UC015 nas faixas TC010-TC018, TC028 e TC091-TC118 com cenários negativos por regra de negócio, bloqueios de exclusão com histórico e rastreabilidade (#TBD).
 
 ### Alterado
 
@@ -41,11 +40,9 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 ### Corrigido
 
 - Área B (Autoria do instrutor): modelo com `Quiz.status`, `Quiz.allowRetake` e `Lesson.indexStatus`; classes e sequências com os nomes desenhados no item 13; bloqueios de exclusão como 409 `CONFLICT`, não 422; casos de teste sem regra no item 10 fora da planilha e cancelamento registrado em `pendencias-area-b.md`, porque o grupo ainda não definiu o fluxo (#TBD).
-- Resolução das pendências cruzadas da Área A nos diagramas de sequência da Área D (confirmação dos erros CONFLICT e SERVICE_UNAVAILABLE e auditoria RNF016 no UC008) (#TBD).
-- Resolução das pendências cruzadas da Área A no modelo de dados da Área D (seed de admin, status bloqueado, trilha de auditoria RNF016 e locale no Tutor e Dashboard) (#TBD).
-- Correções da revisão cruzada do RA2 na Área D (itens 12 a 15) (#TBD).
-- Resolução das pendências cruzadas da Área D nos diagramas de sequência (confirmação dos erros CONFLICT e SERVICE_UNAVAILABLE e auditoria RNF016 no UC008) (#TBD).
-- Resolução das pendências cruzadas da Área D no modelo de dados (seed de admin, status bloqueado, trilha de auditoria RNF016 e locale no Tutor e Dashboard) (#TBD).
+- Área C (itens 12 a 15): modelo de dados, classes, sequências e casos de teste alinhados às regras do item 10, ao TDD e entre si (Payment 0..* por matrícula, status em inglês, 404 em UC009 E1, TC054 removido, TC057 renomeado para TC178, TC179 de gabarito oculto), porque a revisão cruzada achou contradições que impediam a conferência (#TBD).
+- Área D (itens 12 a 15): pendências cruzadas #122 (seed do primeiro Administrador, status `blocked` com 403 `ACCOUNT_BLOCKED`, `AuditLog` com retenção de 12 meses pela RNF016, `User.locale` no Tutor de IA e no dashboard) e #123 (409 `CONFLICT` só para exclusão bloqueada, `LESSON_NOT_INDEXED` para aula não indexada, auditoria no UC008) resolvidas; classes e sequências com os métodos do item 13 e os códigos do TDD; casos de teste sem regra inventada, com os removidos registrados em `pendencias-area-d.md` (#TBD).
+- Área A: `JwtGuard` declara `parseToken` e `authorize`, usados pela Área D no UC016, e `User.status` e `User.theme` passam aos valores em inglês (`active`/`blocked`/`deleted`, `light`/`dark`/`system`) que as outras áreas gravam, com o rótulo em pt-BR ao lado (#TBD).
 
 Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129):
 
@@ -58,7 +55,6 @@ Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129
 - Item 11: o diagrama de atividades verifica se a aula está transcrita e indexada antes da busca do Tutor de IA (E-1 do UC001), que antes ficava de fora.
 - Item 14: cancelar e confirmar em `alt` no UC011 (parte 2) e no UC017, porque o `opt` de cancelamento deixava o fluxo seguir (análise do professor) (#131).
 - Item 15: UC011 ganha a regra R-3, a exceção E4 (nova senha fora da política), o protótipo `UC011-E4-1` e o caso de teste TC090, porque não havia cenário negativo para a política de senha (#131).
-- Área C (itens 12 a 15): modelo de dados, classes, sequências e casos de teste alinhados às regras do item 10, ao TDD e entre si (Payment 0..* por matrícula, status em inglês, 404 em UC009 E1, TC054 removido, TC057 renomeado para TC178, TC179 de gabarito oculto), porque a revisão cruzada achou contradições que impediam a conferência (#TBD).
 
 ## [1.2.0] - 2026-11-12
 
