@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
+- Item 14: diagramas de sequência da Área C (Aprendizagem do aluno) em draw.io para UC002, UC003, UC009, UC010, UC019 e UC020, com alt para cancelamentos e exceções, endpoints do TDD e transição de matrícula no pagamento simulado (#TBD).
 - Item 13: diagrama de classes da Área C (Aprendizagem do aluno) em draw.io, perspectivas negocial e de implementação técnica (matrícula/pagamento e aulas/quizzes/avaliações), com tipos nos cabeçalhos, estereótipos arquiteturais e transição de matrícula (#TBD).
 - Item 12: modelo lógico relacional da Área C (Aprendizagem do aluno) em draw.io e dicionário de dados cobrindo Enrollment, Payment, LessonProgress, QuizAttempt, QuizAnswer e Review, com suporte a matrícula pendente e ativa e pagamento simulado (#TBD).
 - `CHANGELOG.md`, a regra de registrar toda mudança (`AGENTS.md`, `CONTRIBUTING.md` e template de PR) e o job `changelog` no CI, para que o caminho do documento até a versão final fique registrado e nenhum PR entre sem a sua linha (#127).
