@@ -1,14 +1,18 @@
 ## 1. UC006 – Cadastrar Curso
 
-Fluxo básico de criação de curso com salvamento inicial em status de rascunho e publicação posterior no catálogo (passos 1 a 6). O cancelamento pelo Instrutor é modelado obrigatoriamente em bloco `alt` exclusivo (A1), encerrando a execução sem persistência. No salvamento, campos obrigatórios ausentes retornam 422 `VALIDATION_FAILED` (E1). Ao acionar a publicação, a tentativa de publicar curso sem módulos ou aulas cadastrados é interceptada em `alt` como 422 `VALIDATION_FAILED` (E4), mantendo o curso como rascunho; com conteúdo completo, o curso é atualizado para publicado e liberado no catálogo.
+Cobre o cadastro do curso com salvamento inicial em status `draft` (R-1), a publicação no catálogo e a exclusão. Na validação, campos obrigatórios ausentes devolvem 422 `VALIDATION_FAILED` (E1). Ao acionar a publicação, `Course.canBePublished()` barra o curso sem módulos ou aulas com 422 `VALIDATION_FAILED` (E4), mantendo o curso como rascunho; com conteúdo completo, `Course.publish()` altera o status para `published`. A exclusão é bloqueada com 409 `CONFLICT` quando há matrículas ativas (R-2), modelada no diagrama de exclusão.
 
-![Diagrama de sequência do UC006](../diagramas/14-sequencia-uc006.png)
+![Diagrama de sequência do UC006: cadastro e publicação](../diagramas/14-sequencia-uc006-1.png)
 
-*Figura 0 – UC006, diagrama de sequência: cadastrar curso*
+*Figura 0 – UC006, diagrama de sequência: cadastrar e publicar curso*
+
+![Diagrama de sequência do UC006: exclusão bloqueada por matrícula ativa](../diagramas/14-sequencia-uc006-2.png)
+
+*Figura 0 – UC006, diagrama de sequência: excluir curso (R-2)*
 
 ## 2. UC014 – Gerenciar Módulos do Curso
 
-Cobre o fluxo básico de cadastro e ordenação de módulos e o fluxo de exclusão (A2). Na exclusão, o cancelamento é isolado em bloco `alt`, encerrando o fluxo. Na confirmação, o `ModuleService` consulta o histórico acadêmico (`hasStudentHistory`): a detecção de progresso de alunos em aulas ou respostas em quizzes do módulo dispara o fluxo de exceção em `alt` como 422 `VALIDATION_FAILED` (E4), bloqueando a destruição e instruindo o Instrutor a apenas editar o módulo; sem histórico, o módulo, suas aulas e quizzes são excluídos em cascata, retornando 204 No Content. No fluxo de criação, validações barram título ausente (E1, 422) e posição conflitante dentro do curso (E2, 422).
+Cobre o fluxo básico de cadastro de módulo e o fluxo de exclusão (A2). Na criação, título ausente devolve 422 `VALIDATION_FAILED` (E1) e posição já utilizada no curso devolve 422 `VALIDATION_FAILED` (E2, R-2). Na exclusão, a confirmação consulta `ModuleRepositoryInterface.hasStudentHistory`: havendo progresso de alunos em aulas ou respostas de quiz do módulo, a exclusão é bloqueada com 409 `CONFLICT` (E4, R-4), e o Instrutor só pode editar o módulo; sem histórico, o módulo é removido em cascata com suas aulas e seu quiz (R-3), com 204 No Content.
 
 ![Diagrama de sequência do UC014](../diagramas/14-sequencia-uc014.png)
 
@@ -16,7 +20,7 @@ Cobre o fluxo básico de cadastro e ordenação de módulos e o fluxo de exclus�
 
 ## 3. UC015 – Gerenciar Aulas do Curso
 
-Modela a criação de aula com upload desacoplado de vídeo e o fluxo de exclusão de aula (A2). Na exclusão, o cancelamento encerra o diagrama em bloco `alt`; na confirmação, `LessonService.hasStudentProgress` verifica se algum aluno já possui registros em `LessonProgress`: havendo histórico, a exclusão é bloqueada em `alt` com 422 `VALIDATION_FAILED` (E4), preservando os dados dos alunos; caso não haja progresso registrado, a aula é removida do banco (204 No Content) e o vídeo correspondente é excluído do storage Cloudflare R2. Na criação de aula, após validação de formato e limite de 500 MB (E1, 422, RNF018), é gerada URL pré-assinada temporária de 15 minutos (RNF002) para envio direto ao storage; após confirmação do upload, a aula é salva e o job de transcrição e indexação é enfileirado no RabbitMQ (RNF004).
+Modela a criação de aula com upload desacoplado de vídeo e o fluxo de exclusão (A2). Formato ou tamanho inválidos devolvem 422 `VALIDATION_FAILED` (E1, R-2, RNF018). A aula é criada com `videoKey` pendente (`Lesson`, item 12); a URL pré-assinada de 15 minutos é gerada por `MediaStorageInterface.generateSignedUploadUrl` (R-3, RNF002), e o envio do arquivo segue direto ao storage, sem passar pela API. Falha no envio ou URL expirada gera nova URL (E2). Após a confirmação, `LessonService.confirmUpload` salva a chave do vídeo e `TranscriptionQueueInterface.dispatchTranscriptionJob` enfileira a transcrição e a indexação, uma única vez por vídeo (R-4, RNF004). Na exclusão, `LessonRepositoryInterface.hasStudentProgress` bloqueia a remoção com 409 `CONFLICT` quando há progresso de aluno (E4, R-5); sem progresso, a aula é removida e o vídeo é apagado com `MediaStorageInterface.deleteObject`.
 
 ![Diagrama de sequência do UC015](../diagramas/14-sequencia-uc015.png)
 
@@ -24,8 +28,12 @@ Modela a criação de aula com upload desacoplado de vídeo e o fluxo de exclus�
 
 ## 4. UC004 – Cadastrar Quiz com Gabarito
 
-Fluxo básico de cadastro de quiz e publicação aos alunos do módulo, com cancelamento tratado em bloco `alt` que encerra a operação. O `QuizService.validateQuestions` valida o atendimento às regras de negócio: perguntas com menos de 2 alternativas disparam 422 `VALIDATION_FAILED` (E1, R-1) e perguntas sem gabarito definido disparam 422 `VALIDATION_FAILED` (E2, R-1). Dados válidos persistem o quiz e suas alternativas com gabarito no banco de dados, oferecendo a opção de salvamento como rascunho sem visibilidade para os alunos (A2) ou publicação imediata para consumo dos alunos matriculados.
+Fluxo básico de cadastro de quiz, com validação em `QuizAuthoringService.validateQuestions`: pergunta com menos de duas alternativas devolve 422 `VALIDATION_FAILED` (E1, R-1) e pergunta sem alternativa correta devolve 422 `VALIDATION_FAILED` (E2, R-1). Dados válidos persistem o quiz com suas perguntas e alternativas, no status informado pelo Instrutor (`draft` ou `published`, item 12).
 
 ![Diagrama de sequência do UC004](../diagramas/14-sequencia-uc004.png)
 
 *Figura 0 – UC004, diagrama de sequência: cadastrar quiz com gabarito*
+
+## Nota sobre o cancelamento
+
+Os diagramas de sequência dos UC004, UC006, UC014 e UC015 modelam o cancelamento do Instrutor em bloco `alt` exclusivo, conforme a regra deste item. O item 10 não descreve esse fluxo para esses casos de uso; a dúvida está registrada em `pendencias-area-b.md`, na raiz do repositório.
