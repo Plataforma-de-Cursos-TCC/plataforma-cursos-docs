@@ -39,6 +39,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 ### Corrigido
 
 - Área B (Autoria do instrutor): modelo com `Quiz.status`, `Quiz.allowRetake` e `Lesson.indexStatus`; classes e sequências com os nomes desenhados no item 13; bloqueios de exclusão como 409 `CONFLICT`, não 422; casos de teste sem regra no item 10 fora da planilha e cancelamento registrado em `pendencias-area-b.md`, porque o grupo ainda não definiu o fluxo (#TBD).
+- Resolução das pendências cruzadas da Área A nos diagramas de sequência da Área D (confirmação dos erros CONFLICT e SERVICE_UNAVAILABLE e auditoria RNF016 no UC008) (#TBD).
 - Resolução das pendências cruzadas da Área A no modelo de dados da Área D (seed de admin, status bloqueado, trilha de auditoria RNF016 e locale no Tutor e Dashboard) (#TBD).
 
 Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129):

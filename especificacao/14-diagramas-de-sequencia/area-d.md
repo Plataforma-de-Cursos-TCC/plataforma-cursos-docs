@@ -37,3 +37,12 @@ Exclusão definitiva de conta pelo Administrador com anonimização de dados pes
 ![Diagrama de sequência do UC018](../diagramas/14-sequencia-uc018.png)
 
 *Figura 0 – UC018, diagrama de sequência: excluir e anonimizar usuário*
+
+### Resolução das pendências cruzadas da Área A (Issue #123)
+
+Em conformidade com a regra 8 do `AGENTS.md`, seguem resolvidas as pendências cruzadas deixadas pela Área A para a Área D no item 14:
+
+1. **Códigos de erro `CONFLICT` e `SERVICE_UNAVAILABLE` do catálogo (`docs/tdd.md` seção 3.1):** Confirmados para a Área D com base nos requisitos **RF009** e **RNF003**:
+   - O código `CONFLICT` (HTTP 409) é confirmado para a Área D sob a especialização estável `LESSON_NOT_INDEXED` no fluxo de exceção E1 do UC001, disparado quando o Aluno tenta interagir com o Tutor de IA em uma aula cujo processamento de transcrição e geração de embeddings vetoriais ainda não foi finalizado.
+   - O código `SERVICE_UNAVAILABLE` (HTTP 503) é confirmado para a Área D no fluxo de exceção E3 do UC001, acompanhado obrigatoriamente do cabeçalho HTTP `Retry-After` e do atributo `error.retryAfterSeconds`, retornado quando ocorre falha de comunicação, indisponibilidade temporária ou timeout do microsserviço físico `ai-service` ou da API do provedor de inteligência artificial.
+2. **RNF016 nas ações administrativas do UC008:** Atendido por **RNF016**, **RF012** e regras de negócio do **UC008** (R-4) e **UC018** (R-4). O diagrama de sequência do UC008 (`14-sequencia-uc008.drawio`) e sua especificação modelam expressamente o acionamento síncrono do serviço `AuditService.logAction(...)` e a execução da operação de persistência em banco de dados (`INSERT audit_logs`) tanto no fluxo alternativo A4 (alteração de perfil de acesso pelo Administrador) quanto no fluxo básico de bloqueio e desbloqueio de usuários, bem como na negação de acesso do UC016 e na exclusão/anonimização do UC018. Todos os eventos auditados registram autor, ação, identificador do alvo e carimbo de data/hora, com garantia de retenção pelo período estrito de 12 meses.
