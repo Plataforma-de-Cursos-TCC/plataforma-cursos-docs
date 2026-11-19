@@ -69,10 +69,10 @@
           <mxGeometry x="0" y="40" width="250" height="80" as="geometry" />
         </mxCell>
         <mxCell id="JwtGuard" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;JwtGuard&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="390" y="700" width="290" height="100" as="geometry" />
+          <mxGeometry x="390" y="690" width="290" height="125" as="geometry" />
         </mxCell>
-        <mxCell id="JwtGuard_methods" value="+issue(user: User): string&lt;br&gt;+issueRefresh(user: User): RefreshSession" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="JwtGuard">
-          <mxGeometry x="0" y="40" width="290" height="60" as="geometry" />
+        <mxCell id="JwtGuard_methods" value="+issue(user: User): string&lt;br&gt;+issueRefresh(user: User): RefreshSession&lt;br&gt;+parseToken(token: string): User&lt;br&gt;+authorize(user: User, role: Role): bool" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="JwtGuard">
+          <mxGeometry x="0" y="40" width="290" height="85" as="geometry" />
         </mxCell>
         <mxCell id="RefreshSession" value="&lt;b&gt;RefreshSession&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=50;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="450" y="840" width="170" height="50" as="geometry" />
@@ -193,7 +193,7 @@
           <mxGeometry x="436" y="550" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_JwtGuard" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="396" y="710" width="20" height="20" as="geometry" />
+          <mxGeometry x="396" y="700" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_RefreshSession" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="456" y="855" width="20" height="20" as="geometry" />

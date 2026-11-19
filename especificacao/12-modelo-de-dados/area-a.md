@@ -21,8 +21,8 @@ Decisões do modelo:
 | email | Simples | Texto | 150 | E-mail, único; usado no login. |
 | passwordHash | Simples | Texto | 255 | Hash da senha (RNF007). |
 | role | Simples | Texto | - | Perfil: student, instructor ou admin. |
-| status | Simples | Texto | - | Ativo, bloqueado ou excluído. |
-| theme | Simples | Texto | - | Tema da interface: claro, escuro ou sistema (UC013 R-7). |
+| status | Simples | Texto | - | Situação da conta: active (ativo), blocked (bloqueado) ou deleted (excluído). |
+| theme | Simples | Texto | - | Tema da interface: light (claro), dark (escuro) ou system (sistema) (UC013 R-7). |
 | locale | Simples | Texto | 5 | Idioma da interface e das mensagens, validado contra a lista de idiomas ativos: pt-BR (padrão; en e es entram sem migração) (RNF013). |
 | termsAcceptedAt | Simples | Data e hora | - | Quando o usuário aceitou os termos no cadastro. |
 | phone | Simples | Texto | 20 | Telefone com DDD (opcional). |
