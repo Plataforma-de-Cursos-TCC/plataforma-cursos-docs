@@ -461,7 +461,7 @@
         <mxCell value="AuditService" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_92">
           <mxGeometry x="730" y="70" width="100" height="20" as="geometry" />
         </mxCell>
-        <mxCell value="UserRepository" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_93">
+        <mxCell value="UserRepository (Área A)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_93">
           <mxGeometry x="890" y="70" width="100" height="20" as="geometry" />
         </mxCell>
         <mxCell value="BD" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_94">
@@ -473,10 +473,10 @@
         <mxCell value="index(req:&lt;br&gt;ListUsersRequest)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_96">
           <mxGeometry x="280" y="170" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="paginateUsers(filter)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_97">
+        <mxCell value="paginateUsers(page, per_page, query, role)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_97">
           <mxGeometry x="460" y="220" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="paginate(filter)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_98">
+        <mxCell value="paginate(page, per_page, filter)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_98">
           <mxGeometry x="640" y="260" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell value="SELECT users&lt;br&gt;WHERE filter" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_99">
@@ -524,7 +524,7 @@
         <mxCell value="[E3 - tentativa de&lt;br&gt;alterar o próprio&lt;br&gt;perfil]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_113">
           <mxGeometry x="120" y="1080" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="ForbiddenException" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_114">
+        <mxCell value="403 FORBIDDEN" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_114">
           <mxGeometry x="460" y="1150" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell value="403 FORBIDDEN" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_115">
@@ -536,7 +536,7 @@
         <mxCell value="[E2 - usuário já&lt;br&gt;removido]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_117">
           <mxGeometry x="120" y="1330" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="NotFoundException" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_118">
+        <mxCell value="404 NOT_FOUND" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_118">
           <mxGeometry x="460" y="1380" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell value="404 NOT_FOUND" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_119">
@@ -560,7 +560,7 @@
         <mxCell value="user" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_125">
           <mxGeometry x="800" y="1740" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="logAction(adminId,&lt;br&gt;ROLE_CHANGE,&lt;br&gt;targetId)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_126">
+        <mxCell value="logAction(adminId, ROLE_CHANGE, &quot;User&quot;, targetId)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_126">
           <mxGeometry x="640" y="1780" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell value="INSERT audit_logs&lt;br&gt;(RNF016)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_127">
@@ -596,7 +596,7 @@
         <mxCell value="[E1 - tentativa de&lt;br&gt;bloquear a própria&lt;br&gt;conta]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_137">
           <mxGeometry x="120" y="2410" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="ForbiddenException" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_138">
+        <mxCell value="403 FORBIDDEN" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_138">
           <mxGeometry x="460" y="2480" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell value="403 FORBIDDEN" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_139">
@@ -620,7 +620,7 @@
         <mxCell value="user" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_145">
           <mxGeometry x="800" y="2840" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="logAction(adminId,&lt;br&gt;statusAction,&lt;br&gt;targetId)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_146">
+        <mxCell value="logAction(adminId, USER_BLOCK / USER_UNBLOCK, &quot;User&quot;, targetId)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_146">
           <mxGeometry x="640" y="2880" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell value="INSERT audit_logs&lt;br&gt;(RNF016)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_147">
