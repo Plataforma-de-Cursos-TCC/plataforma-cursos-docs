@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<mxfile host="app.diagrams.net" agent="Antigravity" version="24.7.17" compressed="false">
+  <diagram name="13-classes-area-d-implementacao-tutor-analytics" id="diagram_13_d_tutor_analytics">
+    <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1420" pageHeight="960" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ctrl_Tutor" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorController&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="320" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl_Tutor_methods" value="+getMessages(conversationId: UUID, req: CursorRequest): JsonResponse&lt;br&gt;+chat(req: AskTutorRequest): StreamedResponse" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="ctrl_Tutor">
+          <mxGeometry x="0" y="40" width="320" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl_Dashboard" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardController&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="220" width="320" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ctrl_Dashboard_methods" value="+getMetrics(req: DashboardFilterRequest): JsonResponse" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="ctrl_Dashboard">
+          <mxGeometry x="0" y="40" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="req_AskTutor" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AskTutorRequest&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="380" width="320" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="req_AskTutor_attrs" value="+lessonId: UUID&lt;br&gt;+prompt: string&lt;br&gt;+videoTimestampSeconds?: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="req_AskTutor">
+          <mxGeometry x="0" y="40" width="320" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="req_AskTutor_methods" value="+rules(): array" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="req_AskTutor">
+          <mxGeometry x="0" y="106" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="req_DashboardFilter" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardFilterRequest&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="530" width="320" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="req_DashboardFilter_attrs" value="+startDate: Date&lt;br&gt;+endDate: Date&lt;br&gt;+courseId?: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="req_DashboardFilter">
+          <mxGeometry x="0" y="40" width="320" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="req_DashboardFilter_methods" value="+rules(): array" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="req_DashboardFilter">
+          <mxGeometry x="0" y="106" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_Tutor" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorService&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="420" y="40" width="360" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_Tutor_attrs" value="-convRepo: ConversationRepository&lt;br&gt;-msgRepo: MessageRepository&lt;br&gt;-rateLimiter: TutorRateLimiter&lt;br&gt;-aiClient: CourseTutorClient" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_Tutor">
+          <mxGeometry x="0" y="40" width="360" height="84" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_Tutor_methods" value="+getOrCreateConversation(userId: UUID, courseId: UUID, lessonId: UUID): Conversation&lt;br&gt;+ask(userId: UUID, lessonId: UUID, prompt: string): StreamedResponse" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_Tutor">
+          <mxGeometry x="0" y="124" width="360" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_CourseTutorClient" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseTutorClient&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="420" y="260" width="360" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_CourseTutorClient_attrs" value="-endpoint: string&lt;br&gt;-apiKey: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_CourseTutorClient">
+          <mxGeometry x="0" y="40" width="360" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_CourseTutorClient_methods" value="+streamRagResponse(courseId: UUID, lessonId: UUID, prompt: string, locale: Locale): Stream" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_CourseTutorClient">
+          <mxGeometry x="0" y="88" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_RateLimiter" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorRateLimiter&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="420" y="420" width="360" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_RateLimiter_attrs" value="-redis: RedisClient" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_RateLimiter">
+          <mxGeometry x="0" y="40" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_RateLimiter_methods" value="+checkLimit(userId: UUID): boolean&lt;br&gt;+incrementAndGetWaitSeconds(userId: UUID): int" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_RateLimiter">
+          <mxGeometry x="0" y="70" width="360" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_DashboardAnalytics" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardAnalyticsService&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="420" y="570" width="360" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_DashboardAnalytics_attrs" value="-analyticsRepo: AnalyticsQueryRepository" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_DashboardAnalytics">
+          <mxGeometry x="0" y="40" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="srv_DashboardAnalytics_methods" value="+getMetrics(user: User, filter: DashboardFilterDTO): DashboardMetricsDTO" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="srv_DashboardAnalytics">
+          <mxGeometry x="0" y="70" width="360" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="repo_Conv" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ConversationRepository&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="840" y="40" width="320" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="repo_Conv_methods" value="+findByUserAndLesson(userId: UUID, lessonId: UUID): Conversation&lt;br&gt;+create(data: ConversationDTO): Conversation" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="repo_Conv">
+          <mxGeometry x="0" y="40" width="320" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="repo_Msg" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MessageRepository&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="840" y="190" width="320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="repo_Msg_methods" value="+paginateByCursor(conversationId: UUID, cursor: string, limit: int): CursorPaginator&lt;br&gt;+create(data: MessageDTO): Message" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="repo_Msg">
+          <mxGeometry x="0" y="40" width="320" height="48" as="geometry" />
+        </mxCell>
+        <mxCell id="repo_Analytics" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AnalyticsQueryRepository&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="840" y="350" width="320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="repo_Analytics_methods" value="+aggregateProgressAndEnrollments(courseIds: UUID[], start: Date, end: Date): MetricsDTO" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="repo_Analytics">
+          <mxGeometry x="0" y="40" width="320" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_Conv" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Conversation&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="840" y="510" width="320" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_Conv_attrs" value="-id: UUID&lt;br&gt;-userId: UUID&lt;br&gt;-courseId: UUID&lt;br&gt;-lessonId: UUID&lt;br&gt;-createdAt: DateTime" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="ent_Conv">
+          <mxGeometry x="0" y="40" width="320" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_Msg" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Message&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="840" y="650" width="320" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ent_Msg_attrs" value="-id: UUID&lt;br&gt;-conversationId: UUID&lt;br&gt;-role: MessageRole&lt;br&gt;-content: string&lt;br&gt;-videoTimestampSeconds: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="ent_Msg">
+          <mxGeometry x="0" y="40" width="320" height="102" as="geometry" />
+        </mxCell>
+        <mxCell id="note_impl_tutor" value="&lt;b&gt;Regras de Implementação (Tutor de IA e Analytics):&lt;/b&gt;&lt;br&gt;• TutorController utiliza SSE (Server-Sent Events) para streaming de resposta em menos de 3s (RNF003).&lt;br&gt;• TutorService orquestra verificação de matrícula (E4), indexação da aula (E1) e cota de mensagens no Redis (E2).&lt;br&gt;• CourseTutorClient comunica-se com o microsserviço ai-service (PostgreSQL pgvector) respeitando o locale do usuário.&lt;br&gt;• DashboardAnalyticsService agrega progresso e engajamento dinamicamente e impede que Instrutor consulte cursos alheios (UC007 R-2, 403 FORBIDDEN)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="800" width="1120" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_ctrl_srv_tutor" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="ctrl_Tutor" target="srv_Tutor">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="100" />
+              <mxPoint x="420" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_ctrl_srv_dash" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="ctrl_Dashboard" target="srv_DashboardAnalytics">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="360" y="275" />
+              <mxPoint x="390" y="275" />
+              <mxPoint x="390" y="645" />
+              <mxPoint x="420" y="645" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_srv_tutor_client" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="srv_Tutor" target="srv_CourseTutorClient">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="600" y="220" />
+              <mxPoint x="600" y="260" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_srv_tutor_limiter" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="srv_Tutor" target="srv_RateLimiter">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="580" y="220" />
+              <mxPoint x="580" y="420" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_srv_tutor_conv_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="srv_Tutor" target="repo_Conv">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="100" />
+              <mxPoint x="840" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_srv_tutor_msg_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="srv_Tutor" target="repo_Msg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="140" />
+              <mxPoint x="810" y="140" />
+              <mxPoint x="810" y="255" />
+              <mxPoint x="840" y="255" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_srv_dash_analytics_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="srv_DashboardAnalytics" target="repo_Analytics">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="645" />
+              <mxPoint x="810" y="645" />
+              <mxPoint x="810" y="415" />
+              <mxPoint x="840" y="415" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_repo_conv_ent" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;dashed=1;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="repo_Conv" target="ent_Conv">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="160" />
+              <mxPoint x="1000" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_repo_msg_ent" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;dashed=1;endArrow=open;endFill=0;endSize=8;" edge="1" parent="1" source="repo_Msg" target="ent_Msg">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1000" y="320" />
+              <mxPoint x="1000" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="typeicon_ctrl_Tutor" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ctrl_Dashboard" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="230" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_req_AskTutor" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="390" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_req_DashboardFilter" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="540" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_srv_Tutor" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="426" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_srv_CourseTutorClient" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="426" y="270" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_srv_RateLimiter" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="426" y="430" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_srv_DashboardAnalytics" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="426" y="580" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_repo_Conv" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="846" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_repo_Msg" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="846" y="200" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_repo_Analytics" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="846" y="360" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ent_Conv" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="846" y="520" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ent_Msg" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="846" y="660" width="20" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
