@@ -566,10 +566,10 @@
         <mxCell value="saveDraft( userId, quizId,&lt;br&gt;draftAnswers )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_126">
           <mxGeometry x="540" y="1420" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="saveDraft( userId, quizId,&lt;br&gt;draftAnswers )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_127">
+        <mxCell value="saveWithAnswers( attempt, draftAnswers )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_127">
           <mxGeometry x="970" y="1470" width="220" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="INSERT/UPDATE&lt;br&gt;quiz_drafts" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_128">
+        <mxCell value="INSERT/UPDATE quiz_attempts (status = draft)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_128">
           <mxGeometry x="1550" y="1520" width="140" height="40" as="geometry" />
         </mxCell>
         <mxCell value="ok" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_129">
@@ -623,7 +623,7 @@
         <mxCell value="[E2 - gabarito&lt;br&gt;incompleto no quiz]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_145">
           <mxGeometry x="140" y="2400" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="IncompleteAnswerKeyException" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_146">
+        <mxCell value="500 INTERNAL_SERVER_ERROR (gabarito incompleto)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_146">
           <mxGeometry x="740" y="2450" width="190" height="30" as="geometry" />
         </mxCell>
         <mxCell value="500&lt;br&gt;INTERNAL_SERVER_ERROR" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_147">
@@ -635,7 +635,7 @@
         <mxCell value="[correção automática&lt;br&gt;bem-sucedida]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_149">
           <mxGeometry x="140" y="2620" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="create( score, submittedAt )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_150">
+        <mxCell value="submit( score, submittedAt )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_150">
           <mxGeometry x="970" y="2670" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell value="attempt" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_151">

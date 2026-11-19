@@ -455,7 +455,7 @@
         <mxCell value="paginatePublished(&lt;br&gt;category: null, sort:&lt;br&gt;default, page: 1 )" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_97">
           <mxGeometry x="870" y="340" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="SELECT courses WHERE&lt;br&gt;status='published'LIMIT 20" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_98">
+        <mxCell value="SELECT courses WHERE&lt;br&gt;status='published' LIMIT 20" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_98">
           <mxGeometry x="1030" y="410" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell value="cursos" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_99">
