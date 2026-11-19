@@ -1,153 +1,171 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Antigravity" version="24.7.17" compressed="false">
-  <diagram name="13-classes-area-b-implementacao-cursos-modulos" id="diagram_13_impl_cm">
-    <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="960" math="0" shadow="0">
+  <diagram name="13-classes-area-b-implementacao-cursos-modulos" id="diagram_13_impl_cursos_modulos">
+    <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1800" pageHeight="1020" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="CreateCourseRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CreateCourseRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="40" y="40" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="CreateCourseRequest_m" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CreateCourseRequest">
+        <mxCell id="CreateCourseRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CreateCourseRequest">
+          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UpdateCourseRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateCourseRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="150" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UpdateCourseRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="UpdateCourseRequest">
           <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="CourseDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="150" width="200" height="150" as="geometry" />
+          <mxGeometry x="40" y="260" width="160" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="CourseDTO_a" value="+title: string&lt;br&gt;+description: string&lt;br&gt;+priceCents: int&lt;br&gt;+categoryId: UUID&lt;br&gt;+level: CourseLevel&lt;br&gt;+status: CourseStatus" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseDTO">
-          <mxGeometry x="0" y="40" width="200" height="110" as="geometry" />
+        <mxCell id="CourseDTO_s0" value="+title: string&lt;br&gt;+description: string&lt;br&gt;+priceCents: int&lt;br&gt;+categoryId: UUID&lt;br&gt;+level: CourseLevel&lt;br&gt;+status: CourseStatus" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseDTO">
+          <mxGeometry x="0" y="40" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="CourseResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="450" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="CourseResource_s0" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseResource">
+          <mxGeometry x="0" y="40" width="170" height="40" as="geometry" />
         </mxCell>
         <mxCell id="CreateModuleRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CreateModuleRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="330" width="200" height="80" as="geometry" />
+          <mxGeometry x="40" y="560" width="200" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="CreateModuleRequest_m" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CreateModuleRequest">
+        <mxCell id="CreateModuleRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CreateModuleRequest">
+          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UpdateModuleRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateModuleRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="670" width="200" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UpdateModuleRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="UpdateModuleRequest">
           <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
         </mxCell>
         <mxCell id="ModuleDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ModuleDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="440" width="200" height="90" as="geometry" />
+          <mxGeometry x="40" y="780" width="160" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="ModuleDTO_a" value="+title: string&lt;br&gt;+order: int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleDTO">
-          <mxGeometry x="0" y="40" width="200" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="CourseResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="560" width="200" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="CourseResource_m" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseResource">
-          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
+        <mxCell id="ModuleDTO_s0" value="+title: string&lt;br&gt;+order: int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleDTO">
+          <mxGeometry x="0" y="40" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ModuleResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ModuleResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="670" width="200" height="80" as="geometry" />
+          <mxGeometry x="40" y="900" width="170" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ModuleResource_m" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleResource">
-          <mxGeometry x="0" y="40" width="200" height="40" as="geometry" />
+        <mxCell id="ModuleResource_s0" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleResource">
+          <mxGeometry x="0" y="40" width="170" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="CourseController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="320" y="40" width="380" height="160" as="geometry" />
+        <mxCell id="InstructorCourseController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorCourseController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="330" y="40" width="410" height="170" as="geometry" />
         </mxCell>
-        <mxCell id="CourseController_m" value="+index(req: Request): AnonymousResourceCollection&lt;br&gt;+show(id: UUID): CourseResource&lt;br&gt;+store(req: CreateCourseRequest): CourseResource&lt;br&gt;+update(id: UUID, req: UpdateCourseRequest): CourseResource&lt;br&gt;+destroy(id: UUID): Response" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseController">
-          <mxGeometry x="0" y="40" width="380" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="ModuleController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ModuleController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="320" y="330" width="380" height="140" as="geometry" />
-        </mxCell>
-        <mxCell id="ModuleController_m" value="+store(courseId: UUID, req: CreateModuleRequest): ModuleResource&lt;br&gt;+update(id: UUID, req: UpdateModuleRequest): ModuleResource&lt;br&gt;+reorder(courseId: UUID, req: Request): Response&lt;br&gt;+destroy(id: UUID): Response" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleController">
-          <mxGeometry x="0" y="40" width="380" height="100" as="geometry" />
+        <mxCell id="InstructorCourseController_s0" value="+index(req: Request): AnonymousResourceCollection&lt;br&gt;+show(id: UUID): CourseResource&lt;br&gt;+store(req: CreateCourseRequest): CourseResource&lt;br&gt;+update(id: UUID, req: UpdateCourseRequest): CourseResource&lt;br&gt;+publish(id: UUID): CourseResource&lt;br&gt;+unpublish(id: UUID): CourseResource&lt;br&gt;+destroy(id: UUID): Response" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="InstructorCourseController">
+          <mxGeometry x="0" y="40" width="410" height="130" as="geometry" />
         </mxCell>
         <mxCell id="CourseService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="760" y="40" width="400" height="170" as="geometry" />
+          <mxGeometry x="830" y="40" width="460" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="CourseService_m" value="+create(instructorId: UUID, dto: CourseDTO): Course&lt;br&gt;+update(courseId: UUID, instructorId: UUID, dto: CourseDTO): Course&lt;br&gt;+publish(courseId: UUID, instructorId: UUID): Course&lt;br&gt;+unpublish(courseId: UUID, instructorId: UUID): Course&lt;br&gt;+delete(courseId: UUID, instructorId: UUID): void&lt;br&gt;+hasActiveEnrollments(courseId: UUID): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseService">
-          <mxGeometry x="0" y="40" width="400" height="130" as="geometry" />
-        </mxCell>
-        <mxCell id="ModuleService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ModuleService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="760" y="330" width="400" height="150" as="geometry" />
-        </mxCell>
-        <mxCell id="ModuleService_m" value="+create(courseId: UUID, instructorId: UUID, dto: ModuleDTO): Module&lt;br&gt;+update(moduleId: UUID, instructorId: UUID, dto: ModuleDTO): Module&lt;br&gt;+reorder(courseId: UUID, instructorId: UUID, orderMap: array): void&lt;br&gt;+delete(moduleId: UUID, instructorId: UUID): void&lt;br&gt;+hasStudentHistory(moduleId: UUID): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleService">
-          <mxGeometry x="0" y="40" width="400" height="110" as="geometry" />
+        <mxCell id="CourseService_s0" value="+create(instructorId: UUID, dto: CourseDTO): Course&lt;br&gt;+update(courseId: UUID, instructorId: UUID, dto: CourseDTO): Course&lt;br&gt;+publish(courseId: UUID, instructorId: UUID): Course&lt;br&gt;+unpublish(courseId: UUID, instructorId: UUID): Course&lt;br&gt;+delete(courseId: UUID, instructorId: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseService">
+          <mxGeometry x="0" y="40" width="460" height="100" as="geometry" />
         </mxCell>
         <mxCell id="CourseRepositoryInterface" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseRepositoryInterface&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="760" y="550" width="400" height="140" as="geometry" />
+          <mxGeometry x="1380" y="40" width="290" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="CourseRepositoryInterface_m" value="+findById(id: UUID): ?Course&lt;br&gt;+save(course: Course): Course&lt;br&gt;+delete(id: UUID): void&lt;br&gt;+hasActiveEnrollments(id: UUID): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseRepositoryInterface">
-          <mxGeometry x="0" y="40" width="400" height="100" as="geometry" />
+        <mxCell id="CourseRepositoryInterface_s0" value="+findById(id: UUID): ?Course&lt;br&gt;+save(course: Course): Course&lt;br&gt;+delete(id: UUID): void&lt;br&gt;+hasActiveEnrollments(id: UUID): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CourseRepositoryInterface">
+          <mxGeometry x="0" y="40" width="290" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="Course" value="&lt;b&gt;Course&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1380" y="200" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ModuleController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ModuleController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="330" y="310" width="440" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ModuleController_s0" value="+store(courseId: UUID, req: CreateModuleRequest): ModuleResource&lt;br&gt;+update(id: UUID, req: UpdateModuleRequest): ModuleResource&lt;br&gt;+reorder(courseId: UUID, req: Request): Response&lt;br&gt;+destroy(id: UUID): Response" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleController">
+          <mxGeometry x="0" y="40" width="440" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="ModuleService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ModuleService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="860" y="310" width="460" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="ModuleService_s0" value="+create(courseId: UUID, instructorId: UUID, dto: ModuleDTO): Module&lt;br&gt;+update(moduleId: UUID, instructorId: UUID, dto: ModuleDTO): Module&lt;br&gt;+reorder(courseId: UUID, instructorId: UUID, orderMap: array): void&lt;br&gt;+delete(moduleId: UUID, instructorId: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleService">
+          <mxGeometry x="0" y="40" width="460" height="90" as="geometry" />
         </mxCell>
         <mxCell id="ModuleRepositoryInterface" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ModuleRepositoryInterface&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="760" y="730" width="400" height="160" as="geometry" />
+          <mxGeometry x="1410" y="310" width="350" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="ModuleRepositoryInterface_m" value="+findById(id: UUID): ?Module&lt;br&gt;+save(module: Module): Module&lt;br&gt;+delete(id: UUID): void&lt;br&gt;+hasStudentHistory(id: UUID): boolean&lt;br&gt;+isOrderTaken(courseId: UUID, order: int): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleRepositoryInterface">
-          <mxGeometry x="0" y="40" width="400" height="120" as="geometry" />
+        <mxCell id="ModuleRepositoryInterface_s0" value="+findById(id: UUID): ?Module&lt;br&gt;+save(module: Module): Module&lt;br&gt;+delete(id: UUID): void&lt;br&gt;+hasStudentHistory(id: UUID): boolean&lt;br&gt;+isOrderTaken(courseId: UUID, order: int): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleRepositoryInterface">
+          <mxGeometry x="0" y="40" width="350" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="Course" value="&lt;b&gt;Course&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=60;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="400" y="600" width="140" height="60" as="geometry" />
+        <mxCell id="Module" value="&lt;b&gt;Module&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1410" y="480" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Module" value="&lt;b&gt;Module&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=60;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="400" y="750" width="140" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_cc_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="CourseController" target="CourseDTO">
+        <mxCell id="edge_1_InstructorCourseController_CourseDTO" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=0.0000;exitY=0.5000;entryX=1.0000;entryY=0.0625;" edge="1" parent="1" source="InstructorCourseController" target="CourseDTO">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_cc_cs" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="CourseController" target="CourseService">
+        <mxCell id="edge_2_InstructorCourseController_CourseService" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.5000;entryX=0.0000;entryY=0.6071;" edge="1" parent="1" source="InstructorCourseController" target="CourseService">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_cs_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="CourseService" target="CourseRepositoryInterface">
+        <mxCell id="edge_3_CourseService_CourseRepositoryInterface" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.3333;entryX=0.0000;entryY=0.3590;" edge="1" parent="1" source="CourseService" target="CourseRepositoryInterface">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_mc_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="ModuleController" target="ModuleDTO">
+        <mxCell id="edge_4_CourseService_Course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.6667;entryX=0.0000;entryY=0.2500;" edge="1" parent="1" source="CourseService" target="Course">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_mc_ms" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="ModuleController" target="ModuleService">
+        <mxCell id="edge_5_ModuleController_ModuleDTO" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=0.0000;exitY=0.5000;entryX=1.0000;entryY=0.1111;" edge="1" parent="1" source="ModuleController" target="ModuleDTO">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_ms_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="ModuleService" target="ModuleRepositoryInterface">
+        <mxCell id="edge_6_ModuleController_ModuleService" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.5000;entryX=0.0000;entryY=0.5000;" edge="1" parent="1" source="ModuleController" target="ModuleService">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_cs_course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0.25;exitY=1;entryX=1;entryY=0.5;" edge="1" parent="1" source="CourseService" target="Course">
+        <mxCell id="edge_7_ModuleService_ModuleRepositoryInterface" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.3333;entryX=0.0000;entryY=0.3095;" edge="1" parent="1" source="ModuleService" target="ModuleRepositoryInterface">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_ms_module" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0.25;exitY=1;entryX=1;entryY=0.5;" edge="1" parent="1" source="ModuleService" target="Module">
+        <mxCell id="edge_8_ModuleService_Module" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.6667;entryX=0.0000;entryY=0.2500;" edge="1" parent="1" source="ModuleService" target="Module">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_CreateCourseRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_CourseDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="typeicon_UpdateCourseRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="160" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_CreateModuleRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="340" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_ModuleDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="450" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_CourseDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="270" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_CourseResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="460" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_CreateModuleRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="570" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_ModuleResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="typeicon_UpdateModuleRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="680" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_CourseController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="326" y="50" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_ModuleDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="790" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_ModuleController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="326" y="340" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_ModuleResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="910" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_InstructorCourseController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="336" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_CourseService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="766" y="50" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_ModuleService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="766" y="340" width="20" height="20" as="geometry" />
+          <mxGeometry x="836" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_CourseRepositoryInterface" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="766" y="560" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_ModuleRepositoryInterface" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="766" y="740" width="20" height="20" as="geometry" />
+          <mxGeometry x="1386" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_Course" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="406" y="620" width="20" height="20" as="geometry" />
+          <mxGeometry x="1386" y="210" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ModuleController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="336" y="320" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ModuleService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="866" y="320" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ModuleRepositoryInterface" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1416" y="320" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_Module" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="406" y="770" width="20" height="20" as="geometry" />
+          <mxGeometry x="1416" y="490" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

@@ -1,111 +1,126 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Antigravity" version="24.7.17" compressed="false">
   <diagram name="13-classes-area-b-implementacao-quizzes" id="diagram_13_impl_quizzes">
-    <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="960" math="0" shadow="0">
+    <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1610" pageHeight="780" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="CreateQuizRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CreateQuizRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="220" height="80" as="geometry" />
+          <mxGeometry x="40" y="40" width="190" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="CreateQuizRequest_m" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CreateQuizRequest">
-          <mxGeometry x="0" y="40" width="220" height="40" as="geometry" />
+        <mxCell id="CreateQuizRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="CreateQuizRequest">
+          <mxGeometry x="0" y="40" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UpdateQuizRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateQuizRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="150" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="UpdateQuizRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="UpdateQuizRequest">
+          <mxGeometry x="0" y="40" width="190" height="40" as="geometry" />
         </mxCell>
         <mxCell id="QuizDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuizDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="150" width="220" height="90" as="geometry" />
+          <mxGeometry x="40" y="260" width="160" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="QuizDTO_a" value="+title: string&lt;br&gt;+questions: array&amp;lt;QuestionDTO&amp;gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizDTO">
-          <mxGeometry x="0" y="40" width="220" height="50" as="geometry" />
+        <mxCell id="QuizDTO_s0" value="+title: string&lt;br&gt;+status: QuizStatus&lt;br&gt;+allowRetake: boolean&lt;br&gt;+questions: array&lt;QuestionDTO&gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizDTO">
+          <mxGeometry x="0" y="40" width="160" height="90" as="geometry" />
         </mxCell>
         <mxCell id="QuestionDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuestionDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="270" width="220" height="90" as="geometry" />
+          <mxGeometry x="40" y="420" width="160" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="QuestionDTO_a" value="+text: string&lt;br&gt;+options: array&amp;lt;QuestionOptionDTO&amp;gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuestionDTO">
-          <mxGeometry x="0" y="40" width="220" height="50" as="geometry" />
+        <mxCell id="QuestionDTO_s0" value="+text: string&lt;br&gt;+options: array&lt;QuestionOptionDTO&gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuestionDTO">
+          <mxGeometry x="0" y="40" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="QuestionOptionDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuestionOptionDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="390" width="220" height="90" as="geometry" />
+          <mxGeometry x="40" y="540" width="190" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="QuestionOptionDTO_a" value="+text: string&lt;br&gt;+isCorrect: boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuestionOptionDTO">
-          <mxGeometry x="0" y="40" width="220" height="50" as="geometry" />
+        <mxCell id="QuestionOptionDTO_s0" value="+text: string&lt;br&gt;+isCorrect: boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuestionOptionDTO">
+          <mxGeometry x="0" y="40" width="190" height="50" as="geometry" />
         </mxCell>
         <mxCell id="QuizResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuizResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="510" width="220" height="80" as="geometry" />
+          <mxGeometry x="40" y="660" width="160" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="QuizResource_m" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizResource">
-          <mxGeometry x="0" y="40" width="220" height="40" as="geometry" />
+        <mxCell id="QuizResource_s0" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizResource">
+          <mxGeometry x="0" y="40" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="QuizController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuizController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="340" y="40" width="380" height="140" as="geometry" />
+        <mxCell id="InstructorQuizController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;InstructorQuizController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="320" y="40" width="410" height="90" as="geometry" />
         </mxCell>
-        <mxCell id="QuizController_m" value="+store(moduleId: UUID, req: CreateQuizRequest): QuizResource&lt;br&gt;+update(id: UUID, req: UpdateQuizRequest): QuizResource&lt;br&gt;+saveDraft(moduleId: UUID, req: Request): QuizResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizController">
-          <mxGeometry x="0" y="40" width="380" height="100" as="geometry" />
+        <mxCell id="InstructorQuizController_s0" value="+store(moduleId: UUID, req: CreateQuizRequest): QuizResource&lt;br&gt;+update(id: UUID, req: UpdateQuizRequest): QuizResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="InstructorQuizController">
+          <mxGeometry x="0" y="40" width="410" height="50" as="geometry" />
         </mxCell>
-        <mxCell id="QuizService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuizService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="780" y="40" width="380" height="160" as="geometry" />
+        <mxCell id="QuizAuthoringService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuizAuthoringService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="820" y="40" width="430" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="QuizService_m" value="+create(moduleId: UUID, instructorId: UUID, dto: QuizDTO): Quiz&lt;br&gt;+update(quizId: UUID, instructorId: UUID, dto: QuizDTO): Quiz&lt;br&gt;+saveDraft(moduleId: UUID, instructorId: UUID, dto: QuizDTO): Quiz&lt;br&gt;+validateQuestions(dto: QuizDTO): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizService">
-          <mxGeometry x="0" y="40" width="380" height="120" as="geometry" />
+        <mxCell id="QuizAuthoringService_s0" value="+create(moduleId: UUID, instructorId: UUID, dto: QuizDTO): Quiz&lt;br&gt;+update(quizId: UUID, instructorId: UUID, dto: QuizDTO): Quiz&lt;br&gt;+validateQuestions(dto: QuizDTO): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizAuthoringService">
+          <mxGeometry x="0" y="40" width="430" height="70" as="geometry" />
         </mxCell>
         <mxCell id="QuizRepositoryInterface" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;QuizRepositoryInterface&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="780" y="250" width="380" height="120" as="geometry" />
+          <mxGeometry x="1340" y="40" width="230" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="QuizRepositoryInterface_m" value="+findById(id: UUID): ?Quiz&lt;br&gt;+save(quiz: Quiz): Quiz&lt;br&gt;+delete(id: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizRepositoryInterface">
-          <mxGeometry x="0" y="40" width="380" height="80" as="geometry" />
+        <mxCell id="QuizRepositoryInterface_s0" value="+findById(id: UUID): ?Quiz&lt;br&gt;+save(quiz: Quiz): Quiz&lt;br&gt;+delete(id: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="QuizRepositoryInterface">
+          <mxGeometry x="0" y="40" width="230" height="70" as="geometry" />
         </mxCell>
-        <mxCell id="Quiz" value="&lt;b&gt;Quiz&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=60;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="440" y="240" width="140" height="60" as="geometry" />
+        <mxCell id="Quiz" value="&lt;b&gt;Quiz&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="180" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="Question" value="&lt;b&gt;Question&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=60;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="440" y="330" width="140" height="60" as="geometry" />
+        <mxCell id="Question" value="&lt;b&gt;Question&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="250" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="QuestionOption" value="&lt;b&gt;QuestionOption&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=60;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="440" y="420" width="140" height="60" as="geometry" />
+        <mxCell id="QuestionOption" value="&lt;b&gt;QuestionOption&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1340" y="320" width="170" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="edge_qc_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="QuizController" target="QuizDTO">
+        <mxCell id="edge_1_InstructorQuizController_QuizDTO" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=0.0000;exitY=0.5000;entryX=1.0000;entryY=0.0769;" edge="1" parent="1" source="InstructorQuizController" target="QuizDTO">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_qc_qs" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="QuizController" target="QuizService">
+        <mxCell id="edge_2_InstructorQuizController_QuizAuthoringService" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.5000;entryX=0.0000;entryY=0.4091;" edge="1" parent="1" source="InstructorQuizController" target="QuizAuthoringService">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_qs_repo" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="QuizService" target="QuizRepositoryInterface">
+        <mxCell id="edge_3_QuizAuthoringService_QuizRepositoryInterface" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.2000;entryX=0.0000;entryY=0.2000;" edge="1" parent="1" source="QuizAuthoringService" target="QuizRepositoryInterface">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_qs_quiz" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;exitX=0.25;exitY=1;entryX=1;entryY=0.5;" edge="1" parent="1" source="QuizService" target="Quiz">
+        <mxCell id="edge_4_QuizAuthoringService_Quiz" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.4000;entryX=0.0000;entryY=0.2500;" edge="1" parent="1" source="QuizAuthoringService" target="Quiz">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_5_QuizAuthoringService_Question" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.6000;entryX=0.0000;entryY=0.2500;" edge="1" parent="1" source="QuizAuthoringService" target="Question">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_6_QuizAuthoringService_QuestionOption" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0000;exitY=0.8000;entryX=0.0000;entryY=0.2500;" edge="1" parent="1" source="QuizAuthoringService" target="QuestionOption">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_CreateQuizRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_QuizDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="typeicon_UpdateQuizRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="160" width="20" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="typeicon_QuizDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="270" width="20" height="20" as="geometry" />
+        </mxCell>
         <mxCell id="typeicon_QuestionDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="280" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="430" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_QuestionOptionDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="400" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="550" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_QuizResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="520" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="670" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_QuizController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="346" y="50" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_InstructorQuizController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="326" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_QuizService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="786" y="50" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_QuizAuthoringService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="826" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_QuizRepositoryInterface" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="786" y="260" width="20" height="20" as="geometry" />
+          <mxGeometry x="1346" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_Quiz" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="446" y="260" width="20" height="20" as="geometry" />
+          <mxGeometry x="1346" y="190" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_Question" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="446" y="350" width="20" height="20" as="geometry" />
+          <mxGeometry x="1346" y="260" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_QuestionOption" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="446" y="440" width="20" height="20" as="geometry" />
+          <mxGeometry x="1346" y="330" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
