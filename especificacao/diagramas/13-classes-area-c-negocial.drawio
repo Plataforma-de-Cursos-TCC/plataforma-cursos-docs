@@ -119,7 +119,7 @@
         <mxCell id="lbl_c_enr_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="625" y="328" width="30" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_Payment_Enrollment" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="class_Payment" target="class_Enrollment">
+        <mxCell id="edge_Payment_Enrollment" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=1;exitY=0.5152;entryX=0;entryY=0.4516;" edge="1" parent="1" source="class_Payment" target="class_Enrollment">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_pay_enr_01" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
