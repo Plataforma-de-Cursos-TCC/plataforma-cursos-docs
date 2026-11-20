@@ -10,9 +10,9 @@ entity Enrollment
 control EnrollmentRepository
 database BD
 Aluno -> CursoView ++ : acessa a página do curso publicado
-CursoView -> EnrollmentController ++ : checkStatus( courseId )
-EnrollmentController -> EnrollmentService ++ : checkExistingEnrollment( userId, courseId )
-EnrollmentService -> EnrollmentRepository ++ : findByUserAndCourse( userId, courseId )
+CursoView -> EnrollmentController ++ : checkStatus(courseId)
+EnrollmentController -> EnrollmentService ++ : checkExistingEnrollment(userId, courseId)
+EnrollmentService -> EnrollmentRepository ++ : findByUserAndCourse(userId, courseId)
 EnrollmentRepository -> BD ++ : SELECT enrollments WHERE user_id AND course_id
 BD --> EnrollmentRepository : registro
 EnrollmentRepository --> EnrollmentService : enrollment (ou null)
@@ -27,9 +27,9 @@ end
 else Aluno não matriculado
 CursoView --> Aluno : exibe botão "Matricular-se"
 Aluno -> CursoView ++ : aciona "Matricular-se"
-CursoView -> EnrollmentController ++ : enroll( courseId )
-EnrollmentController -> EnrollmentService ++ : enroll( userId, courseId )
-EnrollmentService -> CourseRepository ++ : findPublishedById( courseId )
+CursoView -> EnrollmentController ++ : enroll(courseId)
+EnrollmentController -> EnrollmentService ++ : enroll(userId, courseId)
+EnrollmentService -> CourseRepository ++ : findPublishedById(courseId)
 CourseRepository -> BD ++ : SELECT courses WHERE id AND status = 'published'
 BD --> CourseRepository : curso
 CourseRepository --> EnrollmentService : curso (ou null)
@@ -39,9 +39,9 @@ EnrollmentController --> CursoView : 409 CONFLICT
 CursoView --> Aluno : informa que o curso não está mais disponível
 else curso publicado
 alt A2 - curso gratuito (priceCents == 0)
-EnrollmentService -> Enrollment ++ : create( status: active, pricePaidCents: 0 )
+EnrollmentService -> Enrollment ++ : create(status: active, pricePaidCents: 0)
 Enrollment --> EnrollmentService : enrollment
-EnrollmentService -> EnrollmentRepository ++ : save( enrollment )
+EnrollmentService -> EnrollmentRepository ++ : save(enrollment)
 EnrollmentRepository -> BD ++ : INSERT INTO enrollments (status = 'active')
 BD --> EnrollmentRepository
 EnrollmentRepository --> EnrollmentService
@@ -49,9 +49,9 @@ EnrollmentService --> EnrollmentController : enrollment (active)
 EnrollmentController --> CursoView : 201 Created (EnrollmentResource)
 CursoView --> Aluno : libera acesso imediato e exibe em "Meus cursos"
 else curso pago (priceCents > 0)
-EnrollmentService -> Enrollment ++ : create( status: pending, pricePaidCents: priceCents )
+EnrollmentService -> Enrollment ++ : create(status: pending, pricePaidCents: priceCents)
 Enrollment --> EnrollmentService : enrollment
-EnrollmentService -> EnrollmentRepository ++ : save( enrollment )
+EnrollmentService -> EnrollmentRepository ++ : save(enrollment)
 EnrollmentRepository -> BD ++ : INSERT INTO enrollments (status = 'pending')
 BD --> EnrollmentRepository
 EnrollmentRepository --> EnrollmentService

@@ -11,7 +11,7 @@ entity QuizAttempt
 control QuizAttemptRepository
 database BD
 Aluno -> QuizView ++ : acessa o quiz do módulo
-QuizView -> QuizAttemptController ++ : show( quizId )
+QuizView -> QuizAttemptController ++ : show(quizId)
 QuizAttemptController -> QuizAttemptService ++ : getQuizForStudent(userId, quizId)
 QuizAttemptService -> LessonProgressService ++ : getModuleCompletionStatus(enrId, modId)
 LessonProgressService --> QuizAttemptService : aulas do módulo concluídas?
@@ -34,9 +34,9 @@ QuizAttemptController --> QuizView : 200 OK (QuizResource)
 QuizView --> Aluno : exibe questões do quiz
 alt A2 - Aluno salva rascunho
 Aluno -> QuizView ++ : aciona "Salvar rascunho"
-QuizView -> QuizAttemptController ++ : saveDraft( quizId, req: QuizDraftRequest )
-QuizAttemptController -> QuizAttemptService ++ : saveDraft( userId, quizId, draftAnswers )
-QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers( attempt, draftAnswers )
+QuizView -> QuizAttemptController ++ : saveDraft(quizId, req: QuizDraftRequest)
+QuizAttemptController -> QuizAttemptService ++ : saveDraft(userId, quizId, draftAnswers)
+QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers(attempt, draftAnswers)
 QuizAttemptRepository -> BD ++ : INSERT/UPDATE quiz_attempts (status = draft)
 BD --> QuizAttemptRepository : ok
 QuizAttemptRepository --> QuizAttemptService : ok
@@ -45,23 +45,23 @@ QuizAttemptController --> QuizView : 200 OK
 QuizView --> Aluno : rascunho salvo para retomada posterior
 else Aluno envia respostas
 Aluno -> QuizView ++ : aciona "Enviar respostas"
-QuizView -> QuizAttemptController ++ : submit( quizId, req: QuizSubmitRequest )
+QuizView -> QuizAttemptController ++ : submit(quizId, req: QuizSubmitRequest)
 QuizAttemptController -> QuizSubmitRequest ++ : rules()
 QuizSubmitRequest --> QuizAttemptController : validação
 alt E1 - envio sem todas as questões respondidas
 QuizAttemptController --> QuizView : 422 VALIDATION_FAILED (questões pendentes)
 QuizView --> Aluno : bloqueia envio e indica questões pendentes
 else todas respondidas
-QuizAttemptController -> QuizAttemptService ++ : submitQuiz( userId, quizId, dto )
-QuizAttemptService -> QuizAttemptService : calculateScore( quiz, answers )
+QuizAttemptController -> QuizAttemptService ++ : submitQuiz(userId, quizId, dto)
+QuizAttemptService -> QuizAttemptService : calculateScore(quiz, answers)
 alt E2 - gabarito incompleto no quiz
 QuizAttemptService --> QuizAttemptController : 500 INTERNAL_SERVER_ERROR (gabarito incompleto)
 QuizAttemptController --> QuizView : 500 INTERNAL_SERVER_ERROR
 QuizView --> Aluno : informa falha e registra ocorrência ao instrutor
 else correção automática bem-sucedida
-QuizAttemptService -> QuizAttempt ++ : submit( score, submittedAt )
+QuizAttemptService -> QuizAttempt ++ : submit(score, submittedAt)
 QuizAttempt --> QuizAttemptService : attempt
-QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers( attempt, answers )
+QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers(attempt, answers)
 QuizAttemptRepository -> BD ++ : UPDATE quiz_attempts (draft vira submitted) e INSERT quiz_answers
 BD --> QuizAttemptRepository : ok
 QuizAttemptRepository --> QuizAttemptService : attempt corrigido

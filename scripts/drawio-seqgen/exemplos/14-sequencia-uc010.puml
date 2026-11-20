@@ -10,9 +10,9 @@ entity Review
 control ReviewRepository
 database BD
 Aluno -> AvaliarCursoModal ++ : aciona "Avaliar curso" na página do curso
-AvaliarCursoModal -> ReviewController ++ : me( courseId )
-ReviewController -> ReviewService ++ : getStudentReview( userId, courseId )
-ReviewService -> ReviewRepository ++ : findByUserAndCourse( userId, courseId )
+AvaliarCursoModal -> ReviewController ++ : me(courseId)
+ReviewController -> ReviewService ++ : getStudentReview(userId, courseId)
+ReviewService -> ReviewRepository ++ : findByUserAndCourse(userId, courseId)
 ReviewRepository -> BD ++ : SELECT reviews WHERE user_id AND course_id
 BD --> ReviewRepository : review
 ReviewRepository --> ReviewService : review (ou null)
@@ -29,27 +29,27 @@ Aluno -> AvaliarCursoModal ++ : aciona "Cancelar"
 AvaliarCursoModal --> Aluno : descarta alterações e mantém avaliação anterior
 else confirma o envio
 Aluno -> AvaliarCursoModal ++ : aciona "Confirmar"
-AvaliarCursoModal -> ReviewController ++ : store( courseId, req )
+AvaliarCursoModal -> ReviewController ++ : store(courseId, req)
 ReviewController -> ReviewRequest ++ : rules()
 ReviewRequest --> ReviewController : validação
 alt E2 - envio sem nota selecionada
 ReviewController --> AvaliarCursoModal : 422 VALIDATION_FAILED (fields.rating)
 AvaliarCursoModal --> Aluno : bloqueia envio e indica que nota é obrigatória
 else dados válidos
-ReviewController -> ReviewService ++ : submitReview( userId, courseId, dto )
-ReviewService -> ReviewService : validateEligibility( userId, courseId )
+ReviewController -> ReviewService ++ : submitReview(userId, courseId, dto)
+ReviewService -> ReviewService : validateEligibility(userId, courseId)
 alt E1 - Aluno sem aula concluída no curso (R-1)
 ReviewService --> ReviewController : 403 FORBIDDEN (sem aula concluída)
 ReviewController --> AvaliarCursoModal : 403 FORBIDDEN
 AvaliarCursoModal --> Aluno : bloqueia e informa necessidade de concluir ao menos uma aula
 else Aluno elegível
-ReviewService -> Review ++ : update( rating, comment )
+ReviewService -> Review ++ : update(rating, comment)
 Review --> ReviewService : review
-ReviewService -> ReviewRepository ++ : save( review )
+ReviewService -> ReviewRepository ++ : save(review)
 ReviewRepository -> BD ++ : INSERT INTO reviews ON CONFLICT (user_id, course_id) DO UPDATE
 BD --> ReviewRepository
 ReviewRepository --> ReviewService
-ReviewService -> ReviewService : averageRatingByCourse(courseId )
+ReviewService -> ReviewService : averageRatingByCourse(courseId)
 ReviewService -> BD ++ : SELECT AVG(rating) FROM reviews WHERE course_id
 BD --> ReviewService
 ReviewService --> ReviewController : review salva
