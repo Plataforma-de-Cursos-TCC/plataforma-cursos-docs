@@ -26,8 +26,8 @@ alt perPage fora do intervalo 1..100
   C --> V : 422 VALIDATION_FAILED (perPage)
   V --> ADM : exibe erro de validação
 else parâmetros de listagem válidos
-  C -> S ++ : paginateUsers( filters )
-  S -> R ++ : paginate( filters )
+  C -> S ++ : paginateUsers(filters)
+  S -> R ++ : paginate(filters)
   R -> BD ++ : SELECT users WHERE deleted_at IS NULL
   BD --> R : registros
   R --> S : usuários paginados
@@ -41,7 +41,7 @@ alt A2 - Administrador cancela na confirmação
 else confirmação de bloqueio ou desbloqueio
   ADM -> V ++ : confirma bloqueio ou desbloqueio
   V -> C ++ : updateStatus(id, req)
-  C -> S ++ : updateStatus( adminId, targetId, status )
+  C -> S ++ : updateStatus(adminId, targetId, status)
   alt tentativa de definir status deleted na rota de status
     S --> C : 422 VALIDATION_FAILED
     C --> V : 422 VALIDATION_FAILED
@@ -51,23 +51,23 @@ else confirmação de bloqueio ou desbloqueio
     C --> V : 403 FORBIDDEN
     V --> ADM : impede a ação na própria conta (R-1, R-2)
   else alteração de status válida
-    S -> R ++ : updateStatus( targetId, status )
+    S -> R ++ : updateStatus(targetId, status)
     R -> BD ++ : UPDATE users SET status
     BD --> R : ok
     R --> S : user
     alt bloquear (status blocked)
-      S -> J ++ : revoke( jti, ttl )
+      S -> J ++ : revoke(jti, ttl)
       J --> S : ok (jti no Redis blocklist)
-      S -> RSR ++ : revokeAllByUser( targetId )
+      S -> RSR ++ : revokeAllByUser(targetId)
       RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
       BD --> RSR : ok
       RSR --> S : void
-      S -> A ++ : logAction( adminId, USER_BLOCK, "User", targetId )
+      S -> A ++ : logAction(adminId, USER_BLOCK, "User", targetId)
       A -> BD ++ : INSERT INTO audit_logs (RNF016)
       BD --> A : ok
       A --> S : auditLog
     else desbloquear (status active, sem revogação)
-      S -> A ++ : logAction( adminId, USER_UNBLOCK, "User", targetId )
+      S -> A ++ : logAction(adminId, USER_UNBLOCK, "User", targetId)
       A -> BD ++ : INSERT INTO audit_logs (RNF016)
       BD --> A : ok
       A --> S : auditLog
@@ -79,28 +79,28 @@ else confirmação de bloqueio ou desbloqueio
 else A4 - alteração de perfil (US016)
   ADM -> V ++ : seleciona novo perfil (ex: instructor) e confirma
   V -> C ++ : updateRole(id, req)
-  C -> S ++ : changeRole( adminId, targetId, newRole )
+  C -> S ++ : changeRole(adminId, targetId, newRole)
   alt tentativa de alterar o próprio perfil
     S --> C : 403 FORBIDDEN
     C --> V : 403 FORBIDDEN
     V --> ADM : impede alteração do próprio perfil (R-1)
   else perfil alterado com sucesso
-    S -> R ++ : updateRole( targetId, newRole )
+    S -> R ++ : updateRole(targetId, newRole)
     R -> BD ++ : UPDATE users SET role
     BD --> R : ok
     opt promoção de Aluno para Instrutor
-      S -> IPR ++ : createEmpty( targetId )
+      S -> IPR ++ : createEmpty(targetId)
       IPR -> BD ++ : INSERT INTO instructor_profiles (user_id)
       BD --> IPR : ok
       IPR --> S : void
     end
-    S -> RSR ++ : revokeAllByUser( targetId )
+    S -> RSR ++ : revokeAllByUser(targetId)
     RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
     BD --> RSR : ok
     RSR --> S : void
-    S -> J ++ : revoke( jti, ttl )
+    S -> J ++ : revoke(jti, ttl)
     J --> S : ok (invalida JWT antigo no Redis)
-    S -> A ++ : logAction( adminId, ROLE_CHANGE, "User", targetId )
+    S -> A ++ : logAction(adminId, ROLE_CHANGE, "User", targetId)
     A -> BD ++ : INSERT INTO audit_logs (RNF016)
     BD --> A : ok
     A --> S : auditLog
