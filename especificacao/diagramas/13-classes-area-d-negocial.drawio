@@ -161,17 +161,17 @@
         <mxCell id="enum_AuditAction_vals" value="USER_BLOCK&lt;br&gt;USER_UNBLOCK&lt;br&gt;ROLE_CHANGE&lt;br&gt;USER_DELETE&lt;br&gt;USER_RESTORE&lt;br&gt;ACCESS_DENIED" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="enum_AuditAction">
           <mxGeometry x="0" y="36" width="250" height="115" as="geometry" />
         </mxCell>
-        <mxCell id="edge_admin_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=0;exitX=0.5000;exitY=0.0000;exitPerimeter=0;entryX=0.5000;entryY=1.0000;entryPerimeter=0;" edge="1" parent="1" source="class_Administrator" target="class_User">
+        <mxCell id="edge_admin_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=0;exitX=0;exitY=0.5000;exitPerimeter=0;entryX=0.5;entryY=1;entryPerimeter=0;" edge="1" parent="1" source="class_Administrator" target="class_User">
           <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+            <Array as="points"><mxPoint x="20" y="395" /><mxPoint x="20" y="285" /><mxPoint x="200" y="285" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="edge_inst_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;exitX=0.0000;exitY=0.5000;exitPerimeter=0;entryX=0.5000;entryY=1.0000;entryPerimeter=0;" edge="1" parent="1" source="class_Instructor" target="class_User">
+        <mxCell id="edge_inst_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;exitX=0;exitY=0.5000;exitPerimeter=0;entryX=0.5;entryY=1;entryPerimeter=0;" edge="1" parent="1" source="class_Instructor" target="class_User">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="24" y="555" /><mxPoint x="24" y="285" /><mxPoint x="200" y="285" /></Array></mxGeometry>
+            <Array as="points"><mxPoint x="20" y="555" /><mxPoint x="20" y="285" /><mxPoint x="200" y="285" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="edge_student_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;exitX=0.0000;exitY=0.5000;exitPerimeter=0;entryX=0.5000;entryY=1.0000;entryPerimeter=0;" edge="1" parent="1" source="class_Student" target="class_User">
+        <mxCell id="edge_student_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;exitX=0;exitY=0.5000;exitPerimeter=0;entryX=0.5;entryY=1;entryPerimeter=0;" edge="1" parent="1" source="class_Student" target="class_User">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="8" y="670" /><mxPoint x="8" y="285" /><mxPoint x="200" y="285" /></Array></mxGeometry>
+            <Array as="points"><mxPoint x="20" y="670" /><mxPoint x="20" y="285" /><mxPoint x="200" y="285" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="edge_user_audit" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;" edge="1" parent="1" source="class_User" target="class_AuditLog">
           <mxGeometry relative="1" as="geometry">
