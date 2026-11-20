@@ -6,49 +6,49 @@
         <mxCell id="0" value="" />
         <mxCell id="1" parent="0" value="" />
         <mxCell id="CreateLessonRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CreateLessonRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="210" height="80" as="geometry" />
+          <mxGeometry x="330" y="260" width="210" height="80" as="geometry" />
         </mxCell>
         <mxCell id="CreateLessonRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="CreateLessonRequest">
           <mxGeometry y="40" width="210" height="40" as="geometry" />
         </mxCell>
         <mxCell id="UpdateLessonRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateLessonRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="140" width="210" height="80" as="geometry" />
+          <mxGeometry x="560" y="260" width="210" height="80" as="geometry" />
         </mxCell>
         <mxCell id="UpdateLessonRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="UpdateLessonRequest">
           <mxGeometry y="40" width="210" height="40" as="geometry" />
         </mxCell>
         <mxCell id="AddLessonMaterialRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AddLessonMaterialRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="240" width="210" height="80" as="geometry" />
+          <mxGeometry x="330" y="350" width="210" height="80" as="geometry" />
         </mxCell>
         <mxCell id="AddLessonMaterialRequest_s0" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="AddLessonMaterialRequest">
           <mxGeometry y="40" width="210" height="40" as="geometry" />
         </mxCell>
         <mxCell id="LessonDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LessonDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="340" width="210" height="170" as="geometry" />
+          <mxGeometry x="40" y="40" width="210" height="170" as="geometry" />
         </mxCell>
         <mxCell id="LessonDTO_s0" value="+title: string&lt;br&gt;+description: ?string&lt;br&gt;+order: int&lt;br&gt;+isPreview: boolean&lt;br&gt;+videoKey: string&lt;br&gt;+videoMimeType: string&lt;br&gt;+videoSizeBytes: int&lt;br&gt;+durationSeconds: ?int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="LessonDTO">
           <mxGeometry y="40" width="210" height="130" as="geometry" />
         </mxCell>
         <mxCell id="LessonMaterialDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LessonMaterialDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="530" width="210" height="125" as="geometry" />
+          <mxGeometry x="40" y="230" width="210" height="125" as="geometry" />
         </mxCell>
         <mxCell id="LessonMaterialDTO_s0" value="+title: string&lt;br&gt;+order: int&lt;br&gt;+filePath: string&lt;br&gt;+fileSizeBytes: int&lt;br&gt;+mimeType: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="LessonMaterialDTO">
           <mxGeometry y="40" width="210" height="85" as="geometry" />
         </mxCell>
         <mxCell id="StoredFileDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;StoredFileDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="675" width="210" height="110" as="geometry" />
+          <mxGeometry x="40" y="375" width="210" height="110" as="geometry" />
         </mxCell>
         <mxCell id="StoredFileDTO_s0" value="+key: string&lt;br&gt;+mimeType: string&lt;br&gt;+sizeBytes: int&lt;br&gt;+originalName: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="StoredFileDTO">
           <mxGeometry y="40" width="210" height="70" as="geometry" />
         </mxCell>
         <mxCell id="LessonResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LessonResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="805" width="210" height="80" as="geometry" />
+          <mxGeometry x="560" y="350" width="210" height="80" as="geometry" />
         </mxCell>
         <mxCell id="LessonResource_s0" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="LessonResource">
           <mxGeometry y="40" width="210" height="40" as="geometry" />
         </mxCell>
         <mxCell id="LessonMaterialResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LessonMaterialResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="905" width="210" height="80" as="geometry" />
+          <mxGeometry x="330" y="440" width="210" height="80" as="geometry" />
         </mxCell>
         <mxCell id="LessonMaterialResource_s0" value="+toArray(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="LessonMaterialResource">
           <mxGeometry y="40" width="210" height="40" as="geometry" />
@@ -72,114 +72,98 @@
           <mxGeometry y="40" width="340" height="130" as="geometry" />
         </mxCell>
         <mxCell id="MediaStorageInterface" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MediaStorageInterface&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F8CECC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1530" y="240" width="380" height="90" as="geometry" />
+          <mxGeometry x="890" y="300" width="380" height="90" as="geometry" />
         </mxCell>
         <mxCell id="MediaStorageInterface_s0" value="+uploadFile(file: UploadedFile, directory: string): StoredFileDTO&lt;br&gt;+deleteFile(key: string): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="MediaStorageInterface">
           <mxGeometry y="40" width="380" height="50" as="geometry" />
         </mxCell>
         <mxCell id="TranscriptionQueueInterface" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TranscriptionQueueInterface&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F8CECC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1530" y="360" width="420" height="80" as="geometry" />
+          <mxGeometry x="1290" y="300" width="420" height="80" as="geometry" />
         </mxCell>
         <mxCell id="TranscriptionQueueInterface_s0" value="+dispatchTranscriptionJob(lessonId: UUID, videoKey: string): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="TranscriptionQueueInterface">
           <mxGeometry y="40" width="420" height="40" as="geometry" />
         </mxCell>
         <mxCell id="Lesson" value="&lt;b&gt;Lesson&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1530" y="470" width="160" height="40" as="geometry" />
+          <mxGeometry x="1930" y="60" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell id="LessonMaterial" value="&lt;b&gt;LessonMaterial&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1530" y="540" width="160" height="40" as="geometry" />
+          <mxGeometry x="1930" y="160" width="160" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="edge_ctrl_dto" edge="1" parent="1" source="InstructorLessonController" target="LessonDTO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=0;exitY=0.5;entryX=1;entryY=0.15;" value="">
+        <mxCell id="edge_ctrl_dto" edge="1" parent="1" source="InstructorLessonController" target="LessonDTO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=0.0;exitY=0.5;entryX=1.0;entryY=0.5;" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_ctrl_srv" edge="1" parent="1" source="InstructorLessonController" target="LessonService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" value="">
+        <mxCell id="edge_ctrl_srv" edge="1" parent="1" source="InstructorLessonController" target="LessonService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_srv_repo" edge="1" parent="1" source="LessonService" target="LessonRepositoryInterface" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.2;entryX=0;entryY=0.2;" value="">
+        <mxCell id="edge_srv_repo" edge="1" parent="1" source="LessonService" target="LessonRepositoryInterface" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0;exitY=0.5;entryX=0.0;entryY=0.5;" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_srv_storage" edge="1" parent="1" source="LessonService" target="MediaStorageInterface" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.5;entryX=0;entryY=0.4;" value="">
+        <mxCell id="edge_srv_storage" edge="1" parent="1" source="LessonService" target="MediaStorageInterface" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=0.1964;exitY=1.0;entryX=0.2895;entryY=0.0;" value="">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1490" y="125" />
-              <mxPoint x="1490" y="276" />
-            </Array>
-          </mxGeometry>
+            </mxGeometry>
         </mxCell>
-        <mxCell id="edge_srv_queue" edge="1" parent="1" source="LessonService" target="TranscriptionQueueInterface" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.7;entryX=0;entryY=0.5;" value="">
+        <mxCell id="edge_srv_queue" edge="1" parent="1" source="LessonService" target="TranscriptionQueueInterface" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=0.9107;exitY=1.0;entryX=0.2619;entryY=0.0;" value="">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1480" y="159" />
-              <mxPoint x="1480" y="400" />
-            </Array>
-          </mxGeometry>
+            </mxGeometry>
         </mxCell>
-        <mxCell id="edge_srv_lesson" edge="1" parent="1" source="LessonService" target="Lesson" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.85;entryX=0;entryY=0.5;" value="">
+        <mxCell id="edge_srv_lesson" edge="1" parent="1" source="LessonRepositoryInterface" target="Lesson" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0;exitY=0.2353;entryX=0.0;entryY=0.5;" value="">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1470" y="185" />
-              <mxPoint x="1470" y="490" />
-            </Array>
-          </mxGeometry>
+            </mxGeometry>
         </mxCell>
-        <mxCell id="edge_srv_material" edge="1" parent="1" source="LessonService" target="LessonMaterial" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.95;entryX=0;entryY=0.5;" value="">
+        <mxCell id="edge_srv_material" edge="1" parent="1" source="LessonRepositoryInterface" target="LessonMaterial" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1.0;exitY=0.8235;entryX=0.0;entryY=0.5;" value="">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="1460" y="202" />
-              <mxPoint x="1460" y="560" />
-            </Array>
-          </mxGeometry>
+            </mxGeometry>
         </mxCell>
         <mxCell id="legend_box" value="&lt;b&gt;Legenda de Cores por Papel&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=26;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;collapsible=0;rounded=1;" vertex="1" parent="1">
-          <mxGeometry x="890" y="360" width="325" height="175" as="geometry" />
+          <mxGeometry x="1800" y="290" width="325" height="175" as="geometry" />
         </mxCell>
         <mxCell id="legend_ctrl" value="&lt;b&gt;Controller&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="900" y="394" width="95" height="24" as="geometry" />
+          <mxGeometry x="1810" y="324" width="95" height="24" as="geometry" />
         </mxCell>
         <mxCell id="legend_srv" value="&lt;b&gt;Service&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1005" y="394" width="95" height="24" as="geometry" />
+          <mxGeometry x="1915" y="324" width="95" height="24" as="geometry" />
         </mxCell>
         <mxCell id="legend_repo" value="&lt;b&gt;Repository&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1110" y="394" width="95" height="24" as="geometry" />
+          <mxGeometry x="2020" y="324" width="95" height="24" as="geometry" />
         </mxCell>
         <mxCell id="legend_dto" value="&lt;b&gt;DTO / Request&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="900" y="426" width="95" height="24" as="geometry" />
+          <mxGeometry x="1810" y="356" width="95" height="24" as="geometry" />
         </mxCell>
         <mxCell id="legend_res" value="&lt;b&gt;Resource&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1005" y="426" width="95" height="24" as="geometry" />
+          <mxGeometry x="1915" y="356" width="95" height="24" as="geometry" />
         </mxCell>
         <mxCell id="legend_ent" value="&lt;b&gt;Entity&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="1110" y="426" width="95" height="24" as="geometry" />
+          <mxGeometry x="2020" y="356" width="95" height="24" as="geometry" />
         </mxCell>
         <mxCell id="legend_iface" value="&lt;b&gt;Interface&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="900" y="458" width="305" height="24" as="geometry" />
+          <mxGeometry x="1810" y="388" width="305" height="24" as="geometry" />
         </mxCell>
         <mxCell id="legend_types" value="&lt;b&gt;Tipos:&lt;/b&gt; (C) Classe &amp;bull; (A) Abstrata &amp;bull; (I) Interface &amp;bull; (E) Enumeração" style="text;html=1;strokeColor=none;fillColor=none;fontSize=9;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;" vertex="1" parent="1">
-          <mxGeometry x="900" y="492" width="305" height="30" as="geometry" />
+          <mxGeometry x="1810" y="422" width="305" height="30" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_CreateLessonRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
+          <mxGeometry x="336" y="270" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_UpdateLessonRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="150" width="20" height="20" as="geometry" />
+          <mxGeometry x="566" y="270" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_AddLessonMaterialRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="250" width="20" height="20" as="geometry" />
+          <mxGeometry x="336" y="360" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_LessonDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="350" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_LessonMaterialDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="540" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="240" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_StoredFileDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="685" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="385" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_LessonResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="815" width="20" height="20" as="geometry" />
+          <mxGeometry x="566" y="360" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_LessonMaterialResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="915" width="20" height="20" as="geometry" />
+          <mxGeometry x="336" y="450" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_InstructorLessonController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="336" y="50" width="20" height="20" as="geometry" />
@@ -191,16 +175,16 @@
           <mxGeometry x="1536" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_MediaStorageInterface" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1536" y="250" width="20" height="20" as="geometry" />
+          <mxGeometry x="896" y="310" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_TranscriptionQueueInterface" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1536" y="370" width="20" height="20" as="geometry" />
+          <mxGeometry x="1296" y="310" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_Lesson" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1536" y="480" width="20" height="20" as="geometry" />
+          <mxGeometry x="1936" y="70" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_LessonMaterial" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1536" y="550" width="20" height="20" as="geometry" />
+          <mxGeometry x="1936" y="170" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
