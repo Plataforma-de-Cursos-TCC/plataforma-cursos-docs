@@ -8,17 +8,11 @@
         <mxCell id="RegisterRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;RegisterRequest&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="40" y="40" width="220" height="71" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_RegisterRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="RegisterRequest_m" value="+rules(): array" vertex="1" parent="RegisterRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="220" height="31" as="geometry" />
         </mxCell>
         <mxCell id="RegisterDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;RegisterDTO&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="40" y="130" width="220" height="131" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_RegisterDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="140" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="RegisterDTO_a" value="+email: string&lt;br&gt;+password: string&lt;br&gt;+role: Role&lt;br&gt;+termsAccepted: boolean&lt;br&gt;+locale: Locale" vertex="1" parent="RegisterDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="220" height="91" as="geometry" />
@@ -26,17 +20,11 @@
         <mxCell id="LoginRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LoginRequest&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="40" y="280" width="220" height="71" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_LoginRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="290" width="20" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="LoginRequest_m" value="+rules(): array" vertex="1" parent="LoginRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="220" height="31" as="geometry" />
         </mxCell>
         <mxCell id="LoginDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LoginDTO&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="40" y="370" width="220" height="101" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_LoginDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="380" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="LoginDTO_a" value="+email: string&lt;br&gt;+password: string&lt;br&gt;+rememberMe: boolean" vertex="1" parent="LoginDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="220" height="61" as="geometry" />
@@ -44,17 +32,11 @@
         <mxCell id="SetLocale" value="&amp;lt;&amp;lt;Middleware&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;SetLocale&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=35;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="40" y="491" width="220" height="66" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_SetLocale" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="498" width="20" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="SetLocale_m" value="+handle(req: Request): Response" vertex="1" parent="SetLocale" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="35" width="220" height="31" as="geometry" />
         </mxCell>
         <mxCell id="UserResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserResource&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=35;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="340" y="40" width="360" height="66" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_UserResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="346" y="47" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="UserResource_m" value="+toArray(): array" vertex="1" parent="UserResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="35" width="360" height="31" as="geometry" />
@@ -62,17 +44,11 @@
         <mxCell id="AuthController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthController&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="340" y="135" width="360" height="131" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_AuthController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="346" y="145" width="20" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="AuthController_m" value="+register(req: RegisterRequest): UserResource&lt;br&gt;+login(req: LoginRequest): UserResource&lt;br&gt;+me(): UserResource&lt;br&gt;+forgotPassword(req: ForgotPasswordRequest): void&lt;br&gt;+resetPassword(req: ResetPasswordRequest): void" vertex="1" parent="AuthController" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="360" height="91" as="geometry" />
         </mxCell>
         <mxCell id="ApiException" value="&amp;lt;&amp;lt;Exception&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ApiException&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F8CECC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="340" y="295" width="360" height="177" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_ApiException" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="346" y="305" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ApiException_a" value="-code: ErrorCode&lt;br&gt;-httpStatus: int&lt;br&gt;-fields: array" vertex="1" parent="ApiException" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="360" height="61" as="geometry" />
@@ -80,11 +56,8 @@
         <mxCell id="ApiException_m" value="+__construct(code, httpStatus, fields)&lt;br&gt;+getCode(): ErrorCode&lt;br&gt;+getHttpStatus(): int&lt;br&gt;+getFields(): array" vertex="1" parent="ApiException" style="shape=partialRectangle;top=1;bottom=0;left=0;right=0;text;strokeColor=#000000;strokeWidth=1.5;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;">
           <mxGeometry x="0" y="101" width="360" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="ErrorCode" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ErrorCode&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=35;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+        <mxCell id="ErrorCode" value="&lt;b&gt;ErrorCode&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=35;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="340" y="500" width="360" height="261" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_ErrorCode" value="E" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="346" y="507" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ErrorCode_a" value="UNAUTHENTICATED&lt;br&gt;ACCOUNT_BLOCKED&lt;br&gt;FORBIDDEN&lt;br&gt;NOT_FOUND&lt;br&gt;VALIDATION_FAILED&lt;br&gt;RESET_TOKEN_EXPIRED&lt;br&gt;RESET_TOKEN_INVALID&lt;br&gt;PAYMENT_DECLINED&lt;br&gt;CONFLICT&lt;br&gt;LESSON_NOT_INDEXED&lt;br&gt;PAYLOAD_TOO_LARGE&lt;br&gt;TOO_MANY_REQUESTS&lt;br&gt;INTERNAL_SERVER_ERROR&lt;br&gt;SERVICE_UNAVAILABLE" vertex="1" parent="ErrorCode" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="35" width="360" height="226" as="geometry" />
@@ -92,17 +65,11 @@
         <mxCell id="AuthService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthService&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="780" y="135" width="270" height="86" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_AuthService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="786" y="145" width="20" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="AuthService_m" value="+register(dto: RegisterDTO): User&lt;br&gt;+login(dto: LoginDTO): AuthTokens" vertex="1" parent="AuthService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="270" height="46" as="geometry" />
         </mxCell>
         <mxCell id="AuthTokens" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthTokens&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=35;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="780" y="245" width="270" height="83" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_AuthTokens" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="786" y="252" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="AuthTokens_a" value="+accessToken: string&lt;br&gt;+refresh: RefreshSession" vertex="1" parent="AuthTokens" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="35" width="270" height="48" as="geometry" />
@@ -110,17 +77,11 @@
         <mxCell id="LoginThrottle" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LoginThrottle&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=35;fillColor=#F8CECC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="780" y="360" width="270" height="96" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_LoginThrottle" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="786" y="367" width="20" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="LoginThrottle_m" value="+isBlocked(email: string): boolean&lt;br&gt;+recordFailure(email: string): void&lt;br&gt;+reset(email: string): void" vertex="1" parent="LoginThrottle" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="35" width="270" height="61" as="geometry" />
         </mxCell>
         <mxCell id="JwtGuard" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;JwtGuard&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=35;fillColor=#F8CECC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="780" y="486" width="270" height="126" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_JwtGuard" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="786" y="493" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="JwtGuard_m" value="+issue(user: User): string&lt;br&gt;+issueRefresh(user: User): RefreshSession&lt;br&gt;+parseToken(token: string): User&lt;br&gt;+authorize(user: User, role: Role): bool&lt;br&gt;+revoke(jti: string, ttl: int): void" vertex="1" parent="JwtGuard" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="35" width="270" height="91" as="geometry" />
@@ -128,32 +89,23 @@
         <mxCell id="UserRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserRepository&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="1130" y="135" width="380" height="176" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_UserRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1136" y="145" width="20" height="20" as="geometry" />
-        </mxCell>
         <mxCell id="UserRepository_m" value="+findByEmail(email: string): User&lt;br&gt;+save(user: User): User&lt;br&gt;+paginate(filters: UserFiltersDTO): LengthAwarePaginator&lt;br&gt;+updateStatus(id: UUID, status: UserStatus): void&lt;br&gt;+updateRole(id: UUID, role: Role): void&lt;br&gt;+softDelete(id: UUID): void&lt;br&gt;+restore(id: UUID): void&lt;br&gt;+anonymize(id: UUID): void" vertex="1" parent="UserRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="380" height="136" as="geometry" />
         </mxCell>
-        <mxCell id="User" value="&lt;b&gt;User&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=30;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+        <mxCell id="User" value="&lt;b&gt;User&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=30;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="1290" y="345" width="220" height="106" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_User" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1296" y="350" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="User_a" value="#id: UUID&lt;br&gt;#email: string&lt;br&gt;#role: Role&lt;br&gt;#status: UserStatus" vertex="1" parent="User" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="30" width="220" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="RefreshSession" value="&lt;b&gt;RefreshSession&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=30;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+        <mxCell id="RefreshSession" value="&lt;b&gt;RefreshSession&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=30;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="1130" y="496" width="220" height="106" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_RefreshSession" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1136" y="501" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="RefreshSession_a" value="-id: UUID&lt;br&gt;-tokenHash: string&lt;br&gt;-expiresAt: DateTime&lt;br&gt;-revokedAt: DateTime" vertex="1" parent="RefreshSession" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="30" width="220" height="76" as="geometry" />
         </mxCell>
-        <mxCell id="legend_box" value="&lt;b&gt;Legenda de Papéis (Item 13)&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=25;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;collapsible=0;rounded=0;">
-          <mxGeometry x="1130" y="642" width="380" height="140" as="geometry" />
+        <mxCell id="legend_box" value="&lt;b&gt;Legenda de Papéis (Item 13)&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=25;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="1130" y="770" width="380" height="140" as="geometry" />
         </mxCell>
         <mxCell id="leg_sample_0" value="&lt;b&gt;Controller&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#000000;strokeWidth=1;fontSize=10;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;">
           <mxGeometry x="20" y="32" width="160" height="22" as="geometry" />
@@ -237,6 +189,66 @@
         </mxCell>
         <mxCell id="e_api_exception_errcode" value="" edge="1" parent="1" source="ApiException" target="ErrorCode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
           <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="RefreshSessionRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;RefreshSessionRepository&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="1130" y="642" width="380" height="71" as="geometry" />
+          <mxCell id="RefreshSessionRepository_m" value="+revokeAllByUser(userId: UUID): void" vertex="1" parent="RefreshSessionRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+            <mxGeometry x="0" y="40.0" width="380" height="31" as="geometry" />
+          </mxCell>
+        </mxCell>
+        <mxCell id="e_refreshrepo_refreshsession" value="" edge="1" parent="1" source="RefreshSessionRepository" target="RefreshSession" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=0;entryX=0.5;entryY=1;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_RegisterRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_RegisterDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="140" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LoginRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="290" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LoginDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="380" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_SetLocale" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="498" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_UserResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="346" y="47" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_AuthController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="346" y="145" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ApiException" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="346" y="305" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ErrorCode" value="E" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="346" y="507" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_AuthService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="786" y="145" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_AuthTokens" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="786" y="252" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LoginThrottle" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="786" y="367" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_JwtGuard" value="I" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="786" y="493" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_UserRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1136" y="145" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_User" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1296" y="350" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_RefreshSession" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1136" y="501" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_RefreshSessionRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1136" y="652" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

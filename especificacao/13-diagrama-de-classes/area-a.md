@@ -19,11 +19,13 @@ Na perspectiva de implementação, apresentada em três diagramas (cadastro e lo
 
 3. **Perfil e administração de usuários**:
    - `ProfileController` e `ProfileService` atendem à consulta e atualização cadastral, atualização de dados de instrutor (`InstructorProfileDTO`), troca de senha com validação de senha atual, upload de foto via `PhotoStorage` (armazenamento de imagem no Cloudflare R2 com URL pública e CDN) e persistência de endereços (`AddressRepository`).
+   - `InstructorProfileRepository.createEmpty(userId: UUID): InstructorProfile` cria a linha vazia de perfil de instrutor no momento da promoção (TC236), além do `save(profile: InstructorProfile)`.
    - O `UserRepository` fornece, além de `findByEmail(email)` e `save(user)`, os métodos de gestão administrativa do UC008 e UC018:
      - `paginate(filters: UserFiltersDTO): LengthAwarePaginator`: listagem paginada (`perPage` de 1 a 100) com filtros de busca textual, perfil e status.
      - `updateStatus(id: UUID, status: UserStatus): void`: bloqueio e desbloqueio de contas.
      - `updateRole(id: UUID, role: Role): void`: alteração de papel, instanciando `InstructorProfile` caso o papel passe a instrutor.
      - `softDelete(id: UUID): void` e `restore(id: UUID): void`: exclusão lógica e reativação via `deleted_at` (ADR-0014).
+   - `RefreshSessionRepository.revokeAllByUser(userId: UUID): void` revoga todas as sessões de atualização do usuário, com `revokedAt` preenchido na entidade `RefreshSession`. É chamado no bloqueio, na troca de perfil e na exclusão lógica (D-TC243, UC008 e UC018), junto com a inclusão do `jti` na blocklist do Redis.
      - `anonymize(id: UUID): void`: anonimização irreversível dos dados pessoais para atendimento à LGPD (UC018 R-2), preenchendo `anonymized_at`, ofuscando nome/documento/telefone e liberando o email no índice único parcial.
 
 ![Classes negociais da Área A](../diagramas/13-classes-area-a-negocial.png)
