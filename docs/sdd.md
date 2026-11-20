@@ -89,7 +89,7 @@ flowchart TB
 
 A stack tecnológica e os bancos de dados seguem a decisão do grupo registrada no [ADR-0007](adr/0007-stack-e-bancos.md):
 - **Front-end:** Next.js com TypeScript arquitetado como SPA (sem Server Components ou Server Actions).
-- **API (Core):** Laravel 13 / PHP 8.3 estruturado como monólito modular (módulos auth, catalog, learning e analytics).
+- **API (Core):** Laravel 13 / PHP 8.3 estruturado como monólito modular (módulos auth, authoring, learning, admin e analytics).
 - **Banco de dados do Core:** PostgreSQL 16 na mesma instância do `ai-service`, em databases `core` e `ai` separados (ADR-0017), como SGBD relacional primário para todas as entidades do sistema.
 - **Serviço do Tutor de IA (`ai-service`):** Serviço físico separado rodando em seu próprio container (Laravel 13 / PHP 8.3) com banco de dados dedicado **PostgreSQL 16 com extensão pgvector** para índice vetorial HNSW e busca restrita a `course_id`. A separação física isola a dependência de LLM, pipelines assíncronos de transcrição/embeddings e a carga pesada de cálculo vetorial.
 - **Armazenamento de mídia (`media-service`):** Serviço separado com storage Cloudflare R2 para vídeos (`videoKey`).
