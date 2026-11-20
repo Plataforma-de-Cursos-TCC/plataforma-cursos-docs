@@ -15,6 +15,7 @@ control AuthController as C
 control AuthService as S
 control LoginThrottle as T
 control UserRepository as R
+control RefreshSessionRepository as RS
 entity User as U
 control JwtGuard as J
 database BD
@@ -61,10 +62,10 @@ else dentro do limite
     S -> J ++ : issue(user)
     J --> S -- : jwt (1 h)
     opt rememberMe verdadeiro
-      S -> J ++ : issueRefresh(user)
-      J -> BD ++ : INSERT refresh_sessions (token_hash, family_id)
-      BD --> J --
-      J --> S -- : RefreshSession
+      S -> RS ++ : create(userId, tokenHash, familyId)
+      RS -> BD ++ : INSERT refresh_sessions (token_hash, family_id)
+      BD --> RS --
+      RS --> S -- : RefreshSession
     end
     S --> C : AuthTokens
     C --> V : 200 (UserResource) com cookies HttpOnly (UC016 direciona por perfil)
