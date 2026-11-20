@@ -221,22 +221,28 @@
         <mxCell id="note_3" value="&lt;b&gt;Trilha de Auditoria (UC008, UC016, UC018, RNF016, ADR-0016):&lt;/b&gt;&lt;br&gt;• Registra 100% das ações administrativas e eventos de acesso negado em audit_logs.&lt;br&gt;• Particionamento mensal por range de data: PARTITION BY RANGE (created_at).&lt;br&gt;• Retenção ativa de 12 meses no PostgreSQL; rotina diária audit:archive exporta partições antigas para Cloudflare R2 por 5 anos (D1).&lt;br&gt;• details em jsonb (1FN justificada); sem dados pessoais sensíveis na exclusão LGPD." style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=8;spacingBottom=8;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="950" y="520" width="450" height="150" as="geometry" />
         </mxCell>
-        <mxCell id="edge_courses_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_courses" target="table_conversations">
+        <mxCell id="edge_courses_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_conversations" target="table_courses">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="320" y="144" /><mxPoint x="370" y="144" /></Array>
+              <mxPoint x="370" y="144" />
+              <mxPoint x="320" y="144" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_courses_conv_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="322" y="122" width="20" height="20" as="geometry" />
+          <mxGeometry x="322" y="98" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_courses_conv_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="350" y="122" width="20" height="20" as="geometry" />
+          <mxGeometry x="350" y="98" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_lessons_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_lessons" target="table_conversations">
+        <mxCell id="edge_lessons_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_conversations" target="table_lessons">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="320" y="290" /><mxPoint x="345" y="290" /><mxPoint x="345" y="172" /><mxPoint x="370" y="172" /></Array>
+              <mxPoint x="370" y="172" />
+              <mxPoint x="345" y="172" />
+              <mxPoint x="345" y="290" />
+              <mxPoint x="320" y="290" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_lessons_conv_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
@@ -245,10 +251,12 @@
         <mxCell id="edge_lessons_conv_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="348" y="176" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_messages_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_messages" target="table_conversations">
+        <mxCell id="edge_messages_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_messages" target="table_conversations">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="520" y="260" /><mxPoint x="520" y="220" /></Array>
+              <mxPoint x="520" y="260" />
+              <mxPoint x="520" y="220" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_messages_conv_l1" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
@@ -257,10 +265,12 @@
         <mxCell id="edge_messages_conv_ln" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="525" y="225" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_users_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_users" target="table_conversations">
+        <mxCell id="edge_users_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_conversations" target="table_users">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="720" y="115" /><mxPoint x="670" y="115" /></Array>
+              <mxPoint x="670" y="115" />
+              <mxPoint x="720" y="115" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_users_conv_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
@@ -269,10 +279,12 @@
         <mxCell id="edge_users_conv_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="675" y="95" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_users_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_users" target="table_tutor_credit_packs">
+        <mxCell id="edge_users_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_tutor_credit_packs" target="table_users">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="865" y="200" /><mxPoint x="865" y="260" /></Array>
+              <mxPoint x="865" y="260" />
+              <mxPoint x="865" y="200" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_users_tcp_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
@@ -281,29 +293,33 @@
         <mxCell id="edge_users_tcp_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="868" y="236" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_users_al" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_users" target="table_audit_logs">
+        <mxCell id="edge_users_al" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_audit_logs" target="table_users">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1010" y="115" /><mxPoint x="1060" y="115" /></Array>
+              <mxPoint x="1060" y="115" />
+              <mxPoint x="1010" y="115" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_users_al_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1011" y="95" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_users_al_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
+        <mxCell id="edge_users_al_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1022" y="95" width="36" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_payments_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_payments" target="table_tutor_credit_packs">
+        <mxCell id="edge_payments_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;" edge="1" parent="1" source="table_tutor_credit_packs" target="table_payments">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1060" y="358" /><mxPoint x="1010" y="358" /></Array>
+              <mxPoint x="1010" y="358" />
+              <mxPoint x="1060" y="358" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_payments_tcp_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="1038" y="336" width="20" height="20" as="geometry" />
+          <mxGeometry x="1038" y="326" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_payments_tcp_ln" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="1012" y="336" width="20" height="20" as="geometry" />
+          <mxGeometry x="1012" y="326" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
