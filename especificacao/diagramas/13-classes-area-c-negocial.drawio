@@ -167,8 +167,8 @@
         <mxCell id="edge_Enrollment_QuizAttempt" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;startArrow=diamond;startFill=1;startSize=14;endArrow=none;fontFamily=Helvetica;fontSize=12;exitX=0.8462;exitY=1;entryX=0.3429;entryY=0;" edge="1" parent="1" source="class_Enrollment" target="class_QuizAttempt">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="560" y="690" />
-              <mxPoint x="840" y="690" />
+              <mxPoint x="560" y="703" />
+              <mxPoint x="840" y="703" />
             </Array>
           </mxGeometry>
         </mxCell>
