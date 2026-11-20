@@ -19,7 +19,7 @@
 | RNF013 | 100% dos textos em pt-BR, em arquivos de tradução prontos para receber en e es sem mudança de código; datas, números e valores formatados conforme o idioma. | Capacidade de interação (inclusividade) |
 | RNF014 | Alternância entre modo claro e escuro em 100% das telas, aplicada em até 1 s sem recarregar a página. | Capacidade de interação (engajamento do usuário) |
 | RNF015 | 100% dos endpoints da API documentados em OpenAPI e acessíveis online. | Manutenibilidade (analisabilidade) |
-| RNF016 | 100% das ações administrativas com registro auditável (autor, ação e data), retido por 12 meses. | Segurança (responsabilização) |
+| RNF016 | 100% das ações administrativas com registro auditável (autor, ação e data), retido por 12 meses no PostgreSQL e depois arquivado no armazenamento frio (Cloudflare R2) por até 5 anos. | Segurança (responsabilização) |
 | RNF017 | Link de redefinição de senha de uso único, com expiração de 30 min. | Segurança (autenticidade) |
 | RNF018 | Vídeo de aula aceito somente em mp4 ou webm, com até 500 MB por arquivo. | Eficiência de desempenho (capacidade) |
 | RNF019 | Layout funcional de 360 a 1920 px de largura. | Portabilidade (adaptabilidade) |
