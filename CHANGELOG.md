@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
+- Item 15: casos de teste da Área D (TC211 a TC270) em especificacao/15-casos-de-teste/area-d.md cobrindo cota de mensagens do tutor (D-cota), compra de créditos extras (RF020, RNF022, TC270), parâmetros em inglês do dashboard (D3), paginação perPage (TC245), blocklist Redis (D7, TC243, TC255), auto-desbloqueio proibido (D-TC244), promoção a instrutor (TC236), exclusão lógica e arquivamento de cursos (ADR-0014, TC257, TC258, TC266), preservação de histórico acadêmico (TC265) e reativação de usuário (TC268) (#TBD).
 - Item 14: diagramas de sequência da Área D em draw.io (UC001, UC007, UC008, UC016 e UC018) atualizados via seqgen.py com créditos extras do tutor (D-cota-extra), parâmetros em inglês no dashboard (D3), jti blocklist no Redis (D7), perPage (ADR-0015), soft delete (ADR-0014) e retenção contínua de auditoria (#TBD).
 - Item 13: diagramas de classes da Área D em draw.io (perspectivas negocial e de implementação técnica de administração e tutor/analytics) atualizados com tutor_credit_packs, soft delete (ADR-0014), jti blocklist no Redis (D7), perPage (ADR-0015), parâmetros em inglês no dashboard (D3), papéis por cores com legenda e ícones de tipo (C, A, I, E) (#TBD).
 - Item 6: requisito funcional RF020 para compra de pacote de créditos extras do Tutor de IA pelo Aluno com pagamento simulado (D-cota-extra) (#TBD).
