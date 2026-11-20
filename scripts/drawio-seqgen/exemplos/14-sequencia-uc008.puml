@@ -15,7 +15,9 @@ boundary UserController as C
 control UserAdminService as S
 control JwtGuard as J
 control AuditService as A
-control UserRepository as R
+entity "UserRepository (Área A)" as R
+entity "RefreshSessionRepository (Área A)" as RSR
+entity "InstructorProfileRepository (Área A)" as IPR
 database BD
 
 ADM -> V ++ : busca usuários com paginação (perPage 1..100)
@@ -56,8 +58,10 @@ else confirmação de bloqueio ou desbloqueio
     alt bloquear (status blocked)
       S -> J ++ : revoke( jti, ttl )
       J --> S : ok (jti no Redis blocklist)
-      S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
-      BD --> S : ok
+      S -> RSR ++ : revokeAllByUser( targetId )
+      RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
+      BD --> RSR : ok
+      RSR --> S : void
       S -> A ++ : logAction( adminId, USER_BLOCK, "User", targetId )
       A -> BD ++ : INSERT INTO audit_logs (RNF016)
       BD --> A : ok
@@ -85,11 +89,15 @@ else A4 - alteração de perfil (US016)
     R -> BD ++ : UPDATE users SET role
     BD --> R : ok
     opt promoção de Aluno para Instrutor
-      S -> BD ++ : INSERT INTO instructor_profiles (user_id)
-      BD --> S : ok
+      S -> IPR ++ : createEmpty( targetId )
+      IPR -> BD ++ : INSERT INTO instructor_profiles (user_id)
+      BD --> IPR : ok
+      IPR --> S : void
     end
-    S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
-    BD --> S : ok
+    S -> RSR ++ : revokeAllByUser( targetId )
+    RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
+    BD --> RSR : ok
+    RSR --> S : void
     S -> J ++ : revoke( jti, ttl )
     J --> S : ok (invalida JWT antigo no Redis)
     S -> A ++ : logAction( adminId, ROLE_CHANGE, "User", targetId )

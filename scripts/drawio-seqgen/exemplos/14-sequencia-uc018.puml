@@ -15,7 +15,9 @@ control UserController as C
 control UserAdminService as S
 control JwtGuard as J
 control AuditService as A
-control UserRepository as R
+control CourseService as CS
+entity "RefreshSessionRepository (Área A)" as RSR
+entity "UserRepository (Área A)" as R
 database BD
 
 ADM -> V ++ : aciona "Excluir" na linha do usuário
@@ -40,13 +42,17 @@ else confirma a exclusão
     R -> BD ++ : UPDATE users SET deleted_at = NOW()
     BD --> R : ok
     opt A4 - instrutor com cursos publicados (matriculados mantêm acesso)
-      S -> BD ++ : UPDATE courses SET status='archived' WHERE instructor_id=targetId
-      BD --> S : ok
+      S -> CS ++ : archiveAllByInstructor( targetId )
+      CS -> BD ++ : UPDATE courses SET status='archived' WHERE instructor_id=targetId
+      BD --> CS : ok
+      CS --> S : void
     end
     S -> J ++ : revoke( jti, ttl )
     J --> S : ok (invalida jti no Redis blocklist)
-    S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
-    BD --> S : ok
+    S -> RSR ++ : revokeAllByUser( targetId )
+    RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
+    BD --> RSR : ok
+    RSR --> S : void
     S -> A ++ : logAction( adminId, USER_DELETE, "User", targetId )
     A -> BD ++ : INSERT INTO audit_logs (RNF016)
     BD --> A : ok
