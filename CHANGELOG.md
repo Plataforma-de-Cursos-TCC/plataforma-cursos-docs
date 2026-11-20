@@ -34,6 +34,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Alterado
 
+- Modelo de dados da Área A (item 12): tabelas e colunas em snake_case e tipos PostgreSQL (ADR-0015, ADR-0017), `deleted_at` em tabelas de negócio e anonimização separada com índice parcial único em `email` (ADR-0014), perfil de instrutor vazio ao promover (TC236) e diagrama redesenhado (#TBD).
 - TDD e SDD: core em PostgreSQL 16 (ADR-0017) e monólito modular (ADR-0018), blocklist no Redis nesta sprint (ADR-0008), paginação `perPage` e envelope camelCase (ADR-0015), novas rotas de administração (UC008/UC018), upload de vídeo e material via API/`media-service` (B2, B4) e cota horária com créditos extras simulados no Tutor de IA (#TBD).
 - Tags e Releases `v1.0.0`, `v1.1.0` e `v1.2.0`, links de comparação e o passo a passo de fechar versão, para ligar cada envio ao professor ao commit que o gerou (#140).
 - `entregas/ra2-tarefas.md` registra o que a Área A ensinou (tipo do elemento no item 13, gerador e `alt` no item 14, cenário negativo por regra e TC091 no item 15), para as Áreas B, C e D seguirem o mesmo padrão (#133).
