@@ -245,15 +245,15 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | documentNumber | Simples | Texto | 14 | CPF do usuário. |
 | birthDate | Simples | Data | - | Data de nascimento. |
 | photo | Simples | Texto | 255 | URL ou chave da foto de perfil no storage (R2). |
-| theme | Simples | Texto | - | Tema da interface: claro, escuro ou sistema. |
+| theme | Simples | Texto | - | Tema da interface: `light`, `dark` ou `system`. |
 | locale | Simples | Texto | 5 | Idioma da interface e das mensagens, validado contra a lista de idiomas ativos: pt-BR (padrão; en e es entram sem migração) (RNF013). |
-| status | Simples | Texto | - | Ativo, bloqueado ou excluído. |
+| status | Simples | Texto | - | `active`, `blocked` ou `deleted`. |
 | termsAcceptedAt | Simples | Data e hora | - | Quando o usuário aceitou os termos e a política de privacidade no cadastro (RNF020). |
 | anonymizedAt | Simples | Data | - | Data/hora da anonimização dos dados na exclusão da conta (UC018); nulo enquanto a conta não for anonimizada. |
 | **Entidade: Address** | | | | |
 | id | Determinante | UUID | - | Identificador único do endereço. |
 | userId | Simples | UUID | - | Referência ao usuário dono do endereço. |
-| type | Simples | Texto | - | Tipo: cobrança ou entrega. |
+| type | Simples | Texto | - | Tipo: `billing` (cobrança) ou `shipping` (entrega). |
 | street | Simples | Texto | 150 | Logradouro. |
 | number | Simples | Texto | 10 | Número. |
 | complement | Simples | Texto | 60 | Complemento (opcional). |
@@ -295,8 +295,8 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | description | Simples | Texto longo | TEXT | Descrição do curso. |
 | priceCents | Simples | Numérico | - | Preço do curso, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| level | Simples | Texto | - | Nível: iniciante, intermediário, avançado. |
-| status | Simples | Texto | - | Rascunho ou publicado. |
+| level | Simples | Texto | - | Nível: `beginner`, `intermediate` ou `advanced`. |
+| status | Simples | Texto | - | `draft`, `published` ou `archived`. |
 | thumbnailKey | Simples | Texto | 255 | Chave da imagem de capa no storage. |
 | **Entidade: Module** | | | | |
 | id | Determinante | UUID | - | Identificador único do módulo. |
@@ -318,7 +318,7 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | courseId | Simples | UUID | - | Referência ao curso da matrícula. |
 | pricePaidCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| status | Simples | Texto | - | `pendente` (criada, aguardando pagamento), `ativa`, `cancelada` ou `concluida`. Curso gratuito nasce `ativa`; curso pago nasce `pendente` e vira `ativa` quando o pagamento é aprovado (UC003, UC019). |
+| status | Simples | Texto | - | `pending` (criada, aguardando pagamento), `active`, `cancelled` ou `completed`. Curso gratuito nasce `active`; curso pago nasce `pending` e vira `active` quando o pagamento é aprovado (UC003, UC019). |
 | **Entidade: LessonProgress** | | | | |
 | id | Determinante | UUID | - | Identificador único do registro de progresso. |
 | enrollmentId | Simples | UUID | - | Referência à matrícula. |
@@ -357,7 +357,7 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | enrollmentId | Simples | UUID | - | Referência à matrícula pendente criada antes do pagamento; se o pagamento for recusado, a matrícula segue pendente (UC019, E-1). |
 | amountCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| status | Simples | Texto | - | `aprovado` ou `recusado` (simulado). A recusa fica registrada e não gera matrícula ativa (UC019, E-1). |
+| status | Simples | Texto | - | `approved` ou `declined` (simulado). A recusa (`declined`) fica registrada e não gera matrícula ativa (UC019, E-1). |
 | paidAt | Simples | Data | - | Data/hora do pagamento. |
 | **Entidade: Review** | | | | Uma avaliação por aluno e curso: nova avaliação substitui a anterior (UC010, R-2). |
 | id | Determinante | UUID | - | Identificador único da avaliação. |
@@ -587,11 +587,11 @@ Códigos de erro padrão da API (o `code` é estável e é o que o front-end e o
 | `UNAUTHENTICATED` | 401 | JWT ausente, inválido ou expirado; credencial de login incorreta, com mensagem genérica (UC005 R-1). O front-end tenta o refresh uma vez e, sem sucesso, leva ao login. | UC005 E1 e E2; UC016 E1 |
 | `ACCOUNT_BLOCKED` | 403 | Conta com status bloqueado. No login só é devolvido depois da credencial correta, para não revelar o status a quem não conhece a senha. | UC005 E3; UC008 |
 | `FORBIDDEN` | 403 | Perfil sem permissão, propriedade (`assertOwnership`), Aluno sem matrícula, quiz com aulas não concluídas, ação proibida sobre a própria conta, cabeçalho `Origin` inválido (ADR-0008). | UC016 E2; UC004, UC006, UC014 e UC015 E3; UC001 E4; UC002 E3; UC008 E1; UC018 E1; UC010 |
-| `NOT_FOUND` | 404 | Recurso inexistente. Também no lugar do 403 quando confirmar a existência vazaria dado (quiz sem matrícula, UC002), vídeo indisponível e usuário já removido. | UC002; UC008 E2; UC009 E1; UC018 E2 |
+| `NOT_FOUND` | 404 | Recurso inexistente. Também no lugar do 403 quando confirmar a existência vazaria dado (quiz sem matrícula, UC002) e usuário já removido. | UC002; UC008 E2; UC018 E2 |
 | `VALIDATION_FAILED` | 422 | Validação dos campos, com `fields` por campo (RNF005): e-mail em uso, senha fora da política, confirmação diferente, termos não aceitos, senha atual incorreta (não é 401, que o front-end trataria como sessão expirada), CPF, data, foto, link, posição de módulo em uso, intervalo de datas. | UC012 E1 a E3; UC013 E1 e E2; UC017 E1 a E3; UC004 E1 e E2; UC006 E1 e E4; UC007 E1; UC010 E2; UC014 E1 e E2; UC015 E1; UC002 E1 |
 | `RESET_TOKEN_EXPIRED` | 422 | Link de redefinição com mais de 30 minutos (RNF017). | UC011 E2 |
 | `RESET_TOKEN_INVALID` | 422 | Link já usado, adulterado ou inexistente. | UC011 E3 |
-| `PAYMENT_DECLINED` | 422 | Pagamento simulado recusado; o pagamento é registrado como `recusado` e a matrícula continua `pendente`. Como não há operadora de cartão, não se usa o 402 do Stripe. | UC003 E2; UC019 E1 |
+| `PAYMENT_DECLINED` | 422 | Pagamento simulado recusado; o pagamento é registrado como `declined` e a matrícula continua `pending`. Como não há operadora de cartão, não se usa o 402 do Stripe. | UC003 E2; UC019 E1 |
 | `CONFLICT` | 409 | O estado atual do recurso impede a operação: curso com alunos matriculados no `DELETE`, curso despublicado ou preço alterado durante a matrícula, matrícula já existente. A mensagem diz o motivo. | UC006 E2; UC003 E1; UC019 E2 e E3 |
 | `LESSON_NOT_INDEXED` | 409 | Aula ainda sem transcrição e embeddings; o Tutor de IA não responde até a indexação terminar. | UC001 E1 |
 | `PAYLOAD_TOO_LARGE` | 413 | Corpo acima do limite do servidor. Abaixo dele, a regra de 2 MB da foto (UC013 R-6) é `VALIDATION_FAILED`. | UC013 E1 |
@@ -663,8 +663,8 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | **Área C: Aprendizagem do aluno** | `GET /api/v1/catalog/courses` | Listagem paginada de cursos publicados com filtro `category` e ordenação `sort`: `GET /api/v1/catalog/courses?category=&page=&perPage=&sort=` (público) | UC020 |
 | | `GET /api/v1/catalog/courses/{id}` | Detalhes públicos do curso com lista de módulos e aulas prévia (público) | UC020 |
 | | `POST /api/v1/courses/{id}/enroll` | Criação da matrícula: `active` em curso gratuito; `pending` em curso pago, devolvendo os dados para o pagamento (Aluno) | UC003 |
-| | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado (Aluno dono). Aprovado: registra o pagamento, a matrícula vira `active` e o acesso é liberado (`200`). Recusado: registra `Payment.status = recusado`, mantém a matrícula `pending` e responde `422 PAYMENT_DECLINED` | UC019 |
-| | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview). Aula inexistente: 404 `NOT_FOUND`; Aluno sem matrícula em aula que não é prévia: 403 `FORBIDDEN`; vídeo indisponível ou ainda em processamento: 404 `NOT_FOUND` | UC009 |
+| | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado (Aluno dono). `approved`: registra o pagamento, a matrícula vira `active` e o acesso é liberado (`200`). `declined`: registra `Payment.status = declined`, mantém a matrícula `pending` e responde `422 PAYMENT_DECLINED` | UC019 |
+| | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview). Aula inexistente: 404 `NOT_FOUND`; Aluno sem matrícula em aula que não é prévia: 403 `FORBIDDEN`; falha ao assinar a URL do vídeo: 503 `SERVICE_UNAVAILABLE` com `Retry-After` | UC009 |
 | | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado). Corpo: `{ "watchedSeconds": inteiro >= 0, "completed": booleano }`; valor inválido: 422 `VALIDATION_FAILED` | UC009 |
 | | `GET /api/v1/quizzes/{id}` | Carga do quiz: perguntas e alternativas, sem gabarito (Aluno matriculado no curso do quiz, com as aulas do módulo concluídas); `404` para quiz inexistente ou sem matrícula, `403` se as aulas não estão concluídas | UC002 |
 | | `PUT /api/v1/quizzes/{id}/attempt/draft` | Salvamento do rascunho das respostas do quiz (Aluno matriculado) | UC002 |
