@@ -31,16 +31,26 @@ def tw(s):
     return sum(3.6 if c in " iIljtf.,:;()[]'\"!|" else 10.5 if c in 'mwMW' else
                8.0 if c.isupper() or c in '_%@' else 6.4 for c in s)
 
+def pieces(text):
+    """Words; a word too long for the widest gap also breaks after '('."""
+    out = []
+    for word in text.split():
+        if tw(word) > MAXGAP - 2 * BAR - 20 and '(' in word:
+            a, b = word.split('(', 1); out += [(a + '(', False), (b, True)]
+        else: out.append((word, False))
+    return out
+
 def wrap(text, width):
     lines, cur = [], ''
-    for word in text.split():
-        if cur and tw(cur + ' ' + word) > width: lines.append(cur); cur = word
-        else: cur = (cur + ' ' + word).strip()
+    for word, glue in pieces(text):
+        sep = '' if glue else ' '
+        if cur and tw(cur + sep + word) > width: lines.append(cur); cur = word
+        else: cur = (cur + sep + word) if cur else word
     return lines + [cur] if cur else lines
 
 def need(text, maxlines=3):
     """Smallest box width that fits the text in at most maxlines lines."""
-    w = up10(max(tw(x) for x in text.split()))
+    w = up10(max(tw(x) for x, _ in pieces(text)))
     while len(wrap(text, w)) > maxlines: w += 10
     return w
 
