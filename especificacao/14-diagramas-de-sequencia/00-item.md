@@ -11,6 +11,6 @@ Um diagrama de sequência por caso de uso, mostrando a interação entre as cama
 | 3 | UC012 | Cadastrar-se na plataforma | A (Acesso e conta) | [area-a.md](area-a.md) |
 | 4 | UC013 | Editar dados do perfil | A (Acesso e conta) | [area-a.md](area-a.md) |
 | 5 | UC017 | Alterar senha | A (Acesso e conta) | [area-a.md](area-a.md) |
-| 6 | a definir | Casos de uso da Área B | B (Autoria do instrutor) | [area-b.md](area-b.md) |
-| 7 | a definir | Casos de uso da Área C | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
-| 8 | a definir | Casos de uso da Área D | D (Tutor de IA, analytics e administração) | [area-d.md](area-d.md) |
+| 6 | a definir | Casos de uso da Área B (entregue) | B (Autoria do instrutor) | [area-b.md](area-b.md) |
+| 7 | a definir | Casos de uso da Área C (entregue) | C (Aprendizagem do aluno) | [area-c.md](area-c.md) |
+| 8 | a definir | Casos de uso da Área D (entregue) | D (Tutor de IA, analytics e administração) | [area-d.md](area-d.md) |
