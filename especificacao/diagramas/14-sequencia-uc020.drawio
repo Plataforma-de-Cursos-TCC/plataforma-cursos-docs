@@ -485,7 +485,7 @@
         <mxCell value="paginatePublished(category:&lt;br&gt;&amp;quot;Programacao&amp;quot;)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_107">
           <mxGeometry x="930" y="1580" width="170" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="SELECT courses WHERE&lt;br&gt;status=&amp;#x27;published&amp;#x27;AND&lt;br&gt;category=&amp;#x27;Programacao&amp;#x27;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_108">
+        <mxCell value="SELECT courses WHERE&lt;br&gt;status=&amp;#x27;published&amp;#x27; AND&lt;br&gt;category=&amp;#x27;Programacao&amp;#x27;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_108">
           <mxGeometry x="1140" y="1630" width="160" height="60" as="geometry" />
         </mxCell>
         <mxCell value="cursos da categoria" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_109">
