@@ -2,7 +2,7 @@
 
 **PRODUTO:** Plataforma de Cursos
 
-Um diagrama de sequência por caso de uso, mostrando a interação entre as camadas: o ator, a tela (boundary, a View), o Controller e o Service (control), a entidade (entity) e o banco de dados. As mensagens são os métodos do diagrama de classes (item 13) e o fluxo básico vem da especificação do caso de uso (item 10); cada fluxo de exceção vira um fragmento `alt` e cada fluxo alternativo, um `opt`. O mínimo exigido é de 4 casos de uso para a equipe; cada área entrega os diagramas dos seus casos de uso prioritários.
+Um diagrama de sequência por caso de uso, mostrando a interação entre as camadas: o ator, a tela e o Controller (boundary), o Service (control), o Repository e a entidade (entity) e o banco de dados (database). As mensagens são os métodos do diagrama de classes (item 13) e o fluxo básico vem da especificação do caso de uso (item 10); cada fluxo de exceção vira uma região de um fragmento `alt`; cada fluxo alternativo também é um `alt`, e o cancelamento é a última região do `alt` que encerra o diagrama (sem `opt` seguido de continuação). O mínimo exigido é de 4 casos de uso para a equipe; cada área entrega os diagramas dos seus casos de uso prioritários.
 
 | Nº | UC | CASO DE USO | ÁREA | ARQUIVO |
 |---|---|---|---|---|

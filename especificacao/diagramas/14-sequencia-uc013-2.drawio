@@ -200,7 +200,7 @@
             <mxPoint x="90" y="1180" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell value="Instrutor" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_42">
+        <mxCell value="Usuário" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_42">
           <mxGeometry x="60" y="70" width="60" height="20" as="geometry" />
         </mxCell>
         <mxCell value="PerfilView" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_43">
@@ -227,7 +227,7 @@
         <mxCell value="updateInstructor(req:&lt;br&gt;UpdateInstructorRequest)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_50">
           <mxGeometry x="300" y="190" width="170" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="[E3 - o Usuário não é&lt;br&gt;Instrutor (guarda de perfil&lt;br&gt;do UC016)]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_51">
+        <mxCell value="[E3 - o Usuário é Aluno ou&lt;br&gt;Administrador -&amp;gt; 403&lt;br&gt;FORBIDDEN]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_51">
           <mxGeometry x="110" y="270" width="150" height="60" as="geometry" />
         </mxCell>
         <mxCell value="403 FORBIDDEN" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_52">
@@ -236,7 +236,7 @@
         <mxCell value="informa que a ação não é&lt;br&gt;permitida" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_53">
           <mxGeometry x="110" y="380" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="[é Instrutor]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_54">
+        <mxCell value="[o Usuário é Instrutor]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_54">
           <mxGeometry x="110" y="460" width="150" height="30" as="geometry" />
         </mxCell>
         <mxCell value="rules()" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_55">
@@ -263,7 +263,7 @@
         <mxCell value="save(profile)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_62">
           <mxGeometry x="880" y="890" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="UPDATE&lt;br&gt;instructor_profile" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_63">
+        <mxCell value="UPDATE&lt;br&gt;instructor_profiles" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_63">
           <mxGeometry x="1040" y="930" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell value="InstructorProfile" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_64">

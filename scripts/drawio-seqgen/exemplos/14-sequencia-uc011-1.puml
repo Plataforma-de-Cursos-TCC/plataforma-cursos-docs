@@ -29,7 +29,7 @@ alt E1 - e-mail não cadastrado (R-2, anti-enumeração)
   S --> C : nada é enviado
 else e-mail cadastrado
   S -> TR ++ : issueFor(user)
-  TR -> BD ++ : invalida o link anterior (A1) e INSERT password_reset_token
+  TR -> BD ++ : invalida o link anterior (A1) e INSERT password_reset_tokens
   BD --> TR --
   TR --> S -- : token
   S -> M ++ : sendLink(user, token)

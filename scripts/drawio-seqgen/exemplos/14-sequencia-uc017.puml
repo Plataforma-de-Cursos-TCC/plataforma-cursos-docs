@@ -8,10 +8,7 @@ control UserRepository as R
 database BD
 
 USU -> V ++ : informa senha atual, nova senha e confirmação
-alt A1 - o Usuário cancela
-  USU -> V : aciona "Cancelar"
-  V --> USU -- : mantém a senha atual
-else confirma
+alt confirma
   USU -> V ++ : aciona "Salvar senha"
   V -> C ++ : changePassword(req: ChangePasswordRequest)
   C -> Q ++ : rules()
@@ -27,14 +24,14 @@ else confirma
     S -> U ++ : checkPassword(current)
     U --> S -- : válida?
     alt E1 - senha atual incorreta (R-1)
-      S --> C : WrongPasswordException
+      S --> C : ApiException(VALIDATION_FAILED)
       C --> V : 422 VALIDATION_FAILED (fields.currentPassword)
       V --> USU : informa que a senha atual está incorreta
     else senha atual correta
       S -> U ++ : changePassword(current, newPassword)
       U --> S -- : hash da nova senha (RNF007)
       S -> R ++ : save(user)
-      R -> BD ++ : UPDATE users SET passwordHash
+      R -> BD ++ : UPDATE users SET password_hash
       BD --> R --
       R --> S --
       S --> C : ok
@@ -42,4 +39,7 @@ else confirma
       V --> USU : confirma a alteração
     end
   end
+else A1 - o Usuário cancela
+  USU -> V : aciona "Cancelar"
+  V --> USU -- : mantém a senha atual
 end
