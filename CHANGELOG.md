@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
+- Item 6: requisito funcional RF020 para compra de pacote de créditos extras do Tutor de IA pelo Aluno com pagamento simulado (D-cota-extra) (#TBD).
 - Item 15: casos de teste da Área C (Aprendizagem do aluno) cobrindo UC002, UC003, UC009, UC010, UC019 e UC020 (TC151 a TC179, com IDs do catálogo para os UCs da área), com cenários negativos por regra de negócio e códigos de erro da API (#TBD).
 - Item 14: diagramas de sequência da Área C (Aprendizagem do aluno) em draw.io para UC002, UC003, UC009, UC010, UC019 e UC020, com alt para cancelamentos e exceções, endpoints do TDD e transição de matrícula no pagamento simulado (#TBD).
 - Item 13: diagrama de classes da Área C (Aprendizagem do aluno) em draw.io, perspectivas negocial e de implementação técnica (matrícula/pagamento e aulas/quizzes/avaliações), com tipos nos cabeçalhos, estereótipos arquiteturais e transição de matrícula (#TBD).

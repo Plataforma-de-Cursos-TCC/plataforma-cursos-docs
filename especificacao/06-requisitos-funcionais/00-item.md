@@ -23,5 +23,6 @@
 | RF017 | Realizar login de usuário | Usuário | Sprint 1 |
 | RF018 | Controlar o acesso às áreas protegidas por perfil | Usuário | Sprint 1 |
 | RF019 | Alterar senha | Usuário | Sprint 1 |
+| RF020 | Comprar pacote de créditos extras para o Tutor de IA | Aluno | Sprint 4 |
 
 A prioridade e a justificativa de cada requisito, e o caso de uso que o detalha, estão na tabela de rastreabilidade do item 9.
