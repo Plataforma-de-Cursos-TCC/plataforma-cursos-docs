@@ -34,6 +34,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Alterado
 
+- Catálogo e matriz de testes (C4): remoção do TC054 (curso gratuito no pagamento), reescrita do TC057 (categoria sem cursos publicados) conforme especificação da Área C, e inclusão de TC178 (catálogo sem cursos publicados) e TC179 (gabarito oculto antes do envio do quiz) em `docs/testes/casos-de-teste.md` e `docs/testes/cobertura.md` (#TBD).
 - Diagramas de classes da Área A (item 13): repositório `UserRepository` com métodos de paginação e administração (UC008/UC018), `JwtGuard` com `revoke` na blocklist Redis (ADR-0008), declaração do enum transversal `ErrorCode` e classe `ApiException` (TDD 3.1), cores por papel com legenda e alinhamento aos critérios visuais (#TBD).
 - Modelo de dados da Área A (item 12): tabelas e colunas em snake_case e tipos PostgreSQL (ADR-0015, ADR-0017), `deleted_at` em tabelas de negócio e anonimização separada com índice parcial único em `email` (ADR-0014), perfil de instrutor vazio ao promover (TC236) e diagrama redesenhado (#TBD).
 - TDD e SDD: core em PostgreSQL 16 (ADR-0017) e monólito modular (ADR-0018), blocklist no Redis nesta sprint (ADR-0008), paginação `perPage` e envelope camelCase (ADR-0015), novas rotas de administração (UC008/UC018), upload de vídeo e material via API/`media-service` (B2, B4) e cota horária com créditos extras simulados no Tutor de IA (#TBD).
