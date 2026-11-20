@@ -784,5 +784,5 @@ As decisões arquiteturais do projeto são formalizadas e mantidas como Architec
 | [ADR-0015](adr/0015-convencao-de-nomes-por-camada.md) | D15 | **Convenção de nomes por camada:** Banco em snake_case, API e código em camelCase (`perPage`); substitui o nome do item 4 da ADR-0009. | 12, 13, 14, 15 |
 | [ADR-0016](adr/0016-retencao-de-logs-e-auditoria.md) | D16 | **Retenção de logs e da trilha de auditoria:** Auditoria retida 12 meses no PostgreSQL e 5 anos arquivada no R2; logs da aplicação por 90 dias. | 8, 12, 14 |
 | [ADR-0017](adr/0017-core-em-postgresql.md) | D17 | **Core em PostgreSQL 16:** Core migrado para PostgreSQL 16 na mesma instância do `ai-service`, em databases `core` e `ai` separados; substitui o MySQL da ADR-0007. | 5, 11, 12 |
-| [ADR-0018](adr/0018-core-como-monolito-modular.md) | D18 | **Core como monólito modular:** Core estruturado em módulos internos comunicando-se por Services públicos, sem microsserviços novos. | 11, 13 |
+| [ADR-0018](adr/0018-core-como-monolito-modular.md) | D18 | **Core como monólito modular:** Core estruturado em módulos internos comunicando-se por Services públicos (única exceção: o catálogo público de cursos, somente leitura, no módulo Learning), sem microsserviços novos. | 11, 13 |
 

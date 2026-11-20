@@ -28,7 +28,7 @@ relacionados: [adr-0006, adr-0007, adr-0017]
 ## Decisão
 
 1. O core é um único deploy Laravel dividido em módulos: Auth (Área A), Authoring (Área B), Learning (Área C), Admin e Analytics (Área D).
-2. Cada módulo tem seus Controllers, Services, Repositories e Models. Um módulo usa outro só pelos Services públicos dele, nunca lendo as tabelas do outro diretamente.
+2. Cada módulo tem seus Controllers, Services, Repositories e Models. Um módulo usa outro só pelos Services públicos dele, nunca lendo as tabelas do outro diretamente. Única exceção: o catálogo público de cursos é somente leitura e fica no módulo Learning (Área C), que lê `courses` pelo `CourseRepository`.
 3. Os serviços continuam três: core, `ai-service` e `media-service`. Um módulo só vira serviço próprio se tiver carga ou ritmo de deploy muito diferente dos outros, registrado em ADR nova.
 
 ## Consequências
