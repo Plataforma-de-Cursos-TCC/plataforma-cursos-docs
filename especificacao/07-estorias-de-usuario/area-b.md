@@ -33,8 +33,8 @@
 ## 8. US006 – REQUISITO RF004: Gerenciar aulas do curso
 
 **COMO:** Instrutor logado\
-**POSSO:** cadastrar uma aula com vídeo dentro de um módulo\
-**PARA:** disponibilizar o conteúdo em vídeo aos alunos.\
+**POSSO:** cadastrar uma aula com vídeo e materiais complementares dentro de um módulo\
+**PARA:** disponibilizar o conteúdo em vídeo e anexos de apoio aos alunos.\
 **PRIORIDADE:** Must Have\
 **AUTOR(A):** Adrian Antônio de Souza Gomes
 
@@ -45,6 +45,8 @@
 | 1 | **DADO QUE:** informo o título da aula e um arquivo de vídeo válido <br> **QUANDO:** salvo a aula <br> **ENTÃO:** a aula fica disponível para reprodução pelos alunos matriculados. |
 | 2 | **DADO QUE:** envio um arquivo em formato não suportado <br> **QUANDO:** tento salvar <br> **ENTÃO:** recebo erro informando os formatos aceitos. |
 | 3 | **DADO QUE:** marco a aula como prévia <br> **QUANDO:** um Visitante sem matrícula acessa o curso <br> **ENTÃO:** ele consegue assistir a essa aula sem se matricular. |
+| 4 | **DADO QUE:** anexo um arquivo de material complementar em PDF de até 50 MB <br> **QUANDO:** salvo a aula <br> **ENTÃO:** o material fica vinculado à aula e disponível para download pelos alunos matriculados. |
+| 5 | **DADO QUE:** envio um material complementar em formato não suportado ou acima de 50 MB <br> **QUANDO:** tento salvar <br> **ENTÃO:** o sistema rejeita o envio e informa as restrições permitidas. |
 
 ## 9. US010 – REQUISITO RF007: Gerenciar quizzes do curso
 
