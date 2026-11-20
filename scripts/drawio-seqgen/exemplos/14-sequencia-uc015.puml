@@ -7,6 +7,7 @@ boundary AulaView as V
 control InstructorLessonController as C
 control CreateLessonRequest as Q
 control LessonService as S
+control LessonProgressService as P
 control LessonRepositoryInterface as R
 control MediaStorageInterface as M
 control TranscriptionQueueInterface as T
@@ -22,9 +23,9 @@ alt E1 - formato ou tamanho de vídeo inválido (R-2, RNF018)
   C --> V : 422 VALIDATION_FAILED (fields.video)
   V --> INS : informa formato mp4/webm e limite de 500 MB
 else E2 - falha no envio ou na comunicação com storage
-  M --> S : erro de I/O no storage
+  M --> S : erro de comunicação com o storage
   S --> C : Falha de armazenamento
-  C --> V : 500 / 503 Falha no envio
+  C --> V : 503 SERVICE_UNAVAILABLE (Retry-After)
   V --> INS : informa erro e permite nova tentativa
 else envio bem-sucedido
   M --> S : StoredFileDTO (key, mimeType, sizeBytes)
@@ -53,10 +54,8 @@ else envio bem-sucedido
       INS -> V : confirma exclusão
       V -> C ++ : destroy(id: UUID)
       C -> S ++ : delete(lessonId, instructorId)
-      S -> R ++ : hasStudentProgress(id: UUID)
-      R -> BD ++ : SELECT id FROM lesson_progress WHERE lesson_id
-      BD --> R -- : registro encontrado?
-      R --> S -- : boolean
+      S -> P ++ : hasStudentProgress(lessonId: UUID)
+      P --> S -- : boolean
       alt E4 - progresso de aluno registrado na aula (R-5)
         S --> C : exclusão bloqueada
         C --> V : 409 CONFLICT (aula só pode ser editada)
@@ -66,8 +65,6 @@ else envio bem-sucedido
         R -> BD ++ : UPDATE lessons, lesson_materials SET deleted_at = NOW()
         BD --> R -- : ok
         R --> S -- : ok
-        S -> M ++ : deleteFile(videoKey)
-        M --> S -- : ok
         S --> C : ok
         C --> V : 204 No Content
         V --> INS : remove aula e atualiza lista

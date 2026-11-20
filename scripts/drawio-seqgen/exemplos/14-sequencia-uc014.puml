@@ -7,6 +7,7 @@ boundary ModuloView as V
 control ModuleController as C
 control CreateModuleRequest as Q
 control ModuleService as S
+control LessonProgressService as P
 control ModuleRepositoryInterface as R
 database BD
 
@@ -22,7 +23,7 @@ alt cadastro de novo módulo
   else dados válidos
     C -> S ++ : create(courseId, instructorId, dto: ModuleDTO)
     S -> R ++ : isOrderTaken(courseId, order)
-    R -> BD ++ : SELECT id FROM modules WHERE course_id e order
+    R -> BD ++ : SELECT id FROM modules WHERE course_id e position
     BD --> R -- : registro encontrado?
     R --> S -- : boolean
     alt E2 - posição já utilizada no curso (R-2)
@@ -52,10 +53,8 @@ else exclusão de módulo existente (A2)
     INS -> V : confirma exclusão
     V -> C ++ : destroy(id: UUID)
     C -> S ++ : delete(moduleId, instructorId)
-    S -> R ++ : hasStudentHistory(id: UUID)
-    R -> BD ++ : SELECT progresso em aulas e respostas de quiz
-    BD --> R -- : registros encontrados?
-    R --> S -- : boolean
+    S -> P ++ : hasStudentHistoryInModule(moduleId: UUID)
+    P --> S -- : boolean
     alt E4 - histórico de alunos em aula ou quiz do módulo (R-4)
       S --> C : exclusão bloqueada
       C --> V : 409 CONFLICT (módulo só pode ser editado)
