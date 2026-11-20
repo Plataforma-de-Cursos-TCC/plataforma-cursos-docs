@@ -41,7 +41,7 @@
     *Figura 0 – UC002, fluxo alternativo A1: resultado salvo com opção de refazer*
   - **A2 – O Aluno salva um rascunho e retoma depois**
     - A-2.1 O Aluno aciona “Salvar rascunho” antes de enviar todas as respostas.
-    - A-2.2 O sistema salva as respostas parciais vinculadas ao Aluno e ao quiz.
+    - A-2.2 O sistema grava as respostas parciais numa tentativa com status draft, uma por Aluno e quiz; se já existe rascunho, atualiza-o.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 2) na próxima vez que o Aluno acessar o quiz.
 
     ![rascunho salvo do quiz](prototipos/png/UC002/UC002-A2-1.png)
@@ -98,10 +98,10 @@
 
   *Figura 0 – UC003, fluxo básico: meus cursos do aluno após matrícula*
 - **Fluxos alternativos:**
-  - **A1 – O Aluno já está matriculado no curso**
-    - A-1.1 O sistema identifica matrícula existente do Aluno para esse curso.
-    - A-1.2 O sistema exibe o botão “Continuar assistindo” no lugar de “Matricular-se”.
-    - A-1.3 Este caso de uso é finalizado.
+  - **A1 – O Aluno já tem matrícula no curso**
+    - A-1.1 O sistema identifica matrícula existente do Aluno para esse curso, em qualquer status.
+    - A-1.2 Se a matrícula está ativa, o sistema exibe o botão “Continuar assistindo” no lugar de “Matricular-se” e este caso de uso é finalizado.
+    - A-1.3 Se a matrícula está pendente (curso pago sem pagamento aprovado), o sistema exibe “Matricule-se”; ao acioná-lo, retoma o UC019 para a mesma matrícula, sem criar nova linha.
 
     ![aluno matriculado: Continuar assistindo](prototipos/png/UC003/UC003-A1-1.png)
 
