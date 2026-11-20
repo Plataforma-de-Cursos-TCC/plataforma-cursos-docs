@@ -192,9 +192,9 @@
         </mxCell>
         <mxCell id="RefreshSessionRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;RefreshSessionRepository&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="1130" y="642" width="380" height="71" as="geometry" />
-          <mxCell id="RefreshSessionRepository_m" value="+revokeAllByUser(userId: UUID): void" vertex="1" parent="RefreshSessionRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
-            <mxGeometry x="0" y="40.0" width="380" height="31" as="geometry" />
-          </mxCell>
+        </mxCell>
+        <mxCell id="RefreshSessionRepository_m" value="+revokeAllByUser(userId: UUID): void" vertex="1" parent="RefreshSessionRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40.0" width="380" height="31" as="geometry" />
         </mxCell>
         <mxCell id="e_refreshrepo_refreshsession" value="" edge="1" parent="1" source="RefreshSessionRepository" target="RefreshSession" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=0;entryX=0.5;entryY=1;">
           <mxGeometry relative="1" as="geometry" />
