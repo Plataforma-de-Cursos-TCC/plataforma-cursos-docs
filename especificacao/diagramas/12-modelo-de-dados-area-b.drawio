@@ -98,7 +98,7 @@
         <mxCell id="row_mod_title" value="&lt;b&gt;title: varchar(150)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
           <mxGeometry y="80" width="330" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_mod_order" value="&lt;b&gt;order: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
+        <mxCell id="row_mod_order" value="&lt;b&gt;position: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
           <mxGeometry y="100" width="330" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_mod_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
@@ -134,7 +134,7 @@
         <mxCell id="row_les_size" value="video_size_bytes: bigint" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
           <mxGeometry y="180" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_les_order" value="&lt;b&gt;order: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
+        <mxCell id="row_les_order" value="&lt;b&gt;position: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
           <mxGeometry y="200" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_les_preview" value="&lt;b&gt;is_preview: boolean&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
@@ -170,7 +170,7 @@
         <mxCell id="row_mat_size" value="&lt;b&gt;size_bytes: bigint&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
           <mxGeometry y="140" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_mat_order" value="&lt;b&gt;order: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
+        <mxCell id="row_mat_order" value="&lt;b&gt;position: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
           <mxGeometry y="160" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_mat_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
