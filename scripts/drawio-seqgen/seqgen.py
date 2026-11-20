@@ -17,7 +17,6 @@ ICON = {'actor': ('shape=umlActor;verticalLabelPosition=bottom;', 30, 50),
 MINGAP, MAXGAP, BAR, TOP = 160, 260, 10, 130
 
 def role(kind, name):
-    name = re.sub(r'\s*\(.*$', '', name)   # '(Área X)' suffix does not change the role
     if kind == 'interface': return 'interface'
     if kind not in ('control', 'boundary', 'entity'): return kind
     if re.search(r'(Controller|Request|Resource|View)$', name): return 'boundary'
