@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="Electron" version="32.6.10" type="device" compressed="false">
   <diagram id="diagram_13_classes_aprendizagem" name="13-classes-area-c-implementacao-aprendizagem">
     <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="800" pageHeight="1160" math="0" shadow="0">
@@ -220,6 +220,72 @@
         </mxCell>
         <mxCell id="leg_lbl_Interface" value="Interface" vertex="1" parent="legend_box" style="text;html=1;align=left;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=10;fontColor=#000000;">
           <mxGeometry x="36" y="162" width="170" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ProgressUpdateRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ProgressDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="216" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizSubmitRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="336" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizSubmitDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="456" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ReviewRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="559" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ReviewDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="679" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_MediaService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="906" y="290" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LessonStreamResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="799" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizResultResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="902" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="1314" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ReviewResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="1005" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LessonController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="430" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ReviewController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="386" y="640" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LessonProgressService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="906" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="906" y="430" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ReviewService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="906" y="640" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ProgressRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1426" y="50" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizAttemptRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1426" y="430" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ReviewRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1426" y="640" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_QuizDraftRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="1108" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ProgressResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="1211" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
