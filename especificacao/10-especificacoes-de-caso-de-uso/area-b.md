@@ -21,10 +21,6 @@
 
   *Figura 0 – UC004, fluxo básico: botão "Novo quiz" na tela "Aulas do módulo"*
 
-  ![botão "Novo quiz" acionado na tela "Aulas do módulo"](prototipos/png/UC015/UC015-FB-1.png)
-
-  *Figura 0 – UC004, fluxo básico: botão "Novo quiz" acionado na tela "Aulas do módulo"*
-
   ![formulário "Novo quiz" vazio](prototipos/png/UC004/UC004-FB-3.png)
 
   *Figura 0 – UC004, fluxo básico: formulário "Novo quiz" vazio*
@@ -32,10 +28,6 @@
   ![formulário "Novo quiz" com alternativa correta marcada](prototipos/png/UC004/UC004-FB-4.png)
 
   *Figura 0 – UC004, fluxo básico: formulário "Novo quiz" com alternativa correta marcada*
-
-  !["Salvar quiz" dispara validação sobre o estado preenchido](prototipos/png/UC004/UC004-FB-4.png)
-
-  *Figura 0 – UC004, fluxo básico: "Salvar quiz" dispara validação sobre o estado preenchido*
 
   ![formulário "Novo quiz" após publicar com "Voltar ao módulo"](prototipos/png/UC004/UC004-FB-7.png)
 
@@ -101,8 +93,8 @@
 - **Ator(es):** Instrutor.
 - **Descrição:** o Instrutor cria, edita, exclui e lista os cursos do seu catálogo (US004, RF002).
 - **Pré-condições:** o Instrutor ter realizado login na plataforma.
-- **Pós-condições:** curso criado ou atualizado disponível no catálogo do Instrutor, com status rascunho ou publicado.
-- **Regras de negócio:** R-1 o curso é criado com status rascunho por padrão; R-2 a exclusão é bloqueada se houver alunos matriculados (nesse caso, o Instrutor só pode despublicar o curso).
+- **Pós-condições:** curso criado ou atualizado disponível no catálogo do Instrutor, com status rascunho, publicado ou arquivado.
+- **Regras de negócio:** R-1 o curso é criado com status rascunho por padrão; R-2 a exclusão é bloqueada se houver alunos matriculados (nesse caso, o Instrutor só pode despublicar o curso, pelo arquivamento do A4); R-3 o curso arquivado sai do catálogo, mas os alunos já matriculados mantêm o acesso às aulas.
 - **Protótipo(s) de tela:** formulário de cadastro de curso com título, descrição, preço e categoria. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Instrutor acessa “Meus cursos”. (A-2)
@@ -155,6 +147,11 @@
     - A-3.1 O Instrutor aciona “Cancelar” no formulário de criação de curso.
     - A-3.2 O sistema fecha o formulário sem persistir nenhuma informação no banco e retorna à lista “Meus cursos”.
     - A-3.3 Este caso de uso é finalizado.
+  - **A4 – O Instrutor arquiva um curso publicado**
+    - A-4.1 O Instrutor aciona “Arquivar” em um curso publicado. O Administrador também aciona este fluxo no UC018, ao excluir o Instrutor e optar por despublicar os cursos dele.
+    - A-4.2 O sistema muda o status do curso de publicado para arquivado e o retira do catálogo.
+    - A-4.3 O sistema mantém o acesso dos alunos já matriculados às aulas do curso e não apaga nenhum dado.
+    - A-4.4 Este caso de uso é finalizado.
 - **Fluxos de exceção:**
   - **E1 – Campos obrigatórios não preenchidos**
     - E-1.1 O sistema identifica título, descrição ou preço ausente.
@@ -166,7 +163,7 @@
     *Figura 0 – UC006, fluxo de exceção E1: erro "Campo obrigatório" no título*
   - **E2 – Tentativa de excluir curso com alunos matriculados**
     - E-2.1 O sistema identifica matrículas ativas vinculadas ao curso.
-    - E-2.2 O sistema impede a exclusão e sugere despublicar o curso.
+    - E-2.2 O sistema impede a exclusão e sugere despublicar o curso (arquivamento, A4).
     - E-2.3 Este caso de uso é finalizado.
 
     ![exclusão bloqueada na lista "Meus cursos"](prototipos/png/UC006/UC006-E2-1.png)
@@ -177,9 +174,6 @@
     - E-3.2 O sistema nega o acesso (403) e não executa nenhuma alteração.
     - E-3.3 Este caso de uso é finalizado.
 
-    ![acesso negado: curso de outro Instrutor](prototipos/png/UC004/UC004-E3-1.png)
-
-    *Figura 0 – UC006, fluxo de exceção E3: acesso negado: curso de outro Instrutor*
   - **E4 – Publicação de curso sem módulos ou aulas**
     - E-4.1 O sistema identifica que o curso não tem módulos ou aulas cadastrados ao acionar “Publicar”.
     - E-4.2 O sistema mantém o curso como rascunho e indica o que falta.
@@ -232,7 +226,7 @@
     - A-2.2 O sistema verifica se há histórico de alunos no módulo. (E-4)
     - A-2.3 O sistema avisa que as aulas e o quiz do módulo também serão removidos e pede confirmação.
     - A-2.4 O Instrutor confirma a exclusão. (A-3)
-    - A-2.5 O sistema remove o módulo, as suas aulas e o seu quiz e atualiza a lista.
+    - A-2.5 O sistema remove logicamente (`deleted_at`) o módulo, as suas aulas e o seu quiz e atualiza a lista.
     - A-2.6 Este caso de uso é finalizado.
 
     ![confirmação de exclusão do módulo](prototipos/png/UC014/UC014-A2-1.png)
@@ -321,9 +315,9 @@
   - **A2 – O Instrutor exclui uma aula**
     - A-2.1 O Instrutor aciona “Excluir” em uma aula.
     - A-2.2 O sistema verifica se há histórico de alunos na aula. (E-4)
-    - A-2.3 O sistema avisa que a aula e o vídeo serão removidos e pede confirmação.
+    - A-2.3 O sistema avisa que a aula deixará de aparecer no curso e pede confirmação.
     - A-2.4 O Instrutor confirma a exclusão. (A-3)
-    - A-2.5 O sistema remove a aula logicamente (`deleted_at`), marca a exclusão dos materiais vinculados e apaga o arquivo de vídeo do storage Cloudflare R2, atualizando a lista.
+    - A-2.5 O sistema remove a aula logicamente (`deleted_at`) e marca a exclusão lógica dos materiais vinculados; o arquivo de vídeo e os materiais permanecem no Cloudflare R2, preservados para o histórico, e a lista é atualizada.
     - A-2.6 Este caso de uso é finalizado.
 
     ![confirmação de exclusão da aula](prototipos/png/UC015/UC015-A2-1.png)
@@ -341,7 +335,7 @@
     - A-4.3 O sistema valida o formato e o tamanho do material. (E-5)
     - A-4.4 O arquivo é transmitido via API ao `media-service`, armazenado no Cloudflare R2 e registrado na tabela de materiais da aula (`LessonMaterial`).
     - A-4.5 O material fica disponível para download pelos alunos matriculados na aula.
-    - A-4.6 O Instrutor pode excluir um material complementar existente, o que marca a exclusão lógica do registro e remove o arquivo correspondente do storage.
+    - A-4.6 O Instrutor pode excluir um material complementar existente, o que marca a exclusão lógica do registro (`deleted_at`); o arquivo permanece no Cloudflare R2.
     - A-4.7 Este caso de uso é finalizado.
 - **Fluxos de exceção:**
   - **E1 – Formato ou tamanho de vídeo inválido**
@@ -354,7 +348,7 @@
     *Figura 0 – UC015, fluxo de exceção E1: erro "Formato não aceito" no vídeo*
   - **E2 – Falha no envio do vídeo ou no armazenamento**
     - E-2.1 O sistema identifica falha no envio do vídeo à API ou erro na comunicação com o `media-service`.
-    - E-2.2 O sistema informa o erro e permite nova tentativa de envio.
+    - E-2.2 O sistema responde 503 `SERVICE_UNAVAILABLE` com `Retry-After`, informa o erro e permite nova tentativa de envio.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 5).
 
     ![erro "Falha no envio" com botão "Tentar novamente"](prototipos/png/UC015/UC015-E2-1.png)
