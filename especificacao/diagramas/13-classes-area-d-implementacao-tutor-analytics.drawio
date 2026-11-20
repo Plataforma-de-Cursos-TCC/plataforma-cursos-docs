@@ -116,7 +116,7 @@
         <mxCell id="cls_DashboardAnalyticsService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardAnalyticsService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="820" y="520" width="380" height="116" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardAnalyticsService_attrs" value="-analyticsRepo: AnalyticsQueryRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardAnalyticsService">
+        <mxCell id="cls_DashboardAnalyticsService_attrs" value="-learningMetrics: LearningMetricsService (Área C)" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardAnalyticsService">
           <mxGeometry x="0" y="36" width="380" height="32" as="geometry" />
         </mxCell>
         <mxCell id="cls_DashboardAnalyticsService_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_DashboardAnalyticsService">
@@ -143,11 +143,11 @@
         <mxCell id="cls_TutorCreditPackRepository_methods" value="+findAvailablePack(userId: UUID): TutorCreditPack&lt;br&gt;+create(userId: UUID, packType: string, messagesTotal: int): TutorCreditPack&lt;br&gt;+consumeMessage(packId: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorCreditPackRepository">
           <mxGeometry x="0" y="36" width="380" height="96" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AnalyticsQueryRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AnalyticsQueryRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFD8A8;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1240" y="520" width="380" height="100" as="geometry" />
+        <mxCell id="cls_LearningMetricsService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LearningMetricsService (Área C)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;dashPattern=8 8;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="820" y="664" width="380" height="96" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AnalyticsQueryRepository_methods" value="+aggregateProgressAndEnrollments(courseIds: UUID[], start: Date, end: Date, groupBy: string): DashboardMetricsDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AnalyticsQueryRepository">
-          <mxGeometry x="0" y="36" width="380" height="64" as="geometry" />
+        <mxCell id="cls_LearningMetricsService_methods" value="+aggregateProgressAndEnrollments(courseIds: UUID[], startDate: Date, endDate: Date, groupBy: GroupBy): LearningActivityDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_LearningMetricsService">
+          <mxGeometry x="0" y="36" width="380" height="56" as="geometry" />
         </mxCell>
         <mxCell id="cls_DashboardFilterDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardFilterDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="1240" y="650" width="380" height="116" as="geometry" />
@@ -279,19 +279,22 @@
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_das_aqr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_DashboardAnalyticsService" target="cls_AnalyticsQueryRepository">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
+        <mxCell id="edge_das_lm" value="" style="rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_DashboardAnalyticsService" target="cls_LearningMetricsService">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_aqr_dfd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_AnalyticsQueryRepository" target="cls_DashboardFilterDTO">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_aqr_dmd" value="" style="rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="cls_AnalyticsQueryRepository" target="cls_DashboardMetricsDTO">
+        <mxCell id="edge_das_dfd" value="" style="rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.9;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_DashboardAnalyticsService" target="cls_DashboardFilterDTO">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="1640" y="570" />
-              <mxPoint x="1640" y="676" />
+              <mxPoint x="1220" y="624" />
+              <mxPoint x="1220" y="708" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_das_dmd" value="" style="rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_DashboardAnalyticsService" target="cls_DashboardMetricsDTO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1640" y="578" />
+              <mxPoint x="1640" y="707" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -404,8 +407,8 @@
         <mxCell id="typeicon_cls_TutorCreditPackRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="1246" y="330" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_AnalyticsQueryRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1246" y="528" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_LearningMetricsService_ext" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="826" y="672" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_DashboardFilterDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="1246" y="658" width="20" height="20" as="geometry" />
