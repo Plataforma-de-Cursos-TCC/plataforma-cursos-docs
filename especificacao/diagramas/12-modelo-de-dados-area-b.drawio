@@ -5,7 +5,7 @@
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="table_Category" value="Category" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_Category" value="categories" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="40" y="40" width="270" height="100" as="geometry" />
         </mxCell>
         <mxCell id="row_cat_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Category">
@@ -20,7 +20,7 @@
         <mxCell id="row_cat_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Category">
           <mxGeometry y="80" width="270" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_Course" value="Course" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_Course" value="courses" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="370" y="40" width="330" height="260" as="geometry" />
         </mxCell>
         <mxCell id="row_course_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course">
@@ -59,7 +59,7 @@
         <mxCell id="row_course_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course">
           <mxGeometry y="240" width="330" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_User" value="User (Área A)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#4A5568;strokeWidth=1.5;strokeDasharray=2 2;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_User" value="users (Área A)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#4A5568;strokeWidth=1.5;strokeDasharray=2 2;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="760" y="40" width="280" height="160" as="geometry" />
         </mxCell>
         <mxCell id="row_user_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_User">
@@ -83,7 +83,7 @@
         <mxCell id="row_user_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_User">
           <mxGeometry y="140" width="280" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_Module" value="Module" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_Module" value="modules" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="370" y="350" width="330" height="140" as="geometry" />
         </mxCell>
         <mxCell id="row_mod_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
@@ -104,7 +104,7 @@
         <mxCell id="row_mod_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
           <mxGeometry y="120" width="330" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_Lesson" value="Lesson" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_Lesson" value="lessons" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="40" y="550" width="300" height="280" as="geometry" />
         </mxCell>
         <mxCell id="row_les_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
@@ -146,8 +146,8 @@
         <mxCell id="row_les_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
           <mxGeometry y="260" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_LessonMaterial" value="LessonMaterial" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="870" width="300" height="200" as="geometry" />
+        <mxCell id="table_LessonMaterial" value="lesson_materials" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="890" width="300" height="200"  as="geometry" />
         </mxCell>
         <mxCell id="row_mat_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
@@ -176,7 +176,7 @@
         <mxCell id="row_mat_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
           <mxGeometry y="180" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_Quiz" value="Quiz" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_Quiz" value="quizzes" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="390" y="550" width="290" height="160" as="geometry" />
         </mxCell>
         <mxCell id="row_quiz_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Quiz">
@@ -200,7 +200,7 @@
         <mxCell id="row_quiz_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Quiz">
           <mxGeometry y="140" width="290" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_Question" value="Question" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_Question" value="questions" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="390" y="770" width="290" height="120" as="geometry" />
         </mxCell>
         <mxCell id="row_quest_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Question">
@@ -218,7 +218,7 @@
         <mxCell id="row_quest_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Question">
           <mxGeometry y="100" width="290" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_QuestionOption" value="QuestionOption" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_QuestionOption" value="question_options" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="750" y="770" width="280" height="140" as="geometry" />
         </mxCell>
         <mxCell id="row_opt_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption">
@@ -239,29 +239,29 @@
         <mxCell id="row_opt_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption">
           <mxGeometry y="120" width="280" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="note_integridade" value="&lt;b&gt;Regras de integridade e bloqueio de exclusão (Área C e ADR-0014):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;UC015 R-5:&lt;/b&gt; A exclusão de uma Lesson é bloqueada se houver registros em LessonProgress (progresso de alunos).&lt;br&gt;• &lt;b&gt;UC014 R-4:&lt;/b&gt; A exclusão de um Module é bloqueada se houver histórico de alunos (LessonProgress ou QuizAttempt).&lt;br&gt;• &lt;b&gt;UC006 R-2:&lt;/b&gt; A exclusão de um Course é bloqueada se houver matrículas ativas em Enrollment.&lt;br&gt;• &lt;b&gt;ADR-0014:&lt;/b&gt; Exclusão lógica com deleted_at em todas as tabelas de negócio; nenhum DELETE físico." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="1130" width="450" height="150" as="geometry" />
+        <mxCell id="note_integridade" value="&lt;b&gt;Regras de integridade e bloqueio de exclusão (Área C e ADR-0014):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;UC015 R-5:&lt;/b&gt; A exclusão de uma aula (lessons) é bloqueada se houver registros em lesson_progress (progresso de alunos).&lt;br&gt;• &lt;b&gt;UC014 R-4:&lt;/b&gt; A exclusão de um módulo (modules) é bloqueada se houver histórico de alunos (lesson_progress ou quiz_attempts).&lt;br&gt;• &lt;b&gt;UC006 R-2:&lt;/b&gt; A exclusão de um curso (courses) é bloqueada se houver matrículas ativas em enrollments.&lt;br&gt;• &lt;b&gt;ADR-0014:&lt;/b&gt; Exclusão lógica com deleted_at em todas as tabelas de negócio; nenhum DELETE físico." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1150" width="450" height="150"  as="geometry" />
         </mxCell>
-        <mxCell id="note_quiz_rules" value="&lt;b&gt;Relação Módulo–Quiz e Gabarito (TDD seção 2):&lt;/b&gt;&lt;br&gt;• Cada Quiz pertence a exatamente um Module (1 Module para 0..n Quizzes).&lt;br&gt;• &lt;b&gt;UC004 R-1:&lt;/b&gt; Toda Question precisa de ao menos 2 alternativas (QuestionOption), com exatamente uma marcada como correta (isCorrect = true).&lt;br&gt;• &lt;b&gt;UC004 R-2:&lt;/b&gt; A edição do gabarito preserva tentativas e notas anteriores já registradas em QuizAttempt." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="530" y="1130" width="500" height="150" as="geometry" />
+        <mxCell id="note_quiz_rules" value="&lt;b&gt;Relação Módulo–Quiz e Gabarito (TDD seção 2):&lt;/b&gt;&lt;br&gt;• Cada quiz (quizzes) pertence a exatamente um módulo (modules) (1 linha de modules para 0..n de quizzes).&lt;br&gt;• &lt;b&gt;UC004 R-1:&lt;/b&gt; Toda questão (questions) precisa de ao menos 2 alternativas (question_options), com exatamente uma marcada como correta (is_correct = true).&lt;br&gt;• &lt;b&gt;UC004 R-2:&lt;/b&gt; A edição do gabarito preserva tentativas e notas anteriores já registradas em quiz_attempts." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="530" y="1150" width="500" height="150"  as="geometry" />
         </mxCell>
-        <mxCell id="edge_course_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.15;entryX=1;entryY=0.4;" edge="1" parent="1" source="table_Course" target="table_Category">
+        <mxCell id="edge_course_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.3077;entryX=1;entryY=0.8;" edge="1" parent="1" source="table_Course" target="table_Category">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_cc_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="345" y="60" width="24" height="20" as="geometry" />
+          <mxGeometry x="344" y="96" width="24" height="20"  as="geometry" />
         </mxCell>
         <mxCell id="lbl_cc_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="315" y="60" width="24" height="20" as="geometry" />
+          <mxGeometry x="312" y="96" width="24" height="20"  as="geometry" />
         </mxCell>
-        <mxCell id="edge_course_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.15;entryX=0;entryY=0.25;" edge="1" parent="1" source="table_Course" target="table_User">
+        <mxCell id="edge_course_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.2308;entryX=0;entryY=0.375;" edge="1" parent="1" source="table_Course" target="table_User">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_cu_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="705" y="60" width="24" height="20" as="geometry" />
+          <mxGeometry x="702" y="76" width="24" height="20"  as="geometry" />
         </mxCell>
         <mxCell id="lbl_cu_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="735" y="60" width="24" height="20" as="geometry" />
+          <mxGeometry x="734" y="76" width="24" height="20"  as="geometry" />
         </mxCell>
         <mxCell id="edge_mod_course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="table_Module" target="table_Course">
           <mxGeometry relative="1" as="geometry" />
@@ -289,10 +289,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_ml_n" value="0..*" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="205" y="845" width="24" height="20" as="geometry" />
+          <mxGeometry x="196" y="862" width="34" height="20"  as="geometry" />
         </mxCell>
         <mxCell id="lbl_ml_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="205" y="815" width="24" height="20" as="geometry" />
+          <mxGeometry x="196" y="832" width="24" height="20"  as="geometry" />
         </mxCell>
         <mxCell id="edge_quiz_mod" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="table_Quiz" target="table_Module">
           <mxGeometry relative="1" as="geometry" />
@@ -312,14 +312,14 @@
         <mxCell id="lbl_qq_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="545" y="715" width="24" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_opt_quest" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="table_QuestionOption" target="table_Question">
+        <mxCell id="edge_opt_quest" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.4286;entryX=1;entryY=0.5;" edge="1" parent="1" source="table_QuestionOption" target="table_Question">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_oq_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="720" y="810" width="24" height="20" as="geometry" />
+          <mxGeometry x="722" y="808" width="24" height="20"  as="geometry" />
         </mxCell>
         <mxCell id="lbl_oq_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="685" y="810" width="24" height="20" as="geometry" />
+          <mxGeometry x="684" y="808" width="24" height="20"  as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
