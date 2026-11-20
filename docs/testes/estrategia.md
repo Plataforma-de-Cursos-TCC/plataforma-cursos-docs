@@ -78,7 +78,7 @@ A equipe adota o ciclo clássico de **TDD (Red → Green → Refactor)** como me
 | **Testes de Frontend (Unit e Componentes)** | **Vitest** + **React Testing Library** | Node.js LTS / Next.js | Execução ultrarrápida com suporte nativo a ESM e TypeScript, compatível com o ecossistema de componentes shadcn/ui e Tailwind. |
 | **Mock de APIs no Frontend** | **Mock Service Worker (MSW)** | Frontend / Testes | Intercepta requisições HTTP na camada de rede nos testes Vitest, permitindo simular contratos REST reais sem subir a API completa. |
 | **Testes Ponta a Ponta (E2E)** | **Playwright** | Chromium, Firefox, WebKit | Testes multiplataforma com gravação de traces, screenshots de falhas, suporte a fluxos assíncronos e simulação de responsividade móvel (RNF019). |
-| **Banco Efêmero de Testes** | **MySQL 8** (Service Container) | GitHub Actions CI | Garante fidelidade de tipos e restrições de integridade idênticas ao ambiente de produção. |
+| **Banco Efêmero de Testes** | **PostgreSQL 16** (Service Container) | GitHub Actions CI | Garante fidelidade de tipos e restrições de integridade idênticas ao ambiente de produção. |
 | **Banco Vetorial Efêmero** | **PostgreSQL 16 + pgvector** (Service Container) | GitHub Actions CI | Valida as consultas com `whereVectorSimilarTo()` do `ai-service` sem depender de banco SQLite incompatível com vetores. |
 
 ## 5. Testes do Tutor de IA (`ai-service`)
