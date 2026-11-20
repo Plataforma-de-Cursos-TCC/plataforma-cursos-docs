@@ -287,6 +287,54 @@
         <mxCell id="typeicon_ProgressResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="1211" width="20" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="LearningMetricsService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LearningMetricsService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1920" y="412" width="460" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="LearningMetricsService_body" value="+aggregateProgressAndEnrollments(courseIds: List&amp;lt;UUID&amp;gt;, startDate: Date, endDate: Date, groupBy: GroupBy): LearningActivityDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="LearningMetricsService">
+          <mxGeometry x="0" y="44" width="460" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="LearningActivityDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LearningActivityDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="2440" y="412" width="320" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="LearningActivityDTO_body" value="+enrollmentsByPeriod: Map&amp;lt;String,int&amp;gt;&lt;br&gt;+completedLessonsByPeriod: Map&amp;lt;String,int&amp;gt;&lt;br&gt;+quizAverageByPeriod: Map&amp;lt;String,float&amp;gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="LearningActivityDTO">
+          <mxGeometry x="0" y="44" width="320" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="GroupBy" value="&lt;b&gt;GroupBy&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1920" y="600" width="220" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="GroupBy_body" value="day&lt;br&gt;week&lt;br&gt;month" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="GroupBy">
+          <mxGeometry x="0" y="44" width="220" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="EnrollmentRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;EnrollmentRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1420" y="800" width="460" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lm_srv_prog" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=0;entryX=1;entryY=0.5;" edge="1" parent="1" source="LearningMetricsService" target="ProgressRepository">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lm_srv_quiz" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.5;entryX=1;entryY=0.5;" edge="1" parent="1" source="LearningMetricsService" target="QuizAttemptRepository">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lm_srv_enr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.826;exitY=1;entryX=1;entryY=0.5;" edge="1" parent="1" source="LearningMetricsService" target="EnrollmentRepository">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lm_srv_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=1;exitY=0.5;entryX=0;entryY=0.5;" edge="1" parent="1" source="LearningMetricsService" target="LearningActivityDTO">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lm_srv_enum" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;dashed=1;exitX=0.239;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="LearningMetricsService" target="GroupBy">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LearningMetricsService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1926" y="422" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_LearningActivityDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="2446" y="422" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_GroupBy" value="E" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1926" y="610" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_EnrollmentRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1426" y="810" width="20" height="20" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
