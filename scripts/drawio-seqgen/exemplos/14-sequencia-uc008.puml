@@ -11,7 +11,7 @@ skinparam BoxPadding 8
 
 actor "Administrador" as ADM
 boundary UserAdminView as V
-boundary UserController as C
+control UserController as C
 control UserAdminService as S
 control JwtGuard as J
 control AuditService as A
