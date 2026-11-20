@@ -234,8 +234,8 @@
         <mxCell value="DashboardAnalyticsService" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_48">
           <mxGeometry x="710" y="70" width="180" height="20" as="geometry" />
         </mxCell>
-        <mxCell value="LearningMetricsService" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_49">
-          <mxGeometry x="970" y="70" width="160" height="20" as="geometry" />
+        <mxCell value="LearningMetricsService (Área C)" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_49">
+          <mxGeometry x="950" y="70" width="200" height="20" as="geometry" />
         </mxCell>
         <mxCell value="seleciona startDate,&lt;br&gt;endDate, courseId e&lt;br&gt;groupBy" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_50">
           <mxGeometry x="120" y="140" width="130" height="60" as="geometry" />
