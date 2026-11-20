@@ -12,7 +12,7 @@ relacionados: [adr-0007, adr-0008]
 ---
 # ADR-0009 — Listagens com estado na URL, paginação obrigatória e resposta mínima
 
-- **Status:** aceita · **Data:** 09/10/2026 · **Decisor:** Grupo
+- **Status:** aceita · **Data:** 09/10/2026 · **Decisor:** Grupo · **Atualização:** o nome `per_page` do item 4 foi substituído por `perPage` na [ADR-0015](0015-convencao-de-nomes-por-camada.md)
 
 ## Contexto
 
