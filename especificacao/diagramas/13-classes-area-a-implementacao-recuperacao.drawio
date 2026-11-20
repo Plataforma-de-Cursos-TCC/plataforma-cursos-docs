@@ -1,118 +1,136 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Antigravity" version="24.7.17" compressed="false">
-  <diagram name="13-classes-area-a-implementacao-recuperacao" id="diagram_recuperacao">
-    <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="900" pageHeight="650" math="0" shadow="0">
+  <diagram id="diagram_recuperacao" name="13-classes-area-a-implementacao-recuperacao">
+    <mxGraphModel dx="1200" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="720" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="c_ForgotPasswordRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ForgotPasswordRequest&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="50" y="40" width="180" height="80" as="geometry" />
+        <mxCell id="ForgotPasswordRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ForgotPasswordRequest&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="40" y="40" width="190" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="c_ForgotPasswordRequest_m" value="+rules(): array" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="c_ForgotPasswordRequest">
-          <mxGeometry y="40" width="180" height="40" as="geometry" />
+        <mxCell id="typeicon_ForgotPasswordRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="46" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="c_AuthController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthController&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
+        <mxCell id="ForgotPasswordRequest_m" value="+rules(): array" vertex="1" parent="ForgotPasswordRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="AuthController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuthController&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="270" y="40" width="320" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="c_AuthController_m" value="+register(req: RegisterRequest): UserResource&lt;br&gt;+login(req: LoginRequest): UserResource&lt;br&gt;+me(): UserResource&lt;br&gt;+forgotPassword(req: ForgotPasswordRequest): void&lt;br&gt;+resetPassword(req: ResetPasswordRequest): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="c_AuthController">
-          <mxGeometry y="40" width="320" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="c_ResetPasswordRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ResetPasswordRequest&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="630" y="40" width="180" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="c_ResetPasswordRequest_m" value="+rules(): array" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="c_ResetPasswordRequest">
-          <mxGeometry y="40" width="180" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="c_PasswordResetService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PasswordResetService&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="270" y="240" width="320" height="100" as="geometry" />
-        </mxCell>
-        <mxCell id="c_PasswordResetService_m" value="+requestReset(email: string): void&lt;br&gt;+reset(token: string, newPassword: string): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="c_PasswordResetService">
-          <mxGeometry y="40" width="320" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="c_ResetMailer" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ResetMailer&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="380" width="260" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="c_ResetMailer_m" value="+sendLink(user: User, token: string): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="c_ResetMailer">
-          <mxGeometry y="40" width="260" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="c_UserRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserRepository&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="320" y="380" width="220" height="100" as="geometry" />
-        </mxCell>
-        <mxCell id="c_UserRepository_m" value="+findByEmail(email: string): User&lt;br&gt;+save(user: User): User" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="c_UserRepository">
-          <mxGeometry y="40" width="220" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="c_User" value="&lt;b&gt;User&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="370" y="540" width="120" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="c_PasswordResetTokenRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PasswordResetTokenRepository&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="560" y="380" width="280" height="120" as="geometry" />
-        </mxCell>
-        <mxCell id="c_PasswordResetTokenRepository_m" value="+issueFor(user: User): string&lt;br&gt;+findValid(token: string): PasswordResetToken&lt;br&gt;+save(token: PasswordResetToken): void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="c_PasswordResetTokenRepository">
-          <mxGeometry y="40" width="280" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="c_PasswordResetToken" value="&lt;b&gt;PasswordResetToken&lt;/b&gt;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=40;fillColor=#F2F2F2;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;strokeColor=#000000;strokeWidth=1.5;swimlaneFillColor=#FFFFFF;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="610" y="540" width="180" height="40" as="geometry" />
-        </mxCell>
-        <mxCell id="e_auth_forgot" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0;exitY=0.125;entryX=1;entryY=0.25;" edge="1" parent="1" source="c_AuthController" target="c_ForgotPasswordRequest">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e_auth_reset" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=1;exitY=0.125;entryX=0;entryY=0.25;" edge="1" parent="1" source="c_AuthController" target="c_ResetPasswordRequest">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e_auth_service" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="c_AuthController" target="c_PasswordResetService">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e_service_mailer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;exitX=0.15625;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="c_PasswordResetService" target="c_ResetMailer">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="320" y="360" />
-              <mxPoint x="170" y="360" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e_service_userrepo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="c_PasswordResetService" target="c_UserRepository">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e_service_tokenrepo" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;exitX=0.84375;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="c_PasswordResetService" target="c_PasswordResetTokenRepository">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="540" y="360" />
-              <mxPoint x="700" y="360" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="e_userrepo_user" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="c_UserRepository" target="c_User">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="e_tokenrepo_token" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="c_PasswordResetTokenRepository" target="c_PasswordResetToken">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_c_ForgotPasswordRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="56" y="50" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_c_AuthController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="typeicon_AuthController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="276" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_c_ResetPasswordRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="AuthController_m" value="+register(req: RegisterRequest): UserResource&lt;br&gt;+login(req: LoginRequest): UserResource&lt;br&gt;+me(): UserResource&lt;br&gt;+forgotPassword(req: ForgotPasswordRequest): void&lt;br&gt;+resetPassword(req: ResetPasswordRequest): void" vertex="1" parent="AuthController" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40" width="320" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="ResetPasswordRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ResetPasswordRequest&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="630" y="40" width="190" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ResetPasswordRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="636" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_c_PasswordResetService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="ResetPasswordRequest_m" value="+rules(): array" vertex="1" parent="ResetPasswordRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40" width="190" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="PasswordResetService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PasswordResetService&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="270" y="240" width="320" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PasswordResetService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="276" y="250" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_c_ResetMailer" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="PasswordResetService_m" value="+requestReset(email: string): void&lt;br&gt;+reset(token: string, newPassword: string): void" vertex="1" parent="PasswordResetService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ResetMailer" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ResetMailer&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="40" y="380" width="250" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_ResetMailer" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="46" y="390" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_c_UserRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="326" y="390" width="20" height="20" as="geometry" />
+        <mxCell id="ResetMailer_m" value="+sendLink(user: User, token: string): void" vertex="1" parent="ResetMailer" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40" width="250" height="40" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_c_User" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="376" y="550" width="20" height="20" as="geometry" />
+        <mxCell id="UserRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserRepository&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="310" y="380" width="360" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_c_PasswordResetTokenRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="566" y="390" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_UserRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="316" y="390" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_c_PasswordResetToken" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="616" y="550" width="20" height="20" as="geometry" />
+        <mxCell id="UserRepository_m" value="+findByEmail(email: string): User&lt;br&gt;+save(user: User): User&lt;br&gt;+paginate(filters: UserFiltersDTO): LengthAwarePaginator&lt;br&gt;+updateStatus(id: UUID, status: UserStatus): void&lt;br&gt;+updateRole(id: UUID, role: Role): void&lt;br&gt;+softDelete(id: UUID): void&lt;br&gt;+restore(id: UUID): void&lt;br&gt;+anonymize(id: UUID): void" vertex="1" parent="UserRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40" width="360" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="PasswordResetTokenRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PasswordResetTokenRepository&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="690" y="380" width="290" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PasswordResetTokenRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="696" y="390" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="PasswordResetTokenRepository_m" value="+issueFor(user: User): string&lt;br&gt;+findValid(token: string): PasswordResetToken&lt;br&gt;+save(token: PasswordResetToken): void" vertex="1" parent="PasswordResetTokenRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40" width="290" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="User" value="&lt;b&gt;User&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="430" y="620" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_User" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="436" y="630" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="PasswordResetToken" value="&lt;b&gt;PasswordResetToken&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="745" y="540" width="180" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_PasswordResetToken" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="751" y="550" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_box" value="&lt;b&gt;Legenda de Papéis&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=25;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;collapsible=0;rounded=0;">
+          <mxGeometry x="840" y="40" width="220" height="240" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_0" value="&lt;b&gt;Controller&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="20" y="35" width="180" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_1" value="&lt;b&gt;Service&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="20" y="75" width="180" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_2" value="&lt;b&gt;Repository&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="20" y="115" width="180" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_3" value="&lt;b&gt;DTO / Request&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#E1D5E7;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="20" y="155" width="180" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_4" value="&lt;b&gt;Entity&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="20" y="195" width="180" height="28" as="geometry" />
+        </mxCell>
+        <mxCell id="e_auth_forgot" value="" edge="1" parent="1" source="AuthController" target="ForgotPasswordRequest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0;exitY=0.25;entryX=1;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_auth_reset" value="" edge="1" parent="1" source="AuthController" target="ResetPasswordRequest" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=1;exitY=0.25;entryX=0;entryY=0.5;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_auth_service" value="" edge="1" parent="1" source="AuthController" target="PasswordResetService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;endSize=6;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_service_mailer" value="" edge="1" parent="1" source="PasswordResetService" target="ResetMailer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;endSize=6;exitX=0.15;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="318" y="360" />
+              <mxPoint x="165" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_service_userrepo" value="" edge="1" parent="1" source="PasswordResetService" target="UserRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;endSize=6;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_service_tokenrepo" value="" edge="1" parent="1" source="PasswordResetService" target="PasswordResetTokenRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;endSize=6;exitX=0.85;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="542" y="360" />
+              <mxPoint x="835" y="360" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_userrepo_user" value="" edge="1" parent="1" source="UserRepository" target="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tokenrepo_token" value="" edge="1" parent="1" source="PasswordResetTokenRepository" target="PasswordResetToken" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
