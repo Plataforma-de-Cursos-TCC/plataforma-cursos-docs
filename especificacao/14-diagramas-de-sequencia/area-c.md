@@ -4,7 +4,7 @@ Diagramas de sequência para os casos de uso prioritários da Área C (UC003, UC
 
 ## 1. UC003 – Matricular-se em Curso
 
-Fluxo básico e alternativos A1 (Aluno já matriculado, exibindo botão "Continuar assistindo") e A2 (curso gratuito gerando matrícula com status `active` imediata, sem acionar gateway simulado; resposta `201 Created`). Em curso pago, gera matrícula inicial `pending` (resposta `201 Created`) e aciona o UC019. Exceção E1 trata a despublicação do curso durante a tentativa de matrícula, retornando `409 CONFLICT`.
+Fluxo básico e alternativos A1 (Aluno já tem matrícula no curso: se ativa, exibe o botão "Continuar assistindo"; se pendente, exibe "Matricule-se", que retoma o pagamento da mesma matrícula sem criar nova linha) e A2 (curso gratuito gerando matrícula com status `active` imediata, sem acionar gateway simulado; resposta `201 Created`). Em curso pago, gera matrícula inicial `pending` (resposta `201 Created`) e aciona o UC019. Exceção E1 trata a despublicação do curso durante a tentativa de matrícula, retornando `409 CONFLICT`.
 
 ![Diagrama de sequência do UC003](../diagramas/14-sequencia-uc003.png)
 

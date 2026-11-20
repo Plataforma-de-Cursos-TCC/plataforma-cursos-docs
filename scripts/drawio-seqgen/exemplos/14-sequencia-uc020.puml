@@ -1,7 +1,7 @@
 ' Item 14 - Diagrama de sequência do UC020 Consultar Catálogo de Cursos. Mensagens e métodos do item 13.
 ' Gerar: python3 scripts/drawio-seqgen/seqgen.py <este arquivo> especificacao/diagramas/14-sequencia-uc020.drawio
 @startuml 14-sequencia-uc020
-actor "Visitante/Aluno" as P0
+actor Visitante as P0
 boundary CatalogoView
 control CatalogController
 control CatalogFilterRequest

@@ -13,7 +13,7 @@ Aluno -> AvaliarCursoModal ++ : aciona "Avaliar curso" na página do curso
 AvaliarCursoModal -> ReviewController ++ : me( courseId )
 ReviewController -> ReviewService ++ : getStudentReview( userId, courseId )
 ReviewService -> ReviewRepository ++ : findByUserAndCourse( userId, courseId )
-ReviewRepository -> BD ++ : SELECT reviews WHERE userId AND courseId
+ReviewRepository -> BD ++ : SELECT reviews WHERE user_id AND course_id
 BD --> ReviewRepository : review
 ReviewRepository --> ReviewService : review (ou null)
 ReviewService --> ReviewController : review (ou null)
@@ -46,11 +46,11 @@ else Aluno elegível
 ReviewService -> Review ++ : update( rating, comment )
 Review --> ReviewService : review
 ReviewService -> ReviewRepository ++ : save( review )
-ReviewRepository -> BD ++ : INSERT INTO reviews ON DUPLICATE KEY UPDATE
+ReviewRepository -> BD ++ : INSERT INTO reviews ON CONFLICT (user_id, course_id) DO UPDATE
 BD --> ReviewRepository
 ReviewRepository --> ReviewService
 ReviewService -> ReviewService : averageRatingByCourse(courseId )
-ReviewService -> BD ++ : SELECT AVG(rating) FROM reviews WHERE courseId
+ReviewService -> BD ++ : SELECT AVG(rating) FROM reviews WHERE course_id
 BD --> ReviewService
 ReviewService --> ReviewController : review salva
 ReviewController --> AvaliarCursoModal : 200 OK (ReviewResource)

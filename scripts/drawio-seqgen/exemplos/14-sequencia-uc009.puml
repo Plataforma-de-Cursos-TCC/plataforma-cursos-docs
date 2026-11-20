@@ -1,7 +1,8 @@
 ' Item 14 - Diagrama de sequência do UC009 Assistir Aula. Mensagens e métodos do item 13.
 ' Gerar: python3 scripts/drawio-seqgen/seqgen.py <este arquivo> especificacao/diagramas/14-sequencia-uc009.drawio
 @startuml 14-sequencia-uc009
-actor Usuário
+actor Aluno
+actor Visitante
 boundary AulaPlayerView
 control LessonPlayerController
 control LessonProgressService
@@ -9,40 +10,49 @@ control MediaService
 entity LessonProgress
 control ProgressRepository
 database BD
-Usuário -> AulaPlayerView ++ : acessa a aula do curso
+alt A4 - Visitante assiste a aula prévia (sem login)
+Visitante -> AulaPlayerView ++ : acessa a aula marcada como prévia
+AulaPlayerView -> LessonPlayerController ++ : stream( lessonId )
+LessonPlayerController -> LessonProgressService ++ : getStreamUrl( null, lessonId )
+LessonProgressService -> LessonProgressService : checkEnrollmentOrPreview( null, lessonId )
+LessonProgressService -> MediaService ++ : generateSignedStreamUrl( videoKey )
+MediaService --> LessonProgressService : url assinada Cloudflare R2 (15 min)
+LessonProgressService --> LessonPlayerController : { streamUrl }
+LessonPlayerController --> AulaPlayerView : 200 OK (LessonStreamResource)
+AulaPlayerView --> Visitante : reproduz sem registrar progresso
+else Aluno
+Aluno -> AulaPlayerView ++ : acessa a aula do curso
 AulaPlayerView -> LessonPlayerController ++ : stream( lessonId )
 LessonPlayerController -> LessonProgressService ++ : getStreamUrl( userId, lessonId )
 LessonProgressService -> LessonProgressService : checkEnrollmentOrPreview( userId, lessonId )
 alt E1 - sem matrícula e aula não é prévia
 LessonProgressService --> LessonPlayerController : 403 FORBIDDEN
 LessonPlayerController --> AulaPlayerView : 403 FORBIDDEN
-AulaPlayerView --> Usuário : bloqueia vídeo e sugere matrícula no curso (UC003)
-else Aluno matriculado ou aula prévia (A4)
+AulaPlayerView --> Aluno : bloqueia vídeo e sugere matrícula no curso (UC003)
+else Aluno matriculado
 LessonProgressService -> MediaService ++ : generateSignedStreamUrl( videoKey )
 MediaService --> LessonProgressService : url assinada Cloudflare R2 (15 min)
 alt E2 - falha ao carregar o vídeo
 LessonProgressService --> LessonPlayerController : 503 SERVICE_UNAVAILABLE
 LessonPlayerController --> AulaPlayerView : 503 SERVICE_UNAVAILABLE
-AulaPlayerView --> Usuário : informa erro no vídeo e oferece tentar novamente
+AulaPlayerView --> Aluno : informa erro no vídeo e oferece tentar novamente
 else vídeo disponível
-LessonProgressService -> ProgressRepository ++ : findByEnrollmentAndLesson( enrId, lessonId )
-ProgressRepository -> BD ++ : SELECT lesson_progress WHERE enrollmentId AND lessonId
+LessonProgressService -> ProgressRepository ++ : findByEnrollmentAndLesson( enrollmentId, lessonId )
+ProgressRepository -> BD ++ : SELECT lesson_progress WHERE enrollment_id AND lesson_id
 BD --> ProgressRepository : progresso anterior
 ProgressRepository --> LessonProgressService : progresso (ou null)
 LessonProgressService --> LessonPlayerController : { streamUrl, watchedSeconds }
 LessonPlayerController --> AulaPlayerView : 200 OK (LessonStreamResource)
 alt A2 - retoma aula já iniciada
-AulaPlayerView --> Usuário : reproduz o vídeo a partir do ponto salvo
-else A4 - visitante em aula prévia
-AulaPlayerView --> Usuário : reproduz sem registrar progresso
+AulaPlayerView --> Aluno : reproduz o vídeo a partir do ponto salvo
 else início do vídeo
-AulaPlayerView --> Usuário : reproduz a partir do início
+AulaPlayerView --> Aluno : reproduz a partir do início
 end
 alt A1 - Aluno sai antes do fim
-Usuário -> AulaPlayerView ++ : pausa ou sai da tela
+Aluno -> AulaPlayerView ++ : pausa ou sai da tela
 AulaPlayerView -> LessonPlayerController ++ : updateProgress( lessonId, req )
 LessonPlayerController -> LessonProgressService ++ : recordProgress( userId, lessonId, dto )
-LessonProgressService -> LessonProgress ++ : updateProgress( seconds, false )
+LessonProgressService -> LessonProgress ++ : updateProgress( watchedSeconds, false )
 LessonProgress --> LessonProgressService
 LessonProgressService -> ProgressRepository ++ : save( progress )
 ProgressRepository -> BD ++ : UPDATE/INSERT lesson_progress
@@ -50,20 +60,21 @@ BD --> ProgressRepository
 ProgressRepository --> LessonProgressService
 LessonProgressService --> LessonPlayerController : ok
 LessonPlayerController --> AulaPlayerView : 200 OK
-AulaPlayerView --> Usuário : salva segundos assistidos e encerra
+AulaPlayerView --> Aluno : salva segundos assistidos e encerra
 else vídeo assistido até o fim
-Usuário -> AulaPlayerView ++ : assiste até o término do vídeo
+Aluno -> AulaPlayerView ++ : assiste até o término do vídeo
 AulaPlayerView -> LessonPlayerController ++ : updateProgress( lessonId, req )
 LessonPlayerController -> LessonProgressService ++ : recordProgress( userId, lessonId, dto )
 LessonProgressService -> LessonProgress ++ : markCompleted()
 LessonProgress --> LessonProgressService
 LessonProgressService -> ProgressRepository ++ : save( progress )
-ProgressRepository -> BD ++ : UPDATE lesson_progress SET completed=true, completedAt=NOW()
+ProgressRepository -> BD ++ : UPDATE lesson_progress SET completed = true, completed_at = NOW()
 BD --> ProgressRepository
 ProgressRepository --> LessonProgressService
 LessonProgressService --> LessonPlayerController : ok
 LessonPlayerController --> AulaPlayerView : 200 OK
-AulaPlayerView --> Usuário : marca aula como concluída e atualiza progresso
+AulaPlayerView --> Aluno : marca aula como concluída e atualiza progresso
+end
 end
 end
 end

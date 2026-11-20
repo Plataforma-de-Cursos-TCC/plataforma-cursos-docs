@@ -21,7 +21,7 @@ QuizAttemptController --> QuizView : 403 FORBIDDEN
 QuizView --> Aluno : bloqueia quiz e indica aulas pendentes
 else aulas concluídas
 QuizAttemptService -> QuizAttemptRepository ++ : findLatestByEnrollmentAndQuiz(enrId, quizId)
-QuizAttemptRepository -> BD ++ : SELECT quiz_attempts WHERE enrollmentId AND quizId
+QuizAttemptRepository -> BD ++ : SELECT quiz_attempts WHERE enrollment_id AND quiz_id AND status = 'submitted'
 BD --> QuizAttemptRepository : tentativa anterior
 QuizAttemptRepository --> QuizAttemptService : attempt (ou null)
 alt A1 - quiz já respondido anteriormente
@@ -62,7 +62,7 @@ else correção automática bem-sucedida
 QuizAttemptService -> QuizAttempt ++ : submit( score, submittedAt )
 QuizAttempt --> QuizAttemptService : attempt
 QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers( attempt, answers )
-QuizAttemptRepository -> BD ++ : INSERT INTO quiz_attempts, quiz_answers
+QuizAttemptRepository -> BD ++ : UPDATE quiz_attempts (draft vira submitted) e INSERT quiz_answers
 BD --> QuizAttemptRepository : ok
 QuizAttemptRepository --> QuizAttemptService : attempt corrigido
 QuizAttemptService --> QuizAttemptController : QuizAttempt
