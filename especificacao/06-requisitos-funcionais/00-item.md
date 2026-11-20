@@ -7,7 +7,7 @@
 | RF001 | Gerenciar conta de usuário (cadastro e edição dos dados do perfil) | Visitante, Usuário | Sprint 1 |
 | RF002 | Gerenciar cadastro do curso | Instrutor | Sprint 2 |
 | RF003 | Gerenciar módulos do curso | Instrutor | Sprint 2 |
-| RF004 | Gerenciar aulas do curso (com upload de vídeo) | Instrutor | Sprint 2 |
+| RF004 | Gerenciar aulas do curso (com upload de vídeo e material complementar) | Instrutor | Sprint 2 |
 | RF005 | Registrar matrícula do aluno no curso | Aluno | Sprint 1 |
 | RF006 | Registrar progresso de aula assistida | Aluno | Sprint 2 |
 | RF007 | Gerenciar quizzes do curso | Instrutor | Sprint 3 |
