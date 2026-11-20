@@ -26,7 +26,7 @@ alt A1 - Administrador cancela na confirmação (R-3)
 else confirma a exclusão
   ADM -> V ++ : confirma exclusão
   V -> C ++ : destroy(id)
-  C -> S ++ : deleteAndAnonymize(adminId, targetId)
+  C -> S ++ : softDelete(adminId, targetId)
   alt E1 - tentativa de excluir a própria conta (R-2)
     S --> C : 403 FORBIDDEN
     C --> V : 403 FORBIDDEN
@@ -39,13 +39,13 @@ else confirma a exclusão
     S -> R ++ : softDelete(targetId)
     R -> BD ++ : UPDATE users SET deleted_at = NOW()
     BD --> R : ok
-    opt instrutor com cursos ativos
+    opt A4 - instrutor com cursos publicados (matriculados mantêm acesso)
       S -> BD ++ : UPDATE courses SET status='archived' WHERE instructor_id=targetId
       BD --> S : ok
     end
     S -> J ++ : revoke( jti, ttl )
     J --> S : ok (invalida jti no Redis blocklist)
-    S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW()
+    S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
     BD --> S : ok
     S -> A ++ : logAction( adminId, USER_DELETE, "User", targetId )
     A -> BD ++ : INSERT INTO audit_logs (RNF016)
@@ -55,5 +55,44 @@ else confirma a exclusão
     C --> V : 204 No Content
     V --> ADM : exibe confirmação e remove usuário da lista ativa
   end
+else A2 - reativação de conta excluída (PATCH restore)
+  ADM -> V ++ : aciona "Reativar" na conta excluída
+  V -> C ++ : restore(id)
+  C -> S ++ : restore( adminId, targetId )
+  S -> R ++ : restore( targetId )
+  R -> BD ++ : UPDATE users SET deleted_at = NULL
+  BD --> R : ok
+  R --> S : user
+  S -> A ++ : logAction( adminId, USER_RESTORE, "User", targetId )
+  A -> BD ++ : INSERT INTO audit_logs (RNF016)
+  BD --> A : ok
+  A --> S : auditLog
+  S --> C : user
+  C --> V : 200 OK (UserAdminResource)
+  V --> ADM : conta reativada com status active
+else A3 - anonimização irreversível (LGPD)
+  ADM -> V ++ : aciona "Anonimizar" na conta excluída
+  V -> C ++ : anonymize(id)
+  C -> S ++ : anonymize( targetId )
+  S -> R ++ : anonymize( targetId )
+  R -> BD ++ : UPDATE users SET nome, e-mail, documento, anonymized_at=NOW() (user_id preservado)
+  BD --> R : ok
+  R --> S : ok
+  S -> A ++ : logAction( adminId, USER_ANONYMIZE, "User", targetId )
+  A -> BD ++ : INSERT INTO audit_logs (RNF016)
+  BD --> A : ok
+  A --> S : auditLog
+  S --> C : void
+  C --> V : 204 No Content
+  V --> ADM : anonimização concluída e registrada
+else E3 - reativar conta já anonimizada
+  ADM -> V ++ : aciona "Reativar" em conta anonimizada
+  V -> C ++ : restore(id)
+  C -> S ++ : restore( adminId, targetId )
+  S -> R ++ : findById( targetId )
+  R --> S : user com anonymized_at preenchido
+  S --> C : 422 VALIDATION_FAILED (fields.user)
+  C --> V : 422 VALIDATION_FAILED
+  V --> ADM : anonimização é irreversível pela LGPD
 end
 @enduml

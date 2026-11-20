@@ -16,12 +16,13 @@ control JwtGuard as J
 control AuditService as A
 control ProtectedAreaController as P
 database BD
+database Redis as RD
 
 USU -> V ++ : navega para rota de área protegida
 V -> E ++ : handle( req, next, requiredRole )
 E -> J ++ : parseToken(token)
-J -> BD ++ : valida assinatura e checa Redis blocklist
-BD --> J -- : token válido?
+J -> RD ++ : valida assinatura e consulta blocklist de jti
+RD --> J -- : token válido?
 J --> E -- : User (ou nulo / revogado)
 alt E1 - sessão ausente, expirada ou na blocklist do Redis
   E --> V : 401 UNAUTHENTICATED
@@ -31,7 +32,7 @@ else token válido
   J --> E : autorizado?
   alt E2 - perfil sem permissão na rota (R-2)
     E -> A ++ : logAccessDenied( userId, targetArea, requiredRole )
-    A -> BD ++ : INSERT INTO audit_logs (ACTION=ACCESS_DENIED, RNF016)
+    A -> BD ++ : INSERT INTO audit_logs (ACCESS_DENIED, RNF016)
     BD --> A : ok
     A --> E : auditLog
     E --> V : 403 FORBIDDEN

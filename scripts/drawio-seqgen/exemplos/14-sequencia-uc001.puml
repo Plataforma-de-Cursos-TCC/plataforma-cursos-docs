@@ -15,15 +15,16 @@ control TutorController as C
 control TutorService as S
 control TutorRateLimiter as T
 control TutorCreditPackRepository as CP
+control ConversationRepository as CV
 control CourseTutorClient as CT
 control MessageRepository as MR
 database BD
 
 ALU -> V ++ : envia pergunta (com videoTimestampSeconds opcional)
 V -> C ++ : chat(req: AskTutorRequest)
-C -> S ++ : ask( userId, lessonId, prompt, timestamp )
+C -> S ++ : ask( userId, lessonId, prompt, videoTimestampSeconds? )
 S -> T ++ : checkLimit(userId)
-T --> S -- : cota ok? (20 msg/h janela deslizante)
+T --> S -- : cota ok? (20 msg/h por Aluno, janela deslizante)
 alt E4 - Aluno sem matrícula no curso
   S --> C : 403 FORBIDDEN
   C --> V : 403 FORBIDDEN
@@ -32,23 +33,37 @@ else E1 - aula ainda não indexada
   S --> C : 409 LESSON_NOT_INDEXED
   C --> V : 409 LESSON_NOT_INDEXED
   V --> ALU : informa conteúdo em preparo
-else cota horária excedida
+else E2 - cota horária esgotada e sem mensagens extras
+  S -> T ++ : incrementAndGetWaitSeconds(userId)
+  T --> S -- : waitSeconds (Retry-After)
   S -> CP ++ : findAvailablePack(userId)
-  CP -> BD ++ : SELECT tutor_credit_packs WHERE credits_remaining > 0
-  BD --> CP : pack (ou nulo)
-  CP --> S : pack
-  alt créditos extras disponíveis
-    S -> CP ++ : decrementCredits(packId)
-    CP -> BD ++ : UPDATE tutor_credit_packs SET credits_remaining = credits_remaining - 1
+  CP -> BD ++ : SELECT tutor_credit_packs WHERE messages_used < messages_total
+  BD --> CP : nulo
+  CP --> S : nulo
+  S --> C : 429 TOO_MANY_REQUESTS (Retry-After)
+  C --> V : 429 TOO_MANY_REQUESTS (Retry-After)
+  V --> ALU : bloqueia envio, informa espera e oferta pacote extra
+else pergunta liberada (cota ok ou pacote extra com mensagem)
+  opt cota horária esgotada, consome mensagem do pacote extra
+    S -> CP ++ : findAvailablePack(userId)
+    CP -> BD ++ : SELECT tutor_credit_packs WHERE messages_used < messages_total
+    BD --> CP : pack
+    CP --> S : pack
+    S -> CP ++ : consumeMessage(packId)
+    CP -> BD ++ : UPDATE tutor_credit_packs SET messages_used = messages_used + 1 WHERE messages_used < messages_total
     BD --> CP : ok
     CP --> S : ok
-  else E2 - sem cota e sem créditos extras
-    S --> C : 429 TOO_MANY_REQUESTS (Retry-After)
-    C --> V : 429 TOO_MANY_REQUESTS (Retry-After)
-    V --> ALU : bloqueia envio, informa espera e oferta pacote extra
   end
-end
-opt pergunta liberada
+  S -> CV ++ : findByUserAndLesson( userId, lessonId )
+  CV -> BD ++ : SELECT conversations WHERE user_id AND lesson_id
+  BD --> CV : conversa (ou nula)
+  CV --> S : conversation
+  opt conversa inexistente
+    S -> CV ++ : create( userId, lessonId )
+    CV -> BD ++ : INSERT INTO conversations (UNIQUE(user_id, lesson_id))
+    BD --> CV : ok
+    CV --> S : conversation
+  end
   S -> CT ++ : streamRagResponse( courseId, lessonId, prompt, locale )
   alt E3 - falha no serviço de IA
     CT --> S : 503 SERVICE_UNAVAILABLE (Retry-After)
@@ -57,11 +72,11 @@ opt pergunta liberada
     V --> ALU : informa erro e permite tentar novamente
   else resposta gerada com sucesso
     CT --> S : stream de resposta RAG com timestamps
-    S -> MR ++ : create(MessageDTO): pergunta do Aluno
+    S -> MR ++ : create( conversationId, role=user, content, videoTimestampSeconds? )
     MR -> BD ++ : INSERT INTO messages
     BD --> MR : ok
     MR --> S : message
-    S -> MR ++ : create(MessageDTO): resposta do Tutor
+    S -> MR ++ : create( conversationId, role=assistant, content, videoTimestampSeconds? )
     MR -> BD ++ : INSERT INTO messages
     BD --> MR : ok
     MR --> S : message

@@ -53,16 +53,21 @@ else confirmação de bloqueio ou desbloqueio
     R -> BD ++ : UPDATE users SET status
     BD --> R : ok
     R --> S : user
-    opt bloqueio de usuário
+    alt bloquear (status blocked)
       S -> J ++ : revoke( jti, ttl )
       J --> S : ok (jti no Redis blocklist)
-      S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW()
+      S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
       BD --> S : ok
+      S -> A ++ : logAction( adminId, USER_BLOCK, "User", targetId )
+      A -> BD ++ : INSERT INTO audit_logs (RNF016)
+      BD --> A : ok
+      A --> S : auditLog
+    else desbloquear (status active, sem revogação)
+      S -> A ++ : logAction( adminId, USER_UNBLOCK, "User", targetId )
+      A -> BD ++ : INSERT INTO audit_logs (RNF016)
+      BD --> A : ok
+      A --> S : auditLog
     end
-    S -> A ++ : logAction( adminId, ACTION, "User", targetId )
-    A -> BD ++ : INSERT INTO audit_logs (RNF016)
-    BD --> A : ok
-    A --> S : auditLog
     S --> C : user
     C --> V : 200 OK (UserAdminResource)
     V --> ADM : status atualizado e registrado em auditoria
@@ -83,6 +88,8 @@ else A4 - alteração de perfil (US016)
       S -> BD ++ : INSERT INTO instructor_profiles (user_id)
       BD --> S : ok
     end
+    S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
+    BD --> S : ok
     S -> J ++ : revoke( jti, ttl )
     J --> S : ok (invalida JWT antigo no Redis)
     S -> A ++ : logAction( adminId, ROLE_CHANGE, "User", targetId )
