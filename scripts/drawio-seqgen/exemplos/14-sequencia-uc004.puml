@@ -1,0 +1,42 @@
+' Item 14 - Diagrama de sequência do UC004 Cadastrar Quiz com Gabarito (ADR-0013). Reconstruído do .drawio atual.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc004.puml especificacao/diagramas/14-sequencia-uc004.drawio
+@startuml 14-sequencia-uc004
+
+actor Instrutor as INS
+boundary QuizView as V
+control InstructorQuizController as C
+control CreateQuizRequest as Q
+control QuizAuthoringService as S
+control QuizRepositoryInterface as R
+database BD
+
+alt A3 - o Instrutor cancela o cadastro do quiz
+  INS -> V ++ : aciona "Cancelar"
+  V --> INS -- : descarta alterações e retorna ao módulo
+else o Instrutor confirma o cadastro
+  INS -> V ++ : aciona "Salvar quiz"
+  V -> C ++ : store(moduleId, req: CreateQuizRequest)
+  C -> Q ++ : rules()
+  Q --> C -- : erros de validação
+  C -> S ++ : validateQuestions(dto: QuizDTO)
+  S --> C -- : resultado da validação
+  alt E1 - pergunta com menos de duas alternativas (R-1)
+    C --> V : 422 VALIDATION_FAILED (fields.options)
+    V --> INS : informa que cada pergunta requer ao menos duas opções
+  else E2 - pergunta sem alternativa correta (R-1)
+    C --> V : 422 VALIDATION_FAILED (fields.isCorrect)
+    V --> INS : informa que exatamente uma alternativa deve ser correta
+  else dados válidos
+    C -> S ++ : create(moduleId, instructorId, dto: QuizDTO)
+    S -> R ++ : save(quiz: Quiz)
+    R -> BD ++ : INSERT INTO quizzes, questions, question_options
+    BD --> R -- : ok
+    R --> S -- : quiz
+    S --> C -- : quiz
+    C --> V : 201 Created (QuizResource)
+    V --> INS : exibe quiz cadastrado no módulo
+  end
+  deactivate C
+  deactivate V
+end
+@enduml

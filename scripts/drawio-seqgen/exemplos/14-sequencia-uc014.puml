@@ -1,0 +1,76 @@
+' Item 14 - Diagrama de sequência do UC014 Gerenciar Módulos do Curso. Reconstruído do .drawio atual.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc014.puml especificacao/diagramas/14-sequencia-uc014.drawio
+@startuml 14-sequencia-uc014
+
+actor Instrutor as INS
+boundary ModuloView as V
+control ModuleController as C
+control CreateModuleRequest as Q
+control ModuleService as S
+control ModuleRepositoryInterface as R
+database BD
+
+INS -> V ++ : acessa o módulo
+alt cadastro de novo módulo
+  INS -> V : informa título, ordem e aciona "Salvar módulo"
+  V -> C ++ : store(courseId, req: CreateModuleRequest)
+  C -> Q ++ : rules()
+  Q --> C -- : erros de validação
+  alt E1 - título ausente
+    C --> V : 422 VALIDATION_FAILED (fields.title)
+    V --> INS : indica que o título é obrigatório
+  else dados válidos
+    C -> S ++ : create(courseId, instructorId, dto: ModuleDTO)
+    S -> R ++ : isOrderTaken(courseId, order)
+    R -> BD ++ : SELECT id FROM modules WHERE course_id e order
+    BD --> R -- : registro encontrado?
+    R --> S -- : boolean
+    alt E2 - posição já utilizada no curso (R-2)
+      S --> C : conflito de posição
+      C --> V : 422 VALIDATION_FAILED (fields.order)
+      V --> INS : informa que a posição já está em uso
+    else posição disponível
+      S -> R ++ : save(module: Module)
+      R -> BD ++ : INSERT INTO modules
+      BD --> R -- : ok
+      R --> S -- : module
+      S --> C : module
+      C --> V : 201 Created (ModuleResource)
+      V --> INS : exibe novo módulo na lista
+    end
+    deactivate S
+  end
+  deactivate C
+  deactivate V
+else exclusão de módulo existente (A2)
+  INS -> V : aciona "Excluir módulo"
+  V --> INS : exibe diálogo de confirmação
+  alt A3 - o Instrutor cancela a exclusão
+    INS -> V : aciona "Cancelar" no diálogo
+    V --> INS : encerra sem alterar o módulo
+  else o Instrutor confirma a exclusão
+    INS -> V : confirma exclusão
+    V -> C ++ : destroy(id: UUID)
+    C -> S ++ : delete(moduleId, instructorId)
+    S -> R ++ : hasStudentHistory(id: UUID)
+    R -> BD ++ : SELECT progresso em aulas e respostas de quiz
+    BD --> R -- : registros encontrados?
+    R --> S -- : boolean
+    alt E4 - histórico de alunos em aula ou quiz do módulo (R-4)
+      S --> C : exclusão bloqueada
+      C --> V : 409 CONFLICT (módulo só pode ser editado)
+      V --> INS : informa que o módulo possui histórico de alunos
+    else sem histórico de alunos
+      S -> R ++ : delete(id: UUID)
+      R -> BD ++ : UPDATE modules, lessons, quizzes SET deleted_at = NOW()
+      BD --> R -- : ok
+      R --> S -- : ok
+      S --> C : ok
+      C --> V : 204 No Content
+      V --> INS : remove módulo e atualiza lista
+    end
+    deactivate S
+    deactivate C
+  end
+end
+@enduml
