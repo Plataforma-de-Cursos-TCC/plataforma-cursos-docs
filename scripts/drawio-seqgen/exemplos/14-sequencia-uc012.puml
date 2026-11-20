@@ -50,10 +50,10 @@ else dados válidos
     BD --> R --
     R --> S -- : User
     opt A1 - perfil Instrutor
-      S -> IR ++ : save(profile) com o InstructorProfile vazio
+      S -> IR ++ : createEmpty(userId)
       IR -> BD ++ : INSERT instructor_profiles (user_id)
       BD --> IR --
-      IR --> S --
+      IR --> S -- : InstructorProfile
     end
     S --> C : User
     C --> V : 201 (UserResource)
