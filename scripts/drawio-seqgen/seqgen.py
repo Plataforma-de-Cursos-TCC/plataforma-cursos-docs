@@ -1,7 +1,10 @@
 """Generate draw.io sequence diagrams (one layout for all) from a PlantUML subset.
 
-Subset: actor/boundary/control/entity/database, A -> B / A --> B with ++ / --,
+Subset: actor/boundary/control/entity/database/interface, A -> B / A --> B with ++ / --,
 alt / else / opt / end, deactivate. Usage: seqgen.py in.puml out.drawio
+The icon follows the role in the name (Controller/Request/Resource/View = boundary,
+Service = control, Repository = entity); any other control is an infrastructure
+interface (boundary with <<interface>>). A message to the same participant is a loop.
 """
 import html, math, re, sys
 import xml.etree.ElementTree as ET
@@ -11,7 +14,15 @@ LINE = 'strokeColor=#000000;strokeWidth=1.5;'
 ICON = {'actor': ('shape=umlActor;verticalLabelPosition=bottom;', 30, 50),
         'boundary': ('shape=umlBoundary;', 50, 40), 'control': ('shape=umlControl;', 40, 46),
         'entity': ('shape=umlEntity;', 40, 40), 'database': ('shape=cylinder3;size=8;boundedLbl=1;', 40, 46)}
-MINGAP, MAXGAP, BAR, TOP = 160, 260, 10, 110   # BAR = half width of an activation bar
+MINGAP, MAXGAP, BAR, TOP = 160, 260, 10, 130
+
+def role(kind, name):
+    if kind == 'interface': return 'interface'
+    if kind not in ('control', 'boundary', 'entity'): return kind
+    if re.search(r'(Controller|Request|Resource|View)$', name): return 'boundary'
+    if name.endswith('Service'): return 'control'
+    if name.endswith('Repository'): return 'entity'
+    return 'interface' if kind == 'control' else kind   # BAR = half width of an activation bar
 
 def up10(v): return int(math.ceil(v / 10.0) * 10)
 
@@ -38,9 +49,9 @@ def parse(path):
     cur = root
     for raw in open(path, encoding='utf-8'):
         ln = raw.strip()
-        m = re.match(r'(actor|boundary|control|entity|database)\s+(?:"([^"]+)"|(\w+))(?:\s+as\s+(\w+))?$', ln)
+        m = re.match(r'(actor|boundary|control|entity|database|interface)\s+(?:"([^"]+)"|(\w+))(?:\s+as\s+(\w+))?$', ln)
         if m:
-            parts.append({'kind': m[1], 'name': m[2] or m[3], 'id': m[4] or m[3] or m[2]}); continue
+            parts.append({'kind': role(m[1], m[2] or m[3]), 'name': m[2] or m[3], 'id': m[4] or m[3] or m[2]}); continue
         ids = [p['id'] for p in parts]
         m = re.match(r'(\w+)\s*(-->|->)\s*(\w+)\s*(\+\+|--)?\s*(?::\s*(.*))?$', ln)
         if m and m[1] in ids and m[3] in ids:
@@ -70,7 +81,8 @@ def build(src, dst):
     for f in frags:
         f['lo'], f['hi'] = min(f['idx']), max(f['idx'])
         if f['lo'] == f['hi']: f['hi'] = min(n - 1, f['lo'] + 1)
-    gapof = lambda e: e['s'] if e['d'] > e['s'] else e['s'] - 1      # gap next to the sender
+    gapof = lambda e: (e['s'] if e['s'] < n - 1 else e['s'] - 1) if e['d'] == e['s'] else \
+        e['s'] if e['d'] > e['s'] else e['s'] - 1                    # gap next to the sender
     # column gaps: wide enough for names, for the labels next to the sender and for the conditions
     gap = [MINGAP] * (n - 1)
     for i in range(n - 1):
@@ -84,12 +96,15 @@ def build(src, dst):
     for g in gap: X.append(X[-1] + g)
 
     cells, labels = {k: [] for k in ('frame', 'life', 'bar', 'edge', 'text')}, []
-    def cell(layer, style, value='', geo=None, pts=None):
+    def cell(layer, style, value='', geo=None, pts=None, way=None):
         c = ET.Element('mxCell', value=value, style=style, parent='1')
         if pts:
             c.set('edge', '1'); g = ET.SubElement(c, 'mxGeometry', relative='1')
             for (x, y), role in zip(pts, ('sourcePoint', 'targetPoint')):
                 ET.SubElement(g, 'mxPoint', {'x': str(x), 'y': str(y), 'as': role})
+            if way:
+                arr = ET.SubElement(g, 'Array', {'as': 'points'})
+                for x, y in way: ET.SubElement(arr, 'mxPoint', x=str(x), y=str(y))
         else:
             c.set('vertex', '1'); x, y, w, h = geo
             assert all(v % 10 == 0 for v in geo), ('off grid', value, geo)
@@ -108,11 +123,15 @@ def build(src, dst):
         return X[i] + BAR + 10, gap[i] - 2 * BAR - 20
 
     for i, p in enumerate(parts):
-        st, w, h = ICON[p['kind']]
+        st, w, h = ICON['boundary' if p['kind'] == 'interface' else p['kind']]
         cell('life', st + 'html=1;fillColor=#FFFFFF;' + LINE + FONT, '', (X[i] - w // 2 - (X[i] - w // 2) % 10 if False else up10(X[i] - w / 2 - 5), 20, up10(w), up10(h)))
         nw = up10(tw(p['name']) + 10); nx = X[i] - nw // 2
         cell('text', 'text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;' + FONT,
              html.escape(p['name']), (nx - nx % 10, 70, nw + (10 if nx % 10 else 0), 20))
+        if p['kind'] == 'interface':
+            sw = up10(tw('<<interface>>') + 10); sx = X[i] - sw // 2
+            cell('text', 'text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;' + FONT,
+                 '&lt;&lt;interface&gt;&gt;', (sx - sx % 10, 90, sw + (10 if sx % 10 else 0), 20))
 
     y, active, last, arrows = TOP, {}, {}, 0
     def close(p, end):
@@ -130,8 +149,12 @@ def build(src, dst):
             if e['act'] == '++' and not e['ret']: active.setdefault(d, y)
             right = d > s
             edge = lambda p, out: X[p] + (BAR if out else -BAR) if p in active else X[p]
-            cell('edge', 'html=1;rounded=0;' + LINE + ('dashed=1;endArrow=open;endSize=8;' if e['ret'] else 'endArrow=block;endFill=1;endSize=8;'),
-                 pts=[(edge(s, right), y), (edge(d, not right), y)])
+            style = 'html=1;rounded=0;' + LINE + ('dashed=1;endArrow=open;endSize=8;' if e['ret'] else 'endArrow=block;endFill=1;endSize=8;')
+            if s == d:
+                x0 = X[s] + BAR
+                cell('edge', style, pts=[(x0, y), (x0, y + 20)], way=[(x0 + 40, y), (x0 + 40, y + 20)]); y += 20
+            else:
+                cell('edge', style, pts=[(edge(s, right), y), (edge(d, not right), y)])
             arrows += 1; last[s] = last[d] = y
             if e['act'] == '--': close(s, y + 10)
             if e['act'] == '++' and e['ret']: active.setdefault(d, y)
@@ -152,7 +175,7 @@ def build(src, dst):
     for p in list(active): close(p, last[p] + 10)
     y += 50
     for i in range(n):
-        cell('life', 'html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;', pts=[(X[i], 96), (X[i], y)])
+        cell('life', 'html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;', pts=[(X[i], 116 if any(q['kind'] == 'interface' for q in parts) else 96), (X[i], y)])
     assert arrows == sum(1 for e in events if e['t'] == 'msg')
 
     name = dst.rsplit('/', 1)[-1][:-7]
