@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="Electron" version="32.7.4" type="device" compressed="false">
   <diagram id="13-classes-area-d-implementacao-administracao" name="13-classes-area-d-implementacao-administracao">
-    <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2100" pageHeight="1150" math="0" shadow="0">
+    <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2100" pageHeight="900" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="cls_ListUsersRequest" value="&lt;&lt;FormRequest&gt;&gt;&lt;br&gt;&lt;b&gt;ListUsersRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+        <mxCell id="cls_ListUsersRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ListUsersRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="40" y="40" width="340" height="148" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_ListUsersRequest" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
@@ -20,11 +20,11 @@
         <mxCell id="cls_ListUsersRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_ListUsersRequest">
           <mxGeometry x="0" y="116" width="340" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="cls_UpdateUserStatusRequest" value="&lt;&lt;FormRequest&gt;&gt;&lt;br&gt;&lt;b&gt;UpdateUserStatusRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="218" width="340" height="100" as="geometry" />
+        <mxCell id="cls_UpdateUserStatusRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateUserStatusRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="155" width="340" height="100" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_UpdateUserStatusRequest" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="46" y="226" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="163" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_UpdateUserStatusRequest_attrs" value="+status: UserStatus" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UpdateUserStatusRequest">
           <mxGeometry x="0" y="36" width="340" height="32" as="geometry" />
@@ -35,11 +35,11 @@
         <mxCell id="cls_UpdateUserStatusRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UpdateUserStatusRequest">
           <mxGeometry x="0" y="68" width="340" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="cls_UpdateUserRoleRequest" value="&lt;&lt;FormRequest&gt;&gt;&lt;br&gt;&lt;b&gt;UpdateUserRoleRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="348" width="340" height="100" as="geometry" />
+        <mxCell id="cls_UpdateUserRoleRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UpdateUserRoleRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="255" width="340" height="100" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_UpdateUserRoleRequest" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="46" y="356" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="263" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_UpdateUserRoleRequest_attrs" value="+newRole: Role" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UpdateUserRoleRequest">
           <mxGeometry x="0" y="36" width="340" height="32" as="geometry" />
@@ -50,25 +50,16 @@
         <mxCell id="cls_UpdateUserRoleRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UpdateUserRoleRequest">
           <mxGeometry x="0" y="68" width="340" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="cls_PermissionsResource" value="&lt;&lt;Resource&gt;&gt;&lt;br&gt;&lt;b&gt;PermissionsResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="483" width="340" height="68" as="geometry" />
+        <mxCell id="cls_PermissionsResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PermissionsResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="345" width="340" height="68" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_PermissionsResource" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="46" y="491" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="353" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_PermissionsResource_methods" value="+toArray(request: Request): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_PermissionsResource">
           <mxGeometry x="0" y="36" width="340" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="cls_UserAdminResource" value="&lt;&lt;Resource&gt;&gt;&lt;br&gt;&lt;b&gt;UserAdminResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="576" width="340" height="68" as="geometry" />
-        </mxCell>
-        <mxCell id="typeicon_cls_UserAdminResource" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="46" y="584" width="20" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="cls_UserAdminResource_methods" value="+toArray(request: Request): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UserAdminResource">
-          <mxGeometry x="0" y="36" width="340" height="32" as="geometry" />
-        </mxCell>
-        <mxCell id="cls_UserController" value="&lt;&lt;Controller&gt;&gt;&lt;br&gt;&lt;b&gt;UserController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+        <mxCell id="cls_UserController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="450" y="40" width="350" height="180" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_UserController" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
@@ -77,34 +68,43 @@
         <mxCell id="cls_UserController_methods" value="+index(req: ListUsersRequest): JsonResponse&lt;br&gt;+updateStatus(id: UUID, req: UpdateUserStatusRequest): JsonResponse&lt;br&gt;+updateRole(id: UUID, req: UpdateUserRoleRequest): JsonResponse&lt;br&gt;+destroy(id: UUID): JsonResponse&lt;br&gt;+restore(id: UUID): JsonResponse" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UserController">
           <mxGeometry x="0" y="36" width="350" height="144" as="geometry" />
         </mxCell>
-        <mxCell id="cls_ProtectedAreaController" value="&lt;&lt;Controller&gt;&gt;&lt;br&gt;&lt;b&gt;ProtectedAreaController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="450" y="265" width="350" height="68" as="geometry" />
+        <mxCell id="cls_UserAdminResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserAdminResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="450" y="245" width="350" height="68" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_cls_UserAdminResource" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="456" y="253" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_UserAdminResource_methods" value="+toArray(request: Request): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UserAdminResource">
+          <mxGeometry x="0" y="36" width="350" height="32" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_ProtectedAreaController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ProtectedAreaController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="450" y="345" width="350" height="68" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_ProtectedAreaController" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="456" y="273" width="20" height="20" as="geometry" />
+          <mxGeometry x="456" y="353" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_ProtectedAreaController_methods" value="+checkPermissions(): JsonResponse" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_ProtectedAreaController">
           <mxGeometry x="0" y="36" width="350" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="cls_EnsureUserHasRole" value="&lt;&lt;Middleware&gt;&gt;&lt;br&gt;&lt;b&gt;EnsureUserHasRole&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="450" y="378" width="350" height="84" as="geometry" />
+        <mxCell id="cls_EnsureUserHasRole" value="&amp;lt;&amp;lt;Middleware&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;EnsureUserHasRole&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="450" y="450" width="350" height="84" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_EnsureUserHasRole" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="456" y="386" width="20" height="20" as="geometry" />
+          <mxGeometry x="456" y="458" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_EnsureUserHasRole_methods" value="+handle(req: Request, next: Closure, role: Role): Response" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_EnsureUserHasRole">
           <mxGeometry x="0" y="36" width="350" height="48" as="geometry" />
         </mxCell>
-        <mxCell id="cls_JwtGuard" value="&lt;&lt;Service&gt;&gt;&lt;br&gt;&lt;b&gt;JwtGuard (Área A)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="450" y="507" width="350" height="116" as="geometry" />
+        <mxCell id="cls_JwtGuard" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;JwtGuard (Área A)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="450" y="555" width="350" height="116" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_JwtGuard" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="456" y="515" width="20" height="20" as="geometry" />
+          <mxGeometry x="456" y="563" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="cls_JwtGuard_methods" value="+parseToken(token: string): User&lt;br&gt;+authorize(user: User, role: Role): boolean&lt;br&gt;+revoke(token: string): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_JwtGuard">
+        <mxCell id="cls_JwtGuard_methods" value="+parseToken(token: string): User&lt;br&gt;+authorize(user: User, role: Role): boolean&lt;br&gt;+revoke(jti: string, ttl: int): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_JwtGuard">
           <mxGeometry x="0" y="36" width="350" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="cls_UserAdminService" value="&lt;&lt;Service&gt;&gt;&lt;br&gt;&lt;b&gt;UserAdminService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+        <mxCell id="cls_UserAdminService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserAdminService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="860" y="40" width="370" height="260" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_UserAdminService" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
@@ -116,14 +116,14 @@
         <mxCell id="cls_UserAdminService_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_UserAdminService">
           <mxGeometry x="0" y="84" width="370" height="4" as="geometry" />
         </mxCell>
-        <mxCell id="cls_UserAdminService_methods" value="+paginateUsers(page: int, perPage: int, query: string, role?: Role): Paginator&lt;br&gt;+updateStatus(adminId: UUID, targetId: UUID, status: UserStatus): User&lt;br&gt;+changeRole(adminId: UUID, targetId: UUID, newRole: Role): User&lt;br&gt;+deleteAndAnonymize(adminId: UUID, targetId: UUID): void&lt;br&gt;+restore(adminId: UUID, targetId: UUID): User" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UserAdminService">
+        <mxCell id="cls_UserAdminService_methods" value="+paginateUsers(filters: UserFiltersDTO): LengthAwarePaginator&lt;br&gt;+updateStatus(adminId: UUID, targetId: UUID, status: UserStatus): User&lt;br&gt;+changeRole(adminId: UUID, targetId: UUID, newRole: Role): User&lt;br&gt;+deleteAndAnonymize(adminId: UUID, targetId: UUID): void&lt;br&gt;+restore(adminId: UUID, targetId: UUID): User" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UserAdminService">
           <mxGeometry x="0" y="84" width="370" height="176" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AuditService" value="&lt;&lt;Service&gt;&gt;&lt;br&gt;&lt;b&gt;AuditService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="860" y="360" width="370" height="164" as="geometry" />
+        <mxCell id="cls_AuditService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuditService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="860" y="335" width="370" height="164" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_AuditService" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="866" y="368" width="20" height="20" as="geometry" />
+          <mxGeometry x="866" y="343" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_AuditService_attrs" value="-auditRepo: AuditLogRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AuditService">
           <mxGeometry x="0" y="36" width="370" height="32" as="geometry" />
@@ -134,43 +134,43 @@
         <mxCell id="cls_AuditService_methods" value="+logAction(actorId: UUID, action: AuditAction, targetType: string, targetId: UUID, details?: JSON): AuditLog&lt;br&gt;+logAccessDenied(userId: UUID, targetArea: string, requiredRole: Role): AuditLog" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AuditService">
           <mxGeometry x="0" y="68" width="370" height="96" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AuditLogResource" value="&lt;&lt;Resource&gt;&gt;&lt;br&gt;&lt;b&gt;AuditLogResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="860" y="569" width="370" height="68" as="geometry" />
+        <mxCell id="cls_AuditLogResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuditLogResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="860" y="530" width="370" height="68" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_AuditLogResource" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="866" y="577" width="20" height="20" as="geometry" />
+          <mxGeometry x="866" y="538" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_AuditLogResource_methods" value="+toArray(request: Request): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AuditLogResource">
           <mxGeometry x="0" y="36" width="370" height="32" as="geometry" />
         </mxCell>
-        <mxCell id="cls_UserRepository" value="&lt;&lt;Repository&gt;&gt;&lt;br&gt;&lt;b&gt;UserRepository (Área A)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+        <mxCell id="cls_UserRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserRepository (Área A)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="1290" y="40" width="350" height="212" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_UserRepository" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1296" y="48" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="cls_UserRepository_methods" value="+findById(id: UUID): User&lt;br&gt;+save(user: User): void&lt;br&gt;+paginate(page: int, perPage: int, filter: array): Paginator&lt;br&gt;+updateStatus(id: UUID, status: UserStatus): void&lt;br&gt;+updateRole(id: UUID, role: Role): void&lt;br&gt;+softDelete(id: UUID): void&lt;br&gt;+restore(id: UUID): void&lt;br&gt;+anonymize(id: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UserRepository">
+        <mxCell id="cls_UserRepository_methods" value="+findById(id: UUID): User&lt;br&gt;+save(user: User): void&lt;br&gt;+paginate(filters: UserFiltersDTO): LengthAwarePaginator&lt;br&gt;+updateStatus(id: UUID, status: UserStatus): void&lt;br&gt;+updateRole(id: UUID, role: Role): void&lt;br&gt;+softDelete(id: UUID): void&lt;br&gt;+restore(id: UUID): void&lt;br&gt;+anonymize(id: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_UserRepository">
           <mxGeometry x="0" y="36" width="350" height="176" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AuditLogRepository" value="&lt;&lt;Repository&gt;&gt;&lt;br&gt;&lt;b&gt;AuditLogRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1290" y="292" width="350" height="84" as="geometry" />
+        <mxCell id="cls_AuditLogRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuditLogRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="280" width="350" height="84" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_AuditLogRepository" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="1296" y="300" width="20" height="20" as="geometry" />
+          <mxGeometry x="1296" y="288" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_AuditLogRepository_methods" value="+create(logData: AuditLogDTO): AuditLog&lt;br&gt;+findByActor(actorId: UUID): Collection" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AuditLogRepository">
           <mxGeometry x="0" y="36" width="350" height="48" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AuditLogDTO" value="&lt;&lt;DTO&gt;&gt;&lt;br&gt;&lt;b&gt;AuditLogDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1290" y="421" width="350" height="164" as="geometry" />
+        <mxCell id="cls_AuditLogDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuditLogDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1290" y="395" width="350" height="164" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_AuditLogDTO" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="1296" y="429" width="20" height="20" as="geometry" />
+          <mxGeometry x="1296" y="403" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_AuditLogDTO_attrs" value="+userId: UUID&lt;br&gt;+action: AuditAction&lt;br&gt;+targetType: string&lt;br&gt;+targetId: UUID&lt;br&gt;+ipAddress: string&lt;br&gt;+userAgent: string&lt;br&gt;+details: JSON" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AuditLogDTO">
           <mxGeometry x="0" y="36" width="350" height="128" as="geometry" />
         </mxCell>
-        <mxCell id="cls_User" value="&lt;&lt;Entity&gt;&gt;&lt;br&gt;&lt;b&gt;&lt;i&gt;User (Área A)&lt;/i&gt;&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+        <mxCell id="cls_User" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;&lt;i&gt;User (Área A)&lt;/i&gt;&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="1700" y="40" width="340" height="228" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_User" value="A" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
@@ -185,11 +185,11 @@
         <mxCell id="cls_User_methods" value="+isBlocked(): boolean&lt;br&gt;+isDeleted(): boolean&lt;br&gt;+isAnonymized(): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_User">
           <mxGeometry x="0" y="164" width="340" height="64" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AuditLog" value="&lt;&lt;Entity&gt;&gt;&lt;br&gt;&lt;b&gt;AuditLog&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1700" y="308" width="340" height="228" as="geometry" />
+        <mxCell id="cls_AuditLog" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AuditLog&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1700" y="240" width="340" height="228" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_AuditLog" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="1706" y="316" width="20" height="20" as="geometry" />
+          <mxGeometry x="1706" y="248" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_AuditLog_attrs" value="-id: UUID&lt;br&gt;-userId: UUID&lt;br&gt;-action: AuditAction&lt;br&gt;-targetType: string&lt;br&gt;-targetId: UUID&lt;br&gt;-ipAddress: string&lt;br&gt;-userAgent: string&lt;br&gt;-details: JSON&lt;br&gt;-createdAt: DateTime" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AuditLog">
           <mxGeometry x="0" y="36" width="340" height="160" as="geometry" />
@@ -201,53 +201,49 @@
           <mxGeometry x="0" y="196" width="340" height="32" as="geometry" />
         </mxCell>
         <mxCell id="legend_box" value="&lt;b&gt;Legenda de Papéis Arquiteturais (Laravel Modular):&lt;/b&gt;&lt;br&gt;&lt;table style=&quot;font-size:11px; margin-top:4px;&quot;&gt;&lt;tr&gt;&lt;td style=&quot;background:#DAE8FC; border:1px solid #000; padding:2px 8px;&quot;&gt;&lt;b&gt;Controller / Middleware&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;width:15px;&quot;&gt;&lt;/td&gt;&lt;td style=&quot;background:#D5E8D4; border:1px solid #000; padding:2px 8px;&quot;&gt;&lt;b&gt;Service&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;width:15px;&quot;&gt;&lt;/td&gt;&lt;td style=&quot;background:#FFE6CC; border:1px solid #000; padding:2px 8px;&quot;&gt;&lt;b&gt;Repository&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;width:15px;&quot;&gt;&lt;/td&gt;&lt;td style=&quot;background:#E1D5E7; border:1px solid #000; padding:2px 8px;&quot;&gt;&lt;b&gt;DTO / Request&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;width:15px;&quot;&gt;&lt;/td&gt;&lt;td style=&quot;background:#FFF2CC; border:1px solid #000; padding:2px 8px;&quot;&gt;&lt;b&gt;Resource&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;width:15px;&quot;&gt;&lt;/td&gt;&lt;td style=&quot;background:#F5F5F5; border:1px solid #000; padding:2px 8px;&quot;&gt;&lt;b&gt;Entity&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;width:15px;&quot;&gt;&lt;/td&gt;&lt;td style=&quot;background:#F8CECC; border:1px solid #000; padding:2px 8px;&quot;&gt;&lt;b&gt;Interface&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;align=center;verticalAlign=middle;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="780" width="2000" height="50" as="geometry" />
+          <mxGeometry x="40" y="695" width="2000" height="45" as="geometry" />
         </mxCell>
-        <mxCell id="note_impl_admin" value="&lt;b&gt;Regras de Implementação da Área D (Administração e Governança):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Camadas e Responsabilidades:&lt;/b&gt; UserController e ProtectedAreaController expõem endpoints REST e delegam exclusivamente a Services de domínio.&lt;br&gt;• &lt;b&gt;Validação e Integridade:&lt;/b&gt; UserAdminService valida regras R-1 e R-2 do UC008; auto-bloqueio (E1) e auto-alteração de perfil (E3) retornam HTTP 403 FORBIDDEN.&lt;br&gt;• &lt;b&gt;Soft Delete e Reativação:&lt;/b&gt; Exclusão lógica com deletedAt; reativação via UserAdminService.restore restaura status active; login com conta excluída/anonimizada retorna HTTP 401 unauthenticated (D8, ADR-0014, TC262).&lt;br&gt;• &lt;b&gt;Segurança e Sessões:&lt;/b&gt; JwtGuard.revoke invalida jti no Redis blocklist (D7); refresh sessions do usuário são revogadas no banco (D-TC243, D-TC258).&lt;br&gt;• &lt;b&gt;Auditoria Imutável:&lt;/b&gt; Toda alteração cadastral (status/role), soft delete e negação de acesso (UC016 E2) aciona obrigatoriamente AuditService.logAction / logAccessDenied, gravando em audit_logs particionada mensalmente (ADR-0016, RNF016).&lt;br&gt;• &lt;b&gt;Tratamento de Erros:&lt;/b&gt; Exceções (401 UNAUTHENTICATED, 403 FORBIDDEN, 404 NOT_FOUND, 422 VALIDATION_FAILED) seguem ApiException do TDD 3.1; não são desenhadas como classes." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=10;spacingRight=10;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="845" width="2000" height="135" as="geometry" />
+        <mxCell id="note_impl_admin" value="&lt;b&gt;Regras de Implementação da Área D (Administração e Governança):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Camadas e Responsabilidades:&lt;/b&gt; UserController e ProtectedAreaController expõem endpoints REST e delegam exclusivamente a Services de domínio.&lt;br&gt;• &lt;b&gt;Validação e Integridade:&lt;/b&gt; UserAdminService valida regras R-1 e R-2 do UC008; auto-bloqueio (E1) e auto-alteração de perfil (E3) retornam HTTP 403 FORBIDDEN.&lt;br&gt;• &lt;b&gt;Soft Delete e Reativação:&lt;/b&gt; Exclusão lógica com deletedAt; reativação via UserAdminService.restore restaura status active; login com conta excluída/anonimizada retorna HTTP 401 unauthenticated (D8, ADR-0014, TC262).&lt;br&gt;• &lt;b&gt;Segurança e Sessões:&lt;/b&gt; JwtGuard.revoke(jti, ttl) invalida jti no Redis blocklist (D7); refresh sessions do usuário são revogadas no banco (D-TC243, D-TC258).&lt;br&gt;• &lt;b&gt;Auditoria Imutável:&lt;/b&gt; Toda alteração cadastral (status/role), soft delete e negação de acesso (UC016 E2) aciona obrigatoriamente AuditService.logAction / logAccessDenied, gravando em audit_logs particionada mensalmente (ADR-0016, RNF016).&lt;br&gt;• &lt;b&gt;Tratamento de Erros:&lt;/b&gt; Exceções (401 UNAUTHENTICATED, 403 FORBIDDEN, 404 NOT_FOUND, 422 VALIDATION_FAILED) seguem ApiException do TDD 3.1; não são desenhadas como classes." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=10;spacingRight=10;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="40" y="750" width="2000" height="135" as="geometry" />
         </mxCell>
-        <mxCell id="edge_uc_lur" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.15;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_ListUsersRequest">
+        <mxCell id="edge_uc_lur" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_ListUsersRequest">
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_uc_usr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.35;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_UpdateUserStatusRequest">
+        <mxCell id="edge_uc_usr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.55;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_UpdateUserStatusRequest">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="430" y="90" />
-              <mxPoint x="430" y="255" />
+              <mxPoint x="415" y="139" />
+              <mxPoint x="415" y="195" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_uc_urr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.55;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_UpdateUserRoleRequest">
+        <mxCell id="edge_uc_urr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.85;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_UpdateUserRoleRequest">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="415" y="120" />
-              <mxPoint x="415" y="385" />
+              <mxPoint x="395" y="193" />
+              <mxPoint x="395" y="295" />
             </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_uc_uar" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_UserAdminResource">
+          <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_pac_pr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_ProtectedAreaController" target="cls_PermissionsResource">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="400" y="230" />
-              <mxPoint x="400" y="500" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_uc_uar" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_UserAdminResource">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="390" y="150" />
-              <mxPoint x="390" y="595" />
-            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_ehr_jwt" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_EnsureUserHasRole" target="cls_JwtGuard">
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_ehr_as" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_EnsureUserHasRole" target="cls_AuditService">
+        <mxCell id="edge_ehr_as" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.8;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_EnsureUserHasRole" target="cls_AuditService">
           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="830" y="492" />
+              <mxPoint x="830" y="466" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_uc_uas" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserController" target="cls_UserAdminService">
@@ -266,15 +262,19 @@
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_as_alrep" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_AuditService" target="cls_AuditLogRepository">
+        <mxCell id="edge_as_alrep" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_AuditService" target="cls_AuditLogRepository">
           <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1260" y="384" />
+              <mxPoint x="1260" y="322" />
+            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="edge_ur_u" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.2;exitDx=0;exitDy=0;entryX=0;entryY=0.2;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_UserRepository" target="cls_User">
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_alrep_al" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_AuditLogRepository" target="cls_AuditLog">
+        <mxCell id="edge_alrep_al" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_AuditLogRepository" target="cls_AuditLog">
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
