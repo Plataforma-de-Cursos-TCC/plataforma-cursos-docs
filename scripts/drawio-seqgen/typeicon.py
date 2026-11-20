@@ -10,7 +10,8 @@ for path in sys.argv[1:]:
             old[c.get('id')[9:]] = c.get('value'); root.remove(c)
     for c in list(root):
         st, val = c.get('style', ''), c.get('value', '')
-        if c.get('vertex') != '1' or c.get('parent') != '1' or not st.startswith('swimlane') or '<b>' not in val:
+        ALLOWED_FILLS = ('#F2F2F2', '#DAE8FC', '#D5E8D4', '#FFE6CC', '#E1D5E7', '#FFF2CC', '#F5F5F5', '#F8CECC')
+        if c.get('vertex') != '1' or c.get('parent') != '1' or not any(f'fillColor={f}' in st for f in ALLOWED_FILLS) or '<b>' not in val or 'legend' in c.get('id', '').lower():
             continue
         g = c.find('mxGeometry'); x, y, w = (float(g.get(k)) for k in ('x', 'y', 'width'))
         m = re.search(r'startSize=(\d+)', st); head = float(m.group(1)) if m else float(g.get('height'))

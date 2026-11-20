@@ -15,7 +15,7 @@ boundary DashboardView as V
 control DashboardController as C
 control DashboardFilterRequest as Q
 control DashboardAnalyticsService as S
-control LearningMetricsService as LM
+control "LearningMetricsService (Área C)" as LM
 
 USU -> V ++ : seleciona startDate, endDate, courseId e groupBy
 V -> C ++ : getMetrics(req: DashboardFilterRequest)
