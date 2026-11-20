@@ -12,7 +12,7 @@
 | RNF006 | Cobertura mínima de 75% dos testes automatizados do backend; merge bloqueado abaixo disso. | Manutenibilidade (testabilidade) |
 | RNF007 | 0 senhas em texto puro (armazenadas com hash). | Segurança (confidencialidade) |
 | RNF008 | 0 logins aceitos durante os 15 min seguintes a 5 tentativas inválidas consecutivas na mesma conta. | Segurança (resistência) |
-| RNF009 | Listagens da API com p95 de até 2 s com 1000 usuários simultâneos; listagens paginadas (`per_page` padrão 20, máximo 100). | Eficiência de desempenho (comportamento temporal) |
+| RNF009 | Listagens da API com p95 de até 2 s com 1000 usuários simultâneos; listagens paginadas (`perPage` padrão 20, máximo 100). | Eficiência de desempenho (comportamento temporal) |
 | RNF010 | Disponibilidade mensal mínima de 99%. | Confiabilidade (disponibilidade) |
 | RNF011 | Backup diário do banco de dados e dos arquivos de vídeo e material das aulas, com restauração dos dois testada mensalmente. | Confiabilidade (recuperabilidade) |
 | RNF012 | Interface conforme WCAG 2.1 AA: contraste mínimo de 4,5:1 e navegação completa por teclado. | Capacidade de interação (inclusividade) |
