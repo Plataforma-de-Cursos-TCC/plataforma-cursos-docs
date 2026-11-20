@@ -20,7 +20,7 @@ Resumo do pagamento simulado com fragmento `alt` para cancelamento pelo Aluno (A
 
 ## 3. UC009 – Assistir Aula
 
-Geração de URL assinada temporária de 15 minutos via `MediaService` no Cloudflare R2 (RNF002) para reprodução protegida do vídeo. Trata a aula indisponível para o usuário, sem matrícula e sem prévia (E1, `404 NOT_FOUND`, sem revelar a existência da aula), falha no carregamento de vídeo (E2, `503 SERVICE_UNAVAILABLE`) e os fluxos alternativos: retomada do ponto salvo em segundos assistidos (A2, R-2, R-3), reprodução pública para Visitante em aula prévia sem persistência de progresso (A4, R-1) e saída antes do término com persistência parcial do progresso (A1). O fluxo básico conclui com a marcação de aula finalizada e atualização do progresso global.
+Geração de URL assinada temporária de 15 minutos via `MediaService` no Cloudflare R2 (RNF002) para reprodução protegida do vídeo. Trata a aula indisponível para o usuário, sem matrícula e sem prévia (E1, `403 FORBIDDEN`, acesso não autorizado sem matrícula ativa e sem prévia, conforme decisão C3), falha no carregamento de vídeo (E2, `503 SERVICE_UNAVAILABLE`) e os fluxos alternativos: retomada do ponto salvo em segundos assistidos (A2, R-2, R-3), reprodução pública para Visitante em aula prévia sem persistência de progresso (A4, R-1) e saída antes do término com persistência parcial do progresso (A1). O fluxo básico conclui com a marcação de aula finalizada e atualização do progresso global.
 
 ![Diagrama de sequência do UC009](../diagramas/14-sequencia-uc009.png)
 
@@ -44,7 +44,7 @@ Abertura do modal de avaliação com pré-carregamento de nota e comentário ant
 
 ## 6. UC020 – Consultar Catálogo de Cursos
 
-Consulta pública e paginada de cursos publicados (`page=1`, `per_page=20`, ADR-0009). Apresenta os estados de catálogo vazio (E1, "Nenhum curso disponível no momento.") e categoria sem cursos publicados (E2, com opção "Ver todos"). Trata a aplicação e limpeza de filtros por categoria (A1) e a seleção de um curso para visualização detalhada de sua ementa, módulos e aulas marcadas como prévia.
+Consulta pública e paginada de cursos publicados (`page=1`, `perPage=20`, ADR-0009, ADR-0015; com `perPage` estritamente de 1 a 100, retornando HTTP `422 VALIDATION_FAILED` fora desse intervalo, decisão D-TC245). Apresenta os estados de catálogo vazio (E1, "Nenhum curso disponível no momento.") e categoria sem cursos publicados (E2, com opção "Ver todos"). Trata a aplicação e limpeza de filtros por categoria (A1) e a seleção de um curso para visualização detalhada de sua ementa, módulos e aulas marcadas como prévia.
 
 ![Diagrama de sequência do UC020](../diagramas/14-sequencia-uc020.png)
 
