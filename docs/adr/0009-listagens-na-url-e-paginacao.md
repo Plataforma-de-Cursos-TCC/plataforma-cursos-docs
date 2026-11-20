@@ -34,7 +34,7 @@ relacionados: [adr-0007, adr-0008]
 1. Filtros, ordenação e página de toda listagem ficam na query string da rota (`?page=2&sort=-createdAt&category=dados`). A URL é a fonte única do estado; o front-end deriva dela a `queryKey` do React Query, normalizada (ordem das chaves estável, valores padrão omitidos).
 2. A paginação nas listagens usa `placeholderData: keepPreviousData` para evitar piscar a tela. Mudar qualquer filtro ou ordenação volta à página 1. A busca por texto usa debounce antes de escrever na URL.
 3. **Toda listagem é paginada.** O back-end usa `paginate` quando a tela mostra o número de páginas. `cursorPaginate` é permitida apenas para fluxos de rolagem infinita, como o histórico de mensagens do Tutor, mediante registro da exceção no TDD.
-4. Parâmetros padronizados: `page` (padrão 1), `per_page` (padrão 20, máximo 100, validado em `FormRequest`), `sort` (lista branca de campos, prefixo `-` para decrescente) e filtros por nome. Toda ordenação tem desempate por `id`. O envelope segue o formato do TDD, seção 3.2.
+4. Parâmetros padronizados: `page` (padrão 1), `per_page` (*substituído por `perPage`, [ADR-0015](0015-convencao-de-nomes-por-camada.md)*; padrão 20, máximo 100, validado em `FormRequest`), `sort` (lista branca de campos, prefixo `-` para decrescente) e filtros por nome. Toda ordenação tem desempate por `id`. O envelope segue o formato do TDD, seção 3.2.
 5. **Resposta mínima:** cada tela de listagem tem seu API Resource, que devolve somente os campos que a tela usa. Nada que o back-end devolve fica sem uso no front-end. Isso entra no checklist de PR.
 
 ## Consequências
