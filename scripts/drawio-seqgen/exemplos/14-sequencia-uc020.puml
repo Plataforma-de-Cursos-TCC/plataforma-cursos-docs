@@ -1,0 +1,66 @@
+' Item 14 - Diagrama de sequência do UC020 Consultar Catálogo de Cursos. Mensagens e métodos do item 13.
+' Gerar: python3 scripts/drawio-seqgen/seqgen.py <este arquivo> especificacao/diagramas/14-sequencia-uc020.drawio
+@startuml 14-sequencia-uc020
+actor "Visitante/Aluno" as P0
+boundary CatalogoView
+control CatalogController
+control CatalogFilterRequest
+control CatalogService
+control CourseRepository
+database BD
+P0 -> CatalogoView ++ : acessa o catálogo de cursos
+CatalogoView -> CatalogController ++ : index( req: CatalogFilterRequest )
+CatalogController -> CatalogFilterRequest ++ : rules()
+CatalogFilterRequest --> CatalogController : parâmetros válidos
+CatalogController -> CatalogService ++ : listPublishedCourses( dto )
+CatalogService -> CourseRepository ++ : paginatePublished( category: null, sort: default, page: 1 )
+CourseRepository -> BD ++ : SELECT courses WHERE status='published' LIMIT 20
+BD --> CourseRepository : cursos
+CourseRepository --> CatalogService : paginator
+CatalogService --> CatalogController : paginator
+CatalogController --> CatalogoView : 200 OK (CourseCatalogResource paginado)
+alt E1 - nenhum curso publicado
+CatalogoView --> P0 : exibe "Nenhum curso disponível no momento."
+else catálogo com cursos publicados
+CatalogoView --> P0 : exibe grade de cards de cursos
+alt A1 - ator limpa o filtro de categoria
+P0 -> CatalogoView ++ : seleciona chip "Todas"
+CatalogoView -> CatalogController ++ : index( reqSemCategoria )
+CatalogController -> CatalogService ++ : listPublishedCourses( dtoSemCat )
+CatalogService -> CourseRepository ++ : paginatePublished( category: null )
+CourseRepository -> BD ++ : SELECT courses WHERE status='published'
+BD --> CourseRepository
+CourseRepository --> CatalogService
+CatalogService --> CatalogController
+CatalogController --> CatalogoView : 200 OK
+CatalogoView --> P0 : exibe catálogo completo sem filtro
+else ator filtra por categoria específica
+P0 -> CatalogoView ++ : clica na categoria "Programação"
+CatalogoView -> CatalogController ++ : index( reqComCategoria )
+CatalogController -> CatalogService ++ : listPublishedCourses( dtoComCat )
+CatalogService -> CourseRepository ++ : paginatePublished( category: "Programacao" )
+CourseRepository -> BD ++ : SELECT courses WHERE status='published'AND category='Programacao'
+BD --> CourseRepository : cursos da categoria
+CourseRepository --> CatalogService
+CatalogService --> CatalogController
+CatalogController --> CatalogoView : 200 OK
+alt E2 - categoria sem cursos publicados
+CatalogoView --> P0 : exibe "Nenhum curso encontrado nesta categoria." com botão "Ver todos"
+else cursos encontrados
+CatalogoView --> P0 : exibe cursos filtrados da categoria
+opt ator seleciona um curso para ver detalhes
+P0 -> CatalogoView ++ : clica no card do curso
+CatalogoView -> CatalogController ++ : show( courseId )
+CatalogController -> CatalogService ++ : getCourseDetails( courseId )
+CatalogService -> CourseRepository ++ : findPublishedById( courseId )
+CourseRepository -> BD ++ : SELECT course, modules, lessons WHERE id
+BD --> CourseRepository
+CourseRepository --> CatalogService
+CatalogService --> CatalogController
+CatalogController --> CatalogoView : 200 OK (CourseDetailResource)
+CatalogoView --> P0 : abre página do curso com módulos e aulas prévia
+end
+end
+end
+end
+@enduml

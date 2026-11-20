@@ -1,0 +1,76 @@
+' Item 14 - Diagrama de sequência do UC002 Responder Quiz. Mensagens e métodos do item 13.
+' Gerar: python3 scripts/drawio-seqgen/seqgen.py <este arquivo> especificacao/diagramas/14-sequencia-uc002.drawio
+@startuml 14-sequencia-uc002
+actor Aluno
+boundary QuizView
+control QuizAttemptController
+control QuizSubmitRequest
+control QuizAttemptService
+control LessonProgressService
+entity QuizAttempt
+control QuizAttemptRepository
+database BD
+Aluno -> QuizView ++ : acessa o quiz do módulo
+QuizView -> QuizAttemptController ++ : show( quizId )
+QuizAttemptController -> QuizAttemptService ++ : getQuizForStudent(userId, quizId)
+QuizAttemptService -> LessonProgressService ++ : getModuleCompletionStatus(enrId, modId)
+LessonProgressService --> QuizAttemptService : aulas do módulo concluídas?
+alt E3 - aulas do módulo não concluídas
+QuizAttemptService --> QuizAttemptController : 403 FORBIDDEN (aulas pendentes)
+QuizAttemptController --> QuizView : 403 FORBIDDEN
+QuizView --> Aluno : bloqueia quiz e indica aulas pendentes
+else aulas concluídas
+QuizAttemptService -> QuizAttemptRepository ++ : findLatestByEnrollmentAndQuiz(enrId, quizId)
+QuizAttemptRepository -> BD ++ : SELECT quiz_attempts WHERE enrollmentId AND quizId
+BD --> QuizAttemptRepository : tentativa anterior
+QuizAttemptRepository --> QuizAttemptService : attempt (ou null)
+alt A1 - quiz já respondido anteriormente
+QuizAttemptService --> QuizAttemptController : QuizAttempt anterior
+QuizAttemptController --> QuizView : 200 OK (QuizResultResource)
+QuizView --> Aluno : exibe resultado salvo (com opção de refazer, se permitido)
+else quiz liberado para resolução
+QuizAttemptService --> QuizAttemptController : Quiz (questões sem gabarito)
+QuizAttemptController --> QuizView : 200 OK (QuizResource)
+QuizView --> Aluno : exibe questões do quiz
+alt A2 - Aluno salva rascunho
+Aluno -> QuizView ++ : aciona "Salvar rascunho"
+QuizView -> QuizAttemptController ++ : saveDraft( quizId, req: QuizDraftRequest )
+QuizAttemptController -> QuizAttemptService ++ : saveDraft( userId, quizId, draftAnswers )
+QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers( attempt, draftAnswers )
+QuizAttemptRepository -> BD ++ : INSERT/UPDATE quiz_attempts (status = draft)
+BD --> QuizAttemptRepository : ok
+QuizAttemptRepository --> QuizAttemptService : ok
+QuizAttemptService --> QuizAttemptController : ok
+QuizAttemptController --> QuizView : 200 OK
+QuizView --> Aluno : rascunho salvo para retomada posterior
+else Aluno envia respostas
+Aluno -> QuizView ++ : aciona "Enviar respostas"
+QuizView -> QuizAttemptController ++ : submit( quizId, req: QuizSubmitRequest )
+QuizAttemptController -> QuizSubmitRequest ++ : rules()
+QuizSubmitRequest --> QuizAttemptController : validação
+alt E1 - envio sem todas as questões respondidas
+QuizAttemptController --> QuizView : 422 VALIDATION_FAILED (questões pendentes)
+QuizView --> Aluno : bloqueia envio e indica questões pendentes
+else todas respondidas
+QuizAttemptController -> QuizAttemptService ++ : submitQuiz( userId, quizId, dto )
+QuizAttemptService -> QuizAttemptService : calculateScore( quiz, answers )
+alt E2 - gabarito incompleto no quiz
+QuizAttemptService --> QuizAttemptController : 500 INTERNAL_SERVER_ERROR (gabarito incompleto)
+QuizAttemptController --> QuizView : 500 INTERNAL_SERVER_ERROR
+QuizView --> Aluno : informa falha e registra ocorrência ao instrutor
+else correção automática bem-sucedida
+QuizAttemptService -> QuizAttempt ++ : submit( score, submittedAt )
+QuizAttempt --> QuizAttemptService : attempt
+QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers( attempt, answers )
+QuizAttemptRepository -> BD ++ : INSERT INTO quiz_attempts, quiz_answers
+BD --> QuizAttemptRepository : ok
+QuizAttemptRepository --> QuizAttemptService : attempt corrigido
+QuizAttemptService --> QuizAttemptController : QuizAttempt
+QuizAttemptController --> QuizView : 200 OK (QuizResultResource com nota e gabarito)
+QuizView --> Aluno : exibe nota, alternativas corretas e salva progresso
+end
+end
+end
+end
+end
+@enduml
