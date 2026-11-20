@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
+- Item 14: diagramas de sequência da Área D em draw.io (UC001, UC007, UC008, UC016 e UC018) atualizados via seqgen.py com créditos extras do tutor (D-cota-extra), parâmetros em inglês no dashboard (D3), jti blocklist no Redis (D7), perPage (ADR-0015), soft delete (ADR-0014) e retenção contínua de auditoria (#TBD).
 - Item 13: diagramas de classes da Área D em draw.io (perspectivas negocial e de implementação técnica de administração e tutor/analytics) atualizados com tutor_credit_packs, soft delete (ADR-0014), jti blocklist no Redis (D7), perPage (ADR-0015), parâmetros em inglês no dashboard (D3), papéis por cores com legenda e ícones de tipo (C, A, I, E) (#TBD).
 - Item 6: requisito funcional RF020 para compra de pacote de créditos extras do Tutor de IA pelo Aluno com pagamento simulado (D-cota-extra) (#TBD).
 - Item 7: estória de usuário US022 para compra de créditos extras do Tutor de IA (RF020), critérios de desbloqueio, tratamento de cursos de instrutor excluído e quota horária em US012 e US016 (#TBD).
