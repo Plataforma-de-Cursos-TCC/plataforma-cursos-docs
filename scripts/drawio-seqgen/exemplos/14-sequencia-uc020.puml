@@ -39,7 +39,7 @@ P0 -> CatalogoView ++ : clica na categoria "Programação"
 CatalogoView -> CatalogController ++ : index(reqComCategoria)
 CatalogController -> CatalogService ++ : listPublishedCourses(dtoComCat)
 CatalogService -> CourseRepository ++ : paginatePublished(category: "Programacao")
-CourseRepository -> BD ++ : SELECT courses WHERE status='published'AND category='Programacao'
+CourseRepository -> BD ++ : SELECT courses WHERE status='published' AND category='Programacao'
 BD --> CourseRepository : cursos da categoria
 CourseRepository --> CatalogService
 CatalogService --> CatalogController
