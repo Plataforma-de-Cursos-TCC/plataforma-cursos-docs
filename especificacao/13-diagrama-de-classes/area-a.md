@@ -15,7 +15,7 @@ Na perspectiva de implementação, apresentada em três diagramas (cadastro e lo
 
 2. **Recuperação de senha**:
    - `ForgotPasswordRequest` e `ResetPasswordRequest` validam os fluxos de solicitação e redefinição.
-   - `PasswordResetService` coordena o `UserRepository`, o `PasswordResetTokenRepository` (geração de hash criptográfico com validade de 2 horas e consumo único) e o envio assíncrono do link por fila através do `ResetMailer`, assegurando proteção contra enumeração de usuários (UC011 R-2).
+   - `PasswordResetService` coordena o `UserRepository`, o `PasswordResetTokenRepository` (geração de hash criptográfico com validade de 30 minutos (RNF017) e consumo único) e o envio assíncrono do link por fila através do `ResetMailer`, assegurando proteção contra enumeração de usuários (UC011 R-2).
 
 3. **Perfil e administração de usuários**:
    - `ProfileController` e `ProfileService` atendem à consulta e atualização cadastral, atualização de dados de instrutor (`InstructorProfileDTO`), troca de senha com validação de senha atual, upload de foto via `PhotoStorage` (armazenamento de imagem no Cloudflare R2 com URL pública e CDN) e persistência de endereços (`AddressRepository`).
