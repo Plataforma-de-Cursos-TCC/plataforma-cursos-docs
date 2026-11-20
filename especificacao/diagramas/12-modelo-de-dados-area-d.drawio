@@ -249,7 +249,7 @@
           <mxGeometry x="325" y="270" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_lessons_conv_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="350" y="100" width="20" height="20" as="geometry" />
+          <mxGeometry x="350" y="122" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_messages_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;" edge="1" parent="1" source="table_messages" target="table_conversations">
           <mxGeometry relative="1" as="geometry">

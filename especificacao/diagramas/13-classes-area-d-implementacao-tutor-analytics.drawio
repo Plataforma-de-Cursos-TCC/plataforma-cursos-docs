@@ -240,10 +240,10 @@
           <mxGeometry x="0" y="164" width="350" height="48" as="geometry" />
         </mxCell>
         <mxCell id="cls_DashboardMetricsDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardMetricsDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1660" y="520" width="350" height="84" as="geometry" />
+          <mxGeometry x="1660" y="634" width="350" height="84" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_cls_DashboardMetricsDTO" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="1666" y="528" width="20" height="20" as="geometry" />
+          <mxGeometry x="1666" y="642" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="cls_DashboardMetricsDTO_attrs" value="+totals: array&lt;br&gt;+series: array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardMetricsDTO">
           <mxGeometry x="0" y="36" width="350" height="48" as="geometry" />
@@ -350,9 +350,9 @@
           <mxGeometry relative="1" as="geometry">
           </mxGeometry>
         </mxCell>
-        <mxCell id="edge_aqr_dmd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_AnalyticsQueryRepository" target="cls_DashboardMetricsDTO">
+        <mxCell id="edge_aqr_dmd" value="" style="rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5;exitPerimeter=0;entryX=0;entryY=0.5;entryPerimeter=0;" edge="1" parent="1" source="cls_AnalyticsQueryRepository" target="cls_DashboardMetricsDTO">
           <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
+          <Array as="points"><mxPoint x="1640" y="570" /><mxPoint x="1640" y="676" /></Array></mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>

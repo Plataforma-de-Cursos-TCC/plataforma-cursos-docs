@@ -21,28 +21,28 @@
           <mxGeometry x="0" y="159" width="320" height="52" as="geometry" />
         </mxCell>
         <mxCell id="class_Administrator" value="&lt;b&gt;Administrator&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="285" width="320" height="180" as="geometry" />
+          <mxGeometry x="40" y="305" width="320" height="180" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_class_Administrator" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="46" y="293" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="313" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="class_Administrator_methods" value="+blockUser(user: User): void&lt;br&gt;+unblockUser(user: User): void&lt;br&gt;+changeUserRole(user: User, newRole: Role): void&lt;br&gt;+softDeleteUser(user: User): void&lt;br&gt;+restoreUser(user: User): void&lt;br&gt;+anonymizeUser(user: User): void&lt;br&gt;+viewDashboard(filter: DashboardFilter): Metrics" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Administrator">
           <mxGeometry x="0" y="36" width="320" height="136" as="geometry" />
         </mxCell>
         <mxCell id="class_Instructor" value="&lt;b&gt;Instructor&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="490" width="320" height="90" as="geometry" />
+          <mxGeometry x="40" y="510" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_class_Instructor" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="46" y="498" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="518" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="class_Instructor_methods" value="+viewDashboard(filter: DashboardFilter): Metrics" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Instructor">
           <mxGeometry x="0" y="36" width="320" height="46" as="geometry" />
         </mxCell>
         <mxCell id="class_Student" value="&lt;b&gt;Student&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="605" width="320" height="90" as="geometry" />
+          <mxGeometry x="40" y="625" width="320" height="90" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_class_Student" value="C" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="46" y="613" width="20" height="20" as="geometry" />
+          <mxGeometry x="46" y="633" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="class_Student_methods" value="+askTutor(lesson: Lesson, question: string): Message" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Student">
           <mxGeometry x="0" y="36" width="320" height="46" as="geometry" />
@@ -161,29 +161,17 @@
         <mxCell id="enum_AuditAction_vals" value="USER_BLOCK&lt;br&gt;USER_UNBLOCK&lt;br&gt;ROLE_CHANGE&lt;br&gt;USER_DELETE&lt;br&gt;USER_RESTORE&lt;br&gt;ACCESS_DENIED" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="enum_AuditAction">
           <mxGeometry x="0" y="36" width="250" height="115" as="geometry" />
         </mxCell>
-        <mxCell id="edge_admin_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=0;" edge="1" parent="1" source="class_Administrator" target="class_User">
+        <mxCell id="edge_admin_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=0;exitX=0.5000;exitY=0.0000;exitPerimeter=0;entryX=0.5000;entryY=1.0000;entryPerimeter=0;" edge="1" parent="1" source="class_Administrator" target="class_User">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="200" y="275" />
-              <mxPoint x="200" y="260" />
-            </Array>
-          </mxGeometry>
+            </mxGeometry>
         </mxCell>
-        <mxCell id="edge_inst_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=0;" edge="1" parent="1" source="class_Instructor" target="class_User">
+        <mxCell id="edge_inst_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;exitX=0.0000;exitY=0.5000;exitPerimeter=0;entryX=0.5000;entryY=1.0000;entryPerimeter=0;" edge="1" parent="1" source="class_Instructor" target="class_User">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="20" y="535" />
-              <mxPoint x="20" y="150" />
-            </Array>
-          </mxGeometry>
+            <Array as="points"><mxPoint x="24" y="555" /><mxPoint x="24" y="285" /><mxPoint x="200" y="285" /></Array></mxGeometry>
         </mxCell>
-        <mxCell id="edge_student_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=0;" edge="1" parent="1" source="class_Student" target="class_User">
+        <mxCell id="edge_student_user" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;endFill=0;exitX=0.0000;exitY=0.5000;exitPerimeter=0;entryX=0.5000;entryY=1.0000;entryPerimeter=0;" edge="1" parent="1" source="class_Student" target="class_User">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="10" y="650" />
-              <mxPoint x="10" y="150" />
-            </Array>
-          </mxGeometry>
+            <Array as="points"><mxPoint x="8" y="670" /><mxPoint x="8" y="285" /><mxPoint x="200" y="285" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="edge_user_audit" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;" edge="1" parent="1" source="class_User" target="class_AuditLog">
           <mxGeometry relative="1" as="geometry">
@@ -199,37 +187,25 @@
         <mxCell id="edge_user_audit_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1270" y="0" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_student_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;" edge="1" parent="1" source="class_Student" target="class_Conversation">
+        <mxCell id="edge_student_conv" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;exitX=1.0000;exitY=0.1667;exitPerimeter=0;entryX=0.0000;entryY=0.5000;entryPerimeter=0;" edge="1" parent="1" source="class_Student" target="class_Conversation">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="360" y="625" />
-              <mxPoint x="380" y="625" />
-              <mxPoint x="380" y="315" />
-              <mxPoint x="420" y="315" />
-            </Array>
-          </mxGeometry>
+            <Array as="points"><mxPoint x="385" y="640" /><mxPoint x="385" y="315" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="edge_student_conv_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="365" y="605" width="20" height="20" as="geometry" />
+          <mxGeometry x="362" y="616" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_student_conv_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="395" y="295" width="20" height="20" as="geometry" />
+          <mxGeometry x="392" y="292" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_student_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;" edge="1" parent="1" source="class_Student" target="class_TutorCreditPack">
+        <mxCell id="edge_student_tcp" value="" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;exitX=1.0000;exitY=0.7222;exitPerimeter=0;entryX=0.0000;entryY=0.4118;entryPerimeter=0;" edge="1" parent="1" source="class_Student" target="class_TutorCreditPack">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="360" y="675" />
-              <mxPoint x="400" y="675" />
-              <mxPoint x="400" y="555" />
-              <mxPoint x="420" y="555" />
-            </Array>
-          </mxGeometry>
+            <Array as="points"><mxPoint x="410" y="690" /><mxPoint x="410" y="540" /></Array></mxGeometry>
         </mxCell>
         <mxCell id="edge_student_tcp_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="365" y="680" width="20" height="20" as="geometry" />
+          <mxGeometry x="364" y="694" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_student_tcp_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="395" y="535" width="20" height="20" as="geometry" />
+          <mxGeometry x="400" y="515" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_course_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=none;" edge="1" parent="1" source="class_Course" target="class_Conversation">
           <mxGeometry relative="1" as="geometry">
