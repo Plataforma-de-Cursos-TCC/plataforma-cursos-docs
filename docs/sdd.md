@@ -11,7 +11,7 @@ atualizado: 2026-10-07
 
 ## 1. Visão da arquitetura
 
-A Plataforma de Cursos é um sistema web com front-end separado de uma API central. A API concentra as regras de negócio das quatro áreas (A a D) e é a única a falar com o banco, com o armazenamento de vídeo e com os serviços externos. A especificação sustenta três pontos de arquitetura: autenticação por token JWT com rotas protegidas por perfil (RNF001), upload e entrega de vídeo por URL assinada (RNF002) e um Tutor de IA que consulta só o material do próprio curso (RAG restrito por `course_id`).
+A Plataforma de Cursos é um sistema web com front-end separado de uma API central. A API concentra as regras de negócio das quatro áreas (A a D) e é a única a falar com o banco, com o armazenamento de vídeo e com os serviços externos. A especificação sustenta três pontos de arquitetura: autenticação por token JWT com rotas protegidas por perfil (RNF001), upload de vídeo e material via API (`media-service`) com entrega por URL assinada (RNF002, B2, B4) e um Tutor de IA que consulta só o material do próprio curso (RAG restrito por `course_id`).
 
 A arquitetura adota o estilo monólito modular (API única dividida por áreas A a D com Laravel 13) integrado a um front-end SPA em Next.js e microsserviços físicos dedicados para IA e mídia, conforme definido no [ADR-0007](adr/0007-stack-e-bancos.md). Motivo: equipe de 4 integrantes (uma área por integrante, conforme [ADR-0006](adr/0006-divisao-por-areas.md)) e alta coesão de domínio no core, isolando fisicamente apenas serviços com cargas computacionais e dependências especializadas (`ai-service` e `media-service`).
 
@@ -38,7 +38,7 @@ flowchart TB
     admin -->|"usa"| plataforma
     plataforma -->|"pergunta + trechos do curso"| tutor
     tutor -->|"resposta com aula e timestamp"| plataforma
-    plataforma -->|"URL assinada, vídeo"| storage
+    plataforma -->|"reprodução por URL assinada, vídeo"| storage
     plataforma -->|"link de redefinição de senha"| email
 ```
 
@@ -66,8 +66,8 @@ flowchart TB
 
     usuario -->|"HTTPS"| web
     web -->|"HTTPS/JSON, token JWT"| api
-    web -->|"upload e reprodução por URL assinada"| r2
-    api -->|"URL assinada (15 min)"| r2
+    web -->|"reprodução por URL assinada"| r2
+    api -->|"upload de vídeo e material"| r2
     api -->|"leitura e escrita"| db
     api -->|"pergunta do Aluno e contexto da aula"| tutorsvc
     api -->|"publica jobs de transcrição e ingestão"| fila
@@ -90,7 +90,7 @@ flowchart TB
 A stack tecnológica e os bancos de dados seguem a decisão do grupo registrada no [ADR-0007](adr/0007-stack-e-bancos.md):
 - **Front-end:** Next.js com TypeScript arquitetado como SPA (sem Server Components ou Server Actions).
 - **API (Core):** Laravel 13 / PHP 8.3 estruturado como monólito modular (módulos auth, catalog, learning e analytics).
-- **Banco de dados do Core:** MySQL 8 como SGBD relacional primário para todas as entidades do sistema.
+- **Banco de dados do Core:** PostgreSQL 16 na mesma instância do `ai-service`, em databases `core` e `ai` separados (ADR-0017), como SGBD relacional primário para todas as entidades do sistema.
 - **Serviço do Tutor de IA (`ai-service`):** Serviço físico separado rodando em seu próprio container (Laravel 13 / PHP 8.3) com banco de dados dedicado **PostgreSQL 16 com extensão pgvector** para índice vetorial HNSW e busca restrita a `course_id`. A separação física isola a dependência de LLM, pipelines assíncronos de transcrição/embeddings e a carga pesada de cálculo vetorial.
 - **Armazenamento de mídia (`media-service`):** Serviço separado com storage Cloudflare R2 para vídeos (`videoKey`).
 - **Mensageria:** RabbitMQ 3.13+ com protocolo AMQP, para os jobs assíncronos de transcrição e ingestão vetorial entre a API e o `ai-service`.
@@ -110,7 +110,7 @@ flowchart TB
         end
         subgraph areaB["Área B: Autoria do instrutor"]
             cursos["Cursos e categorias"]
-            modaulas["Módulos e aulas<br/>upload por URL assinada"]
+            modaulas["Módulos e aulas<br/>upload via API"]
             quizaut["Quiz e gabarito"]
             perfinstr["Perfil do instrutor"]
         end
@@ -237,7 +237,7 @@ sequenceDiagram
 | Integração | O que trafega | Falha | Fallback |
 |---|---|---|---|
 | Provedor do modelo de linguagem (Tutor de IA) | Pergunta do Aluno e trechos do curso recuperados por similaridade; resposta em streaming | Sem fonte na especificação para o comportamento em indisponibilidade | Sem fonte na especificação. |
-| Armazenamento e entrega de vídeo (R2) | Arquivo de vídeo, por URL assinada de envio com validade de 15 min (RNF002); `videoKey` guardada no banco; reprodução por URL assinada | Upload com URL expirada ou indisponível: o sistema informa o erro e gera nova URL assinada (UC015, E-2); falha na entrega do vídeo na reprodução (UC009) | Nova URL assinada para nova tentativa (especificação, UC015) |
+| Armazenamento e entrega de vídeo (R2) | Arquivo de vídeo e materiais complementares, enviados via API (`media-service`) (B2, B4); chaves guardadas no banco; reprodução de vídeo por URL assinada de 15 min (RNF002) | Upload com arquivo inválido ou falha de rede: o sistema rejeita e permite novo envio (UC015); falha na entrega do vídeo na reprodução (UC009) | Nova tentativa (especificação, UC015) |
 | Envio de e-mail (recuperar senha) | Link de redefinição, com validade de 30 minutos (UC011) | Sem fonte na especificação | Sem fonte na especificação. |
 | Pagamento | Não há integração externa: o pagamento é simulado (RF014; entidade Payment com status aprovado ou recusado) | Pagamento recusado: fica registrado como recusado, a matrícula segue pendente (sem acesso) e a API responde 422 PAYMENT_DECLINED; nova tentativa permitida (UC019, E-1) | Nova tentativa pelo Aluno |
 
@@ -431,7 +431,7 @@ classDiagram
 | Enumeração de usuários | Mensagem de login inválido e de recuperação de senha não revela se o e-mail existe | especificação (UC005, UC011) |
 | Bloqueio de login | 15 min após 5 tentativas inválidas consecutivas | especificação (RNF008) |
 | Recuperação de senha | Link de redefinição com validade de 30 minutos | especificação (UC011) |
-| Vídeo | Upload e reprodução só por URL assinada, com expiração de 15 min; sem acesso direto ao armazenamento | especificação (RNF002) |
+| Vídeo | Upload pela API via `media-service` (gravação no R2) e reprodução por URL assinada com expiração de 15 min; sem acesso direto ao armazenamento | especificação (RNF002, B2, B4) |
 | Matrícula | Só o Aluno matriculado acessa as aulas, salvo aula marcada como prévia (`isPreview`) | especificação (US006, UC003) |
 | Tutor de IA | Responde só com base no material do próprio curso (RAG restrito por `course_id`); limite de mensagens por Aluno por período | especificação (UC001) |
 | LGPD | Aceite de termos e política de privacidade registrado em 100% dos cadastros; dados pessoais removidos na exclusão da conta, com histórico anonimizado | especificação (RNF020, UC012, US016) |
@@ -448,7 +448,7 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 | RNF | Característica | Meta | Como a arquitetura atende |
 |---|---|---|---|
 | RNF001 | Segurança | Token de 1 h; 100% das rotas verificam perfil | Controle de acesso por perfil na API (componente da área D), antes de qualquer componente de negócio |
-| RNF002 | Segurança | URL assinada de 15 min; 0 acessos diretos | A API gera a URL; o front-end nunca recebe credencial do armazenamento |
+| RNF002 | Segurança | URL assinada de 15 min para reprodução; upload via API; 0 acessos diretos | A API/media-service grava no storage e emite URL temporária para streaming; o front-end nunca recebe credencial do armazenamento |
 | RNF003 | Eficiência de desempenho | Primeiro trecho da resposta do Tutor de IA em até 3 s (p95) | Resposta em streaming do provedor até o chat |
 | RNF004 | Eficiência de desempenho | 0 reprocessamentos por aula | Transcrição e embeddings guardados no banco e gerados uma vez, após o upload |
 | RNF005 | Capacidade de interação | 100% dos campos obrigatórios validados com mensagem de erro clara | Front-end SPA com validação nos formulários |
@@ -464,7 +464,7 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 | RNF015 | Manutenibilidade | 100% dos endpoints em OpenAPI, online | API documentada em OpenAPI e publicada |
 | RNF016 | Segurança | 100% das ações administrativas registradas, por 12 meses | Registro de auditoria no componente de gerenciamento de usuários |
 | RNF017 | Segurança | Link de redefinição de senha de uso único, com expiração de 30 min | Token de uso único com validade de 30 min, gerado na área A e enviado por e-mail |
-| RNF018 | Eficiência de desempenho | Vídeo de aula aceito somente em mp4 ou webm, com até 500 MB por arquivo | Validação de tipo e tamanho na emissão da URL assinada de envio (área B) |
+| RNF018 | Eficiência de desempenho | Vídeo de aula aceito somente em mp4 ou webm, com até 500 MB por arquivo | Validação de tipo e tamanho no upload direto via API (área B) |
 | RNF019 | Flexibilidade | Layout funcional de 360 a 1920 px de largura | Front-end SPA responsiva, mesmo componente de layout do RNF005 |
 | RNF020 | Segurança | Aceite de termos e da política de dados pessoais (LGPD) registrado em 100% dos cadastros | Campo de aceite no cadastro (área A) |
 | RNF021 | Manutenibilidade | Cobertura de testes de 75% no frontend, com merge bloqueado abaixo | Verificação de cobertura (Vitest) no pipeline de integração contínua |

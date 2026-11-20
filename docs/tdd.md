@@ -16,14 +16,14 @@ A infraestrutura e as escolhas tecnológicas da plataforma estão consolidadas n
 | Camada / Função | Tecnologia | Versão | Justificativa | Decisão / ADR |
 |---|---|---|---|---|
 | **Front-end Web** | Next.js com TypeScript | 14+ <!-- proposta: versão a confirmar pelo grupo --> | Arquitetado estritamente como SPA (Single Page Application, sem Server Components ou Server Actions) consumindo a API via JSON/REST e SSE. TypeScript unifica a tipagem com os DTOs do sistema e viabiliza tema claro/escuro (RNF014), suporte i18n (RNF013) e responsividade 360–1920 px (RNF019). | [ADR-0007](adr/0007-stack-e-bancos.md) |
-| **API (Core)** | Laravel / PHP | Laravel 13 / PHP 8.3 | Monólito modular dividido nas áreas A a D (`auth`, `catalog`, `learning`, `analytics`). Proporciona produtividade, migrações integradas, Eloquent ORM e separação coesa de domínios para a equipe de 4 desenvolvedores ([ADR-0006](adr/0006-divisao-por-areas.md)). | [ADR-0007](adr/0007-stack-e-bancos.md) |
-| **Banco de dados do Core** | MySQL | 8.0+ | SGBD relacional transacional primário que atende com maturidade todas as entidades relacionais da plataforma (usuários, cursos, matrículas, progresso, avaliações e quizzes). | [ADR-0007](adr/0007-stack-e-bancos.md) |
+| **API (Core)** | Laravel / PHP | Laravel 13 / PHP 8.3 | Monólito modular dividido nas áreas A a D (`auth`, `authoring`, `learning`, `analytics`). Proporciona produtividade, migrações integradas, Eloquent ORM e separação coesa de domínios sem microsserviços adicionais ([ADR-0006](adr/0006-divisao-por-areas.md), [ADR-0018](adr/0018-core-como-monolito-modular.md)). | [ADR-0007](adr/0007-stack-e-bancos.md), [ADR-0018](adr/0018-core-como-monolito-modular.md) |
+| **Banco de dados do Core** | PostgreSQL | 16 | SGBD relacional transacional primário que atende com maturidade todas as entidades relacionais da plataforma, com suporte a particionamento de auditoria (ADR-0016), índices parciais únicos de e-mail (ADR-0014) e tipos modernos (`uuid`, `jsonb`, `timestamptz`). Fica na mesma instância do `ai-service`, em database `core` separado. | [ADR-0017](adr/0017-core-em-postgresql.md) |
 | **Serviço do Tutor de IA (`ai-service`)** | Laravel com Laravel AI SDK / PHP | Laravel 13 / PHP 8.3 | Microsserviço físico separado responsável por transcrever aulas, gerar embeddings uma única vez (RNF004), executar o pipeline RAG do `CourseTutorAgent` e responder em streaming SSE (RNF003) sem onerar o core transacional. | [ADR-0007](adr/0007-stack-e-bancos.md) |
-| **Banco vetorial (`ai-service`)** | PostgreSQL com extensão `pgvector` | PostgreSQL 16 (`pgvector:pg16`) | Suporte nativo de primeira classe no Laravel 13 e Laravel AI SDK (`whereVectorSimilarTo`, `$table->vector()`), indexação HNSW de alta performance com filtragem híbrida e particionada por `course_id`. | [ADR-0007](adr/0007-stack-e-bancos.md) |
-| **Serviço de Mídia (`media-service`)** | Laravel / PHP | Laravel 13 / PHP 8.3 | Serviço físico desacoplado para coordenar upload e streaming de vídeos via URLs assinadas de 15 minutos (RNF002). | [ADR-0007](adr/0007-stack-e-bancos.md), [sdd.md](sdd.md) |
-| **Armazenamento de Objetos (Storage)** | Cloudflare R2 | API S3-compatible | Armazenamento seguro de vídeos das aulas e thumbnails com geração de URLs pré-assinadas temporárias (RNF002), sem tráfego de mídia passando pelo servidor web da API. | [sdd.md](sdd.md) |
+| **Banco vetorial (`ai-service`)** | PostgreSQL com extensão `pgvector` | PostgreSQL 16 (`pgvector:pg16`) | Suporte nativo de primeira classe no Laravel 13 e Laravel AI SDK (`whereVectorSimilarTo`, `$table->vector()`), indexação HNSW de alta performance com filtragem híbrida e particionada por `course_id`. Fica na mesma instância gerenciada do Railway, em database `ai` separado. | [ADR-0007](adr/0007-stack-e-bancos.md), [ADR-0017](adr/0017-core-em-postgresql.md) |
+| **Serviço de Mídia (`media-service`)** | Laravel / PHP | Laravel 13 / PHP 8.3 | Serviço físico desacoplado para coordenar o processamento de upload de vídeos e materiais via API e entrega de streaming via URLs assinadas de 15 minutos (RNF002, B2, B4). | [ADR-0007](adr/0007-stack-e-bancos.md), [sdd.md](sdd.md) |
+| **Armazenamento de Objetos (Storage)** | Cloudflare R2 | API S3-compatible | Armazenamento seguro de vídeos das aulas, materiais complementares e thumbnails; streaming de vídeo e download por URLs assinadas temporárias (RNF002); upload de arquivos realizado via API/`media-service` (B2, B4). | [sdd.md](sdd.md) |
 | **Mensageria e Filas** | RabbitMQ | 3.13+ | Broker de mensageria assíncrona para orquestração de pipelines pesados em background (transcrição de vídeos e ingestão de embeddings para o `ai-service`). | <!-- proposta: alinhado ao Obsidian Vault e SDD para jobs assíncronos desacoplados --> |
-| **Cache e Gerenciamento de Sessão** | Redis | 7.2+ | Cache de listagens em memória (RNF009), rate limiting de requisições e suporte à blocklist de tokens JWT revogados na Sprint 2. | <!-- proposta: alinhado ao Obsidian Vault para rate limit e blocklist --> |
+| **Cache e Gerenciamento de Sessão** | Redis | 7.2+ | Cache de listagens em memória (RNF009), rate limiting de requisições, controle de janela deslizante de cota do Tutor de IA e suporte à blocklist de tokens JWT (`jti`) revogados nesta sprint (ADR-0008). | [ADR-0008](adr/0008-sessao-jwt-em-cookie.md) |
 | **Testes Automatizados (Backend)** | Pest PHP | 2.x / 3.x | Framework de testes fluente para PHP que assegura cobertura mínima de testes de 75% no backend com validação em pipeline de CI (RNF006). | <!-- proposta: alinhado ao Obsidian Vault e RNF006 --> |
 | **Testes Automatizados (Frontend)** | Vitest e Playwright | Mais recentes | Vitest para testes unitários/componentes do Next.js e Playwright para validação de testes ponta a ponta (E2E) dos fluxos principais. | <!-- proposta: alinhado ao Obsidian Vault --> |
 | **Hospedagem e Deploy** | Vercel (front-end), Railway (API e serviços) e Cloudflare R2 (mídia) | Planos gratuitos ou de entrada | Front-end SPA na Vercel, com `rewrites` de `/api/*` para a API no Railway, de modo que navegador e API compartilham o mesmo host e o cookie `__Host-` do ADR-0008 continua válido. API, `media-service`, `ai-service` e bancos no Railway; bancos, cache e mensageria sem exposição pública. Docker Compose fica só para o ambiente de desenvolvimento local. Domínio ainda pendente. | [ADR-0010](adr/0010-hospedagem-e-armazenamento.md), [ADR-0007](adr/0007-stack-e-bancos.md) |
@@ -595,17 +595,17 @@ Códigos de erro padrão da API (o `code` é estável e é o que o front-end e o
 | `CONFLICT` | 409 | O estado atual do recurso impede a operação: curso com alunos matriculados no `DELETE`, curso despublicado ou preço alterado durante a matrícula, matrícula já existente. A mensagem diz o motivo. | UC006 E2; UC003 E1; UC019 E2 e E3 |
 | `LESSON_NOT_INDEXED` | 409 | Aula ainda sem transcrição e embeddings; o Tutor de IA não responde até a indexação terminar. | UC001 E1 |
 | `PAYLOAD_TOO_LARGE` | 413 | Corpo acima do limite do servidor. Abaixo dele, a regra de 2 MB da foto (UC013 R-6) é `VALIDATION_FAILED`. | UC013 E1 |
-| `TOO_MANY_REQUESTS` | 429 | Limite de taxa: 5 logins inválidos seguidos bloqueiam a conta por 15 minutos (RNF008) e o Tutor de IA tem cota de mensagens. Sempre com o cabeçalho `Retry-After` (segundos) e `error.retryAfterSeconds`, que alimentam o tempo restante mostrado ao Usuário. | UC005 E4; UC001 E2 |
+| `TOO_MANY_REQUESTS` | 429 | Limite de taxa: 5 logins inválidos seguidos bloqueiam a conta por 15 minutos (RNF008) e o Tutor de IA tem cota de 20 mensagens por hora por Aluno em janela deslizante (UC001). Sempre com o cabeçalho `Retry-After` (segundos) e `error.retryAfterSeconds`, que alimentam o tempo restante mostrado ao Usuário. | UC005 E4; UC001 E2 |
 | `INTERNAL_SERVER_ERROR` | 500 | Falha inesperada, inclusive quiz publicado com gabarito incompleto (UC002 E2). A resposta não expõe detalhe interno; o detalhe vai para o log. | UC002 E2 |
 | `SERVICE_UNAVAILABLE` | 503 | Dependência fora do ar (ai-service, Cloudflare R2, envio de e-mail), com `Retry-After`. | UC001 E3; UC009 E2; UC015 E2 |
 
-Regras do padrão: um erro tem um só `code`, sempre na estrutura acima, e o status HTTP segue a semântica do código (4xx erro do cliente, 5xx falha do servidor). Respostas que protegem contra enumeração de usuários (UC005 R-1 e UC011 R-2) têm o mesmo status e o mesmo corpo nos dois casos, e o e-mail de recuperação sai por fila para o tempo de resposta também não diferenciar. Os códigos de B a D são os que a especificação já pedia; os de `CONFLICT` e `SERVICE_UNAVAILABLE` nos UCs dessas áreas aguardam a confirmação de cada área. Na prática de mercado há duas alternativas ao envelope próprio, o `application/problem+json` da RFC 9457 e o formato `{message, errors}` padrão do Laravel; o envelope daqui mantém o `fields` do segundo e o `code` estável do primeiro.
+Regras do padrão: um erro tem um só `code`, sempre na estrutura acima, e o status HTTP segue a semântica do código (4xx erro do cliente, 5xx falha do servidor). Respostas que protegem contra enumeração de usuários (UC005 R-1 e UC011 R-2) têm o mesmo status e o mesmo corpo nos dois casos, e o e-mail de recuperação sai por fila para o tempo de resposta também não diferenciar. Para assegurar manutenibilidade e evitar proliferação de classes de exceção por cenário, a aplicação utiliza a classe única `ApiException(code: ErrorCode, httpStatus: int, fields: array = [])` e o enum tipado `ErrorCode` (declarados no módulo Auth / Área A, item 13), utilizados transversalmente por todos os módulos do monólito. Cada código estável da tabela acima corresponde a um caso de `ErrorCode`. Na prática de mercado há duas alternativas ao envelope próprio, o `application/problem+json` da RFC 9457 e o formato `{message, errors}` padrão do Laravel; o envelope daqui mantém o `fields` do segundo e o `code` estável do primeiro.
 
 Respostas de sucesso: `200 OK` com corpo em leituras e atualizações, `201 Created` em criações e `204 No Content`, sem corpo, em todo `DELETE` bem-sucedido.
 
 ### 3.2 Paginação
 
-Toda listagem é paginada ([ADR-0009](adr/0009-listagens-na-url-e-paginacao.md)). Os parâmetros são `page` (padrão 1), `per_page` (padrão 20, máximo 100), `sort` (lista branca de campos; prefixo `-` para decrescente, com desempate por `id`) e os filtros próprios de cada rota. Os mesmos parâmetros ficam na URL da tela, que é a fonte do estado de filtros e página. A única exceção é o histórico de mensagens do Tutor de IA (`Message`), paginado por cursor (`cursor` e `per_page`, resposta com `meta.nextCursor`) para a rolagem infinita da conversa; todo o resto usa `page` e `per_page`. Cada tela usa um API Resource que devolve somente os campos que ela exibe. Metadados consolidados seguem no envelope da resposta (RNF009):
+Toda listagem é paginada ([ADR-0009](adr/0009-listagens-na-url-e-paginacao.md), atualizada pela [ADR-0015](adr/0015-convencao-de-nomes-por-camada.md)). Os parâmetros na API são estritamente em camelCase: `page` (padrão 1), `perPage` (padrão 20, máximo 100; valores fora de 1 a 100 retornam 422 `VALIDATION_FAILED` com o campo em `fields.perPage`), `sort` (lista branca de campos; prefixo `-` para decrescente, com desempate por `id`) e os filtros próprios de cada rota. Os mesmos parâmetros ficam na URL da tela, que é a fonte do estado de filtros e página. A única exceção é o histórico de mensagens do Tutor de IA (`Message`), paginado por cursor (`cursor` e `perPage`, resposta com `meta.nextCursor`) para a rolagem infinita da conversa; todo o resto usa `page` e `perPage`. Cada tela usa um API Resource que devolve somente os campos que ela exibe e serializa o envelope em camelCase. Metadados consolidados seguem no envelope da resposta (RNF009, ADR-0015):
 
 ```json
 {
@@ -617,17 +617,17 @@ Toda listagem é paginada ([ADR-0009](adr/0009-listagens-na-url-e-paginacao.md))
     "totalPages": 3
   },
   "links": {
-    "first": "/api/v1/courses?page=1&per_page=20",
-    "last": "/api/v1/courses?page=3&per_page=20",
+    "first": "/api/v1/courses?page=1&perPage=20",
+    "last": "/api/v1/courses?page=3&perPage=20",
     "prev": null,
-    "next": "/api/v1/courses?page=2&per_page=20"
+    "next": "/api/v1/courses?page=2&perPage=20"
   }
 }
 ```
 
 ### 3.3 Endpoints por Área e Casos de Uso
 
-A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D ([ADR-0006](adr/0006-divisao-por-areas.md)) e correlacionados aos casos de uso correspondentes ([especificacao/10-especificacoes-de-caso-de-uso/](especificacao/10-especificacoes-de-caso-de-uso/00-item.md)):
+A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D ([ADR-0006](adr/0006-divisao-por-areas.md)) e correlacionados aos casos de uso correspondentes ([especificacao/10-especificacoes-de-caso-de-uso/](../especificacao/10-especificacoes-de-caso-de-uso/00-item.md)):
 
 | Área | Método e Endpoint | Descrição e Acesso | UC Relacionado |
 |---|---|---|---|
@@ -651,30 +651,36 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | | `POST /api/v1/instructor/courses/{id}/modules` | Criação e ordenação de módulos do curso (Instrutor dono) | UC014 |
 | | `PUT /api/v1/instructor/modules/{id}` | Edição e reordenação de módulos (Instrutor dono) | UC014 |
 | | `DELETE /api/v1/instructor/modules/{id}` | Exclusão de módulo; responde `204` (Instrutor dono) | UC014 |
-| | `POST /api/v1/instructor/modules/{id}/lessons` | Criação de aula e solicitação de URL assinada para upload de vídeo (Instrutor dono) | UC015 |
-| | `POST /api/v1/instructor/lessons/{id}/upload-url` | Novo link assinado de upload, para trocar o vídeo de uma aula existente (Instrutor dono) | UC015 |
+| | `POST /api/v1/instructor/modules/{id}/lessons` | Criação de aula com metadados e upload multipart de vídeo via API (`media-service` grava no R2 e salva `videoKey`) (Instrutor dono) | UC015 |
+| | `PUT /api/v1/instructor/lessons/{id}` | Edição de metadados da aula e marcação de `isPreview` (Instrutor dono) | UC015 |
+| | `PUT /api/v1/instructor/lessons/{id}/video` | Substituição do vídeo da aula via upload direto pela API/`media-service` (Instrutor dono) | UC015 |
 | | `DELETE /api/v1/instructor/lessons/{id}` | Exclusão de aula; responde `204` (Instrutor dono) | UC015 |
-| | `PUT /api/v1/instructor/lessons/{id}` | Edição de dados da aula e marcação de `isPreview` (Instrutor dono) | UC015 |
+| | `POST /api/v1/instructor/lessons/{id}/materials` | Upload de material complementar da aula (PDF/anexo) via API (`media-service` grava no R2 e registra `LessonMaterial`) (Instrutor dono) | UC015 |
+| | `DELETE /api/v1/instructor/materials/{id}` | Exclusão lógica de material complementar; responde `204` (Instrutor dono) | UC015 |
 | | `POST /api/v1/instructor/modules/{id}/quiz` | Cadastro de quiz com perguntas e alternativas com gabarito (Instrutor dono) | UC004 |
-| | `PUT /api/v1/instructor/quizzes/{id}` | Edição de perguntas, gabarito e `status` (`rascunho` ou `publicado`) do quiz (Instrutor dono); preserva tentativas e notas já registradas (R-2). Gabarito ausente ou menos de 2 alternativas: 422 `VALIDATION_FAILED` | UC004 |
-| **Área C: Aprendizagem do aluno** | `GET /api/v1/catalog/courses` | Listagem paginada de cursos publicados com filtro `category` e ordenação `sort`: `GET /api/v1/catalog/courses?category=&page=&per_page=&sort=` (público) | UC020 |
+| | `PUT /api/v1/instructor/quizzes/{id}` | Edição de perguntas, gabarito e `status` (`draft` ou `published`) do quiz (Instrutor dono); preserva tentativas e notas já registradas (R-2). Gabarito ausente ou menos de 2 alternativas: 422 `VALIDATION_FAILED` | UC004 |
+| **Área C: Aprendizagem do aluno** | `GET /api/v1/catalog/courses` | Listagem paginada de cursos publicados com filtro `category` e ordenação `sort`: `GET /api/v1/catalog/courses?category=&page=&perPage=&sort=` (público) | UC020 |
 | | `GET /api/v1/catalog/courses/{id}` | Detalhes públicos do curso com lista de módulos e aulas prévia (público) | UC020 |
-| | `POST /api/v1/courses/{id}/enroll` | Criação da matrícula: `ativa` em curso gratuito; `pendente` em curso pago, devolvendo os dados para o pagamento (Aluno) | UC003 |
-| | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado (Aluno dono). Aprovado: registra o pagamento, a matrícula vira `ativa` e o acesso é liberado (`200`). Recusado: registra `Payment.status = recusado`, mantém a matrícula `pendente` e responde `422 PAYMENT_DECLINED` | UC019 |
+| | `POST /api/v1/courses/{id}/enroll` | Criação da matrícula: `active` em curso gratuito; `pending` em curso pago, devolvendo os dados para o pagamento (Aluno) | UC003 |
+| | `POST /api/v1/enrollments/{id}/pay` | Processamento de pagamento simulado (Aluno dono). Aprovado: registra o pagamento, a matrícula vira `active` e o acesso é liberado (`200`). Recusado: registra `Payment.status = recusado`, mantém a matrícula `pending` e responde `422 PAYMENT_DECLINED` | UC019 |
 | | `GET /api/v1/lessons/{id}/stream` | Geração de URL assinada de 15 min no Cloudflare R2 para assistir à aula (Aluno matriculado ou preview). Aula inexistente: 404 `NOT_FOUND`; Aluno sem matrícula em aula que não é prévia: 403 `FORBIDDEN`; vídeo indisponível ou ainda em processamento: 404 `NOT_FOUND` | UC009 |
-| | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado). Corpo: `{ "segundos_assistidos": inteiro >= 0, "concluida": booleano }`; valor inválido: 422 `VALIDATION_FAILED` | UC009 |
+| | `POST /api/v1/lessons/{id}/progress` | Registro de segundos assistidos e marcação de conclusão da aula (Aluno matriculado). Corpo: `{ "watchedSeconds": inteiro >= 0, "completed": booleano }`; valor inválido: 422 `VALIDATION_FAILED` | UC009 |
 | | `GET /api/v1/quizzes/{id}` | Carga do quiz: perguntas e alternativas, sem gabarito (Aluno matriculado no curso do quiz, com as aulas do módulo concluídas); `404` para quiz inexistente ou sem matrícula, `403` se as aulas não estão concluídas | UC002 |
 | | `PUT /api/v1/quizzes/{id}/attempt/draft` | Salvamento do rascunho das respostas do quiz (Aluno matriculado) | UC002 |
 | | `GET /api/v1/quizzes/{id}/attempt/result` | Consulta do resultado da última tentativa enviada, com as respostas do Aluno e o gabarito, que só aparece depois do envio (Aluno matriculado) | UC002 |
 | | `POST /api/v1/quizzes/{id}/attempt` | Submissão de respostas do quiz e correção automática imediata (Aluno matriculado) | UC002 |
 | | `POST /api/v1/courses/{id}/reviews` | Criação ou substituição da avaliação e comentário do aluno sobre o curso, uma por aluno e curso (Aluno matriculado). Primeira avaliação: 201 Created; substituição da existente: 200 OK; Aluno sem matrícula: 403 `FORBIDDEN` | UC010 |
 | | `GET /api/v1/courses/{id}/reviews/me` | Consulta da avaliação anterior do próprio aluno para o curso, para pré-preencher o formulário (Aluno matriculado). Sem avaliação anterior: 404 `NOT_FOUND`, e o formulário abre vazio | UC010 |
-| **Área D: Tutor de IA e Administração** | `GET /api/v1/ai/tutor/conversations/{id}/messages` | Histórico da conversa com rolagem infinita, paginado por cursor (Aluno dono) | UC001 |
+| **Área D: Tutor de IA e Administração** | `GET /api/v1/ai/tutor/conversations/{id}/messages` | Histórico da conversa com rolagem infinita, paginado por cursor (`cursor` e `perPage`, resposta com `meta.nextCursor`) (Aluno dono) | UC001 |
 | | `POST /api/v1/ai/tutor/chat` | Envio de dúvida ao Tutor de IA com streaming SSE da resposta contextualizada (Aluno matriculado) | UC001 |
-| | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos; parâmetros `inicio` e `fim` (datas ISO, `inicio` ≤ `fim`, senão `422 VALIDATION_FAILED`) e `curso_id` opcional; o Instrutor só vê os próprios cursos (`403 FORBIDDEN` para curso de outro Instrutor, R-2) (Instrutor / Administrador) | UC007 |
-| | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma (Administrador) | UC008 |
-| | `PUT /api/v1/admin/users/{id}/status` | Bloqueio ou desbloqueio de conta de usuário (Administrador) | UC008 |
-| | `DELETE /api/v1/admin/users/{id}` | Exclusão de conta com anonimização de dados conforme LGPD (Administrador) | UC018 |
+| | `POST /api/v1/ai/tutor/credits/buy` | Compra de pacote de mensagens extras do Tutor de IA com pagamento simulado (reusa `Payment` com `purpose = 'tutor_credits'`, liberando mensagens adicionais após esgotar a cota horária de 20 msgs/h) (Aluno) | UC001 |
+| | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos; parâmetros `startDate` e `endDate` (datas ISO, `startDate` ≤ `endDate`, senão `422 VALIDATION_FAILED`), `courseId` opcional e `groupBy` (`day`, `week`, `month`); o Instrutor só vê os próprios cursos (`403 FORBIDDEN` para curso de outro Instrutor, R-2) (Instrutor / Administrador) | UC007 |
+| | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma com filtros (`page`, `perPage`, `role`, `status`, `search`) (Administrador) | UC008 |
+| | `PUT /api/v1/admin/users/{id}/status` | Bloqueio ou desbloqueio de conta de usuário (`active` ou `blocked`; envio de `deleted` devolve 422 `VALIDATION_FAILED`) (Administrador) | UC008 |
+| | `PUT /api/v1/admin/users/{id}/role` | Alteração do perfil de acesso do usuário (`student`, `instructor`, `admin`); revoga sessões de refresh e coloca o `jti` do token atual na blocklist do Redis (Administrador) | UC008 |
+| | `DELETE /api/v1/admin/users/{id}` | Exclusão lógica de conta (`status = deleted`, preenchimento de `deleted_at`, revogação de sessões e blocklist de `jti`) com escolha de arquivar (`archived`) ou excluir em cascata os cursos de Instrutor (Administrador) | UC018 |
+| | `POST /api/v1/admin/users/{id}/reactivate` | Reativação de conta de usuário excluída logicamente (`status = active`, limpa `deleted_at`) antes da anonimização (Administrador). Conta já anonimizada: 422 `VALIDATION_FAILED` | UC018 |
+| | `POST /api/v1/admin/users/{id}/anonymize` | Anonimização irreversível dos dados pessoais conforme LGPD (`anonymized_at`, substituição de PII por dados sintéticos mantendo integridade histórica) (Administrador) | UC018 |
 | | `GET /api/v1/me/permissions` | Verificação de permissões e direcionamento de rota protegida por perfil (autenticado) | UC016 |
 
 ---
@@ -689,7 +695,7 @@ A autenticação é inteiramente baseada em tokens JWT (*JSON Web Tokens*) assin
 - **Armazenamento Seguro do Token:** Para blindar a aplicação contra ataques de furto por *Cross-Site Scripting* (XSS), o JWT é transmitido ao cliente e armazenado em um cookie com flags `HttpOnly`, `Secure` e `SameSite=Strict`. O front-end SPA nunca manipula o token via código JavaScript de acesso a storage local (`localStorage` / `sessionStorage`).
 - **Tempo de Vida (TTL):** O JWT possui TTL de 1 hora (RNF001 e UC005). O TTL implementa a expiração por inatividade da regra R-2 do UC005: a sessão sem renovação expira em 1 hora. Ao expirar, o front-end renova a sessão com o refresh token da opção "manter conectado", quando existir; sem ele, o usuário reautentica.
 - **Manter conectado:** No login, o campo booleano `rememberMe` decide se a API também emite um refresh token rotativo, em cookie `HttpOnly` de vida longa. Cada renovação invalida o anterior. A duração (30 dias) e a rotação estão definidas no [ADR-0008](adr/0008-sessao-jwt-em-cookie.md).
-- **Revogação e Blocklist:** Na Sprint 2, a invalidação antecipada (logout imediato ou bloqueio administrativo de usuário, UC008/UC018) será realizada por meio de uma blocklist mantida em Redis pelo tempo residual de expiração do token.
+- **Revogação e Blocklist:** A invalidação antecipada de tokens (logout imediato, alteração de perfil no UC008 ou bloqueio/exclusão administrativa no UC008/UC018) é implementada nesta sprint por meio de uma blocklist de `jti` mantida no Redis pelo tempo residual de expiração do token (ADR-0008). O custo é uma única verificação em memória por requisição autenticada, com chave expirando automaticamente junto ao TTL do JWT.
 
 ### 4.2 Autorização, Perfis e Verificação de Propriedade (*Ownership*)
 
@@ -749,7 +755,8 @@ flowchart TD
 
 ### 5.2 Limites de Uso, Controle de Custo e Privacidade
 
-- **Rate Limiting:** Para conter custos de chamadas de inferência de LLM e evitar abusos, cada aluno matriculado possui uma cota de perguntas por janela de tempo (ex.: máximo de 20 perguntas por hora, monitoradas em Redis). Requisições excedentes recebem HTTP 429 com aviso de tempo de espera.
+- **Rate Limiting e Cota do Tutor:** Para conter custos de inferência de LLM e evitar abusos, cada Aluno matriculado possui uma cota de 20 perguntas por hora, monitorada no Redis através de algoritmo de janela deslizante (*sliding window*). Ao estourar a cota horária, a API responde HTTP 429 `TOO_MANY_REQUESTS` acompanhada obrigatoriamente do cabeçalho `Retry-After` com os segundos restantes até que a mensagem mais antiga expire da janela deslizante, além do campo `error.retryAfterSeconds` no corpo da resposta (UC001).
+- **Pacote Extra de Créditos (simulado):** O Aluno pode adquirir pacotes de mensagens extras do Tutor de IA com pagamento simulado (reutilizando a infraestrutura de `Payment` da Área C com `purpose = 'tutor_credits'` e persistindo em `TutorCreditPack`). A franquia extra adquirida só é consumida após o esgotamento da cota horária gratuita regular de 20 mensagens/hora.
 - **Privacidade e LGPD:** Em estrito cumprimento à privacidade do aluno (RNF020), nenhuma informação de identificação pessoal (PII) — como nome, e-mail, telefone ou CPF — é enviada aos provedores de modelos de linguagem externos. A mensagem enviada contém apenas a dúvida formulada pelo aluno e os fragmentos de contexto extraídos das aulas do curso.
 - **Tratamento de Indisponibilidade do Modelo:** Conforme determinado no [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md), o Tutor de IA é tratado como ator sistêmico externo. Caso a API de inferência externa falhe ou atinja timeout, o sistema ativa um fluxo alternativo/de degradação graciosa: o chat exibe uma mensagem informativa amigável (*"O Tutor de IA está temporariamente indisponível no momento. Por favor, tente novamente em alguns instantes."*), sem interromper a reprodução do vídeo ou o progresso da aula pelo aluno.
 
@@ -767,7 +774,14 @@ As decisões arquiteturais do projeto são formalizadas e mantidas como Architec
 | [ADR-0012](adr/0012-diagramas-do-ra1-em-drawio.md) | D4 | **Diagramas do RA1 em draw.io:** fonte `.drawio` versionada e PNG exportado da fonte nos itens 4 (BPMN 2.0), 9 e 11 (UML); substitui a ADR-0004. | 4, 9, 11 |
 | [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md) | D5 | **Tutor de IA como ator sistêmico:** Modela o Tutor como ator secundário participante de casos de uso sem iniciar fluxos autônomos. | 2, 5, 6, 9, 10 |
 | [ADR-0006](adr/0006-divisao-por-areas.md) | D6 | **Divisão por áreas de A a D:** Estrutura o sistema e o trabalho da equipe em 4 áreas funcionais especializadas. | 6, 7, 8, 10 |
-| [ADR-0007](adr/0007-stack-e-bancos.md) | D7 | **Definição da stack tecnológica e bancos de dados:** Formaliza Next.js SPA, API Laravel 13 modular, MySQL 8 relacional e `ai-service` físico com PostgreSQL 16 + pgvector. | 5, 11 |
+| [ADR-0007](adr/0007-stack-e-bancos.md) | D7 | **Definição da stack tecnológica e bancos de dados:** Formaliza Next.js SPA, API Laravel 13 modular e `ai-service` com PostgreSQL 16 + pgvector; banco do core substituído pela ADR-0017. | 5, 11 |
 | [ADR-0008](adr/0008-sessao-jwt-em-cookie.md) | D8 | **Sessão com JWT em cookie HttpOnly:** Token de acesso de 1 hora, refresh token rotacionado para «manter conectado» e blocklist no Redis. | 5, 11 |
-| [ADR-0009](adr/0009-listagens-na-url-e-paginacao.md) | D9 | **Listagens com estado na URL e paginação obrigatória:** Filtros, ordenação e página na query string, `per_page` limitado e resposta mínima por tela. | 5, 11 |
+| [ADR-0009](adr/0009-listagens-na-url-e-paginacao.md) | D9 | **Listagens com estado na URL e paginação obrigatória:** Filtros, ordenação e página na query string, resposta mínima por tela; parâmetro `per_page` substituído pela ADR-0015 (`perPage`). | 5, 11 |
+| [ADR-0010](adr/0010-hospedagem-e-armazenamento.md) | D10 | **Hospedagem e armazenamento de mídia:** Front-end na Vercel, API e microsserviços no Railway e mídia no Cloudflare R2. | 5, 11 |
+| [ADR-0013](adr/0013-diagramas-do-ra2-em-drawio.md) | D4 | **Diagramas do RA2 em draw.io:** Fonte `.drawio` e exportação PNG para os diagramas dos itens 12 a 14; substitui a ADR-0011. | 12, 13, 14 |
+| [ADR-0014](adr/0014-exclusao-logica-e-anonimizacao.md) | D14 | **Exclusão lógica e anonimização separada:** `deleted_at` em todas as tabelas de negócio; exclusão de usuário reversível e anonimização como passo separado irreversível. | 10, 12, 13, 14, 15 |
+| [ADR-0015](adr/0015-convencao-de-nomes-por-camada.md) | D15 | **Convenção de nomes por camada:** Banco em snake_case, API e código em camelCase (`perPage`); substitui o nome do item 4 da ADR-0009. | 12, 13, 14, 15 |
+| [ADR-0016](adr/0016-retencao-de-logs-e-auditoria.md) | D16 | **Retenção de logs e da trilha de auditoria:** Auditoria retida 12 meses no PostgreSQL e 5 anos arquivada no R2; logs da aplicação por 90 dias. | 8, 12, 14 |
+| [ADR-0017](adr/0017-core-em-postgresql.md) | D17 | **Core em PostgreSQL 16:** Core migrado para PostgreSQL 16 na mesma instância do `ai-service`, em databases `core` e `ai` separados; substitui o MySQL da ADR-0007. | 5, 11, 12 |
+| [ADR-0018](adr/0018-core-como-monolito-modular.md) | D18 | **Core como monólito modular:** Core estruturado em módulos internos comunicando-se por Services públicos, sem microsserviços novos. | 11, 13 |
 
