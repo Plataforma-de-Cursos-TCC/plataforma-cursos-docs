@@ -1,0 +1,97 @@
+' Item 14 - Diagrama de sequência do UC008 Gerenciar Usuários (Área D). Camadas e métodos do item 13.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc008.puml especificacao/diagramas/14-sequencia-uc008.drawio
+@startuml 14-sequencia-uc008
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam BoxPadding 8
+
+actor "Administrador" as ADM
+boundary UserAdminView as V
+boundary UserController as C
+control UserAdminService as S
+control JwtGuard as J
+control AuditService as A
+control UserRepository as R
+database BD
+
+ADM -> V ++ : busca usuários com paginação (perPage 1..100)
+V -> C ++ : index(req: ListUsersRequest)
+alt perPage fora do intervalo 1..100
+  C --> V : 422 VALIDATION_FAILED (perPage)
+  V --> ADM : exibe erro de validação
+else parâmetros de listagem válidos
+  C -> S ++ : paginateUsers( filters )
+  S -> R ++ : paginate( filters )
+  R -> BD ++ : SELECT users WHERE deleted_at IS NULL
+  BD --> R : registros
+  R --> S : usuários paginados
+  S --> C : LengthAwarePaginator
+  C --> V : 200 OK (UserAdminResource)
+  V --> ADM : exibe lista de usuários ativos
+end
+alt A2 - Administrador cancela na confirmação
+  ADM -> V ++ : aciona "Cancelar"
+  V --> ADM : descarta a ação sem alterar o usuário
+else confirmação de bloqueio ou desbloqueio
+  ADM -> V ++ : confirma bloqueio ou desbloqueio
+  V -> C ++ : updateStatus(id, req)
+  C -> S ++ : updateStatus( adminId, targetId, status )
+  alt tentativa de definir status deleted na rota de status
+    S --> C : 422 VALIDATION_FAILED
+    C --> V : 422 VALIDATION_FAILED
+    V --> ADM : exclusão deve usar rota DELETE (UC018)
+  else tentativa de auto-bloqueio ou auto-desbloqueio
+    S --> C : 403 FORBIDDEN
+    C --> V : 403 FORBIDDEN
+    V --> ADM : impede a ação na própria conta (R-1, R-2)
+  else alteração de status válida
+    S -> R ++ : updateStatus( targetId, status )
+    R -> BD ++ : UPDATE users SET status
+    BD --> R : ok
+    R --> S : user
+    opt bloqueio de usuário
+      S -> J ++ : revoke( jti, ttl )
+      J --> S : ok (jti no Redis blocklist)
+      S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW()
+      BD --> S : ok
+    end
+    S -> A ++ : logAction( adminId, ACTION, "User", targetId )
+    A -> BD ++ : INSERT INTO audit_logs (RNF016)
+    BD --> A : ok
+    A --> S : auditLog
+    S --> C : user
+    C --> V : 200 OK (UserAdminResource)
+    V --> ADM : status atualizado e registrado em auditoria
+  end
+else A4 - alteração de perfil (US016)
+  ADM -> V ++ : seleciona novo perfil (ex: instructor) e confirma
+  V -> C ++ : updateRole(id, req)
+  C -> S ++ : changeRole( adminId, targetId, newRole )
+  alt tentativa de alterar o próprio perfil
+    S --> C : 403 FORBIDDEN
+    C --> V : 403 FORBIDDEN
+    V --> ADM : impede alteração do próprio perfil (R-1)
+  else perfil alterado com sucesso
+    S -> R ++ : updateRole( targetId, newRole )
+    R -> BD ++ : UPDATE users SET role
+    BD --> R : ok
+    opt promoção de Aluno para Instrutor
+      S -> BD ++ : INSERT INTO instructor_profiles (user_id)
+      BD --> S : ok
+    end
+    S -> J ++ : revoke( jti, ttl )
+    J --> S : ok (invalida JWT antigo no Redis)
+    S -> A ++ : logAction( adminId, ROLE_CHANGE, "User", targetId )
+    A -> BD ++ : INSERT INTO audit_logs (RNF016)
+    BD --> A : ok
+    A --> S : auditLog
+    S --> C : user
+    C --> V : 200 OK (UserAdminResource)
+    V --> ADM : perfil atualizado, tokens revogados e auditado
+  end
+end
+@enduml

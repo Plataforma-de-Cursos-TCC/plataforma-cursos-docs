@@ -1,0 +1,59 @@
+' Item 14 - Diagrama de sequência do UC018 Excluir e Anonimizar Usuário (Área D). Camadas e métodos do item 13.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc018.puml especificacao/diagramas/14-sequencia-uc018.drawio
+@startuml 14-sequencia-uc018
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam BoxPadding 8
+
+actor "Administrador" as ADM
+boundary UserAdminView as V
+control UserController as C
+control UserAdminService as S
+control JwtGuard as J
+control AuditService as A
+control UserRepository as R
+database BD
+
+ADM -> V ++ : aciona "Excluir" na linha do usuário
+V --> ADM : exibe modal com aviso de exclusão lógica
+alt A1 - Administrador cancela na confirmação (R-3)
+  ADM -> V ++ : aciona "Cancelar"
+  V --> ADM : fecha o modal sem alterar o usuário
+else confirma a exclusão
+  ADM -> V ++ : confirma exclusão
+  V -> C ++ : destroy(id)
+  C -> S ++ : deleteAndAnonymize(adminId, targetId)
+  alt E1 - tentativa de excluir a própria conta (R-2)
+    S --> C : 403 FORBIDDEN
+    C --> V : 403 FORBIDDEN
+    V --> ADM : erro: autoexclusão proibida
+  else E2 - usuário não encontrado ou já excluído
+    S --> C : 404 NOT_FOUND
+    C --> V : 404 NOT_FOUND
+    V --> ADM : informa usuário não encontrado e atualiza lista
+  else exclusão lógica confirmada (ADR-0014)
+    S -> R ++ : softDelete(targetId)
+    R -> BD ++ : UPDATE users SET deleted_at = NOW()
+    BD --> R : ok
+    opt instrutor com cursos ativos
+      S -> BD ++ : UPDATE courses SET status='archived' WHERE instructor_id=targetId
+      BD --> S : ok
+    end
+    S -> J ++ : revoke( jti, ttl )
+    J --> S : ok (invalida jti no Redis blocklist)
+    S -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW()
+    BD --> S : ok
+    S -> A ++ : logAction( adminId, USER_DELETE, "User", targetId )
+    A -> BD ++ : INSERT INTO audit_logs (RNF016)
+    BD --> A : ok
+    A --> S : auditLog
+    S --> C : void
+    C --> V : 204 No Content
+    V --> ADM : exibe confirmação e remove usuário da lista ativa
+  end
+end
+@enduml

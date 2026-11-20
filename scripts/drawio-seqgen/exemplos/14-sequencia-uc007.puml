@@ -1,0 +1,49 @@
+' Item 14 - Diagrama de sequência do UC007 Ver Dashboard com Filtro (Área D). Camadas e métodos do item 13.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc007.puml especificacao/diagramas/14-sequencia-uc007.drawio
+@startuml 14-sequencia-uc007
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam BoxPadding 8
+
+actor "Instrutor / Administrador" as USU
+boundary DashboardView as V
+control DashboardController as C
+control DashboardFilterRequest as Q
+control DashboardAnalyticsService as S
+control AnalyticsQueryRepository as R
+database BD
+
+USU -> V ++ : seleciona startDate, endDate, courseId e groupBy
+V -> C ++ : getMetrics(req: DashboardFilterRequest)
+C -> Q ++ : rules()
+Q --> C -- : validação de datas e agrupamento
+alt E1 - startDate posterior a endDate ou groupBy inválido
+  C --> V : 422 VALIDATION_FAILED
+  V --> USU : exibe erro nos campos inválidos
+else filtro com parâmetros válidos
+  C -> S ++ : getMetrics( user, filter )
+  alt R-2 - Instrutor consulta curso de outro instrutor
+    S --> C : 403 FORBIDDEN
+    C --> V : 403 FORBIDDEN
+    V --> USU : exibe aviso de acesso negado
+  else acesso permitido
+    S -> R ++ : aggregateProgressAndEnrollments( courseIds, start, end, groupBy )
+    R -> BD ++ : SELECT progress, enrollments WHERE date BETWEEN start AND end
+    BD --> R : registros agregados
+    R --> S : DashboardMetricsDTO
+    alt E2 - nenhuma atividade no período
+      S --> C : DashboardMetricsDTO (vazio)
+      C --> V : 200 OK (DashboardResource zerado)
+      V --> USU : exibe estado vazio claro sem atividade
+    else dados encontrados no período
+      S --> C : DashboardMetricsDTO
+      C --> V : 200 OK (DashboardResource)
+      V --> USU : exibe gráficos e indicadores atualizados
+    end
+  end
+end
+@enduml

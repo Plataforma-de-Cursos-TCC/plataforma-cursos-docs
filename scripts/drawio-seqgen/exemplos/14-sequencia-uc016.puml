@@ -1,0 +1,50 @@
+' Item 14 - Diagrama de sequência do UC016 Acessar Área Protegida por Perfil (Área D). Camadas e métodos do item 13.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc016.puml especificacao/diagramas/14-sequencia-uc016.drawio
+@startuml 14-sequencia-uc016
+skinparam shadowing false
+skinparam dpi 192
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam wrapMessageWidth 170
+skinparam BoxPadding 8
+
+actor "Usuário" as USU
+boundary AppRouterView as V
+control EnsureUserHasRole as E
+control JwtGuard as J
+control AuditService as A
+control ProtectedAreaController as P
+database BD
+
+USU -> V ++ : navega para rota de área protegida
+V -> E ++ : handle( req, next, requiredRole )
+E -> J ++ : parseToken(token)
+J -> BD ++ : valida assinatura e checa Redis blocklist
+BD --> J -- : token válido?
+J --> E -- : User (ou nulo / revogado)
+alt E1 - sessão ausente, expirada ou na blocklist do Redis
+  E --> V : 401 UNAUTHENTICATED
+  V --> USU : redireciona para tela de login (UC005)
+else token válido
+  E -> J ++ : authorize( user, requiredRole )
+  J --> E : autorizado?
+  alt E2 - perfil sem permissão na rota (R-2)
+    E -> A ++ : logAccessDenied( userId, targetArea, requiredRole )
+    A -> BD ++ : INSERT INTO audit_logs (ACTION=ACCESS_DENIED, RNF016)
+    BD --> A : ok
+    A --> E : auditLog
+    E --> V : 403 FORBIDDEN
+    V --> USU : exibe acesso negado e direciona para área do seu perfil
+  else perfil autorizado
+    E -> P ++ : checkPermissions()
+    P --> E : 200 OK (PermissionsResource)
+    E --> V : 200 OK
+    alt A1 - primeiro acesso logo após o login
+      V --> USU : redireciona para home do perfil
+    else navegação direta
+      V --> USU : exibe a área protegida solicitada
+    end
+  end
+end
+@enduml
