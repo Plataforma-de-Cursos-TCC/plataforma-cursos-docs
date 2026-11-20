@@ -5,7 +5,7 @@
 - **Descrição:** o Aluno faz uma pergunta sobre o conteúdo da aula ao Tutor de IA do curso e recebe uma resposta que cita a origem no material (US012, RF009). Iniciado a partir do UC009 (Assistir Aula), fluxo alternativo A3: UC001 «extend» UC009 (a seta sai do UC001 e aponta para o UC009).
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; a aula já ter sido transcrita e indexada.
 - **Pós-condições:** pergunta e resposta salvas no histórico de conversa do Aluno com aquele curso.
-- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por curso em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código HTTP 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua saldo em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
+- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código HTTP 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
 - **Protótipo(s) de tela:** chat na lateral da reprodução do vídeo, com a resposta indicando a aula e o minuto do vídeo de origem. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno abre o chat na página da aula. (A-2)
@@ -58,7 +58,7 @@
 
     *Figura 0 – UC001, fluxo de exceção E1: conteúdo em preparo*
   - **E2 – Limite de mensagens atingido**
-    - E-2.1 O sistema identifica que o Aluno atingiu a cota de 20 mensagens na janela deslizante de 1 hora no Redis e não possui saldo em pacote de créditos extras.
+    - E-2.1 O sistema identifica que o Aluno atingiu a cota de 20 mensagens por hora, em janela deslizante no Redis, e não possui mensagem disponível em pacote de créditos extras.
     - E-2.2 O sistema bloqueia o novo envio com HTTP 429 `TOO_MANY_REQUESTS`, informa o tempo restante no cabeçalho `Retry-After` e oferece a aquisição de pacote de créditos extras (A-3).
     - E-2.3 Este caso de uso é finalizado.
 
@@ -322,7 +322,7 @@
     - A-2.5 Este caso de uso é finalizado.
   - **A3 – Execução da anonimização irreversível (LGPD)**
     - A-3.1 A pedido do titular ou após 30 dias de exclusão lógica sem reativação, a rotina de anonimização é executada.
-    - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, foto) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico.
+    - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, foto) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico, e registra a ação `USER_ANONYMIZE` em `audit_logs` (RNF016).
     - A-3.3 Este caso de uso é finalizado.
   - **A4 – Exclusão de Instrutor com cursos publicados**
     - A-4.1 Ao selecionar a exclusão de um Instrutor com cursos publicados, o sistema solicita a escolha entre despublicar os cursos (`archived`) ou aplicar exclusão lógica em cascata.
