@@ -26,64 +26,64 @@ Decisões do modelo:
 | ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: categories** | | | | Categorias temáticas de classificação dos cursos. |
-| id | Determinante | UUID | - | Identificador único da categoria (chave primária). |
-| name | Simples | Texto | 80 | Nome descritivo da categoria de curso (obrigatório). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único da categoria (chave primária). |
+| name | Simples | text | 80 | Nome descritivo da categoria de curso (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
 | **Tabela: courses** | | | | Catálogo de cursos criados por instrutores (UC006, RF002). |
-| id | Determinante | UUID | - | Identificador único do curso (chave primária). |
-| instructor_id | Simples | UUID | - | FK para `users.id` (Área A), identificando o instrutor proprietário do curso. |
-| category_id | Simples | UUID | - | FK para `categories.id`, categorização temática do curso. |
-| title | Simples | Texto | 150 | Título oficial do curso (obrigatório). |
-| description | Simples | Texto longo | TEXT | Descrição detalhada do conteúdo programático (obrigatório). |
-| price_cents | Simples | Inteiro | - | Preço do curso expresso em centavos (inteiro, obrigatório). |
-| currency | Simples | Texto | 3 | Código ISO 4217 da moeda (padrão 'BRL', obrigatório). |
-| level | Simples | Texto | 20 | Nível de dificuldade: 'beginner', 'intermediate', 'advanced' (opcional). |
-| status | Simples | Texto | 20 | Estado de publicação: 'draft', 'published' ou 'archived' (obrigatório, padrão 'draft'). |
-| thumbnail_key | Simples | Texto | 255 | Chave da imagem de capa no storage Cloudflare R2 (opcional). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único do curso (chave primária). |
+| instructor_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o instrutor proprietário do curso. |
+| category_id | Simples | uuid | - | FK para `categories.id`, categorização temática do curso. |
+| title | Simples | text | 150 | Título oficial do curso (obrigatório). |
+| description | Simples | text | TEXT | Descrição detalhada do conteúdo programático (obrigatório). |
+| price_cents | Simples | integer | - | Preço do curso expresso em centavos (inteiro, obrigatório). |
+| currency | Simples | text | 3 | Código ISO 4217 da moeda (padrão 'BRL', obrigatório). |
+| level | Simples | text CHECK | 20 | Nível de dificuldade: 'beginner', 'intermediate', 'advanced' (opcional). |
+| status | Simples | text CHECK | 20 | Estado de publicação: 'draft', 'published' ou 'archived' (obrigatório, padrão 'draft'). |
+| thumbnail_key | Simples | text | 255 | Chave da imagem de capa no storage Cloudflare R2 (opcional). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
 | **Tabela: modules** | | | | Módulos de conteúdo programático ordenados dentro do curso (UC014, RF003). |
-| id | Determinante | UUID | - | Identificador único do módulo (chave primária). |
-| course_id | Simples | UUID | - | FK para `courses.id`, curso ao qual o módulo pertence. |
-| title | Simples | Texto | 150 | Título descritivo do módulo (obrigatório). |
-| position | Simples | Inteiro | - | Posição sequencial do módulo dentro do curso (única por curso, obrigatório). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único do módulo (chave primária). |
+| course_id | Simples | uuid | - | FK para `courses.id`, curso ao qual o módulo pertence. |
+| title | Simples | text | 150 | Título descritivo do módulo (obrigatório). |
+| position | Simples | integer | - | Posição sequencial do módulo dentro do curso (única por curso, obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
 | **Tabela: lessons** | | | | Unidade de aula em vídeo com metadados e indexação vetorial (UC015, RF004). |
-| id | Determinante | UUID | - | Identificador único da aula (chave primária). |
-| module_id | Simples | UUID | - | FK para `modules.id`, módulo ao qual a aula pertence. |
-| title | Simples | Texto | 150 | Título da aula (obrigatório). |
-| description | Simples | Texto longo | TEXT | Descrição do conteúdo da aula (opcional). |
-| video_key | Simples | Texto | 255 | Chave do arquivo de vídeo no storage Cloudflare R2 (obrigatório após upload). |
-| duration_seconds | Simples | Inteiro | - | Duração total do vídeo em segundos (opcional). |
-| video_mime_type | Simples | Texto | 100 | Tipo MIME do arquivo de vídeo (ex.: 'video/mp4', 'video/webm'). |
-| video_size_bytes | Simples | Inteiro grande | - | Tamanho do arquivo de vídeo em bytes (até 500 MB). |
-| position | Simples | Inteiro | - | Posição sequencial da aula dentro do módulo (obrigatório). |
-| is_preview | Simples | Booleano | - | Flag indicando se a aula pode ser assistida gratuitamente como degustação (padrão false). |
-| index_status | Simples | Texto | 20 | Status da indexação vetorial para o Tutor de IA: 'pending', 'indexed', 'failed' (obrigatório, padrão 'pending'). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único da aula (chave primária). |
+| module_id | Simples | uuid | - | FK para `modules.id`, módulo ao qual a aula pertence. |
+| title | Simples | text | 150 | Título da aula (obrigatório). |
+| description | Simples | text | TEXT | Descrição do conteúdo da aula (opcional). |
+| video_key | Simples | text | 255 | Chave do arquivo de vídeo no storage Cloudflare R2 (obrigatório após upload). |
+| duration_seconds | Simples | integer | - | Duração total do vídeo em segundos (opcional). |
+| video_mime_type | Simples | text | 100 | Tipo MIME do arquivo de vídeo (ex.: 'video/mp4', 'video/webm'). |
+| video_size_bytes | Simples | bigint | - | Tamanho do arquivo de vídeo em bytes (até 500 MB). |
+| position | Simples | integer | - | Posição sequencial da aula dentro do módulo (obrigatório). |
+| is_preview | Simples | boolean | - | Flag indicando se a aula pode ser assistida gratuitamente como degustação (padrão false). |
+| index_status | Simples | text CHECK | 20 | Status da indexação vetorial para o Tutor de IA: 'pending', 'indexed', 'failed' (obrigatório, padrão 'pending'). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
 | **Tabela: lesson_materials** | | | | Arquivos complementares de apoio vinculados à aula (UC015, RF004, RNF018). |
-| id | Determinante | UUID | - | Identificador único do material complementar (chave primária). |
-| lesson_id | Simples | UUID | - | FK para `lessons.id`, aula à qual o material pertence. |
-| title | Simples | Texto | 150 | Título descritivo do material (obrigatório). |
-| file_key | Simples | Texto | 255 | Chave do arquivo de documento no storage Cloudflare R2 (obrigatório). |
-| mime_type | Simples | Texto | 100 | Tipo MIME do arquivo (ex.: 'application/pdf', obrigatório). |
-| size_bytes | Simples | Inteiro grande | - | Tamanho do arquivo em bytes (até 50 MB, obrigatório). |
-| position | Simples | Inteiro | - | Posição sequencial do material dentro da aula (obrigatório). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único do material complementar (chave primária). |
+| lesson_id | Simples | uuid | - | FK para `lessons.id`, aula à qual o material pertence. |
+| title | Simples | text | 150 | Título descritivo do material (obrigatório). |
+| file_key | Simples | text | 255 | Chave do arquivo de documento no storage Cloudflare R2 (obrigatório). |
+| mime_type | Simples | text | 100 | Tipo MIME do arquivo (ex.: 'application/pdf', obrigatório). |
+| size_bytes | Simples | bigint | - | Tamanho do arquivo em bytes (até 50 MB, obrigatório). |
+| position | Simples | integer | - | Posição sequencial do material dentro da aula (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
 | **Tabela: quizzes** | | | | Avaliações objetivas vinculadas aos módulos do curso (UC004, RF007). |
-| id | Determinante | UUID | - | Identificador único do quiz (chave primária). |
-| module_id | Simples | UUID | - | FK para `modules.id`, vinculando o quiz ao módulo correspondente. |
-| title | Simples | Texto | 150 | Título do quiz (obrigatório). |
-| status | Simples | Texto | 20 | Estado de publicação do quiz: 'draft' ou 'published' (obrigatório, padrão 'draft'). |
-| allow_retake | Simples | Booleano | - | Flag indicando se novas tentativas de resolução são permitidas após submissão (padrão true, obrigatório). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único do quiz (chave primária). |
+| module_id | Simples | uuid | - | FK para `modules.id`, vinculando o quiz ao módulo correspondente. |
+| title | Simples | text | 150 | Título do quiz (obrigatório). |
+| status | Simples | text CHECK | 20 | Estado de publicação do quiz: 'draft' ou 'published' (obrigatório, padrão 'draft'). |
+| allow_retake | Simples | boolean | - | Flag indicando se novas tentativas de resolução são permitidas após submissão (padrão true, obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
 | **Tabela: questions** | | | | Questões avaliativas que compõem o quiz (UC004, RF007). |
-| id | Determinante | UUID | - | Identificador único da questão (chave primária). |
-| quiz_id | Simples | UUID | - | FK para `quizzes.id`, quiz proprietário da questão. |
-| text | Simples | Texto longo | TEXT | Enunciado da questão (obrigatório). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único da questão (chave primária). |
+| quiz_id | Simples | uuid | - | FK para `quizzes.id`, quiz proprietário da questão. |
+| text | Simples | text | TEXT | Enunciado da questão (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
 | **Tabela: question_options** | | | | Alternativas de resposta e gabarito oficial da questão (UC004, RF007). |
-| id | Determinante | UUID | - | Identificador único da alternativa (chave primária). |
-| question_id | Simples | UUID | - | FK para `questions.id`, questão à qual a alternativa pertence. |
-| text | Simples | Texto longo | TEXT | Texto descritivo da alternativa (obrigatório). |
-| is_correct | Simples | Booleano | - | Indica se a alternativa compõe o gabarito oficial (obrigatório). |
-| deleted_at | Simples | Data e hora | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| id | Determinante | uuid | - | Identificador único da alternativa (chave primária). |
+| question_id | Simples | uuid | - | FK para `questions.id`, questão à qual a alternativa pertence. |
+| text | Simples | text | TEXT | Texto descritivo da alternativa (obrigatório). |
+| is_correct | Simples | boolean | - | Indica se a alternativa compõe o gabarito oficial (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
