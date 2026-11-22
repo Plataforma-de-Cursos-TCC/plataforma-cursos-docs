@@ -5,9 +5,9 @@
 | # | REQUISITO NÃO-FUNCIONAL | NORMA ISO/IEC 25010 |
 |---|---|---|
 | RNF001 | Autenticação por token JWT com expiração de 1 h; 100% das áreas protegidas verificam o perfil do usuário. | Segurança (autenticidade) |
-| RNF002 | Upload de vídeo somente por URL assinada com expiração de 15 min; 0 acessos diretos ao armazenamento. | Segurança (confidencialidade) |
+| RNF002 | Upload de vídeo e de material somente pela API, que grava no armazenamento; reprodução somente por URL assinada com expiração de 15 min; 0 acessos diretos ao armazenamento. | Segurança (confidencialidade) |
 | RNF003 | Resposta do Tutor de IA em streaming, com o primeiro trecho em até 3 s no percentil 95. | Eficiência de desempenho (comportamento temporal) |
-| RNF004 | Transcrição e embeddings gerados uma única vez por aula; 0 reprocessamentos em acessos repetidos à mesma aula. | Eficiência de desempenho (utilização de recursos) |
+| RNF004 | Transcrição e embeddings gerados uma única vez por aula, salvo quando o vídeo é substituído (UC015 A1); 0 reprocessamentos em acessos repetidos à mesma aula. | Eficiência de desempenho (utilização de recursos) |
 | RNF005 | 100% dos campos obrigatórios validados, com mensagem que indica o campo e a regra violada em 100% dos casos. | Capacidade de interação (proteção contra erro do usuário) |
 | RNF006 | Cobertura mínima de 75% dos testes automatizados do backend; merge bloqueado abaixo disso. | Manutenibilidade (testabilidade) |
 | RNF007 | 0 senhas em texto puro (armazenadas com hash). | Segurança (confidencialidade) |
