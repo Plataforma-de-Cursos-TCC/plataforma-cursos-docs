@@ -38,6 +38,11 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Corrigido
 
+- Revisão cruzada final, parte geral: índices dos itens 12 a 15, US022 e RF020 rastreados nos itens 7 e 9, ADR-0019 com o upload pela API, TDD e matriz de cobertura refeitos a partir dos itens 12, 13 e 15, e tabela de testes do RA1 marcada como histórico, para o documento não contradizer a si mesmo na entrega (#PR).
+- Revisão cruzada final, Área A: login com conta excluída ou anonimizada em 401 genérico, tipos PostgreSQL no modelo, `User` abstrata, `UserFiltersDTO` e fluxos do UC005 em `alt` (#PR).
+- Revisão cruzada final, Área B: `position` em todas as camadas, `archive()` sem volta a rascunho, `softDeleteAllByInstructor`, critérios da US005 e colunas de auditoria (#PR).
+- Revisão cruzada final, Área C: `archived` no status do curso, `payments.created_at`, `GroupBy` como enumeração e rótulos internos trocados por referências formais (#PR).
+- Revisão cruzada final, Área D: exclusão em cascata no UC018 com TC273, anonimização sem exclusão física, busca de usuários por `search` e `status`, compra de créditos via `PaymentService` e tipos PostgreSQL no dicionário (#PR).
 - Área A: `JwtGuard` declara `parseToken` e `authorize`, usados pela Área D no UC016, e `User.status` e `User.theme` passam aos valores em inglês (`active`/`blocked`/`deleted`, `light`/`dark`/`system`) com o rótulo em pt-BR no item 12 (#141).
 
 Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129):
