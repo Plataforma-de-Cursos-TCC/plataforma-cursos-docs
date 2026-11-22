@@ -13,6 +13,10 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ## [Não lançado]
 
+### Alterado
+
+- Diagramas dos itens 12 e 13 padronizados: cores por papel, legenda única com cabeçalho escuro e tipos de linha, notas em amarelo, setas ortogonais retas e legendas e notas no espaço livre, porque os formatos divergiam entre áreas e a leitura ficava ambígua; a Fonte das figuras passa a usar link curto do GitHub Pages (#158).
+
 ## [2.0.1] - 2026-11-22
 
 ### Alterado

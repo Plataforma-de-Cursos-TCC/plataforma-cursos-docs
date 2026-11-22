@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Antigravity" version="24.7.17" compressed="false">
   <diagram name="Item 12 Modelo de Dados Area B" id="diagram_item12_b">
     <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1080" pageHeight="1340" math="0" shadow="0">
@@ -59,7 +59,7 @@
         <mxCell id="row_course_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course">
           <mxGeometry y="280" width="330" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="table_User" value="users (Área A)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#4A5568;strokeWidth=1.5;strokeDasharray=2 2;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="table_User" value="users (Área A)" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#4A5568;strokeWidth=1.5;strokeDasharray=2 2;fontFamily=Helvetica;fontSize=12;dashed=1" vertex="1" parent="1">
           <mxGeometry x="760" y="40" width="280" height="160" as="geometry" />
         </mxCell>
         <mxCell id="row_user_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_User">
@@ -84,7 +84,7 @@
           <mxGeometry y="140" width="280" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_Module" value="modules" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="370" y="360" width="330" height="180" as="geometry" />
+          <mxGeometry x="370" y="400" width="330" height="180" as="geometry" />
         </mxCell>
         <mxCell id="row_mod_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
           <mxGeometry y="30" width="330" height="20" as="geometry" />
@@ -105,7 +105,7 @@
           <mxGeometry y="160" width="330" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_Lesson" value="lessons" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="560" width="300" height="320" as="geometry" />
+          <mxGeometry x="40" y="400" width="300" height="320" as="geometry" />
         </mxCell>
         <mxCell id="row_les_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
@@ -147,7 +147,7 @@
           <mxGeometry y="300" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_LessonMaterial" value="lesson_materials" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="900" width="300" height="240" as="geometry" />
+          <mxGeometry x="40" y="780" width="300" height="240" as="geometry" />
         </mxCell>
         <mxCell id="row_mat_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
@@ -177,7 +177,7 @@
           <mxGeometry y="220" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_Quiz" value="quizzes" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="390" y="560" width="290" height="200" as="geometry" />
+          <mxGeometry x="390" y="640" width="290" height="200" as="geometry" />
         </mxCell>
         <mxCell id="row_quiz_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Quiz">
           <mxGeometry y="30" width="290" height="20" as="geometry" />
@@ -201,7 +201,7 @@
           <mxGeometry y="180" width="290" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_Question" value="questions" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="390" y="780" width="290" height="160" as="geometry" />
+          <mxGeometry x="390" y="900" width="290" height="160" as="geometry" />
         </mxCell>
         <mxCell id="row_quest_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Question">
           <mxGeometry y="30" width="290" height="20" as="geometry" />
@@ -219,7 +219,7 @@
           <mxGeometry y="140" width="290" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_QuestionOption" value="question_options" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="750" y="780" width="280" height="180" as="geometry" />
+          <mxGeometry x="750" y="900" width="280" height="180" as="geometry" />
         </mxCell>
         <mxCell id="row_opt_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption">
           <mxGeometry y="30" width="280" height="20" as="geometry" />
@@ -239,89 +239,190 @@
         <mxCell id="row_opt_del" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption">
           <mxGeometry y="160" width="280" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="note_integridade" value="&lt;b&gt;Regras de integridade e bloqueio de exclusão (Área C e ADR-0014):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;UC015 R-5:&lt;/b&gt; A exclusão de uma aula (lessons) é bloqueada se houver registros em lesson_progress (progresso de alunos).&lt;br&gt;• &lt;b&gt;UC014 R-4:&lt;/b&gt; A exclusão de um módulo (modules) é bloqueada se houver histórico de alunos (lesson_progress ou quiz_attempts).&lt;br&gt;• &lt;b&gt;UC006 R-2:&lt;/b&gt; A exclusão de um curso (courses) é bloqueada se houver matrículas ativas em enrollments.&lt;br&gt;• &lt;b&gt;ADR-0014:&lt;/b&gt; Exclusão lógica com deleted_at em todas as tabelas de negócio; nenhum DELETE físico." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="1160" width="450" height="150" as="geometry" />
+        <mxCell id="note_integridade" value="&lt;b&gt;Regras de integridade e bloqueio de exclusão (Área C e ADR-0014):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;UC015 R-5:&lt;/b&gt; A exclusão de uma aula (lessons) é bloqueada se houver registros em lesson_progress (progresso de alunos).&lt;br&gt;• &lt;b&gt;UC014 R-4:&lt;/b&gt; A exclusão de um módulo (modules) é bloqueada se houver histórico de alunos (lesson_progress ou quiz_attempts).&lt;br&gt;• &lt;b&gt;UC006 R-2:&lt;/b&gt; A exclusão de um curso (courses) é bloqueada se houver matrículas ativas em enrollments.&lt;br&gt;• &lt;b&gt;ADR-0014:&lt;/b&gt; Exclusão lógica com deleted_at em todas as tabelas de negócio; nenhum DELETE físico." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="400" width="300" height="250" as="geometry" />
         </mxCell>
-        <mxCell id="note_quiz_rules" value="&lt;b&gt;Relação Módulo–Quiz e Gabarito (TDD seção 2):&lt;/b&gt;&lt;br&gt;• Cada quiz (quizzes) pertence a exatamente um módulo (modules) (1 linha de modules para 0..n de quizzes).&lt;br&gt;• &lt;b&gt;UC004 R-1:&lt;/b&gt; Toda questão (questions) precisa de ao menos 2 alternativas (question_options), com exatamente uma marcada como correta (is_correct = true).&lt;br&gt;• &lt;b&gt;UC004 R-2:&lt;/b&gt; A edição do gabarito preserva tentativas e notas anteriores já registradas em quiz_attempts." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="530" y="1160" width="500" height="150" as="geometry" />
+        <mxCell id="note_quiz_rules" value="&lt;b&gt;Relação Módulo–Quiz e Gabarito (TDD seção 2):&lt;/b&gt;&lt;br&gt;• Cada quiz (quizzes) pertence a exatamente um módulo (modules) (1 linha de modules para 0..n de quizzes).&lt;br&gt;• &lt;b&gt;UC004 R-1:&lt;/b&gt; Toda questão (questions) precisa de ao menos 2 alternativas (question_options), com exatamente uma marcada como correta (is_correct = true).&lt;br&gt;• &lt;b&gt;UC004 R-2:&lt;/b&gt; A edição do gabarito preserva tentativas e notas anteriores já registradas em quiz_attempts." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="740" y="670" width="300" height="210" as="geometry" />
         </mxCell>
-        <mxCell id="edge_course_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.3077;entryX=1;entryY=0.8;" edge="1" parent="1" source="table_Course" target="table_Category">
+        <mxCell id="edge_course_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.23333333;entryX=1;entryY=0.5" edge="1" parent="1" source="table_Course" target="table_Category">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lbl_cc_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="344" y="96" width="24" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="lbl_cc_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="312" y="96" width="24" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_course_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.2308;entryX=0;entryY=0.375;" edge="1" parent="1" source="table_Course" target="table_User">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="lbl_cu_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="702" y="76" width="24" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="lbl_cu_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="734" y="76" width="24" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_mod_course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="table_Module" target="table_Course">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="lbl_mc_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="545" y="358" width="24" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="lbl_mc_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="545" y="342" width="24" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_les_mod" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0;entryY=0.5;" edge="1" parent="1" source="table_Lesson" target="table_Module">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="190" y="450" />
-            </Array>
+        <mxCell id="lbl_cc_n" value="n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_course_cat">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-14" y="-12" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="lbl_lm_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="200" y="540" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_cc_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_course_cat">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="16" y="-12" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="lbl_lm_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="345" y="430" width="24" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="edge_mat_les" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="table_LessonMaterial" target="table_Lesson">
+        <mxCell id="edge_course_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.23333333;entryX=0;entryY=0.4375" edge="1" parent="1" source="table_Course" target="table_User">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lbl_ml_n" value="0..*" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="196" y="898" width="34" height="20" as="geometry" />
+        <mxCell id="lbl_cu_n" value="n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_course_user">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="14" y="-12" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="lbl_ml_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="196" y="882" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_cu_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_course_user">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-16" y="-12" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="edge_quiz_mod" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="table_Quiz" target="table_Module">
+        <mxCell id="edge_mod_course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1" source="table_Module" target="table_Course">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lbl_qm_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="545" y="558" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_mc_n" value="n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_mod_course">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-14" y="-20" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="lbl_qm_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="545" y="542" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_mc_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_mod_course">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-14" y="20" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="edge_quest_quiz" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="table_Question" target="table_Quiz">
+        <mxCell id="edge_les_mod" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.28125;entryX=0;entryY=0.5" edge="1" parent="1" source="table_Lesson" target="table_Module">
+          <mxGeometry relative="1" as="geometry">
+            </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_lm_n" value="n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_les_mod">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="10" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_lm_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_les_mod">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-10" y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_mat_les" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1" source="table_LessonMaterial" target="table_Lesson">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lbl_qq_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="545" y="778" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_ml_n" value="0..*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_mat_les">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="18" y="-10" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="lbl_qq_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="545" y="762" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_ml_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_mat_les">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="14" y="8" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="edge_opt_quest" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.4286;entryX=1;entryY=0.5;" edge="1" parent="1" source="table_QuestionOption" target="table_Question">
+        <mxCell id="edge_quiz_mod" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1" source="table_Quiz" target="table_Module">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="lbl_oq_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="722" y="835" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_qm_n" value="n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_quiz_mod">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-14" y="-20" as="offset" />
+          </mxGeometry>
         </mxCell>
-        <mxCell id="lbl_oq_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="684" y="835" width="24" height="20" as="geometry" />
+        <mxCell id="lbl_qm_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_quiz_mod">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-14" y="20" as="offset" />
+          </mxGeometry>
         </mxCell>
-      <mxCell id="row_cat_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Category"><mxGeometry y="80" width="270" height="20" as="geometry" /></mxCell><mxCell id="row_cat_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Category"><mxGeometry y="100" width="270" height="20" as="geometry" /></mxCell><mxCell id="row_course_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course"><mxGeometry y="240" width="330" height="20" as="geometry" /></mxCell><mxCell id="row_course_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course"><mxGeometry y="260" width="330" height="20" as="geometry" /></mxCell><mxCell id="row_mod_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module"><mxGeometry y="120" width="330" height="20" as="geometry" /></mxCell><mxCell id="row_mod_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module"><mxGeometry y="140" width="330" height="20" as="geometry" /></mxCell><mxCell id="row_les_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson"><mxGeometry y="260" width="300" height="20" as="geometry" /></mxCell><mxCell id="row_les_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson"><mxGeometry y="280" width="300" height="20" as="geometry" /></mxCell><mxCell id="row_quiz_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Quiz"><mxGeometry y="140" width="290" height="20" as="geometry" /></mxCell><mxCell id="row_quiz_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Quiz"><mxGeometry y="160" width="290" height="20" as="geometry" /></mxCell><mxCell id="row_mat_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial"><mxGeometry y="180" width="300" height="20" as="geometry" /></mxCell><mxCell id="row_mat_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial"><mxGeometry y="200" width="300" height="20" as="geometry" /></mxCell><mxCell id="row_quest_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Question"><mxGeometry y="100" width="290" height="20" as="geometry" /></mxCell><mxCell id="row_quest_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Question"><mxGeometry y="120" width="290" height="20" as="geometry" /></mxCell><mxCell id="row_opt_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption"><mxGeometry y="120" width="280" height="20" as="geometry" /></mxCell><mxCell id="row_opt_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption"><mxGeometry y="140" width="280" height="20" as="geometry" /></mxCell></root>
+        <mxCell id="edge_quest_quiz" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1" source="table_Question" target="table_Quiz">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_qq_n" value="n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_quest_quiz">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-14" y="-20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_qq_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_quest_quiz">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="-14" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="edge_opt_quest" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.44444444;entryX=1;entryY=0.5" edge="1" parent="1" source="table_QuestionOption" target="table_Question">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="lbl_oq_n" value="n" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_opt_quest">
+          <mxGeometry x="-1" relative="1" as="geometry">
+            <mxPoint x="-14" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lbl_oq_1" value="1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;fontFamily=Helvetica;fontColor=#000000;" vertex="1" connectable="0" parent="edge_opt_quest">
+          <mxGeometry x="1" relative="1" as="geometry">
+            <mxPoint x="16" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="row_cat_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Category">
+          <mxGeometry y="80" width="270" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_cat_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Category">
+          <mxGeometry y="100" width="270" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_course_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course">
+          <mxGeometry y="240" width="330" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_course_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course">
+          <mxGeometry y="260" width="330" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_mod_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
+          <mxGeometry y="120" width="330" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_mod_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Module">
+          <mxGeometry y="140" width="330" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_les_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
+          <mxGeometry y="260" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_les_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Lesson">
+          <mxGeometry y="280" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_quiz_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Quiz">
+          <mxGeometry y="140" width="290" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_quiz_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Quiz">
+          <mxGeometry y="160" width="290" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_mat_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
+          <mxGeometry y="180" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_mat_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_LessonMaterial">
+          <mxGeometry y="200" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_quest_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Question">
+          <mxGeometry y="100" width="290" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_quest_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Question">
+          <mxGeometry y="120" width="290" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_opt_created" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption">
+          <mxGeometry y="120" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_opt_updated" value="&lt;b&gt;updated_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_QuestionOption">
+          <mxGeometry y="140" width="280" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
+          <mxGeometry x="740" y="240" width="300" height="136" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_0" value="PK: chave primária · FK: chave estrangeira · 1, 0..*: cardinalidade" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
+          <mxGeometry x="10" y="32" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_1a" value="" style="rounded=0;html=1;dashed=1;fillColor=#FFFFFF;strokeColor=#000000;" parent="legend" vertex="1">
+          <mxGeometry x="10" y="68" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_1" value="Tabela de outra área (só referenciada)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" parent="legend" vertex="1">
+          <mxGeometry x="60" y="64" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_2s" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
+          <mxGeometry x="10" y="109.0" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_2t" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
+          <mxGeometry x="60" y="109.0" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_2e" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;endArrow=block;endFill=1;" parent="legend" edge="1" source="legend_2s" target="legend_2t">
+          <mxGeometry x="0" y="0" width="0" height="0" as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="legend_2" value="Chave estrangeira (FK aponta para a PK)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
+          <mxGeometry x="70" y="96" width="220" height="26" as="geometry" />
+        </mxCell>
+      </root>
     </mxGraphModel>
   </diagram>
 </mxfile>
