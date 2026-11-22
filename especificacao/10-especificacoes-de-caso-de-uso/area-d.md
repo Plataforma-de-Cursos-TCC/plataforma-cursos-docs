@@ -5,7 +5,7 @@
 - **Descrição:** o Aluno faz uma pergunta sobre o conteúdo da aula ao Tutor de IA do curso e recebe uma resposta que cita a origem no material (US012, US022, RF009, RF020). Iniciado a partir do UC009 (Assistir Aula), fluxo alternativo A3: UC001 «extend» UC009 (a seta sai do UC001 e aponta para o UC009).
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; a aula já ter sido transcrita e indexada.
 - **Pós-condições:** pergunta e resposta salvas no histórico de conversa do Aluno com aquele curso.
-- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código HTTP 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
+- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código de status HTTP (*Hypertext Transfer Protocol*) 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
 - **Protótipo(s) de tela:** chat na lateral da reprodução do vídeo, com a resposta indicando a aula e o minuto do vídeo de origem. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno abre o chat na página da aula. (A-2)
@@ -59,7 +59,7 @@
     *Figura 0 – UC001, fluxo de exceção E1: conteúdo em preparo*
   - **E2 – Limite de mensagens atingido**
     - E-2.1 O sistema identifica que o Aluno atingiu a cota de 20 mensagens por hora, em janela deslizante no Redis, e não possui mensagem disponível em pacote de créditos extras.
-    - E-2.2 O sistema bloqueia o novo envio com HTTP 429 `TOO_MANY_REQUESTS`, informa o tempo restante no cabeçalho `Retry-After` e oferece a aquisição de pacote de créditos extras (A-3).
+    - E-2.2 O sistema bloqueia o novo envio com código HTTP 429 `TOO_MANY_REQUESTS` (NOTTINGHAM; FIELDING, 2012), informa o tempo restante no cabeçalho `Retry-After` (FIELDING; NOTTINGHAM; RESCHKE, 2022) a partir do controle de taxa no Redis (REDIS, 2024), e oferece a aquisição de pacote de créditos extras (A-3).
     - E-2.3 Este caso de uso é finalizado.
 
     ![limite de mensagens atingido](prototipos/png/UC001/UC001-E2-1.png)
@@ -151,7 +151,7 @@
   2. O Administrador seleciona a ação: bloquear, desbloquear, alterar perfil ou excluir. (A-3) (A-4) (A-5)
   3. O Administrador confirma a ação. (A-2)
   4. O sistema aplica a mudança de status. (E-1) (E-2)
-  5. O sistema revoga o acesso imediatamente (em caso de bloqueio, via blocklist no Redis e revogação de refresh tokens) ou restaura o acesso (em caso de desbloqueio) e grava o evento em `AuditLog`.
+  5. O sistema revoga o acesso imediatamente (em caso de bloqueio, via blocklist no Redis (REDIS, 2024) e revogação de refresh tokens) ou restaura o acesso (em caso de desbloqueio) e grava o evento em `AuditLog`.
   6. Este caso de uso é finalizado.
 
   ![lista de usuários com avatar e perfis](prototipos/png/UC008/UC008-FB-1.png)
@@ -191,7 +191,7 @@
     - A-4.2 O Administrador escolhe o novo perfil: Aluno, Instrutor ou Administrador.
     - A-4.3 O sistema pede confirmação da alteração de perfil. (A-2)
     - A-4.4 O Administrador confirma a alteração.
-    - A-4.5 O sistema grava o novo perfil, revoga as sessões de refresh ativas, adiciona o `jti` do token atual na blocklist do Redis, registra a alteração na trilha de auditoria (`ROLE_CHANGE`) e atualiza a lista de usuários.
+    - A-4.5 O sistema grava o novo perfil, revoga as sessões de refresh ativas, adiciona o identificador único do token (*JWT ID* - `jti`) atual (JONES; BRADLEY; SAKIMURA, 2015) na blocklist do Redis (REDIS, 2024), registra a alteração na trilha de auditoria (`ROLE_CHANGE`) e atualiza a lista de usuários.
     - A-4.6 Este caso de uso retorna ao fluxo básico (passo 1).
 
     ![modal de confirmação "Alterar perfil de João Silva?"](prototipos/png/UC008/UC008-A4-1.png)
@@ -320,7 +320,7 @@
     - A-2.3 O sistema valida se a conta não foi anonimizada (E-3).
     - A-2.4 O sistema restaura o usuário (`status = active`, `deleted_at = null`), registra `USER_RESTORE` na trilha de auditoria e restabelece a possibilidade de login.
     - A-2.5 Este caso de uso é finalizado.
-  - **A3 – Execução da anonimização irreversível (LGPD)**
+  - **A3 – Execução da anonimização irreversível nos termos do art. 16 da LGPD (BRASIL, 2018)**
     - A-3.1 A pedido do titular ou após 30 dias de exclusão lógica sem reativação, a rotina de anonimização é executada.
     - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, data de nascimento, foto e remoção de endereços associados) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico, e registra a ação `USER_ANONYMIZE` em `audit_logs` (RNF016).
     - A-3.3 Este caso de uso é finalizado.
@@ -348,5 +348,5 @@
     *Figura 0 – UC018, fluxo de exceção E2: erro "Usuário não encontrado"*
   - **E3 – Tentativa de reativar conta já anonimizada**
     - E-3.1 O Administrador tenta reativar uma conta cujo `anonymized_at` já foi preenchido.
-    - E-3.2 O sistema impede a ação e responde HTTP 422 `VALIDATION_FAILED` com erro em `fields.user`, informando que a anonimização é irreversível pela LGPD.
+    - E-3.2 O sistema impede a ação e responde HTTP 422 `VALIDATION_FAILED` com erro em `fields.user`, informando que a anonimização é irreversível nos termos da LGPD (BRASIL, 2018).
     - E-3.3 Este caso de uso é finalizado.

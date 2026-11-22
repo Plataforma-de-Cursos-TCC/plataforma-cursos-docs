@@ -33,7 +33,7 @@
 ## 3. US003 – REQUISITO RF001: Editar dados do perfil
 
 **COMO:** Usuário logado\
-**POSSO:** editar os meus dados cadastrais (nome, telefone, endereço, CPF, data de nascimento, foto de perfil e tema)\
+**POSSO:** editar os meus dados cadastrais (nome, telefone, endereço, Cadastro de Pessoas Físicas (CPF), data de nascimento, foto de perfil e tema)\
 **PARA:** manter as minhas informações atualizadas.\
 **PRIORIDADE:** Should Have\
 **AUTOR(A):** Lucas Bruno e Silva
@@ -44,7 +44,7 @@
 |---|---|
 | 1 | **DADO QUE:** altero nome, telefone e tema com valores válidos <br> **QUANDO:** salvo <br> **ENTÃO:** os dados são atualizados, o tema é aplicado imediatamente e os dados aparecem no meu perfil. |
 | 2 | **DADO QUE:** informo um CPF com dígitos verificadores inválidos ou fora de 11 dígitos <br> **QUANDO:** salvo <br> **ENTÃO:** recebo erro no campo CPF e o perfil não é alterado. |
-| 3 | **DADO QUE:** deixo o nome em branco ou envio uma foto que não seja JPG/PNG ou tenha mais de 2 MB <br> **QUANDO:** tento salvar <br> **ENTÃO:** o sistema bloqueia o envio e indica o campo pendente. |
+| 3 | **DADO QUE:** deixo o nome em branco ou envio uma foto que não esteja em formato JPG (*Joint Photographic Experts Group*) ou PNG (*Portable Network Graphics*) ou tenha mais de 2 Megabytes (MB) <br> **QUANDO:** tento salvar <br> **ENTÃO:** o sistema bloqueia o envio e indica o campo pendente. |
 
 ## 4. US017 – REQUISITO RF013: Recuperar senha por e-mail
 

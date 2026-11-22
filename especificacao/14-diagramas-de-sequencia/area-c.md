@@ -1,6 +1,6 @@
 ## 3. Área C – Aprendizagem do aluno
 
-Diagramas de sequência para os casos de uso prioritários da Área C (UC003, UC019, UC009, UC002, UC010 e UC020), modelados em notação UML com ferramentas draw.io via `seqgen.py` conforme a [ADR-0013](../../docs/adr/0013-diagramas-do-ra2-em-drawio.md). As mensagens refletem com exatidão as operações das classes do item 13 e os endpoints REST e códigos de erro do TDD (seção 3). Cancelamentos e confirmações são modelados exclusivamente em fragmentos `alt`, com o ramo de cancelamento encerrando a sequência.
+Diagramas de sequência para os casos de uso prioritários da Área C (UC003, UC019, UC009, UC002, UC010 e UC020), modelados na notação UML 2.5.1 (OMG, 2017) com ferramentas draw.io via `seqgen.py` conforme a [ADR-0013](../../docs/adr/0013-diagramas-do-ra2-em-drawio.md). As mensagens refletem com exatidão as operações das classes do item 13 e os endpoints REST e códigos de erro do TDD (seção 3). Cancelamentos e confirmações são modelados exclusivamente em fragmentos `alt`, com o ramo de cancelamento encerrando a sequência.
 
 ### UC003 – Matricular-se em Curso
 
@@ -20,7 +20,7 @@ Resumo do pagamento simulado com fragmento `alt` para cancelamento pelo Aluno (A
 
 ### UC009 – Assistir Aula
 
-Geração de URL assinada temporária de 15 minutos via `MediaService` no Cloudflare R2 (RNF002) para reprodução protegida do vídeo. Trata a aula indisponível para o usuário, sem matrícula e sem prévia (E1, `403 FORBIDDEN`, acesso não autorizado sem matrícula ativa e sem prévia), falha no carregamento de vídeo (E2, `503 SERVICE_UNAVAILABLE`) e os fluxos alternativos: retomada do ponto salvo em segundos assistidos (A2, R-2, R-3), reprodução pública para Visitante em aula prévia sem persistência de progresso (A4, R-1) e saída antes do término com persistência parcial do progresso (A1). O fluxo básico conclui com a marcação de aula finalizada e atualização do progresso global.
+Geração de URL assinada temporária de 15 minutos via `MediaService` no Cloudflare R2 (CLOUDFLARE, 2022) (RNF002) para reprodução protegida do vídeo. Trata a aula indisponível para o usuário, sem matrícula e sem prévia (E1, `403 FORBIDDEN`, acesso não autorizado sem matrícula ativa e sem prévia), falha no carregamento de vídeo (E2, `503 SERVICE_UNAVAILABLE`) e os fluxos alternativos: retomada do ponto salvo em segundos assistidos (A2, R-2, R-3), reprodução pública para Visitante em aula prévia sem persistência de progresso (A4, R-1) e saída antes do término com persistência parcial do progresso (A1). O fluxo básico conclui com a marcação de aula finalizada e atualização do progresso global.
 
 ![Diagrama de sequência do UC009](../diagramas/14-sequencia-uc009.png)
 

@@ -17,14 +17,14 @@ Decisões do modelo:
 - **Normalização e Desvio Justificado:** `enrollments`, `lesson_progress`, `quiz_attempts`, `quiz_answers` e `reviews` estão na 3FN (Terceira Forma Normal): as chaves primárias são UUIDs únicos, cada atributo não chave depende exclusivamente da chave primária e não há atributos multivalorados. A tabela `payments` apresenta um desvio deliberado da 3FN: `user_id` e `course_id` derivam de `enrollments` (via `enrollment_id`), dependendo transitivamente da chave primária nos pagamentos de matrícula. Essas colunas são mantidas no registro de pagamento porque ele constitui o comprovante financeiro imutável da transação (identificando aluno e curso mesmo diante de mutações ou cancelamentos posteriores da matrícula) e atende também à compra direta de créditos do tutor de IA onde `enrollment_id` pode ser nulo.
 - **Exclusão lógica (ADR-0014):** todas as tabelas contêm a coluna `deleted_at: timestamptz NULL`. Registros ativos possuem `deleted_at IS NULL`; operações de exclusão realizam soft delete preenchendo o timestamp corrente, assegurando integridade referencial com o histórico acadêmico e financeiro.
 
-| ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
+| ATRIBUTO | CLASSE | DOMÍNIO | TAM. | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: enrollments** | | | | |
 | id | Determinante | uuid | - | Identificador único da matrícula (PK). |
 | user_id | Simples | uuid | - | FK para `users.id` (Área A), aluno matriculado. |
 | course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso da matrícula. |
 | price_paid_cents | Simples | integer | - | Valor pago pela matrícula, em centavos (0 para cursos gratuitos). |
-| currency | Simples | varchar(3) | 3 | Código ISO 4217 da moeda da transação (padrão 'BRL'). |
+| currency | Simples | varchar(3) | 3 | Código alfabético da moeda da transação segundo a ISO 4217 (ISO, 2015), padrão 'BRL'. |
 | status | Simples | text CHECK | 20 | Status da matrícula: 'pending', 'active', 'cancelled', 'completed' (UC003, UC019). |
 | created_at | Simples | timestamptz | - | Data e hora de criação da matrícula. |
 | updated_at | Simples | timestamptz | - | Data e hora da última alteração de status (opcional). |
@@ -36,7 +36,7 @@ Decisões do modelo:
 | enrollment_id | Simples | uuid | - | FK para `enrollments.id`, matrícula associada (0..* por matrícula, NULL se cota extra). |
 | purpose | Simples | text CHECK | 20 | Finalidade do pagamento: 'enrollment' ou 'tutor_credits' (RF020, RNF022). |
 | amount_cents | Simples | integer | - | Valor cobrado no pagamento simulado, em centavos. |
-| currency | Simples | varchar(3) | 3 | Código ISO 4217 da moeda (padrão 'BRL'). |
+| currency | Simples | varchar(3) | 3 | Código alfabético da moeda segundo a ISO 4217 (ISO, 2015), padrão 'BRL'. |
 | status | Simples | text CHECK | 20 | Status do pagamento: 'approved' ou 'declined' (UC019). |
 | paid_at | Simples | timestamptz | - | Data e hora do pagamento aprovado; nulo na recusa. |
 | created_at | Simples | timestamptz | - | Data e hora de criação da tentativa de pagamento (NOT NULL). |

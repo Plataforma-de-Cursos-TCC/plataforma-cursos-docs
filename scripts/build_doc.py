@@ -27,6 +27,7 @@ from docx.oxml.ns import qn
 
 REPO = Path(__file__).resolve().parent.parent
 ESP = REPO / "especificacao"
+REFERENCIAS = REPO / "especificacao" / "16-referencias.md"
 DECLARACAO = REPO / "entregas" / "declaracao-uso-de-ia.md"
 
 AUTORES = [
@@ -81,6 +82,9 @@ TITULO = re.compile(
 )
 US = re.compile(r"^(?:\d+\. )?US\d{3} –")
 
+FONTE_FIGURA = "Fonte: Elaborado pelos autores (2026)."
+REPO_URL = "https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs"
+VERSAO = "v2.0.1"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
 
@@ -116,6 +120,11 @@ def preprocess(path):
     # Links para outros .md do repositório não fazem sentido no documento.
     md = re.sub(r"(?<!!)\[([^\]]+)\]\(([^)]*\.md[^)]*)\)", r"\1", md)
     md = drop_column(md, "ARQUIVO")
+    # Fonte (NBR 14724) depois de cada legenda, com o link do PNG no repositório, na versão entregue.
+    def fonte(m):
+        rel = (path.parent / m.group(2)).resolve().relative_to(REPO).as_posix()
+        return f"{m.group(0)}\n\n{m.group(3)}{FONTE_FIGURA} Disponível em: <{REPO_URL}/blob/{VERSAO}/{rel}>."
+    md = re.sub(r"^( *)!\[[^\]]*\]\(([^)<>]+)\)[ \t]*\n[ \t]*\n( *)\*Figura \d+ –[^\n]*\*", fonte, md, flags=re.M)
     # Caminho absoluto das imagens, porque os arquivos são concatenados.
     md = re.sub(
         r"!\[([^\]]*)\]\(([^)<>]+)\)",
@@ -134,6 +143,7 @@ def build_markdown(items):
             parts.append(f"# {n} {titulo}\n\nEm elaboração (RA2). Fonte de trabalho: {fonte}.\n")
         else:
             parts += [preprocess(ESP / f) for f in src]
+    parts.append(preprocess(REFERENCIAS))
     parts.append(preprocess(DECLARACAO))
     return renumber_figures("\n\n".join(parts))
 
@@ -831,18 +841,53 @@ def assemble(pandoc_docx, template, out_docx, pages):
     first_run.addprevious(run_br)
 
     # Sumário estático: mostra apenas itens de nível 1.
-    headings = [
-        (1, p.text.strip(), p._p)
-        for p in doc.paragraphs
-        if p.style.name == "Heading 1" and p.text.strip()
-    ]
+    # Fonte (NBR 14724): centralizada, 10 pt, presa à legenda.
+    for p in body.iter(qn("w:p")):
+        txt = text_of(p).strip()
+        if re.match(r"Figura \d+ –", txt):
+            child(child(p, "w:pPr", 0), "w:keepNext", 0)
+        elif txt.startswith(FONTE_FIGURA):
+            child(child(p, "w:pPr", 0), "w:jc", 0).set(qn("w:val"), "center")
+            for r in p.iter(qn("w:r")):
+                child(child(r, "w:rPr", 0), "w:sz", 0).set(qn("w:val"), "20")
+
+    # Títulos de nível 1 (sumário) e legendas (lista de ilustrações), na ordem do documento.
+    marks = []
+    for p in doc.paragraphs:
+        txt = p.text.strip()
+        if p.style.name == "Heading 1" and txt:
+            marks.append((1, txt, p._p))
+        elif re.match(r"Figura \d+ –", txt):
+            marks.append((0, txt, p._p))
+    headings = [m for m in marks if m[0] == 1]
+    figures = [m for m in marks if m[0] == 0]
+    if pages is not None:
+        pages = dict(zip([id(m[2]) for m in marks], pages))
+        hpages = [pages[id(m[2])] for m in headings]
+        fpages = [pages[id(m[2])] for m in figures]
+    else:
+        hpages, fpages = None, None
     sdt = cover[25]
     content = sdt.find(qn("w:sdtContent"))
     # Sem os parágrafos vazios da capa, o sumário precisa de quebra de página explícita.
     child(child(content[0], "w:pPr", 0), "w:pageBreakBefore", 1)
     for p in list(content)[2:]:
         content.remove(p)
-    for i, ((level, text, hp), page) in enumerate(zip(headings, pages or [0] * len(headings))):
+    # Lista de ilustrações antes do sumário (NBR 14724), no mesmo formato das entradas do sumário.
+    lista_titulo = copy.deepcopy(content[0])
+    set_text(lista_titulo, "LISTA DE ILUSTRAÇÕES")
+    lista = [lista_titulo]
+    for i, ((_, text, fp), page) in enumerate(zip(figures, fpages or [0] * len(figures))):
+        name = f"_Fig{800000 + i}"
+        bs, be = OxmlElement("w:bookmarkStart"), OxmlElement("w:bookmarkEnd")
+        bs.set(qn("w:id"), str(800000 + i)); bs.set(qn("w:name"), name)
+        be.set(qn("w:id"), str(800000 + i))
+        ppr_f = fp.find(qn("w:pPr"))
+        (fp.insert(0, bs) if ppr_f is None else ppr_f.addnext(bs))
+        fp.append(be)
+        lista.append(toc_entry(1, text, page, name))
+    cover[25:25] = lista
+    for i, ((level, text, hp), page) in enumerate(zip(headings, hpages or [0] * len(headings))):
         name = f"_Toc{900000 + i}"
         bs, be = OxmlElement("w:bookmarkStart"), OxmlElement("w:bookmarkEnd")
         bs.set(qn("w:id"), str(900000 + i)); bs.set(qn("w:name"), name)
@@ -936,9 +981,9 @@ def assemble(pandoc_docx, template, out_docx, pages):
         elif first_txt == "ID" and "CENÁRIO" in full_head and "ENTRADAS" in full_head:
             # Casos de teste (item 15): mesma largura útil.
             widths = [900, 1700, 2300, 2690, 2900]
-        elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAMANHO" in full_head:
+        elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAM." in full_head:
             # Dicionário de dados (item 12): colunas curtas não quebram o nome do atributo.
-            widths = [2000, 1700, 1300, 1200, 4290]
+            widths = [2300, 1700, 1600, 800, 4090]
         if widths:
             tblPr = tbl.find(qn("w:tblPr"))
             tblW = tblPr.find(qn("w:tblW"))
@@ -1048,6 +1093,17 @@ def assemble(pandoc_docx, template, out_docx, pages):
               child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
               p_next_h1._p.addprevious(p_break2)
 
+    # Itens 12 a 15: cada área ("N. Área X") começa em página própria.
+    item = None
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            item = p.text.split(" ", 1)[0]
+        elif item in ("12", "13", "14", "15") and p.style.name == "Heading 2" and re.match(r"\d+\. Área [A-D]", p.text):
+            ppr = child(p._p, "w:pPr", 0)
+            if ppr.find(qn("w:pageBreakBefore")) is None:
+                pstyle = ppr.find(qn("w:pStyle"))
+                ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
+
     # Item 14: cada caso de uso (Heading 2) começa em página própria e o diagrama é limitado à altura
     # útil da página em retrato (título, texto e legenda ocupam o resto).
     max_h14 = 7020000  # 19,5 cm
@@ -1092,7 +1148,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
 
     doc.save(out_docx)
     patch_docx_files(out_docx)
-    return [(lv, tx) for lv, tx, _ in headings]
+    return [(lv, tx if lv == 1 else tx.split(" –")[0] + " –") for lv, tx, _ in marks]
 
 
 def patch_docx_files(path):
@@ -1301,7 +1357,7 @@ def check():
         if isinstance(src, list):
             for f in src:
                 assert (ESP / f).is_file(), f
-    assert DECLARACAO.is_file()
+    assert DECLARACAO.is_file() and REFERENCIAS.is_file()
     assert parse_range(1, 11) == list(range(1, 12))
     assert parse_range(6, 6) == [6]
     for bad in [(9, 3), (0, 5), (1, 16)]:

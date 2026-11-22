@@ -14,9 +14,9 @@ Decisões do modelo:
 - **Exclusão lógica transversal (ADR-0014):** Toda tabela de negócio da Área A (`users`, `addresses` e `instructor_profiles`) implementa a coluna `deleted_at: timestamptz` (trait `SoftDeletes` do Eloquent). Nenhuma operação da aplicação realiza exclusão física (`DELETE`) no banco transacional, garantindo integridade referencial com matrículas, histórico acadêmico e logs de auditoria, além de viabilizar a reativação de contas excluídas pelo Administrador antes da anonimização (UC018).
 - **Idioma e internacionalização (RNF013):** `users.locale` armazena o idioma preferencial da interface e das mensagens (`pt-BR` padrão; `en` e `es` são suportados sem necessidade de migração de schema). A coluna é tipada como `varchar(5)` com validação contra lista de idiomas permitidos; os textos da aplicação residem em arquivos de tradução e a API devolve código de erro estável (`code`).
 - **Termos e privacidade (RNF020, UC012 R-4):** `users.terms_accepted_at` registra o aceite obrigatório dos termos de uso e da política de privacidade no cadastro.
-- **Segurança de credenciais e tokens (RNF007, RNF017, ADR-0008):** Senhas nunca são persistidas em texto claro (somente `password_hash`). Tokens de redefinição de senha e de refresh session são gravados exclusivamente sob hash SHA-256 (`token_hash`), impedindo vazamento de credenciais mesmo em caso de dump do banco de dados.
+- **Segurança de credenciais e tokens (RNF007, RNF017, ADR-0008):** Senhas nunca são persistidas em texto claro (somente `password_hash`). Tokens de redefinição de senha e de refresh session são gravados exclusivamente sob o algoritmo de resumo criptográfico SHA-256 (*Secure Hash Algorithm* - SHA) (`token_hash`), impedindo vazamento de credenciais mesmo em caso de dump do banco de dados.
 
-| ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
+| ATRIBUTO | CLASSE | DOMÍNIO | TAM. | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: users** | | | | Entidade central de contas de usuários (alunos, instrutores e administradores). |
 | id | Determinante | uuid | - | Identificador único universal do usuário (PK). |
@@ -47,7 +47,7 @@ Decisões do modelo:
 | city | Simples | varchar | 80 | Município. |
 | state | Simples | char | 2 | Unidade Federativa (UF). |
 | zip_code | Simples | varchar | 9 | Código de Endereçamento Postal (CEP formatado). |
-| country | Simples | char | 2 | Código do país (ISO 3166-1 alpha-2, padrão 'BR'). |
+| country | Simples | char | 2 | Código do país de 2 dígitos conforme a norma ISO 3166-1 alpha-2 (ISO, 2020), padrão 'BR'. |
 | is_default | Simples | boolean | - | Indica se o endereço é o padrão para o usuário. |
 | created_at | Simples | timestamptz | - | Timestamp de criação do registro. |
 | updated_at | Simples | timestamptz | - | Timestamp da última atualização. |

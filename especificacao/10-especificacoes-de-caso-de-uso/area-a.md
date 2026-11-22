@@ -144,7 +144,7 @@
 - **Descrição:** o Visitante cria uma conta na plataforma informando e-mail e senha e aceitando os termos de uso e a política de privacidade (US002, RF001).
 - **Pré-condições:** o Visitante ter acessado a plataforma sem estar autenticado.
 - **Pós-condições:** conta criada com perfil Aluno (ou Instrutor, se escolhido no fluxo alternativo A1) e senha armazenada com hash; Visitante direcionado ao login.
-- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório (LGPD, RNF020).
+- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório em conformidade com a LGPD (BRASIL, 2018) (RNF020).
 - **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política, opção de perfil e botão “Criar conta”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Visitante acessa a tela de cadastro.
@@ -200,7 +200,7 @@
 - **Descrição:** o Usuário autenticado altera os seus dados de perfil: nome, telefone, endereço, CPF, data de nascimento, foto de perfil e tema da interface (US003, RF001). O Instrutor também mantém por aqui a minibiografia e os links do perfil de Instrutor (US020, RF016). A troca de senha fica no UC017, acionado a partir desta tela.
 - **Pré-condições:** o Usuário ter realizado login na plataforma.
 - **Pós-condições:** dados do perfil atualizados e confirmados ao Usuário; o tema escolhido aplicado imediatamente e salvo no perfil.
-- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário; R-2 apenas o nome é obrigatório, os demais campos são opcionais; R-3 o CPF deve ter 11 dígitos com dígitos verificadores válidos, caso contrário o sistema exibe erro no campo; R-4 a data de nascimento deve ser válida e não pode ser futura; R-5 o telefone deve incluir o DDD; R-6 a foto de perfil aceita somente JPG ou PNG, com até 2 MB, e é armazenada no storage com a URL gravada no perfil; R-7 o tema aceita três opções (claro, escuro ou sistema), é aplicado imediatamente e salvo no perfil.
+- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário; R-2 apenas o nome é obrigatório, os demais campos são opcionais; R-3 o CPF deve ter 11 dígitos com dígitos verificadores válidos, caso contrário o sistema exibe erro no campo; R-4 a data de nascimento deve ser válida e não pode ser futura; R-5 o telefone deve incluir o código de Discagem Direta a Distância (DDD); R-6 a foto de perfil aceita somente JPG ou PNG, com até 2 MB, e é armazenada no storage com a URL gravada no perfil; R-7 o tema aceita três opções (claro, escuro ou sistema), é aplicado imediatamente e salvo no perfil.
 - **Protótipo(s) de tela:** tela “Meu perfil” com campos de nome, telefone, endereço, CPF, data de nascimento, foto e tema, opção “Alterar senha” e botão “Salvar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Usuário acessa a tela “Meu perfil”.
