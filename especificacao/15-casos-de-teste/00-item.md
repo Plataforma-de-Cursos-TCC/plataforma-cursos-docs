@@ -2,7 +2,7 @@
 
 **PRODUTO:** Plataforma de Cursos
 
-Planilha de casos de teste derivada das especificações de caso de uso (item 10) e dos critérios de aceite das estórias (item 7). Para cada caso de uso, os fluxos viram cenários: o cenário 1 é o fluxo básico, e cada fluxo alternativo (A) e de exceção (E) forma um cenário; cada cenário tem um ou mais casos de teste (CT) com entradas concretas e o resultado esperado. A coluna ID mantém o identificador TC do repositório. O mínimo exigido é de 4 casos de uso para a equipe; cada área entrega os casos de teste dos seus casos de uso.
+Planilha de casos de teste derivada das especificações de caso de uso (item 10) e dos critérios de aceite das estórias (item 7). Para cada caso de uso, os fluxos viram cenários: o cenário 1 é o fluxo básico, e cada fluxo alternativo (A) e de exceção (E) forma um cenário; cada cenário tem um ou mais casos de teste (CT) com entradas concretas e o resultado esperado. A coluna ID mantém o identificador TC do repositório; os IDs TC054, TC111, TC115, TC237 e TC267 foram descartados na revisão e não são reaproveitados. O mínimo exigido é de 4 casos de uso para a equipe; cada área entrega os casos de teste dos seus casos de uso.
 
 | Nº | UC | CASO DE USO | ÁREA | ARQUIVO |
 |---|---|---|---|---|
