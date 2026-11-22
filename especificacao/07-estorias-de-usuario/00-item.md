@@ -25,3 +25,4 @@
 | 19 | US013 | Ver dashboard com filtro | RF010 | [area-d.md](area-d.md) |
 | 20 | US015 | Acessar área protegida por perfil | RF018 | [area-d.md](area-d.md) |
 | 21 | US016 | Gerenciar usuários | RF012 | [area-d.md](area-d.md) |
+| 22 | US022 | Comprar créditos extras do Tutor de IA | RF020 | [area-d.md](area-d.md) |
