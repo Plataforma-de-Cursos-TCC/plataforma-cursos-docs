@@ -92,7 +92,7 @@
         <mxCell id="UserRepository_m" value="+findById(id: UUID): ?User&lt;br&gt;+findByEmail(email: string): User&lt;br&gt;+save(user: User): User&lt;br&gt;+paginate(filters: UserFiltersDTO): LengthAwarePaginator&lt;br&gt;+updateStatus(id: UUID, status: UserStatus): void&lt;br&gt;+updateRole(id: UUID, role: Role): void&lt;br&gt;+softDelete(id: UUID): void&lt;br&gt;+restore(id: UUID): void&lt;br&gt;+anonymize(id: UUID): void" vertex="1" parent="UserRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
           <mxGeometry x="0" y="40" width="380" height="152" as="geometry" />
         </mxCell>
-        <mxCell id="User" value="&lt;b&gt;User&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=30;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+        <mxCell id="User" value="&lt;i&gt;&lt;b&gt;User&lt;/b&gt;&lt;/i&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=3;align=center;verticalAlign=middle;startSize=30;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="1290" y="345" width="220" height="106" as="geometry" />
         </mxCell>
         <mxCell id="User_a" value="#id: UUID&lt;br&gt;#email: string&lt;br&gt;#role: Role&lt;br&gt;#status: UserStatus" vertex="1" parent="User" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
@@ -247,7 +247,7 @@
         <mxCell id="typeicon_UserRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="1136" y="145" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_User" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+        <mxCell id="typeicon_User" value="A" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="1296" y="350" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_RefreshSession" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
