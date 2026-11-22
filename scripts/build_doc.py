@@ -81,6 +81,9 @@ TITULO = re.compile(
 )
 US = re.compile(r"^(?:\d+\. )?US\d{3} –")
 
+FONTE_FIGURA = "Fonte: Elaborado pelos autores (2026)."
+REPO_URL = "https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs"
+VERSAO = "v2.0.1"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
 
@@ -116,6 +119,11 @@ def preprocess(path):
     # Links para outros .md do repositório não fazem sentido no documento.
     md = re.sub(r"(?<!!)\[([^\]]+)\]\(([^)]*\.md[^)]*)\)", r"\1", md)
     md = drop_column(md, "ARQUIVO")
+    # Fonte (NBR 14724) depois de cada legenda, com o link do PNG no repositório, na versão entregue.
+    def fonte(m):
+        rel = (path.parent / m.group(2)).resolve().relative_to(REPO).as_posix()
+        return f"{m.group(0)}\n\n{m.group(3)}{FONTE_FIGURA} Disponível em: <{REPO_URL}/blob/{VERSAO}/{rel}>."
+    md = re.sub(r"^( *)!\[[^\]]*\]\(([^)<>]+)\)[ \t]*\n[ \t]*\n( *)\*Figura \d+ –[^\n]*\*", fonte, md, flags=re.M)
     # Caminho absoluto das imagens, porque os arquivos são concatenados.
     md = re.sub(
         r"!\[([^\]]*)\]\(([^)<>]+)\)",
@@ -831,18 +839,53 @@ def assemble(pandoc_docx, template, out_docx, pages):
     first_run.addprevious(run_br)
 
     # Sumário estático: mostra apenas itens de nível 1.
-    headings = [
-        (1, p.text.strip(), p._p)
-        for p in doc.paragraphs
-        if p.style.name == "Heading 1" and p.text.strip()
-    ]
+    # Fonte (NBR 14724): centralizada, 10 pt, presa à legenda.
+    for p in body.iter(qn("w:p")):
+        txt = text_of(p).strip()
+        if re.match(r"Figura \d+ –", txt):
+            child(child(p, "w:pPr", 0), "w:keepNext", 0)
+        elif txt.startswith(FONTE_FIGURA):
+            child(child(p, "w:pPr", 0), "w:jc", 0).set(qn("w:val"), "center")
+            for r in p.iter(qn("w:r")):
+                child(child(r, "w:rPr", 0), "w:sz", 0).set(qn("w:val"), "20")
+
+    # Títulos de nível 1 (sumário) e legendas (lista de ilustrações), na ordem do documento.
+    marks = []
+    for p in doc.paragraphs:
+        txt = p.text.strip()
+        if p.style.name == "Heading 1" and txt:
+            marks.append((1, txt, p._p))
+        elif re.match(r"Figura \d+ –", txt):
+            marks.append((0, txt, p._p))
+    headings = [m for m in marks if m[0] == 1]
+    figures = [m for m in marks if m[0] == 0]
+    if pages is not None:
+        pages = dict(zip([id(m[2]) for m in marks], pages))
+        hpages = [pages[id(m[2])] for m in headings]
+        fpages = [pages[id(m[2])] for m in figures]
+    else:
+        hpages, fpages = None, None
     sdt = cover[25]
     content = sdt.find(qn("w:sdtContent"))
     # Sem os parágrafos vazios da capa, o sumário precisa de quebra de página explícita.
     child(child(content[0], "w:pPr", 0), "w:pageBreakBefore", 1)
     for p in list(content)[2:]:
         content.remove(p)
-    for i, ((level, text, hp), page) in enumerate(zip(headings, pages or [0] * len(headings))):
+    # Lista de ilustrações antes do sumário (NBR 14724), no mesmo formato das entradas do sumário.
+    lista_titulo = copy.deepcopy(content[0])
+    set_text(lista_titulo, "LISTA DE ILUSTRAÇÕES")
+    lista = [lista_titulo]
+    for i, ((_, text, fp), page) in enumerate(zip(figures, fpages or [0] * len(figures))):
+        name = f"_Fig{800000 + i}"
+        bs, be = OxmlElement("w:bookmarkStart"), OxmlElement("w:bookmarkEnd")
+        bs.set(qn("w:id"), str(800000 + i)); bs.set(qn("w:name"), name)
+        be.set(qn("w:id"), str(800000 + i))
+        ppr_f = fp.find(qn("w:pPr"))
+        (fp.insert(0, bs) if ppr_f is None else ppr_f.addnext(bs))
+        fp.append(be)
+        lista.append(toc_entry(1, text, page, name))
+    cover[25:25] = lista
+    for i, ((level, text, hp), page) in enumerate(zip(headings, hpages or [0] * len(headings))):
         name = f"_Toc{900000 + i}"
         bs, be = OxmlElement("w:bookmarkStart"), OxmlElement("w:bookmarkEnd")
         bs.set(qn("w:id"), str(900000 + i)); bs.set(qn("w:name"), name)
@@ -1103,7 +1146,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
 
     doc.save(out_docx)
     patch_docx_files(out_docx)
-    return [(lv, tx) for lv, tx, _ in headings]
+    return [(lv, tx if lv == 1 else tx.split(" –")[0] + " –") for lv, tx, _ in marks]
 
 
 def patch_docx_files(path):
