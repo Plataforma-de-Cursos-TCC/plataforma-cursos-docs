@@ -282,7 +282,7 @@
   2. O Instrutor aciona “Nova aula”.
   3. O Instrutor informa título, descrição, ordem e se a aula é prévia, e anexa o arquivo de vídeo.
   4. O sistema valida o formato e o tamanho do vídeo. (E-1)
-  5. O Instrutor aciona “Salvar aula”; o arquivo de vídeo é transmitido via API ao `media-service`, que grava o objeto no Cloudflare R2 (CLOUDFLARE, 2022) e devolve a chave do vídeo (`video_key`), tipo MIME e tamanho em bytes. (E-2)
+  5. O Instrutor aciona “Salvar aula”; o arquivo de vídeo é transmitido via API ao `media-service`, que grava o objeto no Cloudflare R2 (CLOUDFLARE, 2022) e devolve a chave do vídeo (`video_key`), tipo de mídia MIME (*Multipurpose Internet Mail Extensions*) e tamanho em bytes. (E-2)
   6. O sistema salva a aula com a chave do vídeo obrigatória (`video_key`), duração e metadados, e inicia a transcrição e a indexação do conteúdo.
   7. Este caso de uso é finalizado.
 

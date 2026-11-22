@@ -5,7 +5,7 @@
 - **Descrição:** o Aluno faz uma pergunta sobre o conteúdo da aula ao Tutor de IA do curso e recebe uma resposta que cita a origem no material (US012, US022, RF009, RF020). Iniciado a partir do UC009 (Assistir Aula), fluxo alternativo A3: UC001 «extend» UC009 (a seta sai do UC001 e aponta para o UC009).
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; a aula já ter sido transcrita e indexada.
 - **Pós-condições:** pergunta e resposta salvas no histórico de conversa do Aluno com aquele curso.
-- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código HTTP 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
+- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código de status HTTP (*Hypertext Transfer Protocol*) 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
 - **Protótipo(s) de tela:** chat na lateral da reprodução do vídeo, com a resposta indicando a aula e o minuto do vídeo de origem. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno abre o chat na página da aula. (A-2)
@@ -191,7 +191,7 @@
     - A-4.2 O Administrador escolhe o novo perfil: Aluno, Instrutor ou Administrador.
     - A-4.3 O sistema pede confirmação da alteração de perfil. (A-2)
     - A-4.4 O Administrador confirma a alteração.
-    - A-4.5 O sistema grava o novo perfil, revoga as sessões de refresh ativas, adiciona o `jti` do token atual (JONES; BRADLEY; SAKIMURA, 2015) na blocklist do Redis (REDIS, 2024), registra a alteração na trilha de auditoria (`ROLE_CHANGE`) e atualiza a lista de usuários.
+    - A-4.5 O sistema grava o novo perfil, revoga as sessões de refresh ativas, adiciona o identificador único do token (*JWT ID* - `jti`) atual (JONES; BRADLEY; SAKIMURA, 2015) na blocklist do Redis (REDIS, 2024), registra a alteração na trilha de auditoria (`ROLE_CHANGE`) e atualiza a lista de usuários.
     - A-4.6 Este caso de uso retorna ao fluxo básico (passo 1).
 
     ![modal de confirmação "Alterar perfil de João Silva?"](prototipos/png/UC008/UC008-A4-1.png)
