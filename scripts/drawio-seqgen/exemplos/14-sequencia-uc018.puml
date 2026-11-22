@@ -90,7 +90,7 @@ else A3 - anonimização irreversível (LGPD)
   S -> R ++ : anonymize(targetId)
   R -> BD ++ : UPDATE users SET name, email, document_number, phone, birth_date, photo, anonymized_at=NOW()
   BD --> R : ok
-  R -> BD ++ : DELETE FROM addresses WHERE user_id=targetId
+  R -> BD ++ : UPDATE addresses SET street, number, complement, district, zip_code, deleted_at=NOW() WHERE user_id=targetId
   BD --> R : ok
   R --> S : ok
   S -> A ++ : logAction(adminId, USER_ANONYMIZE, "User", targetId)
