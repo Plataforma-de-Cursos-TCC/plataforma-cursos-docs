@@ -34,7 +34,7 @@ Decisões do modelo:
 | **Tabela: messages** | | | | Mensagem individual trocada na conversa com o Tutor de IA (UC001). |
 | id | Determinante | uuid | - | Identificador único da mensagem. |
 | conversation_id | Simples | uuid | - | FK para `conversations.id`, indicando a conversa à qual a mensagem pertence. |
-| role | Simples | text com CHECK | - | Papel do emissor: `user` (pergunta do Aluno) ou `assistant` (resposta do Tutor de IA). |
+| role | Simples | text CHECK | - | Papel do emissor: `user` (pergunta do Aluno) ou `assistant` (resposta do Tutor de IA). |
 | content | Simples | text | - | Conteúdo textual da pergunta ou da resposta gerada pelo Tutor. |
 | video_timestamp_seconds | Simples | integer | - | Segundo exato do vídeo da aula referenciado na resposta ou na pergunta (opcional, RF009). |
 | created_at | Simples | timestamptz | - | Data e hora de envio ou geração da mensagem. |
@@ -50,7 +50,7 @@ Decisões do modelo:
 | **Tabela: audit_logs** | | | | Trilha de auditoria das ações administrativas e de segurança no PostgreSQL 16 (RNF016, ADR-0016). Particionada por mês (`PARTITION BY RANGE (created_at)`) com exportação para R2 por 5 anos via `audit:archive`. |
 | id | Determinante | uuid | - | Identificador único do registro de auditoria. |
 | user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o autor da ação (nulo em tentativas não autenticadas e na rotina automática de anonimização, UC018 A3). |
-| action | Simples | text com CHECK | - | Identificador estável da ação: `USER_BLOCK`, `USER_UNBLOCK`, `ROLE_CHANGE`, `USER_DELETE`, `USER_RESTORE`, `USER_ANONYMIZE`, `ACCESS_DENIED`. |
+| action | Simples | text CHECK | - | Identificador estável da ação: `USER_BLOCK`, `USER_UNBLOCK`, `ROLE_CHANGE`, `USER_DELETE`, `USER_RESTORE`, `USER_ANONYMIZE`, `ACCESS_DENIED`. |
 | target_type | Simples | text | - | Tipo da entidade ou recurso alvo da ação auditada (ex.: `User`, `ProtectedArea`). |
 | target_id | Simples | uuid | - | Identificador UUID do recurso afetado (opcional; preservado na exclusão LGPD). |
 | ip_address | Simples | text | - | Endereço IP de origem da requisição (compatível com IPv4 e IPv6). |
