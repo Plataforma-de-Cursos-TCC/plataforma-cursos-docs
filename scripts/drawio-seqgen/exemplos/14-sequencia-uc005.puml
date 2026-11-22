@@ -46,12 +46,12 @@ else dentro do limite
     S -> U ++ : checkPassword(password)
     U --> S -- : válida?
   end
-  alt E1 - e-mail inexistente ou senha incorreta
+  alt E1 - e-mail inexistente, senha incorreta, status = deleted ou anonimizada (ADR-0014)
     S -> T ++ : recordFailure(email)
     T --> S --
     S --> C : ApiException(UNAUTHENTICATED)
     C --> V : 401 UNAUTHENTICATED
-    V --> USU : mensagem genérica, sem revelar se o e-mail existe (R-1)
+    V --> USU : mensagem genérica 401, sem revelar se a conta existiu (R-1)
   else E3 - credenciais válidas e conta bloqueada pelo Administrador
     S --> C : ApiException(ACCOUNT_BLOCKED)
     C --> V : 403 ACCOUNT_BLOCKED
