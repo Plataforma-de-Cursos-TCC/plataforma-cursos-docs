@@ -7,7 +7,9 @@ atualizado: 2026-10-08
 ---
 # Casos de teste
 
-66 casos de teste, derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US021) possuem cobertura de testes associada.
+Histórico do RA1: 66 casos de teste, derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US021) possuíam cobertura no RA1.
+
+> **Fonte vigente:** no RA2, os casos de teste das quatro áreas (A a D) e das 22 estórias (US001 a US022) estão em [especificacao/15-casos-de-teste/](../../especificacao/15-casos-de-teste/00-item.md). Esta tabela fica como histórico; o TC048 (remoção direta dos dados na exclusão) foi substituído pelos casos do UC018 (TC257 a TC273), que seguem a exclusão lógica da ADR-0014.
 
 > **Item 15 da especificação:** os casos da Área A (UC005, UC011, UC012, UC013 e UC017) foram revisados e ampliados em [especificacao/15-casos-de-teste/area-a.md](../../especificacao/15-casos-de-teste/area-a.md), que é a fonte vigente para esses UCs. O TC008 foi descartado (editava o e-mail, que o UC013 não permite) e o TC060 foi reclassificado como exceção E3.
 
