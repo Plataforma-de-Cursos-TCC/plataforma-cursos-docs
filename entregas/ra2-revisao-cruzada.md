@@ -479,3 +479,41 @@
 3. **F3 · `argon-R10`** (`docs/adr/0018-core-como-monolito-modular.md:30`): **FALSO** — A alegação de violação modular pelo acesso de Admin aos repositórios de Auth contradiz a decisão conjunta das quatro áreas em `entregas/ra2-relatorio-areas-abcd.md:3` (*"leitura entre módulos só por Services ou Repositories"*), sendo o acesso aos repositórios de Auth deliberado e autorizado entre as áreas.
 4. **F4 · Saltos numéricos `TC271`/`TC272`** (apontamentos diversos): **FALSO** — A instrução geral explicita expressamente que *"a faixa D usa TC271/TC272 de propósito"* para os cenários finais de anonimização e cascata de arquivamento (`area-d.md:93-94`), sendo numeração intencional e válida.
 5. **F5 · Numeração `"Figura 0"`** (apontamentos diversos): **FALSO** — A instrução geral explicita que *"legendas 'Figura 0' são intencionais (build renumera)"*, pois o compilador `scripts/build_doc.py:91-105` renumera automaticamente todas as figuras sequencialmente no documento final DOCX/PDF.
+
+---
+
+## 4. Correções aplicadas
+
+Todas as correções foram aprovadas pelo grupo antes de começar, foram feitas por área (cada commit tem o autor da área) e conferidas pelo coordenador.
+
+- [x] C1: matriz de `docs/testes/cobertura.md` refeita a partir dos itens 15, com UC001 em TC211 a TC221.
+- [x] C2: índices dos itens 12 a 15 preenchidos para as Áreas B, C e D.
+- [x] C3: US022 no índice do item 7, RF020 na tabela do item 9 e na descrição do UC001.
+- [x] C4: [ADR-0019](../docs/adr/0019-upload-pela-api.md) (upload pela API, chave no banco, leitura por URL assinada) substitui o item 3 da ADR-0010.
+- [x] C5: seção 2 do `docs/tdd.md` reescrita a partir dos itens 12 e 13 (23 tabelas).
+- [x] C6: envelope de paginação do TDD com `total` e `lastPage`.
+- [x] C7: tabela do RA1 em `docs/testes/casos-de-teste.md` marcada como histórico; TC048 substituído pelos casos do UC018.
+- [x] C8: `CourseService.softDeleteAllByInstructor`, `alt` de arquivar ou excluir em cascata no UC018 e TC273.
+- [x] C9: conta excluída ou anonimizada recebe o mesmo 401 genérico no UC005, na sequência, nos casos de teste e no TDD.
+- [x] C10: SQL e dados pessoais da anonimização no UC018; endereços sobrescritos com `deleted_at`, sem `DELETE` físico.
+- [x] C11: `position` em todas as camadas da Área B e no TDD.
+- [x] C12: sem volta a rascunho com matriculados; `Course.archive()` no lugar de `unpublish()`.
+- [x] C13: `PhotoStorage` sem URL pública.
+- [x] C14: tipos PostgreSQL em minúsculas nos dicionários e nos diagramas das quatro áreas.
+- [x] C15 e C16: classes e retornos da Área D alinhados com a Área A.
+- [x] C17: tipo do elemento corrigido (`User` abstrata, `JwtGuard` interface, `GroupBy` enumeração).
+- [x] C18: parâmetro `search`, filtro `status` e `{id}` nas rotas de usuários.
+- [x] C19 e C34: nomes do glossário nos itens 2 e 5; README com 15 itens.
+- [x] C20: rótulos internos de trabalho trocados por ADR, RF ou RNF.
+- [x] C21: cenários duplicados do UC018 corrigidos; IDs descartados registrados sem renumerar.
+- [x] C22, C24, C25, C32 e C33: modelos de dados das Áreas A, B e C (colunas, CHECK, `created_at` e `updated_at`).
+- [x] C23: critérios da US005.
+- [x] C26: "Administrador" nos casos de teste da Área D.
+- [x] C27: compra de créditos via `PaymentService` da Área C.
+- [x] C28: fluxos do UC005 em `alt`; os `opt` que restam são passos condicionais.
+- [x] C29: `UserFiltersDTO` no diagrama de perfil da Área A.
+- [x] C30: ADR-0013 aceita cor por papel no item 13; títulos dos itens 14 e 15 e prefixo `/api/v1` padronizados; seções das issues #122 e #123 retiradas.
+- [x] C31: legenda do protótipo UC013-E3-1 e `Locale` igual nas Áreas A e D.
+- [x] C35: TDD com status vigente.
+
+Conferência mecânica: 0 links relativos quebrados, todo `.drawio` com PNG, nenhum PNG cortado e nenhum ID de caso de teste repetido.
