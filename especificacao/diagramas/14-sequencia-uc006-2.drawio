@@ -323,7 +323,7 @@
         <mxCell value="exibe diálogo de&lt;br&gt;confirmação de exclusão" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_68">
           <mxGeometry x="110" y="180" width="150" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="[A3 - o Instrutor cancela a&lt;br&gt;exclusão]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_69">
+        <mxCell value="[A2 - o Instrutor cancela a&lt;br&gt;exclusão]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_69">
           <mxGeometry x="110" y="260" width="150" height="40" as="geometry" />
         </mxCell>
         <mxCell value="aciona &amp;quot;Cancelar&amp;quot; no&lt;br&gt;diálogo" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_70">
