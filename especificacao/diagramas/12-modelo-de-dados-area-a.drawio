@@ -25,13 +25,13 @@
         <mxCell id="row_user_password_hash" value="&lt;b&gt;password_hash: varchar(255)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="100" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_role" value="&lt;b&gt;role: varchar(20)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_role" value="&lt;b&gt;role: text CHECK (student, instructor, admin)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="120" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_status" value="&lt;b&gt;status: varchar(20)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_status" value="&lt;b&gt;status: text CHECK (active, blocked, deleted)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="140" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_theme" value="&lt;b&gt;theme: varchar(20)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_theme" value="&lt;b&gt;theme: text CHECK (light, dark, system)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="160" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_user_locale" value="&lt;b&gt;locale: varchar(5)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
@@ -107,7 +107,7 @@
         <mxCell id="row_address_user_id" value="&lt;b&gt;FK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
           <mxGeometry y="60" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_address_type" value="&lt;b&gt;type: varchar(20)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
+        <mxCell id="row_address_type" value="&lt;b&gt;type: text CHECK (billing, shipping)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
           <mxGeometry y="80" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_address_street" value="&lt;b&gt;street: varchar(150)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
