@@ -61,8 +61,8 @@
 | TC084 | 4 – E1 Campo inválido | CT3 Foto acima de 2 MB | Foto PNG de 3 MB | Resposta 422 `VALIDATION_FAILED` em `fields.photo`, com aviso do limite de 2 MB (R-6). |
 | TC085 | 4 – E1 Campo inválido | CT4 Nascimento futuro | Data de nascimento `01/01/2030` | Resposta 422 `VALIDATION_FAILED` em `fields.birthDate`, com aviso de data inválida (R-4). |
 | TC059 | 5 – E2 Link ou bio inválidos | CT1 Link em formato inválido | Instrutor logado, link `github ponto com barra ana` | Resposta 422 `VALIDATION_FAILED` em `fields.socialLinks`, com a indicação do campo de link. |
-| TC060 | 6 – E3 Acesso negado | CT1 Aluno edita o perfil de Instrutor | Aluno logado envia bio e links em `PUT /profile/instructor` | Resposta 403 `FORBIDDEN`; os campos de Instrutor não são gravados. |
-| TC086 | 6 – E3 Acesso negado | CT2 Administrador edita o perfil de Instrutor | Administrador logado envia bio e links em `PUT /profile/instructor` | Resposta 403 `FORBIDDEN`; nada é alterado. |
+| TC060 | 6 – E3 Acesso negado | CT1 Aluno edita o perfil de Instrutor | Aluno logado envia bio e links em `PUT /api/v1/profile/instructor` | Resposta 403 `FORBIDDEN`; os campos de Instrutor não são gravados. |
+| TC086 | 6 – E3 Acesso negado | CT2 Administrador edita o perfil de Instrutor | Administrador logado envia bio e links em `PUT /api/v1/profile/instructor` | Resposta 403 `FORBIDDEN`; nada é alterado. |
 
 ## 5. UC017 – Alterar Senha
 
