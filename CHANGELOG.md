@@ -13,6 +13,8 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ## [Não lançado]
 
+- Diagramação e ABNT no documento: cada área dos itens 12 a 15 em página própria, "TAM." no dicionário, Fonte com link do PNG sob cada figura, Lista de Ilustrações, citações autor-data, Referências e siglas por extenso, a pedido do grupo antes do envio (#155).
+
 ## [2.0.0] - 2026-11-22
 
 Entrega do RA2: itens 12 a 15 (modelo de dados, diagramas de classes, diagramas de sequência e casos de teste) das Áreas A a D, com a revisão cruzada final aplicada.
