@@ -13,6 +13,10 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ## [Não lançado]
 
+## [2.0.0] - 2026-11-22
+
+Entrega do RA2: itens 12 a 15 (modelo de dados, diagramas de classes, diagramas de sequência e casos de teste) das Áreas A a D, com a revisão cruzada final aplicada.
+
 ### Adicionado
 
 - Revisão cruzada final do RA2 em `entregas/ra2-revisao-cruzada.md`: quatro modelos revisaram o projeto inteiro e o consolidado tem 35 achados conferidos e aprovados pelo grupo, para corrigir antes do envio ao professor (#152).
@@ -155,7 +159,8 @@ Entrega do RA1: itens 1 a 11 da especificação.
 
 - Critério `C06.5` em `entregas/`, porque a coluna de objetivo pertence à matriz de rastreabilidade do item 9 e não ao item 6 (#61).
 
-[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.2.0...HEAD
+[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/releases/tag/v1.0.0
