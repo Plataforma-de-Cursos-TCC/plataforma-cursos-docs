@@ -99,7 +99,13 @@
           <mxGeometry x="0" y="40.0" width="340" height="152" as="geometry" />
         </mxCell>
         <mxCell id="User" value="&lt;i&gt;&lt;b&gt;User&lt;/b&gt;&lt;/i&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=3;align=center;verticalAlign=middle;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
-          <mxGeometry x="1270" y="680" width="120" height="40" as="geometry" />
+          <mxGeometry x="1160" y="680" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="UserFiltersDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;UserFiltersDTO&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
+          <mxGeometry x="1310" y="680" width="190" height="141.0" as="geometry" />
+        </mxCell>
+        <mxCell id="UserFiltersDTO_a" value="+search: ?string&lt;br&gt;+role: ?Role&lt;br&gt;+status: ?UserStatus&lt;br&gt;+page: ?int&lt;br&gt;+perPage: ?int" vertex="1" parent="UserFiltersDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;">
+          <mxGeometry x="0" y="40.0" width="190" height="101" as="geometry" />
         </mxCell>
         <mxCell id="AddressRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AddressRepository&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;">
           <mxGeometry x="380" y="500" width="340" height="71.0" as="geometry" />
@@ -172,7 +178,10 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="e_userrepo_user" value="" edge="1" parent="1" source="UserRepository" target="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0;">
+        <mxCell id="e_userrepo_user" value="" edge="1" parent="1" source="UserRepository" target="User" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.18;exitY=1;entryX=0.5;entryY=0;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_userrepo_filters" value="" edge="1" parent="1" source="UserRepository" target="UserFiltersDTO" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.72;exitY=1;entryX=0.5;entryY=0;">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_service_addr_repo" value="" edge="1" parent="1" source="ProfileService" target="AddressRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;endSize=6;exitX=0.34;exitY=1;entryX=0.5;entryY=0;">
@@ -227,7 +236,10 @@
           <mxGeometry x="1166" y="450" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_User" value="A" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1276" y="690" width="20" height="20" as="geometry" />
+          <mxGeometry x="1166" y="690" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_UserFiltersDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1316" y="690" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_AddressRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="386" y="510" width="20" height="20" as="geometry" />
