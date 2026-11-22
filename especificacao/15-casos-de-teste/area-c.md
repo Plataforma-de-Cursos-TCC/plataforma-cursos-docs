@@ -103,7 +103,7 @@
 | TC177 | 6 – Negativo Regra R-4 | CT1 Parâmetro de paginação inválido | Requisição com `?page=-1` ou `?perPage=500` (fora do intervalo permitido de 1 a 100) | Resposta 422 `VALIDATION_FAILED` nos campos `page` e `perPage` (`fields.page`, `fields.perPage`), sem consultar a base, prevenindo sobrecarga ou quebra de consulta (R-4, D-TC245). |
 | TC194 | 1 – R-4 / paginação | CT1 Segunda página do catálogo | 25 cursos publicados; `GET /api/v1/catalog/courses?page=2&perPage=20` | Resposta 200 `OK` com 5 cursos em `data`, `meta.currentPage: 2` e `meta.perPage: 20`; nenhum curso repetido em relação à página 1 (R-4). |
 | TC195 | 1 – R-4 / desempate | CT2 Ordem estável com empate | 25 cursos com o mesmo preço e a mesma data de publicação; percorrer as páginas 1 e 2 | Ordem desempatada por `id` (ADR-0009): os 25 ids aparecem uma única vez no conjunto das páginas, sem repetição nem omissão. |
-| TC196 | 1 – R-4 / limite | CT3 Limite máximo de itens por página | `GET /api/v1/catalog/courses?perPage=100` e depois `?perPage=101` | `perPage=100` retorna 200 `OK` com até 100 itens; `perPage=101` retorna 422 `VALIDATION_FAILED` com `fields.perPage` (D-TC245). |
+| TC196 | 1 – R-4 / limite | CT3 Limite máximo de itens por página | `GET /api/v1/catalog/courses?perPage=100` e depois `?perPage=101` | `perPage=100` retorna 200 `OK` com até 100 itens; `perPage=101` retorna 422 `VALIDATION_FAILED` com `fields.perPage`. |
 | TC197 | 2 – A1 / R-4 | CT1 Troca de filtro reinicia a paginação | Visitante na página 2 do catálogo seleciona outra categoria | Requisição e URL voltam a `page=1`; a lista não mostra página vazia por causa do índice anterior (R-4). |
 
 ### Matriz de regras e cenários negativos
