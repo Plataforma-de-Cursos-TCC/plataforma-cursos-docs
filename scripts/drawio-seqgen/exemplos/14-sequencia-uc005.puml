@@ -20,7 +20,7 @@ entity User as U
 control JwtGuard as J
 database BD
 
-opt A2 - já existe uma sessão válida no navegador
+alt A2 - já existe uma sessão válida no navegador
   USU -> V ++ : acessa a tela de login
   V -> C ++ : me()
   C --> V -- : 200 (UserResource)
@@ -76,14 +76,14 @@ deactivate S
 deactivate C
 deactivate V
 
-opt E2 - sessão expirada ao acessar uma área protegida
+alt E2 - sessão expirada ao acessar uma área protegida
   USU -> V ++ : acessa uma área protegida
   V -> C ++ : me()
   C --> V -- : 401 UNAUTHENTICATED
   V --> USU -- : leva à tela de login (tenta antes o refresh, se houver «manter conectado»)
 end
 
-opt A1 - "Esqueci minha senha"
+alt A1 - "Esqueci minha senha"
   USU -> V ++ : aciona "Esqueci minha senha"
   V --> USU -- : inicia o UC011 Recuperar Senha
 end
