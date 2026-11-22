@@ -2,8 +2,8 @@
 id: tdd
 titulo: "TDD — Technical Design Document"
 tipo: documento-projeto
-status: rascunho
-atualizado: 2026-10-08
+status: vigente
+atualizado: 2026-11-22
 ---
 # TDD — Technical Design Document
 
@@ -613,14 +613,14 @@ Toda listagem é paginada ([ADR-0009](adr/0009-listagens-na-url-e-paginacao.md),
   "meta": {
     "currentPage": 1,
     "perPage": 20,
-    "totalItems": 42,
-    "totalPages": 3
+    "total": 42,
+    "lastPage": 3
   },
   "links": {
-    "first": "/api/v1/courses?page=1&perPage=20",
-    "last": "/api/v1/courses?page=3&perPage=20",
+    "first": "/api/v1/catalog/courses?page=1&perPage=20",
+    "last": "/api/v1/catalog/courses?page=3&perPage=20",
     "prev": null,
-    "next": "/api/v1/courses?page=2&perPage=20"
+    "next": "/api/v1/catalog/courses?page=2&perPage=20"
   }
 }
 ```
