@@ -30,6 +30,7 @@ relacionados: [adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006, adr-0
 | [0016](0016-retencao-de-logs-e-auditoria.md) | D16 | Auditoria 12 meses no PostgreSQL e 5 anos arquivada no R2; logs da aplicação por 90 dias | 8, 12, 14 |
 | [0017](0017-core-em-postgresql.md) | D17 | Core em PostgreSQL 16, mesma instância do `ai-service`, databases `core` e `ai` separados; substitui o MySQL da ADR-0007 | 5, 11, 12 |
 | [0018](0018-core-como-monolito-modular.md) | D18 | Core como monólito modular (Auth, Authoring, Learning, Admin e Analytics); só três serviços | 11, 13 |
+| [0019](0019-upload-pela-api.md) | D19 | Upload de arquivos pela API, chave no banco e leitura por URL assinada; substitui o item 3 da ADR-0010 | 8, 10, 12, 13, 14 |
 
 ---
 
