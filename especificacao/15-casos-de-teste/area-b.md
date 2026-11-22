@@ -1,4 +1,6 @@
-## 1. UC006 – Cadastrar Curso
+## 2. Área B – Autoria do instrutor
+
+### 1. UC006 – Cadastrar Curso
 
 **Rastreio:** US004, RF002 (itens 6, 7 e 10).
 
@@ -15,7 +17,7 @@
 | TC094 | 8 – E3 Não proprietário do curso | CT1 Instrutor edita curso de terceiro | Instrutor logado envia `PUT /api/v1/instructor/courses/{id}` para curso de outro instrutor | Resposta 403 `FORBIDDEN` (E3); nenhuma alteração é persistida. |
 | TC095 | 9 – E4 Publicar curso sem conteúdo | CT1 Publicar curso vazio | Curso recém-criado em rascunho sem nenhum módulo ou aula cadastrado; clique em «Publicar» | Resposta 422 `VALIDATION_FAILED` informando necessidade de ao menos um módulo e uma aula para publicação; curso permanece com status `draft`. |
 
-## 2. UC014 – Gerenciar Módulos do Curso
+### 2. UC014 – Gerenciar Módulos do Curso
 
 **Rastreio:** US005, RF003 (itens 6, 7 e 10).
 
@@ -32,7 +34,7 @@
 | TC101 | 8 – E4 Exclusão com histórico de progresso | CT1 Módulo com aula assistida | Módulo onde ao menos um aluno possui registro em `LessonProgress`; confirmação de exclusão | Resposta 409 `CONFLICT` com bloqueio da exclusão (R-4); módulo, aulas e histórico de progresso permanecem preservados; orientação para apenas editar. |
 | TC102 | 8 – E4 Exclusão com histórico de quiz | CT2 Módulo com tentativa de quiz | Módulo onde ao menos um aluno respondeu ao quiz (`QuizAttempt`); confirmação de exclusão | Resposta 409 `CONFLICT` com bloqueio da exclusão (R-4); módulo, quiz e histórico de notas permanecem preservados. |
 
-## 3. UC015 – Gerenciar Aulas do Curso
+### 3. UC015 – Gerenciar Aulas do Curso
 
 **Rastreio:** US006, RF004, RNF002, RNF004, RNF018 (itens 6, 7 e 10).
 
@@ -55,7 +57,7 @@
 | TC120 | 10 – E5 Formato de material complementar inválido | CT1 Envio de arquivo não PDF | Arquivo de material complementar com extensão `.docx` ou `.zip` (5 MB) | Resposta 422 `VALIDATION_FAILED` em `fields.file`, informando que são aceitos apenas arquivos PDF (R-6); nenhum registro persistido. |
 | TC121 | 10 – E5 Tamanho de material complementar excedido | CT2 Envio de arquivo PDF acima de 50 MB | Arquivo PDF com tamanho de 55 MB para material complementar | Resposta 422 `VALIDATION_FAILED` em `fields.file`, informando o limite máximo de 50 MB por arquivo (R-6); nenhum registro persistido. |
 
-## 4. UC004 – Cadastrar Quiz com Gabarito
+### 4. UC004 – Cadastrar Quiz com Gabarito
 
 **Rastreio:** US010, RF007 (itens 6, 7 e 10).
 
