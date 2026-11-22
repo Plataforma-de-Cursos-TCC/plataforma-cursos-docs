@@ -2,9 +2,9 @@
 
 **PRODUTO:** Plataforma de Cursos
 
-Requisitos classificados segundo a norma da Organização Internacional de Normalização (ISO, *International Organization for Standardization*) e da Comissão Eletrotécnica Internacional (IEC, *International Electrotechnical Commission*) (ISO/IEC 25010 (ISO/IEC, 2011)).
+Requisitos classificados segundo a norma da Organização Internacional de Normalização (ISO, *International Organization for Standardization*) e da Comissão Eletrotécnica Internacional (IEC, *International Electrotechnical Commission*), a ISO/IEC 25010 (ISO/IEC, 2011).
 
-| # | REQUISITO NÃO-FUNCIONAL | NORMA ISO/IEC 25010 (ISO/IEC, 2011) |
+| # | REQUISITO NÃO-FUNCIONAL | NORMA ISO/IEC 25010 |
 |---|---|---|
 | RNF001 | Autenticação por token JWT (*JSON Web Token*) (JONES; BRADLEY; SAKIMURA, 2015) com expiração de 1 h; 100% das áreas protegidas verificam o perfil do usuário. | Segurança (autenticidade) |
 | RNF002 | Upload de vídeo e de material somente pela Interface de Programação de Aplicações (API, do inglês *Application Programming Interface*), que grava no armazenamento; reprodução somente por URL assinada (*Uniform Resource Locator*) com expiração de 15 min; 0 acessos diretos ao armazenamento. | Segurança (confidencialidade) |
