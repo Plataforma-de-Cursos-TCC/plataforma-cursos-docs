@@ -485,7 +485,7 @@
         <mxCell value="paginatePublished(category:&lt;br&gt;&amp;quot;Programacao&amp;quot;)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_107">
           <mxGeometry x="930" y="1580" width="170" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="SELECT courses WHERE&lt;br&gt;status=&amp;#x27;published&amp;#x27; AND&lt;br&gt;category=&amp;#x27;Programacao&amp;#x27;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_108">
+        <mxCell value="SELECT courses JOIN categories&lt;br&gt;WHERE status=&amp;#x27;published&amp;#x27; AND&lt;br&gt;categories.name=&amp;#x27;Programacao&amp;#x27;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_108">
           <mxGeometry x="1140" y="1630" width="160" height="60" as="geometry" />
         </mxCell>
         <mxCell value="cursos da categoria" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_109">
@@ -521,7 +521,7 @@
         <mxCell value="findPublishedById(courseId)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_119">
           <mxGeometry x="930" y="2310" width="170" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="SELECT course, modules,&lt;br&gt;lessons WHERE id" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_120">
+        <mxCell value="SELECT courses, modules,&lt;br&gt;lessons WHERE id" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_120">
           <mxGeometry x="1140" y="2350" width="160" height="40" as="geometry" />
         </mxCell>
         <mxCell value="200 OK&lt;br&gt;(CourseDetailResource)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_121">

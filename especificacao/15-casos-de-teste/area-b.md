@@ -1,4 +1,6 @@
-## 1. UC006 – Cadastrar Curso
+## 2. Área B – Autoria do instrutor
+
+### 1. UC006 – Cadastrar Curso
 
 **Rastreio:** US004, RF002 (itens 6, 7 e 10).
 
@@ -9,13 +11,13 @@
 | TC011 | 2 – A1 Editar curso publicado | CT1 Atualizar dados do curso | Curso publicado; alteração de título para `Docker e Kubernetes Avançado` e preço R$ 249,90 | Dados atualizados e refletidos no catálogo; matrículas ativas existentes permanecem inalteradas (200 OK). |
 | TC124 | 3 – A2 Excluir curso sem matrículas | CT1 Exclusão com confirmação | Curso sem matrículas em `Enrollment`; confirmação de exclusão pelo instrutor proprietário | Curso marcado com exclusão lógica (`deleted_at = NOW()`, ADR-0014) e resposta 204 No Content. |
 | TC092 | 4 – A3 Cancelar cadastro de curso | CT1 Cancelamento de novo curso | Formulário de criação de curso com dados preenchidos; clique em «Cancelar» | Operação cancelada, alterações descartadas e retorno à listagem «Meus cursos» sem persistir nenhum registro. |
-| TC123 | 5 – A4 Arquivar curso | CT1 Arquivamento de curso | Curso publicado (`status: published`); acionamento de arquivamento pelo instrutor proprietário | Status alterado para `archived` (D-TC266), curso removido das listagens do catálogo público, mantendo acesso apenas aos alunos já matriculados (200 OK). |
+| TC123 | 5 – A4 Arquivar curso | CT1 Arquivamento de curso | Curso publicado (`status: published`); acionamento de arquivamento pelo instrutor proprietário | Status alterado para `archived` (ADR-0014), curso removido das listagens do catálogo público, mantendo acesso apenas aos alunos já matriculados (200 OK). |
 | TC093 | 6 – E1 Campos obrigatórios ausentes | CT1 Título e preço em branco | Título vazio, descrição `Introdução`, preço em branco | Resposta 422 `VALIDATION_FAILED` com `fields.title` e `fields.priceCents` indicando obrigatoriedade; nenhum registro é criado. |
-| TC012 | 7 – E2 Excluir curso com matrículas | CT1 Exclusão bloqueada com alunos | Curso com 5 alunos matriculados em `Enrollment`; acionamento de «Excluir curso» | Resposta 409 `CONFLICT` com mensagem de bloqueio (R-2), impedindo a exclusão e sugerindo despublicar ou arquivar o curso; dados mantidos intactos. |
-| TC094 | 8 – E3 Não proprietário do curso | CT1 Instrutor edita curso de terceiro | Instrutor logado envia `PUT /api/v1/instructor/courses/{id}` para curso de outro instrutor | Resposta 403 `FORBIDDEN` (R-1); nenhuma alteração é persistida. |
+| TC012 | 7 – E2 Excluir curso com matrículas | CT1 Exclusão bloqueada com alunos | Curso com 5 alunos matriculados em `Enrollment`; acionamento de «Excluir curso» | Resposta 409 `CONFLICT` com mensagem de bloqueio (R-2), impedindo a exclusão e permitindo apenas o arquivamento do curso; dados mantidos intactos. |
+| TC094 | 8 – E3 Não proprietário do curso | CT1 Instrutor edita curso de terceiro | Instrutor logado envia `PUT /api/v1/instructor/courses/{id}` para curso de outro instrutor | Resposta 403 `FORBIDDEN` (E3); nenhuma alteração é persistida. |
 | TC095 | 9 – E4 Publicar curso sem conteúdo | CT1 Publicar curso vazio | Curso recém-criado em rascunho sem nenhum módulo ou aula cadastrado; clique em «Publicar» | Resposta 422 `VALIDATION_FAILED` informando necessidade de ao menos um módulo e uma aula para publicação; curso permanece com status `draft`. |
 
-## 2. UC014 – Gerenciar Módulos do Curso
+### 2. UC014 – Gerenciar Módulos do Curso
 
 **Rastreio:** US005, RF003 (itens 6, 7 e 10).
 
@@ -27,12 +29,12 @@
 | TC096 | 3 – A2 Excluir módulo sem histórico | CT2 Excluir módulo vazio | Módulo recém-criado sem aulas e sem quiz; acionamento de exclusão e confirmação | Módulo removido logicamente com sucesso (`deleted_at = NOW()`); resposta 204 No Content. |
 | TC097 | 4 – A3 Cancelar exclusão de módulo | CT1 Cancelamento de exclusão | Diálogo de confirmação de exclusão de módulo exibido; clique em «Cancelar» | Diálogo fechado sem remover o módulo nem alterar suas aulas ou quiz associados. |
 | TC098 | 5 – E1 Título ausente | CT1 Criar módulo sem título | Formulário de novo módulo com título em branco e posição `2` | Resposta 422 `VALIDATION_FAILED` em `fields.title`; módulo não é salvo. |
-| TC099 | 6 – E2 Posição já utilizada | CT1 Posição duplicada no mesmo curso | Módulo com posição `1` já cadastrado no curso; envio de novo módulo com posição `1` | Resposta 422 `VALIDATION_FAILED` em `fields.order` apontando conflito de posição (R-2); nenhum dado é gravado. |
+| TC099 | 6 – E2 Posição já utilizada | CT1 Posição duplicada no mesmo curso | Módulo com posição `1` já cadastrado no curso; envio de novo módulo com posição `1` | Resposta 422 `VALIDATION_FAILED` em `fields.position` apontando conflito de posição (R-2); nenhum dado é gravado. |
 | TC100 | 7 – E3 Não proprietário do curso | CT1 Módulo em curso de outro instrutor | Envio de `POST /api/v1/instructor/courses/{id}/modules` em curso de terceiro | Resposta 403 `FORBIDDEN` (R-1); criação rejeitada. |
 | TC101 | 8 – E4 Exclusão com histórico de progresso | CT1 Módulo com aula assistida | Módulo onde ao menos um aluno possui registro em `LessonProgress`; confirmação de exclusão | Resposta 409 `CONFLICT` com bloqueio da exclusão (R-4); módulo, aulas e histórico de progresso permanecem preservados; orientação para apenas editar. |
 | TC102 | 8 – E4 Exclusão com histórico de quiz | CT2 Módulo com tentativa de quiz | Módulo onde ao menos um aluno respondeu ao quiz (`QuizAttempt`); confirmação de exclusão | Resposta 409 `CONFLICT` com bloqueio da exclusão (R-4); módulo, quiz e histórico de notas permanecem preservados. |
 
-## 3. UC015 – Gerenciar Aulas do Curso
+### 3. UC015 – Gerenciar Aulas do Curso
 
 **Rastreio:** US006, RF004, RNF002, RNF004, RNF018 (itens 6, 7 e 10).
 
@@ -45,7 +47,7 @@
 | TC118 | 2 – A1 Editar aula sem trocar vídeo | CT2 Edição de dados sem novo vídeo não reprocessa | Aula já indexada (`indexStatus = indexed`); alteração apenas do título | Dados atualizados (200 OK); nenhum job de transcrição enfileirado e `indexStatus` permanece `indexed` (R-4, A-1.4). |
 | TC105 | 3 – A2 Excluir aula sem histórico | CT1 Excluir aula sem alunos | Aula sem registros em `LessonProgress`; confirmação de exclusão | Aula marcada com exclusão lógica (`deleted_at = NOW()`, ADR-0014), materiais vinculados excluídos logicamente, resposta 204 No Content e arquivo de vídeo preservado no Cloudflare R2, sem remoção física. |
 | TC106 | 4 – A3 Cancelar exclusão de aula | CT1 Cancelamento de exclusão | Diálogo de confirmação de exclusão de aula exibido; clique em «Cancelar» | Diálogo fechado sem remover a aula nem o vídeo, mantendo o estado inalterado. |
-| TC119 | 5 – A4 Adicionar material complementar em PDF | CT1 Upload de material PDF válido | Aula existente; título `Guia de Comandos Docker`, ordem `1`, arquivo PDF de 15 MB enviado via API multipart | Arquivo validado, transmitido via API ao `media-service`, armazenado no Cloudflare R2, registrado em `LessonMaterial` (B4) e retornado com 201 Created (`LessonMaterialResource`). |
+| TC119 | 5 – A4 Adicionar material complementar em PDF | CT1 Upload de material PDF válido | Aula existente; título `Guia de Comandos Docker`, ordem `1`, arquivo PDF de 15 MB enviado via API multipart | Arquivo validado, transmitido via API ao `media-service`, armazenado no Cloudflare R2, registrado em `LessonMaterial` (RNF018) e retornado com 201 Created (`LessonMaterialResource`). |
 | TC122 | 5 – A4 Excluir material complementar | CT2 Remoção de material complementar | Material complementar existente vinculado à aula; confirmação de exclusão pelo instrutor proprietário | Registro marcado com exclusão lógica (`deleted_at = NOW()`, ADR-0014); arquivo PDF preservado no Cloudflare R2, sem remoção física; resposta 204 No Content. |
 | TC017 | 6 – E1 Formato de vídeo inválido | CT1 Envio de arquivo AVI | Arquivo de vídeo com extensão `.avi` (30 MB) | Resposta 422 `VALIDATION_FAILED` em `fields.video`, informando que são aceitos apenas MP4 e WebM (R-2, RNF018). |
 | TC107 | 6 – E1 Tamanho de vídeo excedido | CT2 Envio de arquivo acima de 500 MB | Arquivo MP4 com tamanho de 550 MB | Resposta 422 `VALIDATION_FAILED` em `fields.video`, informando o limite máximo de 500 MB por arquivo (R-2, RNF018). |
@@ -55,7 +57,7 @@
 | TC120 | 10 – E5 Formato de material complementar inválido | CT1 Envio de arquivo não PDF | Arquivo de material complementar com extensão `.docx` ou `.zip` (5 MB) | Resposta 422 `VALIDATION_FAILED` em `fields.file`, informando que são aceitos apenas arquivos PDF (R-6); nenhum registro persistido. |
 | TC121 | 10 – E5 Tamanho de material complementar excedido | CT2 Envio de arquivo PDF acima de 50 MB | Arquivo PDF com tamanho de 55 MB para material complementar | Resposta 422 `VALIDATION_FAILED` em `fields.file`, informando o limite máximo de 50 MB por arquivo (R-6); nenhum registro persistido. |
 
-## 4. UC004 – Cadastrar Quiz com Gabarito
+### 4. UC004 – Cadastrar Quiz com Gabarito
 
 **Rastreio:** US010, RF007 (itens 6, 7 e 10).
 
@@ -67,5 +69,5 @@
 | TC113 | 4 – A3 Cancelar cadastro de quiz | CT1 Cancelamento de criação de quiz | Formulário de criação de quiz com dados preenchidos; clique em «Cancelar» | Operação cancelada, alterações descartadas e retorno à visualização do módulo sem persistir dados. |
 | TC114 | 5 – E1 Menos de duas alternativas | CT1 Pergunta com apenas uma alternativa | Pergunta com texto válido, porém com apenas 1 alternativa cadastrada | Resposta 422 `VALIDATION_FAILED` com indicação de que toda pergunta exige no mínimo duas alternativas (R-1); quiz não é salvo. |
 | TC029 | 6 – E2 Pergunta sem gabarito | CT1 Pergunta sem alternativa correta | Pergunta com 4 alternativas cadastradas, nenhuma marcada com `isCorrect = true` | Resposta 422 `VALIDATION_FAILED` informando a obrigatoriedade de marcar a alternativa correta (R-1); quiz não é salvo. |
-| TC116 | 7 – E3 Não proprietário do curso | CT1 Quiz em módulo de terceiro | Envio de `POST /api/v1/instructor/modules/{id}/quiz` em módulo de outro instrutor | Resposta 403 `FORBIDDEN` (R-1); nenhum quiz é cadastrado. |
+| TC116 | 7 – E3 Não proprietário do curso | CT1 Quiz em módulo de terceiro | Envio de `POST /api/v1/instructor/modules/{id}/quiz` em módulo de outro instrutor | Resposta 403 `FORBIDDEN` (E3); nenhum quiz é cadastrado. |
 | TC117 | 8 – E4 Módulo inexistente | CT1 Quiz para módulo removido | ID de módulo inexistente ou já excluído no endpoint de criação | Resposta 404 `NOT_FOUND` informando módulo não encontrado. |

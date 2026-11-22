@@ -10,7 +10,7 @@ Usamos [Conventional Commits](https://www.conventionalcommits.org/):
 <corpo explicando o porquê>
 ```
 
-Tipos aceitos: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `ci`. O escopo é opcional.
+Tipos aceitos (todos os do Conventional Commits): `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore` e `revert`. Use o que melhor descreve a mudança. O escopo é opcional.
 
 - Escreva a mensagem em inglês, no imperativo (`add`, não `added`).
 - O corpo explica o porquê da mudança, não o que o diff já mostra.

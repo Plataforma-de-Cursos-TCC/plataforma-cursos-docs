@@ -338,7 +338,7 @@
         <mxCell value="replaceFor(user,&lt;br&gt;address)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_80">
           <mxGeometry x="870" y="930" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="INSERT ou UPDATE&lt;br&gt;address" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_81">
+        <mxCell value="INSERT ou UPDATE&lt;br&gt;addresses" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_81">
           <mxGeometry x="1350" y="980" width="120" height="40" as="geometry" />
         </mxCell>
         <mxCell value="Address" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_82">

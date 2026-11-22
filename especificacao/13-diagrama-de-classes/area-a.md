@@ -18,15 +18,15 @@ Na perspectiva de implementação, apresentada em três diagramas (cadastro e lo
    - `PasswordResetService` coordena o `UserRepository`, o `PasswordResetTokenRepository` (geração de hash criptográfico com validade de 30 minutos (RNF017) e consumo único) e o envio assíncrono do link por fila através do `ResetMailer`, assegurando proteção contra enumeração de usuários (UC011 R-2).
 
 3. **Perfil e administração de usuários**:
-   - `ProfileController` e `ProfileService` atendem à consulta e atualização cadastral, atualização de dados de instrutor (`InstructorProfileDTO`), troca de senha com validação de senha atual, upload de foto via `PhotoStorage` (armazenamento de imagem no Cloudflare R2 com URL pública e CDN) e persistência de endereços (`AddressRepository`).
+   - `ProfileController` e `ProfileService` atendem à consulta e atualização cadastral, atualização de dados de instrutor (`InstructorProfileDTO`), troca de senha com validação de senha atual, upload de foto via `PhotoStorage` (armazenamento em bucket privado do Cloudflare R2 via API, persistindo a chave no banco e gerando URL assinada para visualização, ADR-0010) e persistência de endereços (`AddressRepository`).
    - `InstructorProfileRepository.createEmpty(userId: UUID): InstructorProfile` cria a linha vazia de perfil de instrutor no momento da promoção (TC236), além do `save(profile: InstructorProfile)`.
-   - O `UserRepository` fornece, além de `findByEmail(email)` e `save(user)`, os métodos de gestão administrativa do UC008 e UC018:
+   - O `UserRepository` fornece, além de `findById(id: UUID)`, `findByEmail(email)` e `save(user)`, os métodos de gestão administrativa do UC008 e UC018:
      - `paginate(filters: UserFiltersDTO): LengthAwarePaginator`: listagem paginada (`perPage` de 1 a 100) com filtros de busca textual, perfil e status.
      - `updateStatus(id: UUID, status: UserStatus): void`: bloqueio e desbloqueio de contas.
      - `updateRole(id: UUID, role: Role): void`: alteração de papel, instanciando `InstructorProfile` caso o papel passe a instrutor.
      - `softDelete(id: UUID): void` e `restore(id: UUID): void`: exclusão lógica e reativação via `deleted_at` (ADR-0014).
-   - `RefreshSessionRepository.create(...)` grava a sessão de refresh no login com «manter conectado» (UC005) e `RefreshSessionRepository.revokeAllByUser(userId: UUID): void` revoga todas as sessões de atualização do usuário, com `revokedAt` preenchido na entidade `RefreshSession`. É chamado no bloqueio, na troca de perfil e na exclusão lógica (D-TC243, UC008 e UC018), junto com a inclusão do `jti` na blocklist do Redis.
-     - `anonymize(id: UUID): void`: anonimização irreversível dos dados pessoais para atendimento à LGPD (UC018 R-2), preenchendo `anonymized_at`, ofuscando nome/documento/telefone e liberando o email no índice único parcial.
+     - `anonymize(id: UUID): void`: anonimização irreversível dos dados pessoais para atendimento à LGPD (UC018 R-3, A3), preenchendo `anonymized_at`, ofuscando nome/documento/telefone e liberando o email no índice único parcial.
+   - `RefreshSessionRepository.create(...)` grava a sessão de refresh no login com «manter conectado» (UC005) e `RefreshSessionRepository.revokeAllByUser(userId: UUID): void` revoga todas as sessões de atualização do usuário, com `revokedAt` preenchido na entidade `RefreshSession`. É chamado no bloqueio, na troca de perfil e na exclusão lógica (UC008 e UC018), junto com a inclusão do `jti` na blocklist do Redis.
 
 ![Classes negociais da Área A](../diagramas/13-classes-area-a-negocial.png)
 

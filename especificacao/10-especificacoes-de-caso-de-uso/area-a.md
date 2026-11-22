@@ -29,9 +29,9 @@
     - A-2.2 O sistema direciona o Usuário diretamente para a sua área, sem exibir a tela de login.
     - A-2.3 Este caso de uso é finalizado.
 - **Fluxos de exceção:**
-  - **E1 – Credenciais incorretas**
-    - E-1.1 O sistema identifica e-mail ou senha inválidos.
-    - E-1.2 O sistema exibe mensagem de erro genérica, sem indicar qual campo está incorreto.
+  - **E1 – Credenciais incorretas ou conta excluída/anonimizada**
+    - E-1.1 O sistema identifica e-mail ou senha inválidos, ou conta com status excluído (`status = deleted`) ou já anonimizada (`anonymized_at` preenchido).
+    - E-1.2 O sistema exibe mensagem de erro genérica (`401 UNAUTHENTICATED`), sem indicar qual campo está incorreto nem revelar se a conta existiu (ADR-0014 item 6).
     - E-1.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
     ![erro "E-mail ou senha inválidos"](prototipos/png/UC005/UC005-E1-1.png)
@@ -256,9 +256,9 @@
     - E-3.2 O sistema nega o acesso, não altera nenhum dado e informa que a ação não é permitida.
     - E-3.3 Este caso de uso é finalizado.
 
-    ![acesso negado à edição de perfil de outro Instrutor](prototipos/png/UC013/UC013-E3-1.png)
+    ![acesso negado à edição de perfil de Instrutor por Aluno ou Administrador](prototipos/png/UC013/UC013-E3-1.png)
 
-    *Figura 0 – UC013, fluxo de exceção E3: acesso negado à edição de perfil de outro Instrutor*
+    *Figura 0 – UC013, fluxo de exceção E3: acesso negado à edição de perfil de Instrutor por Aluno ou Administrador*
 
 ## 5. UC017 – Alterar Senha
 

@@ -58,7 +58,7 @@ O que a Área A ensinou e vale para as outras áreas (os pontos da análise do p
 
 - **Item 13:** o tipo de cada elemento vai num círculo (use `scripts/drawio-seqgen/typeicon.py`) no canto esquerdo do cabeçalho (C classe, A abstrata, I interface, E enumeração) e o papel em estereótipo (`<<Controller>>`, `<<Service>>`). No XML do draw.io, escape os sinais: `&lt;&lt;Controller&gt;&gt;`.
 - **Item 14:** cancelar e confirmar são `alt` (cancelar encerra o diagrama), nunca `opt` seguido de continuação. Para manter um estilo só, gere o `.drawio` com [`scripts/drawio-seqgen/seqgen.py`](../scripts/drawio-seqgen/README.md) (`python3 scripts/drawio-seqgen/seqgen.py entrada.puml saida.drawio`, exemplos em `scripts/drawio-seqgen/exemplos/`).
-- **Item 15:** cada regra de negócio tem ao menos um cenário negativo (a Área A ganhou o TC090 por isso). Os IDs da Área A vão até TC090; as outras áreas começam em TC091.
+- **Item 15:** cada regra de negócio tem ao menos um cenário negativo (a Área A ganhou o TC090 por isso). Os IDs da Área A vão até TC090; as outras áreas começam em TC091. Faixas usadas: Área B TC091 a TC118, Área C TC151 a TC197 e Área D TC211 a TC273 (a reserva da D ia até TC270 e foi estendida sem colidir com outra área).
 - **Fluxo:** a branch nasce pela issue (`N-slug`), o PR leva `Closes #N` e uma linha em `CHANGELOG.md`, `[Não lançado]`, com o número do PR.
 
 ## 6. Quando entrar o segundo idioma (en ou es)

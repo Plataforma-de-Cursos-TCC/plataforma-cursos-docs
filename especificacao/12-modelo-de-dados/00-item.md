@@ -7,6 +7,6 @@ Modelo lógico do banco de dados, na perspectiva relacional e com notação UML,
 | Nº | ÁREA | TABELAS | ARQUIVO |
 |---|---|---|---|
 | 1 | A (Acesso e conta) | User, Address, InstructorProfile, PasswordResetToken, RefreshSession | [area-a.md](area-a.md) |
-| 2 | B (Autoria do instrutor) | a preencher | [area-b.md](area-b.md) |
-| 3 | C (Aprendizagem do aluno) | a preencher | [area-c.md](area-c.md) |
-| 4 | D (Tutor de IA, analytics e administração) | a preencher | [area-d.md](area-d.md) |
+| 2 | B (Autoria do instrutor) | categories, courses, modules, lessons, lesson_materials, quizzes, questions, question_options | [area-b.md](area-b.md) |
+| 3 | C (Aprendizagem do aluno) | enrollments, payments, lesson_progress, quiz_attempts, quiz_answers, reviews | [area-c.md](area-c.md) |
+| 4 | D (Tutor de IA, analytics e administração) | conversations, messages, tutor_credit_packs, audit_logs | [area-d.md](area-d.md) |

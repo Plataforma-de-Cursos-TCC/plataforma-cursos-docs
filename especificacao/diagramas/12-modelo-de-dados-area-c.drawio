@@ -56,7 +56,7 @@
         <mxCell id="row_c_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#666666;dashed=1;" vertex="1" parent="table_Course">
           <mxGeometry y="50" width="340" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="row_c_status" value="&lt;b&gt;status: text CHECK&lt;/b&gt; (draft, published)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course">
+        <mxCell id="row_c_status" value="&lt;b&gt;status: text CHECK&lt;/b&gt; (draft, published, archived)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Course">
           <mxGeometry y="60" width="340" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_Enrollment" value="enrollments" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
@@ -74,10 +74,10 @@
         <mxCell id="row_enr_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#666666;dashed=1;" vertex="1" parent="table_Enrollment">
           <mxGeometry y="90" width="360" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="row_enr_pricePaidCents" value="price_paid_cents: integer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Enrollment">
+        <mxCell id="row_enr_pricePaidCents" value="&lt;b&gt;price_paid_cents: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Enrollment">
           <mxGeometry y="100" width="360" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_enr_currency" value="currency: varchar(3)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Enrollment">
+        <mxCell id="row_enr_currency" value="&lt;b&gt;currency: varchar(3)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Enrollment">
           <mxGeometry y="120" width="360" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_enr_status" value="&lt;b&gt;status: text CHECK&lt;/b&gt; (pending, active, cancelled, completed)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Enrollment">
@@ -93,7 +93,7 @@
           <mxGeometry y="200" width="360" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_Payment" value="payments" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="480" y="160" width="360" height="240" as="geometry" />
+          <mxGeometry x="480" y="160" width="360" height="260" as="geometry" />
         </mxCell>
         <mxCell id="row_pay_id" value="&lt;b&gt;PK&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="30" width="360" height="20" as="geometry" />
@@ -101,10 +101,10 @@
         <mxCell id="row_pay_userId" value="&lt;b&gt;FK&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="50" width="360" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_pay_courseId" value="&lt;b&gt;FK&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;course_id: uuid (NULL)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
+        <mxCell id="row_pay_courseId" value="&lt;b&gt;FK&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;course_id: uuid (NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="70" width="360" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_pay_enrollmentId" value="&lt;b&gt;FK&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;enrollment_id: uuid (NULL)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
+        <mxCell id="row_pay_enrollmentId" value="&lt;b&gt;FK&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;enrollment_id: uuid (NULL)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="90" width="360" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_pay_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#666666;dashed=1;" vertex="1" parent="table_Payment">
@@ -113,20 +113,23 @@
         <mxCell id="row_pay_purpose" value="&lt;b&gt;purpose: text CHECK&lt;/b&gt; (enrollment, tutor_credits)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="120" width="360" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_pay_amountCents" value="amount_cents: integer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
+        <mxCell id="row_pay_amountCents" value="&lt;b&gt;amount_cents: integer&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="140" width="360" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_pay_currency" value="currency: varchar(3)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
+        <mxCell id="row_pay_currency" value="&lt;b&gt;currency: varchar(3)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="160" width="360" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_pay_status" value="&lt;b&gt;status: text CHECK&lt;/b&gt; (approved, declined)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="180" width="360" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_pay_paidAt" value="&lt;b&gt;paid_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
+        <mxCell id="row_pay_paidAt" value="paid_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="200" width="360" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_pay_deletedAt" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
+        <mxCell id="row_pay_createdAt" value="&lt;b&gt;created_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
           <mxGeometry y="220" width="360" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_pay_deletedAt" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_Payment">
+          <mxGeometry y="240" width="360" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_LessonProgress" value="lesson_progress" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="1360" y="40" width="280" height="200" as="geometry" />
@@ -273,7 +276,7 @@
         <mxCell id="lbl_pay_user_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="656" y="122" width="28" height="16" as="geometry" />
         </mxCell>
-        <mxCell id="edge_pay_enr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1.0;exitY=0.375;exitPerimeter=0;entryX=0.0;entryY=0.9545;entryPerimeter=0;" edge="1" parent="1" source="table_Payment" target="table_Enrollment">
+        <mxCell id="edge_pay_enr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1.0;exitY=0.3846;exitPerimeter=0;entryX=0.0;entryY=0.9545;entryPerimeter=0;" edge="1" parent="1" source="table_Payment" target="table_Enrollment">
           <mxGeometry relative="1" as="geometry">
             </mxGeometry>
         </mxCell>
@@ -298,7 +301,7 @@
             </mxGeometry>
         </mxCell>
         <mxCell id="lbl_pay_course_n" value="0..*" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="612" y="418" width="28" height="16" as="geometry" />
+          <mxGeometry x="612" y="426" width="28" height="16" as="geometry" />
         </mxCell>
         <mxCell id="lbl_pay_course_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="656" y="436" width="28" height="16" as="geometry" />

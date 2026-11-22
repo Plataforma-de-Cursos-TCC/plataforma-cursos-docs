@@ -34,7 +34,7 @@ else dados válidos
   end
   opt envia endereço
     S -> AR ++ : replaceFor(user, address)
-    AR -> BD ++ : INSERT ou UPDATE address
+    AR -> BD ++ : INSERT ou UPDATE addresses
     BD --> AR --
     AR --> S -- : Address
   end

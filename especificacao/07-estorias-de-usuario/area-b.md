@@ -28,7 +28,8 @@
 |---|---|
 | 1 | **DADO QUE:** tenho um curso em rascunho <br> **QUANDO:** adiciono um módulo com título <br> **ENTÃO:** ele é salvo na ordem informada. |
 | 2 | **DADO QUE:** reordeno os módulos existentes <br> **QUANDO:** salvo a nova ordem <br> **ENTÃO:** a nova sequência aparece para os alunos matriculados. |
-| 3 | **DADO QUE:** tento excluir um módulo com aulas cadastradas <br> **QUANDO:** confirmo <br> **ENTÃO:** recebo aviso de que as aulas do módulo também serão removidas. |
+| 3 | **DADO QUE:** tento excluir um módulo com aulas cadastradas e sem histórico de alunos <br> **QUANDO:** confirmo a exclusão <br> **ENTÃO:** recebo aviso de que as aulas e o quiz do módulo também serão removidos e a exclusão em cascata é realizada. |
+| 4 | **DADO QUE:** tento excluir um módulo com histórico de alunos em aulas ou no quiz <br> **QUANDO:** solicito a exclusão <br> **ENTÃO:** o sistema bloqueia a exclusão com erro 409 Conflict, preserva o histórico acadêmico e orienta que o módulo pode apenas ser editado. |
 
 ## 8. US006 – REQUISITO RF004: Gerenciar aulas do curso
 

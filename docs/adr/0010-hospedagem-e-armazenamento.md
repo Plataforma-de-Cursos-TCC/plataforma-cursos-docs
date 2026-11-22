@@ -31,7 +31,7 @@ relacionados: [adr-0007, adr-0008]
 
 1. O front-end Next.js (SPA) fica na Vercel. Um `rewrite` de `/api/:path*` para o Railway faz o navegador ver um único host, o que mantém o cookie `__Host-` da ADR-0008. A origem recusa chamadas que não tragam o cabeçalho secreto da Vercel.
 2. O core Laravel, o `ai-service` e o `media-service` rodam como serviços Docker no Railway, com PostgreSQL 16 (o core usava MySQL 8 até a [ADR-0017](0017-core-em-postgresql.md); `pgvector` no `ai`), Redis e RabbitMQ no mesmo projeto, em rede privada. Apenas a API do core é pública.
-3. Vídeos, imagens e arquivos ficam em bucket privado do Cloudflare R2. O navegador envia e baixa por URL assinada gerada pela API, direto no domínio S3 do R2, sem passar pelo `rewrite`. O CORS do bucket libera somente a origem do front-end.
+3. *(Substituído pela [ADR-0019](0019-upload-pela-api.md): o upload passa pela API e o banco guarda a chave.)* Vídeos, imagens e arquivos ficam em bucket privado do Cloudflare R2. O navegador envia e baixa por URL assinada gerada pela API, direto no domínio S3 do R2, sem passar pelo `rewrite`. O CORS do bucket libera somente a origem do front-end.
 4. Domínio: **pendente**. Enquanto não houver domínio próprio, usa-se o domínio padrão da Vercel. Se for comprado, o DNS fica na Cloudflare.
 
 ## Consequências

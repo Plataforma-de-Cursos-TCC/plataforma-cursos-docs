@@ -299,7 +299,7 @@
         <mxCell id="LearningActivityDTO_body" value="+enrollmentsByPeriod: Map&amp;lt;String,int&amp;gt;&lt;br&gt;+completedLessonsByPeriod: Map&amp;lt;String,int&amp;gt;&lt;br&gt;+quizAverageByPeriod: Map&amp;lt;String,float&amp;gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="LearningActivityDTO">
           <mxGeometry x="0" y="44" width="320" height="66" as="geometry" />
         </mxCell>
-        <mxCell id="GroupBy" value="&lt;b&gt;GroupBy&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
+        <mxCell id="GroupBy" value="&amp;lt;&amp;lt;enumeration&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;GroupBy&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="620" y="410" width="220" height="110" as="geometry" />
         </mxCell>
         <mxCell id="GroupBy_body" value="day&lt;br&gt;week&lt;br&gt;month" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="GroupBy">

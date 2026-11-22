@@ -39,13 +39,20 @@ else confirma a exclusão
     V --> ADM : informa usuário não encontrado e atualiza lista
   else exclusão lógica confirmada (ADR-0014)
     S -> R ++ : softDelete(targetId)
-    R -> BD ++ : UPDATE users SET deleted_at = NOW()
+    R -> BD ++ : UPDATE users SET status='deleted', deleted_at=NOW()
     BD --> R : ok
-    opt A4 - instrutor com cursos publicados (matriculados mantêm acesso)
-      S -> CS ++ : archiveAllByInstructor(targetId)
-      CS -> BD ++ : UPDATE courses SET status='archived' WHERE instructor_id=targetId
-      BD --> CS : ok
-      CS --> S : void
+    opt A4 - instrutor com cursos publicados
+      alt arquivar cursos (alunos matriculados mantêm acesso)
+        S -> CS ++ : archiveAllByInstructor(targetId)
+        CS -> BD ++ : UPDATE courses SET status='archived' WHERE instructor_id=targetId
+        BD --> CS : ok
+        CS --> S : void
+      else excluir cursos em cascata
+        S -> CS ++ : softDeleteAllByInstructor(targetId)
+        CS -> BD ++ : UPDATE courses, modules, lessons, quizzes SET deleted_at=NOW()
+        BD --> CS : ok
+        CS --> S : void
+      end
     end
     S -> J ++ : revoke(jti, ttl)
     J --> S : ok (invalida jti no Redis blocklist)
@@ -66,7 +73,7 @@ else A2 - reativação de conta excluída (PATCH restore)
   V -> C ++ : restore(id)
   C -> S ++ : restore(adminId, targetId)
   S -> R ++ : restore(targetId)
-  R -> BD ++ : UPDATE users SET deleted_at = NULL
+  R -> BD ++ : UPDATE users SET status='active', deleted_at=NULL
   BD --> R : ok
   R --> S : user
   S -> A ++ : logAction(adminId, USER_RESTORE, "User", targetId)
@@ -81,7 +88,9 @@ else A3 - anonimização irreversível (LGPD)
   V -> C ++ : anonymize(id)
   C -> S ++ : anonymize(targetId)
   S -> R ++ : anonymize(targetId)
-  R -> BD ++ : UPDATE users SET nome, e-mail, documento, anonymized_at=NOW() (user_id preservado)
+  R -> BD ++ : UPDATE users SET name, email, document_number, phone, birth_date, photo, anonymized_at=NOW()
+  BD --> R : ok
+  R -> BD ++ : UPDATE addresses SET street, number, complement, district, zip_code, deleted_at=NOW() WHERE user_id=targetId
   BD --> R : ok
   R --> S : ok
   S -> A ++ : logAction(adminId, USER_ANONYMIZE, "User", targetId)

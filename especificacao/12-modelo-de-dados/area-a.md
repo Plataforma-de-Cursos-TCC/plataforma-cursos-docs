@@ -23,9 +23,9 @@ Decisões do modelo:
 | name | Simples | varchar | 150 | Nome completo do usuário. |
 | email | Simples | varchar | 150 | E-mail para login; índice único parcial (`UNIQUE WHERE anonymized_at IS NULL`). |
 | password_hash | Simples | varchar | 255 | Hash criptográfico seguro da senha (RNF007). |
-| role | Simples | text com CHECK | 20 | Perfil de acesso: `student`, `instructor` ou `admin`. |
-| status | Simples | text com CHECK | 20 | Situação cadastral: `active` (ativo), `blocked` (bloqueado) ou `deleted` (excluído). |
-| theme | Simples | text com CHECK | 20 | Tema da interface: `light` (claro), `dark` (escuro) ou `system` (sistema) (UC013 R-7). |
+| role | Simples | text CHECK | 20 | Perfil de acesso: `student`, `instructor` ou `admin`. |
+| status | Simples | text CHECK | 20 | Situação cadastral: `active` (ativo), `blocked` (bloqueado) ou `deleted` (excluído). |
+| theme | Simples | text CHECK | 20 | Tema da interface: `light` (claro), `dark` (escuro) ou `system` (sistema) (UC013 R-7). |
 | locale | Simples | varchar | 5 | Idioma da interface: `pt-BR` (padrão), validado contra idiomas ativos (RNF013). |
 | terms_accepted_at | Simples | timestamptz | - | Timestamp de aceite dos termos de uso e privacidade no cadastro (RNF020). |
 | phone | Simples | varchar | 20 | Telefone de contato com DDD (opcional). |
@@ -39,7 +39,7 @@ Decisões do modelo:
 | **Tabela: addresses** | | | | Endereços cadastrados pelo usuário. |
 | id | Determinante | uuid | - | Identificador único do endereço (PK). |
 | user_id | Simples | uuid | - | Chave estrangeira para `users.id`, proprietário do endereço. |
-| type | Simples | text com CHECK | 20 | Tipo do endereço: `billing` (cobrança) ou `shipping` (entrega). |
+| type | Simples | text CHECK | 20 | Tipo do endereço: `billing` (cobrança) ou `shipping` (entrega). |
 | street | Simples | varchar | 150 | Logradouro. |
 | number | Simples | varchar | 10 | Número predial. |
 | complement | Simples | varchar | 60 | Complemento de endereço (opcional). |
