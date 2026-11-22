@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <mxfile host="app.diagrams.net" agent="Antigravity" version="24.7.17" compressed="false">
   <diagram name="Item 12 Modelo de Dados" id="diagram_item12">
     <mxGraphModel dx="1000" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="760" pageHeight="940" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- ==================== TABELA: users ==================== -->
         <mxCell id="table_users" value="users" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="300" height="380" as="geometry" />
+          <mxGeometry x="400" y="40" width="300" height="380" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_id" value="&lt;b&gt;PK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_user_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#000000;" vertex="1" parent="table_users">
@@ -64,12 +62,10 @@
         <mxCell id="row_user_deleted_at" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="360" width="300" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== TABELA: instructor_profiles ==================== -->
         <mxCell id="table_instructor_profiles" value="instructor_profiles" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="470" width="300" height="180" as="geometry" />
+          <mxGeometry x="400" y="470" width="300" height="180" as="geometry" />
         </mxCell>
-        <mxCell id="row_instructor_user_id" value="&lt;b&gt;PK, FK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_instructor_profiles">
+        <mxCell id="row_instructor_user_id" value="&lt;b&gt;PK, FK&lt;/b&gt;    &lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_instructor_profiles">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_instructor_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#000000;" vertex="1" parent="table_instructor_profiles">
@@ -93,18 +89,16 @@
         <mxCell id="row_instructor_deleted_at" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_instructor_profiles">
           <mxGeometry y="160" width="300" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== TABELA: addresses ==================== -->
         <mxCell id="table_addresses" value="addresses" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="420" y="40" width="300" height="340" as="geometry" />
+          <mxGeometry x="760" y="40" width="300" height="340" as="geometry" />
         </mxCell>
-        <mxCell id="row_address_id" value="&lt;b&gt;PK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
+        <mxCell id="row_address_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_address_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#000000;" vertex="1" parent="table_addresses">
           <mxGeometry y="50" width="300" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="row_address_user_id" value="&lt;b&gt;FK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
+        <mxCell id="row_address_user_id" value="&lt;b&gt;FK&lt;/b&gt;    &lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
           <mxGeometry y="60" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_address_type" value="&lt;b&gt;type: text CHECK (billing, shipping)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
@@ -146,18 +140,16 @@
         <mxCell id="row_address_deleted_at" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_addresses">
           <mxGeometry y="320" width="300" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== TABELA: password_reset_tokens ==================== -->
         <mxCell id="table_password_reset_tokens" value="password_reset_tokens" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="420" y="410" width="300" height="160" as="geometry" />
+          <mxGeometry x="40" y="40" width="300" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="row_prt_id" value="&lt;b&gt;PK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_password_reset_tokens">
+        <mxCell id="row_prt_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_password_reset_tokens">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_prt_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#000000;" vertex="1" parent="table_password_reset_tokens">
           <mxGeometry y="50" width="300" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="row_prt_user_id" value="&lt;b&gt;FK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_password_reset_tokens">
+        <mxCell id="row_prt_user_id" value="&lt;b&gt;FK&lt;/b&gt;    &lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_password_reset_tokens">
           <mxGeometry y="60" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_prt_token_hash" value="&lt;b&gt;token_hash: char(64)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_password_reset_tokens">
@@ -172,18 +164,16 @@
         <mxCell id="row_prt_used_at" value="used_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_password_reset_tokens">
           <mxGeometry y="140" width="300" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== TABELA: refresh_sessions ==================== -->
         <mxCell id="table_refresh_sessions" value="refresh_sessions" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="420" y="600" width="300" height="200" as="geometry" />
+          <mxGeometry x="40" y="220" width="300" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="row_rs_id" value="&lt;b&gt;PK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_refresh_sessions">
+        <mxCell id="row_rs_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_refresh_sessions">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_rs_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#000000;" vertex="1" parent="table_refresh_sessions">
           <mxGeometry y="50" width="300" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="row_rs_user_id" value="&lt;b&gt;FK&lt;/b&gt;&#160;&#160;&#160;&#160;&lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_refresh_sessions">
+        <mxCell id="row_rs_user_id" value="&lt;b&gt;FK&lt;/b&gt;    &lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_refresh_sessions">
           <mxGeometry y="60" width="300" height="20" as="geometry" />
         </mxCell>
         <mxCell id="row_rs_token_hash" value="&lt;b&gt;token_hash: char(64)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_refresh_sessions">
@@ -204,84 +194,81 @@
         <mxCell id="row_rs_replaced_by" value="replaced_by: uuid" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_refresh_sessions">
           <mxGeometry y="180" width="300" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== NOTA: Redis ==================== -->
         <mxCell id="note_redis" value="Contador de tentativas de login (RNF008: 5 falhas, bloqueio de 15 min) e blocklist de tokens revogados (ADR-0008)&lt;br&gt;ficam no Redis, fora do modelo relacional." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="40" y="840" width="680" height="60" as="geometry" />
+          <mxGeometry x="40" y="440" width="300" height="80" as="geometry" />
         </mxCell>
-
-        <!-- ==================== RELACIONAMENTO: addresses -> users ==================== -->
-        <mxCell id="edge_address_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.176;entryX=1;entryY=0.158;" edge="1" parent="1" source="table_addresses" target="table_users">
+        <mxCell id="edge_address_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.0882;entryX=1;entryY=0.0789" edge="1" parent="1" source="table_addresses" target="table_users">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="420" y="100" as="sourcePoint" />
             <mxPoint x="340" y="100" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="lbl_address_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="395" y="80" width="20" height="20" as="geometry" />
+          <mxGeometry x="735" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_address_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="345" y="80" width="20" height="20" as="geometry" />
+          <mxGeometry x="705" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== RELACIONAMENTO: password_reset_tokens -> users ==================== -->
-        <mxCell id="edge_prt_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.31;entryX=1;entryY=0.42;" edge="1" parent="1" source="table_password_reset_tokens" target="table_users">
+        <mxCell id="edge_prt_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.1875;entryX=0;entryY=0.0789" edge="1" parent="1" source="table_password_reset_tokens" target="table_users">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="420" y="460" as="sourcePoint" />
             <mxPoint x="340" y="200" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="385" y="460" />
-              <mxPoint x="385" y="200" />
-            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="lbl_prt_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="395" y="440" width="20" height="20" as="geometry" />
+          <mxGeometry x="348" y="50" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_prt_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="345" y="180" width="20" height="20" as="geometry" />
+          <mxGeometry x="375" y="50" width="20" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== RELACIONAMENTO: refresh_sessions -> users ==================== -->
-        <mxCell id="edge_rs_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.30;entryX=1;entryY=0.68;" edge="1" parent="1" source="table_refresh_sessions" target="table_users">
+        <mxCell id="edge_rs_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.15;entryX=0;entryY=0.5526" edge="1" parent="1" source="table_refresh_sessions" target="table_users">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="420" y="660" as="sourcePoint" />
             <mxPoint x="340" y="300" as="targetPoint" />
-            <Array as="points">
-              <mxPoint x="365" y="660" />
-              <mxPoint x="365" y="300" />
-            </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="lbl_rs_n" value="n" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="395" y="640" width="20" height="20" as="geometry" />
+          <mxGeometry x="348" y="230" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_rs_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="345" y="280" width="20" height="20" as="geometry" />
+          <mxGeometry x="375" y="230" width="20" height="20" as="geometry" />
         </mxCell>
-
-        <!-- ==================== RELACIONAMENTO: instructor_profiles -> users ==================== -->
-        <mxCell id="edge_instructor_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;" edge="1" parent="1" source="table_instructor_profiles" target="table_users">
+        <mxCell id="edge_instructor_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1" edge="1" parent="1" source="table_instructor_profiles" target="table_users">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="190" y="470" as="sourcePoint" />
             <mxPoint x="190" y="420" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="lbl_instructor_01" value="0..1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="205" y="445" width="30" height="15" as="geometry" />
+          <mxGeometry x="555" y="445" width="25" height="15" as="geometry" />
         </mxCell>
         <mxCell id="lbl_instructor_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="205" y="425" width="20" height="15" as="geometry" />
+          <mxGeometry x="555" y="425" width="20" height="15" as="geometry" />
         </mxCell>
-
-        <!-- ==================== CONECTOR: refresh_sessions -> Note ==================== -->
-        <mxCell id="edge_note_rs" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=none;exitX=0.5;exitY=1;entryX=0.78;entryY=0;" edge="1" parent="1" source="table_refresh_sessions" target="note_redis">
+        <mxCell id="edge_note_rs" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="table_refresh_sessions" target="note_redis">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="570" y="800" as="sourcePoint" />
             <mxPoint x="570" y="840" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-
+        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
+          <mxGeometry x="760" y="470" width="300" height="104" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_0" value="PK: chave primária · FK: chave estrangeira · 1, 0..*: cardinalidade" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
+          <mxGeometry x="10" y="32" width="280" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_1s" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
+          <mxGeometry x="10" y="77.0" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_1t" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
+          <mxGeometry x="60" y="77.0" width="1" height="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_1e" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;endArrow=block;endFill=1;" parent="legend" edge="1" source="legend_1s" target="legend_1t">
+          <mxGeometry x="0" y="0" width="0" height="0" as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="legend_1" value="Chave estrangeira (FK aponta para a PK)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
+          <mxGeometry x="70" y="64" width="220" height="26" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
