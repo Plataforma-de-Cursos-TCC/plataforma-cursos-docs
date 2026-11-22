@@ -15,7 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
-- Revisão cruzada final do RA2 em `entregas/ra2-revisao-cruzada.md`: quatro modelos revisaram o projeto inteiro e o consolidado tem 35 achados conferidos e aprovados pelo grupo, para corrigir antes do envio ao professor (#PR).
+- Revisão cruzada final do RA2 em `entregas/ra2-revisao-cruzada.md`: quatro modelos revisaram o projeto inteiro e o consolidado tem 35 achados conferidos e aprovados pelo grupo, para corrigir antes do envio ao professor (#152).
 - Área B (Autoria do instrutor), itens 12 a 15 do RA2: modelo de dados em PostgreSQL e snake_case com exclusão lógica e materiais da aula, classes negocial e de implementação, sequências de UC004, UC006, UC014 e UC015 com cancelamento e arquivamento, e casos de teste TC091 a TC118; ajustes nos itens 6, 7 e 10 (RF004 e US006 com material complementar, cancelamento em UC004, UC006, UC014 e UC015) (#141).
 - Área C (Aprendizagem do aluno), itens 12 a 15 do RA2: matrícula com 0..* pagamentos, progresso, tentativa de quiz com rascunho (`draft`/`submitted`) e avaliação; classes com `LearningMetricsService` para o dashboard da Área D (ADR-0018); sequências de UC002, UC003, UC009, UC010, UC019 e UC020; casos de teste TC151 a TC197, com concorrência, nova tentativa de pagamento e paginação trazidos da branch `docs/tasks-lucas-bruno` (#141).
 - Área D (Tutor de IA, analytics e administração), itens 12 a 15 do RA2: conversas, mensagens, créditos extras do Tutor de IA e auditoria particionada; classes, sequências de UC001, UC007, UC008, UC016 e UC018 e casos de teste TC211 a TC272; RF020, US022 e RNF022 (créditos extras) e RNF016 com o arquivamento da auditoria (#141).
@@ -38,11 +38,11 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Corrigido
 
-- Revisão cruzada final, parte geral: índices dos itens 12 a 15, US022 e RF020 rastreados nos itens 7 e 9, ADR-0019 com o upload pela API, TDD e matriz de cobertura refeitos a partir dos itens 12, 13 e 15, e tabela de testes do RA1 marcada como histórico, para o documento não contradizer a si mesmo na entrega (#PR).
-- Revisão cruzada final, Área A: login com conta excluída ou anonimizada em 401 genérico, tipos PostgreSQL no modelo, `User` abstrata, `UserFiltersDTO` e fluxos do UC005 em `alt` (#PR).
-- Revisão cruzada final, Área B: `position` em todas as camadas, `archive()` sem volta a rascunho, `softDeleteAllByInstructor`, critérios da US005 e colunas de auditoria (#PR).
-- Revisão cruzada final, Área C: `archived` no status do curso, `payments.created_at`, `GroupBy` como enumeração e rótulos internos trocados por referências formais (#PR).
-- Revisão cruzada final, Área D: exclusão em cascata no UC018 com TC273, anonimização sem exclusão física, busca de usuários por `search` e `status`, compra de créditos via `PaymentService` e tipos PostgreSQL no dicionário (#PR).
+- Revisão cruzada final, parte geral: índices dos itens 12 a 15, US022 e RF020 rastreados nos itens 7 e 9, ADR-0019 com o upload pela API, TDD e matriz de cobertura refeitos a partir dos itens 12, 13 e 15, e tabela de testes do RA1 marcada como histórico, para o documento não contradizer a si mesmo na entrega (#152).
+- Revisão cruzada final, Área A: login com conta excluída ou anonimizada em 401 genérico, tipos PostgreSQL no modelo, `User` abstrata, `UserFiltersDTO` e fluxos do UC005 em `alt` (#152).
+- Revisão cruzada final, Área B: `position` em todas as camadas, `archive()` sem volta a rascunho, `softDeleteAllByInstructor`, critérios da US005 e colunas de auditoria (#152).
+- Revisão cruzada final, Área C: `archived` no status do curso, `payments.created_at`, `GroupBy` como enumeração e rótulos internos trocados por referências formais (#152).
+- Revisão cruzada final, Área D: exclusão em cascata no UC018 com TC273, anonimização sem exclusão física, busca de usuários por `search` e `status`, compra de créditos via `PaymentService` e tipos PostgreSQL no dicionário (#152).
 - Área A: `JwtGuard` declara `parseToken` e `authorize`, usados pela Área D no UC016, e `User.status` e `User.theme` passam aos valores em inglês (`active`/`blocked`/`deleted`, `light`/`dark`/`system`) com o rótulo em pt-BR no item 12 (#141).
 
 Correções pedidas na análise do professor Evandro sobre os itens 4 a 11 (#129):
