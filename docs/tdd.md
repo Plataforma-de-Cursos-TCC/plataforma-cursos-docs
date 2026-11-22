@@ -32,394 +32,705 @@ Os protótipos de alta fidelidade do front-end (24 telas em HTML, com PNGs em te
 
 ## 2. Modelo de dados
 
+O modelo relacional da plataforma é baseado em PostgreSQL 16 ([ADR-0017](adr/0017-core-em-postgresql.md)), adota convenções de nomenclatura estritamente em língua inglesa e `snake_case` para tabelas e colunas no banco de dados ([ADR-0015](adr/0015-convencao-de-nomes-por-camada.md)) e implementa exclusão lógica transversal (`deleted_at: timestamptz`) em todas as entidades de negócio ([ADR-0014](adr/0014-exclusao-logica-e-anonimizacao.md)). A especificação a seguir divide-se em Diagrama Entidade-Relacionamento (ER), Dicionário de Dados e Diagrama de Classes, organizados estruturalmente pelas quatro áreas funcionais do sistema ([ADR-0006](adr/0006-divisao-por-areas.md)): Área A (Acesso e conta), Área B (Autoria do instrutor), Área C (Aprendizagem do aluno) e Área D (Tutor de IA, analytics e administração).
+
+### 2.1 Diagrama Entidade-Relacionamento (ER)
+
+#### Visão Geral dos Relacionamentos
+
 ```mermaid
 erDiagram
-    Category ||--o{ Course : ""
-    Course ||--|{ Module : ""
-    Module ||--|{ Lesson : ""
-    Module ||--o{ Quiz : ""
-    Quiz ||--|{ Question : ""
-    Question ||--|{ QuestionOption : ""
-    Question ||--o{ QuizAnswer : ""
-    QuestionOption ||--o{ QuizAnswer : ""
-    Quiz ||--o{ QuizAttempt : ""
-    QuizAttempt ||--o{ QuizAnswer : "rascunho pode ser parcial"
-    Enrollment ||--o{ QuizAttempt : ""
-    Enrollment ||--o{ LessonProgress : ""
-    Lesson ||--o{ LessonProgress : ""
-    Course ||--o{ Enrollment : ""
-    Enrollment ||--o{ Payment : "tentativas recusadas e uma aprovada"
-    User ||--o{ Payment : "compra de créditos do tutor, sem matrícula"
-    Course ||--o{ Payment : ""
-    Course ||--o{ Review : ""
-    User ||--o{ Course : ""
-    User ||--o{ Enrollment : ""
-    User ||--o{ Review : ""
-    User ||--o{ Address : ""
-    User ||--o| InstructorProfile : ""
-    User ||--o{ PasswordResetToken : ""
-    User ||--o{ RefreshSession : ""
-    User ||--o{ Conversation : ""
-    Course ||--o{ Conversation : ""
-    Lesson ||--o{ Conversation : ""
-    Conversation ||--|{ Message : ""
+    users ||--o{ addresses : "possui"
+    users ||--o| instructor_profiles : "possui perfil"
+    users ||--o{ password_reset_tokens : "solicita"
+    users ||--o{ refresh_sessions : "mantem conexao"
+    users ||--o{ courses : "autoria"
+    users ||--o{ enrollments : "matricula-se"
+    users ||--o{ payments : "aluno pagador"
+    users ||--o{ reviews : "avalia"
+    users ||--o{ conversations : "participa"
+    users ||--o{ tutor_credit_packs : "adquire"
+    users ||--o{ audit_logs : "autor"
+    categories ||--o{ courses : "classifica"
+    courses ||--|{ modules : "compoe"
+    modules ||--|{ lessons : "compoe"
+    lessons ||--o{ lesson_materials : "anexa"
+    modules ||--o{ quizzes : "avalia"
+    quizzes ||--|{ questions : "compoe"
+    questions ||--|{ question_options : "compoe"
+    courses ||--o{ enrollments : "matriculas"
+    courses ||--o{ payments : "curso pago (opcional)"
+    courses ||--o{ reviews : "avaliacoes"
+    courses ||--o{ conversations : "contexto RAG"
+    enrollments ||--o{ payments : "tentativas de pagamento"
+    enrollments ||--o{ lesson_progress : "registra progresso"
+    lessons ||--o{ lesson_progress : "aulas assistidas"
+    lessons ||--o{ conversations : "contexto pedagógico"
+    enrollments ||--o{ quiz_attempts : "tentativas de quiz"
+    quizzes ||--o{ quiz_attempts : "tentativas"
+    quiz_attempts ||--o{ quiz_answers : "respostas"
+    questions ||--o{ quiz_answers : "questao respondida"
+    question_options ||--o{ quiz_answers : "alternativa assinalada"
+    conversations ||--|{ messages : "mensagens"
+    payments ||--o{ tutor_credit_packs : "pagamento de creditos"
+```
 
-    User {
-        UUID id PK
-        VARCHAR name
-        VARCHAR email
-        VARCHAR passwordHash
-        ENUM role
-        VARCHAR phone
-        VARCHAR documentNumber
-        DATE birthDate
-        VARCHAR photo
-        ENUM theme
-        VARCHAR locale
-        ENUM status
-        DATETIME termsAcceptedAt
-        DATETIME anonymizedAt
+#### Área A – Acesso e conta
+
+```mermaid
+erDiagram
+    users ||--o{ addresses : "possui"
+    users ||--o| instructor_profiles : "possui perfil (0..1)"
+    users ||--o{ password_reset_tokens : "solicita"
+    users ||--o{ refresh_sessions : "mantem conectado"
+
+    users {
+        uuid id PK
+        varchar(150) name
+        varchar(150) email
+        varchar(255) password_hash
+        text role "CHECK (student, instructor, admin)"
+        text status "CHECK (active, blocked, deleted)"
+        text theme "CHECK (light, dark, system)"
+        varchar(5) locale
+        timestamptz terms_accepted_at
+        varchar(20) phone
+        varchar(14) document_number
+        date birth_date
+        varchar(255) photo
+        timestamptz anonymized_at
+        timestamptz created_at
+        timestamptz updated_at
+        timestamptz deleted_at
     }
-    Address {
-        UUID id PK
-        UUID userId FK
-        ENUM type
-        VARCHAR street
-        VARCHAR number
-        VARCHAR complement
-        VARCHAR district
-        VARCHAR city
-        CHAR state
-        VARCHAR zipCode
-        CHAR country
-        BOOLEAN isDefault
+
+    addresses {
+        uuid id PK
+        uuid user_id FK
+        text type "CHECK (billing, shipping)"
+        varchar(150) street
+        varchar(10) number
+        varchar(60) complement
+        varchar(80) district
+        varchar(80) city
+        char(2) state
+        varchar(9) zip_code
+        char(2) country
+        boolean is_default
+        timestamptz created_at
+        timestamptz updated_at
+        timestamptz deleted_at
     }
-    InstructorProfile {
-        UUID userId PK,FK
-        TEXT bio
-        VARCHAR headline
-        JSON socialLinks
+
+    instructor_profiles {
+        uuid user_id PK,FK
+        text bio
+        varchar(150) headline
+        jsonb social_links
+        timestamptz created_at
+        timestamptz updated_at
+        timestamptz deleted_at
     }
-    PasswordResetToken {
-        UUID id PK
-        UUID userId FK
-        CHAR tokenHash
-        DATETIME expiresAt
-        DATETIME createdAt
-        DATETIME usedAt
+
+    password_reset_tokens {
+        uuid id PK
+        uuid user_id FK
+        char(64) token_hash
+        timestamptz expires_at
+        timestamptz created_at
+        timestamptz used_at
     }
-    RefreshSession {
-        UUID id PK
-        UUID userId FK
-        CHAR tokenHash
-        UUID familyId
-        DATETIME expiresAt
-        DATETIME createdAt
-        DATETIME revokedAt
-        UUID replacedBy
-    }
-    Category {
-        UUID id PK
-        VARCHAR name
-    }
-    Course {
-        UUID id PK
-        UUID instructorId FK
-        UUID categoryId FK
-        VARCHAR title
-        TEXT description
-        INT priceCents
-        CHAR currency
-        ENUM level
-        ENUM status
-        VARCHAR thumbnailKey
-    }
-    Module {
-        UUID id PK
-        UUID courseId FK
-        VARCHAR title
-        INT order
-    }
-    Lesson {
-        UUID id PK
-        UUID moduleId FK
-        VARCHAR title
-        TEXT description
-        VARCHAR videoKey
-        INT durationSeconds
-        INT order
-        BOOLEAN isPreview
-    }
-    Enrollment {
-        UUID id PK
-        UUID userId FK
-        UUID courseId FK
-        INT pricePaidCents
-        CHAR currency
-        ENUM status
-    }
-    LessonProgress {
-        UUID id PK
-        UUID enrollmentId FK
-        UUID lessonId FK
-        BOOLEAN completed
-        INT watchedSeconds
-        DATETIME completedAt
-    }
-    Quiz {
-        UUID id PK
-        UUID moduleId FK
-        VARCHAR title
-    }
-    Question {
-        UUID id PK
-        UUID quizId FK
-        TEXT text
-    }
-    QuestionOption {
-        UUID id PK
-        UUID questionId FK
-        TEXT text
-        BOOLEAN isCorrect
-    }
-    QuizAttempt {
-        UUID id PK
-        UUID enrollmentId FK
-        UUID quizId FK
-        DECIMAL score "nulo em rascunho"
-        DATETIME submittedAt "nulo em rascunho"
-    }
-    QuizAnswer {
-        UUID id PK
-        UUID attemptId FK
-        UUID questionId FK
-        UUID optionId FK
-    }
-    Payment {
-        UUID id PK
-        UUID userId FK
-        UUID courseId FK "opcional"
-        UUID enrollmentId FK "opcional"
-        INT amountCents
-        CHAR currency
-        ENUM status
-        DATETIME paidAt "nulo na recusa"
-    }
-    Review {
-        UUID id PK
-        UUID userId FK "única por curso"
-        UUID courseId FK
-        TINYINT rating
-        TEXT comment
-    }
-    Conversation {
-        UUID id PK
-        UUID userId FK
-        UUID courseId FK
-        UUID lessonId FK
-        DATETIME createdAt
-    }
-    Message {
-        UUID id PK
-        UUID conversationId FK
-        ENUM role
-        TEXT content
-        INT videoTimestampSeconds "opcional"
-        DATETIME createdAt
+
+    refresh_sessions {
+        uuid id PK
+        uuid user_id FK
+        char(64) token_hash
+        uuid family_id
+        timestamptz expires_at
+        timestamptz created_at
+        timestamptz revoked_at
+        uuid replaced_by
     }
 ```
 
-### Dicionário de dados
+#### Área B – Autoria do instrutor
 
-Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialLinks, mantido como estrutura semiestruturada por decisão do Plano Técnico (exceção conhecida à 1FN, não normalização pendente).
+```mermaid
+erDiagram
+    users ||--o{ courses : "autoria (instructor_id)"
+    categories ||--o{ courses : "classifica"
+    courses ||--|{ modules : "compoe"
+    modules ||--|{ lessons : "compoe"
+    lessons ||--o{ lesson_materials : "anexa"
+    modules ||--o{ quizzes : "avalia"
+    quizzes ||--|{ questions : "compoe"
+    questions ||--|{ question_options : "alternativas e gabarito"
 
-| Entidade / Atributo | Classe | Domínio | Tamanho | Descrição |
+    categories {
+        uuid id PK
+        varchar(80) name
+        timestamptz deleted_at
+    }
+
+    courses {
+        uuid id PK
+        uuid instructor_id FK
+        uuid category_id FK
+        varchar(150) title
+        text description
+        integer price_cents
+        varchar(3) currency
+        text level "CHECK (beginner, intermediate, advanced)"
+        text status "CHECK (draft, published, archived)"
+        varchar(255) thumbnail_key
+        timestamptz deleted_at
+    }
+
+    modules {
+        uuid id PK
+        uuid course_id FK
+        varchar(150) title
+        integer position
+        timestamptz deleted_at
+    }
+
+    lessons {
+        uuid id PK
+        uuid module_id FK
+        varchar(150) title
+        text description
+        varchar(255) video_key
+        integer duration_seconds
+        varchar(100) video_mime_type
+        bigint video_size_bytes
+        integer position
+        boolean is_preview
+        text index_status "CHECK (pending, indexed, failed)"
+        timestamptz deleted_at
+    }
+
+    lesson_materials {
+        uuid id PK
+        uuid lesson_id FK
+        varchar(150) title
+        varchar(255) file_key
+        varchar(100) mime_type
+        bigint size_bytes
+        integer position
+        timestamptz deleted_at
+    }
+
+    quizzes {
+        uuid id PK
+        uuid module_id FK
+        varchar(150) title
+        text status "CHECK (draft, published)"
+        boolean allow_retake
+        timestamptz deleted_at
+    }
+
+    questions {
+        uuid id PK
+        uuid quiz_id FK
+        text text
+        timestamptz deleted_at
+    }
+
+    question_options {
+        uuid id PK
+        uuid question_id FK
+        text text
+        boolean is_correct
+        timestamptz deleted_at
+    }
+```
+
+#### Área C – Aprendizagem do aluno
+
+```mermaid
+erDiagram
+    users ||--o{ enrollments : "aluno (user_id)"
+    courses ||--o{ enrollments : "curso (course_id)"
+    enrollments ||--o{ payments : "0..* tentativas"
+    users ||--o{ payments : "pagador (user_id)"
+    courses ||--o{ payments : "curso pago (opcional)"
+    enrollments ||--o{ lesson_progress : "registra progresso"
+    lessons ||--o{ lesson_progress : "aula assistida"
+    enrollments ||--o{ quiz_attempts : "tentativas de quiz"
+    quizzes ||--o{ quiz_attempts : "quiz respondido"
+    quiz_attempts ||--o{ quiz_answers : "respostas"
+    questions ||--o{ quiz_answers : "pergunta"
+    question_options ||--o{ quiz_answers : "opcao assinalada"
+    users ||--o{ reviews : "autor (user_id)"
+    courses ||--o{ reviews : "curso avaliado"
+
+    enrollments {
+        uuid id PK
+        uuid user_id FK
+        uuid course_id FK
+        integer price_paid_cents
+        varchar(3) currency
+        text status "CHECK (pending, active, cancelled, completed)"
+        timestamptz created_at
+        timestamptz updated_at
+        timestamptz deleted_at
+    }
+
+    payments {
+        uuid id PK
+        uuid user_id FK
+        uuid course_id FK
+        uuid enrollment_id FK
+        text purpose "CHECK (enrollment, tutor_credits)"
+        integer amount_cents
+        varchar(3) currency
+        text status "CHECK (approved, declined)"
+        timestamptz paid_at
+        timestamptz deleted_at
+    }
+
+    lesson_progress {
+        uuid id PK
+        uuid enrollment_id FK
+        uuid lesson_id FK
+        boolean completed
+        integer watched_seconds
+        timestamptz completed_at
+        timestamptz updated_at
+        timestamptz deleted_at
+    }
+
+    quiz_attempts {
+        uuid id PK
+        uuid enrollment_id FK
+        uuid quiz_id FK
+        text status "CHECK (draft, submitted)"
+        numeric(5,2) score
+        timestamptz submitted_at
+        timestamptz created_at
+        timestamptz deleted_at
+    }
+
+    quiz_answers {
+        uuid id PK
+        uuid attempt_id FK
+        uuid question_id FK
+        uuid option_id FK
+        timestamptz deleted_at
+    }
+
+    reviews {
+        uuid id PK
+        uuid user_id FK
+        uuid course_id FK
+        smallint rating "CHECK (1..5)"
+        text comment
+        timestamptz created_at
+        timestamptz updated_at
+        timestamptz deleted_at
+    }
+```
+
+#### Área D – Tutor de IA, analytics e administração
+
+```mermaid
+erDiagram
+    users ||--o{ conversations : "aluno (user_id)"
+    courses ||--o{ conversations : "curso (course_id)"
+    lessons ||--o{ conversations : "aula (lesson_id)"
+    conversations ||--|{ messages : "mensagens"
+    users ||--o{ tutor_credit_packs : "aluno (user_id)"
+    payments ||--o{ tutor_credit_packs : "pagamento (payment_id)"
+    users ||--o{ audit_logs : "autor (user_id)"
+
+    conversations {
+        uuid id PK
+        uuid user_id FK
+        uuid course_id FK
+        uuid lesson_id FK
+        timestamptz created_at
+        timestamptz deleted_at
+    }
+
+    messages {
+        uuid id PK
+        uuid conversation_id FK
+        text role "CHECK (user, assistant)"
+        text content
+        integer video_timestamp_seconds
+        timestamptz created_at
+        timestamptz deleted_at
+    }
+
+    tutor_credit_packs {
+        uuid id PK
+        uuid user_id FK
+        uuid payment_id FK
+        integer messages_total
+        integer messages_used
+        timestamptz created_at
+        timestamptz deleted_at
+    }
+
+    audit_logs {
+        uuid id PK
+        uuid user_id FK
+        text action "CHECK (USER_BLOCK, USER_UNBLOCK, ROLE_CHANGE, USER_DELETE, USER_RESTORE, USER_ANONYMIZE, ACCESS_DENIED)"
+        text target_type
+        uuid target_id
+        text ip_address
+        text user_agent
+        jsonb details
+        timestamptz created_at
+    }
+```
+
+### 2.2 Dicionário de dados
+
+Atributos normalizados rigorosamente até a 3FN, com as duas exceções justificadas mantidas da especificação do Item 12: estrutura semiestruturada `jsonb` em `instructor_profiles.social_links` e `audit_logs.details` (exceção conhecida à 1FN), e desvio controlado na redundância de `course_id` em `payments` e `conversations` (para evitar junções caras na verificação de pagamentos e no pipeline RAG da IA). Todas as tabelas de negócio possuem a coluna `deleted_at: timestamptz` para controle de exclusão lógica ([ADR-0014](adr/0014-exclusao-logica-e-anonimizacao.md)).
+
+#### Área A – Acesso e conta
+
+| Atributo | Classe | Domínio | Tamanho | Descrição |
 |---|---|---|---|---|
-| **Entidade: User** | | | | |
-| id | Determinante | UUID | - | Identificador único do usuário. |
-| name | Simples | Texto | 150 | Nome completo do usuário. |
-| email | Simples | Texto | 150 | E-mail, usado no login. |
-| passwordHash | Simples | Texto | 255 | Hash da senha. |
-| role | Simples | Texto | - | Perfil: student, instructor ou admin. |
-| phone | Simples | Texto | 20 | Telefone de contato. |
-| documentNumber | Simples | Texto | 14 | CPF do usuário. |
-| birthDate | Simples | Data | - | Data de nascimento. |
-| photo | Simples | Texto | 255 | URL ou chave da foto de perfil no storage (R2). |
-| theme | Simples | Texto | - | Tema da interface: `light`, `dark` ou `system`. |
-| locale | Simples | Texto | 5 | Idioma da interface e das mensagens, validado contra a lista de idiomas ativos: pt-BR (padrão; en e es entram sem migração) (RNF013). |
-| status | Simples | Texto | - | `active`, `blocked` ou `deleted`. |
-| termsAcceptedAt | Simples | Data e hora | - | Quando o usuário aceitou os termos e a política de privacidade no cadastro (RNF020). |
-| anonymizedAt | Simples | Data | - | Data/hora da anonimização dos dados na exclusão da conta (UC018); nulo enquanto a conta não for anonimizada. |
-| **Entidade: Address** | | | | |
-| id | Determinante | UUID | - | Identificador único do endereço. |
-| userId | Simples | UUID | - | Referência ao usuário dono do endereço. |
-| type | Simples | Texto | - | Tipo: `billing` (cobrança) ou `shipping` (entrega). |
-| street | Simples | Texto | 150 | Logradouro. |
-| number | Simples | Texto | 10 | Número. |
-| complement | Simples | Texto | 60 | Complemento (opcional). |
-| district | Simples | Texto | 80 | Bairro. |
-| city | Simples | Texto | 80 | Cidade. |
-| state | Simples | Texto | 2 | UF. |
-| zipCode | Simples | Texto | 9 | CEP. |
-| country | Simples | Texto | 2 | País (ISO 3166-1 alpha-2). |
-| isDefault | Simples | Booleano | - | Indica se é o endereço padrão do usuário. |
-| **Entidade: InstructorProfile** | | | | |
-| userId | Determinante | UUID | - | Referência ao usuário instrutor (PK e FK). |
-| bio | Simples | Texto | - | Biografia curta do instrutor. |
-| headline | Simples | Texto | 150 | Chamada/título de apresentação. |
-| socialLinks | Composto | JSON | - | Conjunto de links de redes sociais. |
-| **Entidade: PasswordResetToken** | | | | |
-| id | Determinante | UUID | - | Identificador único do pedido de redefinição. |
-| userId | Simples | UUID | - | Referência ao usuário que pediu a redefinição. |
-| tokenHash | Simples | Texto | 64 | Hash do token enviado por e-mail; o valor original não é guardado. |
-| expiresAt | Simples | Data e hora | - | Validade de 30 minutos após o pedido (RNF017). |
-| createdAt | Simples | Data e hora | - | Quando o link foi gerado; um novo link invalida o anterior. |
-| usedAt | Simples | Data e hora | - | Quando o token foi usado (uso único); nulo enquanto válido. |
-| **Entidade: RefreshSession** | | | | |
-| id | Determinante | UUID | - | Identificador único do refresh token. |
-| userId | Simples | UUID | - | Referência ao usuário dono da sessão. |
-| tokenHash | Simples | Texto | 64 | Hash do refresh token opaco (ADR-0008). |
-| familyId | Simples | UUID | - | Agrupa os tokens de uma sessão; o reuso de um token consumido revoga a família. |
-| expiresAt | Simples | Data e hora | - | Validade de 30 dias. |
-| createdAt | Simples | Data e hora | - | Emissão do token. |
-| revokedAt | Simples | Data e hora | - | Revogação (rotação, logout, bloqueio ou exclusão); nulo enquanto ativo. |
-| replacedBy | Simples | UUID | - | Token que substituiu este na rotação. |
-| **Entidade: Category** | | | | |
-| id | Determinante | UUID | - | Identificador único da categoria. |
-| name | Simples | Texto | 80 | Nome da categoria de curso. |
-| **Entidade: Course** | | | | |
-| id | Determinante | UUID | - | Identificador único do curso. |
-| instructorId | Simples | UUID | - | Referência ao instrutor dono do curso. |
-| categoryId | Simples | UUID | - | Referência à categoria do curso. |
-| title | Simples | Texto | 150 | Título do curso. |
-| description | Simples | Texto longo | TEXT | Descrição do curso. |
-| priceCents | Simples | Numérico | - | Preço do curso, em centavos. |
-| currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| level | Simples | Texto | - | Nível: `beginner`, `intermediate` ou `advanced`. |
-| status | Simples | Texto | - | `draft`, `published` ou `archived`. |
-| thumbnailKey | Simples | Texto | 255 | Chave da imagem de capa no storage. |
-| **Entidade: Module** | | | | |
-| id | Determinante | UUID | - | Identificador único do módulo. |
-| courseId | Simples | UUID | - | Referência ao curso dono do módulo. |
-| title | Simples | Texto | 150 | Título do módulo. |
-| order | Simples | Numérico | - | Posição do módulo dentro do curso. |
-| **Entidade: Lesson** | | | | |
-| id | Determinante | UUID | - | Identificador único da aula. |
-| moduleId | Simples | UUID | - | Referência ao módulo dono da aula. |
-| title | Simples | Texto | 150 | Título da aula. |
-| description | Simples | Texto longo | TEXT | Descrição da aula. |
-| videoKey | Simples | Texto | 255 | Chave do vídeo no storage (R2). |
-| durationSeconds | Simples | Numérico | - | Duração do vídeo em segundos. |
-| order | Simples | Numérico | - | Posição da aula dentro do módulo. |
-| isPreview | Simples | Booleano | - | Indica se a aula é liberada sem matrícula. |
-| **Entidade: Enrollment** | | | | |
-| id | Determinante | UUID | - | Identificador único da matrícula. |
-| userId | Simples | UUID | - | Referência ao aluno matriculado. |
-| courseId | Simples | UUID | - | Referência ao curso da matrícula. |
-| pricePaidCents | Simples | Numérico | - | Valor pago, em centavos. |
-| currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| status | Simples | Texto | - | `pending` (criada, aguardando pagamento), `active`, `cancelled` ou `completed`. Curso gratuito nasce `active`; curso pago nasce `pending` e vira `active` quando o pagamento é aprovado (UC003, UC019). |
-| **Entidade: LessonProgress** | | | | |
-| id | Determinante | UUID | - | Identificador único do registro de progresso. |
-| enrollmentId | Simples | UUID | - | Referência à matrícula. |
-| lessonId | Simples | UUID | - | Referência à aula assistida. |
-| completed | Simples | Booleano | - | Indica se a aula foi concluída. |
-| watchedSeconds | Simples | Numérico | - | Segundos assistidos, pra retomar de onde parou. |
-| completedAt | Simples | Data | - | Data/hora de conclusão da aula. |
-| **Entidade: Quiz** | | | | |
-| id | Determinante | UUID | - | Identificador único do quiz. |
-| moduleId | Simples | UUID | - | Referência ao módulo dono do quiz. Cada quiz pertence a exatamente um módulo, e cada módulo tem zero ou mais quizzes (UC014). |
-| title | Simples | Texto | 150 | Título do quiz. |
-| **Entidade: Question** | | | | |
-| id | Determinante | UUID | - | Identificador único da pergunta. |
-| quizId | Simples | UUID | - | Referência ao quiz dono da pergunta. |
-| text | Simples | Texto | - | Enunciado da pergunta. |
-| **Entidade: QuestionOption** | | | | |
-| id | Determinante | UUID | - | Identificador único da alternativa. |
-| questionId | Simples | UUID | - | Referência à pergunta dona da alternativa. |
-| text | Simples | Texto | - | Texto da alternativa. |
-| isCorrect | Simples | Booleano | - | Indica se é a alternativa do gabarito. |
-| **Entidade: QuizAttempt** | | | | |
-| id | Determinante | UUID | - | Identificador único da tentativa. |
-| enrollmentId | Simples | UUID | - | Referência à matrícula do aluno. |
-| quizId | Simples | UUID | - | Referência ao quiz respondido. |
-| score | Simples | Numérico | - | Nota calculada da tentativa: acertos / total de questões × 100, escala 0,00 a 100,00, arredondada a 2 casas (meio para cima); nula enquanto rascunho. |
-| submittedAt | Simples | Data | - | Data/hora de envio das respostas; nula enquanto rascunho. |
-| **Entidade: QuizAnswer** | | | | |
-| id | Determinante | UUID | - | Identificador único da resposta. |
-| attemptId | Simples | UUID | - | Referência à tentativa. |
-| questionId | Simples | UUID | - | Referência à pergunta respondida. |
-| optionId | Simples | UUID | - | Referência à alternativa escolhida. |
-| **Entidade: Payment** | | | | Registro de pagamento simulado; não guarda dado de cartão ou de conta. |
-| id | Determinante | UUID | - | Identificador único do pagamento. |
-| userId | Simples | UUID | - | Referência ao aluno que pagou. |
-| courseId | Simples | UUID | - | Referência ao curso pago. |
-| enrollmentId | Simples | UUID | - | Referência à matrícula pendente criada antes do pagamento; opcional (nulo na compra de créditos do tutor, sem matrícula). Uma matrícula tem 0..* pagamentos: tentativas recusadas e no máximo uma aprovada; a recusa mantém a matrícula pendente (UC019, E-1 e E-3). |
-| amountCents | Simples | Numérico | - | Valor pago, em centavos. |
-| currency | Simples | Texto | 3 | Moeda (ISO 4217). |
-| status | Simples | Texto | - | `approved` ou `declined` (simulado). A recusa (`declined`) fica registrada e não gera matrícula ativa (UC019, E-1). |
-| paidAt | Simples | Data | - | Data/hora do pagamento aprovado; nula na recusa. |
-| **Entidade: Review** | | | | Uma avaliação por aluno e curso: nova avaliação substitui a anterior (UC010, R-2). |
-| id | Determinante | UUID | - | Identificador único da avaliação. |
-| userId | Simples | UUID | - | Referência ao aluno autor da avaliação. |
-| courseId | Simples | UUID | - | Referência ao curso avaliado. |
-| rating | Simples | Inteiro | - | Nota de 1 a 5. |
-| comment | Simples | Texto | - | Comentário do aluno. |
-| **Entidade: Conversation** | | | | Conversa do Aluno com o Tutor de IA no contexto de uma aula (UC001). |
-| id | Determinante | UUID | - | Identificador único da conversa. |
-| userId | Simples | UUID | - | Referência ao aluno que conversa com o Tutor. |
-| courseId | Simples | UUID | - | Referência ao curso da aula. |
-| lessonId | Simples | UUID | - | Referência à aula em reprodução, contexto da conversa. |
-| createdAt | Simples | Data | - | Data/hora de início da conversa. |
-| **Entidade: Message** | | | | Mensagem trocada em uma conversa com o Tutor de IA (UC001). |
-| id | Determinante | UUID | - | Identificador único da mensagem. |
-| conversationId | Simples | UUID | - | Referência à conversa dona da mensagem. |
-| role | Simples | Texto | - | Autor da mensagem: user ou assistant. |
-| content | Simples | Texto longo | TEXT | Texto da pergunta ou da resposta. |
-| videoTimestampSeconds | Simples | Numérico | - | Segundo da aula citado na resposta; opcional. |
-| createdAt | Simples | Data | - | Data/hora da mensagem. |
+| **Tabela: users** | | | | Entidade central de contas de usuários (alunos, instrutores e administradores). |
+| id | Determinante | uuid | - | Identificador único universal do usuário (PK). |
+| name | Simples | varchar | 150 | Nome completo do usuário. |
+| email | Simples | varchar | 150 | E-mail para login; índice único parcial (`UNIQUE WHERE anonymized_at IS NULL`). |
+| password_hash | Simples | varchar | 255 | Hash criptográfico seguro da senha (RNF007). |
+| role | Simples | text CHECK | 20 | Perfil de acesso: `student`, `instructor` ou `admin`. |
+| status | Simples | text CHECK | 20 | Situação cadastral: `active` (ativo), `blocked` (bloqueado) ou `deleted` (excluído). |
+| theme | Simples | text CHECK | 20 | Tema da interface: `light` (claro), `dark` (escuro) ou `system` (sistema) (UC013 R-7). |
+| locale | Simples | varchar | 5 | Idioma da interface: `pt-BR` (padrão), validado contra idiomas ativos (RNF013). |
+| terms_accepted_at | Simples | timestamptz | - | Timestamp de aceite dos termos de uso e privacidade no cadastro (RNF020). |
+| phone | Simples | varchar | 20 | Telefone de contato com DDD (opcional). |
+| document_number | Simples | varchar | 14 | CPF formatado do titular (opcional). |
+| birth_date | Simples | date | - | Data de nascimento do usuário (opcional). |
+| photo | Simples | varchar | 255 | Chave da foto de perfil no Cloudflare R2 (opcional). |
+| anonymized_at | Simples | timestamptz | - | Timestamp da anonimização LGPD; nulo enquanto a conta não for anonimizada (ADR-0014). |
+| created_at | Simples | timestamptz | - | Timestamp de criação do registro. |
+| updated_at | Simples | timestamptz | - | Timestamp da última atualização dos dados cadastrais. |
+| deleted_at | Simples | timestamptz | - | Exclusão lógica (soft delete); nulo para contas ativas (ADR-0014). |
+| **Tabela: addresses** | | | | Endereços cadastrados pelo usuário. |
+| id | Determinante | uuid | - | Identificador único do endereço (PK). |
+| user_id | Simples | uuid | - | Chave estrangeira para `users.id`, proprietário do endereço. |
+| type | Simples | text CHECK | 20 | Tipo do endereço: `billing` (cobrança) ou `shipping` (entrega). |
+| street | Simples | varchar | 150 | Logradouro. |
+| number | Simples | varchar | 10 | Número predial. |
+| complement | Simples | varchar | 60 | Complemento de endereço (opcional). |
+| district | Simples | varchar | 80 | Bairro. |
+| city | Simples | varchar | 80 | Município. |
+| state | Simples | char | 2 | Unidade Federativa (UF). |
+| zip_code | Simples | varchar | 9 | Código de Endereçamento Postal (CEP formatado). |
+| country | Simples | char | 2 | Código do país (ISO 3166-1 alpha-2, padrão 'BR'). |
+| is_default | Simples | boolean | - | Indica se o endereço é o padrão para o usuário. |
+| created_at | Simples | timestamptz | - | Timestamp de criação do registro. |
+| updated_at | Simples | timestamptz | - | Timestamp da última atualização. |
+| deleted_at | Simples | timestamptz | - | Exclusão lógica (soft delete); nulo para endereços ativos (ADR-0014). |
+| **Tabela: instructor_profiles** | | | | Dados complementares públicos exclusivos de instrutores (UC013 A1). |
+| user_id | Determinante | uuid | - | Chave primária e estrangeira vinculada a `users.id` (1:0..1). |
+| bio | Simples | text | - | Minibiografia profissional de apresentação (opcional). |
+| headline | Simples | varchar | 150 | Título / chamada de apresentação pública (opcional). |
+| social_links | Composto | jsonb | - | Estrutura semiestruturada de links sociais (Twitter, LinkedIn, GitHub). |
+| created_at | Simples | timestamptz | - | Timestamp de criação do perfil. |
+| updated_at | Simples | timestamptz | - | Timestamp da última modificação. |
+| deleted_at | Simples | timestamptz | - | Exclusão lógica (soft delete); nulo para perfis ativos (ADR-0014). |
+| **Tabela: password_reset_tokens** | | | | Tokens temporários para redefinição de senha (UC011). |
+| id | Determinante | uuid | - | Identificador único do pedido de redefinição (PK). |
+| user_id | Simples | uuid | - | Chave estrangeira para `users.id`. |
+| token_hash | Simples | char | 64 | Hash SHA-256 do token de redefinição de uso único (RNF017). |
+| expires_at | Simples | timestamptz | - | Validade limite de 30 minutos a partir da emissão (RNF017). |
+| created_at | Simples | timestamptz | - | Timestamp de geração; novos pedidos invalidam anteriores (UC011 A1). |
+| used_at | Simples | timestamptz | - | Timestamp em que o token foi consumido; nulo enquanto válido. |
+| **Tabela: refresh_sessions** | | | | Sessões de longa duração do recurso «manter conectado» (ADR-0008). |
+| id | Determinante | uuid | - | Identificador único da sessão de refresh (PK). |
+| user_id | Simples | uuid | - | Chave estrangeira para `users.id`. |
+| token_hash | Simples | char | 64 | Hash SHA-256 do refresh token opaco (ADR-0008). |
+| family_id | Simples | uuid | - | Identificador da família da sessão para detecção de reuso (ADR-0008). |
+| expires_at | Simples | timestamptz | - | Data e hora de expiração da sessão (30 dias). |
+| created_at | Simples | timestamptz | - | Timestamp de emissão do token. |
+| revoked_at | Simples | timestamptz | - | Data e hora de revogação explícita; nulo enquanto ativa. |
+| replaced_by | Simples | uuid | - | Identificador do token sucessor gerado na rotação. |
 
-### Diagrama de Classes
+#### Área B – Autoria do instrutor
+
+| Atributo | Classe | Domínio | Tamanho | Descrição |
+|---|---|---|---|---|
+| **Tabela: categories** | | | | Categorias temáticas de classificação dos cursos. |
+| id | Determinante | uuid | - | Identificador único da categoria (chave primária). |
+| name | Simples | varchar | 80 | Nome descritivo da categoria de curso (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| **Tabela: courses** | | | | Catálogo de cursos criados por instrutores (UC006, RF002). |
+| id | Determinante | uuid | - | Identificador único do curso (chave primária). |
+| instructor_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o instrutor proprietário do curso. |
+| category_id | Simples | uuid | - | FK para `categories.id`, categorização temática do curso. |
+| title | Simples | varchar | 150 | Título oficial do curso (obrigatório). |
+| description | Simples | text | - | Descrição detalhada do conteúdo programático (obrigatório). |
+| price_cents | Simples | integer | - | Preço do curso expresso em centavos (inteiro, obrigatório). |
+| currency | Simples | varchar | 3 | Código ISO 4217 da moeda (padrão 'BRL', obrigatório). |
+| level | Simples | text CHECK | 20 | Nível de dificuldade: 'beginner', 'intermediate', 'advanced' (opcional). |
+| status | Simples | text CHECK | 20 | Estado de publicação: 'draft', 'published' ou 'archived' (obrigatório, padrão 'draft'). |
+| thumbnail_key | Simples | varchar | 255 | Chave da imagem de capa no storage Cloudflare R2 (opcional). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| **Tabela: modules** | | | | Módulos de conteúdo programático ordenados dentro do curso (UC014, RF003). |
+| id | Determinante | uuid | - | Identificador único do módulo (chave primária). |
+| course_id | Simples | uuid | - | FK para `courses.id`, curso ao qual o módulo pertence. |
+| title | Simples | varchar | 150 | Título descritivo do módulo (obrigatório). |
+| position | Simples | integer | - | Posição sequencial do módulo dentro do curso (única por curso, obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| **Tabela: lessons** | | | | Unidade de aula em vídeo com metadados e indexação vetorial (UC015, RF004). |
+| id | Determinante | uuid | - | Identificador único da aula (chave primária). |
+| module_id | Simples | uuid | - | FK para `modules.id`, módulo ao qual a aula pertence. |
+| title | Simples | varchar | 150 | Título da aula (obrigatório). |
+| description | Simples | text | - | Descrição do conteúdo da aula (opcional). |
+| video_key | Simples | varchar | 255 | Chave do arquivo de vídeo no storage Cloudflare R2 (obrigatório após upload). |
+| duration_seconds | Simples | integer | - | Duração total do vídeo em segundos (opcional). |
+| video_mime_type | Simples | varchar | 100 | Tipo MIME do arquivo de vídeo (ex.: 'video/mp4', 'video/webm'). |
+| video_size_bytes | Simples | bigint | - | Tamanho do arquivo de vídeo em bytes (até 500 MB). |
+| position | Simples | integer | - | Posição sequencial da aula dentro do módulo (obrigatório). |
+| is_preview | Simples | boolean | - | Flag indicando se a aula pode ser assistida gratuitamente como degustação (padrão false). |
+| index_status | Simples | text CHECK | 20 | Status da indexação vetorial para o Tutor de IA: 'pending', 'indexed', 'failed' (obrigatório, padrão 'pending'). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| **Tabela: lesson_materials** | | | | Arquivos complementares de apoio vinculados à aula (UC015, RF004, decisão B4). |
+| id | Determinante | uuid | - | Identificador único do material complementar (chave primária). |
+| lesson_id | Simples | uuid | - | FK para `lessons.id`, aula à qual o material pertence. |
+| title | Simples | varchar | 150 | Título descritivo do material (obrigatório). |
+| file_key | Simples | varchar | 255 | Chave do arquivo de documento no storage Cloudflare R2 (obrigatório). |
+| mime_type | Simples | varchar | 100 | Tipo MIME do arquivo (ex.: 'application/pdf', obrigatório). |
+| size_bytes | Simples | bigint | - | Tamanho do arquivo em bytes (até 50 MB, obrigatório). |
+| position | Simples | integer | - | Posição sequencial do material dentro da aula (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| **Tabela: quizzes** | | | | Avaliações objetivas vinculadas aos módulos do curso (UC004, RF007). |
+| id | Determinante | uuid | - | Identificador único do quiz (chave primária). |
+| module_id | Simples | uuid | - | FK para `modules.id`, vinculando o quiz ao módulo correspondente. |
+| title | Simples | varchar | 150 | Título do quiz (obrigatório). |
+| status | Simples | text CHECK | 20 | Estado de publicação do quiz: 'draft' ou 'published' (obrigatório, padrão 'draft'). |
+| allow_retake | Simples | boolean | - | Flag indicando se novas tentativas de resolução são permitidas após submissão (padrão true, obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| **Tabela: questions** | | | | Questões avaliativas que compõem o quiz (UC004, RF007). |
+| id | Determinante | uuid | - | Identificador único da questão (chave primária). |
+| quiz_id | Simples | uuid | - | FK para `quizzes.id`, quiz proprietário da questão. |
+| text | Simples | text | - | Enunciado da questão (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+| **Tabela: question_options** | | | | Alternativas de resposta e gabarito oficial da questão (UC004, RF007). |
+| id | Determinante | uuid | - | Identificador único da alternativa (chave primária). |
+| question_id | Simples | uuid | - | FK para `questions.id`, questão à qual a alternativa pertence. |
+| text | Simples | text | - | Texto descritivo da alternativa (obrigatório). |
+| is_correct | Simples | boolean | - | Indica se a alternativa compõe o gabarito oficial (obrigatório). |
+| deleted_at | Simples | timestamptz | - | Timestamp de exclusão lógica (ADR-0014); nulo se ativo. |
+
+#### Área C – Aprendizagem do aluno
+
+| Atributo | Classe | Domínio | Tamanho | Descrição |
+|---|---|---|---|---|
+| **Tabela: enrollments** | | | | Vínculo formal de matrícula do aluno em um curso (UC003, UC019). |
+| id | Determinante | uuid | - | Identificador único da matrícula (PK). |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), aluno matriculado. |
+| course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso da matrícula. |
+| price_paid_cents | Simples | integer | - | Valor pago pela matrícula, em centavos (0 para cursos gratuitos). |
+| currency | Simples | varchar | 3 | Código ISO 4217 da moeda da transação (padrão 'BRL'). |
+| status | Simples | text CHECK | 20 | Status da matrícula: 'pending', 'active', 'cancelled', 'completed' (UC003, UC019). |
+| created_at | Simples | timestamptz | - | Data e hora de criação da matrícula. |
+| updated_at | Simples | timestamptz | - | Data e hora da última alteração de status (opcional). |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo se ativo, ADR-0014). |
+| **Tabela: payments** | | | | Registro transacional do pagamento simulado (matrícula ou créditos de IA) (UC019, D-cota-extra). |
+| id | Determinante | uuid | - | Identificador único do pagamento simulado (PK). |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), aluno pagador. |
+| course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso associado (opcional/NULL em avulso). |
+| enrollment_id | Simples | uuid | - | FK para `enrollments.id`, matrícula associada (0..* por matrícula, NULL se cota extra). |
+| purpose | Simples | text CHECK | 20 | Finalidade do pagamento: 'enrollment' ou 'tutor_credits' (D-cota-extra). |
+| amount_cents | Simples | integer | - | Valor cobrado no pagamento simulado, em centavos. |
+| currency | Simples | varchar | 3 | Código ISO 4217 da moeda (padrão 'BRL'). |
+| status | Simples | text CHECK | 20 | Status do pagamento: 'approved' ou 'declined' (UC019). |
+| paid_at | Simples | timestamptz | - | Data e hora do pagamento aprovado; nulo na recusa. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo se ativo, ADR-0014). |
+| **Tabela: lesson_progress** | | | | Registro contínuo de progresso e retomada de videoaulas (UC009). |
+| id | Determinante | uuid | - | Identificador único do progresso da aula (PK). |
+| enrollment_id | Simples | uuid | - | FK para `enrollments.id`, matrícula do aluno. |
+| lesson_id | Simples | uuid | - | FK para `lessons.id` (Área B), aula assistida. |
+| completed | Simples | boolean | - | Indica se a aula foi concluída pelo aluno (true/false). |
+| watched_seconds | Simples | integer | - | Posição em segundos assistidos para retomada da aula (UC009 R-2). |
+| completed_at | Simples | timestamptz | - | Data e hora em que a aula foi concluída (nulo se não concluída). |
+| updated_at | Simples | timestamptz | - | Data e hora da última sincronização do progresso. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo se ativo, ADR-0014). |
+| **Tabela: quiz_attempts** | | | | Histórico de tentativas de resolução de quizzes pelo aluno (UC002). |
+| id | Determinante | uuid | - | Identificador único da tentativa de resolução do quiz (PK). |
+| enrollment_id | Simples | uuid | - | FK para `enrollments.id`, matrícula do aluno. |
+| quiz_id | Simples | uuid | - | FK para `quizzes.id` (Área B), quiz respondido. |
+| status | Simples | text CHECK | 20 | Status da tentativa: 'draft' (rascunho) ou 'submitted' (enviada) (UC002 A2). |
+| score | Simples | numeric(5,2) | - | Nota calculada da tentativa: acertos / total de questões × 100, escala decimal de 0,00 a 100,00, arredondada a 2 casas (meio para cima); nula enquanto 'draft' (UC002 R-2). |
+| submitted_at | Simples | timestamptz | - | Data e hora de submissão e correção das respostas; nula enquanto 'draft'. |
+| created_at | Simples | timestamptz | - | Data e hora de início/criação da tentativa. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo se ativo, ADR-0014). |
+| **Tabela: quiz_answers** | | | | Respostas individuais assinaladas pelo aluno em cada questão (UC002). |
+| id | Determinante | uuid | - | Identificador único da resposta individual do quiz (PK). |
+| attempt_id | Simples | uuid | - | FK para `quiz_attempts.id`, tentativa à qual a resposta pertence. |
+| question_id | Simples | uuid | - | FK para `questions.id` (Área B), pergunta respondida. |
+| option_id | Simples | uuid | - | FK para `question_options.id` (Área B), alternativa assinalada pelo aluno. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo se ativo, ADR-0014). |
+| **Tabela: reviews** | | | | Avaliação com nota e comentário textual atribuída ao curso (UC010). |
+| id | Determinante | uuid | - | Identificador único da avaliação do curso (PK). |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), aluno autor da avaliação. |
+| course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso avaliado. |
+| rating | Simples | smallint CHECK | - | Nota atribuída ao curso pelo aluno, de 1 a 5 (UC010 R-3). |
+| comment | Simples | text | - | Comentário textual opinativo sobre o curso (opcional) (UC010 R-3). |
+| created_at | Simples | timestamptz | - | Data e hora de publicação ou substituição da avaliação. |
+| updated_at | Simples | timestamptz | - | Data e hora da última edição da avaliação (opcional). |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo se ativo, ADR-0014). |
+
+#### Área D – Tutor de IA, analytics e administração
+
+| Atributo | Classe | Domínio | Tamanho | Descrição |
+|---|---|---|---|---|
+| **Tabela: conversations** | | | | Conversa do Aluno com o Tutor de IA contextualizada na aula (UC001, RF009). Restrição de unicidade: `UNIQUE(user_id, lesson_id)`. |
+| id | Determinante | uuid | - | Identificador único da conversa (PK). |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o Aluno dono da conversa. |
+| course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso ao qual a conversa pertence (desvio justificado da 3FN para isolamento RAG). |
+| lesson_id | Simples | uuid | - | FK para `lessons.id` (Área B), aula específica que fornece o contexto pedagógico. |
+| created_at | Simples | timestamptz | - | Data e hora de criação da conversa. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para conversas ativas, ADR-0014). |
+| **Tabela: messages** | | | | Mensagem individual trocada na conversa com o Tutor de IA (UC001). |
+| id | Determinante | uuid | - | Identificador único da mensagem (PK). |
+| conversation_id | Simples | uuid | - | FK para `conversations.id`, indicando a conversa à qual a mensagem pertence. |
+| role | Simples | text CHECK | 20 | Papel do emissor: `user` (pergunta do Aluno) ou `assistant` (resposta do Tutor de IA). |
+| content | Simples | text | - | Conteúdo textual da pergunta ou da resposta gerada pelo Tutor. |
+| video_timestamp_seconds | Simples | integer | - | Segundo exato do vídeo da aula referenciado na resposta ou na pergunta (opcional, D6). |
+| created_at | Simples | timestamptz | - | Data e hora de envio ou geração da mensagem. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para mensagens ativas, ADR-0014). |
+| **Tabela: tutor_credit_packs** | | | | Pacote de créditos extras do Tutor de IA adquirido por Aluno com pagamento simulado (RF020, RNF022, D-cota-extra). |
+| id | Determinante | uuid | - | Identificador único do pacote de créditos extras (PK). |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o Aluno proprietário do pacote. |
+| payment_id | Simples | uuid | - | FK para `payments.id` (Área C), identificando o pagamento simulado da aquisição. |
+| messages_total | Simples | integer | - | Quantidade total de mensagens contratadas no pacote (ex.: 50). |
+| messages_used | Simples | integer | - | Quantidade de mensagens consumidas do pacote (padrão 0). |
+| created_at | Simples | timestamptz | - | Data e hora da aquisição e ativação do pacote. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para registros ativos, ADR-0014). |
+| **Tabela: audit_logs** | | | | Trilha de auditoria das ações administrativas e de segurança no PostgreSQL 16 (RNF016, ADR-0016). Particionada por mês (`PARTITION BY RANGE (created_at)`) com exportação para R2 por 5 anos via `audit:archive`. |
+| id | Determinante | uuid | - | Identificador único do registro de auditoria (PK). |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o autor da ação (nulo em tentativas não autenticadas e na rotina automática de anonimização, UC018 A3). |
+| action | Simples | text CHECK | 50 | Identificador estável da ação: `USER_BLOCK`, `USER_UNBLOCK`, `ROLE_CHANGE`, `USER_DELETE`, `USER_RESTORE`, `USER_ANONYMIZE`, `ACCESS_DENIED`. |
+| target_type | Simples | text | - | Tipo da entidade ou recurso alvo da ação auditada (ex.: `User`, `ProtectedArea`). |
+| target_id | Simples | uuid | - | Identificador UUID do recurso afetado (opcional; preservado na exclusão LGPD). |
+| ip_address | Simples | text | - | Endereço IP de origem da requisição (compatível com IPv4 e IPv6). |
+| user_agent | Simples | text | - | Identificação do cliente HTTP/navegador que originou a requisição. |
+| details | Composto | jsonb | - | Metadados contextuais estruturados da operação (ex.: papéis anterior e novo); sem dados pessoais sensíveis (UC018 R-4). |
+| created_at | Simples | timestamptz | - | Data e hora exata da ocorrência do evento auditado (chave de particionamento). |
+
+### 2.3 Diagrama de Classes
+
+Classes de domínio técnico modeladas em estrita aderência ao padrão TE5_1 e às decisões do Item 13: atributos em `camelCase`, sem identificadores de chaves estrangeiras como atributos primitivos (referências puras a tipos do domínio e composições estruturadas com multiplicidade explícita). A multiplicidade entre `Enrollment` e `Payment` expressa formalmente `1` para `0..*` (tentativas de pagamento registradas na matrícula), e aquisições avulsas de pacotes de créditos do Tutor de IA (`tutor_credit_packs`) associam-se diretamente a `Payment` sem exigência de matrícula vinculada.
+
+#### Área A – Acesso e conta
 
 ```mermaid
 classDiagram
     direction TB
 
     class User {
+        <<abstract>>
         #id: UUID
         #name: string
         #email: string
         #phone: string
+        #documentNumber: string
+        #birthDate: date
         #photo: string
         #theme: ThemeType
+        #locale: Locale
         #status: UserStatus
+        #termsAcceptedAt: DateTime
+        #anonymizedAt: DateTime
+        #deletedAt: DateTime
         +editProfile(data: ProfileDTO)
     }
 
     class Address {
         -id: UUID
+        -type: AddressType
         -street: string
+        -number: string
+        -complement: string
+        -district: string
         -city: string
+        -state: string
         -zipCode: string
+        -country: string
         -isDefault: boolean
+        -deletedAt: DateTime
     }
 
-    class Instructor {
+    class InstructorProfile {
         -bio: string
         -headline: string
         -socialLinks: JSON
+        -deletedAt: DateTime
+    }
+
+    class PasswordResetToken {
+        -id: UUID
+        -tokenHash: string
+        -expiresAt: DateTime
+        -createdAt: DateTime
+        -usedAt: DateTime
+    }
+
+    class RefreshSession {
+        -id: UUID
+        -tokenHash: string
+        -familyId: UUID
+        -expiresAt: DateTime
+        -createdAt: DateTime
+        -revokedAt: DateTime
+        -replacedBy: UUID
+    }
+
+    class Instructor {
         +createCourse(data: CourseDTO): Course
         +createQuiz(module: Module, data: QuizDTO): Quiz
+        +viewDashboard(filter: DashboardFilter): DashboardMetrics
     }
 
     class Student {
         +enroll(course: Course)
         +submitQuiz(quiz: Quiz): QuizAttempt
         +reviewCourse(course: Course, rating: number)
+        +buyCreditPack()
     }
 
     class Administrator {
         +blockUser(user: User)
+        +unblockUser(user: User)
+        +changeUserRole(user: User, role: Role)
+        +softDeleteUser(user: User)
+        +restoreUser(user: User)
+        +anonymizeUser(user: User)
+        +viewDashboard(filter: DashboardFilter): DashboardMetrics
+    }
+
+    User <|-- Instructor
+    User <|-- Student
+    User <|-- Administrator
+    User "1" *-- "0..*" Address : possui
+    Instructor "1" *-- "0..1" InstructorProfile : possui
+    User "1" *-- "0..*" PasswordResetToken : solicita
+    User "1" *-- "0..*" RefreshSession : mantem
+```
+
+#### Área B – Autoria do instrutor
+
+```mermaid
+classDiagram
+    direction TB
+
+    class Instructor {
+        +createCourse(data: CourseDTO): Course
+        +createQuiz(module: Module, data: QuizDTO): Quiz
+    }
+
+    class Category {
+        -id: UUID
+        -name: string
+        -deletedAt: DateTime
     }
 
     class Course {
@@ -427,15 +738,21 @@ classDiagram
         -title: string
         -description: string
         -priceCents: number
+        -currency: string
+        -level: CourseLevel
         -status: CourseStatus
+        -thumbnailKey: string
+        -deletedAt: DateTime
         +publish()
+        +archive()
         +addModule(data: ModuleDTO): Module
     }
 
     class Module {
         -id: UUID
         -title: string
-        -order: number
+        -position: number
+        -deletedAt: DateTime
         +addLesson(data: LessonDTO): Lesson
         +addQuiz(data: QuizDTO): Quiz
     }
@@ -446,66 +763,163 @@ classDiagram
         -description: string
         -videoKey: string
         -durationSeconds: number
+        -videoMimeType: string
+        -videoSizeBytes: number
+        -position: number
         -isPreview: boolean
+        -indexStatus: LessonIndexStatus
+        -deletedAt: DateTime
+        +addMaterial(data: LessonMaterialDTO): LessonMaterial
+    }
+
+    class LessonMaterial {
+        -id: UUID
+        -title: string
+        -fileKey: string
+        -mimeType: string
+        -sizeBytes: number
+        -position: number
+        -deletedAt: DateTime
     }
 
     class Quiz {
         -id: UUID
         -title: string
+        -status: QuizStatus
+        -allowRetake: boolean
+        -deletedAt: DateTime
         +addQuestion(data: QuestionDTO): Question
     }
 
     class Question {
         -id: UUID
         -text: string
+        -deletedAt: DateTime
+        +addOption(data: QuestionOptionDTO): QuestionOption
     }
 
     class QuestionOption {
         -id: UUID
         -text: string
         -isCorrect: boolean
+        -deletedAt: DateTime
     }
 
-    class QuizAnswer {
-        -id: UUID
+    Instructor "1" --> "0..*" Course : ministra
+    Category "1" --o "0..*" Course : agrega
+    Course "1" *-- "1..*" Module : compoe
+    Module "1" *-- "1..*" Lesson : compoe
+    Lesson "1" *-- "0..*" LessonMaterial : anexa
+    Module "1" *-- "0..*" Quiz : avaliacao
+    Quiz "1" *-- "1..*" Question : compoe
+    Question "1" *-- "2..*" QuestionOption : compoe
+```
+
+#### Área C – Aprendizagem do aluno
+
+```mermaid
+classDiagram
+    direction TB
+
+    class Student {
+        +enroll(course: Course)
+        +submitQuiz(quiz: Quiz): QuizAttempt
+        +reviewCourse(course: Course, rating: number)
     }
+
+    class Course
+    class Lesson
+    class Quiz
+    class Question
+    class QuestionOption
 
     class Enrollment {
         -id: UUID
         -pricePaidCents: number
+        -currency: string
         -status: EnrollmentStatus
+        -createdAt: DateTime
+        -updatedAt: DateTime
+        -deletedAt: DateTime
+        +cancel()
+        +complete()
     }
 
     class Payment {
         -id: UUID
-        -userId: UUID
-        -courseId: UUID
-        -enrollmentId: UUID
+        -purpose: PaymentPurpose
         -amountCents: number
+        -currency: string
         -status: PaymentStatus
+        -paidAt: DateTime
+        -deletedAt: DateTime
     }
 
     class LessonProgress {
         -id: UUID
         -completed: boolean
         -watchedSeconds: number
+        -completedAt: DateTime
+        -updatedAt: DateTime
+        -deletedAt: DateTime
     }
 
     class QuizAttempt {
         -id: UUID
-        -score: number?
-        -submittedAt: datetime?
+        -status: QuizAttemptStatus
+        -score: number
+        -submittedAt: DateTime
+        -createdAt: DateTime
+        -deletedAt: DateTime
+    }
+
+    class QuizAnswer {
+        -id: UUID
+        -deletedAt: DateTime
     }
 
     class Review {
         -id: UUID
         -rating: number
         -comment: string
+        -createdAt: DateTime
+        -updatedAt: DateTime
+        -deletedAt: DateTime
     }
+
+    Student "1" --> "0..*" Enrollment : realiza
+    Course "1" --> "0..*" Enrollment : matriculas
+    Enrollment "1" --> "0..*" LessonProgress : registra
+    Lesson "1" --> "0..*" LessonProgress : progresso
+    Enrollment "1" --> "0..*" QuizAttempt : tentativas
+    Quiz "1" --> "0..*" QuizAttempt : tentativas
+    QuizAttempt "1" *-- "0..*" QuizAnswer : respostas
+    QuizAnswer "0..*" --> "1" Question : pergunta
+    QuizAnswer "0..*" --> "1" QuestionOption : alternativa
+    Student "1" --> "0..*" Review : avalia
+    Course "1" --> "0..*" Review : avaliacoes
+
+    Enrollment "1" --> "0..*" Payment : possui tentativas
+    Student "1" --> "0..*" Payment : realiza pagamento
+    Course "0..1" <-- "0..*" Payment : curso pago
+```
+
+#### Área D – Tutor de IA, analytics e administração
+
+```mermaid
+classDiagram
+    direction TB
+
+    class Student
+    class User
+    class Course
+    class Lesson
+    class Payment
 
     class Conversation {
         -id: UUID
-        -createdAt: datetime
+        -createdAt: DateTime
+        -deletedAt: DateTime
     }
 
     class Message {
@@ -513,46 +927,40 @@ classDiagram
         -role: MessageRole
         -content: string
         -videoTimestampSeconds: number
-        -createdAt: datetime
+        -createdAt: DateTime
+        -deletedAt: DateTime
     }
 
-    class Category {
+    class TutorCreditPack {
         -id: UUID
-        -name: string
+        -messagesTotal: number
+        -messagesUsed: number
+        -createdAt: DateTime
+        -deletedAt: DateTime
+        +hasAvailableMessages(): boolean
+        +consumeMessage()
     }
 
-    User <|-- Instructor
-    User <|-- Student
-    User <|-- Administrator
-    User "1" *-- "0..*" Address : possui
+    class AuditLog {
+        -id: UUID
+        -action: AuditAction
+        -targetType: string
+        -targetId: UUID
+        -ipAddress: string
+        -userAgent: string
+        -details: JSON
+        -createdAt: DateTime
+    }
 
-    Instructor "1" --> "0..*" Course : ministrado por
-    Course "1" *-- "1..*" Module : compõe
-    Module "1" *-- "1..*" Lesson
-    Module "1" *-- "0..*" Quiz
-
-    Quiz "1" *-- "1..*" Question
-    Question "1" *-- "2..*" QuestionOption
-    QuizAttempt "1" *-- "0..*" QuizAnswer : rascunho ou envio
-    QuizAnswer "0..*" --> "1" QuestionOption : escolhe
-
-    Student "1" --> "0..*" Enrollment
-    Student "1" --> "0..*" Review
-    Course "1" --> "0..*" Enrollment
-    Course "1" --> "0..*" Review
-
-    Payment "0..*" --> "1" Enrollment
-    Enrollment "1" --> "0..*" LessonProgress
-    Enrollment "1" --> "0..*" QuizAttempt
-
-    Student "1" --> "0..*" Conversation
-    Course "1" --> "0..*" Conversation
-    Lesson "1" --> "0..*" Conversation
-    Conversation "1" *-- "0..*" Message
-
-    Category "1" --o "0..*" Course : agrega
-    Student ..> LessonProgress : «depende»
+    Student "1" --> "0..*" Conversation : participa
+    Course "1" --> "0..*" Conversation : contexto curso
+    Lesson "1" --> "0..*" Conversation : contexto aula
+    Conversation "1" *-- "1..*" Message : mensagens
+    Student "1" --> "0..*" TutorCreditPack : adquire
+    Payment "0..1" <-- "0..*" TutorCreditPack : pagamento simulado
+    User "0..1" --> "0..*" AuditLog : autor auditado
 ```
+
 
 ## 3. APIs
 
