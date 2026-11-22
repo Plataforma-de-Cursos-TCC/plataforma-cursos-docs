@@ -1,4 +1,6 @@
-## 1. UC005 – Realizar Login
+## 1. Área A – Acesso e conta
+
+### 1. UC005 – Realizar Login
 
 Fluxo básico e alternativos A1 (esqueci minha senha) e A2 (sessão já ativa). Exceções: bloqueio por tentativas, 429 com `Retry-After` (E4); credencial inválida, 401 genérico (E1); conta bloqueada, 403 `ACCOUNT_BLOCKED` (E3); sessão expirada, 401 (E2). Emite o refresh quando há «manter conectado».
 
@@ -6,7 +8,7 @@ Fluxo básico e alternativos A1 (esqueci minha senha) e A2 (sessão já ativa). 
 
 *Figura 0 – UC005, diagrama de sequência: realizar login*
 
-## 2. UC011 – Recuperar Senha
+### 2. UC011 – Recuperar Senha
 
 Duas fases. Solicitação do link: a resposta é a mesma com o e-mail cadastrado ou não (E1, anti-enumeração) e um novo link invalida o anterior (A1). Redefinição: link expirado, 422 `RESET_TOKEN_EXPIRED` (E2); link usado ou inválido, 422 `RESET_TOKEN_INVALID` (E3); cancelar (A2).
 
@@ -18,7 +20,7 @@ Duas fases. Solicitação do link: a resposta é a mesma com o e-mail cadastrado
 
 *Figura 0 – UC011, diagrama de sequência: redefinição da senha*
 
-## 3. UC012 – Cadastrar-se na Plataforma
+### 3. UC012 – Cadastrar-se na Plataforma
 
 Validação pelo Form Request (E2 senha fora da política, E3 termos não aceitos), e-mail em uso (E1) e o alternativo A1, que cria a conta como Instrutor com o `InstructorProfile` vazio. Os erros de campo são 422 `VALIDATION_FAILED` com `fields`.
 
@@ -26,7 +28,7 @@ Validação pelo Form Request (E2 senha fora da política, E3 termos não aceito
 
 *Figura 0 – UC012, diagrama de sequência: cadastrar-se na plataforma*
 
-## 4. UC013 – Editar Dados do Perfil
+### 4. UC013 – Editar Dados do Perfil
 
 Duas partes. Dados do perfil (`PUT /profile`): validação (E1), foto no R2, endereço e A2 (alterar senha). Perfil de Instrutor (A1, `PUT /profile/instructor`): validação de link e minibiografia (E2) e 403 `FORBIDDEN` para quem não é Instrutor (E3).
 
@@ -38,7 +40,7 @@ Duas partes. Dados do perfil (`PUT /profile`): validação (E1), foto no R2, end
 
 *Figura 0 – UC013, diagrama de sequência: perfil de Instrutor (A1)*
 
-## 5. UC017 – Alterar Senha
+### 5. UC017 – Alterar Senha
 
 Validação da política e da confirmação (E2, E3), senha atual incorreta (E1, 422 `VALIDATION_FAILED` em `fields.currentPassword`, não 401) e cancelamento (A1).
 

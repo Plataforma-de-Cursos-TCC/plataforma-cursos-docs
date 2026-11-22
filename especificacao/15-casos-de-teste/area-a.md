@@ -1,4 +1,6 @@
-## 1. UC005 – Realizar Login
+## 1. Área A – Acesso e conta
+
+### 1. UC005 – Realizar Login
 
 **Rastreio:** US001, RF017 (itens 6, 7 e 10).
 
@@ -15,7 +17,7 @@
 | TC070 | 7 – E4 Tentativas excedidas | CT1 Sexta tentativa após 5 falhas | 5 senhas incorretas seguidas e, depois, a senha correta | A tentativa é recusada com resposta 429 `TOO_MANY_REQUESTS`, cabeçalho `Retry-After` e aviso de bloqueio de 15 minutos com o tempo restante (RNF008). |
 | TC071 | 7 – E4 Tentativas excedidas | CT2 Login após o bloqueio | Senha correta 15 minutos depois do bloqueio | Autenticação aceita e contador de falhas zerado. |
 
-## 2. UC011 – Recuperar Senha
+### 2. UC011 – Recuperar Senha
 
 **Rastreio:** US017, RF013 (itens 6, 7 e 10).
 
@@ -31,7 +33,7 @@
 | TC076 | 6 – E3 Link inválido | CT2 Token adulterado | Link com o token alterado em um caractere | Redefinição recusada com resposta 422 `RESET_TOKEN_INVALID`, informando que o link não é válido. |
 | TC090 | 7 – E4 Nova senha fora da política | CT1 Nova senha curta | Link válido, nova senha `abc12` e confirmação `abc12` | Resposta 422 `VALIDATION_FAILED` em `fields.newPassword`, apontando a regra de senha (R-3), senha anterior inalterada e link ainda válido. |
 
-## 3. UC012 – Cadastrar-se na Plataforma
+### 3. UC012 – Cadastrar-se na Plataforma
 
 **Rastreio:** US002, RF001 (itens 6, 7 e 10).
 
@@ -44,7 +46,7 @@
 | TC078 | 4 – E2 Senha fora da política | CT2 Senha sem número | Senha `somenteletras` | Cadastro recusado com resposta 422 `VALIDATION_FAILED` em `fields.password`, apontando a exigência de pelo menos um número. |
 | TC079 | 5 – E3 Termos não aceitos | CT1 Cadastro sem o aceite | Dados válidos, caixa de termos e política de privacidade desmarcada (RNF020) | Cadastro recusado com resposta 422 `VALIDATION_FAILED` em `fields.termsAccepted`, pedindo o aceite; nenhuma conta é criada. |
 
-## 4. UC013 – Editar Dados do Perfil
+### 4. UC013 – Editar Dados do Perfil
 
 **Rastreio:** US003, US020, RF001, RF016 (itens 6, 7 e 10).
 
@@ -64,7 +66,7 @@
 | TC060 | 6 – E3 Acesso negado | CT1 Aluno edita o perfil de Instrutor | Aluno logado envia bio e links em `PUT /api/v1/profile/instructor` | Resposta 403 `FORBIDDEN`; os campos de Instrutor não são gravados. |
 | TC086 | 6 – E3 Acesso negado | CT2 Administrador edita o perfil de Instrutor | Administrador logado envia bio e links em `PUT /api/v1/profile/instructor` | Resposta 403 `FORBIDDEN`; nada é alterado. |
 
-## 5. UC017 – Alterar Senha
+### 5. UC017 – Alterar Senha
 
 **Rastreio:** US021, RF019 (itens 6, 7 e 10).
 
