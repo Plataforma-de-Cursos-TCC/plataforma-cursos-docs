@@ -18,7 +18,7 @@ Na perspectiva de implementação, apresentada em três diagramas (cadastro e lo
    - `PasswordResetService` coordena o `UserRepository`, o `PasswordResetTokenRepository` (geração de hash criptográfico com validade de 30 minutos (RNF017) e consumo único) e o envio assíncrono do link por fila através do `ResetMailer`, assegurando proteção contra enumeração de usuários (UC011 R-2).
 
 3. **Perfil e administração de usuários**:
-   - `ProfileController` e `ProfileService` atendem à consulta e atualização cadastral, atualização de dados de instrutor (`InstructorProfileDTO`), troca de senha com validação de senha atual, upload de foto via `PhotoStorage` (armazenamento de imagem no Cloudflare R2 com URL pública e CDN) e persistência de endereços (`AddressRepository`).
+   - `ProfileController` e `ProfileService` atendem à consulta e atualização cadastral, atualização de dados de instrutor (`InstructorProfileDTO`), troca de senha com validação de senha atual, upload de foto via `PhotoStorage` (armazenamento em bucket privado do Cloudflare R2 via API, persistindo a chave no banco e gerando URL assinada para visualização, ADR-0010) e persistência de endereços (`AddressRepository`).
    - `InstructorProfileRepository.createEmpty(userId: UUID): InstructorProfile` cria a linha vazia de perfil de instrutor no momento da promoção (TC236), além do `save(profile: InstructorProfile)`.
    - O `UserRepository` fornece, além de `findByEmail(email)` e `save(user)`, os métodos de gestão administrativa do UC008 e UC018:
      - `paginate(filters: UserFiltersDTO): LengthAwarePaginator`: listagem paginada (`perPage` de 1 a 100) com filtros de busca textual, perfil e status.
