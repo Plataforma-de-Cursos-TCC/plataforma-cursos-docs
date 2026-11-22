@@ -256,9 +256,9 @@
     - E-3.2 O sistema nega o acesso, não altera nenhum dado e informa que a ação não é permitida.
     - E-3.3 Este caso de uso é finalizado.
 
-    ![acesso negado à edição de perfil de outro Instrutor](prototipos/png/UC013/UC013-E3-1.png)
+    ![acesso negado à edição de perfil de Instrutor por Aluno ou Administrador](prototipos/png/UC013/UC013-E3-1.png)
 
-    *Figura 0 – UC013, fluxo de exceção E3: acesso negado à edição de perfil de outro Instrutor*
+    *Figura 0 – UC013, fluxo de exceção E3: acesso negado à edição de perfil de Instrutor por Aluno ou Administrador*
 
 ## 5. UC017 – Alterar Senha
 

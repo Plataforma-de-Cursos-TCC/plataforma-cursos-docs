@@ -51,10 +51,10 @@
           <mxGeometry x="0" y="40.0" width="160" height="61" as="geometry" />
         </mxCell>
         <mxCell id="enum_Locale" value="&lt;b&gt;Locale&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;fillColor=#F2F2F2;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1020" y="403" width="160" height="71.0" as="geometry" />
+          <mxGeometry x="1020" y="403" width="160" height="101.0" as="geometry" />
         </mxCell>
-        <mxCell id="enum_Locale_attrs" value="pt-BR" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="enum_Locale">
-          <mxGeometry x="0" y="40.0" width="160" height="31" as="geometry" />
+        <mxCell id="enum_Locale_attrs" value="pt-BR&lt;br&gt;en&lt;br&gt;es" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="enum_Locale">
+          <mxGeometry x="0" y="40.0" width="160" height="61" as="geometry" />
         </mxCell>
         <mxCell id="note_Locale" value="Só pt-BR está ativo; en e es entram&lt;br&gt;como novos valores, sem mudar o modelo." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=middle;align=left;spacingLeft=8;spacingRight=8;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1220" y="403.5" width="280" height="70" as="geometry" />
