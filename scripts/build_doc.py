@@ -27,6 +27,7 @@ from docx.oxml.ns import qn
 
 REPO = Path(__file__).resolve().parent.parent
 ESP = REPO / "especificacao"
+REFERENCIAS = REPO / "especificacao" / "16-referencias.md"
 DECLARACAO = REPO / "entregas" / "declaracao-uso-de-ia.md"
 
 AUTORES = [
@@ -142,6 +143,7 @@ def build_markdown(items):
             parts.append(f"# {n} {titulo}\n\nEm elaboração (RA2). Fonte de trabalho: {fonte}.\n")
         else:
             parts += [preprocess(ESP / f) for f in src]
+    parts.append(preprocess(REFERENCIAS))
     parts.append(preprocess(DECLARACAO))
     return renumber_figures("\n\n".join(parts))
 
@@ -1355,7 +1357,7 @@ def check():
         if isinstance(src, list):
             for f in src:
                 assert (ESP / f).is_file(), f
-    assert DECLARACAO.is_file()
+    assert DECLARACAO.is_file() and REFERENCIAS.is_file()
     assert parse_range(1, 11) == list(range(1, 12))
     assert parse_range(6, 6) == [6]
     for bad in [(9, 3), (0, 5), (1, 16)]:
