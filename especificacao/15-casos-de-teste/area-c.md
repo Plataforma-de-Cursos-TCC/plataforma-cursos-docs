@@ -11,6 +11,9 @@
 | TC021 | 3 – E1 Curso não publicado | CT1 Curso em rascunho | Aluno tenta acessar rota de matrícula de curso com `status = draft` | Resposta 404 `NOT_FOUND` informando que o curso não foi encontrado (R-1); nenhuma matrícula criada. |
 | TC153 | 3 – E1 Curso despublicado | CT2 Despublicação durante a matrícula | Instrutor despublica o curso no instante do acionamento de «Matricular-se» | Resposta 409 `CONFLICT` com aviso de que o curso não está mais disponível (R-1); nenhuma matrícula gravada. |
 | TC154 | 4 – E2 Pagamento não concluído | CT1 Recusa ou desistência no UC019 | Aluno cancela ou tem pagamento simulado recusado no UC019 | Matrícula em `Enrollment` permanece com status `pending` e acesso às aulas segue bloqueado (R-3); botão «Matricule-se» continua disponível para nova tentativa. |
+| TC184 | 2 – A1 / R-2 | CT3 Matrícula ativa existente devolve 200 | Aluno com matrícula ativa no curso envia `POST /courses/{id}/enroll` | Resposta 200 `OK` com a mesma matrícula (mesmo `id`) via `EnrollmentService.enroll()`; nenhuma linha nova em `enrollments` e nenhum `payments` criado. |
+| TC185 | 2 – A1 / R-2 | CT4 Matrícula pendente existente devolve 200 | Aluno com matrícula `pending` em curso pago envia `POST /courses/{id}/enroll` | Resposta 200 `OK` com o mesmo `id` e status `pending`; nenhuma linha nova; a tela retoma o pagamento da mesma matrícula. |
+| TC186 | 2 – A1 / R-2 concorrência | CT5 Duas matrículas simultâneas no mesmo curso | Dois `POST /courses/{id}/enroll` concorrentes do mesmo Aluno em curso gratuito | Uma resposta 201 `Created` e outra 200 `OK` com o mesmo `id` (nem 409 nem 500); uma única linha para o par aluno/curso pelo índice único parcial de `enrollments` (item 12). |
 
 ## 2. UC019 – Processar Pagamento Simulado
 
@@ -24,6 +27,9 @@
 | TC156 | 4 – E2 Preço alterado durante o resumo | CT1 Valor modificado pelo instrutor | Preço do curso é alterado no catálogo após a abertura do modal | Resposta 409 `CONFLICT` com aviso de preço alterado (R-2); pagamento não é registrado e novo resumo com o valor atualizado é apresentado ao aluno. |
 | TC157 | 4 – E2 Curso despublicado no pagamento | CT2 Curso retirado do catálogo | Curso é despublicado antes da confirmação do pagamento | Resposta 409 `CONFLICT` informando indisponibilidade do curso; nenhum pagamento registrado. |
 | TC158 | 5 – E3 Matrícula duplicada | CT1 Duplo acionamento de confirmação | Dois cliques rápidos consecutivos em «Confirmar pagamento» | Primeira requisição processa com sucesso; segunda recebe 409 `CONFLICT` informando que o aluno já possui matrícula ativa, impedindo pagamento duplicado. |
+| TC187 | 5 – E3 / concorrência | CT3 Duplo acionamento simultâneo de pagamento | Duas `POST /enrollments/{id}/pay` concorrentes na mesma matrícula `pending`, com simulador aprovado | Uma resposta 200 `OK` e outra 409 `CONFLICT`; exatamente um `payments` com `status = approved` para a matrícula e uma única ativação em `PaymentService.processSimulatedPayment()`, serializada pelo bloqueio da matrícula. |
+| TC188 | 5 – E3 / R-3 | CT4 Pagamento repetido após aprovação | `POST /enrollments/{id}/pay` com matrícula já `active` e um `payments` aprovado | Resposta 409 `CONFLICT`; nenhum `payments` novo; `paid_at` do pagamento aprovado inalterado. |
+| TC189 | 3 – E1 / nova tentativa | CT2 Recusa seguida de aprovação na mesma matrícula | Simulador recusa a primeira tentativa e aprova a segunda, na mesma matrícula `pending` | Primeiro `payments` com `status = declined` e `paid_at` nulo (422 `PAYMENT_DECLINED`); segundo com `status = approved`; duas linhas de pagamento para uma matrícula (0..* da Área C); matrícula `active` somente após a aprovação. |
 
 ## 3. UC009 – Assistir Aula
 
@@ -62,6 +68,10 @@
 | TC181 | 9 – R-2 Cálculo da nota | CT2 Uma de três correta | Quiz de 3 questões; Aluno acerta 1 e envia | Resposta 200 `OK` com `score` 33,33; a tela exibe 33%. |
 | TC182 | 9 – R-2 Cálculo da nota | CT3 Nenhuma correta | Quiz de 3 questões; Aluno acerta 0 e envia | Resposta 200 `OK` com `score` 0,00; a tela exibe 0%. |
 | TC183 | 9 – R-2 Cálculo da nota | CT4 Todas corretas | Quiz de 3 questões; Aluno acerta 3 e envia | Resposta 200 `OK` com `score` 100,00; a tela exibe 100%. |
+| TC190 | 3 – A2 / concorrência | CT1 Rascunho e envio simultâneos | `PUT /quizzes/{id}/attempt/draft` e `POST /quizzes/{id}/attempt` concorrentes, na mesma matrícula e quiz, com todas as respostas | Serializado pelo bloqueio da matrícula. Se o envio grava primeiro, a tentativa tem `score` e `submitted_at` preenchidos e o rascunho que chega depois recebe 409 `CONFLICT`, sem alterar as respostas enviadas. Se o rascunho grava primeiro, o envio corrige as respostas gravadas. Em qualquer ordem, não há duas tentativas `draft` para o mesmo quiz (UC002 A2). |
+| TC191 | 5 – E2 / R-2 | CT2 Envio com gabarito incompleto desfaz a tentativa | Aluno com rascunho salvo envia `POST /quizzes/{id}/attempt` em quiz com questão sem alternativa correta | Resposta 500 `INTERNAL_SERVER_ERROR` sem detalhe interno. A transação é desfeita: nenhum `quiz_attempts` com `status = submitted`, `score` e `submitted_at` nulos, respostas do rascunho preservadas em `quiz_answers`. Registro de log com `quizId` para o Instrutor responsável (UC002 E2). |
+| TC192 | 1 – R-2 / histórico | CT3 Edição de gabarito após o envio | Aluno envia quiz com `score` 66,67; Instrutor altera o gabarito em `PUT /api/v1/instructor/quizzes/{id}` | `score` continua 66,67 e a tentativa não é recalculada; nenhuma nota muda sem novo envio (UC004 R-2). |
+| TC193 | 1 – R-2 / histórico | CT4 Edição de gabarito antes do envio | Aluno tem rascunho salvo; Instrutor altera o gabarito; Aluno envia | A correção usa o gabarito vigente no momento do envio; o `score` gravado não muda com edições posteriores do gabarito (UC004 R-2). |
 
 ## 5. UC010 – Avaliar Curso
 
@@ -91,3 +101,16 @@
 | TC175 | 4 – E2 Categoria sem cursos | CT1 Categoria cadastrada sem cursos | Seleção de categoria que não possui cursos com status `published` | Resposta 200 `OK` com `data: []`, exibição da mensagem «Nenhum curso encontrado nesta categoria.» e botão para ver todos os cursos (R-1, R-3). |
 | TC176 | 5 – Negativo Regra R-1 | CT1 Ocultação de cursos em rascunho | Consulta no catálogo com curso existente em status `draft` | O curso em rascunho não é retornado na listagem da API nem exibido em nenhum card do catálogo (R-1). |
 | TC177 | 6 – Negativo Regra R-4 | CT1 Parâmetro de paginação inválido | Requisição com `?page=-1` ou `?perPage=500` (fora do intervalo permitido de 1 a 100) | Resposta 422 `VALIDATION_FAILED` nos campos `page` e `perPage` (`fields.page`, `fields.perPage`), sem consultar a base, prevenindo sobrecarga ou quebra de consulta (R-4, D-TC245). |
+| TC194 | 1 – R-4 / paginação | CT1 Segunda página do catálogo | 25 cursos publicados; `GET /api/v1/catalog/courses?page=2&perPage=20` | Resposta 200 `OK` com 5 cursos em `data`, `meta.currentPage: 2` e `meta.perPage: 20`; nenhum curso repetido em relação à página 1 (R-4). |
+| TC195 | 1 – R-4 / desempate | CT2 Ordem estável com empate | 25 cursos com o mesmo preço e a mesma data de publicação; percorrer as páginas 1 e 2 | Ordem desempatada por `id` (ADR-0009): os 25 ids aparecem uma única vez no conjunto das páginas, sem repetição nem omissão. |
+| TC196 | 1 – R-4 / limite | CT3 Limite máximo de itens por página | `GET /api/v1/catalog/courses?perPage=100` e depois `?perPage=101` | `perPage=100` retorna 200 `OK` com até 100 itens; `perPage=101` retorna 422 `VALIDATION_FAILED` com `fields.perPage` (D-TC245). |
+| TC197 | 2 – A1 / R-4 | CT1 Troca de filtro reinicia a paginação | Visitante na página 2 do catálogo seleciona outra categoria | Requisição e URL voltam a `page=1`; a lista não mostra página vazia por causa do índice anterior (R-4). |
+
+### Matriz de regras e cenários negativos
+
+| UC | REGRAS | TESTES NEGATIVOS / ESTADO PRESERVADO |
+|---|---|---|
+| UC003 | R-1; R-2; R-3; R-4 | TC021, TC153 (curso indisponível, sem matrícula); TC184 a TC186 (existente devolve 200 e concorrência não duplica); TC154, TC189 (pendente sem acesso às aulas); TC019 (gratuito sem cobrança). |
+| UC019 | R-1; R-2; R-3 | TC156, TC157 (preço e curso alterados, sem pagamento); TC187, TC188 (pagamento duplicado, um único aprovado); TC053, TC189 (recusa preservada, matrícula pendente sem acesso). |
+| UC002 | R-1; R-2; R-3; R-4 | TC032 (envio incompleto); TC180 a TC183 (cálculo da nota); TC179 (gabarito oculto antes do envio); TC190 (rascunho x envio); TC191 (gabarito incompleto desfaz o envio); TC192, TC193 (nota histórica, UC004 R-2). |
+| UC020 | R-1; R-2; R-3; R-4 | TC176 (rascunho oculto); TC056, TC174 (categoria); TC177, TC196 (limites de paginação); TC194, TC195, TC197 (paginação, desempate e troca de filtro). |
