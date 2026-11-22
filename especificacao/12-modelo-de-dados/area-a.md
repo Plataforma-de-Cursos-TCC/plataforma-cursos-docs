@@ -16,7 +16,7 @@ Decisões do modelo:
 - **Termos e privacidade (RNF020, UC012 R-4):** `users.terms_accepted_at` registra o aceite obrigatório dos termos de uso e da política de privacidade no cadastro.
 - **Segurança de credenciais e tokens (RNF007, RNF017, ADR-0008):** Senhas nunca são persistidas em texto claro (somente `password_hash`). Tokens de redefinição de senha e de refresh session são gravados exclusivamente sob hash SHA-256 (`token_hash`), impedindo vazamento de credenciais mesmo em caso de dump do banco de dados.
 
-| ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
+| ATRIBUTO | CLASSE | DOMÍNIO | TAM. | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: users** | | | | Entidade central de contas de usuários (alunos, instrutores e administradores). |
 | id | Determinante | uuid | - | Identificador único universal do usuário (PK). |

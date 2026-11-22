@@ -17,7 +17,7 @@ Decisões do modelo:
 - **Normalização e Desvio Justificado:** `enrollments`, `lesson_progress`, `quiz_attempts`, `quiz_answers` e `reviews` estão na 3FN (Terceira Forma Normal): as chaves primárias são UUIDs únicos, cada atributo não chave depende exclusivamente da chave primária e não há atributos multivalorados. A tabela `payments` apresenta um desvio deliberado da 3FN: `user_id` e `course_id` derivam de `enrollments` (via `enrollment_id`), dependendo transitivamente da chave primária nos pagamentos de matrícula. Essas colunas são mantidas no registro de pagamento porque ele constitui o comprovante financeiro imutável da transação (identificando aluno e curso mesmo diante de mutações ou cancelamentos posteriores da matrícula) e atende também à compra direta de créditos do tutor de IA onde `enrollment_id` pode ser nulo.
 - **Exclusão lógica (ADR-0014):** todas as tabelas contêm a coluna `deleted_at: timestamptz NULL`. Registros ativos possuem `deleted_at IS NULL`; operações de exclusão realizam soft delete preenchendo o timestamp corrente, assegurando integridade referencial com o histórico acadêmico e financeiro.
 
-| ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
+| ATRIBUTO | CLASSE | DOMÍNIO | TAM. | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: enrollments** | | | | |
 | id | Determinante | uuid | - | Identificador único da matrícula (PK). |

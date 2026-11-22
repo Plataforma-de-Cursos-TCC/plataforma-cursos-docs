@@ -22,7 +22,7 @@ Decisões do modelo:
   - `audit_logs.action`: `USER_BLOCK` (Bloqueio de usuário), `USER_UNBLOCK` (Desbloqueio de usuário), `ROLE_CHANGE` (Alteração de perfil de acesso), `USER_DELETE` (Exclusão lógica de usuário), `USER_RESTORE` (Reativação de usuário excluído), `USER_ANONYMIZE` (Anonimização irreversível conforme LGPD), `ACCESS_DENIED` (Tentativa de acesso não autorizada a área protegida).
   - Enums referenciados de `users`: `role` (`student` = Aluno, `instructor` = Instrutor, `admin` = Administrador); `status` (`active` = Ativo, `blocked` = Bloqueado, `deleted` = Excluído); `theme` (`light` = Claro, `dark` = Escuro, `system` = Sistema).
 
-| ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
+| ATRIBUTO | CLASSE | DOMÍNIO | TAM. | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: conversations** | | | | Conversa do Aluno com o Tutor de IA contextualizada na aula (UC001, RF009). Restrição de unicidade: `UNIQUE(user_id, lesson_id)`. |
 | id | Determinante | uuid | - | Identificador único da conversa. |

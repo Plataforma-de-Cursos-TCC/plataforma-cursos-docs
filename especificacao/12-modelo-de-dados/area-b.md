@@ -23,7 +23,7 @@ Decisões do modelo:
 - **Mapeamento de Enums e Internacionalização:** conforme a arquitetura do sistema (ADR-0015), todos os valores enumerados são persistidos no banco de dados em língua inglesa (ex.: `status` em `courses` como `draft`, `published`, `archived`; `status` em `quizzes` como `draft` e `published`; `level` em `courses` como `beginner`, `intermediate` e `advanced`; `index_status` em `lessons` como `pending`, `indexed` e `failed`). As camadas de apresentação (frontend) e de contrato da API realizam o mapeamento bidirecional desses valores para os respectivos rótulos em português exibidos ao usuário (ex.: `draft` → 'Rascunho', `published` → 'Publicado', `archived` → 'Arquivado'; `pending` → 'Pendente', `indexed` → 'Indexado', `failed` → 'Falhou'; `beginner` → 'Iniciante', `intermediate` → 'Intermediário', `advanced` → 'Avançado').
 - **Valores monetários e localização:** `courses.price_cents` armazena o preço em centavos como número inteiro para evitar imprecisões de arredondamento de ponto flutuante, com `courses.currency` fixada no código ISO 4217 (`BRL` por padrão).
 
-| ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
+| ATRIBUTO | CLASSE | DOMÍNIO | TAM. | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: categories** | | | | Categorias temáticas de classificação dos cursos. |
 | id | Determinante | uuid | - | Identificador único da categoria (chave primária). |
