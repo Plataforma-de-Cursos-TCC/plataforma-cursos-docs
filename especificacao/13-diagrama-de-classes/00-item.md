@@ -2,7 +2,7 @@
 
 **PRODUTO:** Plataforma de Cursos
 
-Diagrama de classes em nível técnico, com elementos negociais (classes do domínio) e de implementação (Controller, Form Request, Service e Repository da API Laravel, em MVC). Atributos aparecem como `nome: tipo`, métodos como `nome(parâmetros): retorno`, com visibilidade (`-` privado, `#` protegido, `+` público) e multiplicidade nas associações. Uma classe referencia o tipo do objeto relacionado, nunca o id da chave estrangeira (`userId` existe só no modelo do item 12). Cada área apresenta as classes dos seus casos de uso; os métodos daqui são as mensagens dos diagramas de sequência do item 14.
+Diagrama de classes em nível técnico, modelado conforme a especificação UML 2.5.1 (OMG, 2017), com elementos negociais (classes do domínio) e de implementação (Controller, Form Request, Service e Repository da API Laravel (LARAVEL LLC, 2024), no padrão arquitetural MVC (REENSKAUG, 1979)). Atributos aparecem como `nome: tipo`, métodos como `nome(parâmetros): retorno`, com visibilidade (`-` privado, `#` protegido, `+` público) e multiplicidade nas associações. Uma classe referencia o tipo do objeto relacionado, nunca o id da chave estrangeira (`userId` existe só no modelo do item 12). Cada área apresenta as classes dos seus casos de uso; os métodos daqui são as mensagens dos diagramas de sequência do item 14.
 
 | Nº | ÁREA | CLASSES | ARQUIVO |
 |---|---|---|---|

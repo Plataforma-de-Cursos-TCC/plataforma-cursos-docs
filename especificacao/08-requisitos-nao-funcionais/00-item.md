@@ -2,9 +2,9 @@
 
 **PRODUTO:** Plataforma de Cursos
 
-| # | REQUISITO NÃO-FUNCIONAL | NORMA ISO/IEC 25010 |
+| # | REQUISITO NÃO-FUNCIONAL | NORMA ISO/IEC 25010 (ISO/IEC, 2011) |
 |---|---|---|
-| RNF001 | Autenticação por token JWT com expiração de 1 h; 100% das áreas protegidas verificam o perfil do usuário. | Segurança (autenticidade) |
+| RNF001 | Autenticação por token JWT (JONES; BRADLEY; SAKIMURA, 2015) com expiração de 1 h; 100% das áreas protegidas verificam o perfil do usuário. | Segurança (autenticidade) |
 | RNF002 | Upload de vídeo e de material somente pela API, que grava no armazenamento; reprodução somente por URL assinada com expiração de 15 min; 0 acessos diretos ao armazenamento. | Segurança (confidencialidade) |
 | RNF003 | Resposta do Tutor de IA em streaming, com o primeiro trecho em até 3 s no percentil 95. | Eficiência de desempenho (comportamento temporal) |
 | RNF004 | Transcrição e embeddings gerados uma única vez por aula, salvo quando o vídeo é substituído (UC015 A1); 0 reprocessamentos em acessos repetidos à mesma aula. | Eficiência de desempenho (utilização de recursos) |
@@ -15,14 +15,14 @@
 | RNF009 | Listagens da API com p95 de até 2 s com 1000 usuários simultâneos; listagens paginadas (`perPage` padrão 20, máximo 100; fora disso 422 VALIDATION_FAILED). | Eficiência de desempenho (comportamento temporal) |
 | RNF010 | Disponibilidade mensal mínima de 99%. | Confiabilidade (disponibilidade) |
 | RNF011 | Backup diário do banco de dados e dos arquivos de vídeo e material das aulas, com restauração dos dois testada mensalmente. | Confiabilidade (recuperabilidade) |
-| RNF012 | Interface conforme WCAG 2.1 AA: contraste mínimo de 4,5:1 e navegação completa por teclado. | Capacidade de interação (inclusividade) |
+| RNF012 | Interface conforme diretrizes WCAG 2.1 nível AA (W3C, 2018): contraste mínimo de 4,5:1 e navegação completa por teclado. | Capacidade de interação (inclusividade) |
 | RNF013 | 100% dos textos em pt-BR, em arquivos de tradução prontos para receber en e es sem mudança de código; datas, números e valores formatados conforme o idioma. | Capacidade de interação (inclusividade) |
 | RNF014 | Alternância entre modo claro e escuro em 100% das telas, aplicada em até 1 s sem recarregar a página. | Capacidade de interação (engajamento do usuário) |
-| RNF015 | 100% dos endpoints da API documentados em OpenAPI e acessíveis online. | Manutenibilidade (analisabilidade) |
-| RNF016 | 100% das ações administrativas com registro auditável em PostgreSQL (autor, ação, data, IP e detalhes), particionado mensalmente e retido por 12 meses no banco operacional, com arquivamento frio compactado no Cloudflare R2 por 5 anos via job diário audit:archive. | Segurança (responsabilização) |
+| RNF015 | 100% dos endpoints da API documentados no padrão OpenAPI (OPENAPI INITIATIVE, 2021) e acessíveis online. | Manutenibilidade (analisabilidade) |
+| RNF016 | 100% das ações administrativas com registro auditável em PostgreSQL (POSTGRESQL GLOBAL DEVELOPMENT GROUP, 2023) (autor, ação, data, IP e detalhes), particionado mensalmente e retido por 12 meses no banco operacional, com arquivamento frio compactado no Cloudflare R2 (CLOUDFLARE, 2022) por 5 anos via job diário audit:archive. | Segurança (responsabilização) |
 | RNF017 | Link de redefinição de senha de uso único, com expiração de 30 min. | Segurança (autenticidade) |
 | RNF018 | Vídeo de aula aceito somente em mp4 ou webm, com até 500 MB por arquivo. | Eficiência de desempenho (capacidade) |
 | RNF019 | Layout funcional de 360 a 1920 px de largura. | Portabilidade (adaptabilidade) |
-| RNF020 | Aceite de termos e da política de dados pessoais (LGPD) registrado em 100% dos cadastros. | Segurança (responsabilização) |
+| RNF020 | Aceite de termos e da política de dados pessoais em conformidade com a LGPD (BRASIL, 2018) registrado em 100% dos cadastros. | Segurança (responsabilização) |
 | RNF021 | Cobertura mínima de 75% dos testes automatizados do frontend; merge bloqueado abaixo disso. | Manutenibilidade (testabilidade) |
 | RNF022 | Preço fixo por pacote de créditos extras do Tutor de IA (R$ 19,90 por 50 mensagens adicionais), adquirido exclusivamente via pagamento simulado (sem cobrança financeira real). | Adequação funcional (completude funcional) |

@@ -2,7 +2,7 @@
 
 **PRODUTO:** Plataforma de Cursos
 
-Modelo lógico do banco de dados, na perspectiva relacional e com notação UML, derivado dos requisitos funcionais (item 6) e das especificações de caso de uso (item 10). Cada tabela é uma caixa com nome, região da chave primária e demais campos; PK e FK ficam à esquerda, campos obrigatórios em negrito e a seta da chave estrangeira aponta para a tabela que guarda a chave primária. A cardinalidade usa `1` e `n`. Cada área apresenta o diagrama das suas tabelas e o dicionário de dados.
+Modelo lógico do banco de dados, na perspectiva relacional e com notação UML (OMG, 2017), derivado dos requisitos funcionais (item 6) e das especificações de caso de uso (item 10). Cada tabela é uma caixa com nome, região da chave primária e demais campos; PK e FK ficam à esquerda, campos obrigatórios em negrito e a seta da chave estrangeira aponta para a tabela que guarda a chave primária. A cardinalidade usa `1` e `n`. Cada área apresenta o diagrama das suas tabelas e o dicionário de dados.
 
 | Nº | ÁREA | TABELAS | ARQUIVO |
 |---|---|---|---|

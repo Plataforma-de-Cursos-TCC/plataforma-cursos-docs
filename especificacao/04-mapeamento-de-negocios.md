@@ -1,6 +1,6 @@
 # 4 MAPEAMENTO DE NEGÓCIOS
 
-Diagrama em BPMN 2.0, desenhado no draw.io ([ADR-0012](../docs/adr/0012-diagramas-do-ra1-em-drawio.md)).
+Diagrama na notação BPMN 2.0 (OMG, 2011), desenhado no draw.io ([ADR-0012](../docs/adr/0012-diagramas-do-ra1-em-drawio.md)).
 
 O mapeamento representa o fluxo de valor do produto (TO BE) em um pool, a Plataforma de Cursos, com seis raias: Visitante, Aluno, Plataforma de Cursos, Tutor de IA, Instrutor e Administrador.
 

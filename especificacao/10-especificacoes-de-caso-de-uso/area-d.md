@@ -59,7 +59,7 @@
     *Figura 0 – UC001, fluxo de exceção E1: conteúdo em preparo*
   - **E2 – Limite de mensagens atingido**
     - E-2.1 O sistema identifica que o Aluno atingiu a cota de 20 mensagens por hora, em janela deslizante no Redis, e não possui mensagem disponível em pacote de créditos extras.
-    - E-2.2 O sistema bloqueia o novo envio com HTTP 429 `TOO_MANY_REQUESTS`, informa o tempo restante no cabeçalho `Retry-After` e oferece a aquisição de pacote de créditos extras (A-3).
+    - E-2.2 O sistema bloqueia o novo envio com código HTTP 429 `TOO_MANY_REQUESTS` (NOTTINGHAM; FIELDING, 2012), informa o tempo restante no cabeçalho `Retry-After` (FIELDING; NOTTINGHAM; RESCHKE, 2022) a partir do controle de taxa no Redis (REDIS, 2024), e oferece a aquisição de pacote de créditos extras (A-3).
     - E-2.3 Este caso de uso é finalizado.
 
     ![limite de mensagens atingido](prototipos/png/UC001/UC001-E2-1.png)
@@ -151,7 +151,7 @@
   2. O Administrador seleciona a ação: bloquear, desbloquear, alterar perfil ou excluir. (A-3) (A-4) (A-5)
   3. O Administrador confirma a ação. (A-2)
   4. O sistema aplica a mudança de status. (E-1) (E-2)
-  5. O sistema revoga o acesso imediatamente (em caso de bloqueio, via blocklist no Redis e revogação de refresh tokens) ou restaura o acesso (em caso de desbloqueio) e grava o evento em `AuditLog`.
+  5. O sistema revoga o acesso imediatamente (em caso de bloqueio, via blocklist no Redis (REDIS, 2024) e revogação de refresh tokens) ou restaura o acesso (em caso de desbloqueio) e grava o evento em `AuditLog`.
   6. Este caso de uso é finalizado.
 
   ![lista de usuários com avatar e perfis](prototipos/png/UC008/UC008-FB-1.png)
@@ -191,7 +191,7 @@
     - A-4.2 O Administrador escolhe o novo perfil: Aluno, Instrutor ou Administrador.
     - A-4.3 O sistema pede confirmação da alteração de perfil. (A-2)
     - A-4.4 O Administrador confirma a alteração.
-    - A-4.5 O sistema grava o novo perfil, revoga as sessões de refresh ativas, adiciona o `jti` do token atual na blocklist do Redis, registra a alteração na trilha de auditoria (`ROLE_CHANGE`) e atualiza a lista de usuários.
+    - A-4.5 O sistema grava o novo perfil, revoga as sessões de refresh ativas, adiciona o `jti` do token atual (JONES; BRADLEY; SAKIMURA, 2015) na blocklist do Redis (REDIS, 2024), registra a alteração na trilha de auditoria (`ROLE_CHANGE`) e atualiza a lista de usuários.
     - A-4.6 Este caso de uso retorna ao fluxo básico (passo 1).
 
     ![modal de confirmação "Alterar perfil de João Silva?"](prototipos/png/UC008/UC008-A4-1.png)
@@ -320,7 +320,7 @@
     - A-2.3 O sistema valida se a conta não foi anonimizada (E-3).
     - A-2.4 O sistema restaura o usuário (`status = active`, `deleted_at = null`), registra `USER_RESTORE` na trilha de auditoria e restabelece a possibilidade de login.
     - A-2.5 Este caso de uso é finalizado.
-  - **A3 – Execução da anonimização irreversível (LGPD)**
+  - **A3 – Execução da anonimização irreversível nos termos do art. 16 da LGPD (BRASIL, 2018)**
     - A-3.1 A pedido do titular ou após 30 dias de exclusão lógica sem reativação, a rotina de anonimização é executada.
     - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, data de nascimento, foto e remoção de endereços associados) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico, e registra a ação `USER_ANONYMIZE` em `audit_logs` (RNF016).
     - A-3.3 Este caso de uso é finalizado.
@@ -348,5 +348,5 @@
     *Figura 0 – UC018, fluxo de exceção E2: erro "Usuário não encontrado"*
   - **E3 – Tentativa de reativar conta já anonimizada**
     - E-3.1 O Administrador tenta reativar uma conta cujo `anonymized_at` já foi preenchido.
-    - E-3.2 O sistema impede a ação e responde HTTP 422 `VALIDATION_FAILED` com erro em `fields.user`, informando que a anonimização é irreversível pela LGPD.
+    - E-3.2 O sistema impede a ação e responde HTTP 422 `VALIDATION_FAILED` com erro em `fields.user`, informando que a anonimização é irreversível nos termos da LGPD (BRASIL, 2018).
     - E-3.3 Este caso de uso é finalizado.

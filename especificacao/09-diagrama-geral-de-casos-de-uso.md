@@ -1,6 +1,6 @@
 # 9 DIAGRAMA GERAL DE CASOS DE USO
 
-Diagrama desenhado no draw.io ([ADR-0012](../docs/adr/0012-diagramas-do-ra1-em-drawio.md)). O «extend» segue a [ADR-0003](../docs/adr/0003-extend-no-sentido-do-te3-3.md): a seta sai do caso de uso opcional e aponta para o caso de uso base.
+Diagrama modelado conforme a notação UML 2.5.1 (OMG, 2017), desenhado no draw.io ([ADR-0012](../docs/adr/0012-diagramas-do-ra1-em-drawio.md)). O «extend» segue a [ADR-0003](../docs/adr/0003-extend-no-sentido-do-te3-3.md): a seta sai do caso de uso opcional e aponta para o caso de uso base.
 
 ![Diagrama Geral de Casos de Uso](diagramas/09-casos-de-uso.png)
 
@@ -8,7 +8,7 @@ Diagrama desenhado no draw.io ([ADR-0012](../docs/adr/0012-diagramas-do-ra1-em-d
 
 ### 9.1 RASTREABILIDADE ENTRE REQUISITOS FUNCIONAIS E CASOS DE USO
 
-A coluna Objetivo indica qual dos 3 objetivos do item 1 o RF atende.
+A coluna Objetivo indica qual dos 3 objetivos do item 1 o RF atende; a coluna Prioridade segue o método MoSCoW (CLEGG; BARKER, 1994).
 
 | RF | UC | OBJETIVO | ÁREA | PRIORIDADE | JUSTIFICATIVA |
 |---|---|---|---|---|---|

@@ -47,7 +47,7 @@ Decisões do modelo:
 | city | Simples | varchar | 80 | Município. |
 | state | Simples | char | 2 | Unidade Federativa (UF). |
 | zip_code | Simples | varchar | 9 | Código de Endereçamento Postal (CEP formatado). |
-| country | Simples | char | 2 | Código do país (ISO 3166-1 alpha-2, padrão 'BR'). |
+| country | Simples | char | 2 | Código do país de 2 dígitos conforme a norma ISO 3166-1 alpha-2 (ISO, 2020), padrão 'BR'. |
 | is_default | Simples | boolean | - | Indica se o endereço é o padrão para o usuário. |
 | created_at | Simples | timestamptz | - | Timestamp de criação do registro. |
 | updated_at | Simples | timestamptz | - | Timestamp da última atualização. |

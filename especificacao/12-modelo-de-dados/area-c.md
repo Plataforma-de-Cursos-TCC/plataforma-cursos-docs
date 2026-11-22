@@ -24,7 +24,7 @@ Decisões do modelo:
 | user_id | Simples | uuid | - | FK para `users.id` (Área A), aluno matriculado. |
 | course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso da matrícula. |
 | price_paid_cents | Simples | integer | - | Valor pago pela matrícula, em centavos (0 para cursos gratuitos). |
-| currency | Simples | varchar(3) | 3 | Código ISO 4217 da moeda da transação (padrão 'BRL'). |
+| currency | Simples | varchar(3) | 3 | Código alfabético da moeda da transação segundo a ISO 4217 (ISO, 2015), padrão 'BRL'. |
 | status | Simples | text CHECK | 20 | Status da matrícula: 'pending', 'active', 'cancelled', 'completed' (UC003, UC019). |
 | created_at | Simples | timestamptz | - | Data e hora de criação da matrícula. |
 | updated_at | Simples | timestamptz | - | Data e hora da última alteração de status (opcional). |
@@ -36,7 +36,7 @@ Decisões do modelo:
 | enrollment_id | Simples | uuid | - | FK para `enrollments.id`, matrícula associada (0..* por matrícula, NULL se cota extra). |
 | purpose | Simples | text CHECK | 20 | Finalidade do pagamento: 'enrollment' ou 'tutor_credits' (RF020, RNF022). |
 | amount_cents | Simples | integer | - | Valor cobrado no pagamento simulado, em centavos. |
-| currency | Simples | varchar(3) | 3 | Código ISO 4217 da moeda (padrão 'BRL'). |
+| currency | Simples | varchar(3) | 3 | Código alfabético da moeda segundo a ISO 4217 (ISO, 2015), padrão 'BRL'. |
 | status | Simples | text CHECK | 20 | Status do pagamento: 'approved' ou 'declined' (UC019). |
 | paid_at | Simples | timestamptz | - | Data e hora do pagamento aprovado; nulo na recusa. |
 | created_at | Simples | timestamptz | - | Data e hora de criação da tentativa de pagamento (NOT NULL). |

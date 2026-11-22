@@ -8,10 +8,10 @@ Tabelas que sustentam a criação e gestão de cursos, módulos, aulas com mater
 
 Decisões do modelo:
 
-- **Convenção por camada e banco PostgreSQL 16 (ADR-0015, ADR-0017):** todas as tabelas e colunas são persistidas em língua inglesa e no padrão `snake_case` (ex.: `course_id`, `video_key`, `deleted_at`). Os tipos de dados utilizam os recursos nativos do PostgreSQL 16: identificadores primários e estrangeiros em `uuid`, strings em `varchar(n)` ou `text`, valores monetários e contadores em `integer` e `bigint`, datas com fuso horário em `timestamptz` e enumerações validadas via restrição `CHECK` (ex.: `level`, `status`, `index_status`).
+- **Convenção por camada e banco PostgreSQL 16 (POSTGRESQL GLOBAL DEVELOPMENT GROUP, 2023) (ADR-0015, ADR-0017):** todas as tabelas e colunas são persistidas em língua inglesa e no padrão `snake_case` (ex.: `course_id`, `video_key`, `deleted_at`). Os tipos de dados utilizam os recursos nativos do PostgreSQL 16: identificadores primários e estrangeiros em `uuid`, strings em `varchar(n)` ou `text`, valores monetários e contadores em `integer` e `bigint`, datas com fuso horário em `timestamptz` e enumerações validadas via restrição `CHECK` (ex.: `level`, `status`, `index_status`).
 - **Exclusão lógica em todo o sistema (ADR-0014):** toda tabela de negócio da Área B contém a coluna `deleted_at: timestamptz` (trait `SoftDeletes` do Eloquent). Nenhuma exclusão realiza `DELETE` físico no banco de dados. As consultas operacionais ignoram registros onde `deleted_at IS NOT NULL`.
 - **Relação Módulo–Quiz resolvida (TDD seção 2):** cada linha de `quizzes` pertence a exatamente um registro de `modules` (`quizzes.module_id` obrigatório), e cada módulo pode conter zero ou mais quizzes (`0..n`). Isso resolve a hierarquia pedagógica do curso, permitindo avaliações modulares pontuais ou finais de módulo.
-- **Normalização até a 3ª Forma Normal (3FN):** todas as tabelas da Área B encontram-se rigorosamente na 3FN. As chaves primárias são UUIDs únicos, todos os atributos não-chave dependem exclusivamente da chave primária inteira (sem dependências parciais) e não há dependências transitivas entre atributos não-chave.
+- **Normalização até a 3ª Forma Normal (3FN)** (CODD, 1970, 1972): todas as tabelas da Área B encontram-se rigorosamente na 3FN. As chaves primárias são UUIDs únicos, todos os atributos não-chave dependem exclusivamente da chave primária inteira (sem dependências parciais) e não há dependências transitivas entre atributos não-chave.
 - **Bloqueio de exclusão e integridade com a Área C:**
   - A exclusão de um curso (`courses`) é bloqueada se houver alunos com matrículas ativas em `enrollments` (UC006 R-2 e E2, retornando HTTP `409 Conflict`), sendo proibido o retorno para rascunho (`draft`) e permitindo exclusivamente o arquivamento (`archived`) para não interromper o acesso dos alunos matriculados.
   - A exclusão de um módulo (`modules`) é bloqueada se houver histórico de alunos registrado em `lesson_progress` (para qualquer aula do módulo) ou em `quiz_attempts` (para qualquer quiz do módulo) (UC014 R-4 e E4, retornando HTTP `409 Conflict`). Caso não haja histórico, a exclusão lógica em cascata marca `deleted_at` no módulo, em suas aulas e nos seus quizzes.
@@ -38,7 +38,7 @@ Decisões do modelo:
 | title | Simples | text | 150 | Título oficial do curso (obrigatório). |
 | description | Simples | text | TEXT | Descrição detalhada do conteúdo programático (obrigatório). |
 | price_cents | Simples | integer | - | Preço do curso expresso em centavos (inteiro, obrigatório). |
-| currency | Simples | text | 3 | Código ISO 4217 da moeda (padrão 'BRL', obrigatório). |
+| currency | Simples | text | 3 | Código alfabético de 3 dígitos da moeda segundo a ISO 4217 (ISO, 2015), padrão 'BRL', obrigatório. |
 | level | Simples | text CHECK | 20 | Nível de dificuldade: 'beginner', 'intermediate', 'advanced' (opcional). |
 | status | Simples | text CHECK | 20 | Estado de publicação: 'draft', 'published' ou 'archived' (obrigatório, padrão 'draft'). |
 | thumbnail_key | Simples | text | 255 | Chave da imagem de capa no storage Cloudflare R2 (opcional). |
