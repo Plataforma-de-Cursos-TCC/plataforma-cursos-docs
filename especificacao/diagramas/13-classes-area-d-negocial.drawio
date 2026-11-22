@@ -38,7 +38,7 @@
         <mxCell id="class_Course" value="&lt;b&gt;Course (Área B)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="420" y="40" width="190" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="class_Course_attrs" value="-id: UUID&lt;br&gt;-title: string&lt;br&gt;-status: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Course">
+        <mxCell id="class_Course_attrs" value="-id: UUID&lt;br&gt;-title: string&lt;br&gt;-status: CourseStatus" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Course">
           <mxGeometry x="0" y="36" width="190" height="60" as="geometry" />
         </mxCell>
         <mxCell id="class_Lesson" value="&lt;b&gt;Lesson (Área B)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
@@ -48,16 +48,22 @@
           <mxGeometry x="0" y="36" width="190" height="60" as="geometry" />
         </mxCell>
         <mxCell id="class_Conversation" value="&lt;b&gt;Conversation&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="420" y="240" width="340" height="150" as="geometry" />
+          <mxGeometry x="420" y="240" width="340" height="125" as="geometry" />
         </mxCell>
-        <mxCell id="class_Conversation_attrs" value="-id: UUID&lt;br&gt;-createdAt: DateTime&lt;br&gt;&lt;i&gt;UNIQUE(userId, lessonId)&lt;/i&gt;" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Conversation">
-          <mxGeometry x="0" y="36" width="340" height="66" as="geometry" />
+        <mxCell id="class_Conversation_attrs" value="-id: UUID&lt;br&gt;-createdAt: DateTime" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Conversation">
+          <mxGeometry x="0" y="36" width="340" height="45" as="geometry" />
         </mxCell>
         <mxCell id="class_Conversation_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="class_Conversation">
-          <mxGeometry x="0" y="102" width="340" height="8" as="geometry" />
+          <mxGeometry x="0" y="81" width="340" height="8" as="geometry" />
         </mxCell>
         <mxCell id="class_Conversation_methods" value="+addMessage(role: MessageRole, text: string): Message" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Conversation">
-          <mxGeometry x="0" y="110" width="340" height="30" as="geometry" />
+          <mxGeometry x="0" y="89" width="340" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="note_conversation" value="&lt;i&gt;Restrição de unicidade:&lt;br&gt;UNIQUE(userId, lessonId)&lt;/i&gt;" style="shape=note;whiteSpace=wrap;html=1;size=10;verticalAlign=middle;align=center;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontFamily=Helvetica;fontSize=10;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="470" y="385" width="240" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_note_conv" value="" style="endArrow=none;dashed=1;html=1;rounded=0;strokeWidth=1;strokeColor=#000000;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="note_conversation" target="class_Conversation">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="class_Message" value="&lt;b&gt;Message&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="820" y="240" width="320" height="180" as="geometry" />
@@ -86,7 +92,7 @@
         <mxCell id="class_Payment" value="&lt;b&gt;Payment (Área C)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="820" y="470" width="260" height="100" as="geometry" />
         </mxCell>
-        <mxCell id="class_Payment_attrs" value="-id: UUID&lt;br&gt;-amountCents: number&lt;br&gt;-purpose: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Payment">
+        <mxCell id="class_Payment_attrs" value="-id: UUID&lt;br&gt;-amountCents: number&lt;br&gt;-purpose: PaymentPurpose" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_Payment">
           <mxGeometry x="0" y="36" width="260" height="60" as="geometry" />
         </mxCell>
         <mxCell id="class_AuditLog" value="&lt;b&gt;AuditLog&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
@@ -114,10 +120,10 @@
           <mxGeometry x="0" y="36" width="250" height="40" as="geometry" />
         </mxCell>
         <mxCell id="enum_AuditAction" value="&lt;b&gt;AuditAction&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1180" y="535" width="250" height="155" as="geometry" />
+          <mxGeometry x="1180" y="535" width="250" height="175" as="geometry" />
         </mxCell>
-        <mxCell id="enum_AuditAction_vals" value="USER_BLOCK&lt;br&gt;USER_UNBLOCK&lt;br&gt;ROLE_CHANGE&lt;br&gt;USER_DELETE&lt;br&gt;USER_RESTORE&lt;br&gt;ACCESS_DENIED" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="enum_AuditAction">
-          <mxGeometry x="0" y="36" width="250" height="115" as="geometry" />
+        <mxCell id="enum_AuditAction_vals" value="USER_BLOCK&lt;br&gt;USER_UNBLOCK&lt;br&gt;ROLE_CHANGE&lt;br&gt;USER_DELETE&lt;br&gt;USER_RESTORE&lt;br&gt;ACCESS_DENIED&lt;br&gt;USER_ANONYMIZE" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="enum_AuditAction">
+          <mxGeometry x="0" y="36" width="250" height="135" as="geometry" />
         </mxCell>
         <mxCell id="edge_admin_user" value="" style="html=1;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="class_Administrator" target="class_User">
           <mxGeometry relative="1" as="geometry">
@@ -260,7 +266,7 @@
         <mxCell id="class_DashboardFilter" value="&lt;b&gt;DashboardFilter&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="40" y="420" width="320" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="class_DashboardFilter_attrs" value="+startDate: Date&lt;br&gt;+endDate: Date&lt;br&gt;+courseId?: UUID&lt;br&gt;+groupBy: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_DashboardFilter">
+        <mxCell id="class_DashboardFilter_attrs" value="+startDate: Date&lt;br&gt;+endDate: Date&lt;br&gt;+courseId?: UUID&lt;br&gt;+groupBy: GroupBy" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="class_DashboardFilter">
           <mxGeometry x="0" y="36" width="320" height="74" as="geometry" />
         </mxCell>
         <mxCell id="class_DashboardMetrics" value="&lt;b&gt;DashboardMetrics&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
