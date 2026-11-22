@@ -43,13 +43,13 @@ erDiagram
     Question ||--o{ QuizAnswer : ""
     QuestionOption ||--o{ QuizAnswer : ""
     Quiz ||--o{ QuizAttempt : ""
-    QuizAttempt ||--|{ QuizAnswer : ""
+    QuizAttempt ||--o{ QuizAnswer : "rascunho pode ser parcial"
     Enrollment ||--o{ QuizAttempt : ""
     Enrollment ||--o{ LessonProgress : ""
     Lesson ||--o{ LessonProgress : ""
     Course ||--o{ Enrollment : ""
-    Payment |o--|| Enrollment : ""
-    User ||--o{ Payment : ""
+    Enrollment ||--o{ Payment : "tentativas recusadas e uma aprovada"
+    User ||--o{ Payment : "compra de créditos do tutor, sem matrícula"
     Course ||--o{ Payment : ""
     Course ||--o{ Review : ""
     User ||--o{ Course : ""
@@ -186,8 +186,8 @@ erDiagram
         UUID id PK
         UUID enrollmentId FK
         UUID quizId FK
-        DECIMAL score
-        DATETIME submittedAt
+        DECIMAL score "nulo em rascunho"
+        DATETIME submittedAt "nulo em rascunho"
     }
     QuizAnswer {
         UUID id PK
@@ -198,12 +198,12 @@ erDiagram
     Payment {
         UUID id PK
         UUID userId FK
-        UUID courseId FK
-        UUID enrollmentId FK
+        UUID courseId FK "opcional"
+        UUID enrollmentId FK "opcional"
         INT amountCents
         CHAR currency
         ENUM status
-        DATETIME paidAt
+        DATETIME paidAt "nulo na recusa"
     }
     Review {
         UUID id PK
@@ -343,8 +343,8 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | id | Determinante | UUID | - | Identificador único da tentativa. |
 | enrollmentId | Simples | UUID | - | Referência à matrícula do aluno. |
 | quizId | Simples | UUID | - | Referência ao quiz respondido. |
-| score | Simples | Numérico | - | Nota calculada da tentativa. |
-| submittedAt | Simples | Data | - | Data/hora de envio das respostas. |
+| score | Simples | Numérico | - | Nota calculada da tentativa; nula enquanto rascunho. |
+| submittedAt | Simples | Data | - | Data/hora de envio das respostas; nula enquanto rascunho. |
 | **Entidade: QuizAnswer** | | | | |
 | id | Determinante | UUID | - | Identificador único da resposta. |
 | attemptId | Simples | UUID | - | Referência à tentativa. |
@@ -354,11 +354,11 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | id | Determinante | UUID | - | Identificador único do pagamento. |
 | userId | Simples | UUID | - | Referência ao aluno que pagou. |
 | courseId | Simples | UUID | - | Referência ao curso pago. |
-| enrollmentId | Simples | UUID | - | Referência à matrícula pendente criada antes do pagamento; se o pagamento for recusado, a matrícula segue pendente (UC019, E-1). |
+| enrollmentId | Simples | UUID | - | Referência à matrícula pendente criada antes do pagamento; opcional (nulo na compra de créditos do tutor, sem matrícula). Uma matrícula tem 0..* pagamentos: tentativas recusadas e no máximo uma aprovada; a recusa mantém a matrícula pendente (UC019, E-1 e E-3). |
 | amountCents | Simples | Numérico | - | Valor pago, em centavos. |
 | currency | Simples | Texto | 3 | Moeda (ISO 4217). |
 | status | Simples | Texto | - | `approved` ou `declined` (simulado). A recusa (`declined`) fica registrada e não gera matrícula ativa (UC019, E-1). |
-| paidAt | Simples | Data | - | Data/hora do pagamento. |
+| paidAt | Simples | Data | - | Data/hora do pagamento aprovado; nula na recusa. |
 | **Entidade: Review** | | | | Uma avaliação por aluno e curso: nova avaliação substitui a anterior (UC010, R-2). |
 | id | Determinante | UUID | - | Identificador único da avaliação. |
 | userId | Simples | UUID | - | Referência ao aluno autor da avaliação. |
@@ -493,8 +493,8 @@ classDiagram
 
     class QuizAttempt {
         -id: UUID
-        -score: number
-        -submittedAt: datetime
+        -score: number?
+        -submittedAt: datetime?
     }
 
     class Review {
@@ -533,7 +533,7 @@ classDiagram
 
     Quiz "1" *-- "1..*" Question
     Question "1" *-- "2..*" QuestionOption
-    QuizAttempt "1" *-- "1..*" QuizAnswer : contém
+    QuizAttempt "1" *-- "0..*" QuizAnswer : rascunho ou envio
     QuizAnswer "0..*" --> "1" QuestionOption : escolhe
 
     Student "1" --> "0..*" Enrollment
@@ -541,7 +541,7 @@ classDiagram
     Course "1" --> "0..*" Enrollment
     Course "1" --> "0..*" Review
 
-    Payment "1" --> "1" Enrollment
+    Payment "0..*" --> "1" Enrollment
     Enrollment "1" --> "0..*" LessonProgress
     Enrollment "1" --> "0..*" QuizAttempt
 
