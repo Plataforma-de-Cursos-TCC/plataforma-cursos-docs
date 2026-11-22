@@ -6,7 +6,7 @@ Pipeline planejado para o futuro repositório de código. Este documento não cr
 
 - Backend: Laravel 13, PHP 8.3, Pest para testes e Pint para formatação.
 - Frontend: Next.js com TypeScript, ESLint, Vitest e Playwright.
-- Banco: MySQL 8, como service container no job de testes.
+- Banco: PostgreSQL 16, como service container no job de testes.
 
 ## Jobs
 
@@ -20,7 +20,7 @@ Pipeline planejado para o futuro repositório de código. Este documento não cr
 ## Gatilho e serviços
 
 - `pull_request` para `main`: roda os quatro jobs.
-- `test` sobe `mysql:8` como service, com porta 3306 e banco efêmero.
+- `test` sobe `postgres:16` como service, com porta 5432 e banco efêmero.
 - Nenhum segredo é necessário nos jobs de PR.
 
 ## Versões

@@ -1,0 +1,64 @@
+' Item 14 - Diagrama de sequência do UC003 Matricular-se em Curso. Mensagens e métodos do item 13.
+' Gerar: python3 scripts/drawio-seqgen/seqgen.py <este arquivo> especificacao/diagramas/14-sequencia-uc003.drawio
+@startuml 14-sequencia-uc003
+actor Aluno
+boundary CursoView
+control EnrollmentController
+control EnrollmentService
+control CourseRepository
+entity Enrollment
+control EnrollmentRepository
+database BD
+Aluno -> CursoView ++ : acessa a página do curso publicado
+CursoView -> EnrollmentController ++ : checkStatus(courseId)
+EnrollmentController -> EnrollmentService ++ : checkExistingEnrollment(userId, courseId)
+EnrollmentService -> EnrollmentRepository ++ : findByUserAndCourse(userId, courseId)
+EnrollmentRepository -> BD ++ : SELECT enrollments WHERE user_id AND course_id
+BD --> EnrollmentRepository : registro
+EnrollmentRepository --> EnrollmentService : enrollment (ou null)
+EnrollmentService --> EnrollmentController : enrollment (ou null)
+EnrollmentController --> CursoView : 200 (EnrollmentResource, ou null)
+alt A1 - Aluno já tem matrícula no curso (qualquer status)
+alt matrícula ativa
+CursoView --> Aluno : exibe botão "Continuar assistindo"
+else matrícula pendente
+CursoView --> Aluno : exibe botão "Matricule-se" e o resumo do UC019 da mesma matrícula, sem nova linha
+end
+else Aluno não matriculado
+CursoView --> Aluno : exibe botão "Matricular-se"
+Aluno -> CursoView ++ : aciona "Matricular-se"
+CursoView -> EnrollmentController ++ : enroll(courseId)
+EnrollmentController -> EnrollmentService ++ : enroll(userId, courseId)
+EnrollmentService -> CourseRepository ++ : findPublishedById(courseId)
+CourseRepository -> BD ++ : SELECT courses WHERE id AND status = 'published'
+BD --> CourseRepository : curso
+CourseRepository --> EnrollmentService : curso (ou null)
+alt E1 - curso despublicado durante a matrícula
+EnrollmentService --> EnrollmentController : 409 CONFLICT (curso indisponível)
+EnrollmentController --> CursoView : 409 CONFLICT
+CursoView --> Aluno : informa que o curso não está mais disponível
+else curso publicado
+alt A2 - curso gratuito (priceCents == 0)
+EnrollmentService -> Enrollment ++ : create(status: active, pricePaidCents: 0)
+Enrollment --> EnrollmentService : enrollment
+EnrollmentService -> EnrollmentRepository ++ : save(enrollment)
+EnrollmentRepository -> BD ++ : INSERT INTO enrollments (status = 'active')
+BD --> EnrollmentRepository
+EnrollmentRepository --> EnrollmentService
+EnrollmentService --> EnrollmentController : enrollment (active)
+EnrollmentController --> CursoView : 201 Created (EnrollmentResource)
+CursoView --> Aluno : libera acesso imediato e exibe em "Meus cursos"
+else curso pago (priceCents > 0)
+EnrollmentService -> Enrollment ++ : create(status: pending, pricePaidCents: priceCents)
+Enrollment --> EnrollmentService : enrollment
+EnrollmentService -> EnrollmentRepository ++ : save(enrollment)
+EnrollmentRepository -> BD ++ : INSERT INTO enrollments (status = 'pending')
+BD --> EnrollmentRepository
+EnrollmentRepository --> EnrollmentService
+EnrollmentService --> EnrollmentController : enrollment (pending)
+EnrollmentController --> CursoView : 201 Created (EnrollmentResource, pending)
+CursoView --> Aluno : abre resumo do UC019 Processar Pagamento Simulado
+end
+end
+end
+@enduml

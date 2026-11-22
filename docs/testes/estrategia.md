@@ -30,7 +30,7 @@ A suíte de testes é distribuída em três níveis complementares, equilibrando
   - **Foco:** Validam regras de negócio puras, algoritmos de cálculo (cálculo de notas de quiz, progresso percentual de aulas), validações de campos e políticas de senha, DTOs, objetos de valor e métodos utilitários sem tocar em banco de dados, rede ou serviços externos.
   - **Execução:** Extremamente rápida em memória, servindo como primeira linha de feedback durante o desenvolvimento.
 - **Testes de Integração (Camada Média):**
-  - **Backend (Feature Tests com Pest):** Testam requisições HTTP completas contra os endpoints REST da API, fluxos de autenticação JWT, controle de acesso por perfil (`assertOwnership`, middleware de RBAC), transações com o banco de dados (MySQL em container efêmero no CI), despacho de eventos e jobs assíncronos no RabbitMQ (utilizando fakes de fila).
+  - **Backend (Feature Tests com Pest):** Testam requisições HTTP completas contra os endpoints REST da API, fluxos de autenticação JWT, controle de acesso por perfil (`assertOwnership`, middleware de RBAC), transações com o banco de dados (PostgreSQL 16 em container efêmero no CI), despacho de eventos e jobs assíncronos no RabbitMQ (utilizando fakes de fila).
   - **Frontend (Vitest + Testing Library):** Validam a interação dos componentes React/Next.js, renderização condicional por estado, validações de formulário cliente e consumo mockado de endpoints da API via handlers simulados (MSW).
 - **Testes Ponta a Ponta / E2E (Topo):**
   - **Foco:** Simulam jornadas completas do usuário em navegadores reais (Chromium, Firefox, WebKit) via Playwright, validando a integração entre interface SPA e API.
@@ -78,7 +78,7 @@ A equipe adota o ciclo clássico de **TDD (Red → Green → Refactor)** como me
 | **Testes de Frontend (Unit e Componentes)** | **Vitest** + **React Testing Library** | Node.js LTS / Next.js | Execução ultrarrápida com suporte nativo a ESM e TypeScript, compatível com o ecossistema de componentes shadcn/ui e Tailwind. |
 | **Mock de APIs no Frontend** | **Mock Service Worker (MSW)** | Frontend / Testes | Intercepta requisições HTTP na camada de rede nos testes Vitest, permitindo simular contratos REST reais sem subir a API completa. |
 | **Testes Ponta a Ponta (E2E)** | **Playwright** | Chromium, Firefox, WebKit | Testes multiplataforma com gravação de traces, screenshots de falhas, suporte a fluxos assíncronos e simulação de responsividade móvel (RNF019). |
-| **Banco Efêmero de Testes** | **MySQL 8** (Service Container) | GitHub Actions CI | Garante fidelidade de tipos e restrições de integridade idênticas ao ambiente de produção. |
+| **Banco Efêmero de Testes** | **PostgreSQL 16** (Service Container) | GitHub Actions CI | Garante fidelidade de tipos e restrições de integridade idênticas ao ambiente de produção. |
 | **Banco Vetorial Efêmero** | **PostgreSQL 16 + pgvector** (Service Container) | GitHub Actions CI | Valida as consultas com `whereVectorSimilarTo()` do `ai-service` sem depender de banco SQLite incompatível com vetores. |
 
 ## 5. Testes do Tutor de IA (`ai-service`)

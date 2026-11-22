@@ -1,0 +1,53 @@
+' Item 14 - Diagrama de sequência do UC006 Cadastrar Curso: excluir ou arquivar curso (R-2, A4). Reconstruído do .drawio atual.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc006-2.puml especificacao/diagramas/14-sequencia-uc006-2.drawio
+@startuml 14-sequencia-uc006-2
+
+actor Instrutor as INS
+boundary CursoView as V
+control InstructorCourseController as C
+control CourseService as S
+control EnrollmentService as E
+entity CourseRepositoryInterface as R
+database BD
+
+INS -> V ++ : aciona "Excluir curso"
+V --> INS : exibe diálogo de confirmação de exclusão
+alt A3 - o Instrutor cancela a exclusão
+  INS -> V : aciona "Cancelar" no diálogo
+  V --> INS -- : encerra sem alterar o curso
+else o Instrutor confirma a exclusão
+  INS -> V : confirma exclusão
+  V -> C ++ : destroy(id: UUID)
+  C -> S ++ : delete(courseId, instructorId)
+  S -> E ++ : hasActiveEnrollments(courseId: UUID)
+  E --> S -- : boolean
+  alt E2 - matrículas ativas vinculadas ao curso (R-2)
+    S --> C : exclusão bloqueada
+    C --> V : 409 CONFLICT (sugere despublicar ou arquivar o curso)
+    V --> INS : informa que há alunos matriculados ativos
+  else sem matrículas ativas
+    S -> R ++ : delete(id: UUID)
+    R -> BD ++ : UPDATE courses SET deleted_at = NOW() WHERE id
+    BD --> R -- : ok
+    R --> S -- : ok
+    S --> C : ok
+    C --> V : 204 No Content
+    V --> INS : remove curso da lista de Meus cursos
+  end
+  deactivate S
+  deactivate C
+else o Instrutor arquiva o curso publicado (A4)
+  INS -> V : aciona "Arquivar" no curso publicado
+  V -> C ++ : archive(id: UUID)
+  C -> S ++ : archive(courseId, instructorId)
+  S -> R ++ : save(course: Course)
+  R -> BD ++ : UPDATE courses SET status = 'archived' WHERE id
+  BD --> R -- : ok
+  R --> S -- : ok
+  S --> C : ok
+  C --> V : 200 OK (status archived)
+  V --> INS : curso sai do catálogo e continua em Meus cursos como arquivado
+  deactivate S
+  deactivate C
+end
+@enduml

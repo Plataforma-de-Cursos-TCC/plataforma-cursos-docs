@@ -9,10 +9,7 @@ entity PasswordResetToken as PT
 database BD
 
 USU -> V ++ : abre o link, informa nova senha e confirmação
-alt A2 - o Usuário cancela
-  USU -> V : aciona "Cancelar"
-  V --> USU -- : mantém a senha atual
-else confirma
+alt confirma
   USU -> V ++ : aciona "Redefinir"
   V -> C ++ : resetPassword(req: ResetPasswordRequest)
   C -> Q ++ : rules()
@@ -23,7 +20,7 @@ else confirma
   else dados válidos
     C -> S ++ : reset(token, newPassword)
     S -> TR ++ : findValid(token)
-    TR -> BD ++ : SELECT password_reset_token WHERE tokenHash
+    TR -> BD ++ : SELECT password_reset_tokens WHERE token_hash
     BD --> TR -- : linha
     TR --> S -- : PasswordResetToken (ou nulo)
     opt o token existe
@@ -33,16 +30,16 @@ else confirma
       PT --> S -- : expirado?
     end
     alt E3 - link inexistente, adulterado ou já usado
-      S --> C : InvalidTokenException
+      S --> C : ApiException(RESET_TOKEN_INVALID)
       C --> V : 422 RESET_TOKEN_INVALID
       V --> USU : informa que o link não é válido e oferece solicitar novo link
     else E2 - link expirado (30 min, RNF017)
-      S --> C : ExpiredTokenException
+      S --> C : ApiException(RESET_TOKEN_EXPIRED)
       C --> V : 422 RESET_TOKEN_EXPIRED
       V --> USU : informa a expiração e oferece solicitar novo link
     else link válido
       S -> R ++ : save(user) com o hash da nova senha (RNF007)
-      R -> BD ++ : UPDATE users SET passwordHash
+      R -> BD ++ : UPDATE users SET password_hash
       BD --> R --
       R --> S --
       S -> PT ++ : consume()
@@ -54,4 +51,7 @@ else confirma
       V --> USU : confirma e leva ao login (UC005)
     end
   end
+else A2 - o Usuário cancela
+  USU -> V : aciona "Cancelar"
+  V --> USU -- : mantém a senha atual
 end

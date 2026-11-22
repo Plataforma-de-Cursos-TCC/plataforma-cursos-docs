@@ -39,7 +39,7 @@ else dados válidos
   BD --> R -- : linha
   R --> S -- : user (ou nulo)
   alt E1 - e-mail já em uso
-    S --> C : EmailTakenException
+    S --> C : ApiException(VALIDATION_FAILED)
     C --> V : 422 VALIDATION_FAILED (fields.email)
     V --> VIS : informa que o e-mail já está em uso
   else e-mail livre
@@ -50,10 +50,10 @@ else dados válidos
     BD --> R --
     R --> S -- : User
     opt A1 - perfil Instrutor
-      S -> IR ++ : save(profile) com o InstructorProfile vazio
-      IR -> BD ++ : INSERT instructor_profile (userId)
+      S -> IR ++ : createEmpty(userId)
+      IR -> BD ++ : INSERT instructor_profiles (user_id)
       BD --> IR --
-      IR --> S --
+      IR --> S -- : InstructorProfile
     end
     S --> C : User
     C --> V : 201 (UserResource)

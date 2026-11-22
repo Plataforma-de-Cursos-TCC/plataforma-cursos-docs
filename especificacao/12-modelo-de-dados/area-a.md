@@ -1,6 +1,6 @@
 ## 1. Área A – Acesso e conta
 
-Tabelas que sustentam o cadastro, o login, a recuperação e a alteração de senha e a edição do perfil (UC005, UC011, UC012, UC013 e UC017; RF001, RF013, RF017 e RF019). `User`, `Address` e `InstructorProfile` vêm do plano técnico; `PasswordResetToken` e `RefreshSession` são novas: a primeira guarda o link de redefinição de uso único com validade de 30 minutos (RNF017) e a segunda, o refresh token rotacionado do «manter conectado» (ADR-0008). O contador de tentativas de login (RNF008) fica no Redis, fora do modelo relacional.
+Tabelas que sustentam o cadastro, o login, a recuperação e a alteração de senha e a edição do perfil (UC005, UC011, UC012, UC013 e UC017; RF001, RF013, RF017 e RF019). `users`, `addresses` e `instructor_profiles` vêm do plano técnico; `password_reset_tokens` e `refresh_sessions` sustentam o link de redefinição de uso único com validade de 30 minutos (RNF017) e o refresh token rotacionado do «manter conectado» (ADR-0008). O contador de tentativas de login (RNF008) e a blocklist de `jti` para revogação imediata (ADR-0008) residem no Redis, fora do modelo relacional.
 
 ![Modelo lógico da Área A](../diagramas/12-modelo-de-dados-area-a.png)
 
@@ -8,59 +8,71 @@ Tabelas que sustentam o cadastro, o login, a recuperação e a alteração de se
 
 Decisões do modelo:
 
-- `InstructorProfile` existe só para o Usuário com perfil de Instrutor (UC012 A1 e UC013 A1): a linha nasce vazia no cadastro como Instrutor e usa a própria chave do `User` (PK e FK), o que faz do Instrutor e do seu perfil uma relação 1 para 1. Como Aluno e Administrador não têm linha nessa tabela, do lado do `User` a relação é `0..1`.
-- `User.locale` guarda o idioma da interface e das mensagens (RNF013). Hoje só o pt-BR está ativo, que é o padrão; en e es entram como novos valores da lista de idiomas ativos, sem migração, por isso o campo é `VARCHAR(5)` validado contra essa lista e não um `ENUM`. Os textos ficam em arquivos de tradução e a API devolve o `code` do erro, que é estável, com a mensagem no idioma do usuário.
-- `User.termsAcceptedAt` registra o aceite dos termos e da política de privacidade no cadastro (RNF020, UC012 R-4).
-- Os tokens de redefinição e de refresh são guardados só como hash (`tokenHash`); o valor original nunca é persistido.
+- **Convenção por camada e tipos PostgreSQL (ADR-0015, ADR-0017):** Tabelas e colunas persistem estritamente em inglês e snake_case (`user_id`, `password_hash`, `terms_accepted_at`, `deleted_at`). Os tipos de dados adotam os padrões nativos do PostgreSQL 16: `uuid` para identificadores primários e estrangeiros, `timestamptz` para carimbos de data/hora, `jsonb` para estruturas semiestruturadas (`social_links`) e restrições `CHECK` para campos enumerados (`role`, `status`, `theme`, `type`).
+- **InstructorProfile e promoção a Instrutor (TC236):** `instructor_profiles` existe apenas para o Usuário com perfil de Instrutor (`role = 'instructor'`). A linha nasce vazia tanto no momento do cadastro direto como Instrutor (UC012 A1) quanto no ato da promoção de perfil realizada pelo Administrador (UC008 A4, TC236), utilizando a própria chave primária do usuário (`users.id`) como chave primária e estrangeira (`PK, FK`), caracterizando relacionamento 1 para 1 do lado do Instrutor e `0..1` do lado do `users`.
+- **Unicidade de e-mail e LGPD (ADR-0014, ADR-0017):** A coluna `email` possui índice único parcial declarativo no PostgreSQL (`UNIQUE (email) WHERE anonymized_at IS NULL`). Isso garante unicidade para todas as contas ativas ou excluídas logicamente, viabilizando que a rotina de anonimização (passo irreversível pós-30 dias ou sob demanda do titular) substitua o e-mail original por identificador sintético descaracterizado preenchendo `anonymized_at`, liberando o e-mail para eventuais novos cadastros legítimos sem violar a restrição.
+- **Exclusão lógica transversal (ADR-0014):** Toda tabela de negócio da Área A (`users`, `addresses` e `instructor_profiles`) implementa a coluna `deleted_at: timestamptz` (trait `SoftDeletes` do Eloquent). Nenhuma operação da aplicação realiza exclusão física (`DELETE`) no banco transacional, garantindo integridade referencial com matrículas, histórico acadêmico e logs de auditoria, além de viabilizar a reativação de contas excluídas pelo Administrador antes da anonimização (UC018).
+- **Idioma e internacionalização (RNF013):** `users.locale` armazena o idioma preferencial da interface e das mensagens (`pt-BR` padrão; `en` e `es` são suportados sem necessidade de migração de schema). A coluna é tipada como `varchar(5)` com validação contra lista de idiomas permitidos; os textos da aplicação residem em arquivos de tradução e a API devolve código de erro estável (`code`).
+- **Termos e privacidade (RNF020, UC012 R-4):** `users.terms_accepted_at` registra o aceite obrigatório dos termos de uso e da política de privacidade no cadastro.
+- **Segurança de credenciais e tokens (RNF007, RNF017, ADR-0008):** Senhas nunca são persistidas em texto claro (somente `password_hash`). Tokens de redefinição de senha e de refresh session são gravados exclusivamente sob hash SHA-256 (`token_hash`), impedindo vazamento de credenciais mesmo em caso de dump do banco de dados.
 
 | ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
 |---|---|---|---|---|
-| **Tabela: User** | | | | |
-| id | Determinante | UUID | - | Identificador único do usuário. |
-| name | Simples | Texto | 150 | Nome completo. |
-| email | Simples | Texto | 150 | E-mail, único; usado no login. |
-| passwordHash | Simples | Texto | 255 | Hash da senha (RNF007). |
-| role | Simples | Texto | - | Perfil: student, instructor ou admin. |
-| status | Simples | Texto | - | Ativo, bloqueado ou excluído. |
-| theme | Simples | Texto | - | Tema da interface: claro, escuro ou sistema (UC013 R-7). |
-| locale | Simples | Texto | 5 | Idioma da interface e das mensagens, validado contra a lista de idiomas ativos: pt-BR (padrão; en e es entram sem migração) (RNF013). |
-| termsAcceptedAt | Simples | Data e hora | - | Quando o usuário aceitou os termos no cadastro. |
-| phone | Simples | Texto | 20 | Telefone com DDD (opcional). |
-| documentNumber | Simples | Texto | 14 | CPF (opcional). |
-| birthDate | Simples | Data | - | Data de nascimento (opcional). |
-| photo | Simples | Texto | 255 | Chave da foto de perfil no storage (opcional). |
-| anonymizedAt | Simples | Data e hora | - | Anonimização na exclusão da conta; nulo enquanto não anonimizada. |
-| **Tabela: Address** | | | | |
-| id | Determinante | UUID | - | Identificador único do endereço. |
-| userId | Simples | UUID | - | FK para `User.id`, dono do endereço. |
-| type | Simples | Texto | - | Tipo: cobrança ou entrega. |
-| street | Simples | Texto | 150 | Logradouro. |
-| number | Simples | Texto | 10 | Número. |
-| district | Simples | Texto | 80 | Bairro. |
-| city | Simples | Texto | 80 | Cidade. |
-| state | Simples | Texto | 2 | UF. |
-| zipCode | Simples | Texto | 9 | CEP. |
-| country | Simples | Texto | 2 | País (ISO 3166-1 alpha-2). |
-| isDefault | Simples | Booleano | - | Endereço padrão do usuário. |
-| complement | Simples | Texto | 60 | Complemento (opcional). |
-| **Tabela: InstructorProfile** | | | | |
-| userId | Determinante | UUID | - | PK e FK para `User.id`, do Instrutor. |
-| bio | Simples | Texto | - | Minibiografia (UC013 A1). |
-| headline | Simples | Texto | 150 | Chamada de apresentação. |
-| socialLinks | Composto | JSON | - | Links de redes sociais. |
-| **Tabela: PasswordResetToken** | | | | |
-| id | Determinante | UUID | - | Identificador único do pedido de redefinição. |
-| userId | Simples | UUID | - | FK para `User.id`. |
-| tokenHash | Simples | Texto | 64 | Hash do token enviado por e-mail. |
-| expiresAt | Simples | Data e hora | - | Validade: 30 minutos após o pedido (RNF017). |
-| createdAt | Simples | Data e hora | - | Quando o link foi gerado; um novo link invalida o anterior (UC011 A1). |
-| usedAt | Simples | Data e hora | - | Quando o token foi usado (uso único); nulo enquanto válido. |
-| **Tabela: RefreshSession** | | | | |
-| id | Determinante | UUID | - | Identificador único do refresh token. |
-| userId | Simples | UUID | - | FK para `User.id`. |
-| tokenHash | Simples | Texto | 64 | Hash do refresh token opaco. |
-| familyId | Simples | UUID | - | Agrupa os tokens de uma sessão; reuso de token consumido revoga a família. |
-| expiresAt | Simples | Data e hora | - | Validade de 30 dias. |
-| createdAt | Simples | Data e hora | - | Emissão do token. |
-| revokedAt | Simples | Data e hora | - | Revogação (rotação, logout, bloqueio ou exclusão); nulo enquanto ativo. |
-| replacedBy | Simples | UUID | - | Token que substituiu este na rotação. |
+| **Tabela: users** | | | | Entidade central de contas de usuários (alunos, instrutores e administradores). |
+| id | Determinante | uuid | - | Identificador único universal do usuário (PK). |
+| name | Simples | varchar | 150 | Nome completo do usuário. |
+| email | Simples | varchar | 150 | E-mail para login; índice único parcial (`UNIQUE WHERE anonymized_at IS NULL`). |
+| password_hash | Simples | varchar | 255 | Hash criptográfico seguro da senha (RNF007). |
+| role | Simples | text com CHECK | 20 | Perfil de acesso: `student`, `instructor` ou `admin`. |
+| status | Simples | text com CHECK | 20 | Situação cadastral: `active` (ativo), `blocked` (bloqueado) ou `deleted` (excluído). |
+| theme | Simples | text com CHECK | 20 | Tema da interface: `light` (claro), `dark` (escuro) ou `system` (sistema) (UC013 R-7). |
+| locale | Simples | varchar | 5 | Idioma da interface: `pt-BR` (padrão), validado contra idiomas ativos (RNF013). |
+| terms_accepted_at | Simples | timestamptz | - | Timestamp de aceite dos termos de uso e privacidade no cadastro (RNF020). |
+| phone | Simples | varchar | 20 | Telefone de contato com DDD (opcional). |
+| document_number | Simples | varchar | 14 | CPF formatado do titular (opcional). |
+| birth_date | Simples | date | - | Data de nascimento do usuário (opcional). |
+| photo | Simples | varchar | 255 | Chave da foto de perfil no Cloudflare R2 (opcional). |
+| anonymized_at | Simples | timestamptz | - | Timestamp da anonimização LGPD; nulo enquanto a conta não for anonimizada (ADR-0014). |
+| created_at | Simples | timestamptz | - | Timestamp de criação do registro. |
+| updated_at | Simples | timestamptz | - | Timestamp da última atualização dos dados cadastrais. |
+| deleted_at | Simples | timestamptz | - | Exclusão lógica (soft delete); nulo para contas ativas (ADR-0014). |
+| **Tabela: addresses** | | | | Endereços cadastrados pelo usuário. |
+| id | Determinante | uuid | - | Identificador único do endereço (PK). |
+| user_id | Simples | uuid | - | Chave estrangeira para `users.id`, proprietário do endereço. |
+| type | Simples | text com CHECK | 20 | Tipo do endereço: `billing` (cobrança) ou `shipping` (entrega). |
+| street | Simples | varchar | 150 | Logradouro. |
+| number | Simples | varchar | 10 | Número predial. |
+| complement | Simples | varchar | 60 | Complemento de endereço (opcional). |
+| district | Simples | varchar | 80 | Bairro. |
+| city | Simples | varchar | 80 | Município. |
+| state | Simples | char | 2 | Unidade Federativa (UF). |
+| zip_code | Simples | varchar | 9 | Código de Endereçamento Postal (CEP formatado). |
+| country | Simples | char | 2 | Código do país (ISO 3166-1 alpha-2, padrão 'BR'). |
+| is_default | Simples | boolean | - | Indica se o endereço é o padrão para o usuário. |
+| created_at | Simples | timestamptz | - | Timestamp de criação do registro. |
+| updated_at | Simples | timestamptz | - | Timestamp da última atualização. |
+| deleted_at | Simples | timestamptz | - | Exclusão lógica (soft delete); nulo para endereços ativos (ADR-0014). |
+| **Tabela: instructor_profiles** | | | | Dados complementares públicos exclusivos de instrutores (UC013 A1). |
+| user_id | Determinante | uuid | - | Chave primária e estrangeira vinculada a `users.id` (1:0..1). |
+| bio | Simples | text | - | Minibiografia profissional de apresentação (opcional). |
+| headline | Simples | varchar | 150 | Título / chamada de apresentação pública (opcional). |
+| social_links | Composto | jsonb | - | Estrutura semiestruturada de links sociais (Twitter, LinkedIn, GitHub). |
+| created_at | Simples | timestamptz | - | Timestamp de criação do perfil. |
+| updated_at | Simples | timestamptz | - | Timestamp da última modificação. |
+| deleted_at | Simples | timestamptz | - | Exclusão lógica (soft delete); nulo para perfis ativos (ADR-0014). |
+| **Tabela: password_reset_tokens** | | | | Tokens temporários para redefinição de senha (UC011). |
+| id | Determinante | uuid | - | Identificador único do pedido de redefinição (PK). |
+| user_id | Simples | uuid | - | Chave estrangeira para `users.id`. |
+| token_hash | Simples | char | 64 | Hash SHA-256 do token de redefinição de uso único (RNF017). |
+| expires_at | Simples | timestamptz | - | Validade limite de 30 minutos a partir da emissão (RNF017). |
+| created_at | Simples | timestamptz | - | Timestamp de geração; novos pedidos invalidam anteriores (UC011 A1). |
+| used_at | Simples | timestamptz | - | Timestamp em que o token foi consumido; nulo enquanto válido. |
+| **Tabela: refresh_sessions** | | | | Sessões de longa duração do recurso «manter conectado» (ADR-0008). |
+| id | Determinante | uuid | - | Identificador único da sessão de refresh (PK). |
+| user_id | Simples | uuid | - | Chave estrangeira para `users.id`. |
+| token_hash | Simples | char | 64 | Hash SHA-256 do refresh token opaco (ADR-0008). |
+| family_id | Simples | uuid | - | Identificador da família da sessão para detecção de reuso (ADR-0008). |
+| expires_at | Simples | timestamptz | - | Data e hora de expiração da sessão (30 dias). |
+| created_at | Simples | timestamptz | - | Timestamp de emissão do token. |
+| revoked_at | Simples | timestamptz | - | Data e hora de revogação explícita; nulo enquanto ativa. |
+| replaced_by | Simples | uuid | - | Identificador do token sucessor gerado na rotação. |

@@ -12,7 +12,7 @@ relacionados: [adr-0005, adr-0006]
 ---
 # ADR-0007 — Definição da stack tecnológica e bancos de dados
 
-- **Status:** aceita · **Data:** 08/10/2026 · **Decisor:** Grupo
+- **Status:** aceita · **Data:** 08/10/2026 · **Decisor:** Grupo · **Atualização:** o banco do core passou a ser PostgreSQL 16 na [ADR-0017](0017-core-em-postgresql.md)
 
 ## Contexto
 

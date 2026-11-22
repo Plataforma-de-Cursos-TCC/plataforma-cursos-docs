@@ -1,0 +1,77 @@
+' Item 14 - Diagrama de sequência do UC015 Gerenciar Aulas do Curso. Reconstruído do .drawio atual.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc015.puml especificacao/diagramas/14-sequencia-uc015.drawio
+@startuml 14-sequencia-uc015
+
+actor Instrutor as INS
+boundary AulaView as V
+control InstructorLessonController as C
+control CreateLessonRequest as Q
+control LessonService as S
+control LessonProgressService as P
+entity LessonRepositoryInterface as R
+control MediaStorageInterface as M
+control TranscriptionQueueInterface as T
+database BD
+
+INS -> V ++ : anexa vídeo e aciona "Salvar aula"
+V -> C ++ : uploadVideo(req: Request)
+C -> S ++ : uploadVideo(file: UploadedFile)
+S -> M ++ : uploadFile(file, directory: "videos")
+alt E1 - formato ou tamanho de vídeo inválido (R-2, RNF018)
+  M --> S : erro de formato/tamanho (> 500 MB)
+  S --> C : Formato/tamanho inválido
+  C --> V : 422 VALIDATION_FAILED (fields.video)
+  V --> INS : informa formato mp4/webm e limite de 500 MB
+else E2 - falha no envio ou na comunicação com storage
+  M --> S : erro de comunicação com o storage
+  S --> C : Falha de armazenamento
+  C --> V : 503 SERVICE_UNAVAILABLE (Retry-After)
+  V --> INS : informa erro e permite nova tentativa
+else envio bem-sucedido
+  M --> S : StoredFileDTO (key, mimeType, sizeBytes)
+  S --> C : StoredFileDTO
+  C --> V : 200 OK (videoKey, metadados)
+  V -> C ++ : store(moduleId, req: CreateLessonRequest)
+  C -> Q ++ : rules()
+  Q --> C -- : validação de campos obrigatórios
+  C -> S ++ : create(moduleId, instructorId, dto: LessonDTO)
+  S -> R ++ : save(lesson: Lesson)
+  R -> BD ++ : INSERT INTO lessons (video_key obrigatório, R-3)
+  BD --> R -- : ok
+  R --> S -- : lesson
+  S -> T ++ : dispatchTranscriptionJob(lessonId, videoKey)
+  T --> S -- : job enfileirado (RNF004)
+  S --> C -- : lesson
+  C --> V : 201 Created (LessonResource)
+  V --> INS : exibe aula cadastrada com vídeo
+  opt exclusão de aula (A2)
+    INS -> V ++ : aciona "Excluir aula"
+    V --> INS : exibe diálogo de confirmação
+    alt A3 - o Instrutor cancela a exclusão
+      INS -> V : aciona "Cancelar" no diálogo
+      V --> INS -- : encerra sem alterar a aula
+    else o Instrutor confirma a exclusão
+      INS -> V : confirma exclusão
+      V -> C ++ : destroy(id: UUID)
+      C -> S ++ : delete(lessonId, instructorId)
+      S -> P ++ : hasStudentProgress(lessonId: UUID)
+      P --> S -- : boolean
+      alt E4 - progresso de aluno registrado na aula (R-5)
+        S --> C : exclusão bloqueada
+        C --> V : 409 CONFLICT (aula só pode ser editada)
+        V --> INS : informa que a aula possui histórico de alunos
+      else sem progresso de alunos
+        S -> R ++ : delete(id: UUID)
+        R -> BD ++ : UPDATE lessons, lesson_materials SET deleted_at = NOW()
+        BD --> R -- : ok
+        R --> S -- : ok
+        S --> C : ok
+        C --> V : 204 No Content
+        V --> INS : remove aula e atualiza lista
+      end
+      deactivate S
+      deactivate C
+    end
+  end
+end
+@enduml

@@ -16,8 +16,8 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 | Caso de Uso (UC) | Estória de Usuário (US) | Requisito Funcional (RF) | Casos de Teste Associados | Status de Cobertura |
 |---|---|---|---|---|
 | UC001 – Conversar com Tutor de IA | US012 | RF009 | TC034, TC035, TC036 | Coberto |
-| UC002 – Responder Quiz | US011 | RF008 | TC031, TC032, TC033 | Coberto |
-| UC003 – Matricular-se em Curso | US007 | RF005 | TC019, TC020, TC021 | Coberto |
+| UC002 – Responder Quiz | US011 | RF008 | TC031, TC032, TC033, TC179, TC180, TC181, TC182, TC183, TC190, TC191, TC192, TC193 | Coberto |
+| UC003 – Matricular-se em Curso | US007 | RF005 | TC019, TC020, TC021, TC184, TC185, TC186 | Coberto |
 | UC004 – Cadastrar Quiz com Gabarito | US010 | RF007 | TC028, TC029, TC030 | Coberto |
 | UC005 – Realizar Login | US001 | RF017 | TC001, TC002, TC003, TC065, TC066, TC067, TC068, TC069, TC070, TC071 | Coberto |
 | UC006 – Cadastrar Curso | US004 | RF002 | TC010, TC011, TC012 | Coberto |
@@ -33,8 +33,8 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 | UC016 – Acessar Área Protegida por Perfil | US015 | RF018 | TC043, TC044, TC045 | Coberto |
 | UC017 – Alterar Senha | US021 | RF019 | TC061, TC062, TC064, TC088, TC089 | Coberto |
 | UC018 – Excluir e Anonimizar Usuário | US016 | RF012 | TC063 | Coberto |
-| UC019 – Processar Pagamento Simulado | US018 | RF014 | TC052, TC053, TC054 | Coberto |
-| UC020 – Consultar Catálogo de Cursos | US019 | RF015 | TC055, TC056, TC057 | Coberto |
+| UC019 – Processar Pagamento Simulado | US018 | RF014 | TC052, TC053, TC187, TC188, TC189 | Coberto |
+| UC020 – Consultar Catálogo de Cursos | US019 | RF015 | TC055, TC056, TC057, TC178, TC194, TC195, TC196, TC197 | Coberto |
 
 *Os casos de UC005, UC011, UC012, UC013 e UC017 vêm do [item 15](../../especificacao/15-casos-de-teste/area-a.md), que é a fonte desses casos; o TC008 foi descartado porque o UC013 não permite editar o e-mail.*
 

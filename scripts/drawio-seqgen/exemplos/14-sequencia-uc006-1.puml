@@ -1,0 +1,58 @@
+' Item 14 - Diagrama de sequência do UC006 Cadastrar Curso: cadastro e publicação. Reconstruído do .drawio atual.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc006-1.puml especificacao/diagramas/14-sequencia-uc006-1.drawio
+@startuml 14-sequencia-uc006-1
+
+actor Instrutor as INS
+boundary CursoView as V
+control InstructorCourseController as C
+control CreateCourseRequest as Q
+control CourseService as S
+entity Course as CO
+entity CourseRepositoryInterface as R
+database BD
+
+alt A3 - o Instrutor cancela o cadastro
+  INS -> V ++ : aciona "Cancelar"
+  V --> INS -- : descarta alterações e retorna a Meus cursos
+else o Instrutor salva o curso
+  INS -> V ++ : aciona "Salvar curso"
+  V -> C ++ : store(req: CreateCourseRequest)
+  C -> Q ++ : rules()
+  Q --> C -- : erros de validação
+  alt E1 - título, descrição ou preço ausentes (R-1 não se aplica)
+    C --> V : 422 VALIDATION_FAILED (fields)
+    V --> INS : indica campos obrigatórios
+  else dados válidos
+    C -> S ++ : create(instructorId, dto: CourseDTO)
+    S -> R ++ : save(course: Course)
+    R -> BD ++ : INSERT INTO courses (status draft, R-1)
+    BD --> R -- : ok
+    R --> S -- : course
+    S --> C -- : course
+    C --> V : 201 Created (CourseResource, status draft)
+    V --> INS : exibe curso em rascunho
+    opt publicação do curso
+      INS -> V ++ : aciona "Publicar curso"
+      V -> C ++ : publish(id: UUID)
+      C -> S ++ : publish(courseId, instructorId)
+      S -> CO ++ : canBePublished()
+      CO --> S -- : boolean
+      alt E4 - curso sem módulos ou aulas
+        S --> C : curso permanece em rascunho
+        C --> V : 422 VALIDATION_FAILED (indica o que falta)
+        V --> INS : informa que o curso precisa de módulos e aulas
+      else curso com módulos e aulas
+        S -> CO ++ : publish()
+        CO --> S -- : status = published
+        S -> R ++ : save(course: Course)
+        R -> BD ++ : UPDATE courses SET status = published
+        BD --> R -- : ok
+        R --> S -- : course
+        S --> C -- : course
+        C --> V -- : 200 OK (CourseResource, status published)
+        V --> INS -- : confirma publicação no catálogo
+      end
+    end
+  end
+end
+@enduml

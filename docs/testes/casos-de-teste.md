@@ -7,9 +7,11 @@ atualizado: 2026-10-08
 ---
 # Casos de teste
 
-64 casos de teste (TC001–TC064), derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US021) possuem cobertura de testes associada.
+66 casos de teste, derivados dos critérios de aceite do item 7 (Dado/Quando/Então) e dos fluxos principal, alternativo e de exceção dos casos de uso do item 10, no padrão Cenário, CT, Entradas e Resultado Esperado. Todos os casos de uso (UC001–UC020) e estórias de usuário (US001–US021) possuem cobertura de testes associada.
 
 > **Item 15 da especificação:** os casos da Área A (UC005, UC011, UC012, UC013 e UC017) foram revisados e ampliados em [especificacao/15-casos-de-teste/area-a.md](../../especificacao/15-casos-de-teste/area-a.md), que é a fonte vigente para esses UCs. O TC008 foi descartado (editava o e-mail, que o UC013 não permite) e o TC060 foi reclassificado como exceção E3.
+
+> **Item 15 da especificação (Área C):** os casos de UC002, UC003, UC009, UC010, UC019 e UC020 estão em [especificacao/15-casos-de-teste/area-c.md](../../especificacao/15-casos-de-teste/area-c.md), que é a fonte vigente para esses UCs. Os TC019 a TC033, TC040 a TC042 e TC052 a TC057 desta tabela ficam como histórico.
 
 Padrão TE6. Os casos nascem dos critérios de aceite das estórias (ADR-0002) e das especificações de casos de uso.
 
@@ -51,6 +53,7 @@ Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem 
 | TC031 | UC002 | Positivo | Dado que completei as aulas do módulo | 1. Quando envio as respostas do quiz. | Então recebo a nota calculada e o resultado fica salvo no meu progresso. | Fluxo básico (passos 1-6) |
 | TC032 | UC002 | Negativo | Dado que não respondo todas as questões | 1. Quando tento enviar. | Então recebo aviso de questão pendente e o envio é bloqueado. | Fluxo de exceção E1 |
 | TC033 | UC002 | Positivo | Dado que já respondi o quiz antes | 1. Quando acesso de novo. | Então vejo meu resultado anterior, sem poder refazer salvo se o instrutor permitir. | Fluxo alternativo A1 |
+| TC179 | UC002 | Negativo | Dado que sou Aluno matriculado com todas as aulas do módulo concluídas | 1. Quando acesso GET /quizzes/{id} antes de submeter as respostas e inspeciono o corpo retornado. | Então a resposta 200 OK (QuizResource) omite qualquer campo de gabarito ou indicação de alternativa correta, que só aparece após o envio em GET /quizzes/{id}/attempt/result. | Regra R-4 / Gabarito oculto antes do envio |
 | TC034 | UC001 | Positivo | Dado que estou numa aula do curso em que sou matriculado | 1. Quando pergunto algo relacionado ao conteúdo. | Então recebo resposta com citação da aula e do timestamp de origem. | Fluxo básico (passos 1-6) |
 | TC035 | UC001 | Negativo | Dado que pergunto algo fora do conteúdo do curso | 1. Quando envio a mensagem. | Então o tutor responde que não tem essa informação no material do curso. | Fluxo alternativo A1 |
 | TC036 | UC001 | Negativo | Dado que excedo o limite de mensagens por período (rate limit) | 1. Quando tento enviar nova pergunta. | Então recebo aviso de limite atingido. | Fluxo de exceção E2 |
@@ -72,10 +75,10 @@ Colunas conforme o esqueleto do arquivo; a coluna **Cenário** mantém a origem 
 | TC090 | UC011 | Negativo | Dado que informo uma nova senha fora da política | 1. Quando tento definir a nova senha. | Então o sistema recusa a redefinição apontando a regra (R-3) e mantém o link válido. | Fluxo de exceção E4 |
 | TC052 | UC019 | Positivo | Dado que escolhi um curso pago | 1. Quando confirmo o pagamento simulado. | Então o pagamento é registrado como aprovado e a matrícula é criada. | Critério 1 (US018) / Fluxo básico (passos 1-5) |
 | TC053 | UC019 | Negativo | Dado que informo dados de pagamento simulado inválidos | 1. Quando confirmo o pagamento simulado. | Então o pagamento é recusado, a matrícula permanece pendente, sem liberar o acesso ao conteúdo, e posso tentar novamente na mesma matrícula. | Critério 2 (US018) / Fluxo de exceção E1 |
-| TC054 | UC019 | Positivo | Dado que o curso é gratuito | 1. Quando solicito a matrícula. | Então nenhum pagamento é exigido e o acesso é liberado diretamente. | Critério 3 (US018) / Regra R-1 |
 | TC055 | UC020 | Positivo | Dado que existem cursos publicados e em rascunho | 1. Quando acesso o catálogo. | Então vejo apenas cursos publicados, com título, instrutor e preço. | Critério 1 (US019) / Fluxo básico (passos 1-2) |
 | TC056 | UC020 | Positivo | Dado que seleciono uma categoria | 1. Quando aplico o filtro. | Então a lista mostra somente cursos dessa categoria. | Critério 2 (US019) / Fluxo básico (passos 3-4) |
-| TC057 | UC020 | Positivo | Dado que uma categoria não tem cursos publicados | 1. Quando filtro por essa categoria. | Então vejo a mensagem "Nenhum curso encontrado nesta categoria." com botão para ver todos. | Critério 3 (US019) / Fluxo de exceção E2 |
+| TC057 | UC020 | Positivo | Dado que seleciono uma categoria que não possui cursos em status published | 1. Quando filtro por essa categoria. | Então a API responde 200 OK com array de dados vazio (data: []) e a interface exibe a mensagem "Nenhum curso encontrado nesta categoria." com botão para ver todos. | Critério 3 (US019) / Fluxo de exceção E2 |
+| TC178 | UC020 | Positivo | Dado que a base de dados não possui nenhum curso em status published | 1. Quando acesso o catálogo de cursos sem parâmetros de busca. | Então a API responde 200 OK com array de dados vazio (data: []) e a interface exibe a mensagem "Nenhum curso disponível no momento.". | Critério 1 (US019) / Fluxo de exceção E1 |
 | TC058 | UC013 | Positivo | Dado que estou logado como Instrutor | 1. Quando preencho minibiografia e links e salvo. | Então o perfil é atualizado e exibido na página do curso. | Critério 1 (US020) / Fluxo alternativo A1 |
 | TC059 | UC013 | Negativo | Dado que informo um link em formato inválido | 1. Quando salvo. | Então o sistema recusa e indica o campo com mensagem de erro. | Critério 2 (US020) / Fluxo de exceção E1 |
 | TC060 | UC013 | Negativo | Dado que sou Aluno ou Administrador | 1. Quando tento editar campos exclusivos de perfil de Instrutor. | Então o acesso aos campos é bloqueado e a alteração é negada. | Critério 3 (US020) / Regra R-1 |

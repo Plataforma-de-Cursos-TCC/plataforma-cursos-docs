@@ -5,7 +5,7 @@
 - **Descrição:** o Aluno responde às questões do quiz de um módulo e recebe a nota calculada automaticamente com base no gabarito (US011, RF008).
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; o quiz do módulo estar cadastrado com gabarito (UC004).
 - **Pós-condições:** respostas do Aluno e nota calculada salvas no seu progresso; resultado disponível para consulta posterior.
-- **Regras de negócio:** R-1 o envio só é aceito com todas as questões respondidas; R-2 a nota é calculada automaticamente comparando as respostas do Aluno com o gabarito; R-3 o Aluno só pode refazer o quiz se o Instrutor permitir.
+- **Regras de negócio:** R-1 o envio só é aceito com todas as questões respondidas; R-2 a nota é calculada automaticamente comparando as respostas do Aluno com o gabarito; R-3 o Aluno só pode refazer o quiz se o Instrutor permitir; R-4 as respostas corretas só aparecem depois do envio do quiz; antes do envio, a API não devolve o gabarito.
 - **Protótipo(s) de tela:** tela de quiz com questões de múltipla escolha e botão de envio. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno acessa o quiz do módulo, liberado pelo sistema somente após a conclusão das aulas do módulo. (A-1)
@@ -41,7 +41,7 @@
     *Figura 0 – UC002, fluxo alternativo A1: resultado salvo com opção de refazer*
   - **A2 – O Aluno salva um rascunho e retoma depois**
     - A-2.1 O Aluno aciona “Salvar rascunho” antes de enviar todas as respostas.
-    - A-2.2 O sistema salva as respostas parciais vinculadas ao Aluno e ao quiz.
+    - A-2.2 O sistema grava as respostas parciais numa tentativa com status draft, uma por Aluno e quiz; se já existe rascunho, atualiza-o.
     - A-2.3 Este caso de uso retorna ao fluxo básico (passo 2) na próxima vez que o Aluno acessar o quiz.
 
     ![rascunho salvo do quiz](prototipos/png/UC002/UC002-A2-1.png)
@@ -98,10 +98,10 @@
 
   *Figura 0 – UC003, fluxo básico: meus cursos do aluno após matrícula*
 - **Fluxos alternativos:**
-  - **A1 – O Aluno já está matriculado no curso**
-    - A-1.1 O sistema identifica matrícula existente do Aluno para esse curso.
-    - A-1.2 O sistema exibe o botão “Continuar assistindo” no lugar de “Matricular-se”.
-    - A-1.3 Este caso de uso é finalizado.
+  - **A1 – O Aluno já tem matrícula no curso**
+    - A-1.1 O sistema identifica matrícula existente do Aluno para esse curso, em qualquer status.
+    - A-1.2 Se a matrícula está ativa, o sistema exibe o botão “Continuar assistindo” no lugar de “Matricular-se” e este caso de uso é finalizado.
+    - A-1.3 Se a matrícula está pendente (curso pago sem pagamento aprovado), o sistema exibe “Matricule-se”; ao acioná-lo, retoma o UC019 para a mesma matrícula, sem criar nova linha.
 
     ![aluno matriculado: Continuar assistindo](prototipos/png/UC003/UC003-A1-1.png)
 
@@ -128,12 +128,12 @@
     *Figura 0 – UC003, fluxo de exceção E1: curso indisponível: aviso e sem matrícula*
   - **E2 – Pagamento não concluído**
     - E-2.1 O UC019 termina sem pagamento aprovado (recusa ou cancelamento pelo Aluno).
-    - E-2.2 O sistema mantém a matrícula pendente, sem ativá-la, e mantém o botão “Matricular-se”.
+    - E-2.2 O sistema mantém a matrícula pendente, sem ativá-la, e mantém o botão “Matricule-se”.
     - E-2.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
-    ![página do curso com aviso Pagamento recusado e botão Matricular-se](prototipos/png/UC019/UC019-E1-1.png)
+    ![página do curso com aviso Pagamento recusado e botão Matricule-se](prototipos/png/UC019/UC019-E1-1.png)
 
-    *Figura 0 – UC003, fluxo de exceção E2: página do curso com aviso “Pagamento recusado.” e botão “Matricular-se”*
+    *Figura 0 – UC003, fluxo de exceção E2: página do curso com aviso “Pagamento recusado.” e botão “Matricule-se”*
 
 ## 12. UC009 – Assistir Aula
 
@@ -142,7 +142,7 @@
 - **Descrição:** o Aluno, ou o Visitante no caso de aula prévia, reproduz o vídeo de uma aula do curso em que está matriculado, com o progresso registrado automaticamente, e pode abrir o chat com o Tutor de IA a qualquer momento (US008, US009, RF006). UC001 «extend» UC009.
 - **Pré-condições:** o Aluno ter realizado login na plataforma; a aula estar cadastrada com vídeo.
 - **Pós-condições:** progresso de visualização do Aluno atualizado; aula marcada como concluída quando o vídeo termina.
-- **Regras de negócio:** R-1 só o Aluno matriculado assiste às aulas do curso, exceto as aulas marcadas como prévia, que podem ser assistidas sem matrícula; R-2 o progresso é salvo em segundos assistidos, e não só como concluído ou não concluído; R-3 o ponto salvo é o mesmo em qualquer dispositivo.
+- **Regras de negócio:** R-1 só o Aluno matriculado assiste às aulas do curso, exceto as aulas marcadas como prévia, que podem ser assistidas sem matrícula; R-2 o progresso é salvo em segundos assistidos, e não só como concluído ou não concluído; R-3 o ponto salvo é o mesmo em qualquer dispositivo; R-4 o progresso da aula não depende do quiz; R-5 o quiz do módulo é liberado quando todas as aulas do módulo estão concluídas.
 - **Protótipo(s) de tela:** mesma tela do UC001: reprodução da videoaula com o chat do Tutor de IA na lateral. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno acessa a aula dentro do curso. (A-2) (E-1)
@@ -304,11 +304,11 @@
   - **E1 – Pagamento simulado recusado**
     - E-1.1 O sistema identifica falha no processamento do pagamento simulado.
     - E-1.2 O sistema informa o erro ao Aluno, registra o pagamento como recusado e não ativa a matrícula.
-    - E-1.3 O sistema volta à página do curso com o botão “Matricular-se” e este caso de uso retorna ao fluxo básico (passo 1).
+    - E-1.3 O sistema volta à página do curso com o botão “Matricule-se” e este caso de uso retorna ao fluxo básico (passo 1).
 
-    ![página do curso com aviso Pagamento recusado e botão Matricular-se](prototipos/png/UC019/UC019-E1-1.png)
+    ![página do curso com aviso Pagamento recusado e botão Matricule-se](prototipos/png/UC019/UC019-E1-1.png)
 
-    *Figura 0 – UC019, fluxo de exceção E1: página do curso com aviso “Pagamento recusado.” e botão “Matricular-se”*
+    *Figura 0 – UC019, fluxo de exceção E1: página do curso com aviso “Pagamento recusado.” e botão “Matricule-se”*
   - **E2 – Curso indisponível ou preço alterado**
     - E-2.1 O sistema identifica que o curso foi despublicado ou teve o preço alterado depois de o resumo ser exibido.
     - E-2.2 O sistema não registra pagamento, informa o motivo e, se o preço mudou, exibe o novo resumo.

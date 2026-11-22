@@ -1,0 +1,75 @@
+' Item 14 - Diagrama de sequência do UC019 Processar Pagamento Simulado. Mensagens e métodos do item 13.
+' Gerar: python3 scripts/drawio-seqgen/seqgen.py <este arquivo> especificacao/diagramas/14-sequencia-uc019.drawio
+@startuml 14-sequencia-uc019
+actor Aluno
+boundary PagamentoModal
+control PaymentController
+control PaymentSimulatedRequest
+control PaymentService
+control EnrollmentService
+entity Payment
+control PaymentRepository
+entity Enrollment
+control EnrollmentRepository
+database BD
+Aluno -> PagamentoModal ++ : visualiza resumo do pagamento (título e valor)
+alt A1 - Aluno cancela no resumo
+Aluno -> PagamentoModal ++ : aciona "Cancelar"
+PagamentoModal --> Aluno : fecha o modal sem cobrança; matrícula mantida pendente
+else Aluno confirma pagamento
+Aluno -> PagamentoModal ++ : aciona "Confirmar pagamento"
+PagamentoModal -> PaymentController ++ : pay(enrollmentId, req)
+PaymentController -> PaymentSimulatedRequest ++ : rules()
+PaymentSimulatedRequest --> PaymentController : dados validados
+PaymentController -> PaymentService ++ : processSimulatedPayment(enrollmentId, dto)
+PaymentService -> EnrollmentService ++ : getEnrollment(enrollmentId)
+EnrollmentService -> EnrollmentRepository ++ : findById(enrollmentId)
+EnrollmentRepository -> BD ++ : SELECT enrollments WHERE id
+BD --> EnrollmentRepository : enrollment
+EnrollmentRepository --> EnrollmentService : enrollment
+EnrollmentService --> PaymentService : enrollment
+alt E3 - matrícula já ativa (duplo clique)
+PaymentService --> PaymentController : 409 CONFLICT (matrícula já ativa)
+PaymentController --> PagamentoModal : 409 CONFLICT
+PagamentoModal --> Aluno : informa que o aluno já está matriculado
+else matrícula pendente
+PaymentService -> PaymentService : validateCourseAvailability(courseId, price)
+alt E2 - curso despublicado ou preço alterado
+PaymentService --> PaymentController : 409 CONFLICT (preço alterado ou indisponível)
+PaymentController --> PagamentoModal : 409 CONFLICT
+PagamentoModal --> Aluno : exibe novo valor ou encerra se indisponível
+else dados consistentes
+PaymentService -> PaymentService : simulateGateway(amountCents)
+alt E1 - pagamento simulado recusado
+PaymentService -> Payment ++ : create(enrollment, amountCents, status: declined)
+Payment --> PaymentService : payment
+PaymentService -> PaymentRepository ++ : save(payment)
+PaymentRepository -> BD ++ : INSERT INTO payments (status ='declined')
+BD --> PaymentRepository
+PaymentRepository --> PaymentService
+PaymentService --> PaymentController : 422 PAYMENT_DECLINED
+PaymentController --> PagamentoModal : 422 PAYMENT_DECLINED
+PagamentoModal --> Aluno : aviso "Pagamento recusado"; matrícula permanece pendente
+else pagamento aprovado
+PaymentService -> Payment ++ : create(enrollment, amountCents, status: approved)
+Payment --> PaymentService : payment
+PaymentService -> PaymentRepository ++ : save(payment)
+PaymentRepository -> BD ++ : INSERT INTO payments (status ='approved')
+BD --> PaymentRepository
+PaymentRepository --> PaymentService
+PaymentService -> EnrollmentService ++ : activateEnrollment(enrollmentId)
+EnrollmentService -> Enrollment ++ : activate()
+Enrollment --> EnrollmentService : status = active
+EnrollmentService -> EnrollmentRepository ++ : save(enrollment)
+EnrollmentRepository -> BD ++ : UPDATE enrollments SET status = 'active'
+BD --> EnrollmentRepository
+EnrollmentRepository --> EnrollmentService
+EnrollmentService --> PaymentService : enrollment ativa
+PaymentService --> PaymentController : payment aprovado
+PaymentController --> PagamentoModal : 200 OK (PaymentResource)
+PagamentoModal --> Aluno : confirma pagamento, matrícula ativada e aulas liberadas
+end
+end
+end
+end
+@enduml

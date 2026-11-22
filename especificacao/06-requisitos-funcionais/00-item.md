@@ -7,7 +7,7 @@
 | RF001 | Gerenciar conta de usuário (cadastro e edição dos dados do perfil) | Visitante, Usuário | Sprint 1 |
 | RF002 | Gerenciar cadastro do curso | Instrutor | Sprint 2 |
 | RF003 | Gerenciar módulos do curso | Instrutor | Sprint 2 |
-| RF004 | Gerenciar aulas do curso (com upload de vídeo) | Instrutor | Sprint 2 |
+| RF004 | Gerenciar aulas do curso (com upload de vídeo e material complementar) | Instrutor | Sprint 2 |
 | RF005 | Registrar matrícula do aluno no curso | Aluno | Sprint 1 |
 | RF006 | Registrar progresso de aula assistida | Aluno | Sprint 2 |
 | RF007 | Gerenciar quizzes do curso | Instrutor | Sprint 3 |
@@ -23,5 +23,6 @@
 | RF017 | Realizar login de usuário | Usuário | Sprint 1 |
 | RF018 | Controlar o acesso às áreas protegidas por perfil | Usuário | Sprint 1 |
 | RF019 | Alterar senha | Usuário | Sprint 1 |
+| RF020 | Comprar pacote de créditos extras para o Tutor de IA | Aluno | Sprint 4 |
 
 A prioridade e a justificativa de cada requisito, e o caso de uso que o detalha, estão na tabela de rastreabilidade do item 9.

@@ -7,6 +7,9 @@ atualizado: 2026-10-09
 ---
 # Pesquisa — sessão JWT em cookie e estado de listagens
 
+> [!NOTE]
+> **Atualização (ADR-0015):** o parâmetro de paginação na API REST e no front-end passou de `per_page` para `perPage` (convenção de camelCase para API/código e snake_case para banco de dados). Consulte a [ADR-0015](../adr/0015-convencao-de-nomes-por-camada.md).
+
 Base para ADR-0008 (sessão e autenticação) e ADR-0009 (listagens, paginação e contrato de API). Esta pesquisa diz **como** implementar as decisões já tomadas. Não rediscute as decisões.
 
 Stack de referência (ADR-0007): Laravel 13 com PHP 8.3 na API REST, Next.js em SPA (sem Server Components e sem Server Actions), React Query, MySQL 8, Redis e RabbitMQ.

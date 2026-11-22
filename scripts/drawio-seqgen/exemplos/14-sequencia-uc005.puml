@@ -15,6 +15,7 @@ control AuthController as C
 control AuthService as S
 control LoginThrottle as T
 control UserRepository as R
+control RefreshSessionRepository as RS
 entity User as U
 control JwtGuard as J
 database BD
@@ -33,7 +34,7 @@ S -> T ++ : isBlocked(email)
 T --> S -- : bloqueado?
 
 alt E4 - 5 tentativas inválidas (RNF008): bloqueado por 15 min
-  S --> C : TooManyAttemptsException
+  S --> C : ApiException(TOO_MANY_REQUESTS)
   C --> V : 429 TOO_MANY_REQUESTS + Retry-After
   V --> USU : informa o bloqueio e o tempo restante
 else dentro do limite
@@ -48,11 +49,11 @@ else dentro do limite
   alt E1 - e-mail inexistente ou senha incorreta
     S -> T ++ : recordFailure(email)
     T --> S --
-    S --> C : InvalidCredentialsException
+    S --> C : ApiException(UNAUTHENTICATED)
     C --> V : 401 UNAUTHENTICATED
     V --> USU : mensagem genérica, sem revelar se o e-mail existe (R-1)
   else E3 - credenciais válidas e conta bloqueada pelo Administrador
-    S --> C : AccountBlockedException
+    S --> C : ApiException(ACCOUNT_BLOCKED)
     C --> V : 403 ACCOUNT_BLOCKED
     V --> USU : informa que a conta está bloqueada
   else credenciais válidas
@@ -61,10 +62,10 @@ else dentro do limite
     S -> J ++ : issue(user)
     J --> S -- : jwt (1 h)
     opt rememberMe verdadeiro
-      S -> J ++ : issueRefresh(user)
-      J -> BD ++ : INSERT refresh_session (tokenHash, familyId)
-      BD --> J --
-      J --> S -- : RefreshSession
+      S -> RS ++ : create(userId, tokenHash, familyId)
+      RS -> BD ++ : INSERT refresh_sessions (token_hash, family_id)
+      BD --> RS --
+      RS --> S -- : RefreshSession
     end
     S --> C : AuthTokens
     C --> V : 200 (UserResource) com cookies HttpOnly (UC016 direciona por perfil)

@@ -55,6 +55,11 @@ Decisão: [ADR-0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md).
 | D4 | **Diagramas em draw.io**: fonte `.drawio` nos itens 4 (BPMN 2.0), 9 e 11 (UML) do RA1 e nos itens 12 a 14 do RA2, PNG exportado da fonte | [0012](docs/adr/0012-diagramas-do-ra1-em-drawio.md) (substitui a [0004](docs/adr/0004-diagramas-como-codigo.md)), [0013](docs/adr/0013-diagramas-do-ra2-em-drawio.md) (substitui a [0011](docs/adr/0011-diagramas-do-ra2-em-plantuml.md)) |
 | D5 | **Tutor de IA como ator sistêmico** | [0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md) |
 | D6 | **Divisão por áreas A a D**, uma por integrante | [0006](docs/adr/0006-divisao-por-areas.md) |
+| D14 | **Exclusão lógica e anonimização separada**: `deleted_at` em tabelas de negócio; exclusão de usuário reversível e anonimização como passo separado para LGPD | [0014](docs/adr/0014-exclusao-logica-e-anonimizacao.md) |
+| D15 | **Convenção de nomes por camada**: banco em `snake_case`, API e código em `camelCase` (`perPage`); substitui o nome do item 4 da ADR-0009 | [0015](docs/adr/0015-convencao-de-nomes-por-camada.md) |
+| D16 | **Retenção de logs e auditoria**: auditoria de 12 meses no PostgreSQL e 5 anos arquivada no R2; logs da aplicação por 90 dias | [0016](docs/adr/0016-retencao-de-logs-e-auditoria.md) |
+| D17 | **Core em PostgreSQL 16**: mesma instância do `ai-service`, databases `core` e `ai` separados; substitui o MySQL da ADR-0007 | [0017](docs/adr/0017-core-em-postgresql.md) |
+| D18 | **Core como monólito modular**: módulos Auth, Authoring, Learning, Admin e Analytics em arquitetura modular única; apenas três serviços no sistema | [0018](docs/adr/0018-core-como-monolito-modular.md) |
 
 ## 5. Áreas
 

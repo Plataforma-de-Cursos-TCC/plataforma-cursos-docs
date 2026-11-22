@@ -251,8 +251,8 @@
     ![erro "Informe um link válido" no perfil do Instrutor](prototipos/png/UC013/UC013-E2-1.png)
 
     *Figura 0 – UC013, fluxo de exceção E2: erro "Informe um link válido" no perfil do Instrutor*
-  - **E3 – Edição de perfil de Instrutor por quem não é o dono**
-    - E-3.1 O sistema identifica que o Usuário autenticado tenta alterar dados de perfil de Instrutor de outra conta (Aluno ou Administrador).
+  - **E3 – o Usuário é Aluno ou Administrador -> 403 FORBIDDEN**
+    - E-3.1 O sistema identifica que o Usuário autenticado é Aluno ou Administrador e tenta alterar dados de perfil de Instrutor.
     - E-3.2 O sistema nega o acesso, não altera nenhum dado e informa que a ação não é permitida.
     - E-3.3 Este caso de uso é finalizado.
 
