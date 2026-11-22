@@ -9,7 +9,7 @@ Tabelas que sustentam a interação do Aluno com o assistente pedagógico no con
 Decisões do modelo:
 
 - **Banco unificado em PostgreSQL 16 (ADR-0017):** todo o armazenamento transacional do core reside no PostgreSQL 16 (database `core`), unificando a tecnologia de banco com a instância gerenciada do microsserviço físico `ai-service` (database `ai` com extensão `pgvector`). Cada serviço mantém seu banco lógico, usuário e permissões isoladas.
-- **Convenção de nomes por camada (ADR-0015 / C10):** todas as tabelas e colunas relacionais são estruturadas em inglês e no padrão `snake_case` (`user_id`, `course_id`, `created_at`, `deleted_at`).
+- **Convenção de nomes por camada (ADR-0015):** todas as tabelas e colunas relacionais são estruturadas em inglês e no padrão `snake_case` (`user_id`, `course_id`, `created_at`, `deleted_at`).
 - **Exclusão lógica em todo o sistema (ADR-0014):** todas as tabelas de negócio (`conversations`, `messages`, `tutor_credit_packs`) possuem a coluna `deleted_at` (`timestamptz` nulo por padrão, trait `SoftDeletes` do Eloquent). Nenhuma operação de domínio executa `DELETE` físico.
 - **Histórico e cota do Tutor de IA (UC001, RF009, RF020, RNF003):** cada conversa é estritamente vinculada a um Aluno (`user_id`), a um curso (`course_id`) e à aula assistida (`lesson_id`). A tabela `conversations` possui a restrição de unicidade `UNIQUE(user_id, lesson_id)`, garantindo exatamente uma conversa aberta por aluno em cada aula. A presença redundante de `course_id` em `conversations` é um desvio deliberado e justificado da 3FN: viabiliza filtragem relacional imediata no pipeline RAG do `ai-service` (`where('course_id', $courseId)`, RNF004) sem necessidade de junções de múltiplas tabelas transacionais a cada mensagem enviada.
 - **Créditos extras do Tutor de IA (`tutor_credit_packs`, RF020, RNF022):** tabela que registra pacotes adicionais de mensagens (ex.: 50 mensagens, RNF022) comprados pelo Aluno através de pagamento simulado (`payment_id` referenciando `payments`, com `purpose = 'tutor_credits'`). A cota horária regular de 20 mensagens por Aluno é controlada por janela deslizante no Redis (RNF022); ao esgotar a cota horária, o sistema debita automaticamente os envios do pacote de créditos extras ativo (`messages_used`).
@@ -25,35 +25,35 @@ Decisões do modelo:
 | ATRIBUTO | CLASSE | DOMÍNIO | TAMANHO | DESCRIÇÃO |
 |---|---|---|---|---|
 | **Tabela: conversations** | | | | Conversa do Aluno com o Tutor de IA contextualizada na aula (UC001, RF009). Restrição de unicidade: `UNIQUE(user_id, lesson_id)`. |
-| id | Determinante | UUID | - | Identificador único da conversa. |
-| user_id | Simples | UUID | - | FK para `users.id` (Área A), identificando o Aluno dono da conversa. |
-| course_id | Simples | UUID | - | FK para `courses.id` (Área B), curso ao qual a conversa pertence (desvio justificado da 3FN para isolamento RAG). |
-| lesson_id | Simples | UUID | - | FK para `lessons.id` (Área B), aula específica que fornece o contexto pedagógico. |
-| created_at | Simples | Data e hora | TIMESTAMPTZ | Data e hora de criação da conversa. |
-| deleted_at | Simples | Data e hora | TIMESTAMPTZ | Data e hora de exclusão lógica (nulo para conversas ativas, ADR-0014). |
+| id | Determinante | uuid | - | Identificador único da conversa. |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o Aluno dono da conversa. |
+| course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso ao qual a conversa pertence (desvio justificado da 3FN para isolamento RAG). |
+| lesson_id | Simples | uuid | - | FK para `lessons.id` (Área B), aula específica que fornece o contexto pedagógico. |
+| created_at | Simples | timestamptz | - | Data e hora de criação da conversa. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para conversas ativas, ADR-0014). |
 | **Tabela: messages** | | | | Mensagem individual trocada na conversa com o Tutor de IA (UC001). |
-| id | Determinante | UUID | - | Identificador único da mensagem. |
-| conversation_id | Simples | UUID | - | FK para `conversations.id`, indicando a conversa à qual a mensagem pertence. |
-| role | Simples | Texto | CHECK | Papel do emissor: `user` (pergunta do Aluno) ou `assistant` (resposta do Tutor de IA). |
-| content | Simples | Texto longo | TEXT | Conteúdo textual da pergunta ou da resposta gerada pelo Tutor. |
-| video_timestamp_seconds | Simples | Inteiro | INTEGER | Segundo exato do vídeo da aula referenciado na resposta ou na pergunta (opcional, RF009). |
-| created_at | Simples | Data e hora | TIMESTAMPTZ | Data e hora de envio ou geração da mensagem. |
-| deleted_at | Simples | Data e hora | TIMESTAMPTZ | Data e hora de exclusão lógica (nulo para mensagens ativas, ADR-0014). |
+| id | Determinante | uuid | - | Identificador único da mensagem. |
+| conversation_id | Simples | uuid | - | FK para `conversations.id`, indicando a conversa à qual a mensagem pertence. |
+| role | Simples | text com CHECK | - | Papel do emissor: `user` (pergunta do Aluno) ou `assistant` (resposta do Tutor de IA). |
+| content | Simples | text | - | Conteúdo textual da pergunta ou da resposta gerada pelo Tutor. |
+| video_timestamp_seconds | Simples | integer | - | Segundo exato do vídeo da aula referenciado na resposta ou na pergunta (opcional, RF009). |
+| created_at | Simples | timestamptz | - | Data e hora de envio ou geração da mensagem. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para mensagens ativas, ADR-0014). |
 | **Tabela: tutor_credit_packs** | | | | Pacote de créditos extras do Tutor de IA adquirido por Aluno com pagamento simulado (RF020, RNF022). |
-| id | Determinante | UUID | - | Identificador único do pacote de créditos extras. |
-| user_id | Simples | UUID | - | FK para `users.id` (Área A), identificando o Aluno proprietário do pacote. |
-| payment_id | Simples | UUID | - | FK para `payments.id` (Área C), identificando o pagamento simulado da aquisição. |
-| messages_total | Simples | Inteiro | INTEGER | Quantidade total de mensagens contratadas no pacote (ex.: 50). |
-| messages_used | Simples | Inteiro | INTEGER | Quantidade de mensagens consumidas do pacote (padrão 0). |
-| created_at | Simples | Data e hora | TIMESTAMPTZ | Data e hora da aquisição e ativação do pacote. |
-| deleted_at | Simples | Data e hora | TIMESTAMPTZ | Data e hora de exclusão lógica (nulo para registros ativos, ADR-0014). |
+| id | Determinante | uuid | - | Identificador único do pacote de créditos extras. |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o Aluno proprietário do pacote. |
+| payment_id | Simples | uuid | - | FK para `payments.id` (Área C), identificando o pagamento simulado da aquisição. |
+| messages_total | Simples | integer | - | Quantidade total de mensagens contratadas no pacote (ex.: 50). |
+| messages_used | Simples | integer | - | Quantidade de mensagens consumidas do pacote (padrão 0). |
+| created_at | Simples | timestamptz | - | Data e hora da aquisição e ativação do pacote. |
+| deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para registros ativos, ADR-0014). |
 | **Tabela: audit_logs** | | | | Trilha de auditoria das ações administrativas e de segurança no PostgreSQL 16 (RNF016, ADR-0016). Particionada por mês (`PARTITION BY RANGE (created_at)`) com exportação para R2 por 5 anos via `audit:archive`. |
-| id | Determinante | UUID | - | Identificador único do registro de auditoria. |
-| user_id | Simples | UUID | - | FK para `users.id` (Área A), identificando o autor da ação (nulo em tentativas não autenticadas e na rotina automática de anonimização, UC018 A3). |
-| action | Simples | Texto | CHECK | Identificador estável da ação: `USER_BLOCK`, `USER_UNBLOCK`, `ROLE_CHANGE`, `USER_DELETE`, `USER_RESTORE`, `USER_ANONYMIZE`, `ACCESS_DENIED`. |
-| target_type | Simples | Texto | TEXT | Tipo da entidade ou recurso alvo da ação auditada (ex.: `User`, `ProtectedArea`). |
-| target_id | Simples | UUID | - | Identificador UUID do recurso afetado (opcional; preservado na exclusão LGPD). |
-| ip_address | Simples | Texto | TEXT | Endereço IP de origem da requisição (compatível com IPv4 e IPv6). |
-| user_agent | Simples | Texto | TEXT | Identificação do cliente HTTP/navegador que originou a requisição. |
-| details | Composto | JSONB | - | Metadados contextuais estruturados da operação (ex.: papéis anterior e novo); sem dados pessoais sensíveis (UC018 R-4). |
-| created_at | Simples | Data e hora | TIMESTAMPTZ | Data e hora exata da ocorrência do evento auditado (chave de particionamento). |
+| id | Determinante | uuid | - | Identificador único do registro de auditoria. |
+| user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o autor da ação (nulo em tentativas não autenticadas e na rotina automática de anonimização, UC018 A3). |
+| action | Simples | text com CHECK | - | Identificador estável da ação: `USER_BLOCK`, `USER_UNBLOCK`, `ROLE_CHANGE`, `USER_DELETE`, `USER_RESTORE`, `USER_ANONYMIZE`, `ACCESS_DENIED`. |
+| target_type | Simples | text | - | Tipo da entidade ou recurso alvo da ação auditada (ex.: `User`, `ProtectedArea`). |
+| target_id | Simples | uuid | - | Identificador UUID do recurso afetado (opcional; preservado na exclusão LGPD). |
+| ip_address | Simples | text | - | Endereço IP de origem da requisição (compatível com IPv4 e IPv6). |
+| user_agent | Simples | text | - | Identificação do cliente HTTP/navegador que originou a requisição. |
+| details | Composto | jsonb | - | Metadados contextuais estruturados da operação (ex.: papéis anterior e novo); sem dados pessoais sensíveis (UC018 R-4). |
+| created_at | Simples | timestamptz | - | Data e hora exata da ocorrência do evento auditado (chave de particionamento). |
