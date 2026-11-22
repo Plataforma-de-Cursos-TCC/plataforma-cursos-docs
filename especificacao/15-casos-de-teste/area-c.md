@@ -58,6 +58,10 @@
 | TC167 | 6 – E3 Aulas do módulo pendentes | CT1 Acesso com aulas incompletas | Aluno com aulas pendentes no módulo tenta acessar `GET /quizzes/{id}` | Resposta 403 `FORBIDDEN` indicando as aulas pendentes; questões e alternativas do quiz permanecem ocultas. |
 | TC168 | 7 – E4 Aluno não matriculado | CT1 Quiz de curso não matriculado | Aluno autenticado tenta carregar quiz de curso em que não está matriculado | Resposta 404 `NOT_FOUND` sem confirmar existência do quiz, protegendo o recurso contra enumeração. |
 | TC179 | 8 – Negativo Gabarito oculto antes do envio | CT1 Resposta de quiz sem gabarito | Aluno com aulas concluídas acessa `GET /quizzes/{id}` antes de enviar e inspeciona o corpo da resposta | Resposta 200 `OK` (`QuizResource`) sem qualquer campo de gabarito (resposta correta de questão ou opção); o gabarito só aparece em `GET /quizzes/{id}/attempt/result` após o envio (R-4; TDD, seção 3.3; UC002 fluxo básico, passos 2 e 5). |
+| TC180 | 9 – R-2 Cálculo da nota | CT1 Duas de três corretas | Quiz de 3 questões; Aluno acerta 2 e envia | Resposta 200 `OK` (`QuizResultResource`) com `score` 66,67 (`numeric(5,2)`); a tela exibe 67%. |
+| TC181 | 9 – R-2 Cálculo da nota | CT2 Uma de três correta | Quiz de 3 questões; Aluno acerta 1 e envia | Resposta 200 `OK` com `score` 33,33; a tela exibe 33%. |
+| TC182 | 9 – R-2 Cálculo da nota | CT3 Nenhuma correta | Quiz de 3 questões; Aluno acerta 0 e envia | Resposta 200 `OK` com `score` 0,00; a tela exibe 0%. |
+| TC183 | 9 – R-2 Cálculo da nota | CT4 Todas corretas | Quiz de 3 questões; Aluno acerta 3 e envia | Resposta 200 `OK` com `score` 100,00; a tela exibe 100%. |
 
 ## 5. UC010 – Avaliar Curso
 

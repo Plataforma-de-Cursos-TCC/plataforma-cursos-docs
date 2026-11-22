@@ -343,7 +343,7 @@ Atributos normalizados até a 3FN, exceto o campo JSON InstructorProfile.socialL
 | id | Determinante | UUID | - | Identificador único da tentativa. |
 | enrollmentId | Simples | UUID | - | Referência à matrícula do aluno. |
 | quizId | Simples | UUID | - | Referência ao quiz respondido. |
-| score | Simples | Numérico | - | Nota calculada da tentativa; nula enquanto rascunho. |
+| score | Simples | Numérico | - | Nota calculada da tentativa: acertos / total de questões × 100, escala 0,00 a 100,00, arredondada a 2 casas (meio para cima); nula enquanto rascunho. |
 | submittedAt | Simples | Data | - | Data/hora de envio das respostas; nula enquanto rascunho. |
 | **Entidade: QuizAnswer** | | | | |
 | id | Determinante | UUID | - | Identificador único da resposta. |
