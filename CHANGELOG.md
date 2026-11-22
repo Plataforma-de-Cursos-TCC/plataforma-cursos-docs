@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Adicionado
 
+- Revisão cruzada final do RA2 em `entregas/ra2-revisao-cruzada.md`: quatro modelos revisaram o projeto inteiro e o consolidado tem 35 achados conferidos e aprovados pelo grupo, para corrigir antes do envio ao professor (#PR).
 - Área B (Autoria do instrutor), itens 12 a 15 do RA2: modelo de dados em PostgreSQL e snake_case com exclusão lógica e materiais da aula, classes negocial e de implementação, sequências de UC004, UC006, UC014 e UC015 com cancelamento e arquivamento, e casos de teste TC091 a TC118; ajustes nos itens 6, 7 e 10 (RF004 e US006 com material complementar, cancelamento em UC004, UC006, UC014 e UC015) (#141).
 - Área C (Aprendizagem do aluno), itens 12 a 15 do RA2: matrícula com 0..* pagamentos, progresso, tentativa de quiz com rascunho (`draft`/`submitted`) e avaliação; classes com `LearningMetricsService` para o dashboard da Área D (ADR-0018); sequências de UC002, UC003, UC009, UC010, UC019 e UC020; casos de teste TC151 a TC197, com concorrência, nova tentativa de pagamento e paginação trazidos da branch `docs/tasks-lucas-bruno` (#141).
 - Área D (Tutor de IA, analytics e administração), itens 12 a 15 do RA2: conversas, mensagens, créditos extras do Tutor de IA e auditoria particionada; classes, sequências de UC001, UC007, UC008, UC016 e UC018 e casos de teste TC211 a TC272; RF020, US022 e RNF022 (créditos extras) e RNF016 com o arquivamento da auditoria (#141).
