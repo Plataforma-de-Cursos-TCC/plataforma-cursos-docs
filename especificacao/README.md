@@ -1,6 +1,6 @@
 # Especificação de software – Plataforma de Cursos
 
-Esqueleto dos 11 itens do template da disciplina. Cada arquivo traz o título do item, o que ele exige e o modelo a preencher (em comentário). Divisão por áreas A a D conforme a ADR-0006.
+Esqueleto dos 15 itens do template da disciplina. Cada arquivo traz o título do item, o que ele exige e o modelo a preencher (em comentário). Divisão por áreas A a D conforme a ADR-0006.
 
 | Item | Título | Onde fica |
 |---|---|---|
