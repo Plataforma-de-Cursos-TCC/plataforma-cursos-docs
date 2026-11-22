@@ -936,9 +936,9 @@ def assemble(pandoc_docx, template, out_docx, pages):
         elif first_txt == "ID" and "CENÁRIO" in full_head and "ENTRADAS" in full_head:
             # Casos de teste (item 15): mesma largura útil.
             widths = [900, 1700, 2300, 2690, 2900]
-        elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAMANHO" in full_head:
+        elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAM." in full_head:
             # Dicionário de dados (item 12): colunas curtas não quebram o nome do atributo.
-            widths = [2000, 1700, 1300, 1200, 4290]
+            widths = [2300, 1700, 1600, 800, 4090]
         if widths:
             tblPr = tbl.find(qn("w:tblPr"))
             tblW = tblPr.find(qn("w:tblW"))
@@ -1047,6 +1047,17 @@ def assemble(pandoc_docx, template, out_docx, pages):
               p_break2 = OxmlElement("w:p")
               child(child(p_break2, "w:pPr", 0), "w:sectPr", 0).extend(list(land_sect))
               p_next_h1._p.addprevious(p_break2)
+
+    # Itens 12 a 15: cada área ("N. Área X") começa em página própria.
+    item = None
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            item = p.text.split(" ", 1)[0]
+        elif item in ("12", "13", "14", "15") and p.style.name == "Heading 2" and re.match(r"\d+\. Área [A-D]", p.text):
+            ppr = child(p._p, "w:pPr", 0)
+            if ppr.find(qn("w:pageBreakBefore")) is None:
+                pstyle = ppr.find(qn("w:pStyle"))
+                ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
 
     # Item 14: cada caso de uso (Heading 2) começa em página própria e o diagrama é limitado à altura
     # útil da página em retrato (título, texto e legenda ocupam o resto).
