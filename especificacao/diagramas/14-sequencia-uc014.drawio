@@ -464,7 +464,7 @@
         <mxCell value="create(courseId,&lt;br&gt;instructorId, dto:&lt;br&gt;ModuleDTO)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_100">
           <mxGeometry x="480" y="700" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="isOrderTaken(courseId, order)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_101">
+        <mxCell value="isPositionTaken(courseId, position)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_101">
           <mxGeometry x="800" y="770" width="220" height="30" as="geometry" />
         </mxCell>
         <mxCell value="SELECT id FROM&lt;br&gt;modules WHERE&lt;br&gt;course_id e position" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_102">
@@ -482,7 +482,7 @@
         <mxCell value="conflito de posição" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_106">
           <mxGeometry x="640" y="1040" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="422&lt;br&gt;VALIDATION_FAILED&lt;br&gt;(fields.order)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_107">
+        <mxCell value="422&lt;br&gt;VALIDATION_FAILED&lt;br&gt;(fields.position)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_107">
           <mxGeometry x="300" y="1080" width="140" height="60" as="geometry" />
         </mxCell>
         <mxCell value="informa que a posição já&lt;br&gt;está em uso" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_108">

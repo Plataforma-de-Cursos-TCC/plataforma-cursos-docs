@@ -44,7 +44,7 @@
         <mxCell id="ModuleDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt; (Área B)&lt;br&gt;&lt;b&gt;ModuleDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="40" y="400" width="200" height="200" as="geometry" />
         </mxCell>
-        <mxCell id="ModuleDTO_s0" value="+title: string&lt;br&gt;+order: int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleDTO">
+        <mxCell id="ModuleDTO_s0" value="+title: string&lt;br&gt;+position: int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleDTO">
           <mxGeometry x="0" y="40" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="ModuleResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt; (Área B)&lt;br&gt;&lt;b&gt;ModuleResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
@@ -95,7 +95,7 @@
         <mxCell id="ModuleRepositoryInterface" value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt; (Área B)&lt;br&gt;&lt;b&gt;ModuleRepositoryInterface&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="1650" y="400" width="350" height="140" as="geometry" />
         </mxCell>
-        <mxCell id="ModuleRepositoryInterface_s0" value="+findById(id: UUID): ?Module&lt;br&gt;+save(module: Module): Module&lt;br&gt;+delete(id: UUID): void&lt;br&gt;+isOrderTaken(courseId: UUID, order: int): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleRepositoryInterface">
+        <mxCell id="ModuleRepositoryInterface_s0" value="+findById(id: UUID): ?Module&lt;br&gt;+save(module: Module): Module&lt;br&gt;+delete(id: UUID): void&lt;br&gt;+isPositionTaken(courseId: UUID, position: int): boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=12;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;" vertex="1" parent="ModuleRepositoryInterface">
           <mxGeometry x="0" y="40" width="350" height="100" as="geometry" />
         </mxCell>
         <mxCell id="Module" value="&lt;b&gt;Module&lt;/b&gt; (Área B)" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
