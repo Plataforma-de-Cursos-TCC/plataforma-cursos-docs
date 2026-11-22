@@ -26,6 +26,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Alterado
 
+- CI e CONTRIBUTING aceitam todos os tipos do Conventional Commits (`style`, `perf`, `build` e `revert` além dos anteriores), para cada commit levar o tipo que melhor descreve a mudança (#152).
 - Nota do quiz (UC002 R-2), decisão do grupo: acertos sobre o total vezes 100, de 0,00 a 100,00, com 2 casas e arredondamento meio para cima; o TDD passa a `Enrollment` 1 para 0..* `Payment` (#141).
 - Diagramas dos itens 13 e 14 das quatro áreas: ícone pelo papel (Repository como entidade), cor de cabeçalho por papel e legenda, e PNG das sequências exportado em escala 1.5 para não cortar, depois de conferência visual dos 41 PNGs (#141).
 - Contexto do projeto e pesquisa de listagens: registro das decisões vigentes ADR-0014 a ADR-0018 em `CONTEXT.md` (seção 4) e nota em `docs/pesquisas/sessao-e-listagens.md` sobre a alteração do parâmetro de paginação para `perPage` (ADR-0015) (#141).
