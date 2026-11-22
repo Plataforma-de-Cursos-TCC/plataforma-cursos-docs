@@ -193,7 +193,7 @@
           <mxGeometry x="766" y="550" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
-          <mxGeometry x="1200.0" y="890" width="300" height="296" as="geometry" />
+          <mxGeometry x="1200" y="585" width="300" height="296" as="geometry" />
         </mxCell>
         <mxCell id="legend_0" value="Entity" style="rounded=0;html=1;fillColor=#F5F5F5;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
           <mxGeometry x="10" y="32" width="280" height="26" as="geometry" />
