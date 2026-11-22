@@ -7,6 +7,6 @@ Diagrama de classes em nível técnico, com elementos negociais (classes do dom�
 | Nº | ÁREA | CLASSES | ARQUIVO |
 |---|---|---|---|
 | 1 | A (Acesso e conta) | User e subclasses, Address, InstructorProfile, PasswordResetToken, RefreshSession, controllers, serviços e repositórios de acesso | [area-a.md](area-a.md) |
-| 2 | B (Autoria do instrutor) | a preencher | [area-b.md](area-b.md) |
-| 3 | C (Aprendizagem do aluno) | a preencher | [area-c.md](area-c.md) |
-| 4 | D (Tutor de IA, analytics e administração) | a preencher | [area-d.md](area-d.md) |
+| 2 | B (Autoria do instrutor) | Category, Course, Module, Lesson, LessonMaterial, Quiz, Question, QuestionOption, controllers, serviços e repositórios de autoria | [area-b.md](area-b.md) |
+| 3 | C (Aprendizagem do aluno) | Enrollment, Payment, LessonProgress, QuizAttempt, QuizAnswer, Review, `LearningMetricsService`, controllers, serviços e repositórios de aprendizagem | [area-c.md](area-c.md) |
+| 4 | D (Tutor de IA, analytics e administração) | Conversation, Message, TutorCreditPack, AuditLog, controllers, serviços e repositórios do Tutor de IA, do dashboard e da administração | [area-d.md](area-d.md) |
