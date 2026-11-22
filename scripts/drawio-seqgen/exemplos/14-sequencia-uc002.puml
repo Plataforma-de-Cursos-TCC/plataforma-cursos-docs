@@ -55,7 +55,7 @@ else todas respondidas
 QuizAttemptController -> QuizAttemptService ++ : submitQuiz(userId, quizId, dto)
 QuizAttemptService -> QuizAttemptService : calculateScore(quiz, answers)
 alt E2 - gabarito incompleto no quiz
-QuizAttemptService --> QuizAttemptController : 500 INTERNAL_SERVER_ERROR (gabarito incompleto)
+QuizAttemptService --> QuizAttemptController : 500 INTERNAL_SERVER_ERROR (gabarito incompleto; rollback e log ao Instrutor)
 QuizAttemptController --> QuizView : 500 INTERNAL_SERVER_ERROR
 QuizView --> Aluno : informa falha e registra ocorrência ao instrutor
 else correção automática bem-sucedida

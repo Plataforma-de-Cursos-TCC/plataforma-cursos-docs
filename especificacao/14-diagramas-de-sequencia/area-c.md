@@ -28,7 +28,7 @@ Geração de URL assinada temporária de 15 minutos via `MediaService` no Cloudf
 
 ## 4. UC002 – Responder Quiz
 
-Carregamento do quiz condicionado à conclusão de todas as aulas do módulo correspondente (E3, `403 FORBIDDEN`). Apresenta as questões sem expor o gabarito. Trata a consulta de resultado anterior com opção de refazer quando autorizado pelo instrutor (A1, R-3), salvamento de rascunho de respostas (A2) e bloqueio de envio com questões pendentes (E1, `422 VALIDATION_FAILED`). A submissão calcula a nota por correção automática imediata; na hipótese de quiz cadastrado com gabarito incompleto, responde `500 INTERNAL_SERVER_ERROR` (E2); no sucesso, persiste `QuizAttempt` com a nota (`score`), grava as respostas em `QuizAnswer` e exibe o gabarito ao lado das alternativas assinaladas.
+Carregamento do quiz condicionado à conclusão de todas as aulas do módulo correspondente (E3, `403 FORBIDDEN`). Apresenta as questões sem expor o gabarito. Trata a consulta de resultado anterior com opção de refazer quando autorizado pelo instrutor (A1, R-3), salvamento de rascunho de respostas (A2) e bloqueio de envio com questões pendentes (E1, `422 VALIDATION_FAILED`). A submissão calcula a nota por correção automática imediata; na hipótese de quiz cadastrado com gabarito incompleto, responde `500 INTERNAL_SERVER_ERROR` (E2), desfaz o envio e registra o erro em log para o Instrutor responsável; no sucesso, persiste `QuizAttempt` com a nota (`score`), grava as respostas em `QuizAnswer` e exibe o gabarito ao lado das alternativas assinaladas.
 
 ![Diagrama de sequência do UC002](../diagramas/14-sequencia-uc002.png)
 
@@ -44,7 +44,7 @@ Abertura do modal de avaliação com pré-carregamento de nota e comentário ant
 
 ## 6. UC020 – Consultar Catálogo de Cursos
 
-Consulta pública e paginada de cursos publicados (`page=1`, `perPage=20`, ADR-0009, ADR-0015; com `perPage` estritamente de 1 a 100, retornando HTTP `422 VALIDATION_FAILED` fora desse intervalo, decisão D-TC245). Apresenta os estados de catálogo vazio (E1, "Nenhum curso disponível no momento.") e categoria sem cursos publicados (E2, com opção "Ver todos"). Trata a aplicação e limpeza de filtros por categoria (A1) e a seleção de um curso para visualização detalhada de sua ementa, módulos e aulas marcadas como prévia.
+Consulta pública e paginada de cursos publicados (`page=1`, `perPage=20`, ordenação com desempate por `id`, ADR-0009, ADR-0015; com `perPage` estritamente de 1 a 100, retornando HTTP `422 VALIDATION_FAILED` fora desse intervalo, decisão D-TC245). Apresenta os estados de catálogo vazio (E1, "Nenhum curso disponível no momento.") e categoria sem cursos publicados (E2, com opção "Ver todos"). Trata a aplicação e limpeza de filtros por categoria (A1) e a seleção de um curso para visualização detalhada de sua ementa, módulos e aulas marcadas como prévia.
 
 ![Diagrama de sequência do UC020](../diagramas/14-sequencia-uc020.png)
 
