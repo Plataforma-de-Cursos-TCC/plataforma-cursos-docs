@@ -8,7 +8,7 @@ control ModuleController as C
 control CreateModuleRequest as Q
 control ModuleService as S
 control LessonProgressService as P
-control ModuleRepositoryInterface as R
+entity ModuleRepositoryInterface as R
 database BD
 
 INS -> V ++ : acessa o módulo

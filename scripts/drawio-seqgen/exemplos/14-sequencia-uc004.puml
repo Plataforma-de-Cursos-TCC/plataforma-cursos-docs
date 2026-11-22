@@ -7,7 +7,7 @@ boundary QuizView as V
 control InstructorQuizController as C
 control CreateQuizRequest as Q
 control QuizAuthoringService as S
-control QuizRepositoryInterface as R
+entity QuizRepositoryInterface as R
 database BD
 
 alt A3 - o Instrutor cancela o cadastro do quiz

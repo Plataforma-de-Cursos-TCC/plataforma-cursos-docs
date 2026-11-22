@@ -7,7 +7,7 @@ boundary CursoView as V
 control InstructorCourseController as C
 control CourseService as S
 control EnrollmentService as E
-control CourseRepositoryInterface as R
+entity CourseRepositoryInterface as R
 database BD
 
 INS -> V ++ : aciona "Excluir curso"

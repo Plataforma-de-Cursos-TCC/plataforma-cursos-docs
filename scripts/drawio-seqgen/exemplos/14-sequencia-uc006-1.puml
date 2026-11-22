@@ -8,7 +8,7 @@ control InstructorCourseController as C
 control CreateCourseRequest as Q
 control CourseService as S
 entity Course as CO
-control CourseRepositoryInterface as R
+entity CourseRepositoryInterface as R
 database BD
 
 alt A3 - o Instrutor cancela o cadastro

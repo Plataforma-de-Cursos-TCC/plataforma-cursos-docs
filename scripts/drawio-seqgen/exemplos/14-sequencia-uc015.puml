@@ -8,7 +8,7 @@ control InstructorLessonController as C
 control CreateLessonRequest as Q
 control LessonService as S
 control LessonProgressService as P
-control LessonRepositoryInterface as R
+entity LessonRepositoryInterface as R
 control MediaStorageInterface as M
 control TranscriptionQueueInterface as T
 database BD

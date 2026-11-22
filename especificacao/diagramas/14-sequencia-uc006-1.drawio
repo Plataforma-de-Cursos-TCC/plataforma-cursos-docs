@@ -53,57 +53,57 @@
         <mxCell value="" style="shape=umlEntity;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="life_14">
           <mxGeometry x="930" y="20" width="40" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="" style="shape=umlBoundary;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="life_15">
-          <mxGeometry x="1080" y="20" width="50" height="40" as="geometry" />
+        <mxCell value="" style="shape=umlEntity;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="life_15">
+          <mxGeometry x="1090" y="20" width="40" height="40" as="geometry" />
         </mxCell>
         <mxCell value="" style="shape=cylinder3;size=8;boundedLbl=1;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="life_16">
           <mxGeometry x="1250" y="20" width="40" height="50" as="geometry" />
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_17">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="110" y="116" as="sourcePoint" />
+            <mxPoint x="110" y="96" as="sourcePoint" />
             <mxPoint x="110" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_18">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="280" y="116" as="sourcePoint" />
+            <mxPoint x="280" y="96" as="sourcePoint" />
             <mxPoint x="280" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_19">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="460" y="116" as="sourcePoint" />
+            <mxPoint x="460" y="96" as="sourcePoint" />
             <mxPoint x="460" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_20">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="630" y="116" as="sourcePoint" />
+            <mxPoint x="630" y="96" as="sourcePoint" />
             <mxPoint x="630" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_21">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="790" y="116" as="sourcePoint" />
+            <mxPoint x="790" y="96" as="sourcePoint" />
             <mxPoint x="790" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_22">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="950" y="116" as="sourcePoint" />
+            <mxPoint x="950" y="96" as="sourcePoint" />
             <mxPoint x="950" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_23">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1110" y="116" as="sourcePoint" />
+            <mxPoint x="1110" y="96" as="sourcePoint" />
             <mxPoint x="1110" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell value="" style="html=1;rounded=0;endArrow=none;dashed=1;dashPattern=4 4;strokeColor=#000000;strokeWidth=1;" parent="1" edge="1" id="life_24">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1270" y="116" as="sourcePoint" />
+            <mxPoint x="1270" y="96" as="sourcePoint" />
             <mxPoint x="1270" y="2470" as="targetPoint" />
           </mxGeometry>
         </mxCell>
@@ -362,130 +362,127 @@
         <mxCell value="CourseRepositoryInterface" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_76">
           <mxGeometry x="1030" y="70" width="160" height="20" as="geometry" />
         </mxCell>
-        <mxCell value="&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_77">
-          <mxGeometry x="1060" y="90" width="100" height="20" as="geometry" />
-        </mxCell>
-        <mxCell value="BD" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_78">
+        <mxCell value="BD" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;spacing=0;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_77">
           <mxGeometry x="1250" y="70" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell value="[A3 - o Instrutor&lt;br&gt;cancela o cadastro]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_79">
+        <mxCell value="[A3 - o Instrutor&lt;br&gt;cancela o cadastro]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_78">
           <mxGeometry x="130" y="170" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="aciona &amp;quot;Cancelar&amp;quot;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_80">
+        <mxCell value="aciona &amp;quot;Cancelar&amp;quot;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_79">
           <mxGeometry x="130" y="220" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="descarta alterações e&lt;br&gt;retorna a Meus cursos" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_81">
+        <mxCell value="descarta alterações e&lt;br&gt;retorna a Meus cursos" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_80">
           <mxGeometry x="130" y="260" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="[o Instrutor salva o&lt;br&gt;curso]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_82">
+        <mxCell value="[o Instrutor salva o&lt;br&gt;curso]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_81">
           <mxGeometry x="130" y="340" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="aciona &amp;quot;Salvar curso&amp;quot;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_83">
+        <mxCell value="aciona &amp;quot;Salvar curso&amp;quot;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_82">
           <mxGeometry x="130" y="390" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="store(req:&lt;br&gt;CreateCourseRequest)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_84">
+        <mxCell value="store(req:&lt;br&gt;CreateCourseRequest)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_83">
           <mxGeometry x="300" y="430" width="140" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="rules()" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_85">
+        <mxCell value="rules()" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_84">
           <mxGeometry x="480" y="480" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="erros de validação" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_86">
+        <mxCell value="erros de validação" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_85">
           <mxGeometry x="480" y="520" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="[E1 - título, descrição&lt;br&gt;ou preço ausentes (R-1&lt;br&gt;não se aplica)]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_87">
+        <mxCell value="[E1 - título, descrição&lt;br&gt;ou preço ausentes (R-1&lt;br&gt;não se aplica)]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_86">
           <mxGeometry x="130" y="590" width="130" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="422&lt;br&gt;VALIDATION_FAILED&lt;br&gt;(fields)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_88">
+        <mxCell value="422&lt;br&gt;VALIDATION_FAILED&lt;br&gt;(fields)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_87">
           <mxGeometry x="300" y="660" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="indica campos&lt;br&gt;obrigatórios" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_89">
+        <mxCell value="indica campos&lt;br&gt;obrigatórios" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_88">
           <mxGeometry x="130" y="730" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="[dados válidos]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_90">
+        <mxCell value="[dados válidos]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_89">
           <mxGeometry x="130" y="810" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="create(instructorId,&lt;br&gt;dto: CourseDTO)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_91">
+        <mxCell value="create(instructorId,&lt;br&gt;dto: CourseDTO)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_90">
           <mxGeometry x="480" y="850" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="save(course: Course)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_92">
+        <mxCell value="save(course: Course)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_91">
           <mxGeometry x="810" y="900" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="INSERT INTO&lt;br&gt;courses (status draft,&lt;br&gt;R-1)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_93">
+        <mxCell value="INSERT INTO&lt;br&gt;courses (status draft,&lt;br&gt;R-1)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_92">
           <mxGeometry x="1130" y="940" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="ok" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_94">
+        <mxCell value="ok" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_93">
           <mxGeometry x="1130" y="1010" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_95">
+        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_94">
           <mxGeometry x="970" y="1050" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_96">
+        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_95">
           <mxGeometry x="650" y="1090" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="201 Created&lt;br&gt;(CourseResource, status&lt;br&gt;draft)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_97">
+        <mxCell value="201 Created&lt;br&gt;(CourseResource, status&lt;br&gt;draft)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_96">
           <mxGeometry x="300" y="1130" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="exibe curso em&lt;br&gt;rascunho" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_98">
+        <mxCell value="exibe curso em&lt;br&gt;rascunho" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_97">
           <mxGeometry x="130" y="1200" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="[publicação do curso]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_99">
+        <mxCell value="[publicação do curso]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_98">
           <mxGeometry x="130" y="1280" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="aciona &amp;quot;Publicar curso&amp;quot;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_100">
+        <mxCell value="aciona &amp;quot;Publicar curso&amp;quot;" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_99">
           <mxGeometry x="130" y="1320" width="130" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="publish(id: UUID)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_101">
+        <mxCell value="publish(id: UUID)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_100">
           <mxGeometry x="300" y="1360" width="140" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="publish(courseId,&lt;br&gt;instructorId)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_102">
+        <mxCell value="publish(courseId,&lt;br&gt;instructorId)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_101">
           <mxGeometry x="480" y="1400" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="canBePublished()" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_103">
+        <mxCell value="canBePublished()" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_102">
           <mxGeometry x="810" y="1450" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="boolean" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_104">
+        <mxCell value="boolean" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_103">
           <mxGeometry x="810" y="1490" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="[E4 - curso sem&lt;br&gt;módulos ou aulas]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_105">
+        <mxCell value="[E4 - curso sem&lt;br&gt;módulos ou aulas]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_104">
           <mxGeometry x="130" y="1560" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="curso permanece em&lt;br&gt;rascunho" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_106">
+        <mxCell value="curso permanece em&lt;br&gt;rascunho" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_105">
           <mxGeometry x="650" y="1610" width="120" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="422&lt;br&gt;VALIDATION_FAILED&lt;br&gt;(indica o que falta)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_107">
+        <mxCell value="422&lt;br&gt;VALIDATION_FAILED&lt;br&gt;(indica o que falta)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_106">
           <mxGeometry x="300" y="1660" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="informa que o curso&lt;br&gt;precisa de módulos e&lt;br&gt;aulas" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_108">
+        <mxCell value="informa que o curso&lt;br&gt;precisa de módulos e&lt;br&gt;aulas" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_107">
           <mxGeometry x="130" y="1730" width="130" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="[curso com módulos e&lt;br&gt;aulas]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_109">
+        <mxCell value="[curso com módulos e&lt;br&gt;aulas]" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=left;fontStyle=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_108">
           <mxGeometry x="130" y="1830" width="130" height="40" as="geometry" />
         </mxCell>
-        <mxCell value="publish()" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_110">
+        <mxCell value="publish()" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_109">
           <mxGeometry x="810" y="1880" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="status = published" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_111">
+        <mxCell value="status = published" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_110">
           <mxGeometry x="810" y="1920" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="save(course: Course)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_112">
+        <mxCell value="save(course: Course)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_111">
           <mxGeometry x="810" y="1960" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="UPDATE courses&lt;br&gt;SET status =&lt;br&gt;published" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_113">
+        <mxCell value="UPDATE courses&lt;br&gt;SET status =&lt;br&gt;published" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_112">
           <mxGeometry x="1130" y="2000" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="ok" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_114">
+        <mxCell value="ok" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_113">
           <mxGeometry x="1130" y="2070" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_115">
+        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_114">
           <mxGeometry x="970" y="2110" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_116">
+        <mxCell value="course" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_115">
           <mxGeometry x="650" y="2150" width="120" height="30" as="geometry" />
         </mxCell>
-        <mxCell value="200 OK&lt;br&gt;(CourseResource, status&lt;br&gt;published)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_117">
+        <mxCell value="200 OK&lt;br&gt;(CourseResource, status&lt;br&gt;published)" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_116">
           <mxGeometry x="300" y="2190" width="140" height="60" as="geometry" />
         </mxCell>
-        <mxCell value="confirma publicação no&lt;br&gt;catálogo" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_118">
+        <mxCell value="confirma publicação no&lt;br&gt;catálogo" style="text;html=1;strokeColor=none;fillColor=none;verticalAlign=bottom;spacing=0;spacingBottom=5;align=center;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" parent="1" vertex="1" id="text_117">
           <mxGeometry x="130" y="2260" width="130" height="40" as="geometry" />
         </mxCell>
       </root>
