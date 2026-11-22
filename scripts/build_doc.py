@@ -84,7 +84,10 @@ US = re.compile(r"^(?:\d+\. )?US\d{3} –")
 
 FONTE_FIGURA = "Fonte: Elaborado pelos autores (2026)."
 REPO_URL = "https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs"
-VERSAO = "v2.0.1"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
+# Link curto da Fonte: página de redirect por figura em docs/f/N.html, servida pelo GitHub Pages.
+PAGES_URL = "https://plataforma-de-cursos-tcc.github.io/plataforma-cursos-docs/f"
+SHORT_DIR = Path(__file__).resolve().parents[1] / "docs" / "f"
+VERSAO = "v2.0.2"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
 
@@ -123,7 +126,8 @@ def preprocess(path):
     # Fonte (NBR 14724) depois de cada legenda, com o link do PNG no repositório, na versão entregue.
     def fonte(m):
         rel = (path.parent / m.group(2)).resolve().relative_to(REPO).as_posix()
-        return f"{m.group(0)}\n\n{m.group(3)}{FONTE_FIGURA} Disponível em: <{REPO_URL}/blob/{VERSAO}/{rel}>."
+        # O número final da figura só existe depois de renumber_figures, que troca o marcador.
+        return f"{m.group(0)}\n\n{m.group(3)}{FONTE_FIGURA} Disponível em: <{PAGES_URL}/@@{rel}@@>."
     md = re.sub(r"^( *)!\[[^\]]*\]\(([^)<>]+)\)[ \t]*\n[ \t]*\n( *)\*Figura \d+ –[^\n]*\*", fonte, md, flags=re.M)
     # Caminho absoluto das imagens, porque os arquivos são concatenados.
     md = re.sub(
@@ -151,7 +155,18 @@ def build_markdown(items):
 def renumber_figures(md):
     """Legendas `Figura N –` numeradas na ordem em que aparecem no documento."""
     n = itertools.count(1)
-    return re.sub(r"Figura \d+ –", lambda m: f"Figura {next(n)} –", md)
+    md = re.sub(r"Figura \d+ –", lambda m: f"Figura {next(n)} –", md)
+
+    # Link curto da Fonte: N.html redireciona ao PNG na versão entregue.
+    def short(m):
+        num, middle, rel = m.group(1), m.group(2), m.group(3)
+        dest = f"{REPO_URL}/blob/{VERSAO}/{rel}"
+        SHORT_DIR.mkdir(parents=True, exist_ok=True)
+        (SHORT_DIR / f"{num}.html").write_text(
+            f'<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0; url={dest}">'
+            f'<link rel="canonical" href="{dest}"><a href="{dest}">{dest}</a>\n', encoding="utf-8")
+        return f"Figura {num} –{middle}{PAGES_URL}/{num}>"
+    return re.sub(r"Figura (\d+) –([^@]*?<)" + re.escape(PAGES_URL) + r"/@@([^@]+)@@>", short, md, flags=re.S)
 
 
 def child(parent, tag, index=None):
