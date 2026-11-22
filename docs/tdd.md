@@ -533,12 +533,12 @@ Atributos normalizados rigorosamente até a 3FN, com as duas exceções justific
 | created_at | Simples | timestamptz | - | Data e hora de criação da matrícula. |
 | updated_at | Simples | timestamptz | - | Data e hora da última alteração de status (opcional). |
 | deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo se ativo, ADR-0014). |
-| **Tabela: payments** | | | | Registro transacional do pagamento simulado (matrícula ou créditos de IA) (UC019, D-cota-extra). |
+| **Tabela: payments** | | | | Registro transacional do pagamento simulado (matrícula ou créditos de IA) (UC019, RF020). |
 | id | Determinante | uuid | - | Identificador único do pagamento simulado (PK). |
 | user_id | Simples | uuid | - | FK para `users.id` (Área A), aluno pagador. |
 | course_id | Simples | uuid | - | FK para `courses.id` (Área B), curso associado (opcional/NULL em avulso). |
 | enrollment_id | Simples | uuid | - | FK para `enrollments.id`, matrícula associada (0..* por matrícula, NULL se cota extra). |
-| purpose | Simples | text CHECK | 20 | Finalidade do pagamento: 'enrollment' ou 'tutor_credits' (D-cota-extra). |
+| purpose | Simples | text CHECK | 20 | Finalidade do pagamento: 'enrollment' ou 'tutor_credits' (RF020). |
 | amount_cents | Simples | integer | - | Valor cobrado no pagamento simulado, em centavos. |
 | currency | Simples | varchar | 3 | Código ISO 4217 da moeda (padrão 'BRL'). |
 | status | Simples | text CHECK | 20 | Status do pagamento: 'approved' ou 'declined' (UC019). |
@@ -597,7 +597,7 @@ Atributos normalizados rigorosamente até a 3FN, com as duas exceções justific
 | video_timestamp_seconds | Simples | integer | - | Segundo exato do vídeo da aula referenciado na resposta ou na pergunta (opcional, D6). |
 | created_at | Simples | timestamptz | - | Data e hora de envio ou geração da mensagem. |
 | deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para mensagens ativas, ADR-0014). |
-| **Tabela: tutor_credit_packs** | | | | Pacote de créditos extras do Tutor de IA adquirido por Aluno com pagamento simulado (RF020, RNF022, D-cota-extra). |
+| **Tabela: tutor_credit_packs** | | | | Pacote de créditos extras do Tutor de IA adquirido por Aluno com pagamento simulado (RF020, RNF022). |
 | id | Determinante | uuid | - | Identificador único do pacote de créditos extras (PK). |
 | user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o Aluno proprietário do pacote. |
 | payment_id | Simples | uuid | - | FK para `payments.id` (Área C), identificando o pagamento simulado da aquisição. |
