@@ -298,9 +298,9 @@
   6. O sistema remove o usuário da listagem de usuários ativos e confirma a exclusão.
   7. Este caso de uso é finalizado.
 
-  ![modal de confirmação com aviso de anonimização irreversível](prototipos/png/UC018/UC018-FB-1.png)
+  ![modal de confirmação com aviso de exclusão lógica](prototipos/png/UC018/UC018-FB-1.png)
 
-  *Figura 0 – UC018, fluxo básico: modal de confirmação com aviso de anonimização irreversível*
+  *Figura 0 – UC018, fluxo básico: modal de confirmação com aviso de exclusão lógica*
 
   ![lista sem o usuário excluído e aviso "Usuário excluído"](prototipos/png/UC018/UC018-FB-2.png)
 
@@ -322,7 +322,7 @@
     - A-2.5 Este caso de uso é finalizado.
   - **A3 – Execução da anonimização irreversível (LGPD)**
     - A-3.1 A pedido do titular ou após 30 dias de exclusão lógica sem reativação, a rotina de anonimização é executada.
-    - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, foto) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico, e registra a ação `USER_ANONYMIZE` em `audit_logs` (RNF016).
+    - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, data de nascimento, foto e remoção de endereços associados) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico, e registra a ação `USER_ANONYMIZE` em `audit_logs` (RNF016).
     - A-3.3 Este caso de uso é finalizado.
   - **A4 – Exclusão de Instrutor com cursos publicados**
     - A-4.1 Ao selecionar a exclusão de um Instrutor com cursos publicados, o sistema solicita a escolha entre despublicar os cursos (`archived`) ou aplicar exclusão lógica em cascata.
