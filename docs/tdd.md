@@ -992,7 +992,7 @@ Códigos de erro padrão da API (o `code` é estável e é o que o front-end e o
 
 | Código | HTTP | Quando | Fluxos |
 |---|---|---|---|
-| `UNAUTHENTICATED` | 401 | JWT ausente, inválido ou expirado; credencial de login incorreta, com mensagem genérica (UC005 R-1). O front-end tenta o refresh uma vez e, sem sucesso, leva ao login. | UC005 E1 e E2; UC016 E1 |
+| `UNAUTHENTICATED` | 401 | JWT ausente, inválido ou expirado; credencial de login incorreta, conta com status `deleted` (excluída) ou conta anonimizada (`anonymized_at IS NOT NULL`), sempre com mensagem genérica idêntica à de senha incorreta para não revelar que a conta existiu (UC005 R-1, ADR-0014 item 6). O front-end tenta o refresh uma vez e, sem sucesso, leva ao login. | UC005 E1 e E2; UC016 E1 |
 | `ACCOUNT_BLOCKED` | 403 | Conta com status bloqueado. No login só é devolvido depois da credencial correta, para não revelar o status a quem não conhece a senha. | UC005 E3; UC008 |
 | `FORBIDDEN` | 403 | Perfil sem permissão, propriedade (`assertOwnership`), Aluno sem matrícula, quiz com aulas não concluídas, ação proibida sobre a própria conta, cabeçalho `Origin` inválido (ADR-0008). | UC016 E2; UC004, UC006, UC014 e UC015 E3; UC009 E1; UC001 E4; UC002 E3; UC008 E1; UC018 E1; UC010 |
 | `NOT_FOUND` | 404 | Recurso inexistente. Também no lugar do 403 quando confirmar a existência vazaria dado (quiz sem matrícula, UC002) e usuário já removido. | UC002; UC004 E4; UC008 E2; UC018 E2 |
@@ -1040,7 +1040,7 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | Área | Método e Endpoint | Descrição e Acesso | UC Relacionado |
 |---|---|---|---|
 | **Área A: Acesso e conta** | `POST /api/v1/auth/register` | Cadastro de novo usuário na plataforma, com o papel escolhido (Aluno ou Instrutor) e o aceite dos termos (público). E-mail em uso, senha fora da política ou termos não aceitos: 422 `VALIDATION_FAILED` com `fields` | UC012 |
-| | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público). Credencial inválida: 401 `UNAUTHENTICATED` com mensagem genérica; conta bloqueada, com a credencial correta: 403 `ACCOUNT_BLOCKED`; bloqueio por força bruta: 429 `TOO_MANY_REQUESTS` com `Retry-After` | UC005 |
+| | `POST /api/v1/auth/login` | Autenticação com e-mail, senha e campo booleano `rememberMe`; emissão de JWT em cookie HttpOnly e, com `rememberMe` verdadeiro, de refresh token (público). Credencial inválida, conta excluída (`status = deleted`) ou conta anonimizada (`anonymized_at IS NOT NULL`): 401 `UNAUTHENTICATED` com mensagem genérica, idêntica à de senha incorreta para não revelar a existência da conta (ADR-0014 item 6, UC005 E1); conta bloqueada, com a credencial correta: 403 `ACCOUNT_BLOCKED` (UC005 E3); bloqueio por força bruta: 429 `TOO_MANY_REQUESTS` com `Retry-After` | UC005 |
 | | `POST /api/v1/auth/refresh` | Troca o refresh token do cookie por novo par de cookies, com rotação (cookie de refresh presente apenas com `rememberMe`) | UC005 |
 | | `GET /api/v1/auth/me` | Dados do usuário autenticado, para restaurar a sessão ao carregar a SPA (autenticado) | UC005 |
 | | `POST /api/v1/auth/logout` | Encerramento de sessão e invalidação do token (autenticado) | UC005 |
@@ -1084,7 +1084,7 @@ A tabela abaixo resume os endpoints da API REST organizados pelas áreas A a D (
 | | `POST /api/v1/ai/tutor/chat` | Envio de dúvida ao Tutor de IA com streaming SSE da resposta contextualizada (Aluno matriculado) | UC001 |
 | | `POST /api/v1/ai/tutor/credits/buy` | Compra de pacote de mensagens extras do Tutor de IA com pagamento simulado (reusa `Payment` com `purpose = 'tutor_credits'`, liberando mensagens adicionais após esgotar a cota horária de 20 msgs/h) (Aluno) | UC001 |
 | | `GET /api/v1/analytics/dashboard` | Visualização de métricas e gráficos; parâmetros `startDate` e `endDate` (datas ISO, `startDate` ≤ `endDate`, senão `422 VALIDATION_FAILED`), `courseId` opcional e `groupBy` (`day`, `week`, `month`); o Instrutor só vê os próprios cursos (`403 FORBIDDEN` para curso de outro Instrutor, R-2) (Instrutor / Administrador) | UC007 |
-| | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma com filtros (`page`, `perPage`, `role`, `status`, `search`) (Administrador) | UC008 |
+| | `GET /api/v1/admin/users` | Listagem paginada e busca de usuários da plataforma com filtros de perfil (`role`), situação cadastral (`status`: `active`, `blocked`, `deleted`) e termo de busca textual (`search`): `GET /api/v1/admin/users?search=&role=&status=&page=&perPage=` (Administrador) | UC008 |
 | | `PUT /api/v1/admin/users/{id}/status` | Bloqueio ou desbloqueio de conta de usuário (`active` ou `blocked`; envio de `deleted` devolve 422 `VALIDATION_FAILED`) (Administrador) | UC008 |
 | | `PUT /api/v1/admin/users/{id}/role` | Alteração do perfil de acesso do usuário (`student`, `instructor`, `admin`); revoga sessões de refresh e coloca o `jti` do token atual na blocklist do Redis (Administrador) | UC008 |
 | | `DELETE /api/v1/admin/users/{id}` | Exclusão lógica de conta (`status = deleted`, preenchimento de `deleted_at`, revogação de sessões e blocklist de `jti`) com escolha de arquivar (`archived`) ou excluir em cascata os cursos de Instrutor (Administrador) | UC018 |
@@ -1121,7 +1121,7 @@ O sistema adota o modelo RBAC (*Role-Based Access Control*) com três perfis for
 ### 4.3 Fluxos de Login e Recuperação de Senha
 
 - **Proteção contra Força Bruta (RNF008, UC005):** A API monitora tentativas inválidas consecutivas de login por e-mail/IP. Após 5 falhas consecutivas, a conta ou endereço de origem é temporariamente bloqueado por 15 minutos.
-- **Mitigação de Enumeração de Usuários (UC005, UC011):** Respostas de falha de login exibem uma mensagem genérica (*"Credenciais inválidas"*). No fluxo de recuperação de senha (UC011), o envio do link por e-mail retorna status afirmativo padronizado independentemente de o e-mail constar ou não na base de dados.
+- **Mitigação de Enumeração de Usuários (UC005, UC011, ADR-0014 item 6):** Respostas de falha de login exibem uma mensagem genérica (*"Credenciais inválidas"*), aplicada tanto para senha incorreta quanto para tentativas de login em contas com status `deleted` (excluídas logicamente) ou já anonimizadas (retornando o mesmo HTTP 401 `UNAUTHENTICATED` genérico, impedindo que o atacante infira a existência ou histórico prévio da conta). No fluxo de recuperação de senha (UC011), o envio do link por e-mail retorna status afirmativo padronizado independentemente de o e-mail constar ou não na base de dados.
 - **Ciclo de Recuperação de Senha (UC011):** O link de redefinição de senha encaminhado por e-mail contém um token de uso único (*one-time token*) com validade estrita de 30 minutos. Uma vez utilizado para gravar a nova senha (com hash seguro conforme RNF007), o token é imediatamente invalidado.
 
 ---
