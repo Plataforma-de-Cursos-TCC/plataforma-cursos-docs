@@ -106,7 +106,7 @@
         <mxCell id="e_tokenrepo_token" value="" edge="1" parent="1" source="PasswordResetTokenRepository" target="PasswordResetToken" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endSize=8;exitX=0.5;exitY=1;entryX=0.5;entryY=0">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
+        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
           <mxGeometry x="680.0" y="700.0" width="300" height="328" as="geometry" />
         </mxCell>
         <mxCell id="legend_0" value="Controller" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">

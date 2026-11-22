@@ -115,6 +115,9 @@ def normalize(path):
     dashed_box = False
     for c in tops:
         st, val = c.get("style", ""), (c.get("value") or "")
+        if "shape=note" in st:  # notas: amarelo de post-it, distinto de qualquer papel
+            c.set("style", setprop(st, "fillColor", "#FFF9DB"))
+            continue
         if not st.startswith("swimlane") and "shape=table" not in st:
             continue
         if not item12 and (c.get("id", "").lower().startswith("enum") or "enum" in val.lower()):
@@ -154,7 +157,7 @@ def normalize(path):
 
     H = 30 + len(rows) * (ROW + 6) + PAD
     box = ET.SubElement(root, "mxCell", id="legend", value="Legenda", vertex="1", parent="1",
-                        style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#FFFFFF;"
+                        style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;"
                               "swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;")
     ET.SubElement(box, "mxGeometry", x=str(x0), y=str(y0), width=str(W), height=str(H)).set("as", "geometry")
     y = 32

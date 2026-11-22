@@ -213,8 +213,8 @@
         <mxCell id="typeicon_InstructorProfile" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="846.0" y="960.0" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
-          <mxGeometry x="1230" y="159" width="300" height="392" as="geometry" />
+        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
+          <mxGeometry x="1230" y="40" width="300" height="392" as="geometry" />
         </mxCell>
         <mxCell id="legend_0" value="Controller" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
           <mxGeometry x="10" y="32" width="280" height="26" as="geometry" />

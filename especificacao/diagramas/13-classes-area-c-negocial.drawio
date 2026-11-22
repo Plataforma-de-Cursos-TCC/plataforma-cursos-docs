@@ -207,13 +207,13 @@
           <mxGeometry x="0" y="40" width="160" height="50" as="geometry" />
         </mxCell>
         <mxCell id="class_Question" value="&lt;b&gt;Question&lt;/b&gt;&lt;br&gt;[Área B]" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;dashed=1;fillColor=#F5F5F5" vertex="1" parent="1">
-          <mxGeometry x="40.0" y="740.0" width="170.0" height="80.0" as="geometry" />
+          <mxGeometry x="40.0" y="740.0" width="150" height="80.0" as="geometry" />
         </mxCell>
         <mxCell id="class_Question_attrs" value="-id: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="class_Question">
           <mxGeometry x="0" y="40" width="220" height="40" as="geometry" />
         </mxCell>
         <mxCell id="class_QuestionOption" value="&lt;b&gt;QuestionOption&lt;/b&gt;&lt;br&gt;[Área B]" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;dashed=1;fillColor=#F5F5F5" vertex="1" parent="1">
-          <mxGeometry x="40.0" y="880" width="170.0" height="80.0" as="geometry" />
+          <mxGeometry x="40.0" y="880" width="150" height="80.0" as="geometry" />
         </mxCell>
         <mxCell id="class_QuestionOption_attrs" value="-id: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="class_QuestionOption">
           <mxGeometry x="0" y="40" width="220" height="40" as="geometry" />
@@ -234,22 +234,22 @@
             </mxGeometry>
         </mxCell>
         <mxCell id="lbl_qans_q_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="216" y="784" width="30" height="20" as="geometry" />
+          <mxGeometry x="220" y="782" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qans_q_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="214" y="760" width="20" height="20" as="geometry" />
+          <mxGeometry x="194" y="758" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qans_o_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="216" y="924" width="30" height="20" as="geometry" />
+          <mxGeometry x="220" y="922" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qans_o_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="214" y="900" width="20" height="20" as="geometry" />
+          <mxGeometry x="194" y="898" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_q_qo_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="132" y="826" width="20" height="20" as="geometry" />
+          <mxGeometry x="120" y="826" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_q_qo_n" value="1..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="132" y="856" width="30" height="20" as="geometry" />
+          <mxGeometry x="120" y="856" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="enum_PaymentPurpose" value="&lt;b&gt;PaymentPurpose&lt;/b&gt;" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;fillColor=#D0F0F0" vertex="1" parent="1">
           <mxGeometry x="180.0" y="580.0" width="140.0" height="95.0" as="geometry" />
@@ -311,8 +311,8 @@
         <mxCell id="typeicon_enum_PaymentPurpose" value="E" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="186.0" y="590.0" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
-          <mxGeometry x="1040" y="144" width="300" height="296" as="geometry" />
+        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
+          <mxGeometry x="1040" y="40" width="300" height="296" as="geometry" />
         </mxCell>
         <mxCell id="legend_0" value="Entity" style="rounded=0;html=1;fillColor=#F5F5F5;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
           <mxGeometry x="10" y="32" width="280" height="26" as="geometry" />

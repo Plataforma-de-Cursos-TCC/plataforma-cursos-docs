@@ -23,6 +23,11 @@ def problems(path):
     legend = [c for c in cells.values() if "Legenda" in (c.get("value") or "")]
     if len(legend) != 1:
         out.append(f"legendas: {len(legend)}")
+    elif "fillColor=#4D4D4D" not in legend[0].get("style", ""):
+        out.append("legenda sem cabeçalho escuro")
+    for c in cells.values():
+        if "shape=note" in c.get("style", "") and "fillColor=#FFF9DB" not in c.get("style", ""):
+            out.append(f"{c.get('id')}: nota sem fundo amarelo")
     return out
 
 

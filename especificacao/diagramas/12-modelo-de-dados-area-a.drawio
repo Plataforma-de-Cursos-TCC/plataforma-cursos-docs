@@ -194,7 +194,7 @@
         <mxCell id="row_rs_replaced_by" value="replaced_by: uuid" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_refresh_sessions">
           <mxGeometry y="180" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="note_redis" value="Contador de tentativas de login (RNF008: 5 falhas, bloqueio de 15 min) e blocklist de tokens revogados (ADR-0008)&lt;br&gt;ficam no Redis, fora do modelo relacional." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
+        <mxCell id="note_redis" value="Contador de tentativas de login (RNF008: 5 falhas, bloqueio de 15 min) e blocklist de tokens revogados (ADR-0008)&lt;br&gt;ficam no Redis, fora do modelo relacional." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingTop=6;spacingLeft=10;spacingRight=10;spacingBottom=6;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
           <mxGeometry x="40" y="440" width="300" height="80" as="geometry" />
         </mxCell>
         <mxCell id="edge_address_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.0882;entryX=1;entryY=0.0789" edge="1" parent="1" source="table_addresses" target="table_users">
@@ -251,7 +251,7 @@
             <mxPoint x="570" y="840" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
+        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
           <mxGeometry x="760" y="546" width="300" height="104" as="geometry" />
         </mxCell>
         <mxCell id="legend_0" value="PK: chave primária · FK: chave estrangeira · 1, 0..*: cardinalidade" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
