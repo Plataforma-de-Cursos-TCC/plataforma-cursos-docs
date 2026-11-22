@@ -1,4 +1,8 @@
-## 1. UC003 – Matricular-se em Curso
+## 3. Área C – Aprendizagem do aluno
+
+Casos de teste dos casos de uso da Área C (UC003, UC019, UC009, UC002, UC010 e UC020), derivados dos fluxos básico, alternativos e de exceção com entradas concretas e resultados esperados.
+
+### UC003 – Matricular-se em Curso
 
 **Rastreio:** US007, RF005 (itens 6, 7 e 10).
 
@@ -11,11 +15,11 @@
 | TC021 | 3 – E1 Curso não publicado | CT1 Curso em rascunho | Aluno tenta acessar rota de matrícula de curso com `status = draft` | Resposta 404 `NOT_FOUND` informando que o curso não foi encontrado (R-1); nenhuma matrícula criada. |
 | TC153 | 3 – E1 Curso despublicado | CT2 Despublicação durante a matrícula | Instrutor despublica o curso no instante do acionamento de «Matricular-se» | Resposta 409 `CONFLICT` com aviso de que o curso não está mais disponível (R-1); nenhuma matrícula gravada. |
 | TC154 | 4 – E2 Pagamento não concluído | CT1 Recusa ou desistência no UC019 | Aluno cancela ou tem pagamento simulado recusado no UC019 | Matrícula em `Enrollment` permanece com status `pending` e acesso às aulas segue bloqueado (R-3); botão «Matricule-se» continua disponível para nova tentativa. |
-| TC184 | 2 – A1 / R-2 | CT3 Matrícula ativa existente devolve 200 | Aluno com matrícula ativa no curso envia `POST /courses/{id}/enroll` | Resposta 200 `OK` com a mesma matrícula (mesmo `id`) via `EnrollmentService.enroll()`; nenhuma linha nova em `enrollments` e nenhum `payments` criado. |
-| TC185 | 2 – A1 / R-2 | CT4 Matrícula pendente existente devolve 200 | Aluno com matrícula `pending` em curso pago envia `POST /courses/{id}/enroll` | Resposta 200 `OK` com o mesmo `id` e status `pending`; nenhuma linha nova; a tela retoma o pagamento da mesma matrícula. |
-| TC186 | 2 – A1 / R-2 concorrência | CT5 Duas matrículas simultâneas no mesmo curso | Dois `POST /courses/{id}/enroll` concorrentes do mesmo Aluno em curso gratuito | Uma resposta 201 `Created` e outra 200 `OK` com o mesmo `id` (nem 409 nem 500); uma única linha para o par aluno/curso pelo índice único parcial de `enrollments` (item 12). |
+| TC184 | 2 – A1 / R-2 | CT3 Matrícula ativa existente devolve 200 | Aluno com matrícula ativa no curso envia `POST /api/v1/courses/{id}/enroll` | Resposta 200 `OK` com a mesma matrícula (mesmo `id`) via `EnrollmentService.enroll()`; nenhuma linha nova em `enrollments` e nenhum `payments` criado. |
+| TC185 | 2 – A1 / R-2 | CT4 Matrícula pendente existente devolve 200 | Aluno com matrícula `pending` em curso pago envia `POST /api/v1/courses/{id}/enroll` | Resposta 200 `OK` com o mesmo `id` e status `pending`; nenhuma linha nova; a tela retoma o pagamento da mesma matrícula. |
+| TC186 | 2 – A1 / R-2 concorrência | CT5 Duas matrículas simultâneas no mesmo curso | Dois `POST /api/v1/courses/{id}/enroll` concorrentes do mesmo Aluno em curso gratuito | Uma resposta 201 `Created` e outra 200 `OK` com o mesmo `id` (nem 409 nem 500); uma única linha para o par aluno/curso pelo índice único parcial de `enrollments` (item 12). |
 
-## 2. UC019 – Processar Pagamento Simulado
+### UC019 – Processar Pagamento Simulado
 
 **Rastreio:** US018, RF014 (itens 6, 7 e 10).
 
@@ -27,19 +31,19 @@
 | TC156 | 4 – E2 Preço alterado durante o resumo | CT1 Valor modificado pelo instrutor | Preço do curso é alterado no catálogo após a abertura do modal | Resposta 409 `CONFLICT` com aviso de preço alterado (R-2); pagamento não é registrado e novo resumo com o valor atualizado é apresentado ao aluno. |
 | TC157 | 4 – E2 Curso despublicado no pagamento | CT2 Curso retirado do catálogo | Curso é despublicado antes da confirmação do pagamento | Resposta 409 `CONFLICT` informando indisponibilidade do curso; nenhum pagamento registrado. |
 | TC158 | 5 – E3 Matrícula duplicada | CT1 Duplo acionamento de confirmação | Dois cliques rápidos consecutivos em «Confirmar pagamento» | Primeira requisição processa com sucesso; segunda recebe 409 `CONFLICT` informando que o aluno já possui matrícula ativa, impedindo pagamento duplicado. |
-| TC187 | 5 – E3 / concorrência | CT3 Duplo acionamento simultâneo de pagamento | Duas `POST /enrollments/{id}/pay` concorrentes na mesma matrícula `pending`, com simulador aprovado | Uma resposta 200 `OK` e outra 409 `CONFLICT`; exatamente um `payments` com `status = approved` para a matrícula e uma única ativação em `PaymentService.processSimulatedPayment()`, serializada pelo bloqueio da matrícula. |
-| TC188 | 5 – E3 / R-3 | CT4 Pagamento repetido após aprovação | `POST /enrollments/{id}/pay` com matrícula já `active` e um `payments` aprovado | Resposta 409 `CONFLICT`; nenhum `payments` novo; `paid_at` do pagamento aprovado inalterado. |
+| TC187 | 5 – E3 / concorrência | CT3 Duplo acionamento simultâneo de pagamento | Duas `POST /api/v1/enrollments/{id}/pay` concorrentes na mesma matrícula `pending`, com simulador aprovado | Uma resposta 200 `OK` e outra 409 `CONFLICT`; exatamente um `payments` com `status = approved` para a matrícula e uma única ativação em `PaymentService.processSimulatedPayment()`, serializada pelo bloqueio da matrícula. |
+| TC188 | 5 – E3 / R-3 | CT4 Pagamento repetido após aprovação | `POST /api/v1/enrollments/{id}/pay` com matrícula já `active` e um `payments` aprovado | Resposta 409 `CONFLICT`; nenhum `payments` novo; `paid_at` do pagamento aprovado inalterado. |
 | TC189 | 3 – E1 / nova tentativa | CT2 Recusa seguida de aprovação na mesma matrícula | Simulador recusa a primeira tentativa e aprova a segunda, na mesma matrícula `pending` | Primeiro `payments` com `status = declined` e `paid_at` nulo (422 `PAYMENT_DECLINED`); segundo com `status = approved`; duas linhas de pagamento para uma matrícula (0..* da Área C); matrícula `active` somente após a aprovação. |
 
-## 3. UC009 – Assistir Aula
+### UC009 – Assistir Aula
 
 **Rastreio:** US008, US009, RF006 (itens 6, 7 e 10).
 
 | ID | CENÁRIO | CASO DE TESTE | ENTRADAS | RESULTADO ESPERADO |
 |---|---|---|---|---|
-| TC022 | 1 – Fluxo básico | CT1 Assistir aula até o fim | Aluno matriculado assiste a todos os 600 segundos da videoaula | Chamada `POST /lessons/{id}/progress` com `watchedSeconds: 600, completed: true`, registro em `LessonProgress` com `completed = true` e `completedAt` preenchido, e progresso do curso recalculado de modo desacoplado do quiz (R-2, R-4). |
-| TC023 | 2 – A1 Sair da aula antes do fim | CT1 Pausa e saída aos 180 segundos | Aluno pausa vídeo aos 180 segundos de aula de 600 segundos e fecha a tela | Chamada `POST /lessons/{id}/progress` com `watchedSeconds: 180, completed: false`, gravando `LessonProgress.watchedSeconds = 180` e `completed = false` (R-2). |
-| TC025 | 3 – A2 Retomar aula iniciada | CT1 Retomada no mesmo dispositivo | Aluno abre aula com 180 segundos salvos | Resposta 200 `OK` em `GET /lessons/{id}/stream` contendo URL assinada; `LessonProgress.watchedSeconds = 180` é o ponto de retomada; reprodutor inicia a reprodução exatamente a partir do segundo 180 (R-2). |
+| TC022 | 1 – Fluxo básico | CT1 Assistir aula até o fim | Aluno matriculado assiste a todos os 600 segundos da videoaula | Chamada `POST /api/v1/lessons/{id}/progress` com `watchedSeconds: 600, completed: true`, registro em `LessonProgress` com `completed = true` e `completedAt` preenchido, e progresso do curso recalculado de modo desacoplado do quiz (R-2, R-4). |
+| TC023 | 2 – A1 Sair da aula antes do fim | CT1 Pausa e saída aos 180 segundos | Aluno pausa vídeo aos 180 segundos de aula de 600 segundos e fecha a tela | Chamada `POST /api/v1/lessons/{id}/progress` com `watchedSeconds: 180, completed: false`, gravando `LessonProgress.watchedSeconds = 180` e `completed = false` (R-2). |
+| TC025 | 3 – A2 Retomar aula iniciada | CT1 Retomada no mesmo dispositivo | Aluno abre aula com 180 segundos salvos | Resposta 200 `OK` em `GET /api/v1/lessons/{id}/stream` contendo URL assinada; `LessonProgress.watchedSeconds = 180` é o ponto de retomada; reprodutor inicia a reprodução exatamente a partir do segundo 180 (R-2). |
 | TC027 | 3 – A2 Retomada em dispositivo diferente | CT2 Retomada em outro aparelho | Aluno loga em outro navegador/dispositivo e acessa a mesma aula | Backend mantém `LessonProgress.watchedSeconds = 180` e vídeo retoma do mesmo ponto salvo independentemente do dispositivo (R-3). |
 | TC026 | 3 – A2 Aula já concluída | CT3 Reassistir aula concluída | Aluno acessa aula com status `completed = true` | Vídeo inicia do começo (segundo 0), mas status `completed = true` e `completedAt` permanecem preservados no progresso (R-2). |
 | TC024 | 4 – Conclusão de módulo | CT1 Concluir todas as aulas do módulo | Aluno assiste à última aula pendente de um módulo | Percentual de conclusão do módulo atinge 100% e acesso ao quiz do módulo é liberado (R-5). |
@@ -49,7 +53,7 @@
 | TC162 | 7 – E2 Falha no carregamento do vídeo | CT1 Erro de conexão com Cloudflare R2 | Falha na resposta do serviço de mídia ao assinar URL | Resposta 503 `SERVICE_UNAVAILABLE` com cabeçalho `Retry-After` e interface exibindo botão de tentar novamente. |
 | TC163 | 8 – Negativo Regra R-2 | CT1 Segundos assistidos negativos | Envio de progresso com `watchedSeconds: -10` | Resposta 422 `VALIDATION_FAILED` no campo `watchedSeconds` (`fields.watchedSeconds`); progresso anterior mantido intacto (R-2). |
 
-## 4. UC002 – Responder Quiz
+### UC002 – Responder Quiz
 
 **Rastreio:** US011, RF008 (itens 6, 7 e 10).
 
@@ -61,19 +65,19 @@
 | TC165 | 3 – A2 Salvar rascunho de respostas | CT1 Rascunho parcial | Aluno assinala 3 de 5 questões e aciona «Salvar rascunho» | Resposta 200 `OK`, respostas parciais salvas; ao reabrir o quiz, as 3 opções marcadas permanecem pré-selecionadas. |
 | TC032 | 4 – E1 Questões pendentes no envio | CT1 Envio incompleto de questões | Aluno tenta submeter quiz deixando 2 questões sem marcação | Resposta 422 `VALIDATION_FAILED` indicando as questões pendentes (R-1); nenhuma tentativa é registrada em `QuizAttempt` e nenhuma nota é calculada. |
 | TC166 | 5 – E2 Gabarito incompleto no quiz | CT1 Erro ao calcular nota por gabarito ausente | Aluno submete respostas para quiz com questão sem alternativa correta cadastrada | Resposta 500 `INTERNAL_SERVER_ERROR`, registro do erro em log para o instrutor e tentativa cancelada sem corromper o progresso do aluno. |
-| TC167 | 6 – E3 Aulas do módulo pendentes | CT1 Acesso com aulas incompletas | Aluno com aulas pendentes no módulo tenta acessar `GET /quizzes/{id}` | Resposta 403 `FORBIDDEN` indicando as aulas pendentes; questões e alternativas do quiz permanecem ocultas. |
+| TC167 | 6 – E3 Aulas do módulo pendentes | CT1 Acesso com aulas incompletas | Aluno com aulas pendentes no módulo tenta acessar `GET /api/v1/quizzes/{id}` | Resposta 403 `FORBIDDEN` indicando as aulas pendentes; questões e alternativas do quiz permanecem ocultas. |
 | TC168 | 7 – E4 Aluno não matriculado | CT1 Quiz de curso não matriculado | Aluno autenticado tenta carregar quiz de curso em que não está matriculado | Resposta 404 `NOT_FOUND` sem confirmar existência do quiz, protegendo o recurso contra enumeração. |
-| TC179 | 8 – Negativo Gabarito oculto antes do envio | CT1 Resposta de quiz sem gabarito | Aluno com aulas concluídas acessa `GET /quizzes/{id}` antes de enviar e inspeciona o corpo da resposta | Resposta 200 `OK` (`QuizResource`) sem qualquer campo de gabarito (resposta correta de questão ou opção); o gabarito só aparece em `GET /quizzes/{id}/attempt/result` após o envio (R-4; TDD, seção 3.3; UC002 fluxo básico, passos 2 e 5). |
+| TC179 | 8 – Negativo Gabarito oculto antes do envio | CT1 Resposta de quiz sem gabarito | Aluno com aulas concluídas acessa `GET /api/v1/quizzes/{id}` antes de enviar e inspeciona o corpo da resposta | Resposta 200 `OK` (`QuizResource`) sem qualquer campo de gabarito (resposta correta de questão ou opção); o gabarito só aparece em `GET /api/v1/quizzes/{id}/attempt/result` após o envio (R-4; TDD, seção 3.3; UC002 fluxo básico, passos 2 e 5). |
 | TC180 | 9 – R-2 Cálculo da nota | CT1 Duas de três corretas | Quiz de 3 questões; Aluno acerta 2 e envia | Resposta 200 `OK` (`QuizResultResource`) com `score` 66,67 (`numeric(5,2)`); a tela exibe 67%. |
 | TC181 | 9 – R-2 Cálculo da nota | CT2 Uma de três correta | Quiz de 3 questões; Aluno acerta 1 e envia | Resposta 200 `OK` com `score` 33,33; a tela exibe 33%. |
 | TC182 | 9 – R-2 Cálculo da nota | CT3 Nenhuma correta | Quiz de 3 questões; Aluno acerta 0 e envia | Resposta 200 `OK` com `score` 0,00; a tela exibe 0%. |
 | TC183 | 9 – R-2 Cálculo da nota | CT4 Todas corretas | Quiz de 3 questões; Aluno acerta 3 e envia | Resposta 200 `OK` com `score` 100,00; a tela exibe 100%. |
-| TC190 | 3 – A2 / concorrência | CT1 Rascunho e envio simultâneos | `PUT /quizzes/{id}/attempt/draft` e `POST /quizzes/{id}/attempt` concorrentes, na mesma matrícula e quiz, com todas as respostas | Serializado pelo bloqueio da matrícula. Se o envio grava primeiro, a tentativa tem `score` e `submitted_at` preenchidos e o rascunho que chega depois recebe 409 `CONFLICT`, sem alterar as respostas enviadas. Se o rascunho grava primeiro, o envio corrige as respostas gravadas. Em qualquer ordem, não há duas tentativas `draft` para o mesmo quiz (UC002 A2). |
-| TC191 | 5 – E2 / R-2 | CT2 Envio com gabarito incompleto desfaz a tentativa | Aluno com rascunho salvo envia `POST /quizzes/{id}/attempt` em quiz com questão sem alternativa correta | Resposta 500 `INTERNAL_SERVER_ERROR` sem detalhe interno. A transação é desfeita: nenhum `quiz_attempts` com `status = submitted`, `score` e `submitted_at` nulos, respostas do rascunho preservadas em `quiz_answers`. Registro de log com `quizId` para o Instrutor responsável (UC002 E2). |
+| TC190 | 3 – A2 / concorrência | CT1 Rascunho e envio simultâneos | `PUT /api/v1/quizzes/{id}/attempt/draft` e `POST /api/v1/quizzes/{id}/attempt` concorrentes, na mesma matrícula e quiz, com todas as respostas | Serializado pelo bloqueio da matrícula. Se o envio grava primeiro, a tentativa tem `score` e `submitted_at` preenchidos e o rascunho que chega depois recebe 409 `CONFLICT`, sem alterar as respostas enviadas. Se o rascunho grava primeiro, o envio corrige as respostas gravadas. Em qualquer ordem, não há duas tentativas `draft` para o mesmo quiz (UC002 A2). |
+| TC191 | 5 – E2 / R-2 | CT2 Envio com gabarito incompleto desfaz a tentativa | Aluno com rascunho salvo envia `POST /api/v1/quizzes/{id}/attempt` em quiz com questão sem alternativa correta | Resposta 500 `INTERNAL_SERVER_ERROR` sem detalhe interno. A transação é desfeita: nenhum `quiz_attempts` com `status = submitted`, `score` e `submitted_at` nulos, respostas do rascunho preservadas em `quiz_answers`. Registro de log com `quizId` para o Instrutor responsável (UC002 E2). |
 | TC192 | 1 – R-2 / histórico | CT3 Edição de gabarito após o envio | Aluno envia quiz com `score` 66,67; Instrutor altera o gabarito em `PUT /api/v1/instructor/quizzes/{id}` | `score` continua 66,67 e a tentativa não é recalculada; nenhuma nota muda sem novo envio (UC004 R-2). |
 | TC193 | 1 – R-2 / histórico | CT4 Edição de gabarito antes do envio | Aluno tem rascunho salvo; Instrutor altera o gabarito; Aluno envia | A correção usa o gabarito vigente no momento do envio; o `score` gravado não muda com edições posteriores do gabarito (UC004 R-2). |
 
-## 5. UC010 – Avaliar Curso
+### UC010 – Avaliar Curso
 
 **Rastreio:** US014, RF011 (itens 6, 7 e 10).
 
@@ -84,17 +88,17 @@
 | TC041 | 2 – A1 Editar avaliação anterior | CT1 Substituição de avaliação existente | Aluno que já havia avaliado com nota 3 reenvia nota 5 e novo comentário | Resposta 200 `OK`, registro anterior em `Review` atualizado na mesma chave primária sem duplicidade (R-2) e média do curso atualizada. |
 | TC170 | 3 – A2 Cancelar alteração | CT1 Descarte de edição de avaliação | Aluno abre modal, altera nota de 5 para 2 e clica em «Cancelar» | Modal é fechado sem salvar; avaliação anterior de nota 5 em `Review` é mantida estritamente inalterada. |
 | TC171 | 4 – E1 Nenhuma aula concluída | CT1 Avaliação sem aula assistida | Aluno matriculado com 0 aulas concluídas tenta abrir formulário de avaliação | Resposta 403 `FORBIDDEN` informando que é obrigatório concluir ao menos uma aula para avaliar (R-1); nenhuma avaliação registrada. |
-| TC042 | 4 – E1 Aluno não matriculado | CT2 Usuário sem matrícula tenta avaliar | Usuário logado sem matrícula tenta enviar `POST /courses/{id}/reviews` | Resposta 403 `FORBIDDEN` com aviso de que apenas alunos matriculados podem avaliar o curso. |
+| TC042 | 4 – E1 Aluno não matriculado | CT2 Usuário sem matrícula tenta avaliar | Usuário logado sem matrícula tenta enviar `POST /api/v1/courses/{id}/reviews` | Resposta 403 `FORBIDDEN` com aviso de que apenas alunos matriculados podem avaliar o curso. |
 | TC172 | 5 – E2 Envio sem nota selecionada | CT1 Nota ausente | Aluno envia formulário preenchendo apenas texto no comentário, sem selecionar nota | Resposta 422 `VALIDATION_FAILED` no campo `rating` apontando obrigatoriedade da nota (R-3); banco de dados inalterado. |
 | TC173 | 5 – E2 Nota fora da escala | CT2 Nota menor que 1 ou maior que 5 | Envio de requisição com `rating: 6` ou `rating: 0` | Resposta 422 `VALIDATION_FAILED` no campo `rating` indicando escala de 1 a 5 (R-3); nenhuma avaliação gravada. |
 
-## 6. UC020 – Consultar Catálogo de Cursos
+### UC020 – Consultar Catálogo de Cursos
 
 **Rastreio:** US019, RF015 (itens 6, 7 e 10).
 
 | ID | CENÁRIO | CASO DE TESTE | ENTRADAS | RESULTADO ESPERADO |
 |---|---|---|---|---|
-| TC055 | 1 – Fluxo básico | CT1 Listagem inicial pública | Acesso público a `/courses` sem parâmetros de busca | Resposta 200 `OK` com lista de cursos publicados contendo título, nome do instrutor (`instructorId`), preço em R$ ou «Gratuito» (R-1, R-2), paginada em 20 itens (`meta.currentPage: 1`, `meta.perPage: 20`) (R-4). |
+| TC055 | 1 – Fluxo básico | CT1 Listagem inicial pública | Acesso público a `GET /api/v1/catalog/courses` sem parâmetros de busca | Resposta 200 `OK` com lista de cursos publicados contendo título, nome do instrutor (`instructorId`), preço em R$ ou «Gratuito» (R-1, R-2), paginada em 20 itens (`meta.currentPage: 1`, `meta.perPage: 20`) (R-4). |
 | TC056 | 1 – Fluxo básico | CT2 Filtro por categoria existente | Seleção do chip «Programação» (`?category=Programacao&page=1`) | Resposta 200 `OK` contendo exclusivamente cursos publicados pertencentes à categoria «Programação» (`categoryId`) (R-1, R-3) com estado refletido na URL (R-4). |
 | TC174 | 2 – A1 Limpar filtro de categoria | CT1 Seleção do chip «Todas» | Ator com filtro ativo seleciona chip «Todas» (`?category=&page=1`) | Resposta 200 `OK` com catálogo completo de todas as categorias e URL atualizada sem parâmetro de categoria (R-3, R-4). |
 | TC178 | 3 – E1 Catálogo vazio | CT1 Nenhum curso publicado no sistema | Base de dados sem nenhum curso em status `published` | Resposta 200 `OK` com array de dados vazio (`data: []`) e exibição da mensagem «Nenhum curso disponível no momento.». |
