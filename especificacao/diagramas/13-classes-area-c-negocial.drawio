@@ -182,16 +182,16 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qa_qz_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1075" y="758" width="30" height="20" as="geometry" />
+          <mxGeometry x="1075" y="738" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qa_qz_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="1115" y="758" width="20" height="20" as="geometry" />
+          <mxGeometry x="1115" y="776" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_QuizAttempt_QuizAnswer" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;startArrow=diamond;startFill=1;startSize=14;endArrow=none;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.2653;entryX=1;entryY=0.2917;" edge="1" parent="1" source="class_QuizAttempt" target="class_QuizAnswer">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qa_qans_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="690" y="758" width="20" height="20" as="geometry" />
+          <mxGeometry x="688" y="738" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qa_qans_n" value="1..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="650" y="758" width="30" height="20" as="geometry" />
@@ -200,7 +200,7 @@
           <mxGeometry relative="1" as="geometry">
             </mxGeometry>
         </mxCell>
-        <mxCell id="edge_Payment_PaymentStatus" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.36;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_Payment" target="enum_PaymentStatus">
+        <mxCell id="edge_Payment_PaymentStatus" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.36;exitY=1;entryX=0.5;entryY=0;;exitX=0.2955;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="class_Payment" target="enum_PaymentStatus">
           <mxGeometry relative="1" as="geometry">
             </mxGeometry>
         </mxCell>
@@ -250,7 +250,7 @@
           <mxGeometry x="155" y="915" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qans_o_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="515" y="875" width="30" height="20" as="geometry" />
+          <mxGeometry x="522" y="890" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qans_o_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="270" y="1100" width="20" height="20" as="geometry" />
@@ -267,7 +267,7 @@
         <mxCell id="enum_PaymentPurpose_attrs" value="enrollment&lt;br&gt;tutor_credits" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="enum_PaymentPurpose">
           <mxGeometry y="40" width="140" height="55" as="geometry" x="0" />
         </mxCell>
-        <mxCell id="edge_Payment_PaymentPurpose" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.86;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="class_Payment" target="enum_PaymentPurpose">
+        <mxCell id="edge_Payment_PaymentPurpose" value="" style="edgeStyle=none;rounded=0;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.86;exitY=1;entryX=0.5;entryY=0;;exitX=0.9545;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="class_Payment" target="enum_PaymentPurpose">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_class_User" value="A" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
@@ -320,6 +320,27 @@
         </mxCell>
         <mxCell id="typeicon_enum_PaymentPurpose" value="E" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="186" y="590" width="20" height="20" as="geometry" />
+        </mxCell>
+          <mxCell id="legend_box" value="&lt;b&gt;Legenda (Item 13)&lt;/b&gt;" vertex="1" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=25;fillColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;collapsible=0;rounded=0;">
+          <mxGeometry x="1400" y="40" width="280" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_0" value="&lt;b&gt;Entidade (#F5F5F5)&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;spacingLeft=25;">
+          <mxGeometry x="20" y="35" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_icon_0" value="C" vertex="1" parent="legend_box" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="25" y="43" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_1" value="&lt;b&gt;Classe Abstrata (#F5F5F5)&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;spacingLeft=25;">
+          <mxGeometry x="20" y="90" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_icon_1" value="A" vertex="1" parent="legend_box" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="25" y="98" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_sample_2" value="&lt;b&gt;Enumeração (#FFFFFF)&lt;/b&gt;" vertex="1" parent="legend_box" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1;fontSize=11;fontFamily=Helvetica;fontColor=#000000;align=center;verticalAlign=middle;spacingLeft=25;">
+          <mxGeometry x="20" y="145" width="240" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="leg_icon_2" value="E" vertex="1" parent="legend_box" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;align=center;verticalAlign=middle;">
+          <mxGeometry x="25" y="153" width="20" height="20" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
