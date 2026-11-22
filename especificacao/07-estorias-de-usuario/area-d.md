@@ -82,3 +82,4 @@
 |---|---|
 | 1 | **DADO QUE:** estou logado como Aluno e desejo créditos adicionais <br> **QUANDO:** confirmo a compra do pacote de mensagens extras com pagamento simulado <br> **ENTÃO:** o pacote de créditos é registrado na minha conta e vinculado ao pagamento simulado (`tutor_credit_packs`). |
 | 2 | **DADO QUE:** possuo um pacote de créditos extras ativo e esgotei a cota de 20 mensagens por hora <br> **QUANDO:** envio uma nova pergunta ao Tutor de IA <br> **ENTÃO:** a pergunta é aceita e respondida normalmente, debitando um crédito do pacote. |
+| 3 | **DADO QUE:** estou na interface de aquisição de créditos extras <br> **QUANDO:** o pagamento simulado não é confirmado ou é cancelado <br> **ENTÃO:** a operação é cancelada sem cobrança, nenhum crédito é adicionado e a cota regular é mantida (ADR-0002). |

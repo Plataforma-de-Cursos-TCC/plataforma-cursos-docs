@@ -2,7 +2,7 @@
 
 - **Nome do caso de uso:** Conversar com Tutor de IA
 - **Ator(es):** Aluno (primário); Tutor de IA (ator sistêmico, secundário).
-- **Descrição:** o Aluno faz uma pergunta sobre o conteúdo da aula ao Tutor de IA do curso e recebe uma resposta que cita a origem no material (US012, RF009). Iniciado a partir do UC009 (Assistir Aula), fluxo alternativo A3: UC001 «extend» UC009 (a seta sai do UC001 e aponta para o UC009).
+- **Descrição:** o Aluno faz uma pergunta sobre o conteúdo da aula ao Tutor de IA do curso e recebe uma resposta que cita a origem no material (US012, US022, RF009, RF020). Iniciado a partir do UC009 (Assistir Aula), fluxo alternativo A3: UC001 «extend» UC009 (a seta sai do UC001 e aponta para o UC009).
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; a aula já ter sido transcrita e indexada.
 - **Pós-condições:** pergunta e resposta salvas no histórico de conversa do Aluno com aquele curso.
 - **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código HTTP 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
