@@ -32,7 +32,7 @@
         <mxCell id="cls_BuyCreditPackRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;BuyCreditPackRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="20" y="338" width="350" height="116" as="geometry" />
         </mxCell>
-        <mxCell id="cls_BuyCreditPackRequest_attrs" value="+packType: string&lt;br&gt;+paymentMethod: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_BuyCreditPackRequest">
+        <mxCell id="cls_BuyCreditPackRequest_attrs" value="+packType: string&lt;br&gt;+confirmPayment: boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_BuyCreditPackRequest">
           <mxGeometry x="0" y="36" width="350" height="48" as="geometry" />
         </mxCell>
         <mxCell id="cls_BuyCreditPackRequest_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_BuyCreditPackRequest">
@@ -90,16 +90,16 @@
           <mxGeometry x="0" y="36" width="350" height="32" as="geometry" />
         </mxCell>
         <mxCell id="cls_TutorService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="820" y="40" width="380" height="276" as="geometry" />
+          <mxGeometry x="820" y="40" width="380" height="292" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorService_attrs" value="-convRepo: ConversationRepository&lt;br&gt;-msgRepo: MessageRepository&lt;br&gt;-creditRepo: TutorCreditPackRepository&lt;br&gt;-rateLimiter: TutorRateLimiter&lt;br&gt;-aiClient: CourseTutorClient" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorService">
-          <mxGeometry x="0" y="36" width="380" height="96" as="geometry" />
+        <mxCell id="cls_TutorService_attrs" value="-convRepo: ConversationRepository&lt;br&gt;-msgRepo: MessageRepository&lt;br&gt;-creditRepo: TutorCreditPackRepository&lt;br&gt;-rateLimiter: TutorRateLimiter&lt;br&gt;-aiClient: CourseTutorClient&lt;br&gt;-paymentService: PaymentService (Área C)" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorService">
+          <mxGeometry x="0" y="36" width="380" height="112" as="geometry" />
         </mxCell>
         <mxCell id="cls_TutorService_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_TutorService">
-          <mxGeometry x="0" y="132" width="380" height="4" as="geometry" />
+          <mxGeometry x="0" y="148" width="380" height="4" as="geometry" />
         </mxCell>
         <mxCell id="cls_TutorService_methods" value="+getOrCreateConversation(userId: UUID, courseId: UUID, lessonId: UUID): Conversation&lt;br&gt;+ask(userId: UUID, lessonId: UUID, prompt: string, videoTimestampSeconds?: int): StreamedResponse&lt;br&gt;+buyCreditPack(userId: UUID, packType: string): TutorCreditPack" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorService">
-          <mxGeometry x="0" y="132" width="380" height="144" as="geometry" />
+          <mxGeometry x="0" y="148" width="380" height="144" as="geometry" />
         </mxCell>
         <mxCell id="cls_CourseTutorClient" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseTutorClient&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="820" y="351" width="380" height="148" as="geometry" />
@@ -140,8 +140,14 @@
         <mxCell id="cls_TutorCreditPackRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorCreditPackRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="1240" y="322" width="380" height="132" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorCreditPackRepository_methods" value="+findAvailablePack(userId: UUID): TutorCreditPack&lt;br&gt;+create(userId: UUID, packType: string, messagesTotal: int): TutorCreditPack&lt;br&gt;+consumeMessage(packId: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorCreditPackRepository">
+        <mxCell id="cls_TutorCreditPackRepository_methods" value="+findAvailablePack(userId: UUID): TutorCreditPack&lt;br&gt;+create(userId: UUID, paymentId: UUID, packType: string, messagesTotal: int): TutorCreditPack&lt;br&gt;+consumeMessage(packId: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorCreditPackRepository">
           <mxGeometry x="0" y="36" width="380" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_PaymentService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentService (Área C)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;dashPattern=8 8;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1240" y="474" width="380" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="cls_PaymentService_methods" value="+processSimulatedPayment(enrollmentId: ?UUID, dto: PaymentDTO): Payment" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_PaymentService">
+          <mxGeometry x="0" y="36" width="380" height="56" as="geometry" />
         </mxCell>
         <mxCell id="cls_LearningMetricsService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LearningMetricsService (Área C)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;dashPattern=8 8;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="820" y="664" width="380" height="96" as="geometry" />
@@ -424,6 +430,17 @@
         </mxCell>
         <mxCell id="typeicon_cls_DashboardMetricsDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="1666" y="673" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="typeicon_cls_PaymentService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1246" y="482" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_ts_ps" value="" style="html=1;rounded=0;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.85;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="cls_TutorService" target="cls_PaymentService">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1220" y="288" />
+              <mxPoint x="1220" y="522" />
+            </Array>
+          </mxGeometry>
         </mxCell>
         <mxCell id="typeicon_cls_Lesson_ext" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="2086" y="48" width="20" height="20" as="geometry" />
