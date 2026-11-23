@@ -87,7 +87,7 @@ REPO_URL = "https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs"
 # Link curto da Fonte: página de redirect por figura em docs/f/N.html, servida pelo GitHub Pages.
 PAGES_URL = "https://plataforma-de-cursos-tcc.github.io/plataforma-cursos-docs/f"
 SHORT_DIR = Path(__file__).resolve().parents[1] / "docs" / "f"
-VERSAO = "v2.0.2"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
+VERSAO = "v2.0.3"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
 

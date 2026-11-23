@@ -13,6 +13,8 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ## [Não lançado]
 
+## [2.0.3] - 2026-11-22
+
 ### Corrigido
 
 - Diagramas 12-C (modelo de dados) e 13-D (tutor e analytics) com layout ajustado e PNG reexportado, porque o PNG precisa refletir a fonte `.drawio` (#161).
@@ -175,7 +177,8 @@ Entrega do RA1: itens 1 a 11 da especificação.
 
 - Critério `C06.5` em `entregas/`, porque a coluna de objetivo pertence à matriz de rastreabilidade do item 9 e não ao item 6 (#61).
 
-[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.2...HEAD
+[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.3...HEAD
+[2.0.3]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v1.2.0...v2.0.0
