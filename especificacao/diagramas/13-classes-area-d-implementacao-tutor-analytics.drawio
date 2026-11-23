@@ -1,461 +1,437 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<mxfile host="Electron" version="32.7.4" type="device" compressed="false">
+<mxfile host="Electron" compressed="false">
   <diagram id="13-classes-area-d-implementacao-tutor-analytics" name="13-classes-area-d-implementacao-tutor-analytics">
-    <mxGraphModel dx="1400" dy="1000" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2100" pageHeight="1000" math="0" shadow="0">
+    <mxGraphModel dx="978" dy="403" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2100" pageHeight="1000" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="cls_AskTutorRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AskTutorRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="40" width="350" height="132" as="geometry" />
+        <mxCell id="cls_AskTutorRequest" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;AskTutorRequest&lt;/b&gt;" vertex="1">
+          <mxGeometry height="132" width="350" x="40" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AskTutorRequest_attrs" value="+lessonId: UUID&lt;br&gt;+prompt: string&lt;br&gt;+videoTimestampSeconds?: int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AskTutorRequest">
-          <mxGeometry x="0" y="36" width="350" height="64" as="geometry" />
+        <mxCell id="cls_AskTutorRequest_attrs" parent="cls_AskTutorRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+lessonId: UUID&lt;br&gt;+prompt: string&lt;br&gt;+videoTimestampSeconds?: int" vertex="1">
+          <mxGeometry height="64" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AskTutorRequest_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_AskTutorRequest">
-          <mxGeometry x="0" y="100" width="350" height="4" as="geometry" />
+        <mxCell id="cls_AskTutorRequest_sep" parent="cls_AskTutorRequest" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="350" y="100" as="geometry" />
         </mxCell>
-        <mxCell id="cls_AskTutorRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_AskTutorRequest">
-          <mxGeometry x="0" y="100" width="350" height="32" as="geometry" />
+        <mxCell id="cls_AskTutorRequest_methods" parent="cls_AskTutorRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+rules(): array" vertex="1">
+          <mxGeometry height="32" width="350" y="100" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CursorRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CursorRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="190" width="350" height="116" as="geometry" />
+        <mxCell id="cls_CursorRequest" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CursorRequest&lt;/b&gt;" vertex="1">
+          <mxGeometry height="116" width="350" x="40" y="190" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CursorRequest_attrs" value="+cursor?: string&lt;br&gt;+perPage?: int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_CursorRequest">
-          <mxGeometry x="0" y="36" width="350" height="48" as="geometry" />
+        <mxCell id="cls_CursorRequest_attrs" parent="cls_CursorRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+cursor?: string&lt;br&gt;+perPage?: int" vertex="1">
+          <mxGeometry height="48" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CursorRequest_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_CursorRequest">
-          <mxGeometry x="0" y="84" width="350" height="4" as="geometry" />
+        <mxCell id="cls_CursorRequest_sep" parent="cls_CursorRequest" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="350" y="84" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CursorRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_CursorRequest">
-          <mxGeometry x="0" y="84" width="350" height="32" as="geometry" />
+        <mxCell id="cls_CursorRequest_methods" parent="cls_CursorRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+rules(): array" vertex="1">
+          <mxGeometry height="32" width="350" y="84" as="geometry" />
         </mxCell>
-        <mxCell id="cls_BuyCreditPackRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;BuyCreditPackRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="325" width="350" height="116" as="geometry" />
+        <mxCell id="cls_BuyCreditPackRequest" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;BuyCreditPackRequest&lt;/b&gt;" vertex="1">
+          <mxGeometry height="116" width="350" x="40" y="325" as="geometry" />
         </mxCell>
-        <mxCell id="cls_BuyCreditPackRequest_attrs" value="+packType: string&lt;br&gt;+confirmPayment: boolean" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_BuyCreditPackRequest">
-          <mxGeometry x="0" y="36" width="350" height="48" as="geometry" />
+        <mxCell id="cls_BuyCreditPackRequest_attrs" parent="cls_BuyCreditPackRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+packType: string&lt;br&gt;+confirmPayment: boolean" vertex="1">
+          <mxGeometry height="48" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_BuyCreditPackRequest_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_BuyCreditPackRequest">
-          <mxGeometry x="0" y="84" width="350" height="4" as="geometry" />
+        <mxCell id="cls_BuyCreditPackRequest_sep" parent="cls_BuyCreditPackRequest" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="350" y="84" as="geometry" />
         </mxCell>
-        <mxCell id="cls_BuyCreditPackRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_BuyCreditPackRequest">
-          <mxGeometry x="0" y="84" width="350" height="32" as="geometry" />
+        <mxCell id="cls_BuyCreditPackRequest_methods" parent="cls_BuyCreditPackRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+rules(): array" vertex="1">
+          <mxGeometry height="32" width="350" y="84" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardFilterRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardFilterRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="590" width="350" height="148" as="geometry" />
+        <mxCell id="cls_DashboardFilterRequest" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardFilterRequest&lt;/b&gt;" vertex="1">
+          <mxGeometry height="148" width="350" x="40" y="590" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardFilterRequest_attrs" value="+startDate: Date&lt;br&gt;+endDate: Date&lt;br&gt;+courseId?: UUID&lt;br&gt;+groupBy: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardFilterRequest">
-          <mxGeometry x="0" y="36" width="350" height="80" as="geometry" />
+        <mxCell id="cls_DashboardFilterRequest_attrs" parent="cls_DashboardFilterRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+startDate: Date&lt;br&gt;+endDate: Date&lt;br&gt;+courseId?: UUID&lt;br&gt;+groupBy: string" vertex="1">
+          <mxGeometry height="80" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardFilterRequest_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_DashboardFilterRequest">
-          <mxGeometry x="0" y="116" width="350" height="4" as="geometry" />
+        <mxCell id="cls_DashboardFilterRequest_sep" parent="cls_DashboardFilterRequest" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="350" y="116" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardFilterRequest_methods" value="+rules(): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardFilterRequest">
-          <mxGeometry x="0" y="116" width="350" height="32" as="geometry" />
+        <mxCell id="cls_DashboardFilterRequest_methods" parent="cls_DashboardFilterRequest" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+rules(): array" vertex="1">
+          <mxGeometry height="32" width="350" y="116" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="440" y="40" width="340" height="500" as="geometry" />
+        <mxCell id="cls_TutorController" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorController&lt;/b&gt;" vertex="1">
+          <mxGeometry height="500" width="340" x="440" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorController_methods" value="+getMessages(conversationId: UUID, req: CursorRequest): JsonResponse&lt;br&gt;+chat(req: AskTutorRequest): StreamedResponse&lt;br&gt;+buyCredits(req: BuyCreditPackRequest): JsonResponse" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorController">
-          <mxGeometry x="0" y="36" width="340" height="464" as="geometry" />
+        <mxCell id="cls_TutorController_methods" parent="cls_TutorController" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+getMessages(conversationId: UUID, req: CursorRequest): JsonResponse&lt;br&gt;+chat(req: AskTutorRequest): StreamedResponse&lt;br&gt;+buyCredits(req: BuyCreditPackRequest): JsonResponse" vertex="1">
+          <mxGeometry height="464" width="340" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CreditPackResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CreditPackResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="460" width="350" height="68" as="geometry" />
+        <mxCell id="cls_CreditPackResource" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CreditPackResource&lt;/b&gt;" vertex="1">
+          <mxGeometry height="68" width="350" x="40" y="460" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CreditPackResource_methods" value="+toArray(request: Request): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_CreditPackResource">
-          <mxGeometry x="0" y="36" width="350" height="32" as="geometry" />
+        <mxCell id="cls_CreditPackResource_methods" parent="cls_CreditPackResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+toArray(request: Request): array" vertex="1">
+          <mxGeometry height="32" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorRateLimiter" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorRateLimiter&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="840" y="600" width="240" height="132" as="geometry" />
+        <mxCell id="cls_TutorRateLimiter" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorRateLimiter&lt;/b&gt;" vertex="1">
+          <mxGeometry height="132" width="240" x="840" y="600" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorRateLimiter_attrs" value="-redis: RedisClient" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorRateLimiter">
-          <mxGeometry x="0" y="36" width="240" height="32" as="geometry" />
+        <mxCell id="cls_TutorRateLimiter_attrs" parent="cls_TutorRateLimiter" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="-redis: RedisClient" vertex="1">
+          <mxGeometry height="32" width="240" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorRateLimiter_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_TutorRateLimiter">
-          <mxGeometry x="0" y="68" width="240" height="4" as="geometry" />
+        <mxCell id="cls_TutorRateLimiter_sep" parent="cls_TutorRateLimiter" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="240" y="68" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorRateLimiter_methods" value="+checkLimit(userId: UUID): boolean&lt;br&gt;+incrementAndGetWaitSeconds(userId: UUID): int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorRateLimiter">
-          <mxGeometry x="0" y="68" width="240" height="64" as="geometry" />
+        <mxCell id="cls_TutorRateLimiter_methods" parent="cls_TutorRateLimiter" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+checkLimit(userId: UUID): boolean&lt;br&gt;+incrementAndGetWaitSeconds(userId: UUID): int" vertex="1">
+          <mxGeometry height="64" width="240" y="68" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardController" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardController&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="440" y="620" width="340" height="180" as="geometry" />
+        <mxCell id="cls_DashboardController" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#DAE8FC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Controller&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardController&lt;/b&gt;" vertex="1">
+          <mxGeometry height="180" width="340" x="440" y="620" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardController_methods" value="+getMetrics(req: DashboardFilterRequest): JsonResponse" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardController">
-          <mxGeometry x="0" y="36" width="340" height="144" as="geometry" />
+        <mxCell id="cls_DashboardController_methods" parent="cls_DashboardController" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+getMetrics(req: DashboardFilterRequest): JsonResponse" vertex="1">
+          <mxGeometry height="144" width="340" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="760" width="350" height="68" as="geometry" />
+        <mxCell id="cls_DashboardResource" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardResource&lt;/b&gt;" vertex="1">
+          <mxGeometry height="68" width="350" x="40" y="760" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardResource_methods" value="+toArray(request: Request): array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardResource">
-          <mxGeometry x="0" y="36" width="350" height="32" as="geometry" />
+        <mxCell id="cls_DashboardResource_methods" parent="cls_DashboardResource" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+toArray(request: Request): array" vertex="1">
+          <mxGeometry height="32" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="840" y="40" width="400" height="530" as="geometry" />
+        <mxCell id="cls_TutorService" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorService&lt;/b&gt;" vertex="1">
+          <mxGeometry height="530" width="400" x="840" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorService_attrs" value="-convRepo: ConversationRepository&lt;br&gt;-msgRepo: MessageRepository&lt;br&gt;-creditRepo: TutorCreditPackRepository&lt;br&gt;-rateLimiter: TutorRateLimiter&lt;br&gt;-aiClient: CourseTutorClient&lt;br&gt;-paymentService: PaymentService (Área C)" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorService">
-          <mxGeometry x="0" y="36" width="400" height="112" as="geometry" />
+        <mxCell id="cls_TutorService_attrs" parent="cls_TutorService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="-convRepo: ConversationRepository&lt;br&gt;-msgRepo: MessageRepository&lt;br&gt;-creditRepo: TutorCreditPackRepository&lt;br&gt;-rateLimiter: TutorRateLimiter&lt;br&gt;-aiClient: CourseTutorClient&lt;br&gt;-paymentService: PaymentService (Área C)" vertex="1">
+          <mxGeometry height="112" width="400" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorService_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_TutorService">
-          <mxGeometry x="0" y="148" width="400" height="4" as="geometry" />
+        <mxCell id="cls_TutorService_sep" parent="cls_TutorService" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="400" y="148" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorService_methods" value="+getOrCreateConversation(userId: UUID, courseId: UUID, lessonId: UUID): Conversation&lt;br&gt;+ask(userId: UUID, lessonId: UUID, prompt: string, videoTimestampSeconds?: int): StreamedResponse&lt;br&gt;+buyCreditPack(userId: UUID, packType: string): TutorCreditPack" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorService">
-          <mxGeometry x="0" y="148" width="400" height="378" as="geometry" />
+        <mxCell id="cls_TutorService_methods" parent="cls_TutorService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+getOrCreateConversation(userId: UUID, courseId: UUID, lessonId: UUID): Conversation&lt;br&gt;+ask(userId: UUID, lessonId: UUID, prompt: string, videoTimestampSeconds?: int): StreamedResponse&lt;br&gt;+buyCreditPack(userId: UUID, packType: string): TutorCreditPack" vertex="1">
+          <mxGeometry height="378" width="400" y="148" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CourseTutorClient" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseTutorClient&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1090" y="600" width="200" height="170" as="geometry" />
+        <mxCell id="cls_CourseTutorClient" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseTutorClient&lt;/b&gt;" vertex="1">
+          <mxGeometry height="144" width="200" x="1090" y="600" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CourseTutorClient_attrs" value="-endpoint: string&lt;br&gt;-apiKey: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_CourseTutorClient">
-          <mxGeometry x="0" y="36" width="200" height="48" as="geometry" />
+        <mxCell id="cls_CourseTutorClient_attrs" parent="cls_CourseTutorClient" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="-endpoint: string&lt;br&gt;-apiKey: string" vertex="1">
+          <mxGeometry height="48" width="200" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CourseTutorClient_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_CourseTutorClient">
-          <mxGeometry x="0" y="84" width="200" height="4" as="geometry" />
+        <mxCell id="cls_CourseTutorClient_sep" parent="cls_CourseTutorClient" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="200" y="84" as="geometry" />
         </mxCell>
-        <mxCell id="cls_CourseTutorClient_methods" value="+streamRagResponse(courseId: UUID, lessonId: UUID, prompt: string, locale: Locale): Stream" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_CourseTutorClient">
-          <mxGeometry x="0" y="84" width="200" height="86" as="geometry" />
+        <mxCell id="cls_CourseTutorClient_methods" parent="cls_CourseTutorClient" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+streamRagResponse(courseId: UUID, lessonId: UUID, prompt: string, locale: Locale): Stream" vertex="1">
+          <mxGeometry height="64" width="200" y="84" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardAnalyticsService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardAnalyticsService&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="840" y="760" width="400" height="116" as="geometry" />
+        <mxCell id="cls_DashboardAnalyticsService" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardAnalyticsService&lt;/b&gt;" vertex="1">
+          <mxGeometry height="116" width="400" x="840" y="760" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardAnalyticsService_attrs" value="-learningMetrics: LearningMetricsService (Área C)" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardAnalyticsService">
-          <mxGeometry x="0" y="36" width="400" height="32" as="geometry" />
+        <mxCell id="cls_DashboardAnalyticsService_attrs" parent="cls_DashboardAnalyticsService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="-learningMetrics: LearningMetricsService (Área C)" vertex="1">
+          <mxGeometry height="32" width="400" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardAnalyticsService_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_DashboardAnalyticsService">
-          <mxGeometry x="0" y="68" width="400" height="4" as="geometry" />
+        <mxCell id="cls_DashboardAnalyticsService_sep" parent="cls_DashboardAnalyticsService" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="400" y="68" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardAnalyticsService_methods" value="+getMetrics(user: User, filter: DashboardFilterDTO): DashboardMetricsDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardAnalyticsService">
-          <mxGeometry x="0" y="68" width="400" height="48" as="geometry" />
+        <mxCell id="cls_DashboardAnalyticsService_methods" parent="cls_DashboardAnalyticsService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+getMetrics(user: User, filter: DashboardFilterDTO): DashboardMetricsDTO" vertex="1">
+          <mxGeometry height="48" width="400" y="68" as="geometry" />
         </mxCell>
-        <mxCell id="cls_ConversationRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ConversationRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="40" width="350" height="116" as="geometry" />
+        <mxCell id="cls_ConversationRepository" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ConversationRepository&lt;/b&gt;" vertex="1">
+          <mxGeometry height="116" width="350" x="1300" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="cls_ConversationRepository_methods" value="+findByUserAndLesson(userId: UUID, lessonId: UUID): Conversation&lt;br&gt;+create(userId: UUID, lessonId: UUID): Conversation" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_ConversationRepository">
-          <mxGeometry x="0" y="36" width="350" height="80" as="geometry" />
+        <mxCell id="cls_ConversationRepository_methods" parent="cls_ConversationRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+findByUserAndLesson(userId: UUID, lessonId: UUID): Conversation&lt;br&gt;+create(userId: UUID, lessonId: UUID): Conversation" vertex="1">
+          <mxGeometry height="80" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_MessageRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MessageRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="180" width="350" height="116" as="geometry" />
+        <mxCell id="cls_MessageRepository" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;MessageRepository&lt;/b&gt;" vertex="1">
+          <mxGeometry height="116" width="350" x="1300" y="180" as="geometry" />
         </mxCell>
-        <mxCell id="cls_MessageRepository_methods" value="+paginateByCursor(conversationId: UUID, cursor: string, perPage: int): Page&lt;br&gt;+create(conversationId: UUID, role: MessageRole, content: string, videoTimestampSeconds?: int): Message" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_MessageRepository">
-          <mxGeometry x="0" y="36" width="350" height="80" as="geometry" />
+        <mxCell id="cls_MessageRepository_methods" parent="cls_MessageRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+paginateByCursor(conversationId: UUID, cursor: string, perPage: int): Page&lt;br&gt;+create(conversationId: UUID, role: MessageRole, content: string, videoTimestampSeconds?: int): Message" vertex="1">
+          <mxGeometry height="80" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorCreditPackRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorCreditPackRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="320" width="350" height="132" as="geometry" />
+        <mxCell id="cls_TutorCreditPackRepository" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorCreditPackRepository&lt;/b&gt;" vertex="1">
+          <mxGeometry height="132" width="350" x="1300" y="320" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorCreditPackRepository_methods" value="+findAvailablePack(userId: UUID): TutorCreditPack&lt;br&gt;+create(userId: UUID, paymentId: UUID, packType: string, messagesTotal: int): TutorCreditPack&lt;br&gt;+consumeMessage(packId: UUID): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorCreditPackRepository">
-          <mxGeometry x="0" y="36" width="350" height="96" as="geometry" />
+        <mxCell id="cls_TutorCreditPackRepository_methods" parent="cls_TutorCreditPackRepository" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+findAvailablePack(userId: UUID): TutorCreditPack&lt;br&gt;+create(userId: UUID, paymentId: UUID, packType: string, messagesTotal: int): TutorCreditPack&lt;br&gt;+consumeMessage(packId: UUID): void" vertex="1">
+          <mxGeometry height="96" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_PaymentService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentService (Área C)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;dashPattern=8 8;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="480" width="350" height="96" as="geometry" />
+        <mxCell id="cls_PaymentService" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;dashPattern=8 8;spacingLeft=30;" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;PaymentService (Área C)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="96" width="350" x="1300" y="480" as="geometry" />
         </mxCell>
-        <mxCell id="cls_PaymentService_methods" value="+processSimulatedPayment(enrollmentId: ?UUID, dto: PaymentDTO): Payment" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_PaymentService">
-          <mxGeometry x="0" y="36" width="350" height="56" as="geometry" />
+        <mxCell id="cls_PaymentService_methods" parent="cls_PaymentService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+processSimulatedPayment(enrollmentId: ?UUID, dto: PaymentDTO): Payment" vertex="1">
+          <mxGeometry height="56" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_LearningMetricsService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LearningMetricsService (Área C)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;dashPattern=8 8;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="840" y="910" width="400" height="96" as="geometry" />
+        <mxCell id="cls_LearningMetricsService" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;dashPattern=8 8;spacingLeft=30;" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;LearningMetricsService (Área C)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="96" width="400" x="840" y="910" as="geometry" />
         </mxCell>
-        <mxCell id="cls_LearningMetricsService_methods" value="+aggregateProgressAndEnrollments(courseIds: UUID[], startDate: Date, endDate: Date, groupBy: GroupBy): LearningActivityDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_LearningMetricsService">
-          <mxGeometry x="0" y="36" width="400" height="56" as="geometry" />
+        <mxCell id="cls_LearningMetricsService_methods" parent="cls_LearningMetricsService" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+aggregateProgressAndEnrollments(courseIds: UUID[], startDate: Date, endDate: Date, groupBy: GroupBy): LearningActivityDTO" vertex="1">
+          <mxGeometry height="56" width="400" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardFilterDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardFilterDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="740" width="350" height="116" as="geometry" />
+        <mxCell id="cls_DashboardFilterDTO" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardFilterDTO&lt;/b&gt;" vertex="1">
+          <mxGeometry height="116" width="350" x="1300" y="740" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardFilterDTO_attrs" value="+startDate: Date&lt;br&gt;+endDate: Date&lt;br&gt;+courseId?: UUID&lt;br&gt;+groupBy: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardFilterDTO">
-          <mxGeometry x="0" y="36" width="350" height="80" as="geometry" />
+        <mxCell id="cls_DashboardFilterDTO_attrs" parent="cls_DashboardFilterDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+startDate: Date&lt;br&gt;+endDate: Date&lt;br&gt;+courseId?: UUID&lt;br&gt;+groupBy: string" vertex="1">
+          <mxGeometry height="80" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_Conversation" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Conversation&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1710" y="40" width="340" height="148" as="geometry" />
+        <mxCell id="cls_Conversation" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Conversation&lt;/b&gt;" vertex="1">
+          <mxGeometry height="148" width="340" x="1710" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="cls_Conversation_attrs" value="-id: UUID&lt;br&gt;-createdAt: DateTime&lt;br&gt;-deletedAt?: DateTime" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_Conversation">
-          <mxGeometry x="0" y="36" width="340" height="112" as="geometry" />
+        <mxCell id="cls_Conversation_attrs" parent="cls_Conversation" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="-id: UUID&lt;br&gt;-createdAt: DateTime&lt;br&gt;-deletedAt?: DateTime" vertex="1">
+          <mxGeometry height="112" width="340" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_Message" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Message&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1710" y="220" width="340" height="164" as="geometry" />
+        <mxCell id="cls_Message" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;Message&lt;/b&gt;" vertex="1">
+          <mxGeometry height="164" width="340" x="1710" y="220" as="geometry" />
         </mxCell>
-        <mxCell id="cls_Message_attrs" value="-id: UUID&lt;br&gt;-role: MessageRole&lt;br&gt;-content: string&lt;br&gt;-videoTimestampSeconds?: int&lt;br&gt;-createdAt: DateTime&lt;br&gt;-deletedAt?: DateTime" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_Message">
-          <mxGeometry x="0" y="36" width="340" height="128" as="geometry" />
+        <mxCell id="cls_Message_attrs" parent="cls_Message" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="-id: UUID&lt;br&gt;-role: MessageRole&lt;br&gt;-content: string&lt;br&gt;-videoTimestampSeconds?: int&lt;br&gt;-createdAt: DateTime&lt;br&gt;-deletedAt?: DateTime" vertex="1">
+          <mxGeometry height="128" width="340" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorCreditPack" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorCreditPack&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1710" y="420" width="340" height="212" as="geometry" />
+        <mxCell id="cls_TutorCreditPack" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;Entity&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;TutorCreditPack&lt;/b&gt;" vertex="1">
+          <mxGeometry height="212" width="340" x="1710" y="420" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorCreditPack_attrs" value="-id: UUID&lt;br&gt;-messagesTotal: int&lt;br&gt;-messagesUsed: int&lt;br&gt;-createdAt: DateTime&lt;br&gt;-deletedAt?: DateTime" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorCreditPack">
-          <mxGeometry x="0" y="36" width="340" height="128" as="geometry" />
+        <mxCell id="cls_TutorCreditPack_attrs" parent="cls_TutorCreditPack" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="-id: UUID&lt;br&gt;-messagesTotal: int&lt;br&gt;-messagesUsed: int&lt;br&gt;-createdAt: DateTime&lt;br&gt;-deletedAt?: DateTime" vertex="1">
+          <mxGeometry height="128" width="340" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorCreditPack_sep" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" vertex="1" parent="cls_TutorCreditPack">
-          <mxGeometry x="0" y="164" width="340" height="4" as="geometry" />
+        <mxCell id="cls_TutorCreditPack_sep" parent="cls_TutorCreditPack" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="4" width="340" y="164" as="geometry" />
         </mxCell>
-        <mxCell id="cls_TutorCreditPack_methods" value="+hasAvailableMessages(): boolean&lt;br&gt;+consumeMessage(): void" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_TutorCreditPack">
-          <mxGeometry x="0" y="164" width="340" height="48" as="geometry" />
+        <mxCell id="cls_TutorCreditPack_methods" parent="cls_TutorCreditPack" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+hasAvailableMessages(): boolean&lt;br&gt;+consumeMessage(): void" vertex="1">
+          <mxGeometry height="48" width="340" y="164" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardMetricsDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardMetricsDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1300" y="880" width="350" height="84" as="geometry" />
+        <mxCell id="cls_DashboardMetricsDTO" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=36;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;DashboardMetricsDTO&lt;/b&gt;" vertex="1">
+          <mxGeometry height="84" width="350" x="1300" y="880" as="geometry" />
         </mxCell>
-        <mxCell id="cls_DashboardMetricsDTO_attrs" value="+totals: array&lt;br&gt;+series: array" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" vertex="1" parent="cls_DashboardMetricsDTO">
-          <mxGeometry x="0" y="36" width="350" height="48" as="geometry" />
+        <mxCell id="cls_DashboardMetricsDTO_attrs" parent="cls_DashboardMetricsDTO" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;strokeColor=none;fillColor=none;whiteSpace=wrap;" value="+totals: array&lt;br&gt;+series: array" vertex="1">
+          <mxGeometry height="48" width="350" y="36" as="geometry" />
         </mxCell>
-        <mxCell id="note_impl_tutor" value="&lt;b&gt;Regras de Implementação da Área D (Tutor de IA e Analytics):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Streaming e Latência:&lt;/b&gt; TutorController utiliza SSE (Server-Sent Events) para streaming de resposta em menos de 3s (RNF003) e gerencia compra de créditos extras (RF020, RNF022).&lt;br&gt;• &lt;b&gt;Cota e Rate Limiting:&lt;/b&gt; TutorService valida cota no Redis (20 msg/hora em janela deslizante via TutorRateLimiter). Esgotada a cota, consome pacote extra (TutorCreditPack); se ausente, HTTP 429 TOO_MANY_REQUESTS com Retry-After (RNF022).&lt;br&gt;• &lt;b&gt;Integração RAG e Contexto:&lt;/b&gt; CourseTutorClient consome o microsserviço ai-service (PostgreSQL pgvector) enviando contexto da aula e timestamp opcional do vídeo (RF009) com respeito ao locale do usuário (RNF013).&lt;br&gt;• &lt;b&gt;Analytics com Isolamento:&lt;/b&gt; DashboardController recebe parâmetros em inglês: startDate, endDate, courseId e groupBy (day, week, month); DashboardAnalyticsService aplica restrição do Instrutor (UC007 R-2, 403 FORBIDDEN se consultar curso alheio).&lt;br&gt;• &lt;b&gt;Tratamento de Erros:&lt;/b&gt; Exceções (403 FORBIDDEN, 404 NOT_FOUND, 409 LESSON_NOT_INDEXED, 422 VALIDATION_FAILED, 429 TOO_MANY_REQUESTS) seguem ApiException do item 13 da Área A; não são modeladas como classes." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;spacingTop=6;align=left;spacingLeft=10;spacingRight=10;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="860" width="760" height="180" as="geometry" />
+        <mxCell id="note_impl_tutor" parent="1" style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;spacingTop=6;align=left;spacingLeft=10;spacingRight=10;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" value="&lt;b&gt;Regras de Implementação da Área D (Tutor de IA e Analytics):&lt;/b&gt;&lt;br&gt;• &lt;b&gt;Streaming e Latência:&lt;/b&gt; TutorController utiliza SSE (Server-Sent Events) para streaming de resposta em menos de 3s (RNF003) e gerencia compra de créditos extras (RF020, RNF022).&lt;br&gt;• &lt;b&gt;Cota e Rate Limiting:&lt;/b&gt; TutorService valida cota no Redis (20 msg/hora em janela deslizante via TutorRateLimiter). Esgotada a cota, consome pacote extra (TutorCreditPack); se ausente, HTTP 429 TOO_MANY_REQUESTS com Retry-After (RNF022).&lt;br&gt;• &lt;b&gt;Integração RAG e Contexto:&lt;/b&gt; CourseTutorClient consome o microsserviço ai-service (PostgreSQL pgvector) enviando contexto da aula e timestamp opcional do vídeo (RF009) com respeito ao locale do usuário (RNF013).&lt;br&gt;• &lt;b&gt;Analytics com Isolamento:&lt;/b&gt; DashboardController recebe parâmetros em inglês: startDate, endDate, courseId e groupBy (day, week, month); DashboardAnalyticsService aplica restrição do Instrutor (UC007 R-2, 403 FORBIDDEN se consultar curso alheio).&lt;br&gt;• &lt;b&gt;Tratamento de Erros:&lt;/b&gt; Exceções (403 FORBIDDEN, 404 NOT_FOUND, 409 LESSON_NOT_INDEXED, 422 VALIDATION_FAILED, 429 TOO_MANY_REQUESTS) seguem ApiException do item 13 da Área A; não são modeladas como classes." vertex="1">
+          <mxGeometry height="180" width="760" x="40" y="860" as="geometry" />
         </mxCell>
-        <mxCell id="edge_tc_atr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.1320;entryX=1;entryY=0.5000" edge="1" parent="1" source="cls_TutorController" target="cls_AskTutorRequest">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_tc_cur" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.4160;entryX=1;entryY=0.5000" edge="1" parent="1" source="cls_TutorController" target="cls_CursorRequest">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_tc_bcr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.6860;entryX=1;entryY=0.5000" edge="1" parent="1" source="cls_TutorController" target="cls_BuyCreditPackRequest">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_tc_ts" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.0800;entryX=0;entryY=0.0755" edge="1" parent="1" source="cls_TutorController" target="cls_TutorService">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_tc_cpr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.9080;entryX=1;entryY=0.5000" edge="1" parent="1" source="cls_TutorController" target="cls_CreditPackResource">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_ts_trl" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=0.3000;exitY=1;entryX=0.5000;entryY=0" edge="1" parent="1" source="cls_TutorService" target="cls_TutorRateLimiter">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_ts_ctc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=0.8750;exitY=1;entryX=0.5000;entryY=0" edge="1" parent="1" source="cls_TutorService" target="cls_CourseTutorClient">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_ts_cvr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.1094;entryX=0;entryY=0.5000" edge="1" parent="1" source="cls_TutorService" target="cls_ConversationRepository">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_ts_msr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.3736;entryX=0;entryY=0.5000" edge="1" parent="1" source="cls_TutorService" target="cls_MessageRepository">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_ts_tcpr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.6528;entryX=0;entryY=0.5000" edge="1" parent="1" source="cls_TutorService" target="cls_TutorCreditPackRepository">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_cvr_cv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5000;entryX=0;entryY=0.3919" edge="1" parent="1" source="cls_ConversationRepository" target="cls_Conversation">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_msr_ms" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5000;entryX=0;entryY=0.1098" edge="1" parent="1" source="cls_MessageRepository" target="cls_Message">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_tcpr_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.9545;entryX=0;entryY=0.1226" edge="1" parent="1" source="cls_TutorCreditPackRepository" target="cls_TutorCreditPack">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_dc_dfr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.2444;entryX=1;entryY=0.5000" edge="1" parent="1" source="cls_DashboardController" target="cls_DashboardFilterRequest">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_dc_das" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.8889;entryX=0;entryY=0.1724" edge="1" parent="1" source="cls_DashboardController" target="cls_DashboardAnalyticsService">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_dc_dr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.9667;entryX=1;entryY=0.5000" edge="1" parent="1" source="cls_DashboardController" target="cls_DashboardResource">
-          <mxGeometry relative="1" as="geometry">
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="edge_das_lm" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0.5000;exitY=1;entryX=0.5000;entryY=0" edge="1" parent="1" source="cls_DashboardAnalyticsService" target="cls_LearningMetricsService">
+        <mxCell id="edge_tc_atr" edge="1" parent="1" source="cls_TutorController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.1320;entryX=1;entryY=0.5000" target="cls_AskTutorRequest" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_das_dfd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.3276;entryX=0;entryY=0.5000" edge="1" parent="1" source="cls_DashboardAnalyticsService" target="cls_DashboardFilterDTO">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+        <mxCell id="edge_tc_cur" edge="1" parent="1" source="cls_TutorController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.4160;entryX=1;entryY=0.5000" target="cls_CursorRequest" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="edge_das_dmd" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.8621;entryX=0;entryY=0.5000" edge="1" parent="1" source="cls_DashboardAnalyticsService" target="cls_DashboardMetricsDTO">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+        <mxCell id="edge_tc_bcr" edge="1" parent="1" source="cls_TutorController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.6860;entryX=1;entryY=0.5000" target="cls_BuyCreditPackRequest" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cls_Lesson_ext" value="&lt;b&gt;Lesson (Área B)&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="2110" y="40" width="260" height="50" as="geometry" />
+        <mxCell id="edge_tc_ts" edge="1" parent="1" source="cls_TutorController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.0800;entryX=0;entryY=0.0755" target="cls_TutorService" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="cls_User_ext" value="&lt;i&gt;&lt;b&gt;User (Área A)&lt;/b&gt;&lt;/i&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;dashed=1;" vertex="1" parent="1">
-          <mxGeometry x="2110" y="110" width="260" height="400" as="geometry" />
+        <mxCell id="edge_tc_cpr" edge="1" parent="1" source="cls_TutorController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.9080;entryX=1;entryY=0.5000" target="cls_CreditPackResource" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_lesson" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=1;exitY=0.1689;entryX=0;entryY=0.5000" edge="1" parent="1" source="cls_Conversation" target="cls_Lesson_ext">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+        <mxCell id="edge_ts_trl" edge="1" parent="1" source="cls_TutorService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=0.3000;exitY=1;entryX=0.5000;entryY=0" target="cls_TutorRateLimiter" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_lesson_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="2052" y="43" width="36" height="18" as="geometry" />
+        <mxCell id="edge_ts_ctc" edge="1" parent="1" source="cls_TutorService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=0.8750;exitY=1;entryX=0.5000;entryY=0" target="cls_CourseTutorClient" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_lesson_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="2088" y="43" width="20" height="18" as="geometry" />
+        <mxCell id="edge_ts_cvr" edge="1" parent="1" source="cls_TutorService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.1094;entryX=0;entryY=0.5000" target="cls_ConversationRepository" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=1;exitY=0.6081;entryX=0;entryY=0.0500" edge="1" parent="1" source="cls_Conversation" target="cls_User_ext">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+        <mxCell id="edge_ts_msr" edge="1" parent="1" source="cls_TutorService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.3736;entryX=0;entryY=0.5000" target="cls_MessageRepository" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_user_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="2052" y="106" width="36" height="18" as="geometry" />
+        <mxCell id="edge_ts_tcpr" edge="1" parent="1" source="cls_TutorService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.6528;entryX=0;entryY=0.5000" target="cls_TutorCreditPackRepository" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_user_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="2088" y="106" width="20" height="18" as="geometry" />
+        <mxCell id="edge_cvr_cv" edge="1" parent="1" source="cls_ConversationRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5000;entryX=0;entryY=0.3919" target="cls_Conversation" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_tcp_user" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=1;exitY=0.2830;entryX=0;entryY=0.9250" edge="1" parent="1" source="cls_TutorCreditPack" target="cls_User_ext">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+        <mxCell id="edge_msr_ms" edge="1" parent="1" source="cls_MessageRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5000;entryX=0;entryY=0.1098" target="cls_Message" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_tcp_user_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="2052" y="458" width="36" height="18" as="geometry" />
+        <mxCell id="edge_tcpr_tcp" edge="1" parent="1" source="cls_TutorCreditPackRepository" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.9545;entryX=0;entryY=0.1226" target="cls_TutorCreditPack" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_tcp_user_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="2088" y="458" width="20" height="18" as="geometry" />
+        <mxCell id="edge_dc_dfr" edge="1" parent="1" source="cls_DashboardController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.2444;entryX=1;entryY=0.5000" target="cls_DashboardFilterRequest" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_msg" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="cls_Conversation" target="cls_Message">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+        <mxCell id="edge_dc_das" edge="1" parent="1" source="cls_DashboardController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.8889;entryX=0;entryY=0.1724" target="cls_DashboardAnalyticsService" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_msg_l1" value="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="1852" y="195" width="20" height="18" as="geometry" />
+        <mxCell id="edge_dc_dr" edge="1" parent="1" source="cls_DashboardController" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.9667;entryX=1;entryY=0.5000" target="cls_DashboardResource" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="assoc_conv_msg_ln" value="0..*" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" vertex="1" parent="1">
-          <mxGeometry x="1886" y="198" width="36" height="18" as="geometry" />
+        <mxCell id="edge_das_lm" edge="1" parent="1" source="cls_DashboardAnalyticsService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0.5000;exitY=1;entryX=0.5000;entryY=0" target="cls_LearningMetricsService" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_AskTutorRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="48" width="20" height="20" as="geometry" />
+        <mxCell id="edge_das_dfd" edge="1" parent="1" source="cls_DashboardAnalyticsService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.3276;entryX=0;entryY=0.5000" target="cls_DashboardFilterDTO" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_CursorRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="198" width="20" height="20" as="geometry" />
+        <mxCell id="edge_das_dmd" edge="1" parent="1" source="cls_DashboardAnalyticsService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.8621;entryX=0;entryY=0.5000" target="cls_DashboardMetricsDTO" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_BuyCreditPackRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="333" width="20" height="20" as="geometry" />
+        <mxCell id="cls_Lesson_ext" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;dashed=1;" value="&lt;b&gt;Lesson (Área B)&lt;/b&gt;" vertex="1">
+          <mxGeometry height="50" width="260" x="2110" y="40" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_DashboardFilterRequest" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="598" width="20" height="20" as="geometry" />
+        <mxCell id="cls_User_ext" parent="1" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=36;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;dashed=1;" value="&lt;i&gt;&lt;b&gt;User (Área A)&lt;/b&gt;&lt;/i&gt;" vertex="1">
+          <mxGeometry height="400" width="260" x="2110" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_TutorController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="446" y="48" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_lesson" edge="1" parent="1" source="cls_Conversation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=1;exitY=0.1689;entryX=0;entryY=0.5000" target="cls_Lesson_ext" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_CreditPackResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="468" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_lesson_ln" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="0..*" vertex="1">
+          <mxGeometry height="18" width="36" x="2052" y="43" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_TutorRateLimiter" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="846" y="608" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_lesson_l1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="1" vertex="1">
+          <mxGeometry height="18" width="20" x="2088" y="43" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_DashboardController" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="446" y="628" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_user" edge="1" parent="1" source="cls_Conversation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=1;exitY=0.6081;entryX=0;entryY=0.0500" target="cls_User_ext" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_DashboardResource" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46" y="768" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_user_ln" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="0..*" vertex="1">
+          <mxGeometry height="18" width="36" x="2052" y="106" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_TutorService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="846" y="48" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_user_l1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="1" vertex="1">
+          <mxGeometry height="18" width="20" x="2088" y="106" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_CourseTutorClient" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1096" y="608" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_tcp_user" edge="1" parent="1" source="cls_TutorCreditPack" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=1;exitY=0.2830;entryX=0;entryY=0.9250" target="cls_User_ext" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_DashboardAnalyticsService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="846" y="768" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_tcp_user_ln" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="0..*" vertex="1">
+          <mxGeometry height="18" width="36" x="2052" y="458" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_ConversationRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1306" y="48" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_tcp_user_l1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="1" vertex="1">
+          <mxGeometry height="18" width="20" x="2088" y="458" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_MessageRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1306" y="188" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_msg" edge="1" parent="1" source="cls_Conversation" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;endArrow=none;html=1;strokeWidth=1.5;strokeColor=#000000;exitX=0.5;exitY=1;entryX=0.5;entryY=0" target="cls_Message" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_TutorCreditPackRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1306" y="328" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_msg_l1" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="1" vertex="1">
+          <mxGeometry height="18" width="20" x="1852" y="195" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_LearningMetricsService_ext" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="846" y="918" width="20" height="20" as="geometry" />
+        <mxCell id="assoc_conv_msg_ln" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=11;fontFamily=Helvetica;" value="0..*" vertex="1">
+          <mxGeometry height="18" width="36" x="1886" y="198" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_DashboardFilterDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1306" y="748" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_AskTutorRequest" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="46" y="48" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_Conversation" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1716" y="48" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_CursorRequest" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="46" y="198" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_Message" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1716" y="228" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_BuyCreditPackRequest" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="46" y="333" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_TutorCreditPack" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1716" y="428" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_DashboardFilterRequest" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="46" y="598" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_DashboardMetricsDTO" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1306" y="888" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_TutorController" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="446" y="48" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_PaymentService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1306" y="488" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_CreditPackResource" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="46" y="468" as="geometry" />
         </mxCell>
-        <mxCell id="edge_ts_ps" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.9208;entryX=0;entryY=0.5000" edge="1" parent="1" source="cls_TutorService" target="cls_PaymentService">
-          <mxGeometry relative="1" as="geometry">
-            </mxGeometry>
+        <mxCell id="typeicon_cls_TutorRateLimiter" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="846" y="608" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_Lesson_ext" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="2116" y="48" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_DashboardController" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="446" y="628" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_cls_User_ext" value="A" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="2116" y="118" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_cls_DashboardResource" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="46" y="768" as="geometry" />
         </mxCell>
-        <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
-          <mxGeometry x="2070" y="623" width="300" height="392" as="geometry" />
+        <mxCell id="typeicon_cls_TutorService" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="846" y="48" as="geometry" />
         </mxCell>
-        <mxCell id="legend_0" value="Controller" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="32" width="280" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_CourseTutorClient" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1096" y="608" as="geometry" />
         </mxCell>
-        <mxCell id="legend_1" value="Service" style="rounded=0;html=1;fillColor=#D5E8D4;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="64" width="280" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_DashboardAnalyticsService" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="846" y="768" as="geometry" />
         </mxCell>
-        <mxCell id="legend_2" value="Repository" style="rounded=0;html=1;fillColor=#FFE6CC;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="96" width="280" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_ConversationRepository" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1306" y="48" as="geometry" />
         </mxCell>
-        <mxCell id="legend_3" value="DTO / Request" style="rounded=0;html=1;fillColor=#E1D5E7;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="128" width="280" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_MessageRepository" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1306" y="188" as="geometry" />
         </mxCell>
-        <mxCell id="legend_4" value="Resource" style="rounded=0;html=1;fillColor=#FFF2CC;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="160" width="280" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_TutorCreditPackRepository" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1306" y="328" as="geometry" />
         </mxCell>
-        <mxCell id="legend_5" value="Entity" style="rounded=0;html=1;fillColor=#F5F5F5;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="192" width="280" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_LearningMetricsService_ext" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="846" y="918" as="geometry" />
         </mxCell>
-        <mxCell id="legend_6" value="(C) Classe · (A) Abstrata · (I) Interface · (E) Enumeração" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="224" width="280" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_DashboardFilterDTO" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1306" y="748" as="geometry" />
         </mxCell>
-        <mxCell id="legend_7a" value="" style="rounded=0;html=1;dashed=1;fillColor=#FFFFFF;strokeColor=#000000;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="260" width="40" height="18" as="geometry" />
+        <mxCell id="typeicon_cls_Conversation" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1716" y="48" as="geometry" />
         </mxCell>
-        <mxCell id="legend_7" value="Classe de outra área (só referenciada)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" parent="legend" vertex="1">
-          <mxGeometry x="60" y="256" width="230" height="26" as="geometry" />
+        <mxCell id="typeicon_cls_Message" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1716" y="228" as="geometry" />
         </mxCell>
-        <mxCell id="legend_8s" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="301.0" width="1" height="1" as="geometry" />
+        <mxCell id="typeicon_cls_TutorCreditPack" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1716" y="428" as="geometry" />
         </mxCell>
-        <mxCell id="legend_8t" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
-          <mxGeometry x="60" y="301.0" width="1" height="1" as="geometry" />
+        <mxCell id="typeicon_cls_DashboardMetricsDTO" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1306" y="888" as="geometry" />
         </mxCell>
-        <mxCell id="legend_8e" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;endArrow=open;endFill=0;" parent="legend" edge="1" source="legend_8s" target="legend_8t">
-          <mxGeometry x="0" y="0" width="0" height="0" as="geometry" relative="1" />
+        <mxCell id="typeicon_cls_PaymentService" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="1306" y="488" as="geometry" />
         </mxCell>
-        <mxCell id="legend_8" value="Associação navegável" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
-          <mxGeometry x="70" y="288" width="220" height="26" as="geometry" />
+        <mxCell id="edge_ts_ps" edge="1" parent="1" source="cls_TutorService" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.9208;entryX=0;entryY=0.5000" target="cls_PaymentService" value="">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="legend_9s" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="333.0" width="1" height="1" as="geometry" />
+        <mxCell id="typeicon_cls_Lesson_ext" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="C" vertex="1">
+          <mxGeometry height="20" width="20" x="2116" y="48" as="geometry" />
         </mxCell>
-        <mxCell id="legend_9t" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
-          <mxGeometry x="60" y="333.0" width="1" height="1" as="geometry" />
+        <mxCell id="typeicon_cls_User_ext" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;" value="A" vertex="1">
+          <mxGeometry height="20" width="20" x="2116" y="118" as="geometry" />
         </mxCell>
-        <mxCell id="legend_9e" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;endArrow=none;" parent="legend" edge="1" source="legend_9s" target="legend_9t">
-          <mxGeometry x="0" y="0" width="0" height="0" as="geometry" relative="1" />
+        <mxCell id="legend" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;" value="Legenda" vertex="1">
+          <mxGeometry height="392" width="300" x="2070" y="623" as="geometry" />
         </mxCell>
-        <mxCell id="legend_9" value="Associação" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
-          <mxGeometry x="70" y="320" width="220" height="26" as="geometry" />
+        <mxCell id="legend_0" parent="legend" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#000000;fontStyle=1;" value="Controller" vertex="1">
+          <mxGeometry height="26" width="280" x="10" y="32" as="geometry" />
         </mxCell>
-        <mxCell id="legend_10s" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
-          <mxGeometry x="10" y="365.0" width="1" height="1" as="geometry" />
+        <mxCell id="legend_1" parent="legend" style="rounded=0;html=1;fillColor=#D5E8D4;strokeColor=#000000;fontStyle=1;" value="Service" vertex="1">
+          <mxGeometry height="26" width="280" x="10" y="64" as="geometry" />
         </mxCell>
-        <mxCell id="legend_10t" value="" style="point;size=1;strokeColor=none;fillColor=none;" parent="legend" vertex="1">
-          <mxGeometry x="60" y="365.0" width="1" height="1" as="geometry" />
+        <mxCell id="legend_2" parent="legend" style="rounded=0;html=1;fillColor=#FFE6CC;strokeColor=#000000;fontStyle=1;" value="Repository" vertex="1">
+          <mxGeometry height="26" width="280" x="10" y="96" as="geometry" />
         </mxCell>
-        <mxCell id="legend_10e" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;dashed=1;endArrow=open;endFill=0;" parent="legend" edge="1" source="legend_10s" target="legend_10t">
-          <mxGeometry x="0" y="0" width="0" height="0" as="geometry" relative="1" />
+        <mxCell id="legend_3" parent="legend" style="rounded=0;html=1;fillColor=#E1D5E7;strokeColor=#000000;fontStyle=1;" value="DTO / Request" vertex="1">
+          <mxGeometry height="26" width="280" x="10" y="128" as="geometry" />
         </mxCell>
-        <mxCell id="legend_10" value="Dependência (usa)" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" parent="legend" vertex="1">
-          <mxGeometry x="70" y="352" width="220" height="26" as="geometry" />
+        <mxCell id="legend_4" parent="legend" style="rounded=0;html=1;fillColor=#FFF2CC;strokeColor=#000000;fontStyle=1;" value="Resource" vertex="1">
+          <mxGeometry height="26" width="280" x="10" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_5" parent="legend" style="rounded=0;html=1;fillColor=#F5F5F5;strokeColor=#000000;fontStyle=1;" value="Entity" vertex="1">
+          <mxGeometry height="26" width="280" x="10" y="192" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_6" parent="legend" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" value="(C) Classe · (A) Abstrata · (I) Interface · (E) Enumeração" vertex="1">
+          <mxGeometry height="26" width="280" x="10" y="224" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_7a" parent="legend" style="rounded=0;html=1;dashed=1;fillColor=#FFFFFF;strokeColor=#000000;" value="" vertex="1">
+          <mxGeometry height="18" width="40" x="10" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_7" parent="legend" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;" value="Classe de outra área (só referenciada)" vertex="1">
+          <mxGeometry height="26" width="230" x="60" y="256" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_8s" parent="legend" style="point;size=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="10" y="301" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_8t" parent="legend" style="point;size=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="60" y="301" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_8e" edge="1" parent="legend" source="legend_8s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;endArrow=open;endFill=0;" target="legend_8t" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_8" parent="legend" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" value="Associação navegável" vertex="1">
+          <mxGeometry height="26" width="220" x="70" y="288" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_9s" parent="legend" style="point;size=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="10" y="333" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_9t" parent="legend" style="point;size=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="60" y="333" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_9e" edge="1" parent="legend" source="legend_9s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;endArrow=none;" target="legend_9t" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_9" parent="legend" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" value="Associação" vertex="1">
+          <mxGeometry height="26" width="220" x="70" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_10s" parent="legend" style="point;size=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="10" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_10t" parent="legend" style="point;size=1;strokeColor=none;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="1" width="1" x="60" y="365" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_10e" edge="1" parent="legend" source="legend_10s" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#000000;endSize=8;startSize=10;dashed=1;endArrow=open;endFill=0;" target="legend_10t" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_10" parent="legend" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;whiteSpace=wrap;" value="Dependência (usa)" vertex="1">
+          <mxGeometry height="26" width="220" x="70" y="352" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

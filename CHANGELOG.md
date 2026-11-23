@@ -13,6 +13,10 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ## [Não lançado]
 
+### Corrigido
+
+- Diagramas 12-C (modelo de dados) e 13-D (tutor e analytics) com layout ajustado e PNG reexportado, porque o PNG precisa refletir a fonte `.drawio` (#161).
+
 ## [2.0.2] - 2026-11-22
 
 ### Alterado
