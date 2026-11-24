@@ -28,9 +28,9 @@ else E2 - falha no envio ou na comunicação com storage
   C --> V : 503 SERVICE_UNAVAILABLE (Retry-After)
   V --> INS : informa erro e permite nova tentativa
 else envio bem-sucedido
-  M --> S : StoredFileDTO (key, mimeType, sizeBytes)
-  S --> C : StoredFileDTO
-  C --> V : 200 OK (videoKey, metadados)
+  M --> S -- : StoredFileDTO (key, mimeType, sizeBytes)
+  S --> C -- : StoredFileDTO
+  C --> V -- : 200 OK (videoKey, metadados)
   V -> C ++ : store(moduleId, req: CreateLessonRequest)
   C -> Q ++ : rules()
   Q --> C -- : validação de campos obrigatórios
@@ -42,8 +42,8 @@ else envio bem-sucedido
   S -> T ++ : dispatchTranscriptionJob(lessonId, videoKey)
   T --> S -- : job enfileirado (RNF004)
   S --> C -- : lesson
-  C --> V : 201 Created (LessonResource)
-  V --> INS : exibe aula cadastrada com vídeo
+  C --> V -- : 201 Created (LessonResource)
+  V --> INS -- : exibe aula cadastrada com vídeo
   opt exclusão de aula (A2)
     INS -> V ++ : aciona "Excluir aula"
     V --> INS : exibe diálogo de confirmação
@@ -71,6 +71,7 @@ else envio bem-sucedido
       end
       deactivate S
       deactivate C
+      deactivate V
     end
   end
 end

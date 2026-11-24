@@ -29,17 +29,17 @@ alt E1 - sessão ausente, expirada ou na blocklist do Redis
   V --> USU : redireciona para tela de login (UC005)
 else token válido
   E -> J ++ : authorize(user, requiredRole)
-  J --> E : autorizado?
+  J --> E -- : autorizado?
   alt E2 - perfil sem permissão na rota (R-2)
     E -> A ++ : logAccessDenied(userId, targetArea, requiredRole)
     A -> BD ++ : INSERT INTO audit_logs (ACCESS_DENIED, RNF016)
-    BD --> A : ok
-    A --> E : auditLog
+    BD --> A -- : ok
+    A --> E -- : auditLog
     E --> V : 403 FORBIDDEN
     V --> USU : exibe acesso negado e direciona para área do seu perfil
   else perfil autorizado
     E -> P ++ : checkPermissions()
-    P --> E : 200 OK (PermissionsResource)
+    P --> E -- : 200 OK (PermissionsResource)
     E --> V : 200 OK
     alt A1 - primeiro acesso logo após o login
       V --> USU : redireciona para home do perfil
@@ -48,4 +48,6 @@ else token válido
     end
   end
 end
+deactivate E
+deactivate V
 @enduml
