@@ -4,35 +4,7 @@
     <mxGraphModel dx="1200" dy="1200" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1950" pageHeight="1850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
-        <mxCell id="1" parent="0">
-          <mxCell id="e_rev_ctrl_res" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.861667;entryX=1;entryY=0.5" edge="1" parent="1" source="ReviewController" target="ReviewResource">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_rev_req_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="ReviewRequest" target="ReviewDTO">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_prog_req_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="ProgressUpdateRequest" target="ProgressDTO">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_les_ctrl_res_prog" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.654878;entryX=1;entryY=0.5" edge="1" parent="1" source="LessonController" target="ProgressResource">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_les_ctrl_res_stream" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.898780;entryX=1;entryY=0.5" edge="1" parent="1" source="LessonController" target="LessonStreamResource">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_qz_ctrl_req_draft" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.077;entryX=1;entryY=0.5" edge="1" parent="1" source="QuizController" target="QuizDraftRequest">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_qz_req_dto" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="QuizSubmitRequest" target="QuizSubmitDTO">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_qz_ctrl_res_quiz" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.717;entryX=1;entryY=0.5" edge="1" parent="1" source="QuizController" target="QuizResource">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-          <mxCell id="e_qz_ctrl_res_result" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.917;entryX=1;entryY=0.5" edge="1" parent="1" source="QuizController" target="QuizResultResource">
-            <mxGeometry relative="1" as="geometry" />
-          </mxCell>
-        </mxCell>
+        <mxCell id="1" parent="0" />
         <mxCell id="ReviewRequest" value="&amp;lt;&amp;lt;FormRequest&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;ReviewRequest&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="40" y="40" width="220" height="94" as="geometry" />
         </mxCell>

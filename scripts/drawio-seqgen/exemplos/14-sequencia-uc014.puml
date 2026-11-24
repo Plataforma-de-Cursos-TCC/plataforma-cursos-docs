@@ -22,13 +22,13 @@ alt cadastro de novo módulo
     V --> INS : indica que o título é obrigatório
   else dados válidos
     C -> S ++ : create(courseId, instructorId, dto: ModuleDTO)
-    S -> R ++ : isOrderTaken(courseId, order)
+    S -> R ++ : isPositionTaken(courseId, position)
     R -> BD ++ : SELECT id FROM modules WHERE course_id e position
     BD --> R -- : registro encontrado?
     R --> S -- : boolean
     alt E2 - posição já utilizada no curso (R-2)
       S --> C : conflito de posição
-      C --> V : 422 VALIDATION_FAILED (fields.order)
+      C --> V : 422 VALIDATION_FAILED (fields.position)
       V --> INS : informa que a posição já está em uso
     else posição disponível
       S -> R ++ : save(module: Module)

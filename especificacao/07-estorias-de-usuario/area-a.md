@@ -35,7 +35,7 @@
 **COMO:** Usuário logado\
 **POSSO:** editar os meus dados cadastrais (nome, telefone, endereço, Cadastro de Pessoas Físicas (CPF), data de nascimento, foto de perfil e tema)\
 **PARA:** manter as minhas informações atualizadas.\
-**PRIORIDADE:** Should Have\
+**PRIORIDADE:** Must Have\
 **AUTOR(A):** Lucas Bruno e Silva
 
 **Critérios de Aceite:**

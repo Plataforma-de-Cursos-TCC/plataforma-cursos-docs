@@ -3,7 +3,7 @@
 @startuml 14-sequencia-uc006-1
 
 actor Instrutor as INS
-boundary CursoView as V
+boundary CourseView as V
 control InstructorCourseController as C
 control CreateCourseRequest as Q
 control CourseService as S
@@ -29,8 +29,8 @@ else o Instrutor salva o curso
     BD --> R -- : ok
     R --> S -- : course
     S --> C -- : course
-    C --> V : 201 Created (CourseResource, status draft)
-    V --> INS : exibe curso em rascunho
+    C --> V -- : 201 Created (CourseResource, status draft)
+    V --> INS -- : exibe curso em rascunho
     opt publicação do curso
       INS -> V ++ : aciona "Publicar curso"
       V -> C ++ : publish(id: UUID)

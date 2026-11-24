@@ -36,7 +36,7 @@
 **COMO:** Aluno matriculado\
 **POSSO:** retomar a reprodução de uma aula no ponto exato em que parei\
 **PARA:** não perder tempo revendo conteúdo já assistido.\
-**PRIORIDADE:** Could Have\
+**PRIORIDADE:** Must Have\
 **AUTOR(A):** Vinicius Lima Teider
 
 **Critérios de Aceite:**

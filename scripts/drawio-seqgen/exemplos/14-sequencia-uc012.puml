@@ -1,5 +1,5 @@
-' Item 14 - Diagrama de sequência do UC012 Cadastrar-se na Plataforma (ADR-0011). Camadas e métodos do item 13.
-' Gerar o PNG: PLANTUML_LIMIT_SIZE=8192 plantuml -tpng 14-sequencia-uc012.puml
+' Item 14 - Diagrama de sequência do UC012 Cadastrar-se na Plataforma (ADR-0013). Camadas e métodos do item 13.
+' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc012.puml especificacao/diagramas/14-sequencia-uc012.drawio
 @startuml 14-sequencia-uc012
 skinparam shadowing false
 skinparam dpi 192
@@ -43,7 +43,8 @@ else dados válidos
     C --> V : 422 VALIDATION_FAILED (fields.email)
     V --> VIS : informa que o e-mail já está em uso
   else e-mail livre
-    S -> U ++ : cria Student, ou Instructor se A1, com hash da senha (RNF007), termsAcceptedAt e locale
+    S -> U ++ : create(dto: RegisterDTO)
+    note right of U : cria Student, ou Instructor se A1, com hash da senha (RNF007), termsAcceptedAt e locale
     U --> S --
     S -> R ++ : save(user)
     R -> BD ++ : INSERT users

@@ -10,12 +10,14 @@ skinparam responseMessageBelowArrow true
 skinparam wrapMessageWidth 170
 skinparam BoxPadding 8
 
-actor "Instrutor / Administrador" as USU
+actor "Usuário" as USU
 boundary DashboardView as V
 control DashboardController as C
 control DashboardFilterRequest as Q
 control DashboardAnalyticsService as S
 control "LearningMetricsService (Área C)" as LM
+
+note right of USU : Instrutor (seus cursos) ou Administrador (plataforma)
 
 USU -> V ++ : seleciona startDate, endDate, courseId e groupBy
 V -> C ++ : getMetrics(req: DashboardFilterRequest)
@@ -33,15 +35,15 @@ else filtro com parâmetros válidos
   else acesso permitido
     S -> LM ++ : aggregateProgressAndEnrollments(courseIds, startDate, endDate, groupBy)
     LM --> S -- : LearningActivityDTO
-    S -> S : monta DashboardMetricsDTO a partir de LearningActivityDTO
+    S -> S : buildMetrics(activity)
     alt E2 - nenhuma atividade no período
       S --> C : DashboardMetricsDTO (vazio)
       C --> V : 200 OK (DashboardResource zerado)
       V --> USU : exibe estado vazio claro sem atividade
     else dados encontrados no período
-      S --> C : DashboardMetricsDTO
-      C --> V : 200 OK (DashboardResource)
-      V --> USU : exibe gráficos e indicadores atualizados
+      S --> C -- : DashboardMetricsDTO
+      C --> V -- : 200 OK (DashboardResource)
+      V --> USU -- : exibe gráficos e indicadores atualizados
     end
   end
 end
