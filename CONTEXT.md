@@ -3,8 +3,8 @@ id: contexto
 titulo: "Contexto do projeto: leia antes de qualquer tarefa"
 tipo: contexto
 status: vigente
-atualizado: 2026-11-12
-relacionados: [mapa-pesquisa, adr-indice, adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006, adr-0012, adr-0013]
+atualizado: 2026-11-24
+relacionados: [mapa-pesquisa, adr-indice, adr-0001, adr-0002, adr-0003, adr-0004, adr-0005, adr-0006, adr-0007, adr-0008, adr-0009, adr-0010, adr-0012, adr-0013, adr-0014, adr-0015, adr-0016, adr-0017, adr-0018, adr-0019]
 ---
 # Contexto do projeto
 
@@ -55,6 +55,10 @@ Decisão: [ADR-0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md).
 | D4 | **Diagramas em draw.io**: fonte `.drawio` nos itens 4 (BPMN 2.0), 9 e 11 (UML) do RA1 e nos itens 12 a 14 do RA2, PNG exportado da fonte | [0012](docs/adr/0012-diagramas-do-ra1-em-drawio.md) (substitui a [0004](docs/adr/0004-diagramas-como-codigo.md)), [0013](docs/adr/0013-diagramas-do-ra2-em-drawio.md) (substitui a [0011](docs/adr/0011-diagramas-do-ra2-em-plantuml.md)) |
 | D5 | **Tutor de IA como ator sistêmico** | [0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md) |
 | D6 | **Divisão por áreas A a D**, uma por integrante | [0006](docs/adr/0006-divisao-por-areas.md) |
+| D7 | **Stack**: Next.js como SPA no front, Laravel 13 no core e no `ai-service` (PostgreSQL 16 com `pgvector`), `media-service` com R2; o banco do core foi substituído pela D17 | [0007](docs/adr/0007-stack-e-bancos.md) |
+| D8 | **Sessão com JWT em cookie HttpOnly** e opção «manter conectado» | [0008](docs/adr/0008-sessao-jwt-em-cookie.md) |
+| D9 | **Listagens com estado na URL**, paginação obrigatória e resposta mínima; o nome do item 4 foi substituído pela D15 | [0009](docs/adr/0009-listagens-na-url-e-paginacao.md) |
+| D10 | **Hospedagem** na Vercel e no Railway, mídia no Cloudflare R2; o item 3 foi substituído pela D19 | [0010](docs/adr/0010-hospedagem-e-armazenamento.md) |
 | D14 | **Exclusão lógica e anonimização separada**: `deleted_at` em tabelas de negócio; exclusão de usuário reversível e anonimização como passo separado para LGPD | [0014](docs/adr/0014-exclusao-logica-e-anonimizacao.md) |
 | D15 | **Convenção de nomes por camada**: banco em `snake_case`, API e código em `camelCase` (`perPage`); substitui o nome do item 4 da ADR-0009 | [0015](docs/adr/0015-convencao-de-nomes-por-camada.md) |
 | D16 | **Retenção de logs e auditoria**: auditoria de 12 meses no PostgreSQL e 5 anos arquivada no R2; logs da aplicação por 90 dias | [0016](docs/adr/0016-retencao-de-logs-e-auditoria.md) |
