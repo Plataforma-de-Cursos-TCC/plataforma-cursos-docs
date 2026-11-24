@@ -18,7 +18,7 @@
           <mxGeometry x="0" y="40" width="380" height="95" as="geometry" />
         </mxCell>
         <mxCell id="class_Course" value="&lt;b&gt;Course&lt;/b&gt;&lt;br&gt;[Área B]" style="swimlane;fontStyle=0;align=center;verticalAlign=middle;childLayout=stackLayout;horizontal=1;startSize=40;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;html=1;whiteSpace=wrap;fontFamily=Helvetica;fontSize=12;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontColor=#000000;spacingLeft=30;dashed=1;fillColor=#F5F5F5" vertex="1" parent="1">
-          <mxGeometry x="760.0" y="285.0" width="240.0" height="120.0" as="geometry" />
+          <mxGeometry x="760.0" y="305.0" width="240.0" height="120.0" as="geometry" />
         </mxCell>
         <mxCell id="class_Course_attrs" value="-id: UUID&lt;br&gt;-title: string&lt;br&gt;-priceCents: int&lt;br&gt;-status: CourseStatus" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="class_Course">
           <mxGeometry x="0" y="40" width="240" height="80" as="geometry" />
@@ -110,23 +110,23 @@
         <mxCell id="lbl_st_enr_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
           <mxGeometry x="475.0" y="235.0" width="30" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_Course_Enrollment" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.5;entryX=1;entryY=0.2741935" edge="1" parent="1" source="class_Course" target="class_Enrollment">
+        <mxCell id="edge_Course_Enrollment" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=0;exitY=0.5;entryX=1;entryY=0.338710" edge="1" parent="1" source="class_Course" target="class_Enrollment">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_c_enr_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="725.0" y="325.0" width="20" height="20" as="geometry" />
+          <mxGeometry x="725.0" y="345.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="lbl_c_enr_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="625.0" y="325.0" width="30" height="20" as="geometry" />
+          <mxGeometry x="625.0" y="345.0" width="30" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_Payment_Enrollment" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=1;exitY=0.560606;entryX=0;entryY=0.5" edge="1" parent="1" source="class_Payment" target="class_Enrollment">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_pay_enr_01" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="268.0" y="395.0" width="30" height="20" as="geometry" />
+          <mxGeometry x="264.0" y="393.0" width="28" height="18" as="geometry" />
         </mxCell>
-        <mxCell id="lbl_pay_enr_1" value="0..1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="312.0" y="395.0" width="36" height="20" as="geometry" />
+        <mxCell id="lbl_pay_enr_1" value="0..1" style="text;html=1;align=right;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="304.0" y="393.0" width="30" height="18" as="geometry" />
         </mxCell>
         <mxCell id="edge_Student_Review" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;fontFamily=Helvetica;fontSize=12;exitX=1;exitY=0.4444;entryX=0;entryY=0.285714" edge="1" parent="1" source="class_Student" target="class_Review">
           <mxGeometry relative="1" as="geometry" />
@@ -141,10 +141,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_c_rev_1" value="1" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="885.0" y="265.0" width="20" height="20" as="geometry" />
+          <mxGeometry x="886.0" y="285.0" width="20" height="18" as="geometry" />
         </mxCell>
         <mxCell id="lbl_c_rev_n" value="0..*" style="text;html=1;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#000000;fillColor=none;strokeColor=none;" vertex="1" parent="1">
-          <mxGeometry x="885.0" y="250.0" width="30" height="20" as="geometry" />
+          <mxGeometry x="886.0" y="252.0" width="30" height="18" as="geometry" />
         </mxCell>
         <mxCell id="edge_Enrollment_LessonProgress" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;startArrow=diamond;startFill=1;startSize=14;endArrow=none;fontFamily=Helvetica;fontSize=12;exitX=1;exitY=0.7741935;entryX=0;entryY=0.2066116" edge="1" parent="1" source="class_Enrollment" target="class_LessonProgress">
           <mxGeometry relative="1" as="geometry" />
@@ -267,7 +267,7 @@
           <mxGeometry x="316.0" y="50.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_class_Course" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="766.0" y="295.0" width="20" height="20" as="geometry" />
+          <mxGeometry x="766.0" y="315.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_enum_EnrollmentStatus" value="E" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="346.0" y="610.0" width="20" height="20" as="geometry" />
@@ -306,7 +306,7 @@
           <mxGeometry x="46.0" y="750.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_class_QuestionOption" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="46.0" y="870.0" width="20" height="20" as="geometry" />
+          <mxGeometry x="46.0" y="890.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_enum_PaymentPurpose" value="E" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="186.0" y="590.0" width="20" height="20" as="geometry" />
