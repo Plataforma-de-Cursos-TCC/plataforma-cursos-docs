@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Gera o documento de especificação (DOCX; PDF com --pdf) a partir do Template.docx.
+"""Gera o documento de especificação (só DOCX) a partir do Template.docx.
 
 Uso:
-    python3 scripts/build_doc.py [de] [até] [--template T.docx] [--saida DIR] [--pdf]
+    python3 scripts/build_doc.py [de] [até] [--template T.docx] [--saida DIR]
     python3 scripts/build_doc.py --check
 
 Exemplos: `1 11` gera o RA1 (padrão), `6 8` só os itens 6 a 8, `1 15` tudo.
@@ -1397,7 +1397,6 @@ def main():
     ap.add_argument("--template", default=os.environ.get("ESSW_TEMPLATE"))
     ap.add_argument("--saida", default=str(REPO / "build"))
     ap.add_argument("--check", action="store_true")
-    ap.add_argument("--pdf", action="store_true", help="também gera o PDF")
     a = ap.parse_args()
     if a.check:
         return check()
@@ -1427,8 +1426,6 @@ def main():
         pages = heading_pages(to_pdf(draft, tmp, tmp / "lo"), headings)
         final = saida / f"{nome}.docx"
         assemble(tmp / "pandoc.docx", a.template, final, pages)
-        if a.pdf:
-            print(to_pdf(final, saida, tmp / "lo"))
     print(final)
 
 
