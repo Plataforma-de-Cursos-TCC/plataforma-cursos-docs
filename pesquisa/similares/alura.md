@@ -45,7 +45,7 @@ verificado: 2026-10-07
 [F10] Página de prévia do curso "Acessibilidade: estudando com tecnologias assistivas" (preços de campanha; audiodescrição) — Alura — 2026 (consultado em 2026-10-07; verificado em 2026-11-25) — https://www.alura.com.br/conteudo/acessibilidade-estudando-tecnologias-assistivas
 [F11] Instrutores da Alura — Alura — s.d. (consultado em 2026-10-07) — https://www.alura.com.br/instrutores
 [F03] Central de suporte — artigo "O curso possui apostila?" (videoaulas, transcrições, exercícios, material de apoio) — Alura — s.d. (consultado em 2026-10-07) — https://suporte.alura.com.br/o-curso-possui-apostila
-[F12] Central de suporte (empresas) — artigo sobre porcentagem de conclusão do curso (aulas e atividades; certificado) — Alura — 20/07/2026 (consultado em 2026-10-07) — suporte.alura.com.br
+[F12] Central de suporte (empresas) — "A porcentagem do curso não avança. O que fazer?" (aulas e atividades; certificado) — Alura — 20/07/2026 (consultado em 2026-11-26) — https://suporte-empresas.alura.com.br/a-porcentagem-do-curso-n%C3%A3o-avan%C3%A7a.-o-que-fazer
 [F03] Central de suporte — artigo "fórum" (dúvidas sobre exercícios, resposta em até 72h, Discord) — Alura — s.d. (consultado em 2026-10-07) — https://suporte.alura.com.br/tudo-que-voc%C3%AA-precisa-saber-sobre-o-f%C3%B3rum-da-alura
 [F13] Alura LATAM (conteúdo em espanhol; 325 cursos; Luri; AOVS) — Alura — s.d. (consultado em 2026-10-07) — https://www.aluracursos.com
 

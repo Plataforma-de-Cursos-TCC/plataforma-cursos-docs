@@ -24,7 +24,7 @@ HICKSON, I. (ed.). **Server-Sent Events**: W3C Recommendation 03 February 2015. 
 
 HOTMART. **Taxa Hotmart**: quanto custa vender na plataforma. Belo Horizonte: Hotmart, [2026]. Disponível em: https://hotmart.com/pt-br/taxa-hotmart. Acesso em: 7 out. 2026.
 
-ISO. **ISO 3166-1:2020**: Codes for the representation of names of countries and their subdivisions — Part 1: Country code. Geneva: International Organization for Standardization, 2020. Disponível em: https://www.iso.org/iso-3166-country-codes.html. Acesso em: 25 nov. 2026.
+ISO. **ISO 3166-1:2020**: Codes for the representation of names of countries and their subdivisions — Part 1: Country code. Geneva: International Organization for Standardization, 2020. Disponível em: https://www.iso.org/standard/72482.html. Acesso em: 26 nov. 2026.
 
 ISO. **ISO 4217:2015**: Codes for the representation of currencies. Geneva: International Organization for Standardization, 2015. Disponível em: https://www.iso.org/standard/64758.html. Acesso em: 22 nov. 2026.
 
@@ -40,7 +40,7 @@ LEWIS, P. et al. Retrieval-augmented generation for knowledge-intensive NLP task
 
 NOTTINGHAM, M.; FIELDING, R. **RFC 6585**: Additional HTTP Status Codes. Fremont: Internet Engineering Task Force (IETF), 2012. Disponível em: https://www.rfc-editor.org/rfc/rfc6585. Acesso em: 22 nov. 2026.
 
-NVIDIA. **Nemotron-3**: family of high-performance generative AI models. Santa Clara: NVIDIA Corporation, 2024. Disponível em: https://build.nvidia.com. Acesso em: 22 nov. 2026.
+NVIDIA. **Nemotron 3**: family of open models for agentic reasoning (Nemotron 3 Ultra, released 4 June 2026). Santa Clara: NVIDIA Corporation, 2026. Disponível em: https://build.nvidia.com. Acesso em: 26 nov. 2026.
 
 OBJECT MANAGEMENT GROUP. **Business Process Model and Notation (BPMN)**: version 2.0. Needham: OMG, 2011. Disponível em: https://www.omg.org/spec/BPMN/2.0/. Acesso em: 22 nov. 2026.
 
@@ -48,7 +48,7 @@ OBJECT MANAGEMENT GROUP. **Unified Modeling Language (OMG UML)**: version 2.5.1.
 
 OPENAPI INITIATIVE. **OpenAPI Specification**: version 3.1.0. San Francisco: Linux Foundation, 2021. Disponível em: https://spec.openapis.org/oas/v3.1.0. Acesso em: 22 nov. 2026.
 
-PONTIFÍCIA UNIVERSIDADE CATÓLICA DO PARANÁ. **Resolução nº 274/2024 - CONSUN**: Regulamenta o uso de ferramentas de Inteligência Artificial generativa nas atividades de ensino, pesquisa e extensão da PUCPR. Curitiba: PUCPR, 2024.
+PONTIFÍCIA UNIVERSIDADE CATÓLICA DO PARANÁ. **Resolução nº 274/2024 - CONSUN**: Aprova, ad referendum do CONSUN, as diretrizes para uso da inteligência artificial (IA) na PUCPR, a partir do 2º semestre de 2024. Curitiba: PUCPR, 2024.
 
 POSTGRESQL GLOBAL DEVELOPMENT GROUP. **PostgreSQL 16.0 Documentation**. [S. l.]: PostgreSQL Global Development Group, 2023. Disponível em: https://www.postgresql.org/docs/16/. Acesso em: 22 nov. 2026.
 
@@ -56,7 +56,7 @@ REDIS. **Redis Documentation**: in-memory data store. Mountain View: Redis Ltd.,
 
 REENSKAUG, T. **Models-Views-Controllers**: technical note. Palo Alto: Xerox PARC, 1979.
 
-UDEMY. **Teaching on Udemy**: Frequently asked questions. San Francisco: Udemy, Inc., [2026]. Disponível em: https://support.udemy.com/hc/en-us/articles/360003469994-Teaching-on-Udemy-Frequently-asked-questions. Acesso em: 25 nov. 2026.
+UDEMY. **Updating instructor business terms for the next chapter of growth**. San Francisco: Udemy, Inc., 2021. Disponível em: https://teach.udemy.com/business-terms-update-march-2021/. Acesso em: 26 nov. 2026.
 
 VERCEL. **Next.js Documentation**: the React framework for the Web. San Francisco: Vercel, Inc., 2024. Disponível em: https://nextjs.org/docs. Acesso em: 22 nov. 2026.
 
