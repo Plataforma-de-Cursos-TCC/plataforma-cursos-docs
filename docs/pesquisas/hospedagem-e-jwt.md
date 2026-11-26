@@ -11,15 +11,15 @@ Base para a [ADR-0010](../adr/0010-hospedagem-e-armazenamento.md) e para a atual
 
 ## 1. Biblioteca JWT: `php-open-source-saver/jwt-auth`
 
-- Fork mantido do `tymon/jwt-auth`. Versão 2.9.3 (21/08/2026), requer `illuminate/console` ^12 ou ^13, portanto suporta Laravel 13. Cerca de 12,9 milhões de instalações. Fonte: <https://packagist.org/packages/php-open-source-saver/jwt-auth>.
+- Fork mantido do `tymon/jwt-auth`. Versão 2.9.3 (21/08/2026; v2.10.0 em 05/11/2026), requer `php` ^8.3 e `illuminate/auth`, `illuminate/contracts`, `illuminate/http` e `illuminate/support` (`^12|^13`), portanto suporta Laravel 13. Cerca de 12,9 milhões de instalações. Fonte: <https://packagist.org/packages/php-open-source-saver/jwt-auth>.
 - Assinatura assimétrica: configurar `JWT_ALGO=RS256` e as chaves `JWT_PRIVATE_KEY` e `JWT_PUBLIC_KEY` (caminho ou conteúdo). O comando `jwt:secret` gera apenas segredo HS; o par RSA é gerado com `openssl genrsa` e `openssl rsa -pubout`. **A confirmar** na documentação (<https://laravel-jwt-auth.readthedocs.io>, página de configuração ainda marcada como «Coming soon») e em teste no projeto.
 - Publicação da chave pública aos microsserviços: arquivo montado ou variável de ambiente. JWKS e rotação de chaves: **a confirmar**; a biblioteca não documenta rotação, então a troca de chave exige janela com duas chaves públicas aceitas pelos validadores.
 
 ## 2. Railway (back-end Laravel, `ai-service`, `media-service`, bancos)
 
 - Planos: Hobby a US$ 5/mês com US$ 5 de uso incluído e consumo excedente cobrado à parte; Pro a US$ 20/mês; gratuito apenas como trial de 30 dias (US$ 5 em créditos), depois recursos limitados (até 1 vCPU e 0,5 GB de RAM). Fonte oficial: <https://railway.com/pricing>.
-- Bancos: templates oficiais para PostgreSQL, MySQL e Redis, privados por padrão (acesso público em Settings > Networking). Backups e PITR (Postgres e MySQL) são ligados pelo usuário; atualização de versão maior é manual. Fontes: <https://docs.railway.com/databases>, <https://docs.railway.com/databases/postgresql>, <https://docs.railway.com/databases/reference>, <https://docs.railway.com/cli/deploy>.
-- `pgvector` e RabbitMQ: não há template oficial confirmado; exigem imagem ou template da comunidade (`pgvector/pgvector:pg16` como imagem Docker própria). **A confirmar** antes de implementar.
+- Bancos: templates oficiais para PostgreSQL, MySQL e Redis, privados por padrão (acesso público em Settings > Networking). Backups e PITR (Postgres e MySQL) são ligados pelo usuário; o Railway suporta upgrade *in-place* de versão maior do PostgreSQL (com *preflight check*, backup automático e reversão em um clique; verificado em 2026-11-25). Fontes: <https://docs.railway.com/databases>, <https://docs.railway.com/databases/postgresql>, <https://docs.railway.com/databases/reference>, <https://docs.railway.com/cli/deploy>.
+- `pgvector` e RabbitMQ: a documentação oficial do PostgreSQL no Railway lista template de `pgvector` no marketplace oficial (verificado em 2026-11-25); para RabbitMQ não há template oficial confirmado, exigindo imagem ou template da comunidade (**a confirmar** antes de implementar).
 - Consequência: o custo deixa de ser fixo (VPS) e passa a ser por uso; com 5 serviços e 3 bancos o consumo pode passar do crédito do Hobby. Estimativa de custo mensal: **a confirmar** após o primeiro deploy de teste.
 
 ## 3. Cloudflare R2 (vídeos, imagens e arquivos)
@@ -48,7 +48,7 @@ Base para a [ADR-0010](../adr/0010-hospedagem-e-armazenamento.md) e para a atual
 |---|---|
 | `JWT_ALGO=RS256` com a biblioteca | a confirmar em teste |
 | Rotação de chaves | sem suporte documentado |
-| `pgvector` e RabbitMQ no Railway | a confirmar |
+| RabbitMQ no Railway (`pgvector` tem template listado na doc oficial do Railway) | a confirmar (RabbitMQ) |
 | Custo mensal no Railway | a confirmar |
 | Upload de 500 MB no R2 (PUT único ou multipart) | a confirmar |
 | `Set-Cookie` `__Host-` através do rewrite | a confirmar |

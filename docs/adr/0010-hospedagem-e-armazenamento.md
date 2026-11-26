@@ -37,7 +37,7 @@ relacionados: [adr-0007, adr-0008]
 ## Consequências
 
 - **Custo variável:** Railway cobra por uso (Hobby US$ 5/mês com crédito equivalente) e o R2 tem 10 GB gratuitos; estimativa real **a confirmar** após o primeiro deploy.
-- **Pontos a confirmar antes de implementar:** `pgvector` e RabbitMQ no Railway, upload de 500 MB (PUT ou multipart) e `Range` no R2, `Set-Cookie` com `__Host-` pelo `rewrite`, plano da Vercel para uso comercial.
+- **Pontos a confirmar antes de implementar:** RabbitMQ no Railway (template de `pgvector` confirmado na documentação oficial do Railway em 2026-11-25), upload de 500 MB (PUT ou multipart) e `Range` no R2, `Set-Cookie` com `__Host-` pelo `rewrite`, plano da Vercel para uso comercial.
 - **Menos operação:** sem servidor próprio, TLS e deploy ficam com as plataformas; em troca, há dependência de três fornecedores.
 - **Efeito na ADR-0007:** os trechos sobre VPS única e Docker Compose em produção ficam superados por esta decisão; o Docker Compose continua válido para desenvolvimento local.
 

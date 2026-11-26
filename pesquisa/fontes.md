@@ -4,24 +4,24 @@ Numeração global, sem duplicatas por URL (ignorando fragmento, barra final e p
 
 | ID | Fonte | URL | Fichas que citam |
 |---|---|---|---|
-| F01 | Planos de cursos online (Plus, Pro, Ultra Lab; 36 Carreiras; 2.308 cursos) — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/planos-cursos-online | alura |
+| F01 | Planos de cursos online (Plus, Pro, Ultra Lab; 37 Carreiras; 2.348 cursos — verificado em 2026-11-25) — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/planos-cursos-online | alura |
 | F02 | Luri, Inteligência Artificial da Alura — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/luri-inteligencia-artificial | alura |
-| F03 | Central de suporte — artigo "Conheça a Luri" — Alura — s.d., página desatualizada (rodapé © 2025; consultado em 2026-10-07) | https://suporte.alura.com.br | alura |
+| F03 | Central de suporte (artigos "Conheça a Luri", "Quais são os planos disponíveis", "A Alura possui um plano mensal", "O curso possui apostila" e "Tudo que você precisa saber sobre o fórum da Alura") — Alura — s.d., rodapé © 2025 (consultado em 2026-10-07; URLs diretas verificadas em 2026-11-25) | https://suporte.alura.com.br/conhe%C3%A7a-a-luri-nossa-intelig%C3%AAncia-artificial ; https://suporte.alura.com.br/quais-s%C3%A3o-os-planos-dispon%C3%ADveis ; https://suporte.alura.com.br/a-alura-possui-um-plano-mensal ; https://suporte.alura.com.br/o-curso-possui-apostila ; https://suporte.alura.com.br/tudo-que-voc%C3%AA-precisa-saber-sobre-o-f%C3%B3rum-da-alura | alura |
 | F04 | Sobre a Alura (história, Grupo Alun, CEO, números) — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/sobre | alura |
-| F05 | Formações (sequências de cursos por categoria; "Instrutor de Alto Impacto") — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/formacoes | alura |
+| F05 | Carreiras da Alura (jornadas progressivas com cursos ordenados e checkpoints práticos; antiga URL `/formacoes` redireciona para `/carreiras`) — Alura — s.d. (consultado em 2026-10-07; atualizado em 2026-11-25) | https://www.alura.com.br/carreiras | alura |
 | F06 | Como funciona a Alura (fórum, app offline, carreiras) — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/como-funciona | alura |
 | F07 | Alura para Empresas / Alun Business — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/empresas | alura |
 | F08 | Planos para empresas (Corp, Corp Plus, Corp Premium; tabela de catálogo) — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/empresas/planos | alura |
-| F09 | Página de compra (checkout) do plano Plus 1 ano — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/compra/plus/evolua-novos | alura |
-| F10 | Artigo "Acessibilidade: estudando com tecnologias assistivas" (preços da campanha out/2026; audiodescrição; rodapé AOVS/CNPJ; Discord) — Alura — 2026 (consultado em 2026-10-07) | https://www.alura.com.br/conteudo/acessibilidade-estudando-tecnologias-assistivas | alura |
+| F09 | Página de compra (checkout) do plano Plus 1 ano (redireciona conforme campanha ativa) — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/compra/plus/evolua-novos | alura |
+| F10 | Página de prévia do curso "Acessibilidade: estudando com tecnologias assistivas" (preços de campanha; audiodescrição) — Alura — 2026 (consultado em 2026-10-07; verificado em 2026-11-25) | https://www.alura.com.br/conteudo/acessibilidade-estudando-tecnologias-assistivas | alura |
 | F11 | Instrutores da Alura — Alura — s.d. (consultado em 2026-10-07) | https://www.alura.com.br/instrutores | alura |
 | F12 | Central de suporte (empresas) — artigo sobre porcentagem de conclusão do curso (aulas e atividades; certificado) — Alura — 20/07/2026 (consultado em 2026-10-07) — suporte.alura.com.br |  | alura |
 | F13 | Alura LATAM (conteúdo em espanhol; 325 cursos; Luri; AOVS) — Alura — s.d. (consultado em 2026-10-07) | https://www.aluracursos.com | alura |
-| F14 | Coursera About Page & Corporate Overview — Coursera, Inc. — 2025/2026 | https://about.coursera.org/ | coursera |
+| F14 | Coursera About Page & Corporate Overview — Coursera, Inc. — 2025/2026 (URL atualizada em 2026-11-25) | https://www.coursera.org/about | coursera |
 | F15 | Coursera Platform & Offerings Overview — Coursera, Inc. — s.d. (consultado em 2026-10-07) | https://www.coursera.org/ | coursera |
-| F16 | Course Structure and Assessment Guidelines — Coursera Teaching Center — s.d. (consultado em 2026-10-07) | https://teach.coursera.org/ | coursera |
-| F17 | Coursera Plus Pricing — Coursera — s.d. (consultado em 2026-10-07) | https://www.coursera.org/courseraplus | coursera |
-| F18 | Coursera Investor Relations News & Financial Reports — Coursera, Inc. — 2025/2026 | https://investor.coursera.com/ | coursera |
+| F16 | Coursera Parceria (parcerias universitárias e institucionais; antiga URL `teach.coursera.org` redireciona para `/partnerships`) — Coursera — s.d. (consultado em 2026-10-07; atualizado em 2026-11-25) | https://www.coursera.org/partnerships | coursera |
+| F17 | Coursera Plus Pricing — Coursera — s.d. (consultado em 2026-10-07; preço verificado em 2026-11-25) | https://www.coursera.org/courseraplus | coursera |
+| F18 | Coursera Investor Relations Overview — Coursera, Inc. — 2025/2026 (verificado em 2026-11-25) | https://investor.coursera.com/overview/default.aspx | coursera |
 | F19 | Página inicial — DIO (dio.me) — consultado em 2026-10-07 | https://www.dio.me/ | dio |
 | F20 | Bootcamps — DIO (dio.me) — consultado em 2026-10-07 | https://www.dio.me/bootcamp | dio |
 | F21 | Planos e preços — DIO (dio.me/planos) — consultado em 2026-10-07 | https://www.dio.me/planos | dio |
@@ -31,13 +31,13 @@ Numeração global, sem duplicatas por URL (ignorando fragmento, barra final e p
 | F25 | "Como desabilitar ou habilitar a legenda de vídeos dos bootcamps" — Artigo da comunidade DIO — consultado em 2026-10-07 | https://www.dio.me/articles/remover-a-legenda-de-videos-dos-bootcamps-8e41d81aedd7 | dio |
 | F26 | Bootcamp Microsoft Azure AI Fundamentals — DIO (dio.me) — consultado em 2026-10-07 | https://www.dio.me/bootcamp/microsoft-azure-ai-fundamentals | dio |
 | F27 | "Exclusivo: DIO, plataforma gratuita de educação que conecta desenvolvedores a empresas, recebe aporte de R$ 3,5 milhões" — PEGN/Globo — 2021-02-11 | https://revistapegn.globo.com/Startups/noticia/2021/02/exclusivo-dio-plataforma-gratuita-de-educacao-que-conecta-desenvolvedores-empresas-recebe-aporte-de-r-35-milhoes.html | dio |
-| F28 | Introducing Duolingo Max: Learning Powered by GPT-4 — Duolingo Blog — 2025/2026 | https://blog.duolingo.com/duolingo-max/ | duolingo |
-| F29 | Duolingo AI Features: Explain My Answer, Roleplay and Video Call Updates — Duolingo Press & Product — 2025/2026 | https://blog.duolingo.com/ | duolingo |
-| F30 | Practice Real-Time Conversations with Video Call on Duolingo — Duolingo Blog — 2025/2026 | https://blog.duolingo.com/video-call/ | duolingo |
-| F31 | About edX & 2U Overview — edX / 2U, Inc. — s.d. (consultado em 2026-10-07) | https://www.edx.org/about-us | edx |
-| F32 | Open edX Architecture and Studio Course Hierarchy Guide — Axim Collaborative / Open edX — s.d. (consultado em 2026-10-07) | https://openedx.org/ | edx |
-| F33 | edX Platform Offerings and Programs — edX, Inc. — s.d. (consultado em 2026-10-07) | https://www.edx.org/ | edx |
-| F34 | edX Learner Network Milestone and Impact Data — edX News & Reports — 2026 | https://press.edx.org/news/ | edx |
+| F28 | Introducing Duolingo Max: Learning Powered by GPT-4 — Duolingo Blog — 2023-03-14 (atualizado posteriormente; verificado em 2026-11-25) | https://blog.duolingo.com/duolingo-max/ | duolingo |
+| F29 | Duolingo AI Features: Explain My Answer, Roleplay and Video Call Updates — Duolingo Press & Product — 2025/2026 *(pendente de substituição: URL aponta para a home do blog e não sustenta os recursos; ID mantido para preservar numeração)* | https://blog.duolingo.com/ |  |
+| F30 | "Video Call lets you have real life conversations with Lily" — Duolingo Blog — 2024-09-24 | https://blog.duolingo.com/video-call/ | duolingo |
+| F31 | About edX — edX LLC — s.d. (consultado em 2026-10-07; verificado em 2026-11-25) | https://www.edx.org/about-us | edx |
+| F32 | Home — Open edX (Axim Collaborative) — s.d. (consultado em 2026-10-07; verificado em 2026-11-25) | https://openedx.org/ | edx |
+| F33 | Página inicial — edX LLC — s.d. (consultado em 2026-10-07; verificado em 2026-11-25) | https://www.edx.org/ | edx |
+| F34 | edX Learner Network Milestone and Impact Data — edX News & Reports — 2026 *(indisponível: HTTP 404 em 2026-11-25; dado de 100M de alunos coberto por F31 e F33; ID mantido para preservar numeração)* | https://press.edx.org/news/ |  |
 | F35 | Building and Running an edX Course: Exercise and Problem Types — edX Documentation — s.d. (consultado em 2026-10-07) | https://edx.readthedocs.io/projects/edx-partner-course-staff/ | edx |
 | F36 | Hotmart — Página inicial (home) — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br | hotmart |
 | F37 | Áreas de Membros (antigo Hotmart Club) — página de produto — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br/club | hotmart |
@@ -46,7 +46,7 @@ Numeração global, sem duplicatas por URL (ignorando fragmento, barra final e p
 | F40 | Sobre nós — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br/sobre-nos | hotmart |
 | F41 | Sala de Imprensa — Hotmart — s.d. (acessado em 2026-10-07) | https://press.hotmart.com/ | hotmart |
 | F42 | Plataforma de cursos online: criar, vender e escalar — página de produto — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br/criar-curso-online | hotmart |
-| F43 | Hotmart Ai — página de produto — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br/inteligencia-artificial | hotmart |
+| F43 | Hotmart Ai — página de produto — Hotmart — s.d. *(descontinuada em 2026-11-25: redireciona para F44 `/agente-de-ia`; afirmações sobre Hotmart AI migradas para F42; ID mantido para preservar numeração)* | https://hotmart.com/pt-br/inteligencia-artificial |  |
 | F44 | Agente de Inteligência Artificial — página de produto — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br/agente-de-ia | hotmart |
 | F45 | Comunidade online — página de produto — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br/comunidade-online | hotmart |
 | F46 | Hotmart Player — página de produto — Hotmart — s.d. (acessado em 2026-10-07) | https://hotmart.com/pt-br/player | hotmart |
@@ -83,13 +83,13 @@ Numeração global, sem duplicatas por URL (ignorando fragmento, barra final e p
 | F77 | Wikipédia — "Skillshare" — página editada em 29/09/2026, consultada em 07/10/2026 | https://en.wikipedia.org/wiki/Skillshare | skillshare |
 | F78 | PCMag — "Skillshare Review: A Useful Platform for Learning Creative Skills" (Jill Duffy, atualizado 13/08/2025; lida via captura do Wayback Machine de 24/06/2026) | https://www.pcmag.com/reviews/skillshare | skillshare |
 | F79 | About Udemy & Company Facts — Udemy, Inc. — s.d. (consultado em 2026-10-07) | https://about.udemy.com/ | udemy |
-| F80 | Udemy Certificate of Completion Overview — Udemy Support — s.d. (consultado em 2026-10-07) | https://support.udemy.com/hc/en-us/articles/229603868-Certificate-of-Completion | udemy |
+| F80 | "How to Download Your Certificate of Completion on a Browser" — Udemy Support — s.d. (consultado em 2026-10-07) | https://support.udemy.com/hc/en-us/articles/229603868-Certificate-of-Completion | udemy |
 | F81 | Lei nº 13.709, de 14 de agosto de 2018 (Lei Geral de Proteção de Dados Pessoais — LGPD, texto compilado) — Presidência da República / Planalto (consultado em 2026-11-25) | https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm | lgpd |
 | F82 | Lei nº 12.965, de 23 de abril de 2014 (Marco Civil da Internet) — Presidência da República / Planalto (consultado em 2026-11-25) | https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm | lgpd |
 | F83 | Lei nº 8.069, de 13 de julho de 1990 (Estatuto da Criança e do Adolescente — ECA) — Presidência da República / Planalto (consultado em 2026-11-25) | https://www.planalto.gov.br/ccivil_03/leis/l8069.htm | lgpd |
-| F84 | Portal de Legislação e Regulamentações (inclui Resolução CD/ANPD nº 2/2022) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/assuntos/legislacao-e-normas/regulamentacoes | lgpd |
+| F84 | Portal de Legislação e Regulamentações (inclui Resolução CD/ANPD nº 2/2022) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd | lgpd |
 | F85 | Materiais Educativos e Publicações (Guias Orientativos sobre Cookies, Anonimização e Backups) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/centrais-de-conteudo/materiais-educativos-e-publicacoes | lgpd |
-| F86 | Enunciado CD/ANPD nº 1/2023 (Tratamento de dados pessoais de crianças e adolescentes) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/assuntos/noticias-e-eventos/noticias/anpd-divulga-enunciado-sobre-o-tratamento-de-dados-pessoais-de-criancas-e-adolescentes | lgpd |
-| F87 | Resolução CD/ANPD nº 15/2024 (Regulamento de Comunicação de Incidente de Segurança — RCIS) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/assuntos/noticias-e-eventos/noticias/anpd-aprova-regulamento-de-comunicacao-de-incidente-de-seguranca | lgpd |
-| F88 | Resolução CD/ANPD nº 18/2024 (Regulamento sobre a atuação do Encarregado pelo Tratamento de Dados Pessoais) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/assuntos/noticias-e-eventos/noticias/anpd-publica-regulamento-sobre-a-atuacao-do-encarregado-pelo-tratamento-de-dados-pessoais | lgpd |
-| F89 | Resolução CD/ANPD nº 19/2024 (Regulamento de Transferência Internacional de Dados e Cláusulas-Padrão Contratuais) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/assuntos/noticias-e-eventos/noticias/anpd-publica-regulamento-de-transferencia-internacional-de-dados-e-clausulas-padrao-contratuais | lgpd |
+| F86 | Enunciado CD/ANPD nº 1/2023 (Tratamento de dados pessoais de crianças e adolescentes) — ANPD / DOU (consultado em 2026-11-25) | https://www.in.gov.br/en/web/dou/-/enunciado-cd/anpd-n-1-de-22-de-maio-de-2023-485306934 | lgpd |
+| F87 | Resolução CD/ANPD nº 15/2024 (Regulamento de Comunicação de Incidente de Segurança — RCIS) — ANPD / DOU (consultado em 2026-11-25) | https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-15-de-24-de-abril-de-2024-556243024 | lgpd |
+| F88 | Resolução CD/ANPD nº 18/2024 (Regulamento sobre a atuação do Encarregado pelo Tratamento de Dados Pessoais) — ANPD / DOU (consultado em 2026-11-25) | https://www.in.gov.br/en/web/dou/-/resolucao-cd/anpd-n-18-de-16-de-julho-de-2024-572632074 | lgpd |
+| F89 | Resolução CD/ANPD nº 19/2024 (Regulamento de Transferência Internacional de Dados e Cláusulas-Padrão Contratuais; vigora com retificação de 18/08/2025) — ANPD (consultado em 2026-11-25) | https://www.gov.br/anpd/pt-br/acesso-a-informacao/institucional/atos-normativos/regulamentacoes_anpd/resolucao-cd-anpd-no-19-de-23-de-agosto-de-2024 | lgpd |

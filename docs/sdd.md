@@ -258,7 +258,7 @@ O detalhamento completo dos campos, tipos, tamanhos e regras de normalização d
 
 | Dado | Onde fica | Observação |
 |---|---|---|
-| Usuário, endereços, perfil do instrutor | Banco de dados | Entidades User, Address, InstructorProfile. `passwordHash` guarda só o hash da senha (RNF007). `documentNumber` (CPF) e `birthDate` são dados pessoais; `documentNumber` é criptografado em repouso na camada de aplicação (AES-256-GCM, [TDD](tdd.md) seção 7). `socialLinks` é campo JSON, exceção conhecida à 1FN por decisão do Plano Técnico |
+| Usuário, endereços, perfil do instrutor | Banco de dados | Entidades User, Address, InstructorProfile. `passwordHash` guarda só o hash da senha (RNF007). `documentNumber` (CPF) e `birthDate` são dados pessoais; `documentNumber` é criptografado em repouso na camada de aplicação (AES-256-GCM mediante configuração explícita de `'cipher' => 'AES-256-GCM'` em `config/app.php` no Laravel, cujo padrão é AES-256-CBC; [TDD](tdd.md) seção 7). `socialLinks` é campo JSON, exceção conhecida à 1FN por decisão do Plano Técnico |
 | Curso, módulo, aula, categoria | Banco de dados | Entidades Category, Course, Module, Lesson. Preço em centavos e moeda ISO 4217 |
 | Vídeo da aula e imagem de capa | Armazenamento de vídeo (R2) | Banco guarda só `videoKey` e `thumbnailKey` |
 | Matrícula, pagamento simulado, progresso | Banco de dados | Entidades Enrollment, Payment, LessonProgress (`watchedSeconds` para retomar de onde parou) |

@@ -58,7 +58,7 @@ relacionados: [pesquisa-lgpd, lgpd-ripd, lgpd-encarregado, tdd, sdd, adr-0010, a
 
 ## 3. Transferência internacional e contratos com operadores (L12)
 
-Em conformidade com os arts. 33 a 36 e 39 da LGPD, a **Resolução CD/ANPD nº 19/2024** (`[F89]`) e o **RNF023**, todo fornecedor externo que armazena ou processa dados pessoais atua como **operador** e pode envolver transferência internacional de dados (servidores fora do Brasil, em especial EUA/UE).
+Em conformidade com os arts. 33 a 36 e 39 da LGPD, a **Resolução CD/ANPD nº 19/2024** (vigora com retificação de 18/08/2025, `[F89]`) e o **RNF023**, todo fornecedor externo que armazena ou processa dados pessoais atua como **operador** e pode envolver transferência internacional de dados (servidores fora do Brasil, em especial EUA/UE).
 
 ### 3.1 Inventário de operadores e requisitos contratuais
 
