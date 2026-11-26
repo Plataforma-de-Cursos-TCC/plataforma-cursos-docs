@@ -88,7 +88,8 @@ REPO_URL = "https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs"
 # Link curto da Fonte: página de redirect por figura em docs/f/N.html, servida pelo GitHub Pages.
 PAGES_URL = "https://plataforma-de-cursos-tcc.github.io/plataforma-cursos-docs/f"
 SHORT_DIR = Path(__file__).resolve().parents[1] / "docs" / "f"
-VERSAO = "v2.0.5"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
+VERSAO = "v2.0.6"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
+ITEM10_ESCALA = 0.9  # telas do item 10 em 90% dos 15 cm: faltam poucos pontos para a figura caber na página anterior
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
 
@@ -864,6 +865,15 @@ def assemble(pandoc_docx, template, out_docx, pages):
     titles_into_tables(body)
     format_tables_and_captions(doc)
     format_images(doc)
+    cur = ""
+    for p in doc.paragraphs:
+        if p.style.name == "Heading 1":
+            cur = p.text.split(" ")[0]
+        elif cur == "10":
+            for e in p._p.iter(qn("wp:extent")):
+                e.set("cx", str(int(int(e.get("cx")) * ITEM10_ESCALA)))
+                e.set("cy", str(int(int(e.get("cy")) * ITEM10_ESCALA)))
+                sync_pic_ext(p._p, e)
 
     # Elementos 0-28 do template: capa, folha de rosto, sumário e quebra de seção.
     cover = [copy.deepcopy(e) for e in tbody[:29]]
@@ -1144,7 +1154,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
               extent.set("cx", str(target_w))
               extent.set("cy", str(target_h))
               sync_pic_ext(para._p, extent)
-              if i > 0:
+              if i > 0 and land_prefix != "13 ":  # no item 13 as figuras pequenas dividem a página
                   para.paragraph_format.page_break_before = True
 
           # Quebra de seção retornando ao retrato após o item 11:
