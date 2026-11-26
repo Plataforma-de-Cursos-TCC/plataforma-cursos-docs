@@ -7,6 +7,7 @@ Pesquisa vigente sobre produtos similares à Plataforma de Cursos. Na ordem de p
 - [similares/](similares/README.md): 10 fichas de produto (Udemy, Coursera, Khan Academy, edX, Duolingo, Skillshare, Alura, Hotmart, DIO e Rocketseat), mais a síntese:
   - [matriz-comparativa.md](similares/matriz-comparativa.md): os 10 produtos lado a lado nos eixos de análise;
   - [lacunas-e-diferencial.md](similares/lacunas-e-diferencial.md): lacunas do mercado, diferencial da Plataforma de Cursos e insumos para os itens 1, 2 e 3.
+- [lgpd.md](lgpd.md): base legal e regulatória da LGPD (Lei nº 13.709/2018), Marco Civil da Internet, ECA e resoluções da ANPD aplicadas à Plataforma de Cursos.
 - [fontes.md](fontes.md): todas as fontes com numeração global (F01, F02, ...), sem duplicatas por URL.
 
 ## Convenções
