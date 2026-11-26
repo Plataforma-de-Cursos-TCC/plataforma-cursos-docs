@@ -13,6 +13,11 @@ database BD
 Aluno -> QuizView ++ : acessa o quiz do módulo
 QuizView -> QuizAttemptController ++ : show(quizId)
 QuizAttemptController -> QuizAttemptService ++ : getQuizForStudent(userId, quizId)
+alt E4 - Aluno não matriculado no curso
+QuizAttemptService --> QuizAttemptController : 404 NOT_FOUND
+QuizAttemptController --> QuizView : 404 NOT_FOUND
+QuizView --> Aluno : informa recurso não encontrado
+else Aluno matriculado
 QuizAttemptService -> LessonProgressService ++ : getModuleCompletionStatus(enrId, modId)
 LessonProgressService --> QuizAttemptService -- : aulas do módulo concluídas?
 alt E3 - aulas do módulo não concluídas
@@ -62,12 +67,13 @@ else correção automática bem-sucedida
 QuizAttemptService -> QuizAttempt ++ : submit(score, submittedAt)
 QuizAttempt --> QuizAttemptService -- : attempt
 QuizAttemptService -> QuizAttemptRepository ++ : saveWithAnswers(attempt, answers)
-QuizAttemptRepository -> BD ++ : UPDATE quiz_attempts (draft vira submitted) e INSERT quiz_answers
+QuizAttemptRepository -> BD ++ : UPDATE quiz_attempts (submitted) e INSERT quiz_answers (com snapshot)
 BD --> QuizAttemptRepository -- : ok
 QuizAttemptRepository --> QuizAttemptService -- : attempt corrigido
 QuizAttemptService --> QuizAttemptController -- : QuizAttempt
 QuizAttemptController --> QuizView -- : 200 OK (QuizResultResource com nota e gabarito)
 QuizView --> Aluno -- : exibe nota, alternativas corretas e salva progresso
+end
 end
 end
 end

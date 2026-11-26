@@ -1,6 +1,6 @@
 <mxfile host="Electron" agent="Antigravity" compressed="false">
   <diagram name="Item 12 Modelo de Dados Area C" id="diagram_item12_c">
-    <mxGraphModel dx="4379" dy="1806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1620" pageHeight="780" math="0" shadow="0">
+    <mxGraphModel dx="4379" dy="1806" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1620" pageHeight="820" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -191,7 +191,7 @@
           <mxGeometry height="20" width="280" y="180" as="geometry" />
         </mxCell>
         <mxCell id="table_QuizAnswer" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" value="quiz_answers" vertex="1">
-          <mxGeometry height="140" width="280" x="1360" y="550" as="geometry" />
+          <mxGeometry height="220" width="280" x="1360" y="550" as="geometry" />
         </mxCell>
         <mxCell id="row_qans_id" parent="table_QuizAnswer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" value="&lt;b&gt;PK&lt;/b&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;b&gt;id: uuid&lt;/b&gt;" vertex="1">
           <mxGeometry height="20" width="280" y="30" as="geometry" />
@@ -208,8 +208,20 @@
         <mxCell id="row_qans_div" parent="table_QuizAnswer" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#666666;dashed=1;" value="" vertex="1">
           <mxGeometry height="10" width="280" y="110" as="geometry" />
         </mxCell>
-        <mxCell id="row_qans_deletedAt" parent="table_QuizAnswer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" value="deleted_at: timestamptz" vertex="1">
+        <mxCell id="row_qans_questionText" parent="table_QuizAnswer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" value="question_text: text" vertex="1">
           <mxGeometry height="20" width="280" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="row_qans_selectedOptionText" parent="table_QuizAnswer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" value="selected_option_text: text" vertex="1">
+          <mxGeometry height="20" width="280" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="row_qans_correctOptionText" parent="table_QuizAnswer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" value="correct_option_text: text" vertex="1">
+          <mxGeometry height="20" width="280" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="row_qans_isCorrect" parent="table_QuizAnswer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" value="is_correct: boolean" vertex="1">
+          <mxGeometry height="20" width="280" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="row_qans_deletedAt" parent="table_QuizAnswer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" value="deleted_at: timestamptz" vertex="1">
+          <mxGeometry height="20" width="280" y="200" as="geometry" />
         </mxCell>
         <mxCell id="table_Lesson" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#666666;strokeWidth=1.5;strokeFactor=1;fontFamily=Helvetica;fontSize=12;dashed=1" value="lessons [Área B]" vertex="1">
           <mxGeometry height="50" width="240" x="1760" y="40" as="geometry" />
@@ -343,7 +355,7 @@
         <mxCell id="lbl_qa_quiz_1" parent="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" value="1" vertex="1">
           <mxGeometry height="16" width="28" x="1726" y="296" as="geometry" />
         </mxCell>
-        <mxCell id="edge_qans_question" edge="1" parent="1" source="table_QuizAnswer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1.0;exitY=0.25;exitPerimeter=0;entryX=0.0;entryY=0.5;entryPerimeter=0" target="table_Question" value="">
+        <mxCell id="edge_qans_question" edge="1" parent="1" source="table_QuizAnswer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1.0;exitY=0.1591;exitPerimeter=0;entryX=0.0;entryY=0.5;entryPerimeter=0" target="table_Question" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qans_q_n" parent="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" value="0..*" vertex="1">
@@ -352,7 +364,7 @@
         <mxCell id="lbl_qans_q_1" parent="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" value="1" vertex="1">
           <mxGeometry height="16" width="28" x="1726" y="565" as="geometry" />
         </mxCell>
-        <mxCell id="edge_qans_option" edge="1" parent="1" source="table_QuizAnswer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1.0;exitY=0.75;exitPerimeter=0;entryX=0.0;entryY=0.5;entryPerimeter=0" target="table_QuestionOption" value="">
+        <mxCell id="edge_qans_option" edge="1" parent="1" source="table_QuizAnswer" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1.0;exitY=0.4773;exitPerimeter=0;entryX=0.0;entryY=0.5;entryPerimeter=0" target="table_QuestionOption" value="">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="lbl_qans_o_n" parent="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" value="0..*" vertex="1">

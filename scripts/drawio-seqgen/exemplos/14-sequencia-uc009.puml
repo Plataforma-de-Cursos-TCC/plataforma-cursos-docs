@@ -10,16 +10,22 @@ control MediaService
 entity LessonProgress
 control ProgressRepository
 database BD
-alt A4 - Visitante assiste a aula prévia (sem login)
-Visitante -> LessonPlayerView ++ : acessa a aula marcada como prévia
+alt Visitante (sem login)
+Visitante -> LessonPlayerView ++ : acessa a aula do curso
 LessonPlayerView -> LessonPlayerController ++ : stream(lessonId)
 LessonPlayerController -> LessonProgressService ++ : getStreamUrl(null, lessonId)
 LessonProgressService -> LessonProgressService : checkEnrollmentOrPreview(null, lessonId)
+alt E1 - aula privada (isPreview = false)
+LessonProgressService --> LessonPlayerController : 401 UNAUTHENTICATED
+LessonPlayerController --> LessonPlayerView : 401 UNAUTHENTICATED
+LessonPlayerView --> Visitante : redireciona para tela de login
+else A4 - aula prévia (isPreview = true)
 LessonProgressService -> MediaService ++ : generateSignedStreamUrl(videoKey)
 MediaService --> LessonProgressService -- : url assinada Cloudflare R2 (15 min)
-LessonProgressService --> LessonPlayerController -- : { streamUrl }
+LessonProgressService --> LessonPlayerController -- : LessonStreamDTO(streamUrl, null)
 LessonPlayerController --> LessonPlayerView -- : 200 OK (LessonStreamResource)
 LessonPlayerView --> Visitante -- : reproduz sem registrar progresso
+end
 else Aluno
 Aluno -> LessonPlayerView ++ : acessa a aula do curso
 LessonPlayerView -> LessonPlayerController ++ : stream(lessonId)
@@ -41,7 +47,7 @@ LessonProgressService -> ProgressRepository ++ : findByEnrollmentAndLesson(enrol
 ProgressRepository -> BD ++ : SELECT lesson_progress WHERE enrollment_id AND lesson_id
 BD --> ProgressRepository -- : progresso anterior
 ProgressRepository --> LessonProgressService -- : progresso (ou null)
-LessonProgressService --> LessonPlayerController -- : { streamUrl, watchedSeconds }
+LessonProgressService --> LessonPlayerController -- : LessonStreamDTO(streamUrl, watchedSeconds)
 LessonPlayerController --> LessonPlayerView -- : 200 OK (LessonStreamResource)
 alt A2 - retoma aula já iniciada
 LessonPlayerView --> Aluno : reproduz o vídeo a partir do ponto salvo

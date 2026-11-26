@@ -39,7 +39,11 @@ ReviewCourseModal --> Aluno : bloqueia envio e indica que nota é obrigatória
 else dados válidos
 ReviewController -> ReviewService ++ : submitReview(userId, courseId, dto)
 ReviewService -> ReviewService : validateEligibility(userId, courseId)
-alt E1 - Aluno sem aula concluída no curso (R-1)
+alt E1 - Usuário sem matrícula ativa no curso
+ReviewService --> ReviewController : 403 FORBIDDEN (apenas matriculados)
+ReviewController --> ReviewCourseModal : 403 FORBIDDEN
+ReviewCourseModal --> Aluno : bloqueia e informa que apenas matriculados podem avaliar
+else E1 - Aluno sem aula concluída no curso (R-1)
 ReviewService --> ReviewController : 403 FORBIDDEN (sem aula concluída)
 ReviewController --> ReviewCourseModal : 403 FORBIDDEN
 ReviewCourseModal --> Aluno : bloqueia e informa necessidade de concluir ao menos uma aula
