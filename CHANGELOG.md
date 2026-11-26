@@ -13,6 +13,20 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ## [Não lançado]
 
+## [2.0.5] - 2026-11-26
+
+### Adicionado
+
+- Lista de abreviaturas e siglas (NBR 14724) antes da lista de ilustrações, lida de `especificacao/00-siglas.md`, porque o documento usa muitas siglas sem definição reunida (#187).
+
+### Alterado
+
+- Item 15 em seções paisagem, com colunas mais largas nas tabelas de teste, porque as cinco colunas quebravam demais em retrato (#187).
+
+### Corrigido
+
+- Links curtos da Fonte (`docs/f`) apontam para `v2.0.5`; estavam em `v2.0.3` e abriam os diagramas da versão anterior (#187).
+
 ## [2.0.4] - 2026-11-26
 
 ### Corrigido
@@ -195,7 +209,8 @@ Entrega do RA1: itens 1 a 11 da especificação.
 
 - Critério `C06.5` em `entregas/`, porque a coluna de objetivo pertence à matriz de rastreabilidade do item 9 e não ao item 6 (#61).
 
-[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.4...HEAD
+[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.5...HEAD
+[2.0.5]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.4...v2.0.5
 [2.0.4]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.3...v2.0.4
 [2.0.3]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.1...v2.0.2

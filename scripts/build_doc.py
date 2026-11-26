@@ -28,6 +28,7 @@ from docx.oxml.ns import qn
 REPO = Path(__file__).resolve().parent.parent
 ESP = REPO / "especificacao"
 REFERENCIAS = REPO / "especificacao" / "16-referencias.md"
+SIGLAS = REPO / "especificacao" / "00-siglas.md"
 DECLARACAO = REPO / "entregas" / "declaracao-uso-de-ia.md"
 
 AUTORES = [
@@ -87,7 +88,7 @@ REPO_URL = "https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs"
 # Link curto da Fonte: página de redirect por figura em docs/f/N.html, servida pelo GitHub Pages.
 PAGES_URL = "https://plataforma-de-cursos-tcc.github.io/plataforma-cursos-docs/f"
 SHORT_DIR = Path(__file__).resolve().parents[1] / "docs" / "f"
-VERSAO = "v2.0.4"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
+VERSAO = "v2.0.5"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
 
@@ -264,6 +265,48 @@ def toc_entry(level, text, page, anchor):
             r.append(t)
         link.append(r)
     return p
+
+
+def siglas_paragraphs():
+    """Parágrafos da lista de abreviaturas e siglas (NBR 14724), lidos da tabela de 00-siglas.md."""
+    out = []
+    for line in SIGLAS.read_text(encoding="utf-8").splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) != 2 or cells[0] in ("Sigla", "---") or not line.startswith("|"):
+            continue
+        p = OxmlElement("w:p")
+        ppr = OxmlElement("w:pPr")
+        tabs = OxmlElement("w:tabs")
+        tab = OxmlElement("w:tab")
+        tab.set(qn("w:val"), "left")
+        tab.set(qn("w:pos"), "1701")
+        tabs.append(tab)
+        ppr.append(tabs)
+        sp = OxmlElement("w:spacing")
+        sp.set(qn("w:after"), "40")
+        ppr.append(sp)
+        ind = OxmlElement("w:ind")
+        ind.set(qn("w:left"), "1701")
+        ind.set(qn("w:hanging"), "1701")
+        ppr.append(ind)
+        p.append(ppr)
+        for piece, bold in ((cells[0], True), ("\t", False), (cells[1], False)):
+            r = OxmlElement("w:r")
+            rpr = OxmlElement("w:rPr")
+            if bold:
+                rpr.append(OxmlElement("w:b"))
+            r.append(rpr)
+            if piece == "\t":
+                r.append(OxmlElement("w:tab"))
+            else:
+                t = OxmlElement("w:t")
+                t.set(qn("xml:space"), "preserve")
+                t.text = piece
+                r.append(t)
+            set_run_font(r, size_half_pts=21)
+            p.append(r)
+        out.append(p)
+    return out
 
 
 def fld_run(kind, instr=None):
@@ -890,8 +933,10 @@ def assemble(pandoc_docx, template, out_docx, pages):
         content.remove(p)
     # Lista de ilustrações antes do sumário (NBR 14724), no mesmo formato das entradas do sumário.
     lista_titulo = copy.deepcopy(content[0])
+    siglas_titulo = copy.deepcopy(content[0])
+    set_text(siglas_titulo, "LISTA DE ABREVIATURAS E SIGLAS")
     set_text(lista_titulo, "LISTA DE ILUSTRAÇÕES")
-    lista = [lista_titulo]
+    lista = [siglas_titulo, *siglas_paragraphs(), lista_titulo]
     for i, ((_, text, fp), page) in enumerate(zip(figures, fpages or [0] * len(figures))):
         name = f"_Fig{800000 + i}"
         bs, be = OxmlElement("w:bookmarkStart"), OxmlElement("w:bookmarkEnd")
@@ -994,8 +1039,8 @@ def assemble(pandoc_docx, template, out_docx, pages):
             # Matriz de rastreabilidade (9.1): larguras fixas somando a largura útil de 10490.
             widths = [1000, 1500, 1400, 900, 1600, 4090]
         elif first_txt == "ID" and "CENÁRIO" in full_head and "ENTRADAS" in full_head:
-            # Casos de teste (item 15): mesma largura útil.
-            widths = [900, 1700, 2300, 2690, 2900]
+            # Casos de teste (item 15, em paisagem): largura útil de 13440 (23,7 cm).
+            widths = [1100, 2200, 3000, 3300, 3840]
         elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAM." in full_head:
             # Dicionário de dados (item 12): colunas curtas não quebram o nome do atributo.
             widths = [2300, 1700, 1600, 800, 4090]
@@ -1048,9 +1093,9 @@ def assemble(pandoc_docx, template, out_docx, pages):
                 pstyle = ppr.find(qn("w:pStyle"))
                 ppr.insert(0 if pstyle is None else list(ppr).index(pstyle) + 1, OxmlElement("w:pageBreakBefore"))
 
-    # Itens 4 (BPMN largo), 11 e 13 (classes) em seção paisagem (cabeçalho e rodapé preservados):
+    # Itens 4 (BPMN largo), 11, 13 (classes) e 15 (tabelas de teste) em seção paisagem (cabeçalho e rodapé preservados):
     # O BPMN do item 4 fica em página própria (o texto ocupa a anterior), por isso a altura maior.
-    for land_prefix, max_h in (("4 ", 4400000), ("11 ", 3400000), ("13 ", 4400000)):
+    for land_prefix, max_h in (("4 ", 4400000), ("11 ", 3400000), ("13 ", 4400000), ("15 ", 4400000)):
       p11 = None
       p_next_h1 = None
       for p in doc.paragraphs:
