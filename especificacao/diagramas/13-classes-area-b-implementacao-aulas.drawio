@@ -36,10 +36,10 @@
           <mxGeometry y="40" width="210" height="85" as="geometry" />
         </mxCell>
         <mxCell id="StoredFileDTO" value="&amp;lt;&amp;lt;DTO&amp;gt;&amp;gt; (Área B)&lt;br&gt;&lt;b&gt;StoredFileDTO&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#E1D5E7;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="40" y="400" width="210" height="110" as="geometry" />
+          <mxGeometry x="40" y="400" width="210" height="125" as="geometry" />
         </mxCell>
-        <mxCell id="StoredFileDTO_s0" value="+key: string&lt;br&gt;+mimeType: string&lt;br&gt;+sizeBytes: int&lt;br&gt;+originalName: string" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="StoredFileDTO">
-          <mxGeometry y="40" width="210" height="70" as="geometry" />
+        <mxCell id="StoredFileDTO_s0" value="+key: string&lt;br&gt;+mimeType: string&lt;br&gt;+sizeBytes: int&lt;br&gt;+originalName: string&lt;br&gt;+durationSeconds: ?int" style="text;html=1;align=left;verticalAlign=top;spacingLeft=8;spacingRight=8;spacingTop=6;fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="StoredFileDTO">
+          <mxGeometry y="40" width="210" height="85" as="geometry" />
         </mxCell>
         <mxCell id="LessonResource" value="&amp;lt;&amp;lt;Resource&amp;gt;&amp;gt; (Área B)&lt;br&gt;&lt;b&gt;LessonResource&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFF2CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="300" y="370" width="210" height="80" as="geometry" />

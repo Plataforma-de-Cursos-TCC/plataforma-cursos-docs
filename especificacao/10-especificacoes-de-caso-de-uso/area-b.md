@@ -5,7 +5,7 @@
 - **Descrição:** o Instrutor cadastra um quiz com perguntas e o respectivo gabarito para um módulo do seu curso (US010, RF007).
 - **Pré-condições:** o Instrutor ter realizado login, ser dono do curso e ter cadastrado o módulo (UC014).
 - **Pós-condições:** quiz disponível para os alunos matriculados responderem, com o gabarito usado na correção automática.
-- **Regras de negócio:** R-1 toda pergunta precisa de ao menos duas alternativas, com uma marcada como correta; R-2 a edição do gabarito não altera as notas já lançadas.
+- **Regras de negócio:** R-1 toda pergunta precisa de ao menos duas alternativas, com uma marcada como correta; R-2 a edição do quiz ou do gabarito não altera as tentativas já feitas nem as notas já lançadas, preservadas por *snapshot* no momento da submissão (definido na Área C).
 - **Protótipo(s) de tela:** formulário de cadastro de pergunta com alternativas e marcação de gabarito. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Instrutor acessa o módulo do curso.
@@ -35,7 +35,7 @@
 - **Fluxos alternativos:**
   - **A1 – O Instrutor edita uma pergunta já existente**
     - A-1.1 O Instrutor seleciona a pergunta a editar e altera o enunciado, as alternativas ou o gabarito.
-    - A-1.2 O sistema mantém o histórico de respostas e as notas já lançadas.
+    - A-1.2 O sistema mantém intactas as tentativas já feitas e as notas já lançadas, pois editar o quiz não altera submissões anteriores (preservadas por *snapshot* na submissão, conforme definido na Área C).
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 5).
 
     ![formulário "Editar quiz" com aviso de notas](prototipos/png/UC004/UC004-A1-1.png)
@@ -150,7 +150,7 @@
   - **A4 – O Instrutor arquiva um curso publicado**
     - A-4.1 O Instrutor aciona “Arquivar” em um curso publicado. O Administrador também aciona este fluxo no UC018, ao excluir o Instrutor e optar por despublicar os cursos dele.
     - A-4.2 O sistema muda o status do curso de publicado para arquivado e o retira do catálogo.
-    - A-4.3 O sistema mantém o acesso dos alunos já matriculados às aulas do curso e não apaga nenhum dado.
+    - A-4.3 O sistema mantém o acesso dos alunos já matriculados às aulas do curso e não apaga nenhum dado. Quando acionado pela exclusão de Instrutor no UC018 (Área D), os arquivos de vídeo (voz e imagem) e as transcrições das aulas permanecem retidos enquanto houver alunos matriculados com acesso ativo (execução contratual, LGPD), sendo removidos após o encerramento do acesso ou na anonimização irreversível caso o curso tenha sido excluído em cascata.
     - A-4.4 Este caso de uso é finalizado.
 - **Fluxos de exceção:**
   - **E1 – Campos obrigatórios não preenchidos**
@@ -317,7 +317,7 @@
     - A-2.2 O sistema verifica se há histórico de alunos na aula. (E-4)
     - A-2.3 O sistema avisa que a aula deixará de aparecer no curso e pede confirmação.
     - A-2.4 O Instrutor confirma a exclusão. (A-3)
-    - A-2.5 O sistema remove a aula logicamente (`deleted_at`) e marca a exclusão lógica dos materiais vinculados; o arquivo de vídeo e os materiais permanecem no Cloudflare R2, preservados para o histórico, e a lista é atualizada.
+    - A-2.5 O sistema remove a aula logicamente (`deleted_at`) e marca a exclusão lógica dos materiais vinculados; o arquivo de vídeo e os materiais permanecem no Cloudflare R2, preservados para o histórico (sujeitos ao expurgo definitivo de voz, imagem e transcrição em caso de anonimização irreversível de Instrutor excluído no UC018 da Área D, conforme LGPD), e a lista é atualizada.
     - A-2.6 Este caso de uso é finalizado.
 
     ![confirmação de exclusão da aula](prototipos/png/UC015/UC015-A2-1.png)

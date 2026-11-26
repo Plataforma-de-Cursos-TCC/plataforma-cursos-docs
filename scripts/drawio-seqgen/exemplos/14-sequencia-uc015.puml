@@ -28,9 +28,9 @@ else E2 - falha no envio ou na comunicação com storage
   C --> V : 503 SERVICE_UNAVAILABLE (Retry-After)
   V --> INS : informa erro e permite nova tentativa
 else envio bem-sucedido
-  M --> S -- : StoredFileDTO (key, mimeType, sizeBytes)
+  M --> S -- : StoredFileDTO (key, mimeType, sizeBytes, durationSeconds)
   S --> C -- : StoredFileDTO
-  C --> V -- : 200 OK (videoKey, metadados)
+  C --> V -- : 200 OK (videoKey, durationSeconds, metadados)
   V -> C ++ : store(moduleId, req: CreateLessonRequest)
   C -> Q ++ : rules()
   Q --> C -- : validação de campos obrigatórios
