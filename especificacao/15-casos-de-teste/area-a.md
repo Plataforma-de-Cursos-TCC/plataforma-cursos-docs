@@ -58,11 +58,14 @@
 | TC087 | 1 – Fluxo básico | CT4 Salvar endereço | Tipo `cobrança`, rua `Rua XV de Novembro`, número `100`, bairro `Centro`, cidade `Curitiba`, UF `PR`, CEP `80020-310`, país `BR`, marcado como padrão | Endereço gravado para o usuário e exibido no perfil como endereço padrão. |
 | TC058 | 2 – A1 Perfil do Instrutor | CT1 Preencher minibiografia e links | Instrutor logado, bio `Engenheira de software há 10 anos`, link `https://github.com/anasouza` | Perfil do Instrutor atualizado e exibido na página do curso. |
 | TC082 | 3 – A2 Alterar senha | CT1 Acionar «Alterar senha» | Clique em «Alterar senha» no perfil | O UC017 é iniciado. |
-| TC009 | 4 – E1 Campo inválido | CT1 Nome em branco | Nome vazio | Resposta 422 `VALIDATION_FAILED` com o campo `name` indicado como obrigatório (R-2). |
-| TC083 | 4 – E1 Campo inválido | CT2 CPF inválido | CPF `111.111.111-11` (dígitos verificadores incorretos) | Resposta 422 `VALIDATION_FAILED` em `fields.documentNumber`, com aviso de CPF inválido (R-3). |
-| TC084 | 4 – E1 Campo inválido | CT3 Foto acima de 2 MB | Foto PNG de 3 MB | Resposta 422 `VALIDATION_FAILED` em `fields.photo`, com aviso do limite de 2 MB (R-6). |
-| TC085 | 4 – E1 Campo inválido | CT4 Nascimento futuro | Data de nascimento `01/01/2030` | Resposta 422 `VALIDATION_FAILED` em `fields.birthDate`, com aviso de data inválida (R-4). |
-| TC059 | 5 – E2 Link ou bio inválidos | CT1 Link em formato inválido | Instrutor logado, link `github ponto com barra ana` | Resposta 422 `VALIDATION_FAILED` em `fields.socialLinks`, com a indicação do campo de link. |
+| TC009 | 4 – E1 Campo inválido | CT1 Nome em branco | Nome vazio | Resposta 422 `VALIDATION_FAILED` com o campo `name` indicado como obrigatório (R-2); estado anterior inalterado. |
+| TC083 | 4 – E1 Campo inválido | CT2 CPF inválido | CPF `111.111.111-11` (dígitos verificadores incorretos) | Resposta 422 `VALIDATION_FAILED` em `fields.documentNumber`, com aviso de CPF inválido (R-3); estado anterior inalterado. |
+| TC084 | 4 – E1 Campo inválido | CT3 Foto acima de 2 MB | Foto PNG de 3 MB | Resposta 422 `VALIDATION_FAILED` em `fields.photo`, com aviso do limite de 2 MB (R-6); estado anterior inalterado. |
+| TC085 | 4 – E1 Campo inválido | CT4 Nascimento futuro | Data de nascimento `01/01/2030` | Resposta 422 `VALIDATION_FAILED` em `fields.birthDate`, com aviso de data inválida (R-4); estado anterior inalterado. |
+| TC274 | 4 – E1 Campo inválido | CT5 Tentativa de alterar `role` | Aluno logado envia `role: "admin"` em `PUT /api/v1/profile` | Resposta 422 `VALIDATION_FAILED` em `fields.role` (ou campo rejeitado, R-1); perfil permanece `student` e estado anterior inalterado. |
+| TC275 | 4 – E1 Campo inválido | CT6 Telefone sem DDD | Telefone `99999-0000` (sem DDD) | Resposta 422 `VALIDATION_FAILED` em `fields.phone`, indicando a obrigatoriedade do DDD (R-5); estado anterior inalterado. |
+| TC276 | 4 – E1 Campo inválido | CT7 Tema inválido | Tema `azul` (fora de `light`, `dark`, `system`) | Resposta 422 `VALIDATION_FAILED` em `fields.theme`, indicando as opções válidas (R-7); estado anterior inalterado. |
+| TC059 | 5 – E2 Link ou bio inválidos | CT1 Link em formato inválido | Instrutor logado, link `github ponto com barra ana` | Resposta 422 `VALIDATION_FAILED` em `fields.socialLinks`, com a indicação do campo de link; estado anterior inalterado. |
 | TC060 | 6 – E3 Acesso negado | CT1 Aluno edita o perfil de Instrutor | Aluno logado envia bio e links em `PUT /api/v1/profile/instructor` | Resposta 403 `FORBIDDEN`; os campos de Instrutor não são gravados. |
 | TC086 | 6 – E3 Acesso negado | CT2 Administrador edita o perfil de Instrutor | Administrador logado envia bio e links em `PUT /api/v1/profile/instructor` | Resposta 403 `FORBIDDEN`; nada é alterado. |
 

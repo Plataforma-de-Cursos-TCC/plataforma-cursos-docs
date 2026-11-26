@@ -27,6 +27,10 @@ Na perspectiva de implementação, apresentada em três diagramas (cadastro e lo
      - `softDelete(id: UUID): void` e `restore(id: UUID): void`: exclusão lógica e reativação via `deleted_at` (ADR-0014).
      - `anonymize(id: UUID): void`: anonimização irreversível dos dados pessoais para atendimento à LGPD (UC018 R-3, A3), preenchendo `anonymized_at`, ofuscando nome/documento/telefone e liberando o email no índice único parcial.
    - `RefreshSessionRepository.create(...)` grava a sessão de refresh no login com «manter conectado» (UC005) e `RefreshSessionRepository.revokeAllByUser(userId: UUID): void` revoga todas as sessões de atualização do usuário, com `revokedAt` preenchido na entidade `RefreshSession`. É chamado no bloqueio, na troca de perfil e na exclusão lógica (UC008 e UC018), junto com a inclusão do `jti` na blocklist do Redis.
+   - **Fronteira modular do módulo Auth (ADR-0018):** outros módulos do monólito (como Admin, na Área D) não acessam diretamente `UserRepository`, `RefreshSessionRepository` nem `InstructorProfileRepository`. O módulo Auth expõe três Services públicos como contrato entre áreas:
+     - `UserService`: `findById(userId: UUID): User`, `softDelete(userId: UUID): void`, `restore(userId: UUID): void`, `anonymize(userId: UUID, actorId: ?UUID): void` e `changeRole(userId: UUID, role: Role): User`.
+     - `SessionService`: `revokeAllByUser(userId: UUID): void` (delega a revogação das sessões de refresh ao `RefreshSessionRepository` e a inclusão do `jti` na blocklist do Redis).
+     - `InstructorProfileService`: `createEmpty(userId: UUID): void` (cria o registro vazio de `InstructorProfile` ao promover um Usuário a Instrutor, TC236).
 
 ![Classes negociais da Área A](../diagramas/13-classes-area-a-negocial.png)
 

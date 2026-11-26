@@ -127,7 +127,7 @@ O RFC trata de OAuth, mas o problema é o mesmo para a SPA (inferência: aplicar
 **Modelo:**
 
 - Tabela MySQL `sessoes_refresh`: `id`, `usuario_id`, `familia_id`, `hash_token` (SHA-256 do token, nunca o token em texto), `usado_em`, `revogado_em`, `expira_em`.
-- Cookie `__Host-refresh`: `Path=/api/v1/auth/refresh`, `Secure`, `HttpOnly`, `SameSite=Strict`.
+- Cookie `__Secure-refresh`: `Path=/api/v1/auth/refresh`, `Secure`, `HttpOnly`, `SameSite=Strict` (usa o prefixo `__Secure-` em vez de `__Host-`, pois `__Host-` exige `Path=/`).
   - `Path` restringe o envio, mas MDN é explícita: `Path` não é medida de segurança. A proteção vem de `HttpOnly` e da rotação.
 - `POST /api/v1/auth/refresh`:
   1. Procura o hash do token. Se não existe: 401.
@@ -138,7 +138,7 @@ O RFC trata de OAuth, mas o problema é o mesmo para a SPA (inferência: aplicar
 
 ### 1.7 Duração do cookie "manter conectado"
 
-- **Com a opção marcada:** cookie `__Host-refresh` com `Max-Age=2592000` (30 dias). Recomendação do documento, por ser um prazo comum para "manter conectado" e curto o bastante para não ficar indefinido. (inferência: 30 dias é convenção, não requisito de norma.)
+- **Com a opção marcada:** cookie `__Secure-refresh` com `Max-Age=2592000` (30 dias). Recomendação do documento, por ser um prazo comum para "manter conectado" e curto o bastante para não ficar indefinido. (inferência: 30 dias é convenção, não requisito de norma.)
 - **Sem a opção:** cookie sem `Max-Age` e sem `Expires`, ou seja, cookie de sessão. MDN: é apagado quando a sessão termina, e o navegador define quando isso acontece. Algumas configurações de navegador restauram sessões ao reabrir, então não é garantia de logout ao fechar.
 - Em ambos os casos, o access token de 1 h é o mesmo. O que muda é a validade do refresh.
 
@@ -331,7 +331,7 @@ Incluir no template de PR que altera endpoint:
 | `php-open-source-saver/jwt-auth` como guard | `lcobucci/jwt` puro | Guard, TTL e blacklist prontos. `lcobucci/jwt` exige implementar tudo isso (confirmar suporte ao Laravel 13) |
 | Access de 1 h + refresh opaco rotacionado | Access de 1 h sem refresh (novo login a cada hora) | Atende "manter conectado" sem refresh de longa duração em JWT |
 | Refresh com detecção de reuso revogando a família | Rotação sem detecção | Reuso de token já usado indica roubo. RFC 9700, seção 4.14 |
-| Refresh em `__Host-refresh` com `Path=/api/v1/auth/refresh` e `Max-Age=2592000` quando "manter conectado" | Cookie sem `Max-Age` para todos | `Max-Age` evita erro de relógio. `Path` reduz envio, sem ser medida de segurança (MDN) |
+| Refresh em `__Secure-refresh` com `Path=/api/v1/auth/refresh` e `Max-Age=2592000` quando "manter conectado" | Cookie sem `Max-Age` para todos | `Max-Age` evita erro de relógio. `Path` reduz envio, sem ser medida de segurança (MDN); prefixo `__Secure-` porque `__Host-` exige `Path=/` |
 | Blacklist em Redis por `jti`, com TTL igual ao tempo restante | Logout só apagando cookie | Cookie apagado não invalida um token copiado. Blacklist limitada a 1 h |
 | CSRF por dupla submissão assinada (`__Host-csrf` + `X-CSRF-Token`) e validação de `Origin` | Confiar só em `SameSite` | OWASP: SameSite é defesa em profundidade, não substitui token |
 | App e API no mesmo domínio registrável (ex.: `app.` e `api.` do mesmo domínio) | Domínios diferentes com `SameSite=None` | Cookie third-party é bloqueado por navegadores e exige `SameSite=None` |
