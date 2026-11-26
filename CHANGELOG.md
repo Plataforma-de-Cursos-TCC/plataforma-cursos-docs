@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Corrigido
 
+- Ajustes menores da auditoria #164 e revisão LGPD: PRD, critério C14.1, ADR-0009 e SDD alinhados às fontes e às ADRs 0017 e 0019, e entram `pesquisa/lgpd.md`, ROPA, RIPD e canal do Encarregado com RNF023 a RNF025, porque o projeto não registrava como trata dados pessoais (#171).
 - Área B alinhada à auditoria #164: UC004 e modelo 12-B passam a dizer que editar o quiz não altera tentativas já feitas, `durationSeconds` entra em `StoredFileDTO` e `CourseQueryService` evita que o módulo Learning use `CourseRepository` direto, para os itens 10, 12, 13 e 14 não se contradizerem (#170).
 - Diagramas dos itens 4, 9, 11, 12, 13 e 14 ajustados às regras do projeto (setas ligadas e retas, legenda no RA1, caixas tracejadas, métodos do item 13 nas sequências, regra do `alt`, `.puml` sincronizados com o gerador), porque a revisão de 2026-11-24 achou desvios das ADR-0012, 0013, 0014 e 0015 (#163).
 - CONTEXT.md passa a listar as ADRs 0007 a 0010 e US003 e US009 ficam Must Have, alinhadas ao RF001 e ao RF006, para o contexto e a prioridade baterem com as fontes (#163).
