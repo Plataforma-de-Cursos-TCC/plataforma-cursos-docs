@@ -88,7 +88,7 @@ REPO_URL = "https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs"
 # Link curto da Fonte: página de redirect por figura em docs/f/N.html, servida pelo GitHub Pages.
 PAGES_URL = "https://plataforma-de-cursos-tcc.github.io/plataforma-cursos-docs/f"
 SHORT_DIR = Path(__file__).resolve().parents[1] / "docs" / "f"
-VERSAO = "v2.0.6"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
+VERSAO = "v2.0.7"  # tag da entrega: o link da Fonte aponta para o arquivo nesta versão
 ITEM10_ESCALA = 0.9  # telas do item 10 em 90% dos 15 cm: faltam poucos pontos para a figura caber na página anterior
 TOC_TAB = 10466  # posição do tab direito com pontilhado no estilo Sumrio1 do template
 
@@ -1049,8 +1049,8 @@ def assemble(pandoc_docx, template, out_docx, pages):
             # Matriz de rastreabilidade (9.1): larguras fixas somando a largura útil de 10490.
             widths = [1000, 1500, 1400, 900, 1600, 4090]
         elif first_txt == "ID" and "CENÁRIO" in full_head and "ENTRADAS" in full_head:
-            # Casos de teste (item 15, em paisagem): largura útil de 13440 (23,7 cm).
-            widths = [1100, 2200, 3000, 3300, 3840]
+            # Casos de teste (item 15, em paisagem): largura útil de 15390 (margens de 720).
+            widths = [1200, 2500, 3300, 3800, 4590]
         elif first_txt == "ATRIBUTO" and "DOMÍNIO" in full_head and "TAM." in full_head:
             # Dicionário de dados (item 12): colunas curtas não quebram o nome do atributo.
             widths = [2300, 1700, 1600, 800, 4090]
@@ -1176,7 +1176,7 @@ def assemble(pandoc_docx, template, out_docx, pages):
 
     # Item 14: cada caso de uso (Heading 2) começa em página própria e o diagrama é limitado à altura
     # útil da página em retrato (título, texto e legenda ocupam o resto).
-    max_h14 = 7020000  # 19,5 cm
+    max_h14 = 6048000  # 16,8 cm: o diagrama divide a página com o fim do texto do caso de uso
     in14 = False
     for p in doc.paragraphs:
         if p.style.name == "Heading 1":
