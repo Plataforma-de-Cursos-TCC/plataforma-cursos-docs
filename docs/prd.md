@@ -36,8 +36,8 @@ Essas lacunas justificam a necessidade de um produto que ofereça tutor de IA in
 | **Aumentar taxa de conclusão** | % de cursos concluídos por aluno | ≥ 60% | 6 meses |
 | **Reduzir abandono por falta de suporte** | Redução de dúvidas manuais ao Tutor de IA | ≥ 30% | 6 meses |
 | **Capacitar instrutores com dashboards** | % de instrutores com curso publicado que consultam o dashboard ao menos uma vez por mês | ≥ 70% | 6 meses |
-| **Escalar número de cursos publicados** | Cursos publicados com status “publicado” | ≥ 10 | 6 meses |
-Objetivos baseados no item 1, [3 Objetivos](../especificacao/01-3-objetivos.md). As metas de 60% em 6 meses e de 70% dos instrutores consultando o dashboard mensalmente constam no item 1; a redução de 30% das dúvidas consta no item 3, [Visão do produto](../especificacao/03-visao-do-produto.md). A meta de 10 cursos publicados também consta no item 1, como 10 instrutores com curso publicado. <!-- proposta: metas sem fonte literal foram adicionadas como suposições -->
+| **Escalar base de instrutores ativos** | Instrutores com ao menos um curso publicado | ≥ 10 | 6 meses |
+Objetivos baseados no item 1, [3 Objetivos](../especificacao/01-3-objetivos.md). As metas de 60% em 6 meses, de 70% dos instrutores consultando o dashboard mensalmente e de ao menos 10 instrutores com curso publicado constam no item 1; a redução de 30% das dúvidas consta no item 3, [Visão do produto](../especificacao/03-visao-do-produto.md). <!-- proposta: metas sem fonte literal foram adicionadas como suposições -->
 
 ## 4. Escopo
 ### 4.1 Dentro (MVP)

@@ -54,26 +54,29 @@ flowchart TB
 
     subgraph plataforma["Plataforma de Cursos"]
         web["Front-end web<br/>SPA responsiva, pt-BR (pronta para en e es), modo claro/escuro"]
-        api["API<br/>regras de negócio das áreas A a D, JWT, documentação OpenAPI"]
-        tutorsvc["Serviço do Tutor de IA<br/>transcrição, embeddings, busca por similaridade, geração de resposta"]
-        db[("Banco de dados<br/>dados relacionais e índice de embeddings")]
+        api["API (Core)<br/>monólito modular das áreas A a D, JWT, documentação OpenAPI"]
+        mediasvc["Serviço de Mídia (media-service)<br/>upload multipart, gravação no R2 e geração de URLs assinadas"]
+        tutorsvc["Serviço do Tutor de IA (ai-service)<br/>transcrição, embeddings, busca por similaridade, geração de resposta"]
+        db_core[("PostgreSQL 16 — database core<br/>dados relacionais das áreas A a D")]
+        db_ai[("PostgreSQL 16 + pgvector — database ai<br/>transcrições e índice vetorial HNSW")]
         fila["RabbitMQ<br/>mensageria AMQP: jobs de transcrição e ingestão vetorial"]
     end
 
-    r2["Armazenamento de vídeo (R2)<br/>externo"]
+    r2["Armazenamento de mídia (Cloudflare R2)<br/>bucket privado externo"]
     llm["Provedor do modelo de linguagem<br/>externo"]
     mail["Serviço de e-mail<br/>externo"]
 
     usuario -->|"HTTPS"| web
     web -->|"HTTPS/JSON, token JWT"| api
-    web -->|"reprodução por URL assinada"| r2
-    api -->|"upload de vídeo e material"| r2
-    api -->|"leitura e escrita"| db
+    web -->|"reprodução e download por URL assinada (15 min)"| r2
+    api -->|"upload de vídeo, material, capa e foto; emissão de URL assinada"| mediasvc
+    mediasvc -->|"gravação e leitura no bucket privado"| r2
+    api -->|"leitura e escrita"| db_core
     api -->|"pergunta do Aluno e contexto da aula"| tutorsvc
     api -->|"publica jobs de transcrição e ingestão"| fila
     fila -->|"consome jobs"| tutorsvc
-    tutorsvc -->|"trechos indexados do curso"| db
-    tutorsvc -->|"leitura do vídeo, transcrição"| r2
+    tutorsvc -->|"leitura e escrita vetorial (course_id)"| db_ai
+    tutorsvc -->|"leitura do vídeo/áudio para transcrição"| mediasvc
     tutorsvc -->|"prompt com trechos, resposta em streaming"| llm
     api -->|"envio de e-mail"| mail
 ```
@@ -81,18 +84,20 @@ flowchart TB
 | Contêiner | Responsabilidade | Origem da definição |
 |---|---|---|
 | Front-end web | Telas de todos os perfis; chat do Tutor de IA ao lado do vídeo; validação de campo obrigatório com mensagem de erro (RNF005); layout de 360 a 1920 px (RNF019); textos em pt-BR, em arquivos de tradução prontos para en e es (RNF013); modo escuro (RNF014) | especificação (RNF005, RNF013, RNF014, RNF019, UC001) |
-| API | Autenticação e perfis, cursos, módulos, aulas, matrícula, pagamento simulado, progresso, quiz com correção automática, avaliação, dashboard, administração; documentação OpenAPI online (RNF015) | especificação |
-| Serviço do Tutor de IA | Transcrever a aula, gerar embeddings uma única vez por aula (RNF004), buscar trechos restritos ao curso, gerar resposta com aula e timestamp, responder em streaming (RNF003) | especificação |
+| API (Core) | Autenticação e perfis, cursos, módulos, aulas, matrícula, pagamento simulado, progresso, quiz com correção automática, avaliação, dashboard, administração; documentação OpenAPI online (RNF015) | especificação, [ADR-0018](adr/0018-core-como-monolito-modular.md) |
+| Serviço de Mídia (`media-service`) | Receber uploads enviados pela API (`multipart/form-data`), gravar vídeos, materiais, thumbnails e fotos de perfil no bucket privado do Cloudflare R2 e gerar URLs assinadas temporárias (15 min para vídeos, RNF002) | especificação (RNF002, RNF018), [ADR-0019](adr/0019-upload-pela-api.md) |
+| Serviço do Tutor de IA (`ai-service`) | Transcrever a aula, gerar embeddings uma única vez por aula (RNF004), buscar trechos restritos ao curso, gerar resposta com aula e timestamp, responder em streaming (RNF003) | especificação, [ADR-0007](adr/0007-stack-e-bancos.md) |
 | Mensageria (RabbitMQ) | Fila AMQP entre a API e o Serviço do Tutor de IA para os jobs de transcrição e ingestão vetorial, executados em background | Proposta (TDD, seção de tecnologias) |
-| Banco de dados | Entidades do dicionário de dados da especificação (seção 5); histórico de conversa do Tutor de IA | especificação |
-| Armazenamento de vídeo | Arquivos de vídeo, referenciados por `videoKey` (storage R2) | especificação (dicionário de dados) |
+| Banco de dados do Core (PostgreSQL 16 — `core`) | Entidades relacionais das áreas A a D (dicionário de dados do item 12), incluindo histórico de conversas do Tutor de IA e trilha de auditoria | especificação, [ADR-0017](adr/0017-core-em-postgresql.md) |
+| Banco de dados de IA (PostgreSQL 16 + pgvector — `ai`) | Transcrições segmentadas e índice vetorial HNSW isolado do core (mesma instância Railway, database e credenciais próprios) | especificação (RNF004), [ADR-0007](adr/0007-stack-e-bancos.md), [ADR-0017](adr/0017-core-em-postgresql.md) |
+| Armazenamento de mídia (Cloudflare R2) | Bucket privado para vídeos, materiais complementares, thumbnails e fotos de perfil, referenciados por chave no banco (`video_key`, `file_key`, `thumbnail_key`, `photo`) | especificação (dicionário de dados), [ADR-0019](adr/0019-upload-pela-api.md) |
 
 A stack tecnológica e os bancos de dados seguem a decisão do grupo registrada no [ADR-0007](adr/0007-stack-e-bancos.md):
 - **Front-end:** Next.js com TypeScript arquitetado como SPA (sem Server Components ou Server Actions).
-- **API (Core):** Laravel 13 / PHP 8.3 estruturado como monólito modular (módulos auth, authoring, learning, admin e analytics).
-- **Banco de dados do Core:** PostgreSQL 16 na mesma instância do `ai-service`, em databases `core` e `ai` separados (ADR-0017), como SGBD relacional primário para todas as entidades do sistema.
-- **Serviço do Tutor de IA (`ai-service`):** Serviço físico separado rodando em seu próprio container (Laravel 13 / PHP 8.3) com banco de dados dedicado **PostgreSQL 16 com extensão pgvector** para índice vetorial HNSW e busca restrita a `course_id`. A separação física isola a dependência de LLM, pipelines assíncronos de transcrição/embeddings e a carga pesada de cálculo vetorial.
-- **Armazenamento de mídia (`media-service`):** Serviço separado com storage Cloudflare R2 para vídeos (`videoKey`).
+- **API (Core):** Laravel 13 / PHP 8.3 estruturado como monólito modular (módulos auth, authoring, learning, admin e analytics; [ADR-0018](adr/0018-core-como-monolito-modular.md)).
+- **Banco de dados do Core:** PostgreSQL 16 na mesma instância do `ai-service`, em databases `core` e `ai` separados ([ADR-0017](adr/0017-core-em-postgresql.md)), como SGBD relacional primário para todas as entidades do sistema.
+- **Serviço do Tutor de IA (`ai-service`):** Serviço físico separado rodando em seu próprio container (Laravel 13 / PHP 8.3) com database dedicado **PostgreSQL 16 com extensão pgvector** (`ai`, [ADR-0017](adr/0017-core-em-postgresql.md)) para índice vetorial HNSW e busca restrita a `course_id`. A separação física isola a dependência de LLM, pipelines assíncronos de transcrição/embeddings e a carga pesada de cálculo vetorial.
+- **Serviço de Mídia (`media-service`):** Serviço separado posicionado entre a API e o bucket privado no Cloudflare R2 para upload via API e emissão de URLs assinadas ([ADR-0019](adr/0019-upload-pela-api.md)).
 - **Mensageria:** RabbitMQ 3.13+ com protocolo AMQP, para os jobs assíncronos de transcrição e ingestão vetorial entre a API e o `ai-service`.
 
 ## 3. Componentes

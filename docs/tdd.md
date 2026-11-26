@@ -34,6 +34,8 @@ Os protótipos de alta fidelidade do front-end (24 telas em HTML, com PNGs em te
 
 O modelo relacional da plataforma é baseado em PostgreSQL 16 ([ADR-0017](adr/0017-core-em-postgresql.md)), adota convenções de nomenclatura estritamente em língua inglesa e `snake_case` para tabelas e colunas no banco de dados ([ADR-0015](adr/0015-convencao-de-nomes-por-camada.md)) e implementa exclusão lógica transversal (`deleted_at: timestamptz`) em todas as entidades de negócio ([ADR-0014](adr/0014-exclusao-logica-e-anonimizacao.md)). A especificação a seguir divide-se em Diagrama Entidade-Relacionamento (ER), Dicionário de Dados e Diagrama de Classes, organizados estruturalmente pelas quatro áreas funcionais do sistema ([ADR-0006](adr/0006-divisao-por-areas.md)): Área A (Acesso e conta), Área B (Autoria do instrutor), Área C (Aprendizagem do aluno) e Área D (Tutor de IA, analytics e administração).
 
+> **Nota sobre fronteiras entre módulos ([ADR-0018](adr/0018-core-como-monolito-modular.md)):** As chaves estrangeiras (FKs) entre tabelas pertencentes a áreas distintas (como `courses.instructor_id -> users.id`, `enrollments.course_id -> courses.id` e `conversations.user_id -> users.id`) existem exclusivamente no **modelo físico relacional** do database `core`, para assegurar integridade referencial no PostgreSQL 16. Na camada de aplicação, os módulos nunca acessam diretamente `Repository` ou `Model` de outro módulo: toda consulta ou mutação entre módulos passa obrigatoriamente pelos **Services públicos** expostos pelo módulo proprietário — em especial `UserService`, `SessionService` e `InstructorProfileService` (Auth / Área A) e `CourseQueryService` (Authoring / Área B).
+
 ### 2.1 Diagrama Entidade-Relacionamento (ER)
 
 #### Visão Geral dos Relacionamentos

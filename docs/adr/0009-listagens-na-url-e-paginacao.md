@@ -8,16 +8,16 @@ data: 2026-10-09
 decisor: Grupo
 itens_template: [5, 11]
 areas: [A, B, C, D]
-relacionados: [adr-0007, adr-0008]
+relacionados: [adr-0007, adr-0008, adr-0015, adr-0017]
 ---
 # ADR-0009 — Listagens com estado na URL, paginação obrigatória e resposta mínima
 
-- **Status:** aceita · **Data:** 09/10/2026 · **Decisor:** Grupo · **Atualização:** o nome `per_page` do item 4 foi substituído por `perPage` na [ADR-0015](0015-convencao-de-nomes-por-camada.md)
+- **Status:** aceita · **Data:** 09/10/2026 · **Decisor:** Grupo · **Atualização:** o nome `per_page` do item 4 foi substituído por `perPage` na [ADR-0015](0015-convencao-de-nomes-por-camada.md); o banco de dados do core citado no contexto (MySQL) foi substituído por PostgreSQL 16 na [ADR-0017](0017-core-em-postgresql.md)
 
 ## Contexto
 
 - Telas de listagem (catálogo, cursos do instrutor, matrículas, avaliações, usuários, mensagens do Tutor) têm filtros, ordenação e páginas. Se esse estado vive só em memória do componente, o F5 e o botão voltar o perdem e o link não pode ser compartilhado.
-- O RNF009 pede desempenho em listagens. Listas sem paginação crescem sem limite e sobrecarregam a API e o MySQL.
+- O RNF009 pede desempenho em listagens. Listas sem paginação crescem sem limite e sobrecarregam a API e o MySQL *(atualizado para PostgreSQL 16 pela [ADR-0017](0017-core-em-postgresql.md))*.
 - Respostas da API que carregam campos que a tela não usa desperdiçam banda e expõem dados sem necessidade.
 - Detalhes, comparações e fontes estão em [sessao-e-listagens.md](../pesquisas/sessao-e-listagens.md).
 
@@ -49,5 +49,5 @@ relacionados: [adr-0007, adr-0008]
 ## Ligações
 
 - **Pesquisa:** [sessao-e-listagens.md](../pesquisas/sessao-e-listagens.md)
-- **TDD (paginação):** [tdd.md](../tdd.md) · **Stack:** [ADR-0007](0007-stack-e-bancos.md) · **Sessão:** [ADR-0008](0008-sessao-jwt-em-cookie.md)
+- **TDD (paginação):** [tdd.md](../tdd.md) · **Stack:** [ADR-0007](0007-stack-e-bancos.md) · **Sessão:** [ADR-0008](0008-sessao-jwt-em-cookie.md) · **Nomes:** [ADR-0015](0015-convencao-de-nomes-por-camada.md) · **Banco:** [ADR-0017](0017-core-em-postgresql.md)
 - **Índice das decisões:** [README.md](README.md) · **Contexto geral:** [CONTEXT.md](../../CONTEXT.md)

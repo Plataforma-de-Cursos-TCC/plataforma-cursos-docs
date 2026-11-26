@@ -29,7 +29,7 @@ relacionados: [ra2-tarefas, ra1-criterios-de-aceite, ra2-rubrica-canvas, ra2-ana
 
 ## Item 14 — Diagramas de sequência
 
-- [ ] **C14.1** No mínimo 4 casos de uso (meta: pelo menos 1 por integrante).
+- [ ] **C14.1** Todos os casos de uso do item 10 possuem diagrama de sequência (conforme rubrica oficial do Canvas).
 - [ ] **C14.2** Fluxo principal e `alt` para os fluxos de exceção do item 10.
 - [ ] **C14.3** Mensagens usam classes do item 13 e endpoints do TDD; uma arquitetura única.
 - [ ] **C14.4** Notação UML correta (lifelines, ativação, `alt`/`opt`/`loop`). Fonte versionada.
