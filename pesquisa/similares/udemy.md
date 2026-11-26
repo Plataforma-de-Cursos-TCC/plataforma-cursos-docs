@@ -29,7 +29,7 @@ verificado: 2026-10-07
 ## Fontes
 
 [F79] About Udemy & Company Facts — Udemy, Inc. — s.d. (consultado em 2026-10-07) — https://about.udemy.com/
-[F80] Udemy Certificate of Completion Overview — Udemy Support — s.d. (consultado em 2026-10-07) — https://support.udemy.com/hc/en-us/articles/229603868-Certificate-of-Completion
+[F80] "How to Download Your Certificate of Completion on a Browser" — Udemy Support — s.d. (consultado em 2026-10-07) — https://support.udemy.com/hc/en-us/articles/229603868-Certificate-of-Completion
 
 ## Não encontrado
 

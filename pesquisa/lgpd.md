@@ -64,7 +64,7 @@ atualizado: 2026-11-25
 ## 8. Transferência internacional de dados (LGPD, arts. 33 a 36; Resolução CD/ANPD nº 19/2024)
 
 - `[Fato][F81]` A transferência internacional de dados pessoais somente é permitida nas hipóteses do art. 33, como país ou organismo internacional com grau adequado (I), garantias contratuais — incluindo cláusulas-padrão contratuais, cláusulas específicas ou normas corporativas globais — (II), consentimento específico e em destaque com informação prévia sobre o caráter internacional (VIII), ou hipóteses do art. 7º, II, V e VI (IX) (LGPD, arts. 33 a 36).
-- `[Fato][F89]` A Resolução CD/ANPD nº 19, de 23 de agosto de 2024, aprovou o Regulamento de Transferência Internacional de Dados e instituiu o conteúdo obrigatório das Cláusulas-Padrão Contratuais (CPCs) para operações transfronteiriças.
+- `[Fato][F89]` A Resolução CD/ANPD nº 19, de 23 de agosto de 2024 (vigora com retificação de 18/08/2025), aprovou o Regulamento de Transferência Internacional de Dados e instituiu o conteúdo obrigatório das Cláusulas-Padrão Contratuais (CPCs) para operações transfronteiriças.
 
 ## 9. Registro de operações, RIPD e deveres do operador (LGPD, arts. 37, 38 e 39)
 

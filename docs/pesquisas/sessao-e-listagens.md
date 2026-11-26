@@ -33,7 +33,7 @@ Convenção deste documento:
 
 ### 1.1 Guard e pacote JWT
 
-Laravel 13 exige PHP 8.3 como mínimo e não traz breaking changes em relação ao 12 ([Laravel 13 release notes](https://laravel.com/framework/docs/releases), consultado 2026-10-09; [Laravel News — Laravel 13 released](https://laravel-news.com/laravel-13-released), consultado 2026-10-09).
+Laravel 13 exige PHP 8.3 como mínimo e busca minimizar breaking changes em relação ao 12 (embora releases major possam conter quebras de compatibilidade) ([Laravel 13 release notes](https://laravel.com/framework/docs/releases), consultado 2026-10-09; [Laravel News — Laravel 13 released](https://laravel-news.com/laravel-13-released), consultado 2026-10-09).
 
 Duas opções:
 

@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Corrigido
 
+- Referências corrigidas após verificação página a página: links da ANPD, ISO e edX, preços e contagens das fichas de concorrentes, o "até 63%" da Udemy sem fonte e afirmações técnicas contrariadas pela documentação oficial, para toda citação ser rastreável antes do envio (#185).
 - ROPA passa a citar o cookie `__Secure-refresh`, como a ADR-0008 retificada, porque restava o nome antigo `__Host-refresh` (#175).
 - Área D alinhada à auditoria #164 e à revisão LGPD: `audit_logs` com chave composta, `videoTimestampSeconds` e reserva de crédito no Tutor, UC008 e UC018 pelos Services da Área A, notas de retenção nas ADR-0014 e ADR-0016 e fim da promessa de "nenhuma PII", para o modelo ser criável no PostgreSQL 16 e o texto não prometer o que o fluxo não cumpre (#174).
 - Área C alinhada à auditoria #164: `quiz_answers` guarda snapshot do enunciado e do gabarito, UC002, UC003, UC009 e UC010 ganham os fluxos que os TCs já testavam e o módulo Learning lê cursos por `CourseQueryService`, para o resultado do quiz não mudar depois de uma edição e as fronteiras da ADR-0018 valerem (#173).

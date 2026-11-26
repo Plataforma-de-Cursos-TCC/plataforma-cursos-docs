@@ -10,7 +10,7 @@ Durante a preparação deste documento de especificação, os autores usaram Gem
 
 Durante a preparação deste documento de especificação, os autores usaram GPT-OSS 120B para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
 
-Durante a preparação deste documento de especificação, os autores usaram Nemotron 3 Ultra (NVIDIA, 2024) para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
+Durante a preparação deste documento de especificação, os autores usaram Nemotron 3 Ultra (NVIDIA, 2026) para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
 
 Durante a preparação deste documento de especificação, os autores usaram MiMo-V2.6-Flash para apoiar a transcrição da versão anterior do documento. Após usar essa ferramenta, os autores revisaram e editaram o conteúdo conforme necessário e assumem total responsabilidade pelo conteúdo.
 
