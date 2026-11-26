@@ -241,7 +241,7 @@ sequenceDiagram
 
 | Integração | O que trafega | Falha | Fallback |
 |---|---|---|---|
-| Provedor do modelo de linguagem (Tutor de IA) | Pergunta do Aluno e trechos do curso recuperados por similaridade; resposta em streaming | Sem fonte na especificação para o comportamento em indisponibilidade | Sem fonte na especificação. |
+| Provedor do modelo de linguagem (Tutor de IA) | Pergunta do Aluno (sem metadados cadastrais e com mascaramento automático de e-mail, CPF e telefone no `ai-service`, com limites declarados para texto livre no [TDD](tdd.md)) e trechos do curso recuperados por similaridade; resposta em streaming | Indisponibilidade retorna 503 `SERVICE_UNAVAILABLE` com `Retry-After` (UC001 E3) e devolve crédito reservado (TC218) | Mensagem informativa no chat mantendo a pergunta digitada para nova tentativa, sem resposta fora do material do curso |
 | Armazenamento e entrega de vídeo (R2) | Arquivo de vídeo e materiais complementares, enviados via API (`media-service`) (B2, B4); chaves guardadas no banco; reprodução de vídeo por URL assinada de 15 min (RNF002) | Upload com arquivo inválido ou falha de rede: o sistema rejeita e permite novo envio (UC015); falha na entrega do vídeo na reprodução (UC009) | Nova tentativa (especificação, UC015) |
 | Envio de e-mail (recuperar senha) | Link de redefinição, com validade de 30 minutos (UC011) | Sem fonte na especificação | Sem fonte na especificação. |
 | Pagamento | Não há integração externa: o pagamento é simulado (RF014; entidade Payment com status aprovado ou recusado) | Pagamento recusado: fica registrado como recusado, a matrícula segue pendente (sem acesso) e a API responde 422 PAYMENT_DECLINED; nova tentativa permitida (UC019, E-1) | Nova tentativa pelo Aluno |
@@ -258,7 +258,7 @@ O detalhamento completo dos campos, tipos, tamanhos e regras de normalização d
 
 | Dado | Onde fica | Observação |
 |---|---|---|
-| Usuário, endereços, perfil do instrutor | Banco de dados | Entidades User, Address, InstructorProfile. `passwordHash` guarda só o hash da senha (RNF007). `documentNumber` (CPF) e `birthDate` são dados pessoais. `socialLinks` é campo JSON, exceção conhecida à 1FN por decisão do Plano Técnico |
+| Usuário, endereços, perfil do instrutor | Banco de dados | Entidades User, Address, InstructorProfile. `passwordHash` guarda só o hash da senha (RNF007). `documentNumber` (CPF) e `birthDate` são dados pessoais; `documentNumber` é criptografado em repouso na camada de aplicação (AES-256-GCM, [TDD](tdd.md) seção 7). `socialLinks` é campo JSON, exceção conhecida à 1FN por decisão do Plano Técnico |
 | Curso, módulo, aula, categoria | Banco de dados | Entidades Category, Course, Module, Lesson. Preço em centavos e moeda ISO 4217 |
 | Vídeo da aula e imagem de capa | Armazenamento de vídeo (R2) | Banco guarda só `videoKey` e `thumbnailKey` |
 | Matrícula, pagamento simulado, progresso | Banco de dados | Entidades Enrollment, Payment, LessonProgress (`watchedSeconds` para retomar de onde parou) |
@@ -266,11 +266,11 @@ O detalhamento completo dos campos, tipos, tamanhos e regras de normalização d
 | Avaliação do curso | Banco de dados | Entidade Review, nota de 1 a 5 e comentário |
 | Transcrição, embeddings e histórico de conversa do Tutor de IA | Banco de dados | Gerados uma única vez por aula (RNF004); busca restrita por `course_id`. O histórico de mensagens e respostas por Aluno é guardado nas entidades Conversation e Message (UC001, seção 5.1). Entidades ainda não constam no dicionário de dados da especificação |
 | Trilha de auditoria das ações administrativas | Banco de dados | Registro de 100% das ações, retido por 12 meses (RNF016) |
-| Backup | Banco de dados e armazenamento de mídia (vídeos e materiais das aulas) | Backup diário dos dois, com restauração testada mensalmente (RNF011) |
+| Backup | Banco de dados e armazenamento de mídia (vídeos e materiais das aulas) | Backup diário criptografado em repouso (AES-256) com retenção rotativa de 30 dias, restauração testada mensalmente (RNF011) e rotina obrigatória de re-anonimização pós-restauração ([TDD](tdd.md) seção 7) |
 
 <!-- proposta: tabelas LessonTranscript (transcrição com marcação de tempo), LessonEmbedding (vetor, trecho, timestamp, course_id) e AuditLog (autor, ação, data). O dicionário da especificação não traz essas entidades, embora o UC001 e o RNF004 exijam os dados. Motivo: dar lugar aos dados que a especificação manda gerar e guardar -->
 
-<!-- proposta: retenção de dados pessoais após exclusão da conta. A especificação diz, na estória US016, que os dados pessoais são removidos e o histórico de matrícula e pagamento permanece anonimizado, mas não fixa prazo. Prazos de retenção do histórico de conversa e dos arquivos de vídeo ficam para decisão do grupo -->
+A política de retenção, carência de 30 dias após exclusão lógica, anonimização a pedido do titular, registros de acesso do Marco Civil (mínimo de 6 meses), backups e retenção de voz/imagem de Instrutores está consolidada na [ADR-0014](adr/0014-exclusao-logica-e-anonimizacao.md), na [ADR-0016](adr/0016-retencao-de-logs-e-auditoria.md) e na seção 7 do [TDD](tdd.md).
 
 ### 5.1 Modelo de classes de domínio
 
@@ -439,12 +439,12 @@ classDiagram
 | Vídeo | Upload pela API via `media-service` (gravação no R2) e reprodução por URL assinada com expiração de 15 min; sem acesso direto ao armazenamento | especificação (RNF002, B2, B4) |
 | Matrícula | Só o Aluno matriculado acessa as aulas, salvo aula marcada como prévia (`isPreview`) | especificação (US006, UC003) |
 | Tutor de IA | Responde só com base no material do próprio curso (RAG restrito por `course_id`); limite de mensagens por Aluno por período | especificação (UC001) |
-| LGPD | Aceite de termos e política de privacidade registrado em 100% dos cadastros; dados pessoais removidos na exclusão da conta, com histórico anonimizado | especificação (RNF020, UC012, US016) |
-| Administração | Registro de 100% das ações administrativas, retido por 12 meses; o administrador não bloqueia a própria conta | especificação (RNF016, US016) |
+| LGPD | Aceite de termos e política de privacidade registrado em 100% dos cadastros; pedido de exclusão/anonimização pelo titular (perfil/DPO) efetivado via UC018; CPF criptografado em repouso; plano de comunicação de incidentes (RCIS, 3 dias úteis); política de retenção, backups com re-anonimização e voz/imagem de Instrutores | especificação (RNF020, UC012, US016, UC018), ADR-0014 e TDD seção 7 |
+| Administração | Registro de 100% das ações administrativas em `audit_logs` (12 meses no PostgreSQL + 5 anos no R2; IP e identificadores tratados como dados pessoais indiretos sob base legal); registros de acesso retidos por no mínimo 6 meses (Marco Civil, art. 15); o administrador não bloqueia a própria conta | especificação (RNF016, US016) e ADR-0016 |
 
 <!-- proposta: a API envia política de CORS restrita ao domínio do front-end. A especificação não trata de CORS. Motivo: limita quais origens podem usar a sessão do usuário no navegador -->
 
-<!-- proposta: mensagens ao provedor do modelo de linguagem não incluem nome, e-mail, CPF nem outros dados pessoais do Aluno; seguem só a pergunta e os trechos do curso. Motivo: a especificação pede LGPD (RNF020), mas não trata do envio de dados a terceiros -->
+<!-- proposta: mensagens ao provedor do modelo de linguagem não anexam metadados cadastrais do Aluno e passam por mascaramento automático de e-mail, CPF e telefone no texto da pergunta antes do envio externo, declarando-se no TDD (seção 5.2) os limites da detecção em texto livre e em transcrições, além da orientação ao Aluno para não inserir dados pessoais no chat. Motivo: atender à LGPD (RNF020) sem prometer eliminação exaustiva impossível em texto livre -->
 
 ## 7. Qualidade
 
@@ -462,7 +462,7 @@ Como a arquitetura atende os RNFs do item 8 (ISO/IEC 25010). RNFs conforme o ite
 | RNF008 | Segurança | Bloqueio de 15 min após 5 tentativas | Contador de tentativas na autenticação (área A) |
 | RNF009 | Eficiência de desempenho | p95 das listagens de até 2 s com 1000 usuários simultâneos | API sem estado (JWT), que permite várias instâncias; toda listagem é paginada; a API não devolve campo que o front-end não use |
 | RNF010 | Confiabilidade | Disponibilidade mensal mínima de 99% | Sem fonte na especificação para o mecanismo |
-| RNF011 | Confiabilidade | Backup diário; restauração testada mensalmente | Backup do banco de dados e dos arquivos de vídeo e material das aulas; restaurar só o banco não recompõe as aulas |
+| RNF011 | Confiabilidade | Backup diário; restauração testada mensalmente | Backup diário criptografado (AES-256, retenção rotativa de 30 dias) do banco de dados e dos arquivos de vídeo e material das aulas, com rotina obrigatória de re-anonimização pós-restauração ([TDD](tdd.md) seção 7) |
 | RNF012 | Capacidade de interação (inclusividade) | WCAG 2.1 AA; contraste 4,5:1; navegação por teclado | Front-end com componentes acessíveis e revisão de contraste |
 | RNF013 | Capacidade de interação | 100% dos textos em pt-BR, em arquivos de tradução prontos para receber en e es sem mudança de código; datas e valores por idioma | Textos em arquivos de tradução e formatação por localidade |
 | RNF014 | Capacidade de interação | Claro/escuro em 100% das telas, preferência salva por usuário | Tema no front-end; preferência persistida no perfil |

@@ -15,9 +15,9 @@ control UserController as C
 control UserAdminService as S
 control JwtGuard as J
 control AuditService as A
-control CourseService as CS
-entity "RefreshSessionRepository (Área A)" as RSR
-entity "UserRepository (Área A)" as R
+control "CourseService (Área B)" as CS
+control "SessionService (Área A)" as SS
+control "UserService (Área A)" as US
 database BD
 
 ADM -> V ++ : aciona "Excluir" na linha do usuário
@@ -38,10 +38,10 @@ else confirma a exclusão
     C --> V : 404 NOT_FOUND
     V --> ADM : informa usuário não encontrado e atualiza lista
   else exclusão lógica confirmada (ADR-0014)
-    S -> R ++ : softDelete(targetId)
-    R -> BD ++ : UPDATE users SET status='deleted', deleted_at=NOW()
-    BD --> R -- : ok
-    R --> S -- : ok
+    S -> US ++ : softDelete(targetId)
+    US -> BD ++ : UPDATE users SET status='deleted', deleted_at=NOW()
+    BD --> US -- : ok
+    US --> S -- : void
     opt A4 - instrutor com cursos publicados
       alt arquivar cursos (alunos matriculados mantêm acesso)
         S -> CS ++ : archiveAllByInstructor(targetId)
@@ -57,10 +57,10 @@ else confirma a exclusão
     end
     S -> J ++ : revoke(jti, ttl)
     J --> S -- : ok (invalida jti no Redis blocklist)
-    S -> RSR ++ : revokeAllByUser(targetId)
-    RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
-    BD --> RSR -- : ok
-    RSR --> S -- : void
+    S -> SS ++ : revokeAllByUser(targetId)
+    SS -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
+    BD --> SS -- : ok
+    SS --> S -- : void
     S -> A ++ : logAction(adminId, USER_DELETE, "User", targetId)
     A -> BD ++ : INSERT INTO audit_logs (RNF016)
     BD --> A -- : ok
@@ -76,10 +76,10 @@ else A2 - reativação de conta excluída (PATCH restore)
   ADM -> V ++ : aciona "Reativar" na conta excluída
   V -> C ++ : restore(id)
   C -> S ++ : restore(adminId, targetId)
-  S -> R ++ : restore(targetId)
-  R -> BD ++ : UPDATE users SET status='active', deleted_at=NULL
-  BD --> R -- : ok
-  R --> S -- : user
+  S -> US ++ : restore(targetId)
+  US -> BD ++ : UPDATE users SET status='active', deleted_at=NULL
+  BD --> US -- : ok
+  US --> S -- : void
   S -> A ++ : logAction(adminId, USER_RESTORE, "User", targetId)
   A -> BD ++ : INSERT INTO audit_logs (RNF016)
   BD --> A -- : ok
@@ -90,13 +90,13 @@ else A2 - reativação de conta excluída (PATCH restore)
 else A3 - anonimização irreversível (LGPD)
   ADM -> V ++ : aciona "Anonimizar" na conta excluída
   V -> C ++ : anonymize(id)
-  C -> S ++ : anonymize(targetId)
-  S -> R ++ : anonymize(targetId)
-  R -> BD ++ : UPDATE users SET name, email, document_number, phone, birth_date, photo, anonymized_at=NOW()
-  BD --> R -- : ok
-  R -> BD ++ : UPDATE addresses SET street, number, complement, district, zip_code, deleted_at=NOW() WHERE user_id=targetId
-  BD --> R -- : ok
-  R --> S -- : ok
+  C -> S ++ : anonymize(targetId, adminId)
+  S -> US ++ : anonymize(targetId, adminId)
+  US -> BD ++ : UPDATE users SET name, email, document_number, phone, birth_date, photo, anonymized_at=NOW()
+  BD --> US -- : ok
+  US -> BD ++ : UPDATE addresses SET street, number, complement, district, zip_code, deleted_at=NOW() WHERE user_id=targetId
+  BD --> US -- : ok
+  US --> S -- : void
   S -> A ++ : logAction(adminId, USER_ANONYMIZE, "User", targetId)
   A -> BD ++ : INSERT INTO audit_logs (RNF016)
   BD --> A -- : ok
@@ -108,8 +108,8 @@ else E3 - reativar conta já anonimizada
   ADM -> V ++ : aciona "Reativar" em conta anonimizada
   V -> C ++ : restore(id)
   C -> S ++ : restore(adminId, targetId)
-  S -> R ++ : findById(targetId)
-  R --> S -- : user com anonymized_at preenchido
+  S -> US ++ : findById(targetId)
+  US --> S -- : user com anonymized_at preenchido
   S --> C -- : 422 VALIDATION_FAILED (fields.user)
   C --> V -- : 422 VALIDATION_FAILED
   V --> ADM -- : anonimização é irreversível pela LGPD

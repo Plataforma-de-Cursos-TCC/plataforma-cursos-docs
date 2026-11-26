@@ -16,9 +16,9 @@ control UserAdminService as S
 control JwtGuard as J
 control AuditService as A
 entity AuditLogRepository as ALR
-entity "UserRepository (Área A)" as R
-entity "RefreshSessionRepository (Área A)" as RSR
-entity "InstructorProfileRepository (Área A)" as IPR
+control "UserService (Área A)" as US
+control "SessionService (Área A)" as SS
+control "InstructorProfileService (Área A)" as IPS
 database BD
 
 ADM -> V ++ : busca usuários com paginação (perPage 1..100)
@@ -28,10 +28,10 @@ alt perPage fora do intervalo 1..100
   V --> ADM : exibe erro de validação
 else perPage válido
   C -> S ++ : paginateUsers(filters)
-  S -> R ++ : paginate(filters)
-  R -> BD ++ : SELECT users WHERE deleted_at IS NULL
-  BD --> R -- : registros
-  R --> S -- : usuários paginados
+  S -> US ++ : paginate(filters)
+  US -> BD ++ : SELECT users WHERE deleted_at IS NULL
+  BD --> US -- : registros
+  US --> S -- : usuários paginados
   S --> C -- : LengthAwarePaginator
   C --> V -- : 200 OK (UserAdminResource)
   V --> ADM -- : exibe lista de usuários ativos
@@ -51,25 +51,25 @@ else perPage válido
       C --> V : 403 FORBIDDEN
       V --> ADM : impede a ação na própria conta (R-1, R-2)
     else alteração de status válida
-      S -> R ++ : updateStatus(targetId, status)
-      R -> BD ++ : UPDATE users SET status
-      BD --> R -- : ok
-      R --> S -- : user
+      S -> US ++ : updateStatus(targetId, status)
+      US -> BD ++ : UPDATE users SET status
+      BD --> US -- : ok
+      US --> S -- : user
       alt bloquear (status blocked)
         S -> J ++ : revoke(jti, ttl)
         J --> S -- : ok (jti no Redis blocklist)
-        S -> RSR ++ : revokeAllByUser(targetId)
-        RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
-        BD --> RSR -- : ok
-        RSR --> S -- : void
-        S -> A ++ : logAction(adminId, USER_BLOCK, "User", targetId)
+        S -> SS ++ : revokeAllByUser(targetId)
+        SS -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
+        BD --> SS -- : ok
+        SS --> S -- : void
+        S -> A ++ : logAction(adminId, USER_BLOCK, "User", targetId, details)
         A -> ALR ++ : create(logData)
         ALR -> BD ++ : INSERT INTO audit_logs (RNF016)
         BD --> ALR -- : ok
         ALR --> A -- : auditLog
         A --> S -- : auditLog
       else desbloquear (status active, sem revogação)
-        S -> A ++ : logAction(adminId, USER_UNBLOCK, "User", targetId)
+        S -> A ++ : logAction(adminId, USER_UNBLOCK, "User", targetId, details)
         A -> ALR ++ : create(logData)
         ALR -> BD ++ : INSERT INTO audit_logs (RNF016)
         BD --> ALR -- : ok
@@ -87,25 +87,25 @@ else perPage válido
     alt tentativa de alterar o próprio perfil
       S --> C : 403 FORBIDDEN
       C --> V : 403 FORBIDDEN
-      V --> ADM : impede alteração do próprio perfil (R-1)
+      V --> ADM : impede alteração do próprio perfil (R-2)
     else perfil alterado com sucesso
-      S -> R ++ : updateRole(targetId, newRole)
-      R -> BD ++ : UPDATE users SET role
-      BD --> R -- : ok
-      R --> S -- : ok
+      S -> US ++ : changeRole(targetId, newRole)
+      US -> BD ++ : UPDATE users SET role
+      BD --> US -- : ok
+      US --> S -- : user
       opt promoção de Aluno para Instrutor
-        S -> IPR ++ : createEmpty(targetId)
-        IPR -> BD ++ : INSERT INTO instructor_profiles (user_id)
-        BD --> IPR -- : ok
-        IPR --> S -- : void
+        S -> IPS ++ : createEmpty(targetId)
+        IPS -> BD ++ : INSERT INTO instructor_profiles (user_id)
+        BD --> IPS -- : ok
+        IPS --> S -- : void
       end
-      S -> RSR ++ : revokeAllByUser(targetId)
-      RSR -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
-      BD --> RSR -- : ok
-      RSR --> S -- : void
+      S -> SS ++ : revokeAllByUser(targetId)
+      SS -> BD ++ : UPDATE refresh_sessions SET revoked_at=NOW() WHERE user_id=targetId
+      BD --> SS -- : ok
+      SS --> S -- : void
       S -> J ++ : revoke(jti, ttl)
       J --> S -- : ok (invalida JWT antigo no Redis)
-      S -> A ++ : logAction(adminId, ROLE_CHANGE, "User", targetId)
+      S -> A ++ : logAction(adminId, ROLE_CHANGE, "User", targetId, {oldRole, newRole})
       A -> ALR ++ : create(logData)
       ALR -> BD ++ : INSERT INTO audit_logs (RNF016)
       BD --> ALR -- : ok

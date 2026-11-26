@@ -15,7 +15,7 @@ A tabela a seguir apresenta a matriz de rastreabilidade entre os requisitos func
 
 | Caso de Uso (UC) | Estória de Usuário (US) | Requisito Funcional (RF) | Casos de Teste Associados | Status de Cobertura |
 |---|---|---|---|---|
-| UC001 – Conversar com Tutor de IA | US012, US022 | RF009, RF020 | TC211, TC212, TC213, TC214, TC215, TC216, TC217, TC218, TC219, TC220, TC270 | Coberto |
+| UC001 – Conversar com Tutor de IA | US012, US022 | RF009, RF020 | TC211, TC212, TC213, TC214, TC215, TC216, TC217, TC218, TC219, TC220, TC270, TC278 | Coberto |
 | UC002 – Responder Quiz | US011 | RF008 | TC031, TC032, TC033, TC164, TC165, TC166, TC167, TC168, TC179, TC180, TC181, TC182, TC183, TC190, TC191, TC192, TC193 | Coberto |
 | UC003 – Matricular-se em Curso | US007 | RF005 | TC019, TC020, TC021, TC151, TC152, TC153, TC154, TC184, TC185, TC186 | Coberto |
 | UC004 – Cadastrar Quiz com Gabarito | US010 | RF007 | TC028, TC029, TC030, TC112, TC113, TC114, TC116, TC117 | Coberto |

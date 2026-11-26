@@ -5,7 +5,7 @@
 - **Descrição:** o Aluno faz uma pergunta sobre o conteúdo da aula ao Tutor de IA do curso e recebe uma resposta que cita a origem no material (US012, US022, RF009, RF020). Iniciado a partir do UC009 (Assistir Aula), fluxo alternativo A3: UC001 «extend» UC009 (a seta sai do UC001 e aponta para o UC009).
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; a aula já ter sido transcrita e indexada.
 - **Pós-condições:** pergunta e resposta salvas no histórico de conversa do Aluno com aquele curso.
-- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código de status HTTP (*Hypertext Transfer Protocol*) 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica.
+- **Regras de negócio:** R-1 o Tutor de IA só responde com base no material do próprio curso; R-2 cada Aluno possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante controlada no Redis; ao estourar o limite, o envio é bloqueado com código de status HTTP (*Hypertext Transfer Protocol*) 429 `TOO_MANY_REQUESTS` e cabeçalho `Retry-After` informando os segundos restantes até a liberação de envio, a menos que possua mensagem disponível em pacote de créditos extras (RF020, RNF022); quando utilizado crédito extra, 1 crédito é reservado antes da chamada ao serviço de IA, confirmado no sucesso da resposta e devolvido automaticamente em caso de falha ou indisponibilidade (E3, TC218); R-3 a pergunta pode opcionalmente referenciar o segundo do vídeo da aula (`videoTimestampSeconds`), permitindo contextualização temporal precisa da dúvida pedagógica: quando `videoTimestampSeconds` é informado, a busca vetorial prioriza trechos em uma janela de até 120 s ao redor do instante indicado (`±120 s`), depois os demais trechos da aula atual e, por fim, os do restante do curso; quando omitido, a busca considera os trechos da aula atual seguidos pelos do curso, sem viés temporal (TC212, TC278).
 - **Protótipo(s) de tela:** chat na lateral da reprodução do vídeo, com a resposta indicando a aula e o minuto do vídeo de origem. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Aluno abre o chat na página da aula. (A-2)
@@ -46,7 +46,7 @@
   - **A3 – O Aluno adquire pacote de créditos extras do Tutor de IA**
     - A-3.1 Ao atingir o limite ou pelo painel do assistente, o Aluno solicita a compra de um pacote de mensagens extras com pagamento simulado (RF020, RNF022).
     - A-3.2 O sistema processa o pagamento simulado (`Payment` com `purpose = tutor_credits`) e ativa o pacote de créditos (`tutor_credit_packs`).
-    - A-3.3 As mensagens do pacote são consumidas automaticamente quando a cota horária regular de 20 mensagens estiver esgotada.
+    - A-3.3 Quando a cota horária regular de 20 mensagens estiver esgotada, cada envio reserva 1 mensagem do pacote (`messages_reserved`), confirma o consumo (`messages_used`) somente após a geração bem-sucedida da resposta e devolve o crédito em caso de falha (E3).
     - A-3.4 Este caso de uso retorna ao fluxo básico (passo 2).
 - **Fluxos de exceção:**
   - **E1 – Aula ainda não processada**
@@ -67,7 +67,7 @@
     *Figura 0 – UC001, fluxo de exceção E2: limite de mensagens atingido*
   - **E3 – Tutor de IA indisponível**
     - E-3.1 O sistema identifica falha ou indisponibilidade na busca ou na geração da resposta do Tutor de IA.
-    - E-3.2 O sistema informa o erro no chat, mantém a pergunta digitada e oferece tentar novamente.
+    - E-3.2 O sistema devolve eventual crédito reservado de pacote extra (preservando o saldo do Aluno, TC218), informa o erro no chat, mantém a pergunta digitada e oferece tentar novamente.
     - E-3.3 Este caso de uso é finalizado.
 
     ![Tutor de IA indisponível, pergunta mantida](prototipos/png/UC001/UC001-E3-1.png)
@@ -191,7 +191,7 @@
     - A-4.2 O Administrador escolhe o novo perfil: Aluno, Instrutor ou Administrador.
     - A-4.3 O sistema pede confirmação da alteração de perfil. (A-2)
     - A-4.4 O Administrador confirma a alteração.
-    - A-4.5 O sistema grava o novo perfil, revoga as sessões de refresh ativas, adiciona o identificador único do token (*JWT ID* - `jti`) atual (JONES; BRADLEY; SAKIMURA, 2015) na blocklist do Redis (REDIS, 2024), registra a alteração na trilha de auditoria (`ROLE_CHANGE`) e atualiza a lista de usuários.
+    - A-4.5 O sistema grava o novo perfil via `UserService.changeRole` (Área A); caso o novo perfil seja Instrutor, cria automaticamente o registro vazio de perfil de instrutor via `InstructorProfileService.createEmpty` (Área A, TC236); em seguida revoga as sessões de refresh ativas via `SessionService.revokeAllByUser` (Área A), adiciona o identificador único do token (*JWT ID* - `jti`) atual (JONES; BRADLEY; SAKIMURA, 2015) na blocklist do Redis (REDIS, 2024), registra a alteração na trilha de auditoria (`ROLE_CHANGE`, informando `oldRole` e `newRole` em `details`) e atualiza a lista de usuários.
     - A-4.6 Este caso de uso retorna ao fluxo básico (passo 1).
 
     ![modal de confirmação "Alterar perfil de João Silva?"](prototipos/png/UC008/UC008-A4-1.png)
@@ -264,8 +264,8 @@
 
 - **Fluxos de exceção:**
   - **E1 – Sessão ausente, expirada ou token revogado**
-    - E-1.1 O sistema identifica que não há sessão ativa, que o token JWT expirou ou que seu identificador `jti` consta na blocklist do Redis.
-    - E-1.2 O sistema direciona o Usuário ao login (UC005), sem exibir os dados da área solicitada.
+    - E-1.1 O sistema identifica que não há sessão ativa, que o token JWT expirou ou que seu identificador `jti` consta na blocklist do Redis (R-4) ou possui assinatura/perfil adulterado.
+    - E-1.2 A API responde HTTP 401 `UNAUTHENTICATED` sem exibir os dados da área solicitada; em caso de token expirado com sessão de refresh ativa («manter conectado», ADR-0008), o front-end tenta uma renovação automática e, se não houver refresh token ou se a renovação falhar (bem como em sessão ausente ou revogada), descarta a sessão e direciona o Usuário ao login (UC005) (TC251, TC252, TC255).
     - E-1.3 Este caso de uso é finalizado.
 
     ![login com aviso de sessão expirada](prototipos/png/UC005/UC005-E2-1.png)
@@ -284,17 +284,17 @@
 
 - **Nome do caso de uso:** Excluir e Anonimizar Usuário
 - **Ator(es):** Administrador.
-- **Descrição:** o Administrador exclui a conta de um usuário através de exclusão lógica (`status = deleted`, `deleted_at = NOW()`), revoga acessos imediatos via blocklist no Redis e revogação das sessões de refresh; o histórico de matrícula, pagamento, notas de quiz e progresso de aula permanece íntegro e associado ao mesmo `userId` (TC265); o Administrador pode reativar contas excluídas antes da anonimização; a anonimização de dados pessoais (LGPD) é um passo posterior irreversível (US016, RF012, ADR-0014, TC268). Estende o UC008 – Gerenciar Usuários, a partir da ação “Excluir”.
-- **Pré-condições:** o Administrador ter realizado login e estar na lista de usuários (UC008).
+- **Descrição:** o Administrador exclui a conta de um usuário através de exclusão lógica (`status = deleted`, `deleted_at = NOW()`), revoga acessos imediatos via blocklist no Redis e revogação das sessões de refresh; o histórico de matrícula, pagamento, notas de quiz e progresso de aula permanece íntegro e associado ao mesmo `userId` (TC265); o Administrador pode reativar contas excluídas antes da anonimização; a anonimização de dados pessoais (LGPD) é um passo posterior irreversível (US016, RF012, ADR-0014, TC268). Para atendimento ao direito de eliminação do titular (art. 18, VI da LGPD), o próprio Usuário pode solicitar a exclusão e anonimização de sua conta a partir do perfil (UC013) ou pelo canal do encarregado de dados (DPO), cabendo ao Administrador executar este caso de uso. Estende o UC008 – Gerenciar Usuários, a partir da ação “Excluir”.
+- **Pré-condições:** o Administrador ter realizado login e estar na lista de usuários (UC008), agindo por iniciativa administrativa ou em atendimento a pedido de exclusão/anonimização formulado pelo próprio titular.
 - **Pós-condições:** conta marcada com exclusão lógica (`status = deleted`, `deleted_at`), acessos revogados imediatamente, histórico acadêmico preservado e ação registrada na trilha de auditoria.
-- **Regras de negócio:** R-1 a exclusão de usuário é lógica: define `status = deleted` e preenche `deleted_at`; o histórico acadêmico (`QuizAttempt`, `LessonProgress`, matrículas e pagamentos) permanece íntegro e associado ao mesmo `userId` (TC265, ADR-0014); R-2 o Administrador não pode excluir a própria conta; R-3 a confirmação da exclusão é solicitada na interface (A1); a exclusão lógica revoga imediatamente os acessos do usuário via inclusão do token atual na blocklist do Redis e revogação das sessões de refresh (`RefreshSession`). O Administrador pode reativar a conta excluída (A2). A anonimização é um passo separado e irreversível, executado a pedido do titular ou automaticamente após 30 dias de exclusão sem reativação; conta já anonimizada não pode ser reativada, sendo qualquer tentativa rejeitada com HTTP 422 `VALIDATION_FAILED` (TC268); R-4 toda exclusão e reativação é registrada na trilha de auditoria (`USER_DELETE`, `USER_RESTORE`), sem armazenar dados pessoais no log (RNF016); R-5 ao excluir um usuário com perfil Instrutor que possui cursos publicados, o Administrador deve escolher entre despublicar os cursos (`status = archived`), preservando o acesso dos alunos matriculados, ou aplicar exclusão lógica em cascata nos cursos, módulos, aulas e quizzes com `deleted_at` (TC266).
+- **Regras de negócio:** R-1 a exclusão de usuário é lógica: define `status = deleted` e preenche `deleted_at`; o histórico acadêmico (`QuizAttempt`, `LessonProgress`, matrículas e pagamentos) permanece íntegro e associado ao mesmo `userId` (TC265, ADR-0014); R-2 o Administrador não pode excluir a própria conta; R-3 a confirmação da exclusão é solicitada na interface (A1); a exclusão lógica revoga imediatamente os acessos do usuário via inclusão do token atual na blocklist do Redis e revogação das sessões de refresh (`SessionService.revokeAllByUser`, Área A). O Administrador pode reativar a conta excluída durante a carência operacional de 30 dias (A2). A anonimização é um passo separado e irreversível, executado imediatamente mediante pedido do titular (dispensando a carência de 30 dias, art. 18, VI da LGPD) ou automaticamente após 30 dias de exclusão sem reativação; conta já anonimizada não pode ser reativada, sendo qualquer tentativa rejeitada com HTTP 422 `VALIDATION_FAILED` (TC268, TC269); R-4 toda exclusão, reativação e anonimização é registrada na trilha de auditoria (`USER_DELETE`, `USER_RESTORE`, `USER_ANONYMIZE`), sem armazenar dados cadastrais diretos (nome, e-mail, CPF, telefone) em `details` (RNF016); os campos `ip_address`, `user_agent`, `user_id` e `target_id` constituem dados pessoais indiretos/pseudonimizados retidos sob base legal (LGPD, art. 7º, II; Marco Civil da Internet, art. 15, BRASIL, 2014); R-5 ao excluir um usuário com perfil Instrutor que possui cursos publicados, o Administrador deve escolher entre despublicar os cursos (`status = archived`), preservando o acesso e os vídeos/transcrições exclusivamente para os alunos já matriculados, ou aplicar exclusão lógica em cascata nos cursos, módulos, aulas e quizzes com `deleted_at` (TC266, TC273), hipótese em que, encerrada a carência de 30 dias (e sem obrigação ativa com matriculados), os vídeos (`video_key` no R2, em coordenação com a Área B) e as transcrições/embeddings no `ai-service` são eliminados definitivamente (voz e imagem do Instrutor, LGPD).
 - **Protótipo(s) de tela:** modal de confirmação “Excluir usuário?” sobre a lista de usuários. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O sistema exibe a confirmação de exclusão com o nome do usuário. (A-1)
   2. O Administrador aciona “Excluir”.
   3. O sistema valida o usuário-alvo. (E-1) (E-2)
   4. Se o usuário-alvo for Instrutor com cursos publicados, o sistema solicita a escolha de tratamento dos cursos (A-4).
-  5. O sistema aplica a exclusão lógica (`status = deleted`, `deleted_at = NOW()`), revoga imediatamente os tokens ativos na blocklist do Redis, revoga as sessões de refresh e registra `USER_DELETE` na trilha de auditoria (sem dados pessoais no log).
+  5. O sistema aplica a exclusão lógica (`status = deleted`, `deleted_at = NOW()`), revoga imediatamente os tokens ativos na blocklist do Redis, revoga as sessões de refresh e registra `USER_DELETE` na trilha de auditoria (sem dados cadastrais diretos em `details`).
   6. O sistema remove o usuário da listagem de usuários ativos e confirma a exclusão.
   7. Este caso de uso é finalizado.
 
@@ -320,9 +320,9 @@
     - A-2.3 O sistema valida se a conta não foi anonimizada (E-3).
     - A-2.4 O sistema restaura o usuário (`status = active`, `deleted_at = null`), registra `USER_RESTORE` na trilha de auditoria e restabelece a possibilidade de login.
     - A-2.5 Este caso de uso é finalizado.
-  - **A3 – Execução da anonimização irreversível nos termos do art. 16 da LGPD (BRASIL, 2018)**
-    - A-3.1 A pedido do titular ou após 30 dias de exclusão lógica sem reativação, a rotina de anonimização é executada.
-    - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, data de nascimento, foto e remoção de endereços associados) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico, e registra a ação `USER_ANONYMIZE` em `audit_logs` (RNF016).
+  - **A3 – Execução da anonimização irreversível nos termos dos arts. 16 e 18 da LGPD (BRASIL, 2018)**
+    - A-3.1 A pedido do próprio titular (solicitado no perfil UC013 ou canal do encarregado de dados, dispensando a carência de 30 dias) ou automaticamente após 30 dias de exclusão lógica sem reativação, a rotina de anonimização é executada.
+    - A-3.2 O sistema limpa ou substitui por dados sintéticos os campos identificáveis (nome, e-mail sintético, CPF, telefone, data de nascimento, foto — removendo também o arquivo no Cloudflare R2 — e remoção de endereços associados) e preenche `anonymized_at = NOW()`, preservando o `userId` para integridade referencial do histórico acadêmico, desvincula conversas do Tutor de IA (retidas por no máximo 12 meses) e registra a ação `USER_ANONYMIZE` em `audit_logs` (RNF016, sem dados cadastrais diretos em `details`).
     - A-3.3 Este caso de uso é finalizado.
   - **A4 – Exclusão de Instrutor com cursos publicados**
     - A-4.1 Ao selecionar a exclusão de um Instrutor com cursos publicados, o sistema solicita a escolha entre despublicar os cursos (`archived`) ou aplicar exclusão lógica em cascata.

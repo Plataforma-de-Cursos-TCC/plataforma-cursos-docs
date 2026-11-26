@@ -1,6 +1,6 @@
 ' Item 14 - Diagrama de sequência do UC001 Conversar com Tutor de IA (Área D). Camadas e métodos do item 13.
 ' Gerar o .drawio: python3 scripts/drawio-seqgen/seqgen.py scripts/drawio-seqgen/exemplos/14-sequencia-uc001.puml especificacao/diagramas/14-sequencia-uc001.drawio
-' findAvailablePack aparece duas vezes por serem fluxos distintos: no E2 confirma a ausência de pacote (429); no ramo liberado, com cota esgotada, obtém o pacote que será consumido.
+' findAvailablePack aparece duas vezes por serem fluxos distintos: no E2 confirma a ausência de pacote (429); no ramo liberado, com cota esgotada, obtém o pacote que será reservado.
 @startuml 14-sequencia-uc001
 skinparam shadowing false
 skinparam dpi 192
@@ -45,41 +45,53 @@ else Aluno matriculado
     S -> T ++ : incrementAndGetWaitSeconds(userId)
     T --> S -- : waitSeconds (Retry-After)
     S -> CP ++ : findAvailablePack(userId)
-    CP -> BD ++ : SELECT tutor_credit_packs WHERE messages_used < messages_total
+    CP -> BD ++ : SELECT tutor_credit_packs WHERE messages_used + messages_reserved < messages_total
     BD --> CP -- : nulo
     CP --> S -- : nulo
     S --> C : 429 TOO_MANY_REQUESTS (Retry-After)
     C --> V : 429 TOO_MANY_REQUESTS (Retry-After)
     V --> ALU : bloqueia envio, informa espera e oferta pacote extra
   else pergunta liberada (cota ok ou pacote extra com mensagem)
-    opt cota horária esgotada, consome mensagem do pacote extra
+    opt cota horária esgotada, reserva mensagem do pacote extra
       S -> CP ++ : findAvailablePack(userId)
-      CP -> BD ++ : SELECT tutor_credit_packs WHERE messages_used < messages_total
+      CP -> BD ++ : SELECT tutor_credit_packs WHERE messages_used + messages_reserved < messages_total
       BD --> CP -- : pack
       CP --> S -- : pack
-      S -> CP ++ : consumeMessage(packId)
-      CP -> BD ++ : UPDATE tutor_credit_packs SET messages_used = messages_used + 1 WHERE messages_used < messages_total
+      S -> CP ++ : reserveMessage(packId)
+      CP -> BD ++ : UPDATE tutor_credit_packs SET messages_reserved = messages_reserved + 1
       BD --> CP -- : ok
-      CP --> S -- : ok
+      CP --> S -- : reserved
     end
     S -> CV ++ : findByUserAndLesson(userId, lessonId)
     CV -> BD ++ : SELECT conversations WHERE user_id AND lesson_id
     BD --> CV -- : conversa (ou nula)
     CV --> S -- : conversation
     opt conversa inexistente
-      S -> CV ++ : create(userId, lessonId)
+      S -> CV ++ : create(userId, courseId, lessonId)
       CV -> BD ++ : INSERT INTO conversations (UNIQUE(user_id, lesson_id))
       BD --> CV -- : ok
       CV --> S -- : conversation
     end
-    S -> CT ++ : streamRagResponse(courseId, lessonId, prompt, locale)
+    S -> CT ++ : streamRagResponse(courseId, lessonId, prompt, locale, videoTimestampSeconds?)
     alt E3 - falha no serviço de IA
       CT --> S : 503 SERVICE_UNAVAILABLE (Retry-After)
+      opt havia crédito reservado de pacote extra
+        S -> CP ++ : releaseMessage(packId)
+        CP -> BD ++ : UPDATE tutor_credit_packs SET messages_reserved = messages_reserved - 1
+        BD --> CP -- : ok
+        CP --> S -- : ok
+      end
       S --> C : 503 SERVICE_UNAVAILABLE (Retry-After)
       C --> V : 503 SERVICE_UNAVAILABLE
-      V --> ALU : informa erro e permite tentar novamente
+      V --> ALU : informa erro, devolve crédito e permite tentar novamente
     else resposta gerada com sucesso
       CT --> S -- : stream de resposta RAG com timestamps
+      opt havia crédito reservado de pacote extra
+        S -> CP ++ : confirmMessage(packId)
+        CP -> BD ++ : UPDATE tutor_credit_packs SET messages_reserved = messages_reserved - 1, messages_used = messages_used + 1
+        BD --> CP -- : ok
+        CP --> S -- : ok
+      end
       S -> MR ++ : create(conversationId, role=user, content, videoTimestampSeconds?)
       MR -> BD ++ : INSERT INTO messages
       BD --> MR -- : ok
