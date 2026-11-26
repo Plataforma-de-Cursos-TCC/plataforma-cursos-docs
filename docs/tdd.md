@@ -368,14 +368,17 @@ erDiagram
         uuid id PK
         uuid user_id FK
         uuid payment_id FK
+        text pack_type "CHECK (pack_50)"
         integer messages_total
         integer messages_used
+        integer messages_reserved
         timestamptz created_at
         timestamptz deleted_at
     }
 
     audit_logs {
         uuid id PK
+        timestamptz created_at PK
         uuid user_id FK
         text action "CHECK (USER_BLOCK, USER_UNBLOCK, ROLE_CHANGE, USER_DELETE, USER_RESTORE, USER_ANONYMIZE, ACCESS_DENIED)"
         text target_type
@@ -383,7 +386,6 @@ erDiagram
         text ip_address
         text user_agent
         jsonb details
-        timestamptz created_at
     }
 ```
 
@@ -406,7 +408,7 @@ Atributos normalizados rigorosamente até a 3FN, com as duas exceções justific
 | locale | Simples | varchar | 5 | Idioma da interface: `pt-BR` (padrão), validado contra idiomas ativos (RNF013). |
 | terms_accepted_at | Simples | timestamptz | - | Timestamp de aceite dos termos de uso e privacidade no cadastro (RNF020). |
 | phone | Simples | varchar | 20 | Telefone de contato com DDD (opcional). |
-| document_number | Simples | varchar | 14 | CPF formatado do titular (opcional). |
+| document_number | Simples | varchar | 14 | CPF formatado do titular (opcional). Criptografado em repouso na camada de aplicação via AES-256-GCM (cast `encrypted` do Laravel; armazenado como `text` cifrado na implementação, seção 7). |
 | birth_date | Simples | date | - | Data de nascimento do usuário (opcional). |
 | photo | Simples | varchar | 255 | Chave da foto de perfil no Cloudflare R2 (opcional). |
 | anonymized_at | Simples | timestamptz | - | Timestamp da anonimização LGPD; nulo enquanto a conta não for anonimizada (ADR-0014). |
@@ -599,24 +601,26 @@ Atributos normalizados rigorosamente até a 3FN, com as duas exceções justific
 | video_timestamp_seconds | Simples | integer | - | Segundo exato do vídeo da aula referenciado na resposta ou na pergunta (opcional, D6). |
 | created_at | Simples | timestamptz | - | Data e hora de envio ou geração da mensagem. |
 | deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para mensagens ativas, ADR-0014). |
-| **Tabela: tutor_credit_packs** | | | | Pacote de créditos extras do Tutor de IA adquirido por Aluno com pagamento simulado (RF020, RNF022). |
+| **Tabela: tutor_credit_packs** | | | | Pacote de créditos extras do Tutor de IA adquirido por Aluno com pagamento simulado (RF020, RNF022). Restrição: `CHECK (messages_used + messages_reserved <= messages_total)`. |
 | id | Determinante | uuid | - | Identificador único do pacote de créditos extras (PK). |
 | user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o Aluno proprietário do pacote. |
 | payment_id | Simples | uuid | - | FK para `payments.id` (Área C), identificando o pagamento simulado da aquisição. |
+| pack_type | Simples | text CHECK | 30 | Tipo do pacote contratado (ex.: `pack_50`, RNF022). |
 | messages_total | Simples | integer | - | Quantidade total de mensagens contratadas no pacote (ex.: 50). |
-| messages_used | Simples | integer | - | Quantidade de mensagens consumidas do pacote (padrão 0). |
+| messages_used | Simples | integer | - | Quantidade de mensagens efetivamente confirmadas/consumidas do pacote (padrão 0). |
+| messages_reserved | Simples | integer | - | Quantidade de mensagens reservadas em processamento de resposta do Tutor; confirmadas em `messages_used` no sucesso e devolvidas em caso de falha (padrão 0). |
 | created_at | Simples | timestamptz | - | Data e hora da aquisição e ativação do pacote. |
 | deleted_at | Simples | timestamptz | - | Data e hora de exclusão lógica (nulo para registros ativos, ADR-0014). |
-| **Tabela: audit_logs** | | | | Trilha de auditoria das ações administrativas e de segurança no PostgreSQL 16 (RNF016, ADR-0016). Particionada por mês (`PARTITION BY RANGE (created_at)`) com exportação para R2 por 5 anos via `audit:archive`. |
-| id | Determinante | uuid | - | Identificador único do registro de auditoria (PK). |
+| **Tabela: audit_logs** | | | | Trilha de auditoria das ações administrativas e de segurança no PostgreSQL 16 (RNF016, ADR-0016). Particionada por mês (`PARTITION BY RANGE (created_at)`) com chave primária composta `(id, created_at)` (exigência do particionamento declarativo no PostgreSQL) e exportação para R2 por 5 anos via `audit:archive`. |
+| id | Determinante | uuid | - | Parte 1 da chave primária composta `(id, created_at)` do registro de auditoria. |
+| created_at | Determinante | timestamptz | - | Parte 2 da chave primária composta `(id, created_at)` e chave de particionamento; data e hora exata da ocorrência do evento auditado. |
 | user_id | Simples | uuid | - | FK para `users.id` (Área A), identificando o autor da ação (nulo em tentativas não autenticadas e na rotina automática de anonimização, UC018 A3). |
 | action | Simples | text CHECK | 50 | Identificador estável da ação: `USER_BLOCK`, `USER_UNBLOCK`, `ROLE_CHANGE`, `USER_DELETE`, `USER_RESTORE`, `USER_ANONYMIZE`, `ACCESS_DENIED`. |
 | target_type | Simples | text | - | Tipo da entidade ou recurso alvo da ação auditada (ex.: `User`, `ProtectedArea`). |
-| target_id | Simples | uuid | - | Identificador UUID do recurso afetado (opcional; preservado na exclusão LGPD). |
-| ip_address | Simples | text | - | Endereço IP de origem da requisição (compatível com IPv4 e IPv6). |
-| user_agent | Simples | text | - | Identificação do cliente HTTP/navegador que originou a requisição. |
-| details | Composto | jsonb | - | Metadados contextuais estruturados da operação (ex.: papéis anterior e novo); sem dados pessoais sensíveis (UC018 R-4). |
-| created_at | Simples | timestamptz | - | Data e hora exata da ocorrência do evento auditado (chave de particionamento). |
+| target_id | Simples | uuid | - | Identificador UUID do recurso afetado (opcional; mantido na anonimização LGPD como identificador pseudonimizado sem vínculo a PII cadastral). |
+| ip_address | Simples | text | - | Endereço IP de origem da requisição (IPv4/IPv6); dado pessoal indireto retido sob base legal (LGPD, art. 7º, II; Marco Civil, art. 15). |
+| user_agent | Simples | text | - | Identificação do cliente HTTP/navegador que originou a requisição (metadado técnico/dado pessoal indireto sob acesso restrito). |
+| details | Composto | jsonb | - | Metadados contextuais estruturados da operação (ex.: papéis anterior e novo); proibido armazenar dados cadastrais diretos (nome, e-mail, CPF, telefone) ou credenciais (UC018 R-4). |
 
 ### 2.3 Diagrama de Classes
 
@@ -935,12 +939,16 @@ classDiagram
 
     class TutorCreditPack {
         -id: UUID
+        -packType: string
         -messagesTotal: number
         -messagesUsed: number
+        -messagesReserved: number
         -createdAt: DateTime
         -deletedAt: DateTime
         +hasAvailableMessages(): boolean
-        +consumeMessage()
+        +reserveMessage()
+        +confirmReservedMessage()
+        +releaseReservedMessage()
     }
 
     class AuditLog {
@@ -1160,16 +1168,16 @@ flowchart TD
 
 1. **Transcrição de Vídeo e Segmentação:** Ao receber o evento de upload de aula, um worker assíncrono consome a fila no RabbitMQ, extrai a trilha de áudio do Cloudflare R2 e executa o reconhecimento de voz (transcrição). O texto resultante é segmentado em trechos (*chunks*) lógicos conservando seus intervalos temporais (`start_time` e `end_time` em segundos).
 2. **Indexação Vetorial Única (RNF004):** Para cada chunk, o vetor de embedding é gerado uma única vez e persistido na tabela de chunks do PostgreSQL 16 com a coluna `embedding` do tipo `vector`. O índice HNSW (`vector_cosine_ops`) garante busca rápida mesmo com crescimento da base.
-3. **Busca Vetorial Restrita por Curso:** A busca semântica é estritamente vinculada ao curso da aula em reprodução. A query executa um filtro relacional composto: `Chunk::where('course_id', $courseId)->whereVectorSimilarTo('embedding', $queryEmbedding)->limit(5)->get()`. Isso isola categoricamente o conteúdo de diferentes cursos e impede vazamento de dados de outros instrutores.
+3. **Busca Vetorial Restrita por Curso e Priorização por Timestamp:** A busca semântica é estritamente vinculada ao curso da aula em reprodução (`where('course_id', $courseId)`), isolando categoricamente o conteúdo de diferentes cursos e impedindo vazamento de dados de outros instrutores. O endpoint de streaming (`CourseTutorClient.streamRagResponse`) aceita o parâmetro opcional `videoTimestampSeconds?: int` (RF009). Quando `videoTimestampSeconds` é informado, a ordenação/reclassificação prioriza: (a) trechos da aula atual em uma janela de até 120 segundos ao redor do instante indicado (`[t - 120s, t + 120s]`), (b) demais trechos da aula atual e (c) demais trechos relevantes do mesmo curso. Quando `videoTimestampSeconds` é omitido, a busca considera os trechos da aula atual e, em seguida, os do restante do curso, sem viés temporal.
 4. **Geração de Resposta e Citação Obrigatória:** O modelo de linguagem recebe os chunks recuperados com instruções de sistema (*system prompt*) instruindo postura de tutor socrático. A resposta final deve obrigatoriamente citar o nome da aula e o timestamp correspondente (ex.: *"[Aula 3 — Introdução, aos 04:15]"*), permitindo ao aluno navegar diretamente ao ponto exato do vídeo.
 5. **Streaming de Resposta (RNF003):** A resposta gerada é enviada de volta ao front-end por conexão *Server-Sent Events* (SSE), garantindo que o primeiro token da resposta chegue ao aluno em menos de 3 segundos (meta p95 do RNF003).
 
 ### 5.2 Limites de Uso, Controle de Custo e Privacidade
 
 - **Rate Limiting e Cota do Tutor:** Para conter custos de inferência de LLM e evitar abusos, cada Aluno matriculado possui uma cota de 20 mensagens por hora por Aluno, em janela deslizante (*sliding window*) monitorada no Redis. Ao estourar a cota horária, a API responde HTTP 429 `TOO_MANY_REQUESTS` acompanhada obrigatoriamente do cabeçalho `Retry-After` com os segundos restantes até que a mensagem mais antiga expire da janela deslizante, além do campo `error.retryAfterSeconds` no corpo da resposta (UC001).
-- **Pacote Extra de Créditos (simulado):** O Aluno pode adquirir pacotes de mensagens extras do Tutor de IA com pagamento simulado (reutilizando a infraestrutura de `Payment` da Área C com `purpose = 'tutor_credits'` e persistindo em `TutorCreditPack`). A franquia extra adquirida só é consumida após o esgotamento da cota horária gratuita regular de 20 mensagens/hora.
-- **Privacidade e LGPD:** Em estrito cumprimento à privacidade do aluno (RNF020), nenhuma informação de identificação pessoal (PII) — como nome, e-mail, telefone ou CPF — é enviada aos provedores de modelos de linguagem externos. A mensagem enviada contém apenas a dúvida formulada pelo aluno e os fragmentos de contexto extraídos das aulas do curso.
-- **Tratamento de Indisponibilidade do Modelo:** Conforme determinado no [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md), o Tutor de IA é tratado como ator sistêmico externo. Caso a API de inferência externa falhe ou atinja timeout, o sistema ativa um fluxo alternativo/de degradação graciosa: o chat exibe uma mensagem informativa amigável (*"O Tutor de IA está temporariamente indisponível no momento. Por favor, tente novamente em alguns instantes."*), sem interromper a reprodução do vídeo ou o progresso da aula pelo aluno.
+- **Pacote Extra de Créditos (simulado) e Reserva Transacional:** O Aluno pode adquirir pacotes de mensagens extras do Tutor de IA com pagamento simulado (reutilizando a infraestrutura de `Payment` da Área C com `purpose = 'tutor_credits'` e persistindo em `TutorCreditPack` com `pack_type`, `messages_total`, `messages_used` e `messages_reserved`). A franquia extra adquirida só é utilizada após o esgotamento da cota horária gratuita regular de 20 mensagens/hora. Para impedir perda de crédito em falhas do `ai-service` (UC001 E3) e evitar consumo duplo em concorrência, o crédito segue ciclo em três passos: **reserva** atômica (`messages_reserved = messages_reserved + 1` com guarda `messages_used + messages_reserved < messages_total`) antes da chamada de inferência, **confirmação** no sucesso (`messages_reserved - 1`, `messages_used + 1`) após a entrega da resposta, e **devolução** imediata em caso de falha ou timeout (`messages_reserved - 1`), preservando integralmente o saldo do Aluno (TC218).
+- **Privacidade, Mascaramento de PII e Limites Declarados (LGPD):** Em atendimento à LGPD (RNF020, arts. 6º e 33), a aplicação não anexa metadados cadastrais do Aluno (nome, e-mail, CPF, telefone ou `userId`) ao payload encaminhado ao provedor externo de modelo de linguagem: trafegam apenas a pergunta sanitizada e os fragmentos de contexto das aulas do curso. Antes do envio ao provedor externo, o `ai-service` executa um filtro de sanitização por expressões regulares no texto da pergunta para mascarar padrões estruturados de **e-mail** (`[EMAIL]`), **CPF** (`[CPF]`) e **telefone** (`[TELEFONE]`). **Limites declarados:** a máscara automática não assegura remoção exaustiva de dados pessoais não estruturados digitados livremente pelo Aluno (como nomes próprios, endereços por extenso ou relatos pessoais) nem de eventuais menções faladas presentes na transcrição da aula; por isso, a interface do chat exibe aviso orientando o Aluno a não inserir dados pessoais nas perguntas, e o contrato com o provedor externo deve proibir o uso dos prompts para treinamento de modelos.
+- **Tratamento de Indisponibilidade do Modelo:** Conforme determinado no [ADR-0005](adr/0005-tutor-de-ia-como-ator-sistemico.md), o Tutor de IA é tratado como ator sistêmico externo. Caso a API de inferência externa falhe ou atinja timeout, o sistema devolve eventual crédito reservado, ativa degradação graciosa (HTTP 503 `SERVICE_UNAVAILABLE` com `Retry-After`) e exibe mensagem amigável no chat mantendo a pergunta digitada para nova tentativa, sem interromper a reprodução do vídeo ou o progresso da aula pelo aluno.
 
 ---
 
@@ -1192,7 +1200,65 @@ As decisões arquiteturais do projeto são formalizadas e mantidas como Architec
 | [ADR-0013](adr/0013-diagramas-do-ra2-em-drawio.md) | D4 | **Diagramas do RA2 em draw.io:** Fonte `.drawio` e exportação PNG para os diagramas dos itens 12 a 14; substitui a ADR-0011. | 12, 13, 14 |
 | [ADR-0014](adr/0014-exclusao-logica-e-anonimizacao.md) | D14 | **Exclusão lógica e anonimização separada:** `deleted_at` em todas as tabelas de negócio; exclusão de usuário reversível e anonimização como passo separado irreversível. | 10, 12, 13, 14, 15 |
 | [ADR-0015](adr/0015-convencao-de-nomes-por-camada.md) | D15 | **Convenção de nomes por camada:** Banco em snake_case, API e código em camelCase (`perPage`); substitui o nome do item 4 da ADR-0009. | 12, 13, 14, 15 |
-| [ADR-0016](adr/0016-retencao-de-logs-e-auditoria.md) | D16 | **Retenção de logs e da trilha de auditoria:** Auditoria retida 12 meses no PostgreSQL e 5 anos arquivada no R2; logs da aplicação por 90 dias. | 8, 12, 14 |
+| [ADR-0016](adr/0016-retencao-de-logs-e-auditoria.md) | D16 | **Retenção de logs e da trilha de auditoria:** Auditoria retida 12 meses no PostgreSQL (PK composta `(id, created_at)`) e 5 anos arquivada no R2; logs técnicos por 90 dias e registros de acesso por no mínimo 6 meses (Marco Civil, art. 15). | 8, 12, 14 |
 | [ADR-0017](adr/0017-core-em-postgresql.md) | D17 | **Core em PostgreSQL 16:** Core migrado para PostgreSQL 16 na mesma instância do `ai-service`, em databases `core` e `ai` separados; substitui o MySQL da ADR-0007. | 5, 11, 12 |
 | [ADR-0018](adr/0018-core-como-monolito-modular.md) | D18 | **Core como monólito modular:** Core estruturado em módulos internos comunicando-se por Services públicos (única exceção: o catálogo público de cursos, somente leitura, no módulo Learning), sem microsserviços novos. | 11, 13 |
+
+---
+
+## 7. Privacidade, Conformidade LGPD e Resposta a Incidentes
+
+Esta seção consolida os controles técnicos e operacionais adotados para conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018 — LGPD), o Marco Civil da Internet (Lei nº 12.965/2014) e o Regulamento de Comunicação de Incidente de Segurança da ANPD (Resolução CD/ANPD nº 15/2024 — RCIS).
+
+### 7.1 Direitos do Titular e Pedido de Exclusão/Anonimização
+
+- **Solicitação pelo próprio titular (art. 18, VI da LGPD):** o Usuário (Aluno ou Instrutor) pode solicitar a exclusão e anonimização definitiva da própria conta pela seção de privacidade na tela de perfil (UC013) ou pelo canal do encarregado de dados (DPO). O pedido é encaminhado ao Administrador, que executa o fluxo do UC018 (exclusão lógica seguida imediatamente pelo ramo A3 de anonimização irreversível, dispensando a carência operacional de 30 dias quando o titular requer eliminação imediata).
+- **Separação entre exclusão lógica e anonimização ([ADR-0014](adr/0014-exclusao-logica-e-anonimizacao.md)):** exclusões administrativas sem pedido expresso de anonimização imediata permanecem em carência operacional de 30 dias (`deleted_at` preenchido, acesso revogado via Redis e `refresh_sessions`), exclusivamente para permitir reativação em caso de erro operacional; decorridos 30 dias sem reativação, a rotina agendada executa automaticamente a anonimização irreversível (`anonymized_at`).
+
+### 7.2 Política de Retenção, Carência e Descarte de Dados
+
+| Categoria de dado | Onde reside | Prazo de retenção / carência | Base legal / justificativa | Destinação ao fim do prazo |
+|---|---|---|---|---|
+| **Dados cadastrais diretos** (`users`: nome, e-mail, CPF, telefone, nascimento, foto; `addresses`; `instructor_profiles`) | PostgreSQL (`core`) e R2 (`photo`) | Enquanto a conta estiver ativa + até 30 dias de carência após exclusão lógica (ou imediato se solicitado pelo titular) | Execução de contrato (art. 7º, V) e segurança/reativação (carência) | Anonimização irreversível no banco (`anonymized_at`) e exclusão física da foto no R2 |
+| **Sessões e tokens** (`refresh_sessions`, `password_reset_tokens`) | PostgreSQL (`core`) e Redis | Revogação imediata na exclusão; registros expirados/revogados mantidos por até 90 dias | Prevenção à fraude e segurança da conta (art. 7º, IX) | Expurgo periódico de registros expirados |
+| **Registros de acesso a aplicações** (autenticação, logout, renovação de sessão, falhas de login, IP, data/hora UTC e conta) | Armazenamento controlado de logs | Mínimo de **6 meses (180 dias)** sob sigilo | Obrigação legal — art. 15 da Lei nº 12.965/2014 (Marco Civil da Internet) | Eliminação automática após o prazo legal, salvo ordem judicial |
+| **Logs técnicos/operacionais** (erros, diagnóstico, `requestId`, sem finalidade de registro de acesso) | Observabilidade/logs da aplicação | **90 dias** ([ADR-0016](adr/0016-retencao-de-logs-e-auditoria.md)) | Legítimo interesse operacional e diagnóstico (art. 7º, IX) | Rotação e descarte automático |
+| **Trilha de auditoria administrativa e segurança** (`audit_logs`) | PostgreSQL (`core`, 12 meses) + R2 (arquivo frio, 5 anos) | 12 meses em banco operacional + 5 anos arquivados e criptografados no R2 ([ADR-0016](adr/0016-retencao-de-logs-e-auditoria.md), RNF016) | Obrigação legal/regulatória e responsabilização (art. 7º, II e art. 6º, X) | Eliminação definitiva dos arquivos no R2 após 5 anos |
+| **Histórico acadêmico e transacional** (`enrollments`, `payments`, `lesson_progress`, `quiz_attempts`, `reviews`, `tutor_credit_packs`) | PostgreSQL (`core`) | Preservado sem vínculo a PII cadastral após anonimização do titular (registros transacionais por até 5 anos) | Uso exclusivo do controlador após anonimização (art. 16, IV da LGPD) e integridade acadêmica | Mantido anonimizado / agregado |
+| **Conversas do Tutor de IA** (`conversations`, `messages`) | PostgreSQL (`core`) | Conta ativa; após exclusão/anonimização, desvinculado de PII cadastral e retido por no máximo 12 meses | Execução de contrato (art. 7º, V) e melhoria pedagógica/suporte | Expurgo após 12 meses da exclusão da conta |
+| **Voz e imagem de Instrutores** (vídeos `video_key` e transcrições/embeddings) | Cloudflare R2 e PostgreSQL (`ai`) | Enquanto o curso estiver publicado ou arquivado com alunos matriculados ativos | Execução de contrato e licença de uso de imagem/voz (art. 7º, V) | Eliminação definitiva no R2 e no banco `ai` após exclusão em cascata + carência (ou encerramento do acesso dos matriculados) |
+| **Backups operacionais** (PostgreSQL e R2) | Storage de backup criptografado | Janela rotativa de **30 dias** (RNF011) | Recuperabilidade e segurança (art. 46 da LGPD) | Sobrescrita/expurgo automático ao fim dos 30 dias |
+
+### 7.3 Endereço IP e Identificadores em `audit_logs`
+
+Os campos `ip_address`, `user_agent`, `user_id` e `target_id` em `audit_logs` configuram **dados pessoais indiretos ou pseudonimizados** (art. 5º, I da LGPD). A plataforma não grava dados cadastrais diretos (nome, e-mail, CPF, telefone) nem credenciais no campo `details`. O armazenamento de IP e identificadores em `audit_logs` fundamenta-se em cumprimento de obrigação legal/regulatória (art. 7º, II da LGPD; art. 15 do Marco Civil) e prevenção à fraude/segurança, sob controle de acesso estrito, integridade *append-only* e descarte ao término do ciclo de arquivamento de 5 anos no R2. Após a anonimização do titular (UC018 A3), `target_id` deixa de resolver para qualquer dado identificável no cadastro de usuários.
+
+### 7.4 Criptografia em Trânsito e em Repouso (inclusive CPF)
+
+- **Em trânsito:** todas as comunicações externas (SPA ↔ API ↔ R2) e chamadas a provedores externos trafegam obrigatoriamente sobre TLS 1.2+/1.3 (HTTPS).
+- **Em repouso (infraestrutura):** volumes do PostgreSQL 16 (databases `core` e `ai`), buckets privados do Cloudflare R2 e arquivos arquivados de auditoria utilizam criptografia em repouso AES-256 gerenciada pela infraestrutura.
+- **Criptografia em nível de aplicação para CPF (`users.document_number`):** além da criptografia de volume do banco, o atributo `document_number` recebe criptografia autenticada na camada de aplicação (**AES-256-GCM**, via cast `encrypted` do Laravel com chave gerenciada fora do banco em cofres/variáveis de ambiente e política de rotação). Na implementação física das migrações do banco, a coluna `document_number` deve ser dimensionada como `text` para comportar o payload cifrado (mantendo a validação de 11 dígitos / formato de 14 caracteres na entrada da API).
+
+### 7.5 Backups e Prevenção de Ressurreição de Dados Anonimizados
+
+Em atendimento ao RNF011 e ao art. 18, VI da LGPD:
+1. Os backups diários do PostgreSQL (`core` e `ai`) e das mídias no Cloudflare R2 são criptografados em repouso (AES-256) e mantidos em **janela rotativa de 30 dias**, evitando retenção indefinida de dados pessoais excluídos.
+2. Para impedir que uma restauração de backup reintroduza dados pessoais já anonimizados (**não-ressurreição**), os registros imutáveis de `USER_ANONYMIZE` em `audit_logs` (contendo apenas `target_id` e `created_at`, sem PII) — replicados em log de governança separado do snapshot transacional — servem como lista de re-aplicação.
+3. Todo procedimento de restauração (seja em recuperação de desastre ou nos testes mensais de restauração do RNF011) executa obrigatoriamente, antes de reabrir o ambiente ao tráfego, a rotina idempotente de re-anonimização para todos os `target_id` anonimizados posteriormente à data do backup restaurado.
+
+### 7.6 Retenção de Voz e Imagem de Instrutores (em coordenação com Área B)
+
+Os vídeos de aulas armazenados no Cloudflare R2 (`lessons.video_key`) e as transcrições/embeddings derivados no `ai-service` (`database ai`) contêm voz e imagem do Instrutor, protegidos como dados pessoais e direitos de personalidade:
+- O envio de videoaula pelo Instrutor vincula-se ao aceite de cláusula de licença de uso de imagem e voz para execução contratual do curso (art. 7º, V da LGPD), informando explicitamente a transcrição e indexação vetorial pelo Tutor de IA (RNF004).
+- Na exclusão lógica de conta de Instrutor (UC018 A4) com opção de **arquivamento (`courses.status = 'archived'`)**, vídeos e transcrições permanecem disponíveis exclusivamente para os alunos já matriculados, bloqueando novas matrículas.
+- Na opção de **exclusão lógica em cascata** (ou mediante pedido de eliminação compatibilizado com o encerramento do acesso dos matriculados), após a carência de 30 dias da exclusão lógica o sistema executa a remoção definitiva dos objetos `video_key` no R2 (via `media-service`, Área B) e dos chunks/embeddings correspondentes no `ai-service` (`database ai`, Área D).
+
+### 7.7 Plano de Resposta e Comunicação de Incidentes de Segurança (RCIS)
+
+Em conformidade com a **Resolução CD/ANPD nº 15/2024** (Regulamento de Comunicação de Incidente de Segurança — RCIS) e o art. 48 da LGPD:
+1. **Detecção e contenção imediata (até 24h):** identificação da origem via logs estruturados (`requestId`) e `audit_logs`; isolamento do componente comprometido; revogação imediata de sessões (`refresh_sessions`) e tokens JWT na blocklist do Redis (`JwtGuard.revoke`); rotação de chaves de assinatura (RSA/JWT), chave de criptografia de aplicação (`APP_KEY`) e credenciais do R2/banco quando aplicável.
+2. **Avaliação de risco e dano relevante:** classificação técnica e jurídica pelo Encarregado pelo Tratamento de Dados Pessoais (DPO) e pela equipe responsável, verificando natureza dos dados afetados (ex.: dados cadastrais, CPF cifrado ou não, credenciais), número de titulares e potencial risco ou dano relevante.
+3. **Comunicação formal em até 3 (três) dias úteis:** caso o incidente possa acarretar risco ou dano relevante aos titulares, o Controlador comunica formalmente a **ANPD** e os **titulares afetados** no prazo máximo de **3 dias úteis** contados da ciência do incidente (art. 6º do RCIS), detalhando natureza e categoria dos dados, titulares envolvidos, medidas técnicas e de segurança aplicadas antes e depois do evento, riscos relacionados e recomendações práticas aos titulares; informações complementares são enviadas em até 20 dias úteis quando aplicável.
+4. **Registro interno de incidentes (5 anos):** todo incidente de segurança com dados pessoais — inclusive os que não atinjam o limiar de comunicação à ANPD — é documentado no Registro Interno de Incidentes de Segurança e mantido por no mínimo **5 (cinco) anos** (art. 10 do RCIS), contendo data de ciência, escopo, causa raiz, medidas de contenção e evidências de remediação.
+
 

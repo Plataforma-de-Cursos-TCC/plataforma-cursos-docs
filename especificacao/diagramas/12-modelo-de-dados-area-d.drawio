@@ -123,7 +123,7 @@
           <mxGeometry y="140" width="290" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_tutor_credit_packs" value="tutor_credit_packs" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="720" y="310" width="290" height="180" as="geometry" />
+          <mxGeometry x="720" y="290" width="290" height="220" as="geometry" />
         </mxCell>
         <mxCell id="r_tcp_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: UUID&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
           <mxGeometry y="30" width="290" height="20" as="geometry" />
@@ -137,17 +137,23 @@
         <mxCell id="r_tcp_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
           <mxGeometry y="90" width="290" height="10" as="geometry" />
         </mxCell>
-        <mxCell id="r_tcp_mtotal" value="&lt;b&gt;messages_total: INTEGER&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
+        <mxCell id="r_tcp_ptype" value="&lt;b&gt;pack_type: TEXT [pack_50]&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
           <mxGeometry y="100" width="290" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_tcp_mused" value="&lt;b&gt;messages_used: INTEGER&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
+        <mxCell id="r_tcp_mtotal" value="&lt;b&gt;messages_total: INTEGER&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
           <mxGeometry y="120" width="290" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_tcp_created" value="&lt;b&gt;created_at: TIMESTAMPTZ&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
+        <mxCell id="r_tcp_mused" value="&lt;b&gt;messages_used: INTEGER&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
           <mxGeometry y="140" width="290" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_tcp_del" value="deleted_at: TIMESTAMPTZ" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
+        <mxCell id="r_tcp_mres" value="&lt;b&gt;messages_reserved: INTEGER&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
           <mxGeometry y="160" width="290" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="r_tcp_created" value="&lt;b&gt;created_at: TIMESTAMPTZ&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
+          <mxGeometry y="180" width="290" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="r_tcp_del" value="deleted_at: TIMESTAMPTZ" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_tutor_credit_packs">
+          <mxGeometry y="200" width="290" height="20" as="geometry" />
         </mxCell>
         <mxCell id="table_audit_logs" value="audit_logs" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1060" y="40" width="340" height="240" as="geometry" />
@@ -155,31 +161,31 @@
         <mxCell id="r_al_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: UUID&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="30" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_al_user" value="FK    user_id: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
+        <mxCell id="r_al_created" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;created_at: TIMESTAMPTZ&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="50" width="340" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="r_al_user" value="FK    user_id: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
+          <mxGeometry y="70" width="340" height="20" as="geometry" />
+        </mxCell>
         <mxCell id="r_al_div" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=0;spacingRight=0;rotatable=0;points=[];portConstraint=eastwest;strokeColor=#000000;" vertex="1" parent="table_audit_logs">
-          <mxGeometry y="70" width="340" height="10" as="geometry" />
+          <mxGeometry y="90" width="340" height="10" as="geometry" />
         </mxCell>
         <mxCell id="r_al_action" value="&lt;b&gt;action: TEXT [USER_BLOCK, ..., USER_ANONYMIZE]&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
-          <mxGeometry y="80" width="340" height="20" as="geometry" />
-        </mxCell>
-        <mxCell id="r_al_ttype" value="&lt;b&gt;target_type: TEXT&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="100" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_al_tid" value="target_id: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
+        <mxCell id="r_al_ttype" value="&lt;b&gt;target_type: TEXT&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="120" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_al_ip" value="&lt;b&gt;ip_address: TEXT&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
+        <mxCell id="r_al_tid" value="target_id: UUID" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="140" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_al_ua" value="&lt;b&gt;user_agent: TEXT&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
+        <mxCell id="r_al_ip" value="&lt;b&gt;ip_address: TEXT&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="160" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_al_det" value="details: JSONB" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
+        <mxCell id="r_al_ua" value="&lt;b&gt;user_agent: TEXT&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="180" width="340" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="r_al_created" value="&lt;b&gt;created_at: TIMESTAMPTZ&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
+        <mxCell id="r_al_det" value="details: JSONB" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
           <mxGeometry y="200" width="340" height="20" as="geometry" />
         </mxCell>
         <mxCell id="r_al_part" value="&lt;i&gt;PARTITION BY RANGE (created_at)&lt;/i&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;html=1;fontColor=#000000;" vertex="1" parent="table_audit_logs">
@@ -213,13 +219,13 @@
           <mxGeometry y="160" width="340" height="20" as="geometry" />
         </mxCell>
         <mxCell id="note_1" value="&lt;b&gt;Tutor de IA e Conversas (UC001, RF009, RNF003):&lt;/b&gt;&lt;br&gt;• Persistência relacional em PostgreSQL 16 (ADR-0017).&lt;br&gt;• conversations possui restrição UNIQUE(user_id, lesson_id), com 1 conversa por aluno e aula.&lt;br&gt;• Desvio justificado da 3FN em course_id: viabiliza filtragem relacional imediata no pipeline RAG do ai-service (pgvector) sem junções transitivas.&lt;br&gt;• deleted_at assegura exclusão lógica sem perda de histórico (ADR-0014)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;spacingRight=10;spacingTop=8;spacingBottom=8;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="520" width="430" height="150" as="geometry" />
+          <mxGeometry x="40" y="540" width="430" height="165" as="geometry" />
         </mxCell>
-        <mxCell id="note_2" value="&lt;b&gt;Créditos Extras do Tutor (RF020, RNF022):&lt;/b&gt;&lt;br&gt;• Tabela tutor_credit_packs registra pacotes adicionais adquiridos pelo Aluno.&lt;br&gt;• Integrado a payments (Área C) com purpose = 'tutor_credits' (pagamento simulado).&lt;br&gt;• Cota horária de 20 mensagens gerenciada no Redis (janela deslizante, RNF022); ao estourar, o sistema consome automaticamente o saldo de tutor_credit_packs.&lt;br&gt;• Exclusão lógica com deleted_at (ADR-0014)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;spacingRight=10;spacingTop=8;spacingBottom=8;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="490" y="520" width="440" height="150" as="geometry" />
+        <mxCell id="note_2" value="&lt;b&gt;Créditos Extras do Tutor (RF020, RNF022):&lt;/b&gt;&lt;br&gt;• tutor_credit_packs registra pacotes extras (pack_type, ex.: pack_50) ligados a payments (Área C, purpose = 'tutor_credits').&lt;br&gt;• Cota horária de 20 msg/h no Redis; ao estourar, reserva (messages_reserved + 1), confirma no sucesso (messages_used + 1) e devolve na falha (E3, TC218).&lt;br&gt;• Restrição CHECK (messages_used + messages_reserved &amp;lt;= messages_total) e deleted_at (ADR-0014)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;spacingRight=10;spacingTop=8;spacingBottom=8;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="490" y="540" width="440" height="165" as="geometry" />
         </mxCell>
-        <mxCell id="note_3" value="&lt;b&gt;Trilha de Auditoria (UC008, UC016, UC018, RNF016, ADR-0016):&lt;/b&gt;&lt;br&gt;• Registra 100% das ações administrativas e eventos de acesso negado em audit_logs.&lt;br&gt;• Particionamento mensal por range de data: PARTITION BY RANGE (created_at).&lt;br&gt;• Retenção ativa de 12 meses no PostgreSQL; rotina diária audit:archive exporta partições antigas para Cloudflare R2 por 5 anos (ADR-0016).&lt;br&gt;• details em jsonb (1FN justificada); sem dados pessoais sensíveis na exclusão LGPD." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;spacingRight=10;spacingTop=8;spacingBottom=8;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="950" y="520" width="450" height="150" as="geometry" />
+        <mxCell id="note_3" value="&lt;b&gt;Trilha de Auditoria (UC008, UC016, UC018, RNF016, ADR-0016):&lt;/b&gt;&lt;br&gt;• Particionada por mês: PARTITION BY RANGE (created_at) com PK composta (id, created_at) no PostgreSQL 16.&lt;br&gt;• Retenção ativa de 12 meses no PostgreSQL + 5 anos arquivados no R2 via audit:archive; registros de acesso retidos por mínimo 6 meses (Marco Civil, art. 15).&lt;br&gt;• details em jsonb sem dados cadastrais diretos; IP e identificadores retidos sob base legal (LGPD)." style="shape=note;whiteSpace=wrap;html=1;size=14;verticalAlign=top;align=left;spacingLeft=10;spacingRight=10;spacingTop=8;spacingBottom=8;fillColor=#FFF9DB;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="1">
+          <mxGeometry x="950" y="540" width="450" height="165" as="geometry" />
         </mxCell>
         <mxCell id="edge_courses_conv" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.4444;entryX=1;entryY=0.5714" edge="1" parent="1" source="table_conversations" target="table_courses">
           <mxGeometry relative="1" as="geometry">
@@ -269,7 +275,7 @@
           <mxGeometry x="870" y="205" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_users_tcp_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="870" y="285" width="20" height="20" as="geometry" />
+          <mxGeometry x="870" y="266" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="edge_users_al" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=0;exitY=0.25;entryX=1;entryY=0.375" edge="1" parent="1" source="table_audit_logs" target="table_users">
           <mxGeometry relative="1" as="geometry">
@@ -281,7 +287,7 @@
         <mxCell id="edge_users_al_ln" value="n" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=#000000;" vertex="1" parent="1">
           <mxGeometry x="1035" y="78" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="edge_payments_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.4444;entryX=0;entryY=0.4444" edge="1" parent="1" source="table_tutor_credit_packs" target="table_payments">
+        <mxCell id="edge_payments_tcp" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=block;endFill=1;exitX=1;exitY=0.4545;entryX=0;entryY=0.4444" edge="1" parent="1" source="table_tutor_credit_packs" target="table_payments">
           <mxGeometry relative="1" as="geometry">
             </mxGeometry>
         </mxCell>

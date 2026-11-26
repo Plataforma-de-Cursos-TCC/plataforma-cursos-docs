@@ -2,6 +2,8 @@
 
 ANTHROPIC. **Claude**: AI assistant and developer platform. San Francisco: Anthropic, PBC, 2024. Disponível em: https://www.anthropic.com. Acesso em: 22 nov. 2026.
 
+BRASIL. **Lei nº 12.965, de 23 de abril de 2014**. Estabelece princípios, garantias, direitos e deveres para o uso da Internet no Brasil (Marco Civil da Internet). Brasília, DF: Presidência da República, [2014]. Disponível em: https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l12965.htm. Acesso em: 25 nov. 2026.
+
 BRASIL. **Lei nº 13.709, de 14 de agosto de 2018**. Lei Geral de Proteção de Dados Pessoais (LGPD). Brasília, DF: Presidência da República, [2018]. Disponível em: http://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm. Acesso em: 22 nov. 2026.
 
 BRAY, T. (ed.). **RFC 8259**: The JavaScript Object Notation (JSON) Data Interchange Format. Fremont: Internet Engineering Task Force (IETF), 2017. Disponível em: https://www.rfc-editor.org/rfc/rfc8259. Acesso em: 22 nov. 2026.

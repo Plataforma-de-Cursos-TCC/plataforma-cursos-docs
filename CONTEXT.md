@@ -61,7 +61,7 @@ Decisão: [ADR-0005](docs/adr/0005-tutor-de-ia-como-ator-sistemico.md).
 | D10 | **Hospedagem** na Vercel e no Railway, mídia no Cloudflare R2; o item 3 foi substituído pela D19 | [0010](docs/adr/0010-hospedagem-e-armazenamento.md) |
 | D14 | **Exclusão lógica e anonimização separada**: `deleted_at` em tabelas de negócio; exclusão de usuário reversível e anonimização como passo separado para LGPD | [0014](docs/adr/0014-exclusao-logica-e-anonimizacao.md) |
 | D15 | **Convenção de nomes por camada**: banco em `snake_case`, API e código em `camelCase` (`perPage`); substitui o nome do item 4 da ADR-0009 | [0015](docs/adr/0015-convencao-de-nomes-por-camada.md) |
-| D16 | **Retenção de logs e auditoria**: auditoria de 12 meses no PostgreSQL e 5 anos arquivada no R2; logs da aplicação por 90 dias | [0016](docs/adr/0016-retencao-de-logs-e-auditoria.md) |
+| D16 | **Retenção de logs e auditoria**: auditoria de 12 meses no PostgreSQL e 5 anos arquivada no R2; logs técnicos da aplicação por 90 dias e registros de acesso por no mínimo 6 meses (Marco Civil, art. 15) | [0016](docs/adr/0016-retencao-de-logs-e-auditoria.md) |
 | D17 | **Core em PostgreSQL 16**: mesma instância do `ai-service`, databases `core` e `ai` separados; substitui o MySQL da ADR-0007 | [0017](docs/adr/0017-core-em-postgresql.md) |
 | D18 | **Core como monólito modular**: módulos Auth, Authoring, Learning, Admin e Analytics em arquitetura modular única; apenas três serviços no sistema | [0018](docs/adr/0018-core-como-monolito-modular.md) |
 | D19 | **Upload pela API**: arquivo vai à API, o `media-service` grava no R2 privado, o banco guarda a chave e a leitura é por URL assinada; substitui o item 3 da ADR-0010 | [0019](docs/adr/0019-upload-pela-api.md) |
