@@ -32,7 +32,7 @@ relacionados: [adr-0007, adr-0010]
 ## Decisão
 
 1. O token de acesso é um JWT assinado com RS256 (chave privada só no core Laravel; os microsserviços validam com a chave pública), usando a biblioteca `php-open-source-saver/jwt-auth` (compatível com Laravel 13, ver pesquisa), com expiração de 1 hora, entregue em cookie `HttpOnly`, `Secure` e `SameSite=Strict` (nome `__Host-access`, `Path=/`). O front-end nunca lê nem grava o token.
-2. O login recebe o campo booleano `rememberMe`. Com `rememberMe` verdadeiro, a API também emite um refresh token opaco, aleatório, guardado apenas como hash em tabela própria (`sessoes_refresh`), em cookie `HttpOnly` `__Host-refresh` com `Path=/api/v1/auth/refresh` e validade de 30 dias. Sem `rememberMe`, não há refresh token e o usuário reautentica ao expirar a hora.
+2. O login recebe o campo booleano `rememberMe`. Com `rememberMe` verdadeiro, a API também emite um refresh token opaco, aleatório, guardado apenas como hash em tabela própria (`sessoes_refresh`), em cookie `HttpOnly` `__Secure-refresh` com `Path=/api/v1/auth/refresh` e validade de 30 dias. Sem `rememberMe`, não há refresh token e o usuário reautentica ao expirar a hora.
 3. `POST /api/v1/auth/refresh` troca o refresh token por um novo par de cookies e invalida o anterior (rotação). O uso de um refresh token já consumido revoga toda a família de tokens da sessão.
 4. `GET /api/v1/auth/me` devolve o usuário autenticado para o front-end restaurar a sessão no carregamento da página.
 5. O logout e o bloqueio ou exclusão de conta registram o `jti` do token de acesso em uma blocklist no Redis, com TTL igual ao tempo restante do token, e revogam a família de refresh tokens.
@@ -46,6 +46,10 @@ relacionados: [adr-0007, adr-0010]
 - **Novo estado no servidor:** a tabela `sessoes_refresh` e a blocklist no Redis precisam existir; o Redis passa a ser dependência do logout imediato, e não apenas da Sprint 2.
 - **Trabalho de implementação:** o front-end renova a sessão ao receber 401, repetindo a requisição uma vez; a configuração RS256 da biblioteca e o repasse de `Set-Cookie` pelo `rewrite` precisam de teste antes da implementação; a rotação de chaves não tem suporte documentado.
 - **Pontos a confirmar na implementação:** domínio de hospedagem (pendente) e, se o grupo preferir, um TTL de acesso menor que 1 hora (exigiria alterar o RNF001).
+
+## Atualização
+
+- **Cookie de refresh (`__Secure-refresh`):** o item 2 foi ajustado de `__Host-refresh` para `__Secure-refresh`, mantendo `Path=/api/v1/auth/refresh`, `Secure`, `HttpOnly` e `SameSite=Strict`. Pela especificação de prefixos de cookies (RFC 6265bis), o prefixo `__Host-` exige obrigatoriamente `Path=/`, sendo incompatível com um `Path` restrito ao endpoint de renovação. O cookie do token de acesso permanece como `__Host-access` com `Path=/`. (Proposta de retificação registrada na auditoria #164, sujeita à revisão do grupo via PR.)
 
 ---
 

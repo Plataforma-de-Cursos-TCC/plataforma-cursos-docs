@@ -6,7 +6,7 @@
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="table_users" value="users" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="400" y="40" width="300" height="380" as="geometry" />
+          <mxGeometry x="400" y="40" width="300" height="420" as="geometry" />
         </mxCell>
         <mxCell id="row_user_id" value="&lt;b&gt;PK&lt;/b&gt;    &lt;b&gt;id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
@@ -38,32 +38,38 @@
         <mxCell id="row_user_terms_accepted_at" value="&lt;b&gt;terms_accepted_at: timestamptz&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="200" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_phone" value="phone: varchar(20)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_terms_version" value="&lt;b&gt;terms_version: varchar(20)&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="220" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_document_number" value="document_number: varchar(14)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_guardian_consent_at" value="guardian_consent_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="240" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_birth_date" value="birth_date: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_phone" value="phone: varchar(20)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="260" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_photo" value="photo: varchar(255)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_document_number" value="document_number: varchar(14)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="280" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_anonymized_at" value="anonymized_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_birth_date" value="birth_date: date" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="300" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_created_at" value="created_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_photo" value="photo: varchar(255)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="320" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_updated_at" value="updated_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_anonymized_at" value="anonymized_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="340" width="300" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="row_user_deleted_at" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+        <mxCell id="row_user_created_at" value="created_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
           <mxGeometry y="360" width="300" height="20" as="geometry" />
         </mxCell>
+        <mxCell id="row_user_updated_at" value="updated_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+          <mxGeometry y="380" width="300" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="row_user_deleted_at" value="deleted_at: timestamptz" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_users">
+          <mxGeometry y="400" width="300" height="20" as="geometry" />
+        </mxCell>
         <mxCell id="table_instructor_profiles" value="instructor_profiles" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=0;resizeParentMax=0;resizeLast=0;collapsible=0;marginBottom=0;whiteSpace=wrap;html=1;fillColor=#F2F2F2;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;" vertex="1" parent="1">
-          <mxGeometry x="400" y="470" width="300" height="180" as="geometry" />
+          <mxGeometry x="400" y="510" width="300" height="180" as="geometry" />
         </mxCell>
         <mxCell id="row_instructor_user_id" value="&lt;b&gt;PK, FK&lt;/b&gt;    &lt;b&gt;user_id: uuid&lt;/b&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=12;html=1;" vertex="1" parent="table_instructor_profiles">
           <mxGeometry y="30" width="300" height="20" as="geometry" />
@@ -240,10 +246,10 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="lbl_instructor_01" value="0..1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="555" y="445" width="25" height="15" as="geometry" />
+          <mxGeometry x="555" y="485" width="25" height="15" as="geometry" />
         </mxCell>
         <mxCell id="lbl_instructor_1" value="1" style="text;html=1;align=center;verticalAlign=middle;strokeColor=none;fillColor=none;fontFamily=Helvetica;fontSize=12;fontColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="555" y="425" width="20" height="15" as="geometry" />
+          <mxGeometry x="555" y="465" width="20" height="15" as="geometry" />
         </mxCell>
         <mxCell id="edge_note_rs" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000;strokeWidth=1.5;dashed=1;endArrow=none;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="table_refresh_sessions" target="note_redis">
           <mxGeometry relative="1" as="geometry">

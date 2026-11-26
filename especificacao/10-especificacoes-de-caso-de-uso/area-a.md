@@ -5,14 +5,14 @@
 - **Descrição:** o Usuário informa e-mail e senha para autenticar-se e acessar a área correspondente ao seu perfil (US001, RF017).
 - **Pré-condições:** o Usuário já possui conta cadastrada na plataforma.
 - **Pós-condições:** Usuário autenticado, com sessão ativa, e direcionado para a sua área.
-- **Regras de negócio:** R-1 a mensagem de erro de credencial inválida não revela se o e-mail existe ou não (evita enumeração de usuários); R-2 a sessão expira após um período de inatividade e, depois disso, exige novo login.
-- **Protótipo(s) de tela:** tela de login com campos e-mail/senha e link “esqueci minha senha”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Regras de negócio:** R-1 a mensagem de erro de credencial inválida não revela se o e-mail existe ou não (evita enumeração de usuários); R-2 o token de acesso expira em 1 hora (RNF001) e, após esse prazo sem renovação, exige novo login; R-3 quando a opção «manter conectado» está marcada, a API emite também um cookie de refresh rotacionado com validade de 30 dias (ADR-0008).
+- **Protótipo(s) de tela:** tela de login com campos e-mail/senha, opção «manter conectado» e link “esqueci minha senha”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Usuário acessa a tela de login. (A-1) (A-2)
-  2. O Usuário informa e-mail e senha.
+  2. O Usuário informa e-mail e senha e, opcionalmente, marca a opção «manter conectado».
   3. O Usuário aciona “Entrar”.
   4. O sistema valida as credenciais. (E-1)
-  5. O sistema inicia a sessão do Usuário.
+  5. O sistema inicia a sessão do Usuário, emitindo o cookie de acesso e, quando «manter conectado» estiver marcado, o cookie de refresh com validade de 30 dias (R-3).
   6. O sistema inicia o caso de uso UC016 (Acessar Área Protegida por Perfil) e direciona o Usuário para a sua área conforme o perfil (Aluno, Instrutor ou Administrador). (E-2)
   7. Este caso de uso é finalizado.
 
@@ -104,8 +104,8 @@
 
     *Figura 0 – UC011, fluxo alternativo A1: novo link enviado: mesma confirmação*
   - **A2 – O Usuário cancela a redefinição**
-    - A-2.1 O Usuário fecha a tela de redefinição sem informar a nova senha.
-    - A-2.2 O sistema mantém a senha atual inalterada.
+    - A-2.1 O Usuário aciona «Cancelar» na tela de nova senha (ou fecha a tela de redefinição sem informar a nova senha).
+    - A-2.2 O sistema mantém a senha atual inalterada e preserva o link válido até a expiração (R-1).
     - A-2.3 Este caso de uso é finalizado.
 - **Fluxos de exceção:**
   - **E1 – E-mail não cadastrado**
@@ -144,14 +144,14 @@
 - **Descrição:** o Visitante cria uma conta na plataforma informando e-mail e senha e aceitando os termos de uso e a política de privacidade (US002, RF001).
 - **Pré-condições:** o Visitante ter acessado a plataforma sem estar autenticado.
 - **Pós-condições:** conta criada com perfil Aluno (ou Instrutor, se escolhido no fluxo alternativo A1) e senha armazenada com hash; Visitante direcionado ao login.
-- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite dos termos e da política de privacidade é obrigatório em conformidade com a LGPD (BRASIL, 2018) (RNF020).
-- **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política, opção de perfil e botão “Criar conta”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Regras de negócio:** R-1 o e-mail deve ser único na plataforma; R-2 a senha deve ter ao menos 8 caracteres, com letra e número; R-3 a senha é armazenada com hash (RNF007); R-4 o aceite da versão vigente dos termos de uso e da política de privacidade é obrigatório em conformidade com a LGPD (BRASIL, 2018) (RNF020, RNF026), com registro de data/hora e versão aceita e disponibilização do texto da política de privacidade e do aviso de cookies de sessão (RNF027); o consentimento pode ser revogado pelo titular no UC013; R-5 quando a data de nascimento informada indicar titular menor de 18 anos, o cadastro exige consentimento específico de um dos pais ou responsável legal (art. 14 da LGPD, RNF027).
+- **Protótipo(s) de tela:** tela de cadastro com campos de e-mail, senha e confirmação, caixa de aceite de termos e política (com link para a política de privacidade e aviso de cookies), opção de perfil e botão “Criar conta”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Visitante acessa a tela de cadastro.
-  2. O Visitante informa e-mail, senha e confirmação da senha e aceita os termos de uso e a política de privacidade. (A-1)
+  2. O Visitante informa e-mail, senha e confirmação da senha, declara a data de nascimento (com consentimento do responsável legal se menor de 18 anos, R-5) e aceita a versão vigente dos termos de uso e da política de privacidade (R-4). (A-1)
   3. O Visitante aciona “Criar conta”. (E-3)
-  4. O sistema valida a unicidade do e-mail, os critérios da senha e o aceite dos termos. (E-1) (E-2)
-  5. O sistema cria a conta com perfil Aluno e armazena a senha com hash.
+  4. O sistema valida a unicidade do e-mail, os critérios da senha, o aceite dos termos e, quando aplicável, o consentimento do responsável legal. (E-1) (E-2)
+  5. O sistema cria a conta com perfil Aluno, armazena a senha com hash e registra a data/hora e a versão do aceite (além do consentimento do responsável, quando aplicável).
   6. O sistema confirma o cadastro e direciona o Visitante ao login (UC005).
   7. Este caso de uso é finalizado.
 
@@ -188,9 +188,9 @@
     ![erro de senha fraca com critérios listados](prototipos/png/UC012/UC012-E2-1.png)
 
     *Figura 0 – UC012, fluxo de exceção E2: erro de senha fraca com critérios listados*
-  - **E3 – Termos de uso e política de privacidade não aceitos**
-    - E-3.1 O sistema identifica que o aceite dos termos não foi marcado (R-4); a confirmação da senha também é conferida no front-end antes do envio.
-    - E-3.2 O sistema rejeita o cadastro (422), mantém os dados preenchidos e solicita o aceite.
+  - **E3 – Termos de uso, política de privacidade ou consentimento do responsável não aceitos**
+    - E-3.1 O sistema identifica que o aceite dos termos e da política de privacidade não foi marcado (R-4) ou, para titular menor de 18 anos, que falta o consentimento do responsável legal (R-5); a confirmação da senha também é conferida no front-end antes do envio.
+    - E-3.2 O sistema rejeita o cadastro (422), mantém os dados preenchidos e solicita o aceite obrigatório.
     - E-3.3 Este caso de uso retorna ao fluxo básico (passo 2).
 
 ## 4. UC013 – Editar Dados do Perfil
@@ -200,11 +200,11 @@
 - **Descrição:** o Usuário autenticado altera os seus dados de perfil: nome, telefone, endereço, CPF, data de nascimento, foto de perfil e tema da interface (US003, RF001). O Instrutor também mantém por aqui a minibiografia e os links do perfil de Instrutor (US020, RF016). A troca de senha fica no UC017, acionado a partir desta tela.
 - **Pré-condições:** o Usuário ter realizado login na plataforma.
 - **Pós-condições:** dados do perfil atualizados e confirmados ao Usuário; o tema escolhido aplicado imediatamente e salvo no perfil.
-- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário; R-2 apenas o nome é obrigatório, os demais campos são opcionais; R-3 o CPF deve ter 11 dígitos com dígitos verificadores válidos, caso contrário o sistema exibe erro no campo; R-4 a data de nascimento deve ser válida e não pode ser futura; R-5 o telefone deve incluir o código de Discagem Direta a Distância (DDD); R-6 a foto de perfil aceita somente JPG ou PNG, com até 2 MB, e é armazenada no storage com a URL gravada no perfil; R-7 o tema aceita três opções (claro, escuro ou sistema), é aplicado imediatamente e salvo no perfil.
-- **Protótipo(s) de tela:** tela “Meu perfil” com campos de nome, telefone, endereço, CPF, data de nascimento, foto e tema, opção “Alterar senha” e botão “Salvar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
+- **Regras de negócio:** R-1 o perfil de acesso (Aluno, Instrutor ou Administrador) não pode ser editado pelo próprio Usuário; R-2 apenas o nome é obrigatório, os demais campos são opcionais; R-3 o CPF deve ter 11 dígitos com dígitos verificadores válidos, caso contrário o sistema exibe erro no campo; R-4 a data de nascimento deve ser válida e não pode ser futura; R-5 o telefone deve incluir o código de Discagem Direta a Distância (DDD); R-6 a foto de perfil aceita somente JPG ou PNG, com até 2 MB, e é armazenada no storage com a URL gravada no perfil; R-7 o tema aceita três opções (claro, escuro ou sistema), é aplicado imediatamente e salvo no perfil; R-8 ao cadastrar ou editar um endereço, o Usuário pode marcá-lo como endereço padrão (`isDefault`), havendo no máximo um endereço padrão ativo por Usuário; R-9 em conformidade com a LGPD (RNF026, RNF028), CPF e endereço são opcionais (princípio da minimização, tratados mediante consentimento com finalidade informada na política de privacidade) e o Usuário pode consultar e corrigir seus dados pessoais nesta tela; R-10 a partir desta tela, o titular pode revogar consentimentos opcionais, solicitar a exportação (portabilidade) dos próprios dados em formato estruturado (JSON ou CSV, RNF028) e solicitar a exclusão ou anonimização da própria conta, encaminhada ao fluxo do UC018 – Excluir e Anonimizar Usuário (Área D, ADR-0014).
+- **Protótipo(s) de tela:** tela “Meu perfil” com campos de nome, telefone, endereço (incluindo indicação de endereço padrão), CPF, data de nascimento, foto e tema, opção “Alterar senha” e botão “Salvar”. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
   1. O Usuário acessa a tela “Meu perfil”.
-  2. O Usuário altera um ou mais dados do perfil (nome, telefone, endereço, CPF, data de nascimento, foto ou tema). (A-1) (A-2)
+  2. O Usuário consulta ou altera um ou mais dados do perfil (nome, telefone, endereço e marcação de endereço padrão, CPF, data de nascimento, foto ou tema), podendo também exercer seus direitos de titular previstos em R-9 e R-10 (revogação de consentimento, exportação dos próprios dados ou solicitação de exclusão/anonimização encaminhada ao UC018). (A-1) (A-2)
   3. O Usuário aciona “Salvar”.
   4. O sistema valida os dados informados. (E-1)
   5. O sistema atualiza o perfil e confirma a alteração.

@@ -13,7 +13,7 @@ Decisões do modelo:
 - **Unicidade de e-mail e LGPD (ADR-0014, ADR-0017):** A coluna `email` possui índice único parcial declarativo no PostgreSQL (`UNIQUE (email) WHERE anonymized_at IS NULL`). Isso garante unicidade para todas as contas ativas ou excluídas logicamente, viabilizando que a rotina de anonimização (passo irreversível pós-30 dias ou sob demanda do titular) substitua o e-mail original por identificador sintético descaracterizado preenchendo `anonymized_at`, liberando o e-mail para eventuais novos cadastros legítimos sem violar a restrição.
 - **Exclusão lógica transversal (ADR-0014):** Toda tabela de negócio da Área A (`users`, `addresses` e `instructor_profiles`) implementa a coluna `deleted_at: timestamptz` (trait `SoftDeletes` do Eloquent). Nenhuma operação da aplicação realiza exclusão física (`DELETE`) no banco transacional, garantindo integridade referencial com matrículas, histórico acadêmico e logs de auditoria, além de viabilizar a reativação de contas excluídas pelo Administrador antes da anonimização (UC018).
 - **Idioma e internacionalização (RNF013):** `users.locale` armazena o idioma preferencial da interface e das mensagens (`pt-BR` padrão; `en` e `es` são suportados sem necessidade de migração de schema). A coluna é tipada como `varchar(5)` com validação contra lista de idiomas permitidos; os textos da aplicação residem em arquivos de tradução e a API devolve código de erro estável (`code`).
-- **Termos e privacidade (RNF020, UC012 R-4):** `users.terms_accepted_at` registra o aceite obrigatório dos termos de uso e da política de privacidade no cadastro.
+- **Termos e privacidade (RNF020, RNF026, RNF027, UC012 R-4 e R-5):** `users.terms_accepted_at` e `users.terms_version` registram a data/hora e a versão aceita dos termos de uso e da política de privacidade no cadastro; `users.guardian_consent_at` registra o consentimento do responsável legal quando o titular for menor de 18 anos (art. 14 da LGPD).
 - **Segurança de credenciais e tokens (RNF007, RNF017, ADR-0008):** Senhas nunca são persistidas em texto claro (somente `password_hash`). Tokens de redefinição de senha e de refresh session são gravados exclusivamente sob o algoritmo de resumo criptográfico SHA-256 (*Secure Hash Algorithm* - SHA) (`token_hash`), impedindo vazamento de credenciais mesmo em caso de dump do banco de dados.
 
 | ATRIBUTO | CLASSE | DOMÍNIO | TAM. | DESCRIÇÃO |
@@ -28,6 +28,8 @@ Decisões do modelo:
 | theme | Simples | text CHECK | 20 | Tema da interface: `light` (claro), `dark` (escuro) ou `system` (sistema) (UC013 R-7). |
 | locale | Simples | varchar | 5 | Idioma da interface: `pt-BR` (padrão), validado contra idiomas ativos (RNF013). |
 | terms_accepted_at | Simples | timestamptz | - | Timestamp de aceite dos termos de uso e privacidade no cadastro (RNF020). |
+| terms_version | Simples | varchar | 20 | Versão dos termos de uso e política de privacidade aceitos no cadastro (RNF026). |
+| guardian_consent_at | Simples | timestamptz | - | Timestamp do consentimento do responsável legal para titulares menores de 18 anos (opcional, art. 14 da LGPD, RNF027). |
 | phone | Simples | varchar | 20 | Telefone de contato com DDD (opcional). |
 | document_number | Simples | varchar | 14 | CPF formatado do titular (opcional). |
 | birth_date | Simples | date | - | Data de nascimento do usuário (opcional). |
