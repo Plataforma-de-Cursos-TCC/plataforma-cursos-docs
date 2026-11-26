@@ -13,6 +13,16 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ## [Não lançado]
 
+## [2.0.7] - 2026-11-26
+
+### Alterado
+
+- Tabelas do item 15 na largura útil inteira da paisagem e diagramas de sequência do item 14 com altura máxima de 16,8 cm, o que leva o documento de 294 para 276 páginas, porque as últimas linhas de cada caso de uso iam sozinhas para uma página e o diagrama inteiro para a seguinte (#189).
+
+### Corrigido
+
+- Links curtos da Fonte (`docs/f`) apontam para `v2.0.7`, a versão que acompanha este documento (#189).
+
 ## [2.0.6] - 2026-11-26
 
 ### Alterado
@@ -219,7 +229,8 @@ Entrega do RA1: itens 1 a 11 da especificação.
 
 - Critério `C06.5` em `entregas/`, porque a coluna de objetivo pertence à matriz de rastreabilidade do item 9 e não ao item 6 (#61).
 
-[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.6...HEAD
+[Não lançado]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.7...HEAD
+[2.0.7]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.6...v2.0.7
 [2.0.6]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.5...v2.0.6
 [2.0.5]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.4...v2.0.5
 [2.0.4]: https://github.com/Plataforma-de-Cursos-TCC/plataforma-cursos-docs/compare/v2.0.3...v2.0.4
