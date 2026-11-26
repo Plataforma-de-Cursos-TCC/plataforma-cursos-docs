@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Corrigido
 
+- ROPA passa a citar o cookie `__Secure-refresh`, como a ADR-0008 retificada, porque restava o nome antigo `__Host-refresh` (#PR).
 - Área D alinhada à auditoria #164 e à revisão LGPD: `audit_logs` com chave composta, `videoTimestampSeconds` e reserva de crédito no Tutor, UC008 e UC018 pelos Services da Área A, notas de retenção nas ADR-0014 e ADR-0016 e fim da promessa de "nenhuma PII", para o modelo ser criável no PostgreSQL 16 e o texto não prometer o que o fluxo não cumpre (#174).
 - Área C alinhada à auditoria #164: `quiz_answers` guarda snapshot do enunciado e do gabarito, UC002, UC003, UC009 e UC010 ganham os fluxos que os TCs já testavam e o módulo Learning lê cursos por `CourseQueryService`, para o resultado do quiz não mudar depois de uma edição e as fronteiras da ADR-0018 valerem (#173).
 - Área A alinhada à auditoria #164 e à revisão LGPD: cookie de refresh passa a `__Secure-refresh` (o prefixo `__Host-` exige `Path=/`), Services públicos do módulo Auth, TC274 a TC276 e RNF026 a RNF028, para a sessão funcionar no navegador e o módulo Admin parar de usar Repositories da Área A (#172).
