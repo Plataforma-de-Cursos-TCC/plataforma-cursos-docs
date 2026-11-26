@@ -15,6 +15,7 @@ Registro do caminho do documento de especificação da Plataforma de Cursos até
 
 ### Corrigido
 
+- Área C alinhada à auditoria #164: `quiz_answers` guarda snapshot do enunciado e do gabarito, UC002, UC003, UC009 e UC010 ganham os fluxos que os TCs já testavam e o módulo Learning lê cursos por `CourseQueryService`, para o resultado do quiz não mudar depois de uma edição e as fronteiras da ADR-0018 valerem (#173).
 - Área A alinhada à auditoria #164 e à revisão LGPD: cookie de refresh passa a `__Secure-refresh` (o prefixo `__Host-` exige `Path=/`), Services públicos do módulo Auth, TC274 a TC276 e RNF026 a RNF028, para a sessão funcionar no navegador e o módulo Admin parar de usar Repositories da Área A (#172).
 - Ajustes menores da auditoria #164 e revisão LGPD: PRD, critério C14.1, ADR-0009 e SDD alinhados às fontes e às ADRs 0017 e 0019, e entram `pesquisa/lgpd.md`, ROPA, RIPD e canal do Encarregado com RNF023 a RNF025, porque o projeto não registrava como trata dados pessoais (#171).
 - Área B alinhada à auditoria #164: UC004 e modelo 12-B passam a dizer que editar o quiz não altera tentativas já feitas, `durationSeconds` entra em `StoredFileDTO` e `CourseQueryService` evita que o módulo Learning use `CourseRepository` direto, para os itens 10, 12, 13 e 14 não se contradizerem (#170).
