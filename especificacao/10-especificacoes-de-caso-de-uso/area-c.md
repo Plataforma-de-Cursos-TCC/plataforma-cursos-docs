@@ -5,10 +5,10 @@
 - **Descrição:** o Aluno responde às questões do quiz de um módulo e recebe a nota calculada automaticamente com base no gabarito (US011, RF008).
 - **Pré-condições:** o Aluno ter realizado login e estar matriculado no curso; o quiz do módulo estar cadastrado com gabarito (UC004).
 - **Pós-condições:** respostas do Aluno e nota calculada salvas no seu progresso; resultado disponível para consulta posterior.
-- **Regras de negócio:** R-1 o envio só é aceito com todas as questões respondidas; R-2 a nota é calculada automaticamente comparando as respostas do Aluno com o gabarito; R-3 o Aluno só pode refazer o quiz se o Instrutor permitir; R-4 as respostas corretas só aparecem depois do envio do quiz; antes do envio, a API não devolve o gabarito.
+- **Regras de negócio:** R-1 o envio só é aceito com todas as questões respondidas; R-2 a nota é calculada automaticamente comparando as respostas do Aluno com o gabarito; R-3 o Aluno só pode refazer o quiz se o Instrutor permitir; R-4 as respostas corretas só aparecem depois do envio do quiz; antes do envio, a API não devolve o gabarito; R-5 no envio, o sistema preserva o snapshot do enunciado, da alternativa escolhida e do gabarito vigente para manter o histórico imutável após edições posteriores do quiz (UC004 R-2) e permitir ao Aluno solicitar revisão da correção automática ao Instrutor em caso de divergência (LGPD, art. 20; BRASIL, 2018).
 - **Protótipo(s) de tela:** tela de quiz com questões de múltipla escolha e botão de envio. As telas de cada fluxo aparecem junto ao fluxo, abaixo.
 - **Fluxo básico:**
-  1. O Aluno acessa o quiz do módulo, liberado pelo sistema somente após a conclusão das aulas do módulo. (A-1)
+  1. O Aluno acessa o quiz do módulo, liberado pelo sistema somente após a conclusão das aulas do módulo. (A-1) (E-3) (E-4)
   2. O Aluno responde às questões do quiz. (A-2)
   3. O Aluno aciona “Enviar respostas”.
   4. O sistema compara as respostas com o gabarito e calcula a nota. (E-1) (E-2)
@@ -72,6 +72,10 @@
     ![quiz bloqueado: aulas do módulo pendentes](prototipos/png/UC002/UC002-E3-1.png)
 
     *Figura 0 – UC002, fluxo de exceção E3: quiz bloqueado: aulas do módulo pendentes*
+  - **E4 – Aluno não matriculado no curso**
+    - E-4.1 O sistema identifica que o Aluno autenticado não possui matrícula ativa no curso do quiz.
+    - E-4.2 O sistema retorna 404 `NOT_FOUND` sem confirmar a existência do quiz, protegendo o recurso contra enumeração.
+    - E-4.3 Este caso de uso é finalizado.
 
 ## 11. UC003 – Matricular-se em Curso
 
@@ -118,9 +122,9 @@
     - A-3.1 O UC019 termina com pagamento aprovado para o curso pago.
     - A-3.2 Este caso de uso retorna ao fluxo básico (passo 4).
 - **Fluxos de exceção:**
-  - **E1 – Curso despublicado durante a matrícula**
-    - E-1.1 O sistema verifica que o curso deixou de estar publicado.
-    - E-1.2 O sistema informa que o curso não está mais disponível e não registra a matrícula.
+  - **E1 – Curso não publicado ou despublicado durante a matrícula**
+    - E-1.1 Se o curso nunca foi publicado (ex.: `status = draft` acessado diretamente pela rota de matrícula), o sistema retorna 404 `NOT_FOUND` sem revelar sua existência e sem registrar a matrícula (R-1).
+    - E-1.2 Se o curso foi despublicado durante a matrícula, o sistema retorna 409 `CONFLICT`, informa que o curso não está mais disponível e não registra a matrícula (R-1).
     - E-1.3 Este caso de uso é finalizado.
 
     ![curso indisponível: aviso e sem matrícula](prototipos/png/UC003/UC003-E1-1.png)
@@ -188,9 +192,9 @@
 
     *Figura 0 – UC009, fluxo alternativo A4: aula prévia sem login*
 - **Fluxos de exceção:**
-  - **E1 – Aula indisponível (sem matrícula e sem prévia)**
-    - E-1.1 O sistema identifica que o Aluno não está matriculado no curso e a aula não é prévia.
-    - E-1.2 O sistema bloqueia o acesso e sugere a matrícula no curso (UC003).
+  - **E1 – Aula indisponível (sem matrícula ou Visitante em aula privada)**
+    - E-1.1 Se o ator for Visitante (sem login) tentando acessar aula não marcada como prévia, o sistema retorna 401 `UNAUTHENTICATED`, não vaza dados da mídia e redireciona para a tela de login (R-1).
+    - E-1.2 Se o ator for Aluno autenticado sem matrícula ativa no curso e a aula não for prévia, o sistema retorna 403 `FORBIDDEN`, bloqueia o acesso e sugere a matrícula no curso (UC003) (R-1).
     - E-1.3 Este caso de uso é finalizado.
 
     ![aula bloqueada: matricule-se para assistir](prototipos/png/UC009/UC009-E1-1.png)
@@ -238,9 +242,9 @@
 
   *Figura 0 – UC010, fluxo básico: avaliação salva na página do curso*
 - **Fluxos alternativos:**
-  - **A1 – O Aluno já avaliou o curso antes**
+  - **A1 – O Aluno já avaliou o curso antes (correção da avaliação)**
     - A-1.1 O sistema identifica avaliação anterior do Aluno para esse curso.
-    - A-1.2 O sistema preenche o formulário com a avaliação existente, pronta para edição.
+    - A-1.2 O sistema preenche o formulário com a avaliação existente, pronta para edição e revisão pelo titular (LGPD, art. 18, III; BRASIL, 2018).
     - A-1.3 Este caso de uso retorna ao fluxo básico (passo 3), atualizando a avaliação existente em vez de criar uma nova.
 
     ![avaliação existente para editar](prototipos/png/UC010/UC010-A1-1.png)
@@ -251,9 +255,9 @@
     - A-2.2 O sistema descarta as alterações e mantém a avaliação anterior, se houver.
     - A-2.3 Este caso de uso é finalizado.
 - **Fluxos de exceção:**
-  - **E1 – Aluno sem aula concluída**
-    - E-1.1 O sistema identifica que o Aluno ainda não concluiu nenhuma aula do curso.
-    - E-1.2 O sistema bloqueia a avaliação e informa que é preciso concluir ao menos uma aula.
+  - **E1 – Usuário sem matrícula ou Aluno sem aula concluída**
+    - E-1.1 Se o Usuário autenticado não possuir matrícula ativa no curso, o sistema bloqueia a avaliação (403 `FORBIDDEN`) e informa que apenas alunos matriculados podem avaliar o curso.
+    - E-1.2 Se o Aluno matriculado ainda não concluiu nenhuma aula do curso, o sistema bloqueia a avaliação (403 `FORBIDDEN`) e informa que é preciso concluir ao menos uma aula (R-1).
     - E-1.3 Este caso de uso é finalizado.
 
     ![avaliação bloqueada: concluir uma aula antes](prototipos/png/UC010/UC010-E1-1.png)

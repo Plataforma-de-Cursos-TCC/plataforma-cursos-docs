@@ -6,17 +6,14 @@ boundary CatalogoView
 control CatalogController
 control CatalogFilterRequest
 control CatalogService
-control CourseRepository
-database BD
+control "CourseQueryService (Área B)" as CourseQueryService
 P0 -> CatalogoView ++ : acessa o catálogo de cursos
 CatalogoView -> CatalogController ++ : index(req: CatalogFilterRequest)
 CatalogController -> CatalogFilterRequest ++ : rules()
 CatalogFilterRequest --> CatalogController -- : parâmetros válidos
 CatalogController -> CatalogService ++ : listPublishedCourses(dto)
-CatalogService -> CourseRepository ++ : paginatePublished(category: null, sort: default, page: 1)
-CourseRepository -> BD ++ : SELECT courses WHERE status='published' LIMIT 20
-BD --> CourseRepository -- : cursos
-CourseRepository --> CatalogService -- : paginator
+CatalogService -> CourseQueryService ++ : paginatePublished(category: null, sort: default, perPage: 20, page: 1)
+CourseQueryService --> CatalogService -- : paginator
 CatalogService --> CatalogController -- : paginator
 CatalogController --> CatalogoView -- : 200 OK (CourseCatalogResource paginado)
 alt E1 - nenhum curso publicado
@@ -27,10 +24,8 @@ alt A1 - ator limpa o filtro de categoria
 P0 -> CatalogoView ++ : seleciona chip "Todas"
 CatalogoView -> CatalogController ++ : index(reqSemCategoria)
 CatalogController -> CatalogService ++ : listPublishedCourses(dtoSemCat)
-CatalogService -> CourseRepository ++ : paginatePublished(category: null)
-CourseRepository -> BD ++ : SELECT courses WHERE status='published'
-BD --> CourseRepository --
-CourseRepository --> CatalogService --
+CatalogService -> CourseQueryService ++ : paginatePublished(category: null, sort: default, perPage: 20, page: 1)
+CourseQueryService --> CatalogService -- : paginator
 CatalogService --> CatalogController --
 CatalogController --> CatalogoView -- : 200 OK
 CatalogoView --> P0 -- : exibe catálogo completo sem filtro
@@ -38,10 +33,8 @@ else ator filtra por categoria específica
 P0 -> CatalogoView ++ : clica na categoria "Programação"
 CatalogoView -> CatalogController ++ : index(reqComCategoria)
 CatalogController -> CatalogService ++ : listPublishedCourses(dtoComCat)
-CatalogService -> CourseRepository ++ : paginatePublished(category: "Programacao")
-CourseRepository -> BD ++ : SELECT courses JOIN categories WHERE status='published' AND categories.name='Programacao'
-BD --> CourseRepository -- : cursos da categoria
-CourseRepository --> CatalogService --
+CatalogService -> CourseQueryService ++ : paginatePublished(category: "Programacao", sort: default, perPage: 20, page: 1)
+CourseQueryService --> CatalogService -- : paginator
 CatalogService --> CatalogController --
 CatalogController --> CatalogoView -- : 200 OK
 alt E2 - categoria sem cursos publicados
@@ -52,10 +45,8 @@ opt ator seleciona um curso para ver detalhes
 P0 -> CatalogoView ++ : clica no card do curso
 CatalogoView -> CatalogController ++ : show(courseId)
 CatalogController -> CatalogService ++ : getCourseDetails(courseId)
-CatalogService -> CourseRepository ++ : findPublishedById(courseId)
-CourseRepository -> BD ++ : SELECT courses, modules, lessons WHERE id
-BD --> CourseRepository --
-CourseRepository --> CatalogService --
+CatalogService -> CourseQueryService ++ : findPublishedById(courseId)
+CourseQueryService --> CatalogService -- : curso publicado
 CatalogService --> CatalogController --
 CatalogController --> CatalogoView -- : 200 OK (CourseDetailResource)
 CatalogoView --> P0 -- : abre página do curso com módulos e aulas prévia

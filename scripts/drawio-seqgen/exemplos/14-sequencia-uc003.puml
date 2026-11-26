@@ -5,7 +5,7 @@ actor Aluno
 boundary CourseView
 control EnrollmentController
 control EnrollmentService
-control CourseRepository
+control "CourseQueryService (Área B)" as CourseQueryService
 entity Enrollment
 control EnrollmentRepository
 database BD
@@ -29,11 +29,13 @@ CourseView --> Aluno -- : exibe botão "Matricular-se"
 Aluno -> CourseView ++ : aciona "Matricular-se"
 CourseView -> EnrollmentController ++ : enroll(courseId)
 EnrollmentController -> EnrollmentService ++ : enroll(userId, courseId)
-EnrollmentService -> CourseRepository ++ : findPublishedById(courseId)
-CourseRepository -> BD ++ : SELECT courses WHERE id AND status = 'published'
-BD --> CourseRepository -- : curso
-CourseRepository --> EnrollmentService -- : curso (ou null)
-alt E1 - curso despublicado durante a matrícula
+EnrollmentService -> CourseQueryService ++ : findPublishedById(courseId)
+CourseQueryService --> EnrollmentService -- : curso (ou null)
+alt E1 - curso não publicado (draft)
+EnrollmentService --> EnrollmentController : 404 NOT_FOUND (curso não encontrado)
+EnrollmentController --> CourseView : 404 NOT_FOUND
+CourseView --> Aluno : informa que o curso não foi encontrado
+else E1 - curso despublicado durante a matrícula
 EnrollmentService --> EnrollmentController : 409 CONFLICT (curso indisponível)
 EnrollmentController --> CourseView : 409 CONFLICT
 CourseView --> Aluno : informa que o curso não está mais disponível

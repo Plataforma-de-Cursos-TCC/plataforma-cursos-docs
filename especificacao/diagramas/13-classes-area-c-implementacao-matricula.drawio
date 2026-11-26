@@ -41,11 +41,11 @@
         <mxCell id="CatalogService_m" value="+listPublishedCourses(dto: CatalogFilterDTO): LengthAwarePaginator&lt;br&gt;+getCourseDetails(courseId: UUID): Course" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="CatalogService">
           <mxGeometry y="40" width="480" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="CourseRepository" value="&amp;lt;&amp;lt;Repository&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseRepository&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#FFE6CC;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="1460" y="40" width="540" height="120" as="geometry" />
+        <mxCell id="CourseQueryService" value="&amp;lt;&amp;lt;Service&amp;gt;&amp;gt;&lt;br&gt;&lt;b&gt;CourseQueryService&lt;/b&gt;&lt;br&gt;[Área B]" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=52;fillColor=#D5E8D4;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;spacingLeft=30;" vertex="1" parent="1">
+          <mxGeometry x="1460" y="40" width="540" height="130" as="geometry" />
         </mxCell>
-        <mxCell id="CourseRepository_m" value="+findPublishedById(id: UUID): ?Course&lt;br&gt;+paginatePublished(category: ?string, sort: ?string, perPage: int, page: int): LengthAwarePaginator" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="CourseRepository">
-          <mxGeometry y="44" width="540" height="72" as="geometry" />
+        <mxCell id="CourseQueryService_m" value="+findPublishedById(courseId: UUID): ?Course&lt;br&gt;+paginatePublished(category: ?string, sort: ?string, perPage: int, page: int): LengthAwarePaginator" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="CourseQueryService">
+          <mxGeometry y="54" width="540" height="72" as="geometry" />
         </mxCell>
         <mxCell id="Course" value="&lt;b&gt;Course&lt;/b&gt;&lt;br&gt;[Área B]" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=top;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;dashed=1;spacingLeft=30;" vertex="1" parent="1">
           <mxGeometry x="2040" y="60" width="220" height="80" as="geometry" />
@@ -120,10 +120,10 @@
           <mxGeometry y="40" width="500" height="50" as="geometry" />
         </mxCell>
         <mxCell id="Payment" value="&lt;b&gt;Payment&lt;/b&gt;" style="swimlane;html=1;fontStyle=0;align=center;verticalAlign=middle;startSize=40;fillColor=#F5F5F5;swimlaneFillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=12;fontColor=#000000;collapsible=0;rounded=0;spacingLeft=30;" vertex="1" parent="1">
-          <mxGeometry x="2000.0" y="670.0" width="220.0" height="80.0" as="geometry" />
+          <mxGeometry x="2000.0" y="670.0" width="260.0" height="130.0" as="geometry" />
         </mxCell>
-        <mxCell id="Payment_m" value="+approve(): void&lt;br&gt;+decline(): void" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=10;spacingRight=10;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="Payment">
-          <mxGeometry y="40" width="220" height="40" as="geometry" />
+        <mxCell id="Payment_m" value="+approve(): void&lt;br&gt;+decline(): void&lt;br&gt;+create(enrollment: ?Enrollment, student: Student, purpose: PaymentPurpose, amountCents: int, currency: string, status: PaymentStatus): Payment" style="text;html=1;align=left;verticalAlign=top;spacingLeft=10;spacingRight=10;spacingTop=6;overflow=hidden;rotatable=0;whiteSpace=wrap;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontFamily=Helvetica;fontSize=11;fontColor=#000000;" vertex="1" parent="Payment">
+          <mxGeometry y="40" width="260" height="90" as="geometry" />
         </mxCell>
         <mxCell id="e_ctrl_req_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.1568627;entryX=1;entryY=0.5" edge="1" parent="1" source="CatalogController" target="CatalogFilterRequest">
           <mxGeometry relative="1" as="geometry" />
@@ -140,10 +140,13 @@
         <mxCell id="e_srv_dto_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.8684211;entryX=1;entryY=0.5" edge="1" parent="1" source="CatalogService" target="CatalogFilterDTO">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_srv_repo_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.1579;entryX=0;entryY=0.5" edge="1" parent="1" source="CatalogService" target="CourseRepository">
+        <mxCell id="e_srv_repo_cat" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.1711;entryX=0;entryY=0.5" edge="1" parent="1" source="CatalogService" target="CourseQueryService">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_repo_ent_course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="CourseRepository" target="Course">
+        <mxCell id="e_srv_enr_cqs" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;exitX=1;exitY=0.1;entryX=0.2;entryY=1" edge="1" parent="1" source="EnrollmentService" target="CourseQueryService">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_repo_ent_course" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="CourseQueryService" target="Course">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e_ctrl_res_enr" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;orthogonalLoop=1;html=1;strokeColor=#000000;strokeWidth=1.5;endArrow=open;endFill=0;endSize=8;dashed=1;exitX=0;exitY=0.2941;entryX=1;entryY=0.5" edge="1" parent="1" source="EnrollmentController" target="EnrollmentResource">
@@ -197,8 +200,8 @@
         <mxCell id="typeicon_CatalogService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="946.0" y="50.0" width="20" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="typeicon_CourseRepository" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
-          <mxGeometry x="1466" y="50" width="20" height="20" as="geometry" />
+        <mxCell id="typeicon_CourseQueryService" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
+          <mxGeometry x="1466" y="56" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="typeicon_Course" value="C" vertex="1" parent="1" style="ellipse;html=1;aspect=fixed;fillColor=#FFFFFF;strokeColor=#000000;strokeWidth=1.5;fontFamily=Helvetica;fontSize=11;fontStyle=1;fontColor=#000000;">
           <mxGeometry x="2046" y="70" width="20" height="20" as="geometry" />
@@ -240,7 +243,7 @@
           <mxGeometry x="2006.0" y="680.0" width="20" height="20" as="geometry" />
         </mxCell>
         <mxCell id="legend" value="Legenda" vertex="1" parent="1" style="swimlane;html=1;rounded=0;startSize=26;fontStyle=1;fillColor=#4D4D4D;fontColor=#FFFFFF;swimlaneFillColor=#FFFFFF;strokeColor=#000000;collapsible=0;">
-          <mxGeometry x="1960.0" y="770.0" width="300" height="360" as="geometry" />
+          <mxGeometry x="1960.0" y="820.0" width="300" height="360" as="geometry" />
         </mxCell>
         <mxCell id="legend_0" value="Controller" style="rounded=0;html=1;fillColor=#DAE8FC;strokeColor=#000000;fontStyle=1;" parent="legend" vertex="1">
           <mxGeometry x="10" y="32" width="280" height="26" as="geometry" />
